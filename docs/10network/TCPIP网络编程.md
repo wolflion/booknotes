@@ -1,3 +1,5 @@
+## Part01、开始网络编程（1-14）
+
 ### chap1、理解网络编程和套接字
 
 #### 1.1、理解网络编程和套接字
@@ -15,6 +17,8 @@
 
 + **socket会被认为是文件的一种**，直接用I/O操作即可，`open()、close()、write()`
 + **书上提到了`_t`后缀的数据类型**（一般都是typedef声明引起的）
++ fd是啥，**操作系统返回的整数**（也就是为了方便称呼OS创建的文件或套接字而赋予的数而已），*可以这么记，但是逻辑不是这样，因为是通过fd整数的下标，去数组里找到了相应的值*
+  + 场景是，我想打印《TCP/IP网络编程》的18-20页，说多了可以简写为我想打印编号10的18-20页。
 
 ##### lionel注：
 
@@ -52,37 +56,59 @@
 
 #### 3.1、
 
++ IP只到主机，Port到应用程序
+
 #### 3.2、地址信息的表示
 
 #### 3.3、网络字节序与地址变换
 
++ 【这部分要自己搜一下，大端序，小端序】
+
 #### 3.4、网络地址的初始化与分配
 
-##### lionel注：
++ *知识内容，还没好好看，lionel，知识盲区*    56/421
 
-+ 没具体看，知识盲区
+  ```c
+  struct sockaddr_in addr;
+  memset(&addr, 0, sizeof(addr));
+  addr.sin_addr.s_addr = htonl(INADDR_ANY)); //**自动获取运行服务器端的计算机IP地址**
+  ```
 
 ### chap4-5、基于TCP的服务端/客户端
 
 #### 4.1、理解TCP和UDP
 
++ **IP层解决数据传输中的路径选择问题，TCP层和UDP层以IP层提供的路径信息为基础完成实际的数据传输**。
+
 #### 4.2、实现基于TCP的服务器端/客户端
 
 + 就是**本章1.1+1.2**，即连上后进行**读写+关闭**
++ 深入了解一下accept()的细节问题，*为啥返回的fd能够直接通信，lionel*
++ *会存在所谓的“惊群”现象，面试会不会考到？*
 
 #### 4.3、实现迭代服务器端/客户端
 
 + *这个要想一下原理，lionel*
++ 迭代服务器的代码
++ *存在的问题，lionel*  【TCP不存在数据边界，write()每次传递1个字符串，多次调用后，客户端可能会收到多个字符串，这个怎么验证下？】  87/421
++ 回声（服务器端将客户端传输的字符串数据原封不动地传回客户端）
 
 #### 5.1、回声客户端的完美表现
 
++ *不是太懂，lionel*   92/421
+
 #### 5.2、TCP原理
+
++ 三次握手（103/421）
++ 四次挥手（106/421），**客户端和服务端都要发送`FIN`**
 
 ##### lionel注：
 
 + 要让我**实现迭代服务器端/客户端**，我也不会
 
 ### chap6、基于UDP的服务端/客户端
+
++ *要补充完善一点*，目前笔记上都是空，lionel
 
 ### chap7、优雅的断开套接字连接
 
@@ -149,6 +175,8 @@ struct hostent* gethostbyaddr(const char *addr, socklen_t len, int family);
 
 ### chap9、套接字的多种可选项
 
++ （150/421），这个算比较重点的地方？lionel
+
 #### 9.1、套接字可选项和I/O缓冲大小
 
 + 套接字多种可选项
@@ -183,7 +211,8 @@ int setsockopt(int sock, int level, int optname, const void *optval, socklen_t *
 + 发生地址分配错误（Binding Error）
   + reuseaddr_eserver.c
 + Time-wait状态
-  + **先断开连接的套接字必然会经过Time-wait状态**
+  + **先断开连接的（先发送FIN消息的）套接字必然会经过Time-wait状态**
+  + 如果没有time-wait状态，（A发了FIN没有收到 B的ACK后，会重发FIN，但B已经下线了）  158/421，这部分解释得比较OK
 + 地址再分配
 
 #### 9.3、TCP_NODELAY
@@ -191,8 +220,11 @@ int setsockopt(int sock, int level, int optname, const void *optval, socklen_t *
 + Nagle算法
 + 禁用Nagle算法
   + **将套接字可选项TCP_NODELAY改为1（真）**
++ *书上还没看，之前看过网络笔记上的*
 
 ### chap10、多进程服务器端
+
++ *lionel，IO分流，我确实没懂*【routine】
 
 #### 10.1、进程概念及应用
 
@@ -226,6 +258,7 @@ int setsockopt(int sock, int level, int optname, const void *optval, socklen_t *
   + 图10-2：并发服务器模型  （183/421）
 + 实现并发服务器
 + 通过fork函数复制文件描述符
++ *lionel，代码看一下先*
 
 #### 10.5、分割TCP的I/O程序
 
@@ -264,6 +297,7 @@ int setsockopt(int sock, int level, int optname, const void *optval, socklen_t *
 + 设置文件描述符
 + 设置检查（监视）范围及超时
 + 调用select函数后查看结果
++ **使用select函数时可以将多个文件描述符集中到一起统一监视**（分成3种情况：接收、传输、异常）`FD_SET()`
 
 ### chap13、多种I/O函数
 
@@ -312,6 +346,8 @@ ssize_t readv(int filedes, const struct iovec *iov, int iovcnt);
 
 ### chap14、多播与广播
 
++ TCP是一对一的，所以不存在广播和多播。
+
 #### 14.1、多播
 
 + 多播的数据传输方式及流量方面的优点
@@ -319,6 +355,7 @@ ssize_t readv(int filedes, const struct iovec *iov, int iovcnt);
 + 实现多播Sender和Receiver
   + news_sender.c
   + news_receiver.c
++ 242/421中的代码过程，是ttl和加入组的方法
 
 #### 14.2、广播
 
@@ -327,3 +364,149 @@ ssize_t readv(int filedes, const struct iovec *iov, int iovcnt);
 + 实现广播数据的Sender和Receiver
   + news_sender_brd.c
   + news_receiver_brd.c
+
+## Part2、基于Linux的编程（15-18）
+
+### chap15、套接字和标准I/O
+
+#### 15.1、标准I/O函数的优点
+
++ 标准I/O函数的两个优点：
+  + 具有良好的移植性（Portability）
+  + 可以利用缓冲提高性能
++ 标准I/O函数和系统函数之间的性能对比
+  + syscpy.c
+  + stdcpy.c
++ 标准I/O函数的几个缺点：
+  + 不容易进行双向通信
+  + 有时可能频繁调用fflush函数
+  + 需要以FILE结构体指针的形式返回文件描述符
+
+#### 15.2、使用标准I/O函数
+
++ 利用fdopen函数转换为FILE结构体指针
+  + desto.c
+
+```c
+#include <stdio.h>
+FILE* fdopen(int fildes, const char *mode);
+```
+
+
+
++ 利用fileno函数转换为文件描述符
+  + todes.c
+
+```c
+#include<stdio.h>
+int fileno(FILE* stream);
+```
+
+
+
+#### 15.3、基于套接字的标准I/O函数使用
+
++ **与chap4的进行比对**
+
++ echo_stdserv.c
++ echo_client.c
+
+### chap16、关于I/O流分离的其他内容
+
+#### 16.1、分离I/O流
+
++ 2次I/O流分离
+  + chap10的“TCP I/O过程（Routine）分离”
+    + 通过fork函数复制出1个文件描述符，以区分输入和输出中使用的文件描述符
+  + chap15
+    + 通过2次fdopen函数的调用，创建读模式FILE指针和写模式FILE指针
++ 分离“流”的好处
+  + chap10分离“流”的目的
+    + 通过分开输入过程（代码）和输出过程降低实现难度
+    + 与输入无关的输出操作可以提高速度
+  + chap15分离“流”的目的
+    + 为了将FILE指针按读模式和写模式加以区分
+    + 可以通过区分读写模式降低实现难度
+    + 通过区分I/O缓冲提高缓冲性能
++ “流”分离带来的EOF问题
+  + sep_serv.c
+  + sep_clnt.c
+
+#### 16.2、文件描述符的复制和半关闭
+
++ 终止“流”时无法半关闭的原因
++ 复制文件描述符
++ dup&dup2
+  + dup.c
+
+```c
+#include <unistd.h>
+int dup(int fides);
+int dup2(int fildes, int fildes2);
+```
+
+
+
++ 复制文件描述符后“流”的分离
+  + sep_serv2.c
+
+### chap17、优于select的epoll
+
+#### 17.1、epoll理解及应用
+
+#### 17.2、条件触发和边缘触发
+
++ 条件触发（Level Trigger）：**只要输入缓冲有数据，就会一直通知该事件** 【哪怕是剩余数据】
++ 边缘触发（Edge Trigger）：**输入缓冲区收到数据时仅注册1次该事件**【哪怕缓冲区，还留有数据，也不会再注册】
+
+### chap18、多线程服务器端的实现
+
++ *看看还有啥细节，lionel*
+
+#### 18.1、理解线程的概念
+
+#### 18.2、线程创建及运行
+
+#### 18.3、线程存在的问题和临界区
+
+#### 18.4、线程同步
+
+#### 18.5、线程的销毁和多线程并发服务器端的实现
+
+## Part4、结束网络编程（24-25）
+
+### chap24、制作HTTP服务器端
+
+#### 24.1、HTTP摘要
+
++ 理解Web服务器端
++ HTTP
+  + 无状态的Stateless协议
+  + 请求消息（Request Message）的结构
+  + 响应消息（Response Message）的结构
+
+#### 24.2、实现简单的Web服务器端
+
++ 实现基于Linux的多线程Web服务器端
+
+#### 24.3、习题
+
+### chap25、进阶内容
+
+#### 25.1、网络编程学习的其他内容
+
++ 成为网络程序员的前提是成为程序员
+  + **对某一领域感兴趣**
++ 编写这些程序时的参考书
+  + **在理论基础上，加强编程训练**
++ 后续学习内容
+  + **系统编程**的学习
+
+#### 25.2、网络编程相关书籍介绍
+
++ 系统编程相关书籍
+  + 《APUE》学习方法
+    + 1、快速阅读主要内容，掌握各种系统级别的函数，浏览后可以参考需要的地方
+    + 2、**从开始就把这本书当参考书**，但前提是自己有了一些系统编程经验
++ 协议相关书籍
+  + 《TCP/IP协议族》

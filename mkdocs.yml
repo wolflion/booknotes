@@ -12,3 +12,9 @@ nav:
     - 简介: 'index.md'
     - 网络编程:
         - 《TCP/IP网络编程》: '10network/TCPIP网络编程.md'
+    - 文件系统:
+        - 《Linux内核探秘》: '11filesystem/Linux内核探秘.md'
+        - 《文件系统技术内幕》: '11filesystem/文件系统技术内幕.md'
+        - 《存储技术原理分析》: '11filesystem/存储技术原理分析.md'
+    - 存储:
+        - 《ceph设计原理与实现》: '12storage/ceph设计原理与实现.md'
