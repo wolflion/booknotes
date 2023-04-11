@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>《存储技术原理分析》 - lionel的技术笔记</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "\u300a\u5b58\u50a8\u6280\u672f\u539f\u7406\u5206\u6790\u300b";
+        var mkdocs_page_input_path = "11filesystem\\\u5b58\u50a8\u6280\u672f\u539f\u7406\u5206\u6790.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> lionel的技术笔记
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">简介</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网络编程</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/TCPIP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">《TCP/IP网络编程》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">文件系统</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../Linux%E5%86%85%E6%A0%B8%E6%8E%A2%E7%A7%98/">《Linux内核探秘》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《文件系统技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">《存储技术原理分析》</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#81">8.1、概述</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#82">8.2、文件系统对象</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#821">8.2.1、</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#822">8.2.2、</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#823">8.2.3、</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#824">8.2.4、</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#825">8.2.5、</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#83">8.3、装载文件系统</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#831">8.3.1、</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#832">8.3.2、</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#833">8.3.3、</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#834">8.3.4、</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#835">8.3.5、</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#84">8.4、路径查找</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#842">8.4.2、逐个分量解析</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#85">8.5、打开文件</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#86">8.6、读文件（重点）</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#862io">8.6.2、基于缓冲页面构造I/O请求</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#863io">8.6.3、直接针对页面构造I/O请求</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#89">8.9、块设备文件</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#891inodeinode">8.9.1、块设备的主inode和次inode</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#892">8.9.2、对块设备文件的操作转换为对块设备的操作</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#893">8.9.3、对块设备文件的读/写作用于块设备之上</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#810">8.10、文件系统编程模式</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">存储</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../12storage/ceph%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《ceph设计原理与实现》</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">lionel的技术笔记</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+          <li>文件系统 &raquo;</li>
+      <li>《存储技术原理分析》</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h3 id="chap8">chap8、文件系统</h3>
+<h4 id="81">8.1、概述</h4>
+<ul>
+<li>VFS在系统启动时建立，在系统关闭时消亡。</li>
+<li>Minix为例</li>
+<li>文件系统开头，<strong>通常为一个扇区</strong>，存入引导程序</li>
+<li>超级块，存储磁盘设备上文件系统结构的信息，并说明各部分的大小</li>
+<li>i节点位图：描述磁盘上每个i节点的使用情况。除了位0，i节点位图中每个比特位依次代表盘上i节点区中的一个i节点。</li>
+<li>逻辑块位图：磁盘上每个逻辑块的使用情况。除了位0，其它位依次表示盘上逻辑块区中的一个逻辑块。</li>
+<li>i节点：反映的是<strong>文件的元数据</strong></li>
+<li>逻辑块编号：<strong>保存文件的数据</strong>。每个文件有且仅有一个i节点，但可以有0，1或多个逻辑块</li>
+</ul>
+<h4 id="82">8.2、文件系统对象</h4>
+<h5 id="821">8.2.1、</h5>
+<ul>
+<li>fs/filesystem.c中register_filesystem()</li>
+<li>include/linux/fs.h中的<code>struct file_system_type{};</code></li>
+</ul>
+<h5 id="822">8.2.2、</h5>
+<ul>
+<li>include/linux/fs.h中的<code>struct super_block{};</code></li>
+</ul>
+<h5 id="823">8.2.3、</h5>
+<ul>
+<li>include/linux/fs.h中的<code>struct inode{};</code></li>
+<li>以ext2为例，<code>struct ext2_inode_info{};</code></li>
+</ul>
+<h5 id="824">8.2.4、</h5>
+<ul>
+<li><strong>inode反映的是文件系统对象的元数据，而dentry则表示文件系统对象在文件系统树中的位置</strong>。dentry和inode是多对一的关系，每个dentry只有一个inode，由d_inode指向；而一个inode可能对应多个dentry（例如硬链接），它将这些dentry组成以i_dentry的链表，每个dentry通过d_alias加入所属inode的i_dentry链表中。</li>
+<li>include/linux/dcache.h中<code>struct dentry{};</code></li>
+</ul>
+<h5 id="825">8.2.5、</h5>
+<ul>
+<li>include/linux/mount.h中的<code>struct vfsmount{};</code></li>
+</ul>
+<h4 id="83">8.3、装载文件系统</h4>
+<ul>
+<li>装载的4个要素：<strong>vfsmount、super_block、根dentry、根inode</strong>。</li>
+</ul>
+<h5 id="831">8.3.1、</h5>
+<ul>
+<li>fs/namespace.c中的<code>sys_mount()</code></li>
+<li><code>sys_mount()</code>-&gt;<code>do_mount()</code>-&gt;<code>do_new_mount()</code></li>
+</ul>
+<h5 id="832">8.3.2、</h5>
+<ul>
+<li><code>sys_mount()</code>-&gt;<code>do_mount()</code>-&gt;<code>do_new_mount()</code>-&gt;<code>do_kern_mount()</code></li>
+<li>
+<p><code>sys_mount()</code>-&gt;<code>do_mount()</code>-&gt;<code>do_new_mount()</code>-&gt;<code>do_kern_mount()</code>-&gt;<code>vfs_kern_mount()</code></p>
+</li>
+<li>
+<p><strong>构建文件系统装载实例</strong>，即构建vfsmount，super_block，根dentry和根inode之间的关系。</p>
+</li>
+</ul>
+<h5 id="833">8.3.3、</h5>
+<ul>
+<li><code>sys_mount()</code>-&gt;<code>do_mount()</code>-&gt;<code>do_new_mount()</code>-&gt;<code>do_kern_mount()</code>-&gt;<code>vfs_kern_mount()</code>-&gt;<code>minix_get_sb()</code>-&gt;<code>get_sb_bdev()</code></li>
+</ul>
+<h5 id="834">8.3.4、</h5>
+<ul>
+<li><code>sys_mount()</code>-&gt;<code>do_mount()</code>-&gt;<code>do_new_mount()</code>-&gt;<code>do_kern_mount()</code>-&gt;<code>vfs_kern_mount()</code>-&gt;<code>minix_get_sb()</code>-&gt;<code>get_sb_bdev()</code>-&gt;<code>minx_fill_super()</code></li>
+</ul>
+<h5 id="835">8.3.5、</h5>
+<ul>
+<li><code>sys_mount()</code>-&gt;<code>do_mount()</code>-&gt;<code>do_new_mount()</code>-&gt;<code>do_add_mount()</code>【fs/namespace.c中】</li>
+</ul>
+<h4 id="84">8.4、路径查找</h4>
+<ul>
+<li>
+<p>用户空间表示文件使用的是路径名字符串，内核中对文件的操作需要依据<strong>超级块、inode、dentry以及vfsmount等</strong>。</p>
+</li>
+<li>
+<p>include/linux/path.h</p>
+</li>
+<li>
+<p>某个目录下查找给定名字的文件，有三个动作：</p>
+</li>
+<li>
+<p>1、读出目录的内容，找到该文件对应的项，获得其i节点编号</p>
+</li>
+<li>2、从i节点表中找到该编号的inode，它直接或间接指向包含文件数据的逻辑块</li>
+<li>
+<p>3、读取这些逻辑块即能获得该文件的内容</p>
+</li>
+<li>
+<p>include/linux/namei.h中的<code>struct nameidata{};</code></p>
+</li>
+</ul>
+<p>##### 8.4.1、</p>
+<ul>
+<li>
+<p>fs/namei.c中的<code>path_lookup()</code></p>
+</li>
+<li>
+<p><em>2.6.18代码还是有点的</em></p>
+<h5 id="842">8.4.2、逐个分量解析</h5>
+</li>
+<li>
+<p><code>link_path_walk()</code>，<strong>重点</strong></p>
+</li>
+</ul>
+<p>##### 8.4.3、解析单个分量</p>
+<ul>
+<li><code>do_lookup()</code></li>
+</ul>
+<p>##### 8.4.4、上溯通过装载点</p>
+<ul>
+<li><code>follow_dotdot()</code></li>
+</ul>
+<p>##### 8.4.5、下溯通过装载点</p>
+<ul>
+<li><code>follow_mount()</code></li>
+</ul>
+<p>##### 8.4.6、处理符号链接</p>
+<ul>
+<li><code>do_follow_link()</code></li>
+</ul>
+<h4 id="85">8.5、打开文件</h4>
+<ul>
+<li>
+<p>将路径名转换为<strong>内核中唯一定位的<code>&lt;vfsmount,dentry&gt;</code>二元组</strong></p>
+</li>
+<li>
+<p>文件描述符，<strong>指的是file结构的对象</strong></p>
+</li>
+<li>
+<p>每个进程可以打开多个文件，将它们组织成打开文件表的形式，实际上是指向文件描述符的指针数组，<strong>数组索引即为文件句柄</strong>。</p>
+</li>
+<li>
+<p>打开文件表在内核中对应fdtable结构中，include/linux/fdtable.h中的<code>struct fdtable{};</code></p>
+</li>
+<li>
+<p>include/linux/fs.h中的<code>struct file{};</code></p>
+</li>
+<li>
+<p>include/linux/fdtable.h中的<code>struct files_struct{};</code></p>
+</li>
+</ul>
+<p>##### 8.5.1、open系统调用的处理流程</p>
+<ul>
+<li>
+<p>分配一个文件描述符，正确设置<code>f_mapping（文件地址空间）</code>和<code>f_op（文件操作表）</code>，在打开文件表中找到一个用于保存它的文件句柄。</p>
+</li>
+<li>
+<p>sys_open()-&gt;do_sys_open()-&gt;do_filp_open()-&gt;do_last()-&gt;namidata_to_filp()-&gt;<code>__dentry_open()</code>，lionel，这个要花时间去串一下代码注释，2月17日晚上逐行读一下</p>
+</li>
+</ul>
+<h4 id="86">8.6、读文件（重点）</h4>
+<ul>
+<li>
+<p><strong>地址空间（Address Space）</strong> 的引入，将对象在磁盘中（可能不连续的）数据以及页面为单位连续地呈现出来。</p>
+</li>
+<li>
+<p>include/linux/fs.h中的<code>struct address_space{};</code></p>
+</li>
+<li>
+<p>地址空间的属主对象被定义为属主对象的inode。<strong>对于常规文件或目录文件，这就是文件对应的inode描述符</strong>。</p>
+</li>
+<li>
+<p>radix树，<strong>树的根节点为地址空间的page_tree域</strong>，文件inode地址空间保存的是数据块。</p>
+</li>
+<li>
+<p><strong>VFS通过调用write_begin通知具体文件系统，准备写文件的字节begin~end到给定的页面</strong>。</p>
+</li>
+<li>
+<p>include/linux/mm_types.h中的<code>struct page{};</code></p>
+</li>
+</ul>
+<p>##### 8.6.1、</p>
+<ul>
+<li>sys_read()-&gt;vfs_read()-&gt;do_sync_read()-&gt;generic_file_aio_read()-&gt;do_generic_file_read() 【mm/filemap.c】</li>
+</ul>
+<h5 id="862io">8.6.2、基于缓冲页面构造I/O请求</h5>
+<ul>
+<li><strong>缓冲页面</strong>：是指将页面划分为一个个的缓冲块（Buffer Block），以缓冲块为单位进行I/O。</li>
+<li>管理缓冲块的数据结构为<code>buffer_head</code>，被称作<strong>缓冲头</strong></li>
+<li>I/O的基本单位已经换成bio，而buffer_head仅被用来提取块映射（通过get_block_t调用），用于跟踪页面的状态（通过page_mapping），以及用于封装bio提交以向后兼容（例如submit_bh）</li>
+<li><em>706/792，把书中的内容提了一下</em>，lionel，把之前的疑惑</li>
+</ul>
+<h5 id="863io">8.6.3、直接针对页面构造I/O请求</h5>
+<ul>
+<li>Linux为基于磁盘的文件系统提供另一种策略，构造尽可能大的bio向下层提交。对应的函数为<code>mpage_readpage()</code>，实际上ext3文件系统readpage方法实现为<code>ext3_readpage()</code>【fs/ext3/inode.c】就是直接调用mpage_readpage函数</li>
+</ul>
+<p>8.7、写文件</p>
+<p>8.8、冲刷文件</p>
+<h4 id="89">8.9、块设备文件</h4>
+<h5 id="891inodeinode">8.9.1、块设备的主inode和次inode</h5>
+<h5 id="892">8.9.2、对块设备文件的操作转换为对块设备的操作</h5>
+<h5 id="893">8.9.3、对块设备文件的读/写作用于块设备之上</h5>
+<h4 id="810">8.10、文件系统编程模式</h4>
+<ul>
+<li>实施步骤如下：</li>
+<li>1、定义超级块结构</li>
+<li>2、定义inode结构</li>
+<li>3、实现各种类型文件的inode操作表</li>
+<li>4、实现各种类型文件的file操作表</li>
+<li>5、实现各种类型文件的address_space操作表</li>
+<li>6、实现超级块操作表</li>
+<li>7、实现dentry操作表</li>
+<li>8、定义文件系统类型</li>
+<li>9、模块加载和卸载方法</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/" class="btn btn-neutral float-left" title="《文件系统技术内幕》"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../12storage/ceph%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/" class="btn btn-neutral float-right" title="《ceph设计原理与实现》">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../12storage/ceph%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

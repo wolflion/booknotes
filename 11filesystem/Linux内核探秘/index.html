@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>《Linux内核探秘》 - lionel的技术笔记</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "\u300aLinux\u5185\u6838\u63a2\u79d8\u300b";
+        var mkdocs_page_input_path = "11filesystem\\Linux\u5185\u6838\u63a2\u79d8.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> lionel的技术笔记
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">简介</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网络编程</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/TCPIP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">《TCP/IP网络编程》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">文件系统</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">《Linux内核探秘》</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#21">2.1、文件系统的基本概念</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#211vfs">2.1.1、什么是VFS</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#212super_block">2.1.2、超级块super_block</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#213dentry">2.1.3、目录项dentry</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#214inode">2.1.4、索引节点inode</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#215">2.1.5、文件</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#22">2.2、文件系统的架构</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#221">2.2.1、超级块作用分析</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#222dentry">2.2.2、dentry作用分析</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#223inode">2.2.3、inode作用分析</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#224">2.2.4、文件作用分析</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#23">2.3、从代码层次深入分析文件系统</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#231aufs">2.3.1、一个最简单的文件系统aufs</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#232">2.3.2、文件系统如何管理目录和文件</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#233">2.3.3、文件系统的挂载过程</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#234">2.3.4、文件打开的代码分析</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#24">2.4、本章小结</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《文件系统技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">《存储技术原理分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">存储</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../12storage/ceph%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《ceph设计原理与实现》</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">lionel的技术笔记</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+          <li>文件系统 &raquo;</li>
+      <li>《Linux内核探秘》</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h3 id="chap2-1224232">chap2、文件系统   12（24/232）</h3>
+<h4 id="21">2.1、文件系统的基本概念</h4>
+<h5 id="211vfs">2.1.1、什么是VFS</h5>
+<ul>
+<li><strong>VFS本身只存在于内存中</strong>，它需要将硬盘上的文件系统抽象到内存中，通过几个<strong>重要的结构</strong>（<code>dentry、inode、super_block</code>）</li>
+</ul>
+<h5 id="212super_block">2.1.2、超级块super_block</h5>
+<ul>
+<li>代表了<strong>整个文件系统本身</strong>，</li>
+<li>给出了文件系统的全局信息</li>
+<li>包含一些函数指针</li>
+</ul>
+<h5 id="213dentry">2.1.3、目录项dentry</h5>
+<ul>
+<li>目录项反映了文件系统的这种树状关系</li>
+</ul>
+<h5 id="214inode">2.1.4、索引节点inode</h5>
+<ul>
+<li><strong>inode代表一个文件</strong></li>
+</ul>
+<h5 id="215">2.1.5、文件</h5>
+<ul>
+<li>文件对象的作用是<strong>描述进程和文件交互的关系</strong>。 【<strong>文件对象</strong>指的是内存中的文件】</li>
+<li>进程打开一个文件，内核就动态创建一个文件对象。同一个文件，在不同的进程中有不同的文件对象。</li>
+</ul>
+<h4 id="22">2.2、文件系统的架构</h4>
+<h5 id="221">2.2.1、超级块作用分析</h5>
+<h5 id="222dentry">2.2.2、dentry作用分析</h5>
+<h5 id="223inode">2.2.3、inode作用分析</h5>
+<ul>
+<li>系统内核提供了一个hash链表数组<code>inode_hashtable</code></li>
+<li>inode还有一个重要用作用是<strong>缓存文件的数据内容</strong>，通过成员<code>i_mapping</code>实现的。</li>
+</ul>
+<h5 id="224">2.2.4、文件作用分析</h5>
+<h4 id="23">2.3、从代码层次深入分析文件系统</h4>
+<h5 id="231aufs">2.3.1、一个最简单的文件系统aufs</h5>
+<pre><code class="language-cpp">#include &lt;linux/moudle.h&gt;
+#include &lt;linux/fs.h&gt;
+#include &lt;linux/pagemap.h&gt;
+#include &lt;linux/mount.h&gt;
+#include &lt;linut/init.h&gt;
+#include &lt;linux/nami.h&gt;
+
+#define AUFS_MAIGC 0x64668735
+static struct vfsmount* aufs_mount;
+static int aufs_mount_count;
+
+static struct inode* aufs_get_inode(struct super_block* sb, int mode, dev_t dev)
+{
+    struct inode* inode = new_inode(sb);
+    if (inode) {
+        inode-&gt;i_mode = mode;
+        inode-&gt;i_uid = current-&gt;fsuid;
+        inode-&gt;i_gid = current-&gt;fsgid;
+        inode-&gt;i_blksize = PAGE_CACHE_SIZE;
+        inode-&gt;i_blocks = 0;
+        inode-&gt;i_atime = inode-&gt;i_mtime = inode-&gt;i_ctime = CURRENT_TIME;
+        switch (mode &amp; S_IFMT) {
+        default:
+            int_special_inode(inode, mode, dev);
+            break;
+        case S_IFREG:
+            printk(&quot;create a file \n&quot;);
+            break;
+        case S_IFDIR:
+            inode-&gt;i_op = &amp;simple_dir_inode_operations;
+            inode-&gt;i_fop = &amp;simple_dir_operations;
+            printk(&quot;create a dir file \n&quot;);
+
+            inode-&gt;i_nlink++;
+            break;
+        }
+    }
+    return inode;
+}
+
+//SMP-safe
+static int aufs_mknod(struct inode* dir, struct dentry* dentry, int mode, dev_t dev)
+{
+    struct inode* inode;
+    int error = -EPERM;
+
+    if (dentry-&gt;d_inode)
+        return -EEXIST;
+
+    inode = aufs_get_inode(dir-&gt;i_sb, mode, dev);
+    if (inode) {
+        d_instantiate(dentry, inode);
+        dget(dentry);
+        error = 0;
+    }
+    return error;
+}
+
+static int aufs_mkdir(struct inode* dir, struct dentry* dentry, int mode)
+{
+    int res;
+    res = aufs_mknode(dir, dentry, mode | S_IFDIR, 0);
+    if (!res)
+        dir-&gt;i_nlink++;
+    return res;
+}
+
+static int aufs_create(struct inode* dir, struct dentry* dentry, int mode)
+{
+    return aufs_mknode(dir, entry, mode | S_IFREG, 0);
+}
+
+static int aufs_fill_super(struct super_block* sb, void* data, int silent)
+{
+    static struct tree_descr debug_files[] = { {&quot;&quot;} };
+    return simple_fill_super(sb, AUFS_MAIGC, debug_files);//lionel，也是系统提供的啊，还是fs目录下libfs.c中的
+}
+
+static struct super_block* aufs_get_sb(struct file_system_type* fs_type,
+    int flags, const char* dev_name, void* data)
+{
+    return get_sb_single(fs_type, flags, data, aufs_fill_super);
+}
+
+static struct file_system_type au_fs_type = {
+    .owner = THIS_MODULE,
+.name = &quot;aufs&quot;,
+.get_sb = aufs_get_sb,
+.kill_sb = kill_litter_super,
+};
+
+static int aufs_create_by_name(const char* name, mode_t mode,
+    struct dentry* parent,
+    struct dentry** dentry)
+{
+    int error = 0;
+    /* If the parent is not specified, we create it in the root.
+    * We need the root dentry to do this, which is in the super
+    * block. A pointer to that is in the struct vfsmount that we
+    * have around.
+    */
+    if (!parent) {
+        if (aufs_mount &amp;&amp; aufs_mount-&gt;mnt_sb) {
+            parent = aufs_mount-&gt;mnt_sb-&gt;s_root;
+        }
+    }
+    if (!parent) {
+        printk(&quot;Ah! can not find a parent!\n&quot;);
+        return -EFAULT;
+    }
+
+    *dentry = NULL;
+    mutex_lock(&amp;parent-&gt;d_inode-&gt;i_mutex);
+    &amp;dentry = lookup_one_len(name, parent, strlen(name));
+    if (!IS_ERR(dentry)) {
+        if ((mode &amp; S_IFMT) == S_IFDIR)
+            error = aufs_mkdir(parent-&gt;d_inode, *dentry, mode);
+        else
+            error = aufs_create(parent-&gt;d_inode, *dentry, mode);
+    }
+    else
+        error = PTR_ERR(dentry);
+    mutex_unlock(&amp;parent-&gt;d_inode-&gt;i_mutex);
+    return error;
+}
+
+struct dentry* aufs_create_file(const char* name, mode_t mode,
+    struct dentry* parent, void* data,
+    struct file_operations* fops)
+{
+    struct dentry* dentry = NULL;
+    int error;
+    printk(&quot;aufs: creating file '%s'\n&quot;, name);
+    error = aufs_create_by_name(name, mode, parent, &amp;dentry);
+    if (error) {
+        dentry = NULL;
+        goto exit;
+    }
+    if (dentry-&gt;d_inode) {
+        if (data)
+            dentry-&gt;d_inode-&gt;u.generic_ip = data;
+        if (fops)
+            dentry-&gt;d_inode-&gt;i_fop = fops;
+    }
+exit:
+    return dentry;
+}
+
+struct dentry* aufs_create_dir(const char* name, struct dentry* parent)
+{
+    return aufs_create_file(name, S_IFDIR | S_IRWXU | S_IRUGO | S_IXUGO, parent, NULL, NULL);
+}
+
+static int __init aufs_init(void)
+{
+    int retval;
+    struct dentry* pslot;
+
+    retval = register_filesystem(&amp;au_fs_type);
+
+    if (!retval) {
+        aufs_mount = kern_mount(&amp;au_fs_type);  //lionel，kern_mount()【这个在super.c中】与do_mount()【这个在fs里的namespace.c中】有关联不？
+        if (IS_ERROR(aufs_mount)) {
+            printk(KERN_ERR &quot;aufs: could not mount!\n&quot;);
+            unregister_filesystem(&amp;au_fs_type);
+            return retval;
+        }
+    }
+
+    pslot = aufs_create_dir(&quot;woman star&quot;, NULL);
+    aufs_create_file(&quot;lbb&quot;, S_IFREG | S_IRUGO, pslot, NULL, NULL);
+    aufs_create_file(&quot;fbb&quot;, S_IFREG | S_IRUGO, pslot, NULL, NULL);
+    aufs_create_file(&quot;ljl&quot;, S_IFREG | S_IRUGO, pslot, NULL, NULL);
+
+    pslot = aufs_create_dir(&quot;man star&quot;, NULL);
+    aufs_create_file(&quot;ldh&quot;, S_IFREG | S_IRUGO, pslot, NULL, NULL);
+    aufs_create_file(&quot;lcw&quot;, S_IFREG | S_IRUGO, pslot, NULL, NULL);
+    aufs_create_file(&quot;jw&quot;, S_IFREG | S_IRUGO, pslot, NULL, NULL);
+
+    return retval;
+}
+
+static void __exit aufs_exit(void)
+{
+    simple_release_fs(&amp;aufs_mount, &amp;aufs_mount_count);
+    unregister_filesystem(&amp;au_fs_type);
+}
+
+module_init(aufs_init);
+module_exit(aufs_exit);
+MODULE_LICENSE(&quot;GPL&quot;);
+MOUDLE_DESCRIPTION(&quot;This is a simple module&quot;);
+MODULE_VERSION(&quot;Ver 0.1&quot;);
+
+
+/*
+* mkdir au
+* mount -t aufs none /au
+* ls
+*/
+
+</code></pre>
+<h5 id="232">2.3.2、文件系统如何管理目录和文件</h5>
+<ul>
+<li>代码三部分</li>
+<li>1）<code>register_filesystem</code>函数，把aufs文件系统登记到系统</li>
+<li>2）调用<code>kern_mount</code>函数为文件系统申请必备的数据结构</li>
+<li>3）最后在aufs文件系统内创建两目录，每个目录下面创建3个文件</li>
+</ul>
+<h5 id="233">2.3.3、文件系统的挂载过程</h5>
+<h5 id="234">2.3.4、文件打开的代码分析</h5>
+<h4 id="24">2.4、本章小结</h4>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../10network/TCPIP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="btn btn-neutral float-left" title="《TCP/IP网络编程》"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/" class="btn btn-neutral float-right" title="《文件系统技术内幕》">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../../10network/TCPIP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
