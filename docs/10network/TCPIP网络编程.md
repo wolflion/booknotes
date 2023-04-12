@@ -1,33 +1,29 @@
-## Part01、开始网络编程（1-14）
+## 《TCP/IP网络编程》
++ Part01、
+
+Part01、开始网络编程（1-14）
 
 ### chap1、理解网络编程和套接字
 
 #### 1.1、理解网络编程和套接字
-
-+ **接受连接请求**【即服务端】的套接字创建过程
++ **接受连接请求**【即服务端】的TCP套接字创建过程
   + 1、调用`socket()`创建套接字
   + 2、调用`bind()`分配IP地址和端口号
   + 3、调用`listen()`转为可接收请求状态
   + 4、调用`accept()`受理连接请求
-+ **请求连接**【即客户端】
++ **请求连接**【即客户端】，TCP
   + 1、调用`socket()`
   + 2、调用`connect()`
 
 #### 1.2、基于Linux的文件操作
-
 + **socket会被认为是文件的一种**，直接用I/O操作即可，`open()、close()、write()`
 + **书上提到了`_t`后缀的数据类型**（一般都是typedef声明引起的）
 + fd是啥，**操作系统返回的整数**（也就是为了方便称呼OS创建的文件或套接字而赋予的数而已），*可以这么记，但是逻辑不是这样，因为是通过fd整数的下标，去数组里找到了相应的值*
   + 场景是，我想打印《TCP/IP网络编程》的18-20页，说多了可以简写为我想打印编号10的18-20页。
 
-##### lionel注：
-
-+ TLPI的chap56，提到了**流socket**和**数据报sockect**，本章用到的例子是前者。
-
 ### chap2、套接字类型与协议设置
 
 #### 2.1、套接字协议及其数据传输特性
-
 + 关于协议
   + **对话中使用的通信规则**
 + 协议族（Protocol Family）
@@ -68,11 +64,11 @@
 
 + *知识内容，还没好好看，lionel，知识盲区*    56/421
 
-  ```c
-  struct sockaddr_in addr;
-  memset(&addr, 0, sizeof(addr));
-  addr.sin_addr.s_addr = htonl(INADDR_ANY)); //**自动获取运行服务器端的计算机IP地址**
-  ```
+```c
+struct sockaddr_in addr;
+memset(&addr, 0, sizeof(addr));
+addr.sin_addr.s_addr = htonl(INADDR_ANY)); //**自动获取运行服务器端的计算机IP地址**
+```
 
 ### chap4-5、基于TCP的服务端/客户端
 
@@ -128,8 +124,6 @@
 int shutdown(int sock, int howto);
 ```
 
-
-
 + 为何需要半关闭
 + 基于半关闭的文件传输程序
   + file_server.c
@@ -161,8 +155,6 @@ struct hostent{
 }
 ```
 
-
-
 + 利用IP地址获取域名
   + gethostbyaddr.c
 
@@ -170,8 +162,6 @@ struct hostent{
 #include <netdb.h>
 struct hostent* gethostbyaddr(const char *addr, socklen_t len, int family);
 ```
-
-
 
 ### chap9、套接字的多种可选项
 
@@ -193,8 +183,6 @@ int getsockopt(int sock, int optname, void *optval, socklen_t *optlen);
 
 int setsockopt(int sock, int level, int optname, const void *optval, socklen_t *optlen);
 ```
-
-
 
 + SO_SNDBUF&SO_RCVBUF
   + SO_RCVBUF：输入缓冲大小相关可选项
@@ -312,8 +300,6 @@ ssize_t send(int sockfd, const void* buf, size_t nbytes, int flags);
 ssize_t recv(int sockfd, void *buf, size_t nbytes, int flags);
 ```
 
-
-
 + MSG_OOB：发送紧急消息
   + oob_send.c
   + oob_recv.c
@@ -340,8 +326,6 @@ struct iovec{
 ssize_t readv(int filedes, const struct iovec *iov, int iovcnt);
 ```
 
-
-
 + 合理使用readv&writev函数
 
 ### chap14、多播与广播
@@ -365,7 +349,7 @@ ssize_t readv(int filedes, const struct iovec *iov, int iovcnt);
   + news_sender_brd.c
   + news_receiver_brd.c
 
-## Part2、基于Linux的编程（15-18）
+Part2、基于Linux的编程（15-18）
 
 ### chap15、套接字和标准I/O
 
@@ -392,8 +376,6 @@ ssize_t readv(int filedes, const struct iovec *iov, int iovcnt);
 FILE* fdopen(int fildes, const char *mode);
 ```
 
-
-
 + 利用fileno函数转换为文件描述符
   + todes.c
 
@@ -401,8 +383,6 @@ FILE* fdopen(int fildes, const char *mode);
 #include<stdio.h>
 int fileno(FILE* stream);
 ```
-
-
 
 #### 15.3、基于套接字的标准I/O函数使用
 
@@ -445,8 +425,6 @@ int dup(int fides);
 int dup2(int fildes, int fildes2);
 ```
 
-
-
 + 复制文件描述符后“流”的分离
   + sep_serv2.c
 
@@ -473,7 +451,7 @@ int dup2(int fildes, int fildes2);
 
 #### 18.5、线程的销毁和多线程并发服务器端的实现
 
-## Part4、结束网络编程（24-25）
+Part4、结束网络编程（24-25）
 
 ### chap24、制作HTTP服务器端
 
