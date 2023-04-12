@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>Linux高性能服务器编程 - lionel的技术笔记</title>
+    <title>《Linux高性能服务器编程》 - lionel的技术笔记</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Linux\u9ad8\u6027\u80fd\u670d\u52a1\u5668\u7f16\u7a0b";
+        var mkdocs_page_name = "\u300aLinux\u9ad8\u6027\u80fd\u670d\u52a1\u5668\u7f16\u7a0b\u300b";
         var mkdocs_page_input_path = "10network\\Linux\u9ad8\u6027\u80fd\u670d\u52a1\u5668\u7f16\u7a0b.md";
         var mkdocs_page_url = null;
       </script>
@@ -44,9 +44,189 @@
                 <li class="toctree-l1"><a class="reference internal" href="../..">简介</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">网络编程</span></p>
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../01daily/">daily</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网络编程</span></p>
+              <ul class="current">
                   <li class="toctree-l1"><a class="reference internal" href="../TCPIP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">《TCP/IP网络编程》</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">《Linux高性能服务器编程》</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#11tcpip">1.1、TCP/IP协议族体系结构以及主要协议</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#0">0</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#111">1.1.1、数据链路层</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#112">1.1.2、网络层</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#113">1.1.3、传输层</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#114">1.1.4、应用层</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#12">1.2、封装</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#13">1.3、分用</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#14">1.4、测试网络</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#15arp">1.5、arp协议工作原理</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#151arp">1.5.1、以太网arp请求/应答报文详解</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#152arp">1.5.2、arp高速缓存的查看和修改</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#153tcpdumparp">1.5.3、使用tcpdump观察arp通信过程</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#16dns">1.6、dns工作原理</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#161dns">1.6.1、dns查询和应答报文详解</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#162linuxdns">1.6.2、linux下访问dns服务</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#163tcpdumpdns">1.6.3、使用tcpdump观察dns通信过程</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#17sockettcpip">1.7、socket与tcp/ip协议族的关系</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#0_1">0、</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#21ip">2.1、IP服务的特点</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#22ipv4">2.2、IPv4头部结构</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#221ipv4">2.2.1、IPv4头部结构</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#222tcpdumpipv4">2.2.2、使用tcpdump观察ipv4头部结构</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#23ip">2.3、IP分片</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#24ip">2.4、IP路由</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#241ip">2.4.1、ip模块工作流程</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#242">2.4.2、路由机制</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#243">2.4.3、路由表更新</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#25ip">2.5、IP转发</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#26">2.6、重定向</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#261icmp">2.6.1、icmp重定向报文</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#262">2.6.2、主机重定向实例</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#27ipv6">2.7、IPv6头部结构</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#0_2">0、</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#271ipv6">2.7.1、ipv6固定头部结构</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#272ipv6">2.7.2、ipv6扩展头部</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#0_3">0</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#31tcp">3.1、tcp服务的特点</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#32tcp">3.2、tcp头部结构</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#321tcp">3.2.1、tcp固定头部结构</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#322tcp">3.2.2、tcp头部选项</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#323tcpdumptcp">3.2.3、使用tcpdump观察tcp头部信息</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#33tcp">3.3、tcp连接的建立和关闭</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#331tcpdumptcp">3.3.1、使用tcpdump观察tcp连接的建立和关闭</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#332">3.3.2、半关闭状态</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#333">3.3.3、连接超时</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#34tcp">3.4、tcp状态转移</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#341tcp">3.4.1、tcp状态转移总图</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#342time_wait">3.4.2、time_wait状态</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#35">3.5、复位报文段</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#351">3.5.1、访问不存在的端口</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#352">3.5.2、异常终止连接</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#353">3.5.3、处理半打开连接</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#36tcp">3.6、tcp交互数据流</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#37tcp">3.7、tcp成块数据流</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#38tcp">3.8、tcp带外数据</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#39tcp">3.9、tcp超时重传</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#310">3.10、拥塞控制</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#3101">3.10.1、拥塞控制概述</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#3102">3.10.2、慢启动和拥塞避免</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#3103">3.10.3、快速重传和快速恢复</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#41">4.1、实例总图</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#42">4.2、部署代理服务器</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#421http">4.2.1、http代理服务器的工作原理</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#422squid">4.2.2、部署squid代理服务器</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#43tcpdup">4.3、使用tcpdup抓取传输数据包</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#44dns">4.4、访问dns服务器</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#45">4.5、本地名称查询</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#46http">4.6、HTTP通信</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#461http">4.6.1、http请求</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#462http">4.6.2、http应答</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#47">4.7、实例总结</a>
+    </li>
+    </ul>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">文件系统</span></p>
@@ -63,6 +243,11 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../12storage/ceph%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《ceph设计原理与实现》</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">网课</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/01Linux%E9%AB%98%E5%B9%B6%E5%8F%91%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/">《Linux高并发网络编程开发》</a>
+                  </li>
+              </ul>
       </div>
     </div>
     </nav>
@@ -77,7 +262,8 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-      <li>Linux高性能服务器编程</li>
+          <li>网络编程 &raquo;</li>
+      <li>《Linux高性能服务器编程》</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -799,6 +985,10 @@ int sem_wait(sem_t *sem);
               
             </div>
           </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../TCPIP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="btn btn-neutral float-left" title="《TCP/IP网络编程》"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../11filesystem/Linux%E5%86%85%E6%A0%B8%E6%8E%A2%E7%A7%98/" class="btn btn-neutral float-right" title="《Linux内核探秘》">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
 
   <hr/>
 
@@ -820,6 +1010,10 @@ int sem_wait(sem_t *sem);
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
+      <span><a href="../TCPIP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../11filesystem/Linux%E5%86%85%E6%A0%B8%E6%8E%A2%E7%A7%98/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
