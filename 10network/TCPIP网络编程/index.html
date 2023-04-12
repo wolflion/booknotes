@@ -57,10 +57,6 @@
     <li class="toctree-l3"><a class="reference internal" href="#11">1.1、理解网络编程和套接字</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#12linux">1.2、基于Linux的文件操作</a>
-        <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#lionel">lionel注：</a>
-    </li>
-        </ul>
     </li>
         </ul>
     </li>
@@ -68,7 +64,7 @@
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#21">2.1、套接字协议及其数据传输特性</a>
         <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#lionel_1">lionel注：</a>
+    <li class="toctree-l4"><a class="reference internal" href="#lionel">lionel注：</a>
     </li>
         </ul>
     </li>
@@ -98,7 +94,7 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#52tcp">5.2、TCP原理</a>
         <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#lionel_2">lionel注：</a>
+    <li class="toctree-l4"><a class="reference internal" href="#lionel_1">lionel注：</a>
     </li>
         </ul>
     </li>
@@ -176,6 +172,64 @@
     </li>
         </ul>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap15io">chap15、套接字和标准I/O</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#151io">15.1、标准I/O函数的优点</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#152io">15.2、使用标准I/O函数</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#153io">15.3、基于套接字的标准I/O函数使用</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap16io">chap16、关于I/O流分离的其他内容</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#161io">16.1、分离I/O流</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#162">16.2、文件描述符的复制和半关闭</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap17selectepoll">chap17、优于select的epoll</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#171epoll">17.1、epoll理解及应用</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#172">17.2、条件触发和边缘触发</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap18">chap18、多线程服务器端的实现</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#181">18.1、理解线程的概念</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#182">18.2、线程创建及运行</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#183">18.3、线程存在的问题和临界区</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#184">18.4、线程同步</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#185">18.5、线程的销毁和多线程并发服务器端的实现</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap24http">chap24、制作HTTP服务器端</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#241http">24.1、HTTP摘要</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#242web">24.2、实现简单的Web服务器端</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#243">24.3、习题</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap25">chap25、进阶内容</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#251">25.1、网络编程学习的其他内容</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#252">25.2、网络编程相关书籍介绍</a>
+    </li>
+        </ul>
+    </li>
     </ul>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/">《Linux高性能服务器编程》</a>
@@ -224,41 +278,51 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h2 id="part011-14">Part01、开始网络编程（1-14）</h2>
-<h3 id="chap1">chap1、理解网络编程和套接字</h3>
-<h4 id="11">1.1、理解网络编程和套接字</h4>
+                <h2 id="tcpip">《TCP/IP网络编程》<a class="headerlink" href="#tcpip" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>接受连接请求</strong>【即服务端】的套接字创建过程</li>
+<li>Part01、</li>
+</ul>
+<p>Part01、开始网络编程（1-14）</p>
+<h3 id="chap1">chap1、理解网络编程和套接字<a class="headerlink" href="#chap1" title="Permanent link">&para;</a></h3>
+<h4 id="11">1.1、理解网络编程和套接字<a class="headerlink" href="#11" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>接受连接请求</strong>【即服务端】的TCP套接字创建过程<ul>
 <li>1、调用<code>socket()</code>创建套接字</li>
 <li>2、调用<code>bind()</code>分配IP地址和端口号</li>
 <li>3、调用<code>listen()</code>转为可接收请求状态</li>
 <li>4、调用<code>accept()</code>受理连接请求</li>
-<li><strong>请求连接</strong>【即客户端】</li>
+</ul>
+</li>
+<li><strong>请求连接</strong>【即客户端】，TCP<ul>
 <li>1、调用<code>socket()</code></li>
 <li>2、调用<code>connect()</code></li>
 </ul>
-<h4 id="12linux">1.2、基于Linux的文件操作</h4>
+</li>
+</ul>
+<h4 id="12linux">1.2、基于Linux的文件操作<a class="headerlink" href="#12linux" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>socket会被认为是文件的一种</strong>，直接用I/O操作即可，<code>open()、close()、write()</code></li>
 <li><strong>书上提到了<code>_t</code>后缀的数据类型</strong>（一般都是typedef声明引起的）</li>
-<li>fd是啥，<strong>操作系统返回的整数</strong>（也就是为了方便称呼OS创建的文件或套接字而赋予的数而已），<em>可以这么记，但是逻辑不是这样，因为是通过fd整数的下标，去数组里找到了相应的值</em></li>
+<li>fd是啥，<strong>操作系统返回的整数</strong>（也就是为了方便称呼OS创建的文件或套接字而赋予的数而已），<em>可以这么记，但是逻辑不是这样，因为是通过fd整数的下标，去数组里找到了相应的值</em><ul>
 <li>场景是，我想打印《TCP/IP网络编程》的18-20页，说多了可以简写为我想打印编号10的18-20页。</li>
 </ul>
-<h5 id="lionel">lionel注：</h5>
-<ul>
-<li>TLPI的chap56，提到了<strong>流socket</strong>和<strong>数据报sockect</strong>，本章用到的例子是前者。</li>
+</li>
 </ul>
-<h3 id="chap2">chap2、套接字类型与协议设置</h3>
-<h4 id="21">2.1、套接字协议及其数据传输特性</h4>
+<h3 id="chap2">chap2、套接字类型与协议设置<a class="headerlink" href="#chap2" title="Permanent link">&para;</a></h3>
+<h4 id="21">2.1、套接字协议及其数据传输特性<a class="headerlink" href="#21" title="Permanent link">&para;</a></h4>
 <ul>
-<li>关于协议</li>
+<li>关于协议<ul>
 <li><strong>对话中使用的通信规则</strong></li>
-<li>协议族（Protocol Family）</li>
+</ul>
+</li>
+<li>协议族（Protocol Family）<ul>
 <li>socket的第1个参数</li>
 <li><code>sys/socket.h</code></li>
 <li><code>PF_INET</code>，ipv4</li>
 <li><code>PF_PACKET</code>，底层套接字</li>
-<li>套接字类型（type）</li>
+</ul>
+</li>
+<li>套接字类型（type）<ul>
 <li><strong>套接字的数据传输方式</strong>，socket的第2个参数</li>
 <li>1、面向连接的套接字（SOCK_STREAM）<ul>
 <li>传输过程中数据不会消失</li>
@@ -271,74 +335,79 @@
 <li>39/421</li>
 </ul>
 </li>
-<li>协议的最终选择</li>
+</ul>
+</li>
+<li>协议的最终选择<ul>
 <li>socket的第3个参数</li>
 <li>一般为0，<strong>但 数据传输方式相同，协议不同，需要第3个参数指定</strong>。【同一协议族中存在多个数据传输方式相同的协议】</li>
 </ul>
-<h5 id="lionel_1">lionel注：</h5>
+</li>
+</ul>
+<h5 id="lionel">lionel注：<a class="headerlink" href="#lionel" title="Permanent link">&para;</a></h5>
 <ul>
 <li><code>socket()</code>的3个参数讲解，知识自己盲区，到时试下<code>man socket</code>看看</li>
 </ul>
-<h3 id="chap3">chap3、地址族与数据序列</h3>
-<h4 id="31">3.1、</h4>
+<h3 id="chap3">chap3、地址族与数据序列<a class="headerlink" href="#chap3" title="Permanent link">&para;</a></h3>
+<h4 id="31">3.1、<a class="headerlink" href="#31" title="Permanent link">&para;</a></h4>
 <ul>
 <li>IP只到主机，Port到应用程序</li>
 </ul>
-<h4 id="32">3.2、地址信息的表示</h4>
-<h4 id="33">3.3、网络字节序与地址变换</h4>
+<h4 id="32">3.2、地址信息的表示<a class="headerlink" href="#32" title="Permanent link">&para;</a></h4>
+<h4 id="33">3.3、网络字节序与地址变换<a class="headerlink" href="#33" title="Permanent link">&para;</a></h4>
 <ul>
 <li>【这部分要自己搜一下，大端序，小端序】</li>
 </ul>
-<h4 id="34">3.4、网络地址的初始化与分配</h4>
+<h4 id="34">3.4、网络地址的初始化与分配<a class="headerlink" href="#34" title="Permanent link">&para;</a></h4>
 <ul>
 <li><em>知识内容，还没好好看，lionel，知识盲区</em>    56/421</li>
 </ul>
-<p><code>c
-  struct sockaddr_in addr;
-  memset(&amp;addr, 0, sizeof(addr));
-  addr.sin_addr.s_addr = htonl(INADDR_ANY)); //**自动获取运行服务器端的计算机IP地址**</code></p>
-<h3 id="chap4-5tcp">chap4-5、基于TCP的服务端/客户端</h3>
-<h4 id="41tcpudp">4.1、理解TCP和UDP</h4>
+<pre class="highlight"><code class="language-c">struct sockaddr_in addr;
+memset(&amp;addr, 0, sizeof(addr));
+addr.sin_addr.s_addr = htonl(INADDR_ANY)); //**自动获取运行服务器端的计算机IP地址**</code></pre>
+<h3 id="chap4-5tcp">chap4-5、基于TCP的服务端/客户端<a class="headerlink" href="#chap4-5tcp" title="Permanent link">&para;</a></h3>
+<h4 id="41tcpudp">4.1、理解TCP和UDP<a class="headerlink" href="#41tcpudp" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>IP层解决数据传输中的路径选择问题，TCP层和UDP层以IP层提供的路径信息为基础完成实际的数据传输</strong>。</li>
 </ul>
-<h4 id="42tcp">4.2、实现基于TCP的服务器端/客户端</h4>
+<h4 id="42tcp">4.2、实现基于TCP的服务器端/客户端<a class="headerlink" href="#42tcp" title="Permanent link">&para;</a></h4>
 <ul>
 <li>就是<strong>本章1.1+1.2</strong>，即连上后进行<strong>读写+关闭</strong></li>
 <li>深入了解一下accept()的细节问题，<em>为啥返回的fd能够直接通信，lionel</em></li>
 <li><em>会存在所谓的“惊群”现象，面试会不会考到？</em></li>
 </ul>
-<h4 id="43">4.3、实现迭代服务器端/客户端</h4>
+<h4 id="43">4.3、实现迭代服务器端/客户端<a class="headerlink" href="#43" title="Permanent link">&para;</a></h4>
 <ul>
 <li><em>这个要想一下原理，lionel</em></li>
 <li>迭代服务器的代码</li>
 <li><em>存在的问题，lionel</em>  【TCP不存在数据边界，write()每次传递1个字符串，多次调用后，客户端可能会收到多个字符串，这个怎么验证下？】  87/421</li>
 <li>回声（服务器端将客户端传输的字符串数据原封不动地传回客户端）</li>
 </ul>
-<h4 id="51">5.1、回声客户端的完美表现</h4>
+<h4 id="51">5.1、回声客户端的完美表现<a class="headerlink" href="#51" title="Permanent link">&para;</a></h4>
 <ul>
 <li><em>不是太懂，lionel</em>   92/421</li>
 </ul>
-<h4 id="52tcp">5.2、TCP原理</h4>
+<h4 id="52tcp">5.2、TCP原理<a class="headerlink" href="#52tcp" title="Permanent link">&para;</a></h4>
 <ul>
 <li>三次握手（103/421）</li>
 <li>四次挥手（106/421），<strong>客户端和服务端都要发送<code>FIN</code></strong></li>
 </ul>
-<h5 id="lionel_2">lionel注：</h5>
+<h5 id="lionel_1">lionel注：<a class="headerlink" href="#lionel_1" title="Permanent link">&para;</a></h5>
 <ul>
 <li>要让我<strong>实现迭代服务器端/客户端</strong>，我也不会</li>
 </ul>
-<h3 id="chap6udp">chap6、基于UDP的服务端/客户端</h3>
+<h3 id="chap6udp">chap6、基于UDP的服务端/客户端<a class="headerlink" href="#chap6udp" title="Permanent link">&para;</a></h3>
 <ul>
 <li><em>要补充完善一点</em>，目前笔记上都是空，lionel</li>
 </ul>
-<h3 id="chap7">chap7、优雅的断开套接字连接</h3>
-<h4 id="71tcp">7.1、基于TCP的半关闭</h4>
+<h3 id="chap7">chap7、优雅的断开套接字连接<a class="headerlink" href="#chap7" title="Permanent link">&para;</a></h3>
+<h4 id="71tcp">7.1、基于TCP的半关闭<a class="headerlink" href="#71tcp" title="Permanent link">&para;</a></h4>
 <ul>
-<li>单方面断开连接带来的问题</li>
+<li>单方面断开连接带来的问题<ul>
 <li><code>close()</code>是完全关闭，<strong>不仅无法传输数据，而且也不能接收数据</strong>。</li>
+</ul>
+</li>
 <li>套接字和流（stream）</li>
-<li>针对优雅断开的shutdown函数</li>
+<li>针对优雅断开的shutdown函数<ul>
 <li>第2个参数决定断开连接的方式<ul>
 <li>SHUT_RD：断开输入流</li>
 <li>SHUT_WR：断开输出流</li>
@@ -346,29 +415,36 @@
 </ul>
 </li>
 </ul>
-<pre><code class="language-c">#include&lt;sys/socket.h&gt;
-int shutdown(int sock, int howto);
-</code></pre>
+</li>
+</ul>
+<pre class="highlight"><code class="language-c">#include&lt;sys/socket.h&gt;
+int shutdown(int sock, int howto);</code></pre>
 <ul>
 <li>为何需要半关闭</li>
-<li>基于半关闭的文件传输程序</li>
+<li>基于半关闭的文件传输程序<ul>
 <li>file_server.c</li>
 <li>file_client.c</li>
 </ul>
-<h3 id="chap8">chap8、域名及网络地址</h3>
-<h4 id="81">8.1、域名系统</h4>
+</li>
+</ul>
+<h3 id="chap8">chap8、域名及网络地址<a class="headerlink" href="#chap8" title="Permanent link">&para;</a></h3>
+<h4 id="81">8.1、域名系统<a class="headerlink" href="#81" title="Permanent link">&para;</a></h4>
 <ul>
 <li>什么是域名</li>
 <li>DNS服务器</li>
 </ul>
-<h4 id="82ip">8.2、IP地址和域名之间的转换</h4>
+<h4 id="82ip">8.2、IP地址和域名之间的转换<a class="headerlink" href="#82ip" title="Permanent link">&para;</a></h4>
 <ul>
-<li>程序中有必要使用域名吗？</li>
+<li>程序中有必要使用域名吗？<ul>
 <li><strong>所有学习都要在开始前认识到其必要性</strong>。</li>
-<li>利用域名获取IP地址</li>
+</ul>
+</li>
+<li>利用域名获取IP地址<ul>
 <li>gethostbyname.c</li>
 </ul>
-<pre><code class="language-c">#include &lt;netdb.h&gt;
+</li>
+</ul>
+<pre class="highlight"><code class="language-c">#include &lt;netdb.h&gt;
 struct hostent* gethostbyname(const char* hostname);
 struct hostent{
     char* h_name; //官方域名
@@ -376,125 +452,146 @@ struct hostent{
     int h_addrtype;//ipv4还是ipv6
     int h_length;//IP地址长度
     char** h_addr_list;//以整数形式保存域名对应的IP地址
-}
-</code></pre>
+}</code></pre>
 <ul>
-<li>利用IP地址获取域名</li>
+<li>利用IP地址获取域名<ul>
 <li>gethostbyaddr.c</li>
 </ul>
-<pre><code class="language-c">#include &lt;netdb.h&gt;
-struct hostent* gethostbyaddr(const char *addr, socklen_t len, int family);
-</code></pre>
-<h3 id="chap9">chap9、套接字的多种可选项</h3>
+</li>
+</ul>
+<pre class="highlight"><code class="language-c">#include &lt;netdb.h&gt;
+struct hostent* gethostbyaddr(const char *addr, socklen_t len, int family);</code></pre>
+<h3 id="chap9">chap9、套接字的多种可选项<a class="headerlink" href="#chap9" title="Permanent link">&para;</a></h3>
 <ul>
 <li>（150/421），这个算比较重点的地方？lionel</li>
 </ul>
-<h4 id="91io">9.1、套接字可选项和I/O缓冲大小</h4>
+<h4 id="91io">9.1、套接字可选项和I/O缓冲大小<a class="headerlink" href="#91io" title="Permanent link">&para;</a></h4>
 <ul>
-<li>套接字多种可选项</li>
+<li>套接字多种可选项<ul>
 <li>协议层<ul>
 <li>SOL_SOCKET</li>
 <li>IPPROTO_IP</li>
 <li>IPPROTO_TCP</li>
 </ul>
 </li>
-<li>getsockopt&amp;setsockopt</li>
+</ul>
+</li>
+<li>getsockopt&amp;setsockopt<ul>
 <li>sock_type.c</li>
 </ul>
-<pre><code class="language-c">#include&lt;sys/socket.h&gt;
+</li>
+</ul>
+<pre class="highlight"><code class="language-c">#include&lt;sys/socket.h&gt;
 int getsockopt(int sock, int optname, void *optval, socklen_t *optlen);
 
-int setsockopt(int sock, int level, int optname, const void *optval, socklen_t *optlen);
-</code></pre>
+int setsockopt(int sock, int level, int optname, const void *optval, socklen_t *optlen);</code></pre>
 <ul>
-<li>SO_SNDBUF&amp;SO_RCVBUF</li>
+<li>SO_SNDBUF&amp;SO_RCVBUF<ul>
 <li>SO_RCVBUF：输入缓冲大小相关可选项</li>
 <li>SO_SNDBUF：输出缓冲大小相关可选项</li>
 <li><strong>这2个选项既可以读取当前I/O缓冲大小，也可以进行更改</strong>。</li>
 <li>get_buf.c</li>
 <li>set_buf.c</li>
 </ul>
-<h4 id="92so_reuseaddr">9.2、SO_REUSEADDR</h4>
+</li>
+</ul>
+<h4 id="92so_reuseaddr">9.2、SO_REUSEADDR<a class="headerlink" href="#92so_reuseaddr" title="Permanent link">&para;</a></h4>
 <ul>
-<li>0</li>
-<li>
-<p><strong>学习SO_REUSEADDR可选项之前，应理解好Time-wait状态</strong>。</p>
+<li>0<ul>
+<li><strong>学习SO_REUSEADDR可选项之前，应理解好Time-wait状态</strong>。</li>
+</ul>
 </li>
-<li>
-<p>发生地址分配错误（Binding Error）</p>
-</li>
+</ul>
+<ul>
+<li>发生地址分配错误（Binding Error）<ul>
 <li>reuseaddr_eserver.c</li>
-<li>Time-wait状态</li>
+</ul>
+</li>
+<li>Time-wait状态<ul>
 <li><strong>先断开连接的（先发送FIN消息的）套接字必然会经过Time-wait状态</strong></li>
 <li>如果没有time-wait状态，（A发了FIN没有收到 B的ACK后，会重发FIN，但B已经下线了）  158/421，这部分解释得比较OK</li>
+</ul>
+</li>
 <li>地址再分配</li>
 </ul>
-<h4 id="93tcp_nodelay">9.3、TCP_NODELAY</h4>
+<h4 id="93tcp_nodelay">9.3、TCP_NODELAY<a class="headerlink" href="#93tcp_nodelay" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Nagle算法</li>
-<li>禁用Nagle算法</li>
+<li>禁用Nagle算法<ul>
 <li><strong>将套接字可选项TCP_NODELAY改为1（真）</strong></li>
+</ul>
+</li>
 <li><em>书上还没看，之前看过网络笔记上的</em></li>
 </ul>
-<h3 id="chap10">chap10、多进程服务器端</h3>
+<h3 id="chap10">chap10、多进程服务器端<a class="headerlink" href="#chap10" title="Permanent link">&para;</a></h3>
 <ul>
 <li><em>lionel，IO分流，我确实没懂</em>【routine】</li>
 </ul>
-<h4 id="101">10.1、进程概念及应用</h4>
+<h4 id="101">10.1、进程概念及应用<a class="headerlink" href="#101" title="Permanent link">&para;</a></h4>
 <ul>
-<li>并发服务器端的实现方法</li>
+<li>并发服务器端的实现方法<ul>
 <li>多进程服务器：通过创建多个进程提供服务</li>
 <li>多路复路服务器：通过捆绑并统一管理I/O对象提供服务</li>
 <li>多线程服务器：通过生成与客户端等量的线程提供服务</li>
-<li>理解进程</li>
+</ul>
+</li>
+<li>理解进程<ul>
 <li><strong>占用内存空间的正在运行的程序</strong></li>
+</ul>
+</li>
 <li>通过调用fork函数创建进程</li>
 </ul>
-<h4 id="102">10.2、进程和僵尸进程</h4>
+<h4 id="102">10.2、进程和僵尸进程<a class="headerlink" href="#102" title="Permanent link">&para;</a></h4>
 <ul>
-<li>僵尸（Zombie）进程</li>
+<li>僵尸（Zombie）进程<ul>
 <li>完成工作没有被销毁，继续占用系统中的重要资源</li>
-<li>产生僵尸进程的原因</li>
+</ul>
+</li>
+<li>产生僵尸进程的原因<ul>
 <li>父进程没有管子进程</li>
+</ul>
+</li>
 <li>销毁僵尸进程1：利用wait函数</li>
 <li>销毁僵尸进程2：利用waitpid函数</li>
 </ul>
-<h4 id="103">10.3、信号处理</h4>
+<h4 id="103">10.3、信号处理<a class="headerlink" href="#103" title="Permanent link">&para;</a></h4>
 <ul>
 <li>向操作系统求助</li>
 <li>关于JAVA的题外话：保持开放思维</li>
 <li>信号与signal函数</li>
 <li>利用sigaction函数进行信号处理</li>
 </ul>
-<h4 id="104">10.4、基于多任务的并发服务器</h4>
+<h4 id="104">10.4、基于多任务的并发服务器<a class="headerlink" href="#104" title="Permanent link">&para;</a></h4>
 <ul>
-<li>基于进程的并发服务器模型</li>
+<li>基于进程的并发服务器模型<ul>
 <li>图10-2：并发服务器模型  （183/421）</li>
+</ul>
+</li>
 <li>实现并发服务器</li>
 <li>通过fork函数复制文件描述符</li>
 <li><em>lionel，代码看一下先</em></li>
 </ul>
-<h4 id="105tcpio">10.5、分割TCP的I/O程序</h4>
+<h4 id="105tcpio">10.5、分割TCP的I/O程序<a class="headerlink" href="#105tcpio" title="Permanent link">&para;</a></h4>
 <ul>
 <li>分割I/O程序的优点</li>
 <li>回声客户端的I/O程序分割</li>
 </ul>
-<h3 id="chap11">chap11、进程间通信</h3>
-<h4 id="111">11.1、进程间通信的基本概念</h4>
+<h3 id="chap11">chap11、进程间通信<a class="headerlink" href="#chap11" title="Permanent link">&para;</a></h3>
+<h4 id="111">11.1、进程间通信的基本概念<a class="headerlink" href="#111" title="Permanent link">&para;</a></h4>
 <ul>
 <li>对进程间通信的基本概念</li>
 <li>通过管道实现进程间通信</li>
 </ul>
-<h4 id="112">11.2、运用进程间通信</h4>
+<h4 id="112">11.2、运用进程间通信<a class="headerlink" href="#112" title="Permanent link">&para;</a></h4>
 <ul>
 <li>保存消息的回声服务器端</li>
 <li>如果想构建更大型的程序</li>
 </ul>
-<h3 id="chap12io">chap12、I/O复用</h3>
-<h4 id="121io">12.1、基于I/O复用的服务器端</h4>
+<h3 id="chap12io">chap12、I/O复用<a class="headerlink" href="#chap12io" title="Permanent link">&para;</a></h3>
+<h4 id="121io">12.1、基于I/O复用的服务器端<a class="headerlink" href="#121io" title="Permanent link">&para;</a></h4>
 <ul>
 <li>多进程服务器端的缺点和解决方法</li>
-<li>理解复用</li>
+<li>理解复用<ul>
 <li>定义：<ul>
 <li>1、在1个通信频道中传递多个数据（信号）的技术</li>
 <li>2、为了提高物理设备的效率，用最少的物理要素传递最多数据时使用的技术</li>
@@ -505,9 +602,11 @@ int setsockopt(int sock, int level, int optname, const void *optval, socklen_t *
 <li>减少纸杯个数</li>
 </ul>
 </li>
+</ul>
+</li>
 <li>复用技术在服务器端的应用</li>
 </ul>
-<h4 id="122select">12.2、理解select函数并实现服务器端</h4>
+<h4 id="122select">12.2、理解select函数并实现服务器端<a class="headerlink" href="#122select" title="Permanent link">&para;</a></h4>
 <ul>
 <li>select函数的功能和调用顺序</li>
 <li>设置文件描述符</li>
@@ -515,32 +614,37 @@ int setsockopt(int sock, int level, int optname, const void *optval, socklen_t *
 <li>调用select函数后查看结果</li>
 <li><strong>使用select函数时可以将多个文件描述符集中到一起统一监视</strong>（分成3种情况：接收、传输、异常）<code>FD_SET()</code></li>
 </ul>
-<h3 id="chap13io">chap13、多种I/O函数</h3>
-<h4 id="131sendrecv">13.1、send&amp;recv函数</h4>
+<h3 id="chap13io">chap13、多种I/O函数<a class="headerlink" href="#chap13io" title="Permanent link">&para;</a></h3>
+<h4 id="131sendrecv">13.1、send&amp;recv函数<a class="headerlink" href="#131sendrecv" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Linux中的send&amp;recv</li>
 </ul>
-<pre><code class="language-c">#include&lt;sys/socket.h&gt;
+<pre class="highlight"><code class="language-c">#include&lt;sys/socket.h&gt;
 ssize_t send(int sockfd, const void* buf, size_t nbytes, int flags);
 
-ssize_t recv(int sockfd, void *buf, size_t nbytes, int flags);
-</code></pre>
+ssize_t recv(int sockfd, void *buf, size_t nbytes, int flags);</code></pre>
 <ul>
-<li>MSG_OOB：发送紧急消息</li>
+<li>MSG_OOB：发送紧急消息<ul>
 <li>oob_send.c</li>
 <li>oob_recv.c</li>
+</ul>
+</li>
 <li>紧急模式工作原理</li>
-<li>检查输入缓冲</li>
+<li>检查输入缓冲<ul>
 <li>peek_send.c</li>
 <li>peek_recv.c</li>
 </ul>
-<h4 id="132readvwritev">13.2、readv&amp;writev函数</h4>
+</li>
+</ul>
+<h4 id="132readvwritev">13.2、readv&amp;writev函数<a class="headerlink" href="#132readvwritev" title="Permanent link">&para;</a></h4>
 <ul>
-<li>使用readv&amp;writev函数</li>
+<li>使用readv&amp;writev函数<ul>
 <li>writev.c</li>
 <li>readv.c</li>
 </ul>
-<pre><code class="language-c">#include&lt;sys/uio.h&gt;
+</li>
+</ul>
+<pre class="highlight"><code class="language-c">#include&lt;sys/uio.h&gt;
 ssize_t writev(int filedes, const struct iovec* iov, int iovcnt);
 
 struct iovec{
@@ -548,76 +652,87 @@ struct iovec{
     size_t iov_len; //缓冲大小
 }
 
-ssize_t readv(int filedes, const struct iovec *iov, int iovcnt);
-</code></pre>
+ssize_t readv(int filedes, const struct iovec *iov, int iovcnt);</code></pre>
 <ul>
 <li>合理使用readv&amp;writev函数</li>
 </ul>
-<h3 id="chap14">chap14、多播与广播</h3>
+<h3 id="chap14">chap14、多播与广播<a class="headerlink" href="#chap14" title="Permanent link">&para;</a></h3>
 <ul>
 <li>TCP是一对一的，所以不存在广播和多播。</li>
 </ul>
-<h4 id="141">14.1、多播</h4>
+<h4 id="141">14.1、多播<a class="headerlink" href="#141" title="Permanent link">&para;</a></h4>
 <ul>
 <li>多播的数据传输方式及流量方面的优点</li>
 <li>路由（Routing）和TTL（Time to Live：生存时间），以及加入组的方法</li>
-<li>实现多播Sender和Receiver</li>
+<li>实现多播Sender和Receiver<ul>
 <li>news_sender.c</li>
 <li>news_receiver.c</li>
+</ul>
+</li>
 <li>242/421中的代码过程，是ttl和加入组的方法</li>
 </ul>
-<h4 id="142">14.2、广播</h4>
+<h4 id="142">14.2、广播<a class="headerlink" href="#142" title="Permanent link">&para;</a></h4>
 <ul>
-<li>广播的理解及实现方法</li>
+<li>广播的理解及实现方法<ul>
 <li><strong>广播与多播相同，也是基于UDP完成的</strong></li>
-<li>实现广播数据的Sender和Receiver</li>
+</ul>
+</li>
+<li>实现广播数据的Sender和Receiver<ul>
 <li>news_sender_brd.c</li>
 <li>news_receiver_brd.c</li>
 </ul>
-<h2 id="part2linux15-18">Part2、基于Linux的编程（15-18）</h2>
-<h3 id="chap15io">chap15、套接字和标准I/O</h3>
-<h4 id="151io">15.1、标准I/O函数的优点</h4>
+</li>
+</ul>
+<p>Part2、基于Linux的编程（15-18）</p>
+<h3 id="chap15io">chap15、套接字和标准I/O<a class="headerlink" href="#chap15io" title="Permanent link">&para;</a></h3>
+<h4 id="151io">15.1、标准I/O函数的优点<a class="headerlink" href="#151io" title="Permanent link">&para;</a></h4>
 <ul>
-<li>标准I/O函数的两个优点：</li>
+<li>标准I/O函数的两个优点：<ul>
 <li>具有良好的移植性（Portability）</li>
 <li>可以利用缓冲提高性能</li>
-<li>标准I/O函数和系统函数之间的性能对比</li>
+</ul>
+</li>
+<li>标准I/O函数和系统函数之间的性能对比<ul>
 <li>syscpy.c</li>
 <li>stdcpy.c</li>
-<li>标准I/O函数的几个缺点：</li>
+</ul>
+</li>
+<li>标准I/O函数的几个缺点：<ul>
 <li>不容易进行双向通信</li>
 <li>有时可能频繁调用fflush函数</li>
 <li>需要以FILE结构体指针的形式返回文件描述符</li>
 </ul>
-<h4 id="152io">15.2、使用标准I/O函数</h4>
+</li>
+</ul>
+<h4 id="152io">15.2、使用标准I/O函数<a class="headerlink" href="#152io" title="Permanent link">&para;</a></h4>
 <ul>
-<li>利用fdopen函数转换为FILE结构体指针</li>
+<li>利用fdopen函数转换为FILE结构体指针<ul>
 <li>desto.c</li>
 </ul>
-<pre><code class="language-c">#include &lt;stdio.h&gt;
-FILE* fdopen(int fildes, const char *mode);
-</code></pre>
+</li>
+</ul>
+<pre class="highlight"><code class="language-c">#include &lt;stdio.h&gt;
+FILE* fdopen(int fildes, const char *mode);</code></pre>
 <ul>
-<li>利用fileno函数转换为文件描述符</li>
+<li>利用fileno函数转换为文件描述符<ul>
 <li>todes.c</li>
 </ul>
-<pre><code class="language-c">#include&lt;stdio.h&gt;
-int fileno(FILE* stream);
-</code></pre>
-<h4 id="153io">15.3、基于套接字的标准I/O函数使用</h4>
+</li>
+</ul>
+<pre class="highlight"><code class="language-c">#include&lt;stdio.h&gt;
+int fileno(FILE* stream);</code></pre>
+<h4 id="153io">15.3、基于套接字的标准I/O函数使用<a class="headerlink" href="#153io" title="Permanent link">&para;</a></h4>
 <ul>
-<li>
-<p><strong>与chap4的进行比对</strong></p>
-</li>
-<li>
-<p>echo_stdserv.c</p>
-</li>
+<li><strong>与chap4的进行比对</strong></li>
+</ul>
+<ul>
+<li>echo_stdserv.c</li>
 <li>echo_client.c</li>
 </ul>
-<h3 id="chap16io">chap16、关于I/O流分离的其他内容</h3>
-<h4 id="161io">16.1、分离I/O流</h4>
+<h3 id="chap16io">chap16、关于I/O流分离的其他内容<a class="headerlink" href="#chap16io" title="Permanent link">&para;</a></h3>
+<h4 id="161io">16.1、分离I/O流<a class="headerlink" href="#161io" title="Permanent link">&para;</a></h4>
 <ul>
-<li>2次I/O流分离</li>
+<li>2次I/O流分离<ul>
 <li>chap10的“TCP I/O过程（Routine）分离”<ul>
 <li>通过fork函数复制出1个文件描述符，以区分输入和输出中使用的文件描述符</li>
 </ul>
@@ -626,7 +741,9 @@ int fileno(FILE* stream);
 <li>通过2次fdopen函数的调用，创建读模式FILE指针和写模式FILE指针</li>
 </ul>
 </li>
-<li>分离“流”的好处</li>
+</ul>
+</li>
+<li>分离“流”的好处<ul>
 <li>chap10分离“流”的目的<ul>
 <li>通过分开输入过程（代码）和输出过程降低实现难度</li>
 <li>与输入无关的输出操作可以提高速度</li>
@@ -638,76 +755,95 @@ int fileno(FILE* stream);
 <li>通过区分I/O缓冲提高缓冲性能</li>
 </ul>
 </li>
-<li>“流”分离带来的EOF问题</li>
+</ul>
+</li>
+<li>“流”分离带来的EOF问题<ul>
 <li>sep_serv.c</li>
 <li>sep_clnt.c</li>
 </ul>
-<h4 id="162">16.2、文件描述符的复制和半关闭</h4>
+</li>
+</ul>
+<h4 id="162">16.2、文件描述符的复制和半关闭<a class="headerlink" href="#162" title="Permanent link">&para;</a></h4>
 <ul>
 <li>终止“流”时无法半关闭的原因</li>
 <li>复制文件描述符</li>
-<li>dup&amp;dup2</li>
+<li>dup&amp;dup2<ul>
 <li>dup.c</li>
 </ul>
-<pre><code class="language-c">#include &lt;unistd.h&gt;
+</li>
+</ul>
+<pre class="highlight"><code class="language-c">#include &lt;unistd.h&gt;
 int dup(int fides);
-int dup2(int fildes, int fildes2);
-</code></pre>
+int dup2(int fildes, int fildes2);</code></pre>
 <ul>
-<li>复制文件描述符后“流”的分离</li>
+<li>复制文件描述符后“流”的分离<ul>
 <li>sep_serv2.c</li>
 </ul>
-<h3 id="chap17selectepoll">chap17、优于select的epoll</h3>
-<h4 id="171epoll">17.1、epoll理解及应用</h4>
-<h4 id="172">17.2、条件触发和边缘触发</h4>
+</li>
+</ul>
+<h3 id="chap17selectepoll">chap17、优于select的epoll<a class="headerlink" href="#chap17selectepoll" title="Permanent link">&para;</a></h3>
+<h4 id="171epoll">17.1、epoll理解及应用<a class="headerlink" href="#171epoll" title="Permanent link">&para;</a></h4>
+<h4 id="172">17.2、条件触发和边缘触发<a class="headerlink" href="#172" title="Permanent link">&para;</a></h4>
 <ul>
 <li>条件触发（Level Trigger）：<strong>只要输入缓冲有数据，就会一直通知该事件</strong> 【哪怕是剩余数据】</li>
 <li>边缘触发（Edge Trigger）：<strong>输入缓冲区收到数据时仅注册1次该事件</strong>【哪怕缓冲区，还留有数据，也不会再注册】</li>
 </ul>
-<h3 id="chap18">chap18、多线程服务器端的实现</h3>
+<h3 id="chap18">chap18、多线程服务器端的实现<a class="headerlink" href="#chap18" title="Permanent link">&para;</a></h3>
 <ul>
 <li><em>看看还有啥细节，lionel</em></li>
 </ul>
-<h4 id="181">18.1、理解线程的概念</h4>
-<h4 id="182">18.2、线程创建及运行</h4>
-<h4 id="183">18.3、线程存在的问题和临界区</h4>
-<h4 id="184">18.4、线程同步</h4>
-<h4 id="185">18.5、线程的销毁和多线程并发服务器端的实现</h4>
-<h2 id="part424-25">Part4、结束网络编程（24-25）</h2>
-<h3 id="chap24http">chap24、制作HTTP服务器端</h3>
-<h4 id="241http">24.1、HTTP摘要</h4>
+<h4 id="181">18.1、理解线程的概念<a class="headerlink" href="#181" title="Permanent link">&para;</a></h4>
+<h4 id="182">18.2、线程创建及运行<a class="headerlink" href="#182" title="Permanent link">&para;</a></h4>
+<h4 id="183">18.3、线程存在的问题和临界区<a class="headerlink" href="#183" title="Permanent link">&para;</a></h4>
+<h4 id="184">18.4、线程同步<a class="headerlink" href="#184" title="Permanent link">&para;</a></h4>
+<h4 id="185">18.5、线程的销毁和多线程并发服务器端的实现<a class="headerlink" href="#185" title="Permanent link">&para;</a></h4>
+<p>Part4、结束网络编程（24-25）</p>
+<h3 id="chap24http">chap24、制作HTTP服务器端<a class="headerlink" href="#chap24http" title="Permanent link">&para;</a></h3>
+<h4 id="241http">24.1、HTTP摘要<a class="headerlink" href="#241http" title="Permanent link">&para;</a></h4>
 <ul>
 <li>理解Web服务器端</li>
-<li>HTTP</li>
+<li>HTTP<ul>
 <li>无状态的Stateless协议</li>
 <li>请求消息（Request Message）的结构</li>
 <li>响应消息（Response Message）的结构</li>
 </ul>
-<h4 id="242web">24.2、实现简单的Web服务器端</h4>
+</li>
+</ul>
+<h4 id="242web">24.2、实现简单的Web服务器端<a class="headerlink" href="#242web" title="Permanent link">&para;</a></h4>
 <ul>
 <li>实现基于Linux的多线程Web服务器端</li>
 </ul>
-<h4 id="243">24.3、习题</h4>
-<h3 id="chap25">chap25、进阶内容</h3>
-<h4 id="251">25.1、网络编程学习的其他内容</h4>
+<h4 id="243">24.3、习题<a class="headerlink" href="#243" title="Permanent link">&para;</a></h4>
+<h3 id="chap25">chap25、进阶内容<a class="headerlink" href="#chap25" title="Permanent link">&para;</a></h3>
+<h4 id="251">25.1、网络编程学习的其他内容<a class="headerlink" href="#251" title="Permanent link">&para;</a></h4>
 <ul>
-<li>成为网络程序员的前提是成为程序员</li>
+<li>成为网络程序员的前提是成为程序员<ul>
 <li><strong>对某一领域感兴趣</strong></li>
-<li>编写这些程序时的参考书</li>
+</ul>
+</li>
+<li>编写这些程序时的参考书<ul>
 <li><strong>在理论基础上，加强编程训练</strong></li>
-<li>后续学习内容</li>
+</ul>
+</li>
+<li>后续学习内容<ul>
 <li><strong>系统编程</strong>的学习</li>
 </ul>
-<h4 id="252">25.2、网络编程相关书籍介绍</h4>
+</li>
+</ul>
+<h4 id="252">25.2、网络编程相关书籍介绍<a class="headerlink" href="#252" title="Permanent link">&para;</a></h4>
 <ul>
-<li>系统编程相关书籍</li>
+<li>系统编程相关书籍<ul>
 <li>《APUE》学习方法<ul>
 <li>1、快速阅读主要内容，掌握各种系统级别的函数，浏览后可以参考需要的地方</li>
 <li>2、<strong>从开始就把这本书当参考书</strong>，但前提是自己有了一些系统编程经验</li>
 </ul>
 </li>
-<li>协议相关书籍</li>
+</ul>
+</li>
+<li>协议相关书籍<ul>
 <li>《TCP/IP协议族》</li>
+</ul>
+</li>
 </ul>
               
             </div>

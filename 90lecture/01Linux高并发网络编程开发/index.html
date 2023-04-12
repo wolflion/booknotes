@@ -284,58 +284,62 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h2 id="_1">内容</h2>
-<h3 id="day10socket">day10、网络编程基础socket</h3>
-<h4 id="0120200401">01、知识点概述（20200401）</h4>
+                <h2 id="_1">内容<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h3 id="day10socket">day10、网络编程基础socket<a class="headerlink" href="#day10socket" title="Permanent link">&para;</a></h3>
+<h4 id="0120200401">01、知识点概述（20200401）<a class="headerlink" href="#0120200401" title="Permanent link">&para;</a></h4>
 <ul>
-<li>第8-10天，自己实现一个Mini Web服务器（有两个功能）</li>
+<li>第8-10天，自己实现一个Mini Web服务器（有两个功能）<ul>
 <li>处理网络I/O</li>
 <li>业务处理</li>
 </ul>
-<h4 id="02">02、网络开发两种设计模式（）</h4>
+</li>
+</ul>
+<h4 id="02">02、网络开发两种设计模式（）<a class="headerlink" href="#02" title="Permanent link">&para;</a></h4>
 <ul>
 <li></li>
 </ul>
-<h4 id="03">03、网络模型分层（）</h4>
+<h4 id="03">03、网络模型分层（）<a class="headerlink" href="#03" title="Permanent link">&para;</a></h4>
 <ul>
 <li></li>
 </ul>
-<h4 id="04">04、以太网帧协议（）</h4>
+<h4 id="04">04、以太网帧协议（）<a class="headerlink" href="#04" title="Permanent link">&para;</a></h4>
 <ul>
 <li></li>
 </ul>
-<h4 id="05ip">05、IP协议（）</h4>
+<h4 id="05ip">05、IP协议（）<a class="headerlink" href="#05ip" title="Permanent link">&para;</a></h4>
 <ul>
 <li></li>
 </ul>
-<h4 id="06udp">06、UDP协议（）</h4>
+<h4 id="06udp">06、UDP协议（）<a class="headerlink" href="#06udp" title="Permanent link">&para;</a></h4>
 <ul>
 <li></li>
 </ul>
-<h4 id="07tcp">07、TCP协议（）</h4>
+<h4 id="07tcp">07、TCP协议（）<a class="headerlink" href="#07tcp" title="Permanent link">&para;</a></h4>
 <ul>
 <li></li>
 </ul>
-<h4 id="08tcp-ip">08、TCP-IP四层模型协议封装（）</h4>
+<h4 id="08tcp-ip">08、TCP-IP四层模型协议封装（）<a class="headerlink" href="#08tcp-ip" title="Permanent link">&para;</a></h4>
 <ul>
 <li></li>
 </ul>
-<h4 id="09udptcp">09、UDP和TCP讲解（）</h4>
+<h4 id="09udptcp">09、UDP和TCP讲解（）<a class="headerlink" href="#09udptcp" title="Permanent link">&para;</a></h4>
 <ul>
 <li></li>
 </ul>
-<h4 id="1020200401">10、什么是套接字（20200401）</h4>
+<h4 id="1020200401">10、什么是套接字（20200401）<a class="headerlink" href="#1020200401" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Socket是网络通信的函数接口的总称</strong>，封装了传输层的协议（TCP，UDP）。</li>
 <li>浏览器，应用层用的是HTTP，往下封装的是TCP。</li>
 <li>Socket：IP+Port。</li>
 </ul>
-<h4 id="1120200401">11、套接字内存模型（20200401）</h4>
+<h4 id="1120200401">11、套接字内存模型（20200401）<a class="headerlink" href="#1120200401" title="Permanent link">&para;</a></h4>
 <ul>
-<li>socket通信</li>
+<li>socket通信<ul>
 <li>服务器端（插座）<strong>被动</strong>让客户端连接；</li>
 <li>客户端（电风扇、电视）<strong>主动</strong></li>
-<li>socket编程--<strong>网络IO编程</strong></li>
+</ul>
+</li>
+<li>socket编程--<strong>网络IO编程</strong><ul>
 <li>读写操作（read/wirte)<ul>
 <li>文件描述符</li>
 </ul>
@@ -345,39 +349,49 @@
 <li>客户端的数据先write到写缓冲区，然后会到同步到服务端的读缓冲区里，服务端fd里的写缓冲区也一样。</li>
 <li><em>与匿名管道的区别？</em></li>
 <li><strong>默认是阻塞的</strong>，对应的是fd的设备的文件性质，不是wirte(),read()函数的性质。</li>
-<li>匿名管道</li>
+</ul>
+</li>
+<li>匿名管道<ul>
 <li>分为读、写两端  <strong>队列</strong>数据结构</li>
 <li>管道的读写两端分别对应一个文件描述符</li>
 <li>内核缓冲区（内存中一块存储空间）</li>
 <li><strong>默认是阻塞的</strong></li>
 </ul>
-<h4 id="12">12、知识点复习（）</h4>
+</li>
+</ul>
+<h4 id="12">12、知识点复习（）<a class="headerlink" href="#12" title="Permanent link">&para;</a></h4>
 <ul>
 <li></li>
 </ul>
-<h4 id="13">13、大端和小端存储（）</h4>
+<h4 id="13">13、大端和小端存储（）<a class="headerlink" href="#13" title="Permanent link">&para;</a></h4>
 <ul>
 <li></li>
 </ul>
-<h4 id="14">14、大小端转换函数</h4>
-<h3 id="day11tcp-">day11、TCP三次握手-并发</h3>
-<h4 id="1">1、学习目标</h4>
+<h4 id="14">14、大小端转换函数<a class="headerlink" href="#14" title="Permanent link">&para;</a></h4>
+<h3 id="day11tcp-">day11、TCP三次握手-并发<a class="headerlink" href="#day11tcp-" title="Permanent link">&para;</a></h3>
+<h4 id="1">1、学习目标<a class="headerlink" href="#1" title="Permanent link">&para;</a></h4>
 <ul>
-<li>3次握手、4次挥手、滑动窗口</li>
+<li>3次握手、4次挥手、滑动窗口<ul>
 <li>connect时就会握手，close时就会挥手</li>
+</ul>
+</li>
 <li>错误处理函数封装</li>
 <li>多进程并发，多线程并发</li>
 </ul>
-<h4 id="2">2、知识点回顾</h4>
+<h4 id="2">2、知识点回顾<a class="headerlink" href="#2" title="Permanent link">&para;</a></h4>
 <ul>
-<li>网络开发设计模式</li>
+<li>网络开发设计模式<ul>
 <li>C/S：桌面客户端</li>
 <li>B/S：跨平台，http，<strong>效率低</strong></li>
-<li>分层模型：</li>
+</ul>
+</li>
+<li>分层模型：<ul>
 <li>七层</li>
 <li>四层：网络接口层、网络层、传输层、应用层</li>
+</ul>
+</li>
 <li>tcp,udp</li>
-<li>socket</li>
+<li>socket<ul>
 <li>文件（内核中的缓冲区）操作</li>
 <li>socket tcp server的操作流程<ul>
 <li><em>还是记住这些几种细节</em>，10min左右</li>
@@ -390,13 +404,15 @@
 </ul>
 </li>
 </ul>
-<h4 id="3tcp20200401">3、tcp客户端代码实现（20200401）</h4>
+</li>
+</ul>
+<h4 id="3tcp20200401">3、tcp客户端代码实现（20200401）<a class="headerlink" href="#3tcp20200401" title="Permanent link">&para;</a></h4>
 <ul>
 <li>[client_tcp.c]</li>
 </ul>
-<h4 id="4socket20200402">4、socket函数封装（20200402）</h4>
+<h4 id="4socket20200402">4、socket函数封装（20200402）<a class="headerlink" href="#4socket20200402" title="Permanent link">&para;</a></h4>
 <ul>
-<li>[wrap.c]查看</li>
+<li>[wrap.c]查看<ul>
 <li><strong>Man文档跳转的时候，不区分大小写</strong>，可以把accept()的函数重装包装成Accpet()。</li>
 <li><em>用啥+K可以跳转？lionel</em></li>
 <li>bind(),connect(),listen(),socket(),close()，这些返回-1时，就打印错误。</li>
@@ -405,16 +421,20 @@
 <li>writen()也是自己写的，跟readn()一样</li>
 <li>Readline()调用一个静态函数my_read()</li>
 </ul>
-<h4 id="5tcp20200403">5、TCP三次握手（20200403）</h4>
+</li>
+</ul>
+<h4 id="5tcp20200403">5、TCP三次握手（20200403）<a class="headerlink" href="#5tcp20200403" title="Permanent link">&para;</a></h4>
 <ul>
-<li>连接服务器的过程中完成三次握手，6个标志位：</li>
+<li>连接服务器的过程中完成三次握手，6个标志位：<ul>
 <li>SYN：请求建立连接</li>
 <li>ACK：应答</li>
 <li>FIN：断开连接</li>
 <li>RST</li>
 <li>URG</li>
 <li>PSH</li>
-<li><strong>第1次握手是由客户端发起</strong>，</li>
+</ul>
+</li>
+<li><strong>第1次握手是由客户端发起</strong>，<ul>
 <li>客户端：<ul>
 <li>SYN标志位+32位序号（随机产生）+数据（也可以不带数据）</li>
 </ul>
@@ -423,7 +443,9 @@
 <li>判断SYN值为1时，第1次握手才算成功。</li>
 </ul>
 </li>
-<li>第2次握手</li>
+</ul>
+</li>
+<li>第2次握手<ul>
 <li>服务器<ul>
 <li>ACK标志位+32确认序号（在随机序号基础上+1）+数据（也可以不带数据）</li>
 <li>发起一个连接请求：SYN标志位+32位序号（随机产生）+数据（也可以不带数据）</li>
@@ -434,7 +456,9 @@
 <li>检测32位确认序号是否是自己随机序号基础上加1</li>
 </ul>
 </li>
-<li>第3次握手</li>
+</ul>
+</li>
+<li>第3次握手<ul>
 <li>客户端<ul>
 <li>发送确认数据包：ACK标志位+32位确认序号</li>
 </ul>
@@ -444,26 +468,34 @@
 <li>检测：确认序号是否正确</li>
 </ul>
 </li>
-<li><em>思考</em></li>
+</ul>
+</li>
+<li><em>思考</em><ul>
 <li>带数据的时候，回的确认序号是多少？（大小后再加1？）</li>
 </ul>
-<h4 id="6tcp20200403">6、TCP的数据传输过程（20200403）</h4>
+</li>
+</ul>
+<h4 id="6tcp20200403">6、TCP的数据传输过程（20200403）<a class="headerlink" href="#6tcp20200403" title="Permanent link">&para;</a></h4>
 <ul>
 <li>MSS（最大数据长度）：客户端告诉服务器，你给我发的数据长度的值。</li>
-<li>三次握手，建立连接的过程</li>
+<li>三次握手，建立连接的过程<ul>
 <li>客户端：<code>connect()</code></li>
 <li>服务器：<code>accept()</code></li>
-<li>数据传输</li>
+</ul>
+</li>
+<li>数据传输<ul>
 <li>客户端：编号（对方最后发送ACK的时候携带的确认序号）+ACK+对方最后一次的ACK编号</li>
 <li>服务端：ACK+确认+数据</li>
 <li>客户端：ACK+确认</li>
+</ul>
+</li>
 <li><em>这部分其实没太完全懂，但看图能说出个大概来</em>，<strong>数据连接过程中没有SYN关键字</strong></li>
 </ul>
-<h4 id="0720200403">07、四次挥手（20200403）</h4>
+<h4 id="0720200403">07、四次挥手（20200403）<a class="headerlink" href="#0720200403" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>哪一些主动主动断开连接都可以</strong>。</li>
 <li>需要一个标志位：FIN。</li>
-<li>第一次挥手</li>
+<li>第一次挥手<ul>
 <li>客户端（发送断开的请求）：<ul>
 <li>FIN+对方最后发送ACK的时候携带的确认序号+数据（可以不带）；</li>
 <li>ACK+序号（对方的发送的序号+长度）</li>
@@ -474,7 +506,9 @@
 <li>ACK的作用：告诉对方之前发的数据收到了多少</li>
 </ul>
 </li>
-<li>第二次挥手</li>
+</ul>
+</li>
+<li>第二次挥手<ul>
 <li>服务器（给Client确认数据包）<ul>
 <li>ACK+确认编号（FIN对应的序号+1+数据大小）</li>
 </ul>
@@ -484,7 +518,9 @@
 <li>检测：确认序号</li>
 </ul>
 </li>
-<li>第三次挥手：（<strong>服务器发起的告别过程</strong>）</li>
+</ul>
+</li>
+<li>第三次挥手：（<strong>服务器发起的告别过程</strong>）<ul>
 <li>服务器端（发送断开连接的请求）<ul>
 <li>FIN+序号（最后一次收到，对方的ACK）</li>
 <li>ACK+序号</li>
@@ -494,57 +530,75 @@
 <li>数据检测，数据是不是收到</li>
 </ul>
 </li>
-<li>第四次挥手</li>
+</ul>
+</li>
+<li>第四次挥手<ul>
 <li>客户端：<ul>
 <li>ACK+序号（收到的ACK序号+1）</li>
 </ul>
 </li>
+</ul>
+</li>
 <li><strong>第2次和第3次都是同一个人发的</strong>，<em>主要是序号的值，要确认一下</em>。</li>
-<li>在代码中表现就是</li>
+<li>在代码中表现就是<ul>
 <li>客户端和服务端都是用<code>close()</code></li>
 </ul>
-<h4 id="0820200403">08、滑动窗口（20200403）</h4>
+</li>
+</ul>
+<h4 id="0820200403">08、滑动窗口（20200403）<a class="headerlink" href="#0820200403" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>滑动窗口</strong>就是缓存，对应的“16位窗口大小”，就是记录的缓存大小。</li>
-<li>WIN 4096</li>
+<li>WIN 4096<ul>
 <li>win-滑动窗口</li>
 <li>4096-滑动窗口对应的缓冲区大小</li>
 <li><strong>客户端和服务端的WIN，大小值可以不一样</strong>，一般都不一样。  </li>
+</ul>
+</li>
 <li>可以发很多条，服务器再答复。</li>
 </ul>
-<h4 id="0920200404">09、多进程并发服务器分析（20200404）</h4>
+<h4 id="0920200404">09、多进程并发服务器分析（20200404）<a class="headerlink" href="#0920200404" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>并发</strong>：在某个时间点处理的个数。</li>
-<li>服务端只处理单连接</li>
+<li>服务端只处理单连接<ul>
 <li>创建套接字</li>
 <li>绑定</li>
 <li>监听</li>
 <li>接受连接请求</li>
 <li>通信</li>
-<li>服务端处理多连接</li>
+</ul>
+</li>
+<li>服务端处理多连接<ul>
 <li>监听：最多可以128个【listen(fd,128)】</li>
 <li>接受连接请求<ul>
 <li>让父进程创建子进程，去连接客户端A</li>
 <li><strong>父进程只等待连接请求</strong>，有请求就fork()一下</li>
 </ul>
 </li>
-<li>使用多进程的方式，解决服务器处理多连接的问题</li>
+</ul>
+</li>
+<li>使用多进程的方式，解决服务器处理多连接的问题<ul>
 <li>共享<ul>
 <li><strong>读时共享，写时复制</strong>，读的时候对应的同一个物理地址；写的时候，就会开辟新的空间，再读就会去新开辟的空间读。</li>
 <li>共享的内容有：文件描述符；内存映射区--mmap创建出来的；</li>
 </ul>
 </li>
 <li>父进程的角色是什么？<ul>
-<li>等待接收客户端连接 ---accept()</li>
+<li>等待接收客户端连接 ---accept()<ul>
 <li>有连接，创建一个子进程 fork()</li>
 <li><strong>将通信的文件描述符关闭</strong></li>
 </ul>
 </li>
+</ul>
+</li>
 <li>子进程的角色是什么？<ul>
-<li>通信</li>
+<li>通信<ul>
 <li>使用accept()返回值，就是fd。</li>
-<li><strong>关掉监听的文件描述符</strong></li>
+</ul>
+</li>
+<li><strong>关掉监听的文件描述符</strong><ul>
 <li>主要原因是：浪费资源（因为fd的个数有限，才1024个）</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>创建的进程的个数有限制吗？<ul>
@@ -555,77 +609,105 @@
 <li>子进程资源回收<ul>
 <li>不回收的话，会被init回收或变成僵尸进程。</li>
 <li>wait()或waitpid()回收。</li>
-<li>用信号回收</li>
+<li>用信号回收<ul>
 <li>信号捕捉（signal，sigaction）推荐后者</li>
 <li>捕捉SIGCHLD信号</li>
 </ul>
 </li>
-<li>文件描述符（有2个）？</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>文件描述符（有2个）？<ul>
 <li>用于监听的</li>
 <li>用于通信的</li>
 </ul>
-<h4 id="1020200404">10、多进程并发服务器伪代码（20200404）</h4>
+</li>
+</ul>
+<h4 id="1020200404">10、多进程并发服务器伪代码（20200404）<a class="headerlink" href="#1020200404" title="Permanent link">&para;</a></h4>
 <ul>
 <li>[多进程并发服务器伪代码.c]</li>
 </ul>
-<h4 id="1120200404">11、多进程并发服务器代码实现（20200404）</h4>
+<h4 id="1120200404">11、多进程并发服务器代码实现（20200404）<a class="headerlink" href="#1120200404" title="Permanent link">&para;</a></h4>
 <ul>
 <li>[process_server.c]</li>
 </ul>
-<h4 id="1220200404">12、多线程并发服务器实现思路（20200404）</h4>
+<h4 id="1220200404">12、多线程并发服务器实现思路（20200404）<a class="headerlink" href="#1220200404" title="Permanent link">&para;</a></h4>
 <ul>
-<li>服务器收到客户端的connect()，可以当作是主线程收到，然后<code>pthread_creat()</code>创建子线程处理。</li>
+<li>服务器收到客户端的connect()，可以当作是主线程收到，然后<code>pthread_creat()</code>创建子线程处理。<ul>
 <li>把文件描述传到子线程内部，进行read/write操作。</li>
-<li>线程共享：</li>
+</ul>
+</li>
+<li>线程共享：<ul>
 <li>全局数据区</li>
 <li>堆区数据</li>
 <li>一块有效内存的地址</li>
+</ul>
+</li>
 <li><strong>每个线程都要备份独立的处理</strong>，把处理封装到结构体里，同时在回调函数里处理。</li>
 </ul>
-<h4 id="1320200404">13、多线程版客户端代码实现（20200404）</h4>
+<h4 id="1320200404">13、多线程版客户端代码实现（20200404）<a class="headerlink" href="#1320200404" title="Permanent link">&para;</a></h4>
 <ul>
 <li>[pthread_server.c]</li>
 </ul>
-<h3 id="day12tcp-select-poll">day12、TCP状态转换-select-poll</h3>
-<h4 id="01">01、知识点概述</h4>
-<h4 id="02_1">02、三次握手四次挥手复习</h4>
-<h4 id="03_1">03、多进程多线程并发复习（）</h4>
-<h4 id="04recvsend20200406">04、recv和send函数（20200406）</h4>
+<h3 id="day12tcp-select-poll">day12、TCP状态转换-select-poll<a class="headerlink" href="#day12tcp-select-poll" title="Permanent link">&para;</a></h3>
+<h4 id="01">01、知识点概述<a class="headerlink" href="#01" title="Permanent link">&para;</a></h4>
+<h4 id="02_1">02、三次握手四次挥手复习<a class="headerlink" href="#02_1" title="Permanent link">&para;</a></h4>
+<h4 id="03_1">03、多进程多线程并发复习（）<a class="headerlink" href="#03_1" title="Permanent link">&para;</a></h4>
+<h4 id="04recvsend20200406">04、recv和send函数（20200406）<a class="headerlink" href="#04recvsend20200406" title="Permanent link">&para;</a></h4>
 <ul>
-<li>数据接收</li>
+<li>数据接收<ul>
 <li>read()</li>
 <li>recv()</li>
-<li>数据发送</li>
+</ul>
+</li>
+<li>数据发送<ul>
 <li>write()</li>
 <li>send()</li>
-<li>两者是可替代的，<strong>区别在于后面的函数多了一个参数flags，赋值为0即可</strong>。</li>
+</ul>
+</li>
+<li>两者是可替代的，<strong>区别在于后面的函数多了一个参数flags，赋值为0即可</strong>。<ul>
 <li>UDP的话，用的是<code>recvfrom()</code>和<code>sendto()</code><strong>它们的flags也赋值为0</strong>。</li>
 </ul>
-<h4 id="05tcp20200408">05、tcp状态转换（20200408）</h4>
+</li>
+</ul>
+<h4 id="05tcp20200408">05、tcp状态转换（20200408）<a class="headerlink" href="#05tcp20200408" title="Permanent link">&para;</a></h4>
 <ul>
-<li>客户端：<code>CLOSED</code>-&gt;<code>SYN_SENT</code>-&gt;<code>ESTABLISTHED</code>-&gt;数据传偷中状态不变-&gt;<strong>谁先发送挥手请求，谁先变</strong>-&gt;<code>FIN_WAIT_1</code>-&gt;<code>FIN_WAIT_2</code>-&gt;<code>TIME_WAIT</code>-&gt;<code>CLOSED</code></li>
+<li>客户端：<code>CLOSED</code>-&gt;<code>SYN_SENT</code>-&gt;<code>ESTABLISTHED</code>-&gt;数据传偷中状态不变-&gt;<strong>谁先发送挥手请求，谁先变</strong>-&gt;<code>FIN_WAIT_1</code>-&gt;<code>FIN_WAIT_2</code>-&gt;<code>TIME_WAIT</code>-&gt;<code>CLOSED</code><ul>
 <li>主动断开的一方，最后的状态是<strong>TIME_WAIT</strong>。</li>
-<li>服务端：<code>CLOSED</code>-&gt;<code>LISTEN</code>-&gt;<code>SYN_RCVD</code>-&gt;<code>ESTABLISTHED</code>-&gt;<code>CLOSE_WAIT</code>-&gt;<code>LAST_ACK</code>-&gt;<code>CLOSED</code></li>
+</ul>
+</li>
+<li>服务端：<code>CLOSED</code>-&gt;<code>LISTEN</code>-&gt;<code>SYN_RCVD</code>-&gt;<code>ESTABLISTHED</code>-&gt;<code>CLOSE_WAIT</code>-&gt;<code>LAST_ACK</code>-&gt;<code>CLOSED</code><ul>
 <li><em>这不是服务端主动断开连接</em>。</li>
 </ul>
-<h4 id="062msl20200408">06、2msl等待时长（20200408）</h4>
+</li>
+</ul>
+<h4 id="062msl20200408">06、2msl等待时长（20200408）<a class="headerlink" href="#062msl20200408" title="Permanent link">&para;</a></h4>
 <ul>
-<li>能捕捉到的状态（netstat命令会捕捉）</li>
+<li>能捕捉到的状态（netstat命令会捕捉）<ul>
 <li>LISTEN</li>
 <li>ESTABLISHED</li>
-<li>主动断开连接的一方到<code>TIME_WAIT</code>状态时，会等待2MSL时长，一个MSL是30秒，2个就是1分钟。</li>
+</ul>
+</li>
+<li>主动断开连接的一方到<code>TIME_WAIT</code>状态时，会等待2MSL时长，一个MSL是30秒，2个就是1分钟。<ul>
 <li>怕对方没有收到，用这个2MSL再发送一次。</li>
 </ul>
-<h4 id="0720200408">07、半关闭（20200408）</h4>
+</li>
+</ul>
+<h4 id="0720200408">07、半关闭（20200408）<a class="headerlink" href="#0720200408" title="Permanent link">&para;</a></h4>
 <ul>
-<li>如何理解？</li>
+<li>如何理解？<ul>
 <li><strong>有一端关闭，另一端没关闭</strong></li>
 <li>A给B发送是FIN（A调用了close函数），但是B没有给A发送FIN（B没有调用close）</li>
 <li>即A断开了与B的连接，B没有断开与A的连接。</li>
-<li>特点：</li>
+</ul>
+</li>
+<li>特点：<ul>
 <li>A不能给B发送数据，但能收到B发送的数据。</li>
 <li>B能给A发送数据</li>
-<li>函数：<code>shutdown(int sockfd, int how)</code></li>
+</ul>
+</li>
+<li>函数：<code>shutdown(int sockfd, int how)</code><ul>
 <li>how<ul>
 <li>SHUT_RD 0读</li>
 <li>SHUT_WR 1 写</li>
@@ -633,44 +715,62 @@
 </ul>
 </li>
 <li><strong>把拷贝的文件描述符也不能用了</strong></li>
-<li>dup,dup2</li>
+</ul>
+</li>
+<li>dup,dup2<ul>
 <li>复制文件描述符，dup2()还能得定向。</li>
+</ul>
+</li>
 <li>思考：close函数能否实现半关闭？</li>
 </ul>
-<h4 id="08netstat20200407">08、netstat命令（20200407）</h4>
+<h4 id="08netstat20200407">08、netstat命令（20200407）<a class="headerlink" href="#08netstat20200407" title="Permanent link">&para;</a></h4>
 <ul>
-<li>用netstat捕捉进程的状态（套接字通信）</li>
+<li>用netstat捕捉进程的状态（套接字通信）<ul>
 <li>-a，默认不显示LISTEN相关，所以要用a</li>
 <li>-p，显示建立相关链接的程序名</li>
 <li>-n，拒绝显示别名，能显示数字的全部转化为数字</li>
 <li>-t（tcp）仅显示tcp相关选项</li>
 <li>-u（udp）仅显示udp相关选项</li>
 <li>l 仅列出有在Listen（监听）的服务状态</li>
-<li><code>grep -apn</code></li>
+</ul>
+</li>
+<li><code>grep -apn</code><ul>
 <li><strong>服务端永远有个监听套接字</strong>，最后看名称判断服务器还是客户端。</li>
 <li>第1个ip+port表示当前名称的本地IP+Port，第2个是连的远端的IP+Port。</li>
-<li><strong><code>TIME_WAIT</code>，主动断开的一方，会有一个TIME_WAIT状态</strong>，这个等待大概是1min。</li>
+</ul>
+</li>
+<li><strong><code>TIME_WAIT</code>，主动断开的一方，会有一个TIME_WAIT状态</strong>，这个等待大概是1min。<ul>
 <li><code>FIN_WAIT2</code>和<code>CLOSE_WAIT</code>又分别是谁是发起人呢？</li>
 </ul>
-<h4 id="0920200409">09、端口复用设置（20200409）</h4>
+</li>
+</ul>
+<h4 id="0920200409">09、端口复用设置（20200409）<a class="headerlink" href="#0920200409" title="Permanent link">&para;</a></h4>
 <ul>
-<li>作为server端主动断开连接后，再启动会有“Address already in use”，原因是</li>
+<li>作为server端主动断开连接后，再启动会有“Address already in use”，原因是<ul>
 <li><strong>主动断开连接的一方有2MSL的等待时长</strong>。--lionel，我在定位问题的日志里就见过，但当时不知道啥原因呢。</li>
+</ul>
+</li>
 <li>当然也可以用<strong>端口复用</strong>的方式解决。</li>
-<li>端口复用的用途</li>
+<li>端口复用的用途<ul>
 <li>防止服务器重启时之前绑定的端口还未释放</li>
 <li>程序突然退出而系统没有释放端口</li>
-<li>设置方法</li>
+</ul>
+</li>
+<li>设置方法<ul>
 <li><code>int opt = 1; setsockopt(sockfd, SOL_SOCKET,SO_REUSEADDR,(const void*)&amp;amp;opt, sizeof(opt));</code><ul>
 <li><strong>文件描述符是监听描述符</strong>。</li>
 </ul>
 </li>
-<li>注意事项</li>
+</ul>
+</li>
+<li>注意事项<ul>
 <li><strong>在绑定之前设置端口复用的属性</strong>。</li>
 </ul>
-<h4 id="10io20200408">10、IO多路转换讲解（20200408）</h4>
+</li>
+</ul>
+<h4 id="10io20200408">10、IO多路转换讲解（20200408）<a class="headerlink" href="#10io20200408" title="Permanent link">&para;</a></h4>
 <ul>
-<li>IO操作方式</li>
+<li>IO操作方式<ul>
 <li>阻塞等待<ul>
 <li>好处：不占CPU宝贵的时间片</li>
 <li>缺点：同一时刻只能处理一个操作，效率低</li>
@@ -684,31 +784,41 @@
 </ul>
 </li>
 <li><strong>解决方案：使用IO多路转接技术select/poll/epoll</strong><ul>
-<li>第一种：select/poll</li>
+<li>第一种：select/poll<ul>
 <li><strong>先委托内核帮我们检测一下有哪些客户端会跟我通信</strong>，通过<code>select()</code>来实现。</li>
 <li><strong>select()只识数不认字，只会告诉你有几个快递（客户端）到了</strong>，但是哪个快递，需要挨个遍历所有客户端。</li>
 <li>poll遍历的是线性表。</li>
-<li>第二种：epoll</li>
+</ul>
+</li>
+<li>第二种：epoll<ul>
 <li><strong>epoll()不仅告诉你数量，也会告诉你哪个快递公司的快递</strong>。</li>
 <li>epoll遍历的是红黑树。</li>
 </ul>
 </li>
+</ul>
+</li>
+</ul>
+</li>
 <li><em>以取快递的例子来讲</em></li>
 </ul>
-<h4 id="11io20200408">11、内核大致是如何实现IO连接的（20200408）</h4>
+<h4 id="11io20200408">11、内核大致是如何实现IO连接的（20200408）<a class="headerlink" href="#11io20200408" title="Permanent link">&para;</a></h4>
 <ul>
-<li>先构造一张有关文件描述符的列表，将要监听的文件描述符添加到该表中</li>
+<li>先构造一张有关文件描述符的列表，将要监听的文件描述符添加到该表中<ul>
 <li>阻塞信号集表/自定义信号集表，再用<code>sigpromask()</code>是这两张的桥梁。</li>
-<li>然后调用一个函数，监听该表中的文件描述符，直接这些描述符表中的一个进行I/O操作时，该函数才返回</li>
+</ul>
+</li>
+<li>然后调用一个函数，监听该表中的文件描述符，直接这些描述符表中的一个进行I/O操作时，该函数才返回<ul>
 <li>该函数为阻塞函数</li>
 <li>函数对文件描述符的检测操作是由内核完成的</li>
+</ul>
+</li>
 <li>在返回时，它告诉进程有多少（哪些）描述符要进行I/O操作</li>
 <li><em>通过调用selec()函数，把构造的文件描述符列表给到内核？</em>--是这样的吗？</li>
 </ul>
-<h4 id="12select20200409">12、select的参数和返回值（20200409）</h4>
+<h4 id="12select20200409">12、select的参数和返回值（20200409）<a class="headerlink" href="#12select20200409" title="Permanent link">&para;</a></h4>
 <ul>
 <li><code>int select(int nfds, fd_set *readfds, fd_set *writefds,
-                    fd_set *exceptfds, struct timeval *timeout);</code></li>
+                    fd_set *exceptfds, struct timeval *timeout);</code><ul>
 <li>ndfs：一组描述符中最大的值再加1；最多传1024<ul>
 <li><code>fd_set</code>是个数组，大小是16个，所以最多传1024（16 乘 8位 乘 字节），所以最多1024个标志位。</li>
 </ul>
@@ -721,12 +831,16 @@
 <li>要让结构体变量的a有值，a.tv_sec=0，a.tv_usec=0。</li>
 </ul>
 </li>
-<li>文件描述符集类型：<code>fd_set rdset;</code></li>
+</ul>
+</li>
+<li>文件描述符集类型：<code>fd_set rdset;</code><ul>
 <li>FD_ZERO()清空</li>
 <li>FD_CLR()删除某项</li>
 <li>FD_SET()添加文件描述符</li>
 <li>FD_ISSET()判断是否存在集合中 <strong>没有设置上，就是0</strong></li>
-<li>select函数的优缺点</li>
+</ul>
+</li>
+<li>select函数的优缺点<ul>
 <li>优点<ul>
 <li>跨平台</li>
 </ul>
@@ -737,31 +851,35 @@
 </ul>
 </li>
 </ul>
-<h4 id="13_1">13、复习（）</h4>
-<h4 id="14select20200409">14、select工作过程（20200409）</h4>
+</li>
+</ul>
+<h4 id="13_1">13、复习（）<a class="headerlink" href="#13_1" title="Permanent link">&para;</a></h4>
+<h4 id="14select20200409">14、select工作过程（20200409）<a class="headerlink" href="#14select20200409" title="Permanent link">&para;</a></h4>
 <ul>
 <li>需求：客户端A,B,C,D,E,F连接到服务器；分别对应文件描述符3，4，100，101，102，103，ABC发送了数据。</li>
 <li>第一步：创建fd_set类型的reads;   <strong>这是用户空间</strong></li>
 <li>第二步：添加到reads，<code>FD_SET(3,&amp;reads)</code></li>
-<li>第三步：<code>select(103+1,&amp;reads,NULL,NULL,NULL);</code></li>
+<li>第三步：<code>select(103+1,&amp;reads,NULL,NULL,NULL);</code><ul>
 <li>内核会把用户空间的reads，拷贝到内核空间。</li>
 <li>内核根据值为1，去找文件描述符；<strong>如果文件描述符没有数据，内核会把值从1变为0</strong>，有值的话，就不变。</li>
 <li><strong>内核把修改过的表会再传给用户空间，会覆盖到用户空间的reads</strong>（这样就可能不一样了）</li>
+</ul>
+</li>
 <li><strong>得定义两个fd_set变量</strong>，用于对比。</li>
 </ul>
-<h4 id="15select20200410">15、select伪代码实现（20200410）</h4>
+<h4 id="15select20200410">15、select伪代码实现（20200410）<a class="headerlink" href="#15select20200410" title="Permanent link">&para;</a></h4>
 <ul>
 <li>[select伪代码实现.cpp]</li>
 </ul>
-<h4 id="16select20200410">16、select代码实现（20200410）</h4>
+<h4 id="16select20200410">16、select代码实现（20200410）<a class="headerlink" href="#16select20200410" title="Permanent link">&para;</a></h4>
 <ul>
 <li>[day12_17select.c]</li>
 </ul>
-<h4 id="17poll20200410">17、poll函数介绍（20200410）</h4>
+<h4 id="17poll20200410">17、poll函数介绍（20200410）<a class="headerlink" href="#17poll20200410" title="Permanent link">&para;</a></h4>
 <ul>
 <li>poll的数据结构是个链接，epoll的数据结构是个树。</li>
 <li>poll两块互拷贝也有开销。 </li>
-<li><code>int poll(struct pollfd *fd, nfds_t nfds, int timeout)</code></li>
+<li><code>int poll(struct pollfd *fd, nfds_t nfds, int timeout)</code><ul>
 <li>pollfd：数组的地址</li>
 <li>nfds：数组的最大长度，数组中最后一个使用的元素下标+1<ul>
 <li>内核会轮询检测fd数组的每个文件描述符</li>
@@ -774,41 +892,45 @@
 </ul>
 </li>
 <li>返回值：IO发送变化的文件描述符的个数</li>
+</ul>
+</li>
 <li><em>没太好好听</em>--后面再补充这部分</li>
 </ul>
-<h4 id="18pollio20200411">18、poll实现IO转接代码分析（20200411）</h4>
+<h4 id="18pollio20200411">18、poll实现IO转接代码分析（20200411）<a class="headerlink" href="#18pollio20200411" title="Permanent link">&para;</a></h4>
 <ul>
 <li><em>比较poll.c和select.c</em>，这两个都找他们的例子吧。</li>
 <li><strong>要把流程搞清楚</strong>。</li>
 </ul>
-<h3 id="day13epoll-udp">day13、epoll-udp</h3>
-<h4 id="01_1">01、知识点概述</h4>
-<h4 id="02gdb20200412">02、通过gdb定位段错误的位置（20200412）</h4>
+<h3 id="day13epoll-udp">day13、epoll-udp<a class="headerlink" href="#day13epoll-udp" title="Permanent link">&para;</a></h3>
+<h4 id="01_1">01、知识点概述<a class="headerlink" href="#01_1" title="Permanent link">&para;</a></h4>
+<h4 id="02gdb20200412">02、通过gdb定位段错误的位置（20200412）<a class="headerlink" href="#02gdb20200412" title="Permanent link">&para;</a></h4>
 <ul>
 <li><code>set args</code>设置参数</li>
 <li><code>r</code>运行</li>
 <li>最终定位是<code>pthread_detach()</code>引用参数有错。<em>我对pthread_detach()还不熟悉</em></li>
 </ul>
-<h4 id="03tcp">03、tcp状态转换复习（）</h4>
+<h4 id="03tcp">03、tcp状态转换复习（）<a class="headerlink" href="#03tcp" title="Permanent link">&para;</a></h4>
 <ul>
 <li></li>
 </ul>
-<h4 id="04select">04、select复习（）</h4>
+<h4 id="04select">04、select复习（）<a class="headerlink" href="#04select" title="Permanent link">&para;</a></h4>
 <ul>
 <li></li>
 </ul>
-<h4 id="05epoll20200412">05、epoll相关的函数介绍（20200412）</h4>
+<h4 id="05epoll20200412">05、epoll相关的函数介绍（20200412）<a class="headerlink" href="#05epoll20200412" title="Permanent link">&para;</a></h4>
 <ul>
-<li><strong>epoll在内部是个树结构</strong>。</li>
-<li>
-<p>持在树上的是<code>struct epoll_event</code>类型里的<code>fd</code>。</p>
+<li><strong>epoll在内部是个树结构</strong>。<ul>
+<li>持在树上的是<code>struct epoll_event</code>类型里的<code>fd</code>。</li>
+</ul>
 </li>
-<li>
-<p><code>epoll_create()</code></p>
-</li>
+</ul>
+<ul>
+<li><code>epoll_create()</code><ul>
 <li>用来生成一个树的根结点</li>
 <li>参数size：epoll上能关注的最大描述符数</li>
-<li><code>epoll_clt()</code></li>
+</ul>
+</li>
+<li><code>epoll_clt()</code><ul>
 <li>控制某个epoll文件描述符事件，可以注册、修改、删除</li>
 <li>epfd参数：create()创建的</li>
 <li>op参数：<ul>
@@ -819,7 +941,9 @@
 </li>
 <li>fd参数：关联的文件描述符</li>
 <li>event参数：告诉内核要监听什么事件</li>
-<li><code>epoll_wait()</code></li>
+</ul>
+</li>
+<li><code>epoll_wait()</code><ul>
 <li>等待IO事件发生---可以设置阻塞的函数</li>
 <li>epid参数：epoll_create()创建的</li>
 <li><code>struct epoll_event* events</code>参数：结构体数组，作用是（有哪几个变化了，都在这个结构体里）<strong>传出参数</strong></li>
@@ -831,43 +955,49 @@
 </ul>
 </li>
 </ul>
-<h4 id="06epoll20200415">06、epoll工作流程（20200415）</h4>
+</li>
+</ul>
+<h4 id="06epoll20200415">06、epoll工作流程（20200415）<a class="headerlink" href="#06epoll20200415" title="Permanent link">&para;</a></h4>
 <ul>
 <li>[伪代码.c]</li>
 </ul>
-<h4 id="07">07、（）</h4>
+<h4 id="07">07、（）<a class="headerlink" href="#07" title="Permanent link">&para;</a></h4>
 <ul>
 <li></li>
 </ul>
-<h4 id="08epoll20200415">08、epoll模型代码实现（20200415）</h4>
+<h4 id="08epoll20200415">08、epoll模型代码实现（20200415）<a class="headerlink" href="#08epoll20200415" title="Permanent link">&para;</a></h4>
 <ul>
 <li></li>
 </ul>
-<h4 id="09epoll">09、epoll复习（）</h4>
+<h4 id="09epoll">09、epoll复习（）<a class="headerlink" href="#09epoll" title="Permanent link">&para;</a></h4>
 <ul>
 <li></li>
 </ul>
-<h4 id="10epoll20200419">10、epoll水平触发模式（20200419）</h4>
+<h4 id="10epoll20200419">10、epoll水平触发模式（20200419）<a class="headerlink" href="#10epoll20200419" title="Permanent link">&para;</a></h4>
 <ul>
 <li>默认的触发工作模式</li>
-<li>水平触发模式</li>
+<li>水平触发模式<ul>
 <li>只要fd对应的缓冲区有数据，<strong>根据读来解释</strong></li>
 <li>epoll_wait()返回</li>
 <li>返回的次数与发送数据的次数没有关系</li>
 <li>发100个数据，每次只读1个的话，就要读100次。</li>
 <li><em>不需要额外的操作</em></li>
-<li>[lt_epoll.c]</li>
+</ul>
+</li>
+<li>[lt_epoll.c]<ul>
 <li>读数据时，原来的buf[1024]，bufchar[5]。</li>
 <li>printf()是标准C库函数，有默认缓冲区8K，是<strong>行缓冲</strong>，加<code>\n</code>才会强刷缓冲区。</li>
 <li>换成<code>write(STDOUT_FILENO,buf,len);</code>，<strong>原先定义的buf，最后一位没有给它强制加一个<code>\0</code></strong>，这个在代码中确实有风险。</li>
 <li>linux系统函数，有哪些。</li>
+</ul>
+</li>
 <li><code>epoll_wait()</code>调用次数越多，系统的开销越式。</li>
 </ul>
-<h4 id="1120200419">11、边沿触发模式（20200419）</h4>
+<h4 id="1120200419">11、边沿触发模式（20200419）<a class="headerlink" href="#1120200419" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>ET</strong></li>
 <li>fd-默认阻塞属性</li>
-<li>客户端给server发数据：</li>
+<li>客户端给server发数据：<ul>
 <li>发一次数据server的epoll_wait()被触发一次（即返回一次）</li>
 <li>不管有没有读完，都只返回一次，<strong>不在乎数据有没有读完</strong></li>
 <li><strong>如果读不完，如何全部读出来？</strong><ul>
@@ -875,13 +1005,17 @@
 <li>解决阻塞问题（设置非阻塞--fd）</li>
 </ul>
 </li>
-<li>[et_poll.c]</li>
+</ul>
+</li>
+<li>[et_poll.c]<ul>
 <li>边延触发：要加个宏 <code>temp.events = EPOLLIN | EPOLLET;</code></li>
 </ul>
-<h4 id="1220200419">12、边沿非阻塞模式（20200419）</h4>
+</li>
+</ul>
+<h4 id="1220200419">12、边沿非阻塞模式（20200419）<a class="headerlink" href="#1220200419" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>效率最高</strong></li>
-<li>如何设置非阻塞</li>
+<li>如何设置非阻塞<ul>
 <li>open()，通过设置flags的必选项，以及可选项<code>O_NOBLOCK</code>，<strong>适用于终端文件/dev/tty</strong></li>
 <li>fcntl()<ul>
 <li>更改属性前先获取 <code>int flag = fcntl(fd,F_GETFL);</code></li>
@@ -889,73 +1023,97 @@
 <li>再设置回去<code>fcntl(fd,F_SETFL,flag);</code></li>
 </ul>
 </li>
-<li>将缓冲区的全部数据都读出</li>
+</ul>
+</li>
+<li>将缓冲区的全部数据都读出<ul>
 <li><code>while(recv() &gt;0 ) {printf();}</code></li>
 <li>//当缓冲区数据读完之后，返回是否为0？</li>
-<li>[noblock_et_poll.c]</li>
+</ul>
+</li>
+<li>[noblock_et_poll.c]<ul>
 <li>while()后再进行数据回写<code>send(fd,buf,len,0);</code></li>
 <li><code>len ==0 prinf("断开连接");close(fd);</code><strong>还得从树上删除</strong></li>
 <li><code>len == -1,printf();exit(1);</code> <strong>这里判断一下<code>errno==EAGAIN</code></strong></li>
-<li>阻塞</li>
+</ul>
+</li>
+<li>阻塞<ul>
 <li>数据读完之后</li>
-<li>非阻塞</li>
+</ul>
+</li>
+<li>非阻塞<ul>
 <li>强行读了一个没有数据的缓冲区（fd）</li>
 <li>判断<code>errno==EAGAIN</code></li>
 </ul>
-<h4 id="13102420200419">13、文件描述符突破1024（20200419）</h4>
+</li>
+</ul>
+<h4 id="13102420200419">13、文件描述符突破1024（20200419）<a class="headerlink" href="#13102420200419" title="Permanent link">&para;</a></h4>
 <ul>
-<li>select--突破不了，需要编译内核</li>
+<li>select--突破不了，需要编译内核<ul>
 <li>通过数组实现的，<strong>数组有固定大小</strong></li>
-<li>poll和epoll可以突破1024限制</li>
+</ul>
+</li>
+<li>poll和epoll可以突破1024限制<ul>
 <li>poll是通过内部链表实现的</li>
 <li>epoll是通过红黑树来实现的</li>
-<li>查看受计算机硬件限制的文件描述符上限</li>
+</ul>
+</li>
+<li>查看受计算机硬件限制的文件描述符上限<ul>
 <li>cat或vi  <code>/proc/sys/fs.file-max</code></li>
 <li><code>ulimit -a</code></li>
-<li>通过配置文件修改上限值</li>
+</ul>
+</li>
+<li>通过配置文件修改上限值<ul>
 <li><code>/etc/security/limits.conf</code></li>
+</ul>
+</li>
 <li><code>ulimit -n</code>修改open files的数量</li>
 </ul>
-<h4 id="14udp20200413">14、udp通信流程（20200413）</h4>
+<h4 id="14udp20200413">14、udp通信流程（20200413）<a class="headerlink" href="#14udp20200413" title="Permanent link">&para;</a></h4>
 <ul>
 <li>基于SOCK_STREAM，<strong>面向无连接</strong>，不需要<code>connect()</code></li>
-<li>服务器端：</li>
+<li>服务器端：<ul>
 <li><strong>Server只有一个</strong></li>
 <li>创建套接字<code>int fd = socket(af_inet,sock_dgram,0);</code></li>
 <li>绑定本地IP和端口<code>bind()</code></li>
 <li>通信：接收数据<code>recvfrom()</code></li>
 <li>发送数据<code>sendto()</code></li>
 <li>关闭套接字<code>close()</code></li>
-<li>客户端</li>
+</ul>
+</li>
+<li>客户端<ul>
 <li>创建套接字<code>int fd = socket(af_inet,sock_dgram,0);</code></li>
 <li>通信：发送数据<code>sendto()</code></li>
 <li>接收数据<code>recvfrom()</code></li>
 <li>关闭套接字<code>close()</code></li>
+</ul>
+</li>
 <li><strong>客户端是通过（IP+端口）发送给服务器端，服务器会保存客户端的IP+端口信息</strong>。</li>
-<li><em>qt里面，两者流程都差不多，如果任何一端想接受数据，必须绑定端口</em></li>
+<li><em>qt里面，两者流程都差不多，如果任何一端想接受数据，必须绑定端口</em><ul>
 <li>因为是被封装过了。</li>
 <li><strong>越封装越简单，越简单越不知道怎么回事</strong></li>
 </ul>
-<h4 id="15udp20200413">15、udp服务器端代码实现（20200413）</h4>
+</li>
+</ul>
+<h4 id="15udp20200413">15、udp服务器端代码实现（20200413）<a class="headerlink" href="#15udp20200413" title="Permanent link">&para;</a></h4>
 <ul>
 <li><code>recvfrom()</code></li>
 <li><code>sendto()</code></li>
 <li>[server.c]</li>
 </ul>
-<h4 id="16udp20200413">16、udp客户端代码实现（20200413）</h4>
+<h4 id="16udp20200413">16、udp客户端代码实现（20200413）<a class="headerlink" href="#16udp20200413" title="Permanent link">&para;</a></h4>
 <ul>
 <li>[client.c]</li>
 </ul>
-<h3 id="day14-">day14、广播-组播-本地套接字</h3>
-<h4 id="01_2">01、知识点概述</h4>
-<h4 id="02epoll">02、epoll复习</h4>
-<h4 id="03udp">03、udp通信流程复习（）</h4>
+<h3 id="day14-">day14、广播-组播-本地套接字<a class="headerlink" href="#day14-" title="Permanent link">&para;</a></h3>
+<h4 id="01_2">01、知识点概述<a class="headerlink" href="#01_2" title="Permanent link">&para;</a></h4>
+<h4 id="02epoll">02、epoll复习<a class="headerlink" href="#02epoll" title="Permanent link">&para;</a></h4>
+<h4 id="03udp">03、udp通信流程复习（）<a class="headerlink" href="#03udp" title="Permanent link">&para;</a></h4>
 <ul>
 <li></li>
 </ul>
-<h4 id="04tcp_udp20200419">04、tcp_udp使用场景（20200419）</h4>
+<h4 id="04tcp_udp20200419">04、tcp_udp使用场景（20200419）<a class="headerlink" href="#04tcp_udp20200419" title="Permanent link">&para;</a></h4>
 <ul>
-<li>1、tcp使用场景</li>
+<li>1、tcp使用场景<ul>
 <li>对数据安全性要求高的时候<ul>
 <li>登录数据的传输</li>
 <li>文件传输</li>
@@ -965,7 +1123,9 @@
 <li>传输层协议--tcp</li>
 </ul>
 </li>
-<li>2、udp使用场景</li>
+</ul>
+</li>
+<li>2、udp使用场景<ul>
 <li>效率高--实时性要求比较高<ul>
 <li>视频聊天</li>
 <li>通话</li>
@@ -976,82 +1136,104 @@
 </ul>
 </li>
 </ul>
-<h4 id="0520200419">05、广播通信流程（20200419）</h4>
+</li>
+</ul>
+<h4 id="0520200419">05、广播通信流程（20200419）<a class="headerlink" href="#0520200419" title="Permanent link">&para;</a></h4>
 <ul>
-<li>广播（只有在udp时才可以）</li>
+<li>广播（只有在udp时才可以）<ul>
 <li>服务器：只主动发数据<ul>
 <li><strong>需要广播地址，发送到固定端口</strong></li>
 <li>窗口套接字--socket</li>
 <li>fd需要绑定服务器IP和端口</li>
 <li><strong>初始化客户端IP和端口信息</strong><code>struct sockaddr_in cli;</code></li>
 <li>发送数据<code>sendto(fd,buf,len,0,)</code></li>
-<li><strong>设置广播权限</strong></li>
+<li><strong>设置广播权限</strong><ul>
 <li><code>setsockopt()</code></li>
+</ul>
+</li>
 </ul>
 </li>
 <li>客户端：被动收数据<ul>
 <li><strong>绑定固定端口</strong>，你不绑定固定端口，也会收到数据，只不过不处理，被当成垃圾处理处理掉了</li>
 <li>创建套接字</li>
-<li>显示绑定IP和端口</li>
+<li>显示绑定IP和端口<ul>
 <li>bind()</li>
-<li>接收数据--server数据</li>
+</ul>
+</li>
+<li>接收数据--server数据<ul>
 <li>recvfrom()</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>适用范围<ul>
 <li><strong>只适用于局域网</strong></li>
 </ul>
 </li>
-<li>广播地址</li>
+</ul>
+</li>
+<li>广播地址<ul>
 <li>XXX.XXX.123.255，123网段的都能收到，<strong>255就是广播地址</strong>。</li>
 <li>XXX.XXX.123.1，<strong>1是网关</strong></li>
 <li>255.255.255.255所有网段都能收到。</li>
 </ul>
-<h4 id="0620200419">06、广播服务器代码实现（20200419）</h4>
+</li>
+</ul>
+<h4 id="0620200419">06、广播服务器代码实现（20200419）<a class="headerlink" href="#0620200419" title="Permanent link">&para;</a></h4>
 <ul>
 <li>[broadcast_server.c]</li>
 </ul>
-<h4 id="0720200419">07、广播客户端代码实现（20200419）</h4>
+<h4 id="0720200419">07、广播客户端代码实现（20200419）<a class="headerlink" href="#0720200419" title="Permanent link">&para;</a></h4>
 <ul>
 <li>[broadcast_client.c]</li>
 </ul>
-<h4 id="0820200419">08、广播客户端通信总结（20200419）</h4>
-<h4 id="0920200420">09、组播通信流程（20200420）</h4>
+<h4 id="0820200419">08、广播客户端通信总结（20200419）<a class="headerlink" href="#0820200419" title="Permanent link">&para;</a></h4>
+<h4 id="0920200420">09、组播通信流程（20200420）<a class="headerlink" href="#0920200420" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>广播只能用于局域网范围</strong>。</li>
 <li>组播可以适用于局域网和Internet</li>
-<li>组播Server</li>
+<li>组播Server<ul>
 <li><strong>只发送数据</strong></li>
 <li>需要使用组播地址，发送到客户端对应的端口8989</li>
 <li><strong>添加组播权限</strong>，<code>setsockopt()</code></li>
-<li>组播Client</li>
+</ul>
+</li>
+<li>组播Client<ul>
 <li>绑定固定端口8989</li>
 <li>加入到组播地址，<code>setsockopt()</code></li>
 <li><strong>只接收，不发送数据</strong></li>
-<li><strong>组播地址</strong>（4类）</li>
+</ul>
+</li>
+<li><strong>组播地址</strong>（4类）<ul>
 <li>224.0.0.0-224.0.0.255（预留的永久地址）</li>
 <li>239.0.0.0-239.255.255.255（局域网）</li>
+</ul>
+</li>
 <li><code>struct ip_mreqn</code></li>
 <li><code>struct in_addr</code></li>
 </ul>
-<h4 id="102020420">10、组播服务器代码实现（2020420）</h4>
+<h4 id="102020420">10、组播服务器代码实现（2020420）<a class="headerlink" href="#102020420" title="Permanent link">&para;</a></h4>
 <ul>
 <li>要对<strong><code>struct ip_mreqn</code></strong>初始化，名称记为<em>美人儿去哪</em></li>
 <li><code>if_nametoindex()</code>通过eth0这样的名称，获取mac地址，<strong>if代表ifconfig的if</strong>。</li>
 <li>对比一下组播、广播的代码</li>
 </ul>
-<h4 id="1120200420">11、组播客户端代码实现（20200420）</h4>
-<h4 id="12_1">12、复习</h4>
-<h4 id="1320200421">13、本地套接字通信流程（20200421）</h4>
+<h4 id="1120200420">11、组播客户端代码实现（20200420）<a class="headerlink" href="#1120200420" title="Permanent link">&para;</a></h4>
+<h4 id="12_1">12、复习<a class="headerlink" href="#12_1" title="Permanent link">&para;</a></h4>
+<h4 id="1320200421">13、本地套接字通信流程（20200421）<a class="headerlink" href="#1320200421" title="Permanent link">&para;</a></h4>
 <ul>
-<li>文件格式</li>
+<li>文件格式<ul>
 <li>管道：p</li>
 <li>套接字：s</li>
 <li><strong>这两个文件是伪文件</strong>（在磁盘上大小永远为0，不存在磁盘，存在内核缓冲区里）</li>
-<li>有两种方式</li>
+</ul>
+</li>
+<li>有两种方式<ul>
 <li>tcp流程，<strong>讲这个</strong></li>
 <li>udp</li>
-<li>服务器端</li>
+</ul>
+</li>
+<li>服务器端<ul>
 <li>创建套接字<code>int lfd = socket(AF_LOCAL,sock_stream,0)</code></li>
 <li>绑定<code>struct sockaddr_un serv; serv.sun_family=af_local; strcpy(serv.sun_path,"server.socket");bind(lfd,(struct sockaddr_un&amp;serv,len);</code><ul>
 <li><strong>只有绑定成功后，.socket文件才能被创件出来</strong></li>
@@ -1061,18 +1243,22 @@
 <li>等待接收消息请求<code>struct sockaddr_un client; int len = sizeof(client); int cfd = accept(lfd,&amp;client,&amp;len);</code></li>
 <li>通信 send和recv</li>
 <li>断开连接 close(cfd),close(lfd)</li>
-<li>客户端</li>
+</ul>
+</li>
+<li>客户端<ul>
 <li>创建套接字<code>int lfd = socket(AF_LOCAL,sock_stream,0)</code></li>
 <li><strong>绑定一个套接字文件</strong>：<code>struct sockaddr_un client; client.sun_family=af_local; strcpy(client.sun_path,"client.socket");bind(lfd,(struct sockaddr_un&amp;client,len);</code></li>
 <li>连接服务器：<code>struct sockaddr_un serv; serv.sun_family=af_local; strcpy(serv.sun_path,"server.socket");</code>，<strong>然后再连接server</strong>，<code>connect(fd,&amp;serv,sizeof(serv));</code></li>
 <li>通信 send和recv</li>
 <li>断开连接 close(cfd),close(lfd)</li>
 </ul>
-<h4 id="14server20200421">14、本地套接字Server实现（20200421）</h4>
-<h4 id="15client20200421">15、本地套接字Client实现（20200421）</h4>
-<h4 id="1620200422">16、心跳包（20200422）</h4>
+</li>
+</ul>
+<h4 id="14server20200421">14、本地套接字Server实现（20200421）<a class="headerlink" href="#14server20200421" title="Permanent link">&para;</a></h4>
+<h4 id="15client20200421">15、本地套接字Client实现（20200421）<a class="headerlink" href="#15client20200421" title="Permanent link">&para;</a></h4>
+<h4 id="1620200422">16、心跳包（20200422）<a class="headerlink" href="#1620200422" title="Permanent link">&para;</a></h4>
 <ul>
-<li>作用：<strong>判断客户端和服务器是否处于连接状态</strong></li>
+<li>作用：<strong>判断客户端和服务器是否处于连接状态</strong><ul>
 <li>心跳机制<ul>
 <li>不会携带大量的数据</li>
 <li>每个一定时间 服务器-&gt;客户端/客户端-&gt;服务器发送一个数据包</li>
@@ -1092,20 +1278,24 @@
 <li>继续发送心跳包</li>
 </ul>
 </li>
-<li><strong>乒乓包</strong></li>
+</ul>
+</li>
+<li><strong>乒乓包</strong><ul>
 <li>比心跳包携带的数据多一些</li>
 <li>除了知道连接是否存在，还能获取一些信息</li>
+</ul>
+</li>
 <li><strong>心跳包的实现</strong>--<em>看一下项目里的代码</em></li>
 </ul>
-<h4 id="17epollmain20200424">17、epoll反应堆模型main函数（20200424）</h4>
+<h4 id="17epollmain20200424">17、epoll反应堆模型main函数（20200424）<a class="headerlink" href="#17epollmain20200424" title="Permanent link">&para;</a></h4>
 <ul>
 <li>[epoll_loop.c]的源码学习</li>
 <li><strong>看代码时，先不要追求细节，要先理清流程</strong>。</li>
 </ul>
-<h4 id="18epoll20200425">18、epoll反应堆模型监听套接字初始函数（20200425）</h4>
-<h4 id="19epollacceptconn">19、epoll反应堆模型acceptconn函数</h4>
-<h3 id="day15libevent">day15、libevent</h3>
-<h3 id="day16xml-json">day16、xml json</h3>
+<h4 id="18epoll20200425">18、epoll反应堆模型监听套接字初始函数（20200425）<a class="headerlink" href="#18epoll20200425" title="Permanent link">&para;</a></h4>
+<h4 id="19epollacceptconn">19、epoll反应堆模型acceptconn函数<a class="headerlink" href="#19epollacceptconn" title="Permanent link">&para;</a></h4>
+<h3 id="day15libevent">day15、libevent<a class="headerlink" href="#day15libevent" title="Permanent link">&para;</a></h3>
+<h3 id="day16xml-json">day16、xml json<a class="headerlink" href="#day16xml-json" title="Permanent link">&para;</a></h3>
               
             </div>
           </div><footer>

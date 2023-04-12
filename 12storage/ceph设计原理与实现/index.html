@@ -124,30 +124,28 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h3 id="chap1crush">chap1、基于可扩展哈希的受控副本分布策略CRUSH</h3>
-<h4 id="0">0、</h4>
+                <h3 id="chap1crush">chap1、基于可扩展哈希的受控副本分布策略CRUSH<a class="headerlink" href="#chap1crush" title="Permanent link">&para;</a></h3>
+<h4 id="0">0、<a class="headerlink" href="#0" title="Permanent link">&para;</a></h4>
 <ul>
 <li>CRUSH（Controlled Replication Under Scalable Hashing），<strong>基于哈希的数据分布算法</strong></li>
 </ul>
-<h4 id="11strawstraw2">1.1、straw及straw2算法简介</h4>
+<h4 id="11strawstraw2">1.1、straw及straw2算法简介<a class="headerlink" href="#11strawstraw2" title="Permanent link">&para;</a></h4>
 <ul>
 <li>straw算法执行结果取决于三个因素：<strong>固定输入、元素编号和元素权重</strong>。</li>
 </ul>
-<h4 id="12crush">1.2、CRUSH算法详解</h4>
-<h5 id="121-cluster-map">1.2.1、集群的层次化描述-Cluster Map</h5>
-<h5 id="122-placement-rule">1.2.2、数据分布策略--Placement Rule</h5>
-<ul>
-<li>每条placment rule可以包含多个操作，这些操作共有3种类型</li>
-<li>（1）take</li>
-<li>（2）select</li>
-<li>（3）emit</li>
-</ul>
-<h4 id="13crush">1.3、调制CRUSH</h4>
+<h4 id="12crush">1.2、CRUSH算法详解<a class="headerlink" href="#12crush" title="Permanent link">&para;</a></h4>
+<h5 id="121-cluster-map">1.2.1、集群的层次化描述-Cluster Map<a class="headerlink" href="#121-cluster-map" title="Permanent link">&para;</a></h5>
+<h5 id="122-placement-rule">1.2.2、数据分布策略--Placement Rule<a class="headerlink" href="#122-placement-rule" title="Permanent link">&para;</a></h5>
+<p>+ 每条placment rule可以包含多个操作，这些操作共有3种类型
+   + （1）take
+   + （2）select
+   + （3）emit</p>
+<h4 id="13crush">1.3、调制CRUSH<a class="headerlink" href="#13crush" title="Permanent link">&para;</a></h4>
 <p>0、</p>
 <ul>
 <li><strong>提升CRUSH的计算效率</strong></li>
 </ul>
-<h5 id="131crush-map">1.3.1、编辑CRUSH Map</h5>
+<h5 id="131crush-map">1.3.1、编辑CRUSH Map<a class="headerlink" href="#131crush-map" title="Permanent link">&para;</a></h5>
 <ul>
 <li>（1）获取CRUSH map</li>
 <li>（2）反编译CRUSH map</li>
@@ -156,74 +154,82 @@
 <li>（5）模拟测试</li>
 <li>（6）注入集群</li>
 </ul>
-<h5 id="132crush">1.3.2、定制CRUSH规则</h5>
-<h5 id="133">1.3.3、数据重平衡</h5>
-<h4 id="14">1.4、总结与展望</h4>
+<h5 id="132crush">1.3.2、定制CRUSH规则<a class="headerlink" href="#132crush" title="Permanent link">&para;</a></h5>
+<h5 id="133">1.3.3、数据重平衡<a class="headerlink" href="#133" title="Permanent link">&para;</a></h5>
+<h4 id="14">1.4、总结与展望<a class="headerlink" href="#14" title="Permanent link">&para;</a></h4>
 <ul>
 <li>list和tree算法被先后废弃，原创的straw算法被完全重写</li>
 </ul>
-<h3 id="chap2bluestore">chap2、新型对象存储引擎BlueStore</h3>
+<h3 id="chap2bluestore">chap2、新型对象存储引擎BlueStore<a class="headerlink" href="#chap2bluestore" title="Permanent link">&para;</a></h3>
 <p>https://github.com/ceph/ceph/tree/main/src/os/bluestore
 0、</p>
-<h4 id="21">2.1、设计理念与指导原则</h4>
+<h4 id="21">2.1、设计理念与指导原则<a class="headerlink" href="#21" title="Permanent link">&para;</a></h4>
 <ul>
 <li>写中间设备的过渡过程称为<strong>写日志</strong>，中间设备也叫<strong>日志设备</strong>，一般可由NVRAM或者SSD等高速存储设备充当。</li>
-<li>几个术语</li>
+<li>几个术语<ul>
 <li>block-size（块大小）</li>
 <li>RMW（Read Modify Write）</li>
 <li>COW（Copy-On-Write）</li>
-<li>BlueStore针对写操作综合运用了RMW和COW策略-任何一个写请求，根据磁盘块大小，将其切分为三个部分：</li>
+</ul>
+</li>
+<li>BlueStore针对写操作综合运用了RMW和COW策略-任何一个写请求，根据磁盘块大小，将其切分为三个部分：<ul>
 <li>首尾非块大小对齐部分和中间块大小对齐部分</li>
 <li>然后针对中间块对齐部分采用COW策略</li>
 <li>首尾非块对齐部分采用RMW策略</li>
 </ul>
-<h4 id="22">2.2、磁盘数据结构</h4>
+</li>
+</ul>
+<h4 id="22">2.2、磁盘数据结构<a class="headerlink" href="#22" title="Permanent link">&para;</a></h4>
 <p>0、</p>
 <ul>
 <li>**BuleStore中习惯上磁盘格式以"<code>_t</code>"结尾并且全部小写，而内存格式不以"<code>\t</code>"结尾并且只有首字母大写。</li>
 </ul>
-<h5 id="221pg">2.2.1、PG</h5>
+<h5 id="221pg">2.2.1、PG<a class="headerlink" href="#221pg" title="Permanent link">&para;</a></h5>
 <ul>
-<li>Ceph并不是将任何上层数据一步到位映射到磁盘（OSD），而是引入了一个中间结构，称为<strong>PG，实现两级映射</strong></li>
+<li>Ceph并不是将任何上层数据一步到位映射到磁盘（OSD），而是引入了一个中间结构，称为<strong>PG，实现两级映射</strong><ul>
 <li>第一级映射是静态的</li>
 <li>第二级映射实现PG到OSD的映射，<strong>仍然采用伪随机哈希函数</strong></li>
+</ul>
+</li>
 <li>PG对应的磁盘结构称为<code>bluestore_cnode_t</code></li>
 </ul>
-<h5 id="222">2.2.2、对象</h5>
+<h5 id="222">2.2.2、对象<a class="headerlink" href="#222" title="Permanent link">&para;</a></h5>
 <ul>
-<li>extent是对象内的基本数据管理单元，下面分别予以阐述：</li>
+<li>extent是对象内的基本数据管理单元，下面分别予以阐述：<ul>
 <li>数据校验</li>
 <li>数据压缩</li>
 <li>数据共享</li>
 </ul>
-<h4 id="23">2.3、缓存管理</h4>
-<h5 id="231">2.3.1、常见的缓存淘汰算法</h5>
-<h5 id="232bluestore">2.3.2、BlueStore中的缓存管理</h5>
+</li>
+</ul>
+<h4 id="23">2.3、缓存管理<a class="headerlink" href="#23" title="Permanent link">&para;</a></h4>
+<h5 id="231">2.3.1、常见的缓存淘汰算法<a class="headerlink" href="#231" title="Permanent link">&para;</a></h5>
+<h5 id="232bluestore">2.3.2、BlueStore中的缓存管理<a class="headerlink" href="#232bluestore" title="Permanent link">&para;</a></h5>
 <ul>
 <li>
 <p>2类型的缓存算法</p>
-</li>
-<li>
-<p>LRU</p>
-</li>
+<ul>
+<li>LRU</li>
 <li>2Q：<strong>类似于简化版本ARC</strong>，区别在于只使用一个影子队列</li>
 </ul>
-<h4 id="24">2.4、磁盘空间管理</h4>
-<h5 id="241">2.4.1、常见磁盘空间管理模式</h5>
-<h5 id="242bitmapfreelistmanager">2.4.2、BitmapFreelistManager</h5>
-<h5 id="243bitmapallocator">2.4.3、BitmapAllocator</h5>
-<h4 id="25bluefs">2.5、BlueFs</h4>
-<h5 id="251rocksdbbulefs">2.5.1、RocksDB与BuleFs</h5>
-<h5 id="252">2.5.2、磁盘数据结构</h5>
-<h5 id="253">2.5.3、块设备</h5>
-<h4 id="26">2.6、实现原理</h4>
-<h5 id="261mkfs">2.6.1、mkfs</h5>
+</li>
+</ul>
+<h4 id="24">2.4、磁盘空间管理<a class="headerlink" href="#24" title="Permanent link">&para;</a></h4>
+<h5 id="241">2.4.1、常见磁盘空间管理模式<a class="headerlink" href="#241" title="Permanent link">&para;</a></h5>
+<h5 id="242bitmapfreelistmanager">2.4.2、BitmapFreelistManager<a class="headerlink" href="#242bitmapfreelistmanager" title="Permanent link">&para;</a></h5>
+<h5 id="243bitmapallocator">2.4.3、BitmapAllocator<a class="headerlink" href="#243bitmapallocator" title="Permanent link">&para;</a></h5>
+<h4 id="25bluefs">2.5、BlueFs<a class="headerlink" href="#25bluefs" title="Permanent link">&para;</a></h4>
+<h5 id="251rocksdbbulefs">2.5.1、RocksDB与BuleFs<a class="headerlink" href="#251rocksdbbulefs" title="Permanent link">&para;</a></h5>
+<h5 id="252">2.5.2、磁盘数据结构<a class="headerlink" href="#252" title="Permanent link">&para;</a></h5>
+<h5 id="253">2.5.3、块设备<a class="headerlink" href="#253" title="Permanent link">&para;</a></h5>
+<h4 id="26">2.6、实现原理<a class="headerlink" href="#26" title="Permanent link">&para;</a></h4>
+<h5 id="261mkfs">2.6.1、mkfs<a class="headerlink" href="#261mkfs" title="Permanent link">&para;</a></h5>
 <ul>
 <li><strong>mkfs主要固化一些用户指定的配置项到磁盘，这样后续BlueStore上电时，这些配置项将直接从磁盘读取</strong>。</li>
 </ul>
-<h5 id="262mount">2.6.2、mount</h5>
+<h5 id="262mount">2.6.2、mount<a class="headerlink" href="#262mount" title="Permanent link">&para;</a></h5>
 <ul>
-<li>OSD进程上电时，BlueStore通过mount操作完成正常上电前的检查和准备工作。<strong>mount操作包含以下几个步骤</strong>：</li>
+<li>OSD进程上电时，BlueStore通过mount操作完成正常上电前的检查和准备工作。<strong>mount操作包含以下几个步骤</strong>：<ul>
 <li>1、校验ObjectStore类型</li>
 <li>2、fsck或者deep-fsck</li>
 <li>3、加载并锁定fsid</li>
@@ -231,63 +237,71 @@
 <li>5、加载数据库，读取元数据</li>
 <li>6、加载Collection</li>
 </ul>
-<h5 id="263read">2.6.3、read</h5>
-<h5 id="264write">2.6.4、write</h5>
-<h4 id="27">2.7、使用指南</h4>
-<h5 id="271bluestore">2.7.1、部署BlueStore</h5>
-<h5 id="272">2.7.2、配置参数</h5>
-<h4 id="28">2.8、总结与展望</h4>
-<h3 id="chap3overwrites">chap3、纠删码原理与overwrites支持</h3>
-<h4 id="0_1">0、</h4>
+</li>
+</ul>
+<h5 id="263read">2.6.3、read<a class="headerlink" href="#263read" title="Permanent link">&para;</a></h5>
+<h5 id="264write">2.6.4、write<a class="headerlink" href="#264write" title="Permanent link">&para;</a></h5>
+<h4 id="27">2.7、使用指南<a class="headerlink" href="#27" title="Permanent link">&para;</a></h4>
+<h5 id="271bluestore">2.7.1、部署BlueStore<a class="headerlink" href="#271bluestore" title="Permanent link">&para;</a></h5>
+<h5 id="272">2.7.2、配置参数<a class="headerlink" href="#272" title="Permanent link">&para;</a></h5>
+<h4 id="28">2.8、总结与展望<a class="headerlink" href="#28" title="Permanent link">&para;</a></h4>
+<h3 id="chap3overwrites">chap3、纠删码原理与overwrites支持<a class="headerlink" href="#chap3overwrites" title="Permanent link">&para;</a></h3>
+<h4 id="0_1">0、<a class="headerlink" href="#0_1" title="Permanent link">&para;</a></h4>
 <ul>
 <li>纠删码（Erasure Coding）</li>
 <li>纠删码最简单的实现方式是完全复制，也称为镜像，<strong>将数据不做任何处理同时写入多个不同的存储介质</strong>。</li>
 <li>overwrites技术（覆盖写）</li>
 </ul>
-<h4 id="31raid">3.1、RAID技术概述</h4>
+<h4 id="31raid">3.1、RAID技术概述<a class="headerlink" href="#31raid" title="Permanent link">&para;</a></h4>
 <ul>
-<li>数据存储在单个磁盘上，存在一些固有缺陷</li>
+<li>数据存储在单个磁盘上，存在一些固有缺陷<ul>
 <li>访问速度慢</li>
 <li>容量小</li>
 <li>安全性差</li>
-<li>主流的RAID技术</li>
+</ul>
+</li>
+<li>主流的RAID技术<ul>
 <li>RAID0</li>
 <li>RAID1</li>
 <li>RAID5</li>
 <li>RAID6</li>
 </ul>
-<h4 id="32rs-raidjerasure">3.2、RS-RAID和Jerasure</h4>
+</li>
+</ul>
+<h4 id="32rs-raidjerasure">3.2、RS-RAID和Jerasure<a class="headerlink" href="#32rs-raidjerasure" title="Permanent link">&para;</a></h4>
 <p>0、</p>
-<h5 id="321">3.2.1、计算校验和</h5>
-<h5 id="322">3.2.2、数据恢复</h5>
-<h5 id="323">3.2.3、算术运算</h5>
-<h5 id="324">3.2.4、缺陷与改进</h5>
-<h5 id="325jerasure">3.2.5、Jerasure</h5>
-<h4 id="33ceph">3.3、纠删码在Ceph中的应用</h4>
-<h5 id="331">3.3.1、术语</h5>
-<h5 id="332">3.3.2、概述</h5>
-<h5 id="333">3.3.3、新写</h5>
-<h5 id="334">3.3.4、读</h5>
-<h5 id="335">3.3.5、覆盖写</h5>
-<h5 id="336">3.3.6、日志</h5>
-<h5 id="337scrub">3.3.7、Scrub</h5>
-<h4 id="34">3.4、总结与展望</h4>
-<h3 id="chap5qos">chap5、存储服务质量QoS</h3>
-<h4 id="0_2">0、</h4>
+<h5 id="321">3.2.1、计算校验和<a class="headerlink" href="#321" title="Permanent link">&para;</a></h5>
+<h5 id="322">3.2.2、数据恢复<a class="headerlink" href="#322" title="Permanent link">&para;</a></h5>
+<h5 id="323">3.2.3、算术运算<a class="headerlink" href="#323" title="Permanent link">&para;</a></h5>
+<h5 id="324">3.2.4、缺陷与改进<a class="headerlink" href="#324" title="Permanent link">&para;</a></h5>
+<h5 id="325jerasure">3.2.5、Jerasure<a class="headerlink" href="#325jerasure" title="Permanent link">&para;</a></h5>
+<h4 id="33ceph">3.3、纠删码在Ceph中的应用<a class="headerlink" href="#33ceph" title="Permanent link">&para;</a></h4>
+<h5 id="331">3.3.1、术语<a class="headerlink" href="#331" title="Permanent link">&para;</a></h5>
+<h5 id="332">3.3.2、概述<a class="headerlink" href="#332" title="Permanent link">&para;</a></h5>
+<h5 id="333">3.3.3、新写<a class="headerlink" href="#333" title="Permanent link">&para;</a></h5>
+<h5 id="334">3.3.4、读<a class="headerlink" href="#334" title="Permanent link">&para;</a></h5>
+<h5 id="335">3.3.5、覆盖写<a class="headerlink" href="#335" title="Permanent link">&para;</a></h5>
+<h5 id="336">3.3.6、日志<a class="headerlink" href="#336" title="Permanent link">&para;</a></h5>
+<h5 id="337scrub">3.3.7、Scrub<a class="headerlink" href="#337scrub" title="Permanent link">&para;</a></h5>
+<h4 id="34">3.4、总结与展望<a class="headerlink" href="#34" title="Permanent link">&para;</a></h4>
+<h3 id="chap5qos">chap5、存储服务质量QoS<a class="headerlink" href="#chap5qos" title="Permanent link">&para;</a></h3>
+<h4 id="0_2">0、<a class="headerlink" href="#0_2" title="Permanent link">&para;</a></h4>
 <ul>
 <li>dmClock用于分布式系统的I/O调度算法，（Handling Throughput Variablity for Hypervisor IO Scheduling）</li>
 </ul>
-<h4 id="51">5.1、研究现状</h4>
+<h4 id="51">5.1、研究现状<a class="headerlink" href="#51" title="Permanent link">&para;</a></h4>
 <ul>
 <li>BTRFS</li>
-<li>Q-EBOFS：<strong>没有被Ceph采用</strong></li>
+<li>Q-EBOFS：<strong>没有被Ceph采用</strong><ul>
 <li>在BTRFS原有磁盘调度队列中，引入了一层客户端级别的新队列，采用基于权重的轮询机制，将不同客户端队列中的请求分发至磁盘调度队列，从而在单个OSD层面实现对不同客户端按其权重分配I/O资源的目标。</li>
 </ul>
-<h4 id="52dmclock">5.2、dmClock算法原理</h4>
-<h5 id="521mclock">5.2.1、mClock</h5>
+</li>
+</ul>
+<h4 id="52dmclock">5.2、dmClock算法原理<a class="headerlink" href="#52dmclock" title="Permanent link">&para;</a></h4>
+<h5 id="521mclock">5.2.1、mClock<a class="headerlink" href="#521mclock" title="Permanent link">&para;</a></h5>
 <ul>
 <li>基于时间标签的I/O调度算法。</li>
-<li>mClock基本原理主要包含三个方面：</li>
+<li>mClock基本原理主要包含三个方面：<ul>
 <li>为每个客户端设置一套QoS模板参数，包括预留（r）、权重（w）和上限（l）</li>
 <li>服务端分两个阶段来处理I/O请求：<ul>
 <li>一是基于强制的Constraint-based阶段</li>
@@ -296,160 +310,185 @@
 </li>
 <li>服务端优先工作于Constraint-based阶段</li>
 </ul>
-<h5 id="522dmclock">5.2.2、dmClock</h5>
+</li>
+</ul>
+<h5 id="522dmclock">5.2.2、dmClock<a class="headerlink" href="#522dmclock" title="Permanent link">&para;</a></h5>
 <ul>
 <li>是mClock算法的分布式版本，<strong>两者的基本原理相同</strong></li>
-<li>dmClock和mClock的差别：</li>
+<li>dmClock和mClock的差别：<ul>
 <li>分布式系统具有多个服务器</li>
 <li>客户端记录每个服务器完成的请求个数</li>
 <li>服务端计算请求的时间标签时，</li>
 </ul>
-<h4 id="53qos">5.3、QoS的设计与实现</h4>
-<h5 id="0_3">0、</h5>
+</li>
+</ul>
+<h4 id="53qos">5.3、QoS的设计与实现<a class="headerlink" href="#53qos" title="Permanent link">&para;</a></h4>
+<h5 id="0_3">0、<a class="headerlink" href="#0_3" title="Permanent link">&para;</a></h5>
 <ul>
 <li><strong>通常将QoS的实现置于每个OSD中</strong>，每个OSD通过一个称为<strong>ShardedOpWQ的工作队列</strong></li>
 </ul>
-<h5 id="531prio">5.3.1、优先级队列（prio）</h5>
+<h5 id="531prio">5.3.1、优先级队列（prio）<a class="headerlink" href="#531prio" title="Permanent link">&para;</a></h5>
 <ul>
 <li>入队</li>
 <li>出队</li>
 </ul>
-<h5 id="532wpq">5.3.2、权重的优先级队列（wpq）</h5>
+<h5 id="532wpq">5.3.2、权重的优先级队列（wpq）<a class="headerlink" href="#532wpq" title="Permanent link">&para;</a></h5>
 <ul>
 <li>基于权重的优先级队列与PrioritizedQueue的队列结构类似，同样分为优先级prio、客户端client以及真实的请求list三个级别。</li>
-<li>请求的出队机制：</li>
+<li>请求的出队机制：<ul>
 <li>采用权重概率的方式确定prio级别</li>
 <li>被选中的prio队列并不定能出队请求</li>
 <li>client级别和真实请求的选择采用与PrioritizedQueue相同的方式，分别为<strong>轮询和FIFO策略</strong></li>
 </ul>
-<h5 id="533dmclock">5.3.3、dmClock队列</h5>
+</li>
+</ul>
+<h5 id="533dmclock">5.3.3、dmClock队列<a class="headerlink" href="#533dmclock" title="Permanent link">&para;</a></h5>
 <ul>
 <li>dmClock是一个两级映射队列，第一级为客户端的client队列，第二级为真实的请求队列，每个请求包含三个时间标签<code>&lt;RWL&gt;</code></li>
 <li><strong>dmClock采用完全二叉树来组织管理</strong></li>
 </ul>
-<h5 id="534client">5.3.4、Client的设计</h5>
-<h4 id="54">5.4、总结与展望</h4>
+<h5 id="534client">5.3.4、Client的设计<a class="headerlink" href="#534client" title="Permanent link">&para;</a></h5>
+<h4 id="54">5.4、总结与展望<a class="headerlink" href="#54" title="Permanent link">&para;</a></h4>
 <ul>
-<li>可能的改进方向包括以下几个方面：</li>
+<li>可能的改进方向包括以下几个方面：<ul>
 <li>1、合理模板参数的设置</li>
 <li>2、I/O带宽的限制</li>
 <li>3、突发I/O的处理</li>
 </ul>
-<h3 id="chap6rbd">chap6、分布式块存储RBD</h3>
-<h4 id="0_4">0、</h4>
+</li>
+</ul>
+<h3 id="chap6rbd">chap6、分布式块存储RBD<a class="headerlink" href="#chap6rbd" title="Permanent link">&para;</a></h3>
+<h4 id="0_4">0、<a class="headerlink" href="#0_4" title="Permanent link">&para;</a></h4>
 <ul>
 <li>RBD（RADOS Block Device）</li>
 </ul>
-<h4 id="61rbd">6.1、RBD架构</h4>
+<h4 id="61rbd">6.1、RBD架构<a class="headerlink" href="#61rbd" title="Permanent link">&para;</a></h4>
 <ul>
-<li>上层应用访问RBD块设备有两种途径：</li>
+<li>上层应用访问RBD块设备有两种途径：<ul>
 <li>librbd：基于librados的用户态接口库</li>
 <li>krbd：集成在GNU/Linux内核的一个内核模块，通过用户态的rbd命令行工具，可以将RBD块设备映射为本地的一个块设备文件</li>
 </ul>
-<h4 id="62">6.2、存储组织</h4>
-<h5 id="0_5">0、</h5>
+</li>
+</ul>
+<h4 id="62">6.2、存储组织<a class="headerlink" href="#62" title="Permanent link">&para;</a></h4>
+<h5 id="0_5">0、<a class="headerlink" href="#0_5" title="Permanent link">&para;</a></h5>
 <ul>
 <li>RBD块设备在Ceph中被称为image。<strong>image由元数数据和数据两部分组成</strong></li>
 <li>v1格式的image，v2格式的image</li>
 </ul>
-<h5 id="621">6.2.1、元数据</h5>
-<h5 id="622">6.2.2、数据</h5>
-<h4 id="63">6.3、功能特性</h4>
-<h5 id="631">6.3.1、快照</h5>
-<h5 id="632">6.3.2、克隆</h5>
-<h4 id="64">6.4、总结</h4>
-<h3 id="chap7rgw">chap7、对象存储网关RGW</h3>
-<h4 id="71">7.1、总体架构</h4>
-<h4 id="72">7.2、数据组织和存储</h4>
-<h5 id="721">7.2.1、用户</h5>
-<h5 id="722">7.2.2、存储桶</h5>
-<h5 id="723">7.2.3、对象</h5>
-<h5 id="724">7.2.4、数据存储位置</h5>
-<h4 id="73">7.3、功能实现</h4>
-<h5 id="731">7.3.1、功能特性</h5>
+<h5 id="621">6.2.1、元数据<a class="headerlink" href="#621" title="Permanent link">&para;</a></h5>
+<h5 id="622">6.2.2、数据<a class="headerlink" href="#622" title="Permanent link">&para;</a></h5>
+<h4 id="63">6.3、功能特性<a class="headerlink" href="#63" title="Permanent link">&para;</a></h4>
+<h5 id="631">6.3.1、快照<a class="headerlink" href="#631" title="Permanent link">&para;</a></h5>
+<h5 id="632">6.3.2、克隆<a class="headerlink" href="#632" title="Permanent link">&para;</a></h5>
+<h4 id="64">6.4、总结<a class="headerlink" href="#64" title="Permanent link">&para;</a></h4>
+<h3 id="chap7rgw">chap7、对象存储网关RGW<a class="headerlink" href="#chap7rgw" title="Permanent link">&para;</a></h3>
+<h4 id="71">7.1、总体架构<a class="headerlink" href="#71" title="Permanent link">&para;</a></h4>
+<h4 id="72">7.2、数据组织和存储<a class="headerlink" href="#72" title="Permanent link">&para;</a></h4>
+<h5 id="721">7.2.1、用户<a class="headerlink" href="#721" title="Permanent link">&para;</a></h5>
+<h5 id="722">7.2.2、存储桶<a class="headerlink" href="#722" title="Permanent link">&para;</a></h5>
+<h5 id="723">7.2.3、对象<a class="headerlink" href="#723" title="Permanent link">&para;</a></h5>
+<h5 id="724">7.2.4、数据存储位置<a class="headerlink" href="#724" title="Permanent link">&para;</a></h5>
+<h4 id="73">7.3、功能实现<a class="headerlink" href="#73" title="Permanent link">&para;</a></h4>
+<h5 id="731">7.3.1、功能特性<a class="headerlink" href="#731" title="Permanent link">&para;</a></h5>
 <ul>
 <li>对象存储最基本的功能包括<strong>用户、存储桶、对象的增删改查</strong></li>
 <li>RGW支持的S3 API</li>
 <li>RGW支持的Swift API</li>
-<li>RGW常用的Admin API</li>
+<li>RGW常用的Admin API<ul>
 <li>Get Usage</li>
 </ul>
-<h5 id="732io">7.3.2、I/O路径</h5>
+</li>
+</ul>
+<h5 id="732io">7.3.2、I/O路径<a class="headerlink" href="#732io" title="Permanent link">&para;</a></h5>
 <ul>
-<li>0、</li>
+<li>0、<ul>
 <li>op thread</li>
+</ul>
+</li>
 <li>1、用户认证</li>
 <li>2、用户/存储桶/对象访问权限控制</li>
 <li>3、bucket/用户配额</li>
 </ul>
-<h5 id="733">7.3.3、存储桶创建</h5>
-<h5 id="734">7.3.4、对象上传</h5>
-<h5 id="735">7.3.5、对象下载</h5>
-<h4 id="74">7.4、总结与展望</h4>
-<h3 id="chap8cephfs">chap8、分布式文件系统CephFS</h3>
+<h5 id="733">7.3.3、存储桶创建<a class="headerlink" href="#733" title="Permanent link">&para;</a></h5>
+<h5 id="734">7.3.4、对象上传<a class="headerlink" href="#734" title="Permanent link">&para;</a></h5>
+<h5 id="735">7.3.5、对象下载<a class="headerlink" href="#735" title="Permanent link">&para;</a></h5>
+<h4 id="74">7.4、总结与展望<a class="headerlink" href="#74" title="Permanent link">&para;</a></h4>
+<h3 id="chap8cephfs">chap8、分布式文件系统CephFS<a class="headerlink" href="#chap8cephfs" title="Permanent link">&para;</a></h3>
 <p>0、</p>
 <ul>
 <li><strong>CephFS基于MDS（MetaData Server）对元数据进行管理</strong>。</li>
 </ul>
-<h4 id="81">8.1、文件系统基础知识</h4>
-<h5 id="811">8.1.1、文件系统</h5>
+<h4 id="81">8.1、文件系统基础知识<a class="headerlink" href="#81" title="Permanent link">&para;</a></h4>
+<h5 id="811">8.1.1、文件系统<a class="headerlink" href="#811" title="Permanent link">&para;</a></h5>
 <ul>
 <li>VFS</li>
 </ul>
-<h5 id="812">8.1.2、文件系统中的元数据</h5>
+<h5 id="812">8.1.2、文件系统中的元数据<a class="headerlink" href="#812" title="Permanent link">&para;</a></h5>
 <ul>
-<li>定义4种基本数据类型：</li>
+<li>定义4种基本数据类型：<ul>
 <li>SuperBlock</li>
 <li>Inode</li>
 <li>Dentry</li>
 <li>File</li>
+</ul>
+</li>
 <li>
 <p><strong>SuperBlock和File用于面向前端（客户端）提供服务，而Inode和Dentry则需要后端（服务端）文件系统提供服务功能</strong>，重点介绍下后2者</p>
-</li>
-<li>
-<p>Inode</p>
-</li>
+<ul>
+<li>Inode</li>
 <li>Dentry</li>
 </ul>
-<h5 id="813">8.1.3、硬链接和软链接</h5>
+</li>
+</ul>
+<h5 id="813">8.1.3、硬链接和软链接<a class="headerlink" href="#813" title="Permanent link">&para;</a></h5>
 <ul>
 <li><strong>硬链接</strong>：指多个文件名指向同一个Inode号，<strong>相同的存储内容可以合适不同的文件名</strong>，目录不能用来创建硬链接</li>
 <li><strong>软链接</strong>：创建一个新的Inode，<strong>Inode存储的内容是另外一个文件路径名的指向</strong></li>
 </ul>
-<h5 id="814">8.1.4、日志</h5>
+<h5 id="814">8.1.4、日志<a class="headerlink" href="#814" title="Permanent link">&para;</a></h5>
 <ul>
-<li>日志文件系统，常见3种设计模式</li>
+<li>日志文件系统，常见3种设计模式<ul>
 <li>writeback模式</li>
 <li>ordered模式</li>
 <li>data模式（writeahead）</li>
-<li>日志提交有两种常见的策略：</li>
+</ul>
+</li>
+<li>日志提交有两种常见的策略：<ul>
 <li>超时提交</li>
 <li>满时提交</li>
 </ul>
-<h4 id="82cephfs">8.2、分布式文件系统CephFS</h4>
-<h5 id="821cephfs">8.2.1、CephFS设计框架和背景</h5>
+</li>
+</ul>
+<h4 id="82cephfs">8.2、分布式文件系统CephFS<a class="headerlink" href="#82cephfs" title="Permanent link">&para;</a></h4>
+<h5 id="821cephfs">8.2.1、CephFS设计框架和背景<a class="headerlink" href="#821cephfs" title="Permanent link">&para;</a></h5>
 <ul>
-<li>为了实现文件系统数据（包含元数据和用户数据）负载均衡，业界有如下几种分区方法：</li>
+<li>为了实现文件系统数据（包含元数据和用户数据）负载均衡，业界有如下几种分区方法：<ul>
 <li>（1）静态子树分区</li>
 <li>（2）Hash计算分区法</li>
 <li>（3）动态子树分区</li>
-<li>CephFS一共存在如下三种形式的客户端（接口）：</li>
+</ul>
+</li>
+<li>CephFS一共存在如下三种形式的客户端（接口）：<ul>
 <li>（1）CephFS Kernel Object</li>
 <li>（2）CephFS FUSE</li>
 <li>（3）User Space Client</li>
 </ul>
-<h5 id="822mds">8.2.2、MDS的作用</h5>
+</li>
+</ul>
+<h5 id="822mds">8.2.2、MDS的作用<a class="headerlink" href="#822mds" title="Permanent link">&para;</a></h5>
 <ul>
 <li><strong>MDS用于保存CephFS的元数据信息，它是运行在Ceph服务侧的守护进程</strong>，使用动态申请缓存空间来存储元数据信息，其记录的元数据除了文件在磁盘中的位置，还包括文件名、文件属性、归属目录、子树分割以及诸如快照、配额在内的一些高级特性。</li>
-<li>MDS在设计和实现上具有以下特点：</li>
+<li>MDS在设计和实现上具有以下特点：<ul>
 <li>首先，Ceph的基本存储单元是对象</li>
 <li>其次，每个MDS独立更新自己的日志</li>
 <li>最后，动态子树分区实现了文件系统的动态负载均衡</li>
 </ul>
-<h4 id="83mds">8.3、MDS设计原理与实现</h4>
-<h5 id="831mds">8.3.1、MDS元数据存储</h5>
-<pre><code>  0、
-</code></pre>
+</li>
+</ul>
+<h4 id="83mds">8.3、MDS设计原理与实现<a class="headerlink" href="#83mds" title="Permanent link">&para;</a></h4>
+<h5 id="831mds">8.3.1、MDS元数据存储<a class="headerlink" href="#831mds" title="Permanent link">&para;</a></h5>
+<pre class="highlight"><code>  0、</code></pre>
 <ul>
 <li><strong>MDS的元数据和业务数据都存储在RADOS对象（统称为Object）中</strong>。
   1、元数据与Object的关系
@@ -458,7 +497,7 @@
   4、日志</li>
 <li>MDS的日志系统使用如下混合模式</li>
 </ul>
-<h5 id="832mds">8.3.2、MDS负载均衡实现</h5>
+<h5 id="832mds">8.3.2、MDS负载均衡实现<a class="headerlink" href="#832mds" title="Permanent link">&para;</a></h5>
 <p>1、元数据负载实现背景
   2、目录分片
   3、子树分区
@@ -467,7 +506,7 @@
   6、负载均衡
   7、子树迁移
   8、流量控制</p>
-<h5 id="833mds">8.3.3、MDS故障恢复</h5>
+<h5 id="833mds">8.3.3、MDS故障恢复<a class="headerlink" href="#833mds" title="Permanent link">&para;</a></h5>
 <p>1、日志在故障恢复中的作用
   2、故障检测
   3、MDS恢复</p>
@@ -477,7 +516,7 @@
 <li>（3）Reconnect</li>
 <li>（4）Rejoin</li>
 </ul>
-<h4 id="84">8.4、总结与展望</h4>
+<h4 id="84">8.4、总结与展望<a class="headerlink" href="#84" title="Permanent link">&para;</a></h4>
               
             </div>
           </div><footer>

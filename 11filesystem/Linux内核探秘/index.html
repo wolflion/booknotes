@@ -140,43 +140,45 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h3 id="chap2-1224232">chap2、文件系统   12（24/232）</h3>
-<h4 id="21">2.1、文件系统的基本概念</h4>
-<h5 id="211vfs">2.1.1、什么是VFS</h5>
+                <h3 id="chap2-1224232">chap2、文件系统   12（24/232）<a class="headerlink" href="#chap2-1224232" title="Permanent link">&para;</a></h3>
+<h4 id="21">2.1、文件系统的基本概念<a class="headerlink" href="#21" title="Permanent link">&para;</a></h4>
+<h5 id="211vfs">2.1.1、什么是VFS<a class="headerlink" href="#211vfs" title="Permanent link">&para;</a></h5>
 <ul>
 <li><strong>VFS本身只存在于内存中</strong>，它需要将硬盘上的文件系统抽象到内存中，通过几个<strong>重要的结构</strong>（<code>dentry、inode、super_block</code>）</li>
 </ul>
-<h5 id="212super_block">2.1.2、超级块super_block</h5>
+<h5 id="212super_block">2.1.2、超级块super_block<a class="headerlink" href="#212super_block" title="Permanent link">&para;</a></h5>
 <ul>
-<li>代表了<strong>整个文件系统本身</strong>，</li>
+<li>代表了<strong>整个文件系统本身</strong>，<ul>
 <li>给出了文件系统的全局信息</li>
 <li>包含一些函数指针</li>
 </ul>
-<h5 id="213dentry">2.1.3、目录项dentry</h5>
+</li>
+</ul>
+<h5 id="213dentry">2.1.3、目录项dentry<a class="headerlink" href="#213dentry" title="Permanent link">&para;</a></h5>
 <ul>
 <li>目录项反映了文件系统的这种树状关系</li>
 </ul>
-<h5 id="214inode">2.1.4、索引节点inode</h5>
+<h5 id="214inode">2.1.4、索引节点inode<a class="headerlink" href="#214inode" title="Permanent link">&para;</a></h5>
 <ul>
 <li><strong>inode代表一个文件</strong></li>
 </ul>
-<h5 id="215">2.1.5、文件</h5>
+<h5 id="215">2.1.5、文件<a class="headerlink" href="#215" title="Permanent link">&para;</a></h5>
 <ul>
 <li>文件对象的作用是<strong>描述进程和文件交互的关系</strong>。 【<strong>文件对象</strong>指的是内存中的文件】</li>
 <li>进程打开一个文件，内核就动态创建一个文件对象。同一个文件，在不同的进程中有不同的文件对象。</li>
 </ul>
-<h4 id="22">2.2、文件系统的架构</h4>
-<h5 id="221">2.2.1、超级块作用分析</h5>
-<h5 id="222dentry">2.2.2、dentry作用分析</h5>
-<h5 id="223inode">2.2.3、inode作用分析</h5>
+<h4 id="22">2.2、文件系统的架构<a class="headerlink" href="#22" title="Permanent link">&para;</a></h4>
+<h5 id="221">2.2.1、超级块作用分析<a class="headerlink" href="#221" title="Permanent link">&para;</a></h5>
+<h5 id="222dentry">2.2.2、dentry作用分析<a class="headerlink" href="#222dentry" title="Permanent link">&para;</a></h5>
+<h5 id="223inode">2.2.3、inode作用分析<a class="headerlink" href="#223inode" title="Permanent link">&para;</a></h5>
 <ul>
 <li>系统内核提供了一个hash链表数组<code>inode_hashtable</code></li>
 <li>inode还有一个重要用作用是<strong>缓存文件的数据内容</strong>，通过成员<code>i_mapping</code>实现的。</li>
 </ul>
-<h5 id="224">2.2.4、文件作用分析</h5>
-<h4 id="23">2.3、从代码层次深入分析文件系统</h4>
-<h5 id="231aufs">2.3.1、一个最简单的文件系统aufs</h5>
-<pre><code class="language-cpp">#include &lt;linux/moudle.h&gt;
+<h5 id="224">2.2.4、文件作用分析<a class="headerlink" href="#224" title="Permanent link">&para;</a></h5>
+<h4 id="23">2.3、从代码层次深入分析文件系统<a class="headerlink" href="#23" title="Permanent link">&para;</a></h4>
+<h5 id="231aufs">2.3.1、一个最简单的文件系统aufs<a class="headerlink" href="#231aufs" title="Permanent link">&para;</a></h5>
+<pre class="highlight"><code class="language-cpp">#include &lt;linux/moudle.h&gt;
 #include &lt;linux/fs.h&gt;
 #include &lt;linux/pagemap.h&gt;
 #include &lt;linux/mount.h&gt;
@@ -202,12 +204,12 @@ static struct inode* aufs_get_inode(struct super_block* sb, int mode, dev_t dev)
             int_special_inode(inode, mode, dev);
             break;
         case S_IFREG:
-            printk(&quot;create a file \n&quot;);
+            printk("create a file \n");
             break;
         case S_IFDIR:
             inode-&gt;i_op = &amp;simple_dir_inode_operations;
             inode-&gt;i_fop = &amp;simple_dir_operations;
-            printk(&quot;create a dir file \n&quot;);
+            printk("create a dir file \n");
 
             inode-&gt;i_nlink++;
             break;
@@ -250,7 +252,7 @@ static int aufs_create(struct inode* dir, struct dentry* dentry, int mode)
 
 static int aufs_fill_super(struct super_block* sb, void* data, int silent)
 {
-    static struct tree_descr debug_files[] = { {&quot;&quot;} };
+    static struct tree_descr debug_files[] = { {""} };
     return simple_fill_super(sb, AUFS_MAIGC, debug_files);//lionel，也是系统提供的啊，还是fs目录下libfs.c中的
 }
 
@@ -262,7 +264,7 @@ static struct super_block* aufs_get_sb(struct file_system_type* fs_type,
 
 static struct file_system_type au_fs_type = {
     .owner = THIS_MODULE,
-.name = &quot;aufs&quot;,
+.name = "aufs",
 .get_sb = aufs_get_sb,
 .kill_sb = kill_litter_super,
 };
@@ -283,7 +285,7 @@ static int aufs_create_by_name(const char* name, mode_t mode,
         }
     }
     if (!parent) {
-        printk(&quot;Ah! can not find a parent!\n&quot;);
+        printk("Ah! can not find a parent!\n");
         return -EFAULT;
     }
 
@@ -308,7 +310,7 @@ struct dentry* aufs_create_file(const char* name, mode_t mode,
 {
     struct dentry* dentry = NULL;
     int error;
-    printk(&quot;aufs: creating file '%s'\n&quot;, name);
+    printk("aufs: creating file '%s'\n", name);
     error = aufs_create_by_name(name, mode, parent, &amp;dentry);
     if (error) {
         dentry = NULL;
@@ -339,21 +341,21 @@ static int __init aufs_init(void)
     if (!retval) {
         aufs_mount = kern_mount(&amp;au_fs_type);  //lionel，kern_mount()【这个在super.c中】与do_mount()【这个在fs里的namespace.c中】有关联不？
         if (IS_ERROR(aufs_mount)) {
-            printk(KERN_ERR &quot;aufs: could not mount!\n&quot;);
+            printk(KERN_ERR "aufs: could not mount!\n");
             unregister_filesystem(&amp;au_fs_type);
             return retval;
         }
     }
 
-    pslot = aufs_create_dir(&quot;woman star&quot;, NULL);
-    aufs_create_file(&quot;lbb&quot;, S_IFREG | S_IRUGO, pslot, NULL, NULL);
-    aufs_create_file(&quot;fbb&quot;, S_IFREG | S_IRUGO, pslot, NULL, NULL);
-    aufs_create_file(&quot;ljl&quot;, S_IFREG | S_IRUGO, pslot, NULL, NULL);
+    pslot = aufs_create_dir("woman star", NULL);
+    aufs_create_file("lbb", S_IFREG | S_IRUGO, pslot, NULL, NULL);
+    aufs_create_file("fbb", S_IFREG | S_IRUGO, pslot, NULL, NULL);
+    aufs_create_file("ljl", S_IFREG | S_IRUGO, pslot, NULL, NULL);
 
-    pslot = aufs_create_dir(&quot;man star&quot;, NULL);
-    aufs_create_file(&quot;ldh&quot;, S_IFREG | S_IRUGO, pslot, NULL, NULL);
-    aufs_create_file(&quot;lcw&quot;, S_IFREG | S_IRUGO, pslot, NULL, NULL);
-    aufs_create_file(&quot;jw&quot;, S_IFREG | S_IRUGO, pslot, NULL, NULL);
+    pslot = aufs_create_dir("man star", NULL);
+    aufs_create_file("ldh", S_IFREG | S_IRUGO, pslot, NULL, NULL);
+    aufs_create_file("lcw", S_IFREG | S_IRUGO, pslot, NULL, NULL);
+    aufs_create_file("jw", S_IFREG | S_IRUGO, pslot, NULL, NULL);
 
     return retval;
 }
@@ -366,9 +368,9 @@ static void __exit aufs_exit(void)
 
 module_init(aufs_init);
 module_exit(aufs_exit);
-MODULE_LICENSE(&quot;GPL&quot;);
-MOUDLE_DESCRIPTION(&quot;This is a simple module&quot;);
-MODULE_VERSION(&quot;Ver 0.1&quot;);
+MODULE_LICENSE("GPL");
+MOUDLE_DESCRIPTION("This is a simple module");
+MODULE_VERSION("Ver 0.1");
 
 
 /*
@@ -376,18 +378,19 @@ MODULE_VERSION(&quot;Ver 0.1&quot;);
 * mount -t aufs none /au
 * ls
 */
-
 </code></pre>
-<h5 id="232">2.3.2、文件系统如何管理目录和文件</h5>
+<h5 id="232">2.3.2、文件系统如何管理目录和文件<a class="headerlink" href="#232" title="Permanent link">&para;</a></h5>
 <ul>
-<li>代码三部分</li>
+<li>代码三部分<ul>
 <li>1）<code>register_filesystem</code>函数，把aufs文件系统登记到系统</li>
 <li>2）调用<code>kern_mount</code>函数为文件系统申请必备的数据结构</li>
 <li>3）最后在aufs文件系统内创建两目录，每个目录下面创建3个文件</li>
 </ul>
-<h5 id="233">2.3.3、文件系统的挂载过程</h5>
-<h5 id="234">2.3.4、文件打开的代码分析</h5>
-<h4 id="24">2.4、本章小结</h4>
+</li>
+</ul>
+<h5 id="233">2.3.3、文件系统的挂载过程<a class="headerlink" href="#233" title="Permanent link">&para;</a></h5>
+<h5 id="234">2.3.4、文件打开的代码分析<a class="headerlink" href="#234" title="Permanent link">&para;</a></h5>
+<h4 id="24">2.4、本章小结<a class="headerlink" href="#24" title="Permanent link">&para;</a></h4>
               
             </div>
           </div><footer>
