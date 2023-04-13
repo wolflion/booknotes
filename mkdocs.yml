@@ -38,6 +38,10 @@ markdown_extensions:
 nav:
     - 简介: 'index.md'
     - daily: '01daily.md'
+    - C++: 
+        - 《Effective C++》: '20C++/effectiveC++.md'
+    - STL: 
+        - 《Effective STL》: '21STL/EffectiveSTL.md'
     - 网络编程:
         - 《TCP/IP网络编程》: '10network/TCPIP网络编程.md'
         - 《Linux高性能服务器编程》: '10network/Linux高性能服务器编程.md'
