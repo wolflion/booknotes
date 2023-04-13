@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>《Effective C++》 - lionel的技术笔记</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "\u300aEffective C++\u300b";
+        var mkdocs_page_input_path = "20C++\\effectiveC++.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> lionel的技术笔记
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">简介</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../01daily/">daily</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">C++</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">《Effective C++》</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#part1c1-4">Part1、自己习惯C++（1-4）</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#1c">1、视C++为一个语言联邦</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2constenuminlinedefine">2、尽量以const,enum,inline替换#define</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#3const">3、尽可能使用const</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#31const">3.1、const成员函数</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#32constnon-const">3.2、const和non-const成员函数中避免重复</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#4">4、确定对象被使用前已被初始化</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#part25-12">Part2、构造、析构、赋值（5-12）</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#7">7、</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#part313-17">Part3、资源管理（13-17）</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#16">16、</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#17">17、</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#part418-25">Part4、设计与声明（18-25）</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#18">18、让接口容易被正确使用，不易被误用</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#19classtype">19、设计class犹如设计type</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#20pass-by-reference-to-constpass-by-value">20、宁以pass-by-reference-to-const替换pass-by-value</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#21reference">21、必须返回对象时，别妄想返回其reference</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#22private">22、成员变量声明为private</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#23non-membernon-friendmember">23、宁以non-member,non-friend替换member函数</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#24non-member">24、若所有参数皆需类型转换，请为此采用non-member函数</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#25swap">25、考虑写出一个不抛异常的swap函数</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#part526-31">Part5、实现（26-31）</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#26">26、尽可能延后变量定义式的出现时间</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#27">27、尽量少做转型动作</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#28handles">28、避免返回handles指向对象内部成分</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#29">29、为“异常安全”而努力是值得的</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#30inlining">30、透彻了解inlining的里里外外</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#31">31、文件间的编译依存关系降至最低</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#part632-40">Part6、继承与面向对象设计（32-40）</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#32">32、</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#33">33、</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#34">34、</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#35">35、</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#36">36、</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#37">37、</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#38">38、</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#39">39、</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#40">40、</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#part741-48">Part7、模板与泛型编程（41-48）</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#part8newdelete49-52">Part8、定制new和delete（49-52）</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#49">49、</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#50">50、</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#51">51、</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#52">52、</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#part953-55">Part9、杂项讨论（53-55）</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#53">53、不要轻忽编译器的警告</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#54tr1">54、熟悉TR1在内的标准程序库</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#55boost">55、熟悉boost</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">STL</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/EffectiveSTL/">《Effective STL》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网络编程</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/TCPIP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">《TCP/IP网络编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/">《Linux高性能服务器编程》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">文件系统</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/Linux%E5%86%85%E6%A0%B8%E6%8E%A2%E7%A7%98/">《Linux内核探秘》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《文件系统技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">《存储技术原理分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">存储</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../12storage/ceph%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《ceph设计原理与实现》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网课</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/01Linux%E9%AB%98%E5%B9%B6%E5%8F%91%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/">《Linux高并发网络编程开发》</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">lionel的技术笔记</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+          <li>C++ &raquo;</li>
+      <li>《Effective C++》</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="effective-c">《Effective C++》<a class="headerlink" href="#effective-c" title="Permanent link">&para;</a></h2>
+<h3 id="part1c1-4">Part1、自己习惯C++（1-4）<a class="headerlink" href="#part1c1-4" title="Permanent link">&para;</a></h3>
+<h4 id="1c">1、视C++为一个语言联邦<a class="headerlink" href="#1c" title="Permanent link">&para;</a></h4>
+<ul>
+<li>结论：<ul>
+<li>C++高效编程守则视状况而变化，取决于你使用C++的哪一部分</li>
+</ul>
+</li>
+<li>主要的次语言，4个方面<ul>
+<li>C</li>
+<li>Object-Oriented C++</li>
+<li>Template C++</li>
+<li>STL</li>
+</ul>
+</li>
+</ul>
+<h4 id="2constenuminlinedefine">2、尽量以const,enum,inline替换#define<a class="headerlink" href="#2constenuminlinedefine" title="Permanent link">&para;</a></h4>
+<ul>
+<li>结论：<ul>
+<li>对于单纯常量，最好以const对象或enums替换#defines</li>
+<li>对于形似函数的宏（macros），最好改用inline函数替换#defines</li>
+</ul>
+</li>
+<li>0<ul>
+<li><code>#define</code>时<strong>宏名有可能并未记入符号表</strong>。</li>
+</ul>
+</li>
+</ul>
+<h4 id="3const">3、尽可能使用const<a class="headerlink" href="#3const" title="Permanent link">&para;</a></h4>
+<ul>
+<li>结论：<ul>
+<li>将某些东西声明为const，可帮助编译器侦测出错误用法。const可被施加于任何作用域内的对象、函数参数、函数返回类型、成员函数本体。</li>
+<li>编译器强制实施bitwise constness，但你编写程序时应该使用“概念上的常量性”（conceptual constness）</li>
+<li>当const和non-const成员函数有着实质等价的实现时，令non-const版本调用const版本可避免代码重复</li>
+</ul>
+</li>
+<li>0<ul>
+<li>const在*号左边，指针指向的值是常量 <code>const int * p;</code></li>
+<li>const在*号右边，指针自身常量。<code>int * const p;</code></li>
+</ul>
+</li>
+</ul>
+<h5 id="31const">3.1、const成员函数<a class="headerlink" href="#31const" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>void add(int x, int y) const</code><strong>const在末尾</strong></li>
+</ul>
+<h5 id="32constnon-const">3.2、const和non-const成员函数中避免重复<a class="headerlink" href="#32constnon-const" title="Permanent link">&para;</a></h5>
+<h4 id="4">4、确定对象被使用前已被初始化<a class="headerlink" href="#4" title="Permanent link">&para;</a></h4>
+<ul>
+<li>结论：<ul>
+<li>为内置型对象进行手工初始化，因为C++不保证初始化它们</li>
+<li>构造函数最好使用成员初值列（member initalization list），而不要在构造函数本体内使用赋值操作（assignment）。初值列列出的成员变量，其排列次序应该和它们在class中的声明次序相同。</li>
+<li>为免除“跨编译单元之初始化次序”问题，请以local static对象替换non-local static对象。</li>
+</ul>
+</li>
+<li>C++有十分固定的“成员初始化次序”<ul>
+<li>base classes更早于其derived classes的初始化</li>
+<li>class的成员变量总是以其声明次序被初始化</li>
+</ul>
+</li>
+<li>不同编译单元内定义之non-local static对象<ul>
+<li>static对象：其寿命从被构造出来直到程序结束为止（global对象、定义于namespace作用域内对象、在class内、在函数内、以及在file作用域内被声明为static的对象）</li>
+<li>local static对象：函数内的static对象（它们对函数而言是local）</li>
+<li>non-local static对象：其它static对象</li>
+<li>编译单元（tranlation unit）是指产出单一目标文件（single object file）的那些源码。<em>基本上它是单一源码文件加所含入的头文件</em></li>
+<li><em>lionel，多个编译单元，互相引用non-local static对象，C++没有规定它们的初始化次序</em></li>
+</ul>
+</li>
+</ul>
+<h3 id="part25-12">Part2、构造、析构、赋值（5-12）<a class="headerlink" href="#part25-12" title="Permanent link">&para;</a></h3>
+<h4 id="7">7、<a class="headerlink" href="#7" title="Permanent link">&para;</a></h4>
+<ul>
+<li><em>虚析构函数，声明的价值在哪？</em></li>
+</ul>
+<p>9、</p>
+<ul>
+<li><strong>在derived class对象的base class构造期间，对象的类型是base class而不是derived class</strong>。</li>
+</ul>
+<p>10、</p>
+<ul>
+<li><em><code>this</code></em></li>
+</ul>
+<p>11、
++ <code>operator=</code></p>
+<p>12、</p>
+<ul>
+<li>copy函数分为<strong>copy构造函数、copy assignment操作符</strong></li>
+</ul>
+<h3 id="part313-17">Part3、资源管理（13-17）<a class="headerlink" href="#part313-17" title="Permanent link">&para;</a></h3>
+<h4 id="16">16、<a class="headerlink" href="#16" title="Permanent link">&para;</a></h4>
+<ul>
+<li>new和delete配对</li>
+</ul>
+<h4 id="17">17、<a class="headerlink" href="#17" title="Permanent link">&para;</a></h4>
+<ul>
+<li>newed对象</li>
+<li><code>std::tr1::shared_ptr&lt;Widget&gt; pw(new Widget); //在单独语句内以智能指针存储newed所得对象</code></li>
+</ul>
+<h3 id="part418-25">Part4、设计与声明（18-25）<a class="headerlink" href="#part418-25" title="Permanent link">&para;</a></h3>
+<h4 id="18">18、让接口容易被正确使用，不易被误用<a class="headerlink" href="#18" title="Permanent link">&para;</a></h4>
+<ul>
+<li>结论：<ul>
+<li>好的接口很容易被正确使用，不容易被误用。你应该在你的所有接口中努力达成这些性质</li>
+<li>“促进正确使用”的办法包括接口的一致性，以及与内置类型的行为兼容</li>
+<li>“阻止误用”的办法包括建立新类型、限制类型上的操作，束缚对象值，以及消除客户的资源管理责任</li>
+<li>tr1::shared_ptr支持定制型删除器（custom deleter）。这可防范DLL问题，可被用来自动解除互斥锁（mutexs）等等</li>
+</ul>
+</li>
+<li>0<ul>
+<li>必须考虑客户可能做出什么样的错误</li>
+<li>C++中的<code>explicit</code>关键字只能用于修饰只有一个参数的类构造函数, 它的作用是表明该构造函数是显示的, 而非隐式的, 跟它相对应的另一个关键字是implicit, 意思是隐藏的,类构造函数默认情况下即声明为implicit(隐式).<ul>
+<li><strong>explicit关键字的作用就是防止类构造函数的隐式自动转换.</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="19classtype">19、设计class犹如设计type<a class="headerlink" href="#19classtype" title="Permanent link">&para;</a></h4>
+<ul>
+<li>结论：<ul>
+<li>Class的设计就是type的设计。在定义一个新type之前，请确定你已经考虑过本条款覆盖的所有讨论主题。</li>
+</ul>
+</li>
+<li>设计新type的checklist<ul>
+<li>新type的对象应该如何被创建和销毁？</li>
+</ul>
+</li>
+</ul>
+<h4 id="20pass-by-reference-to-constpass-by-value">20、宁以pass-by-reference-to-const替换pass-by-value<a class="headerlink" href="#20pass-by-reference-to-constpass-by-value" title="Permanent link">&para;</a></h4>
+<ul>
+<li>结论：<ul>
+<li>尽量以pass-by-reference-to-const替换pass-by-value。前者通常比较高效，并可避免切割（slicing problem）问题</li>
+<li>以上规则并不适用于内置类型，以及STL的迭代器和函数对象。对它们而言，pass-by-value往往比较适当</li>
+</ul>
+</li>
+<li>0<ul>
+<li>以by-value方式传递一个Student对象，总体成本是“六次构造函数和六次析构函数”</li>
+<li><strong>references往往以指针实现出来，因为pass-by-reference通常意味真正传递的是指针</strong></li>
+</ul>
+</li>
+</ul>
+<h4 id="21reference">21、必须返回对象时，别妄想返回其reference<a class="headerlink" href="#21reference" title="Permanent link">&para;</a></h4>
+<ul>
+<li>结论：<ul>
+<li>绝不要返回pointer或reference指向一个local stack对象，或返回reference指向一个heap-allocated对象，或返回pointer或reference指向一个local static对象而有可能同时需要多个这样的对象。item4已经为“在单线程环境中合理返回reference指向一个local static对象”提供了一份设计实例。</li>
+</ul>
+</li>
+</ul>
+<h4 id="22private">22、成员变量声明为private<a class="headerlink" href="#22private" title="Permanent link">&para;</a></h4>
+<ul>
+<li>结论：<ul>
+<li>切记将成员变量声明为private。这可赋予客户访问数据的一致性、可细微划分访问控制、允诺约束条件获得保证，并提供class作者以充分的实现弹性。</li>
+<li>protected并不比public更具封装性。</li>
+</ul>
+</li>
+</ul>
+<h4 id="23non-membernon-friendmember">23、宁以non-member,non-friend替换member函数<a class="headerlink" href="#23non-membernon-friendmember" title="Permanent link">&para;</a></h4>
+<ul>
+<li>结论：<ul>
+<li>宁可拿non-member、non-friend函数替换member函数。这样做可以增加封装性、包裹弹性（packaging flexibility）和机能扩充性</li>
+</ul>
+</li>
+<li>0<ul>
+<li>namespace和classes不同，前者可跨越多个源码文件而后者不能</li>
+<li>将所有便利函数放在多个头文件内但隶属同一个命名空间，意味客户可以轻松扩展这一组便利函数。</li>
+</ul>
+</li>
+</ul>
+<h4 id="24non-member">24、若所有参数皆需类型转换，请为此采用non-member函数<a class="headerlink" href="#24non-member" title="Permanent link">&para;</a></h4>
+<ul>
+<li>结论：<ul>
+<li><strong>本条款内含真理，但却不是全部的真理。</strong></li>
+<li>如果你需要为某个函数的所有参数（包括被this指针所指的那个隐喻参数）进行类型转换，那么这个函数必须是个non-member</li>
+</ul>
+</li>
+<li>0<ul>
+<li>令classes支持隐式类型转换通常是个糟糕的主意</li>
+<li>让<code>operator*</code>成为一个non-member函数</li>
+<li>无论何时如果你可以避免friend函数就该避免，因为就像真实世界一样，<strong>朋友带来的麻烦往往多过其价值</strong>。</li>
+</ul>
+</li>
+<li>类型转换，采用non-member函数</li>
+</ul>
+<h4 id="25swap">25、考虑写出一个不抛异常的swap函数<a class="headerlink" href="#25swap" title="Permanent link">&para;</a></h4>
+<ul>
+<li>结论：<ul>
+<li>当std::swap对你的类型效率不高时，提供一个swap成员函数，并确定这个函数不抛出异常</li>
+<li>如果你提供一个member swap，也该提供一个non-member swap用来调用前者。对于classes（而非templates），也请特化std::swap</li>
+<li>调用swap时应针对std::swap使用using声明式，然后调用swap并且不带任何“命名空间资格修饰”</li>
+<li>为“用户定义类型”进行std templates全特化是好的，但千万不要尝试在std内加入某些对std而言全新的东西</li>
+</ul>
+</li>
+<li>0<ul>
+<li><strong>pimpl手法</strong>（pointer to implementation）</li>
+</ul>
+</li>
+</ul>
+<h3 id="part526-31">Part5、实现（26-31）<a class="headerlink" href="#part526-31" title="Permanent link">&para;</a></h3>
+<h4 id="26">26、尽可能延后变量定义式的出现时间<a class="headerlink" href="#26" title="Permanent link">&para;</a></h4>
+<ul>
+<li>结论：<ul>
+<li>尽可能延后变量定义式的出现。这样做可增加程序的清晰度并改善程序效率。</li>
+</ul>
+</li>
+<li>0<ul>
+<li><em>对于代码规范而言，就是需要用的时候，再定义</em></li>
+<li><em>能整理规则了，但不一定能真正的融汇贯通？</em></li>
+<li>本意是避免<strong>构造（和析构）非必要对象，还可以避免无意义的default构造行为</strong>。</li>
+</ul>
+</li>
+</ul>
+<h4 id="27">27、尽量少做转型动作<a class="headerlink" href="#27" title="Permanent link">&para;</a></h4>
+<ul>
+<li>结论：<ul>
+<li>如果可以，尽量避免转型，特别是在注重效率的代码中避免dynamic_casts。如果有个设计需要转型动作，试着发展无需转型的替代设计</li>
+<li>如果转型是必要的，试着将它隐藏于某个函数背后。客户随后可以调用该函数，而不需将转型放进他们自己的代码内</li>
+<li>宁可使用C++-style（新式）转型，不要使用旧式转型。前者很容易辨识出来，而且也比较有着分门别类的职掌</li>
+</ul>
+</li>
+<li>旧式转型<ul>
+<li><code>(T) expression</code></li>
+<li><code>T (expression)</code></li>
+<li><code>class Widget {public: explicit Widget(int size); };</code> <strong>唯一使用旧式转型的时机</strong></li>
+</ul>
+</li>
+<li>新式转型<ul>
+<li>const_cast</li>
+<li>dynamic_cast</li>
+<li>reinterpret_cast</li>
+<li>static_cast</li>
+</ul>
+</li>
+<li>旧式转换、新式转换（<em>我没记，但要保证自己已经完全掌握了4种的区别</em>）</li>
+<li><em>写4个例子，来说明下 转型的使用说明</em></li>
+</ul>
+<h4 id="28handles">28、避免返回handles指向对象内部成分<a class="headerlink" href="#28handles" title="Permanent link">&para;</a></h4>
+<ul>
+<li>结论：<ul>
+<li>避免返回<strong>handles（包括references、指针、迭代器）</strong>指向对象内部。遵守这个条款可增加封装性，帮助const成员函数的行为像个const，并将发生“虚吊号码”（dangling handles）的可能性降至最低</li>
+</ul>
+</li>
+<li><strong>handlers</strong>是指（包括reference、指针、迭代器）</li>
+<li><em>不太懂，lionel</em></li>
+</ul>
+<h4 id="29">29、为“异常安全”而努力是值得的<a class="headerlink" href="#29" title="Permanent link">&para;</a></h4>
+<ul>
+<li>结论：<ul>
+<li>异常安全函数（Exception-safe functions）即使发生异常也不会泄漏资源或允许任何数据结构败坏。这样的函数区分为三种可能的保证：基本型、强烈型、不抛异常型</li>
+<li>“强烈保证”往往能够以copy-and-swap实现出来，但“强烈保证”并非对所有函数都可实现或具备现实意义</li>
+<li>函数提供的“异常安全保证”通常最高只等于等于其所调用之各个函数的“异常安全保证”中的最弱者</li>
+</ul>
+</li>
+<li>当异常被抛出时，带有异常安全性的函数会：<ul>
+<li>不泄漏任何资源</li>
+<li>不允许数据败坏</li>
+</ul>
+</li>
+<li>异常安全函数（Exception-safe functions）提供以下三个保证之一：<ul>
+<li>基本承诺：</li>
+<li>强烈保证：</li>
+<li>不抛掷（nothrow）保证：<strong>承诺绝不抛出异常</strong></li>
+</ul>
+</li>
+<li><strong>copy and swap策略</strong>：为你打算修改的对象（原件）做出一份副本，然后在那副本身上做一切必要修改。若有任何修改动作抛出异常，原对象仍保持未改变状态。待所有改变都成功后，再将修改过的那个副本和原对象在一个不抛出异常的操作中置换（swap）。</li>
+<li>pimpl idiom 【这个黑话是啥意思？】</li>
+<li>“异常安全”不太会</li>
+</ul>
+<h4 id="30inlining">30、透彻了解inlining的里里外外<a class="headerlink" href="#30inlining" title="Permanent link">&para;</a></h4>
+<ul>
+<li>结论：<ul>
+<li>将大多数inlining限制在小型、被频繁调用的函数身上。这可使日后的调试过程和二进制升级（binary upgradability）更容易，也可使潜在的代码膨胀问题最小化，使程序的速度提升机会最大化</li>
+<li>不要只因为function templates出现在头文件，就将它们声明为inline</li>
+</ul>
+</li>
+<li>0<ul>
+<li>inline函数背后的整体观念是，<strong>将“对此函数的每一个调用”都以函数本体替换之</strong></li>
+</ul>
+</li>
+<li><strong>inline函数无法随着程序库的升级而升级</strong><ul>
+<li>f是non-line函数，一旦它有任何修改，客户端只需重新连接就好，远比重新编译的负担少很多</li>
+</ul>
+</li>
+<li><strong>inline函数通常一定被置于头文件内</strong>。（template通常也置于头文件内）</li>
+<li><em>inline函数无法随着程序库的升级而升级。lionel，啥意思？</em></li>
+<li><strong>大部分调试器面对inline函数都束手无策</strong>（gtest就无法走入这个分支，印象中是这样）</li>
+</ul>
+<h4 id="31">31、文件间的编译依存关系降至最低<a class="headerlink" href="#31" title="Permanent link">&para;</a></h4>
+<ul>
+<li>结论：<ul>
+<li>支持“编译依存性最小化”的一般构想是：相依于声明式，不要相依于定义式。基于此构想的两个手段是Handle classes和Interface classes</li>
+<li>程序库头文件应该以“完全且仅有声明式”（full and declaration-only forms）的形式存在。这种做法不论是否涉及templates都适用</li>
+</ul>
+</li>
+<li>0<ul>
+<li>null</li>
+</ul>
+</li>
+<li>将Person分割为两个classes，一个只提供接口，另一个负责实现该接口（<strong>implementation class取名为PersonImpl</strong>）</li>
+<li><strong>编译依存性最小化的本质：</strong>现实中让头文件尽可能自我满足，万一做不到，则让它与其他文件内的声明式（而非定义式）相依。<ul>
+<li>如果使用object references或object pointers可以完成任务，就不要使用objects。</li>
+<li>如果能够，尽量以class声明式替换class定义式</li>
+<li>为声明式和定义式提供不同头文件</li>
+</ul>
+</li>
+<li>文件之间的依赖关系</li>
+<li><strong>C++没有把“将接口从实现中分离”。class的定义式不只详细叙述了class接口，还包括十足的实现细目</strong>。</li>
+<li>头文件中有任何一个被改变，那么每一个含入Person class的文件就得重新编译，任何使用Person classs的文件也必须重新编译。</li>
+<li><strong>编译器必须在编译期间知道对象的大小</strong>。</li>
+<li>“声明的依存性”替换“定义的依存性”，<strong>现实中让头文件尽可能自我满足，万一做不到，让它与其它文件内的声明式（而非定义式）相依</strong>。</li>
+<li><em>Handle classes与Interface classes区别？</em></li>
+</ul>
+<h3 id="part632-40">Part6、继承与面向对象设计（32-40）<a class="headerlink" href="#part632-40" title="Permanent link">&para;</a></h3>
+<h4 id="32">32、<a class="headerlink" href="#32" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Liskov Substitution Principle</li>
+<li>public继承是"is a"，<em>private继承是啥？</em></li>
+</ul>
+<h4 id="33">33、<a class="headerlink" href="#33" title="Permanent link">&para;</a></h4>
+<ul>
+<li>using声明式，<strong>inline转交函数（forwarding function）</strong></li>
+</ul>
+<h4 id="34">34、<a class="headerlink" href="#34" title="Permanent link">&para;</a></h4>
+<ul>
+<li>声明一个pure virtual函数的目的是为了让derived classes只继承函数接口。</li>
+<li>声明简朴的（非纯）inpure virtual函数的目的，是让derived classes继承该函数的接口和缺省实现</li>
+</ul>
+<h4 id="35">35、<a class="headerlink" href="#35" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Template Method模式</li>
+<li>Strategy模式</li>
+<li>摘要，有以下几个替换
+    + 使用non-virtual interface手法
+    + 将virtual函数替换为“函数指针成员变量”
+    + 以tr1::function成员变量替换virtual函数
+    + 将继承体系内的virtual函数替换为另一个继承体系内的virtual函数</li>
+</ul>
+<h4 id="36">36、<a class="headerlink" href="#36" title="Permanent link">&para;</a></h4>
+<ul>
+<li><em>写个代码来看下差异，lionel</em> 【重新定义继承来的non-virtual】</li>
+</ul>
+<h4 id="37">37、<a class="headerlink" href="#37" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>缺省参数是静态绑定</strong>，virtual是动态绑定</li>
+</ul>
+<h4 id="38">38、<a class="headerlink" href="#38" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>复合是has-a</strong></li>
+</ul>
+<h4 id="39">39、<a class="headerlink" href="#39" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>private继承，编译器不会自动将一个derived class对象 转换为一个 base class对象</strong>。</li>
+</ul>
+<h4 id="40">40、<a class="headerlink" href="#40" title="Permanent link">&para;</a></h4>
+<ul>
+<li>多重继承会导致歧义</li>
+</ul>
+<h3 id="part741-48">Part7、模板与泛型编程（41-48）<a class="headerlink" href="#part741-48" title="Permanent link">&para;</a></h3>
+<h3 id="part8newdelete49-52">Part8、定制new和delete（49-52）<a class="headerlink" href="#part8newdelete49-52" title="Permanent link">&para;</a></h3>
+<p>0、</p>
+<ul>
+<li>---定制new和delete--  【new失败了】</li>
+</ul>
+<h4 id="49">49、<a class="headerlink" href="#49" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>operator new</code>分配失败了，会<strong>调用<code>new-handler</code>函数</strong>，设计一个良好的new-handler函数</li>
+<li><code>new(std::nothrow) Widget</code>发生了两件事
+    + 1、nothrow版的operator new被调用，用以分配足够内存给Widget对象。</li>
+<li>使用nothrow new只能保证operator new不抛掷异常，不保证像“new (std::nothrow) Widget”这样的表达式绝不导致异常。</li>
+</ul>
+<h4 id="50">50、<a class="headerlink" href="#50" title="Permanent link">&para;</a></h4>
+<ul>
+<li>自己实现一个<code>operator new</code>，看看哪个开源比较强？</li>
+<li><em>什么场景下，需要自己实现一个operator new？</em></li>
+</ul>
+<h4 id="51">51、<a class="headerlink" href="#51" title="Permanent link">&para;</a></h4>
+<h4 id="52">52、<a class="headerlink" href="#52" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>Widget *pw = new Widget;</code>有2个函数被调用：
+    + 用以分配内存的operator new
+    + Widget的default构造函数
+    + <strong>问题，如果new成功了，构造函数失败了怎么办？无法归还内存了</strong>
+        + 类内作用域
+        + 全员作用域</li>
+</ul>
+<h3 id="part953-55">Part9、杂项讨论（53-55）<a class="headerlink" href="#part953-55" title="Permanent link">&para;</a></h3>
+<h4 id="53">53、不要轻忽编译器的警告<a class="headerlink" href="#53" title="Permanent link">&para;</a></h4>
+<ul>
+<li>结论：<ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<h4 id="54tr1">54、熟悉TR1在内的标准程序库<a class="headerlink" href="#54tr1" title="Permanent link">&para;</a></h4>
+<ul>
+<li>结论：<ul>
+<li>C++标准程序库的主要机能由STL、iostream、locals组成。并包含C99标准程序库</li>
+<li>TR1添加了</li>
+</ul>
+</li>
+<li>C++98的标准库</li>
+<li>TR1中的14个新组件<ul>
+<li>智能指针：<strong>非环形（acyclic）数据结构</strong></li>
+<li>function</li>
+<li>bind</li>
+<li>第1组<ul>
+<li>hash table：非序列容器</li>
+<li>正则表达式</li>
+<li>Tuples</li>
+<li>array</li>
+<li>mem_fn：<em>这个没见过，lionel</em></li>
+<li>reference_wrapper：<em>这个没见过，lionel</em></li>
+<li>随机数</li>
+<li>数学函数</li>
+<li>C99兼容扩充</li>
+</ul>
+</li>
+<li>第2组<ul>
+<li>type traits</li>
+<li>result_of：<em>这个没见过</em></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="55boost">55、熟悉boost<a class="headerlink" href="#55boost" title="Permanent link">&para;</a></h4>
+<ul>
+<li>结论：<ul>
+<li>Boost提供许多TR1组件实现品，以及其它许多程序库</li>
+</ul>
+</li>
+</ul>
+<h2 id="_1">收获<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h3 id="_2">过程<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>2022-11-24（那周开始）：要把Part1、2、3、9这几个部分都整理完，当天基本都过了一遍，至少懂了80%以上，<em>代码要再编编，调试一下</em>。</li>
+<li>Part8部分，可以听下b站候捷内存管理的视频，<code>placement new</code></li>
+</ul>
+<p>https://github.com/wolflion/Coding-Reading/blob/master/99%E6%A0%B8%E5%BF%83%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B9%A6/EffectiveC%2B%2B/EffectiveC%2B%2B%EF%BC%88%E8%87%AA%E5%B7%B1%E6%95%B4%E7%90%86%EF%BC%89.md</p>
+<h3 id="_3">参考<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://www.cnblogs.com/deepllz/p/9171908.html">Effective C++ 条款总结</a></li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../01daily/" class="btn btn-neutral float-left" title="daily"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../21STL/EffectiveSTL/" class="btn btn-neutral float-right" title="《Effective STL》">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../../01daily/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../21STL/EffectiveSTL/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
