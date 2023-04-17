@@ -1,5 +1,19 @@
 ## 《TCP/IP网络编程》
-+ Part01、
++ Part01、（*不太熟悉的地方*）
+
++ chap2：TCP数据没有数据边界，`socket()`的第3个参数
++ chap3：大小端字节序
++ chap4：`accept()`使用的惊群现象，`write()`客户端收到多个字符串
++ chap5：echo的完美解决方案是啥？三次握手，四次挥手 自己画一下
++ chap6：udp的笔记没写，没法复习
++ chap9：**重点章节**，`setsockopt()`设置可选项、Time_wait状态、Nagle算法
++ chap10：多进程代码好好理解一下，`wait()`、`sigaction()`，分割IO不懂
++ chap12、I/O复用，`select()`，【IO复用和IO函数区别？】
++ chap13、I/O函数，`readv()`和`writev()`分散读集中写，
++ chap15、标准I/O
++ chap16、I/O流分离不太懂，
++ chap17、`epoll()`，水平触发和边缘触发
++ chap18、多线程
 
 Part01、开始网络编程（1-14）
 
