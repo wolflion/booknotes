@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Linux内核设计与实现 - lionel的技术笔记</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Linux\u5185\u6838\u8bbe\u8ba1\u4e0e\u5b9e\u73b0";
+        var mkdocs_page_input_path = "13kernel\\Linux\u5185\u6838\u8bbe\u8ba1\u4e0e\u5b9e\u73b0.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> lionel的技术笔记
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">简介</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../01daily/">daily</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">C++</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../20C%2B%2B/effectiveC%2B%2B/">《Effective C++》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">STL</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/EffectiveSTL/">《Effective STL》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网络编程</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/TCPIP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">《TCP/IP网络编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/">《Linux高性能服务器编程》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">文件系统</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/Linux%E5%86%85%E6%A0%B8%E6%8E%A2%E7%A7%98/">《Linux内核探秘》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《文件系统技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">《存储技术原理分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">存储</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../12storage/ceph%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《ceph设计原理与实现》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网课</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/01Linux%E9%AB%98%E5%B9%B6%E5%8F%91%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/">《Linux高并发网络编程开发》</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">lionel的技术笔记</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>Linux内核设计与实现</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="linux">《Linux内核设计与实现》<a class="headerlink" href="#linux" title="Permanent link">&para;</a></h2>
+<h3 id="chap5">chap5、系统调用<a class="headerlink" href="#chap5" title="Permanent link">&para;</a></h3>
+<h4 id="51">5.1、与内核通信<a class="headerlink" href="#51" title="Permanent link">&para;</a></h4>
+<ul>
+<li>系统调用在用户空间进程和硬件设备之间添加了一个中间层。<strong>中间层</strong>的3个作用：</li>
+</ul>
+<h4 id="52apiposixc">5.2、API、POSIX和C库<a class="headerlink" href="#52apiposixc" title="Permanent link">&para;</a></h4>
+<ul>
+<li>POSIX是个标准</li>
+<li>C库：实现了Unix系统的主要API，包括标准C库函数和系统调用接口</li>
+<li>接口设计格言：<strong>提供机制而不是策略</strong>，<em>这个没懂，lionel</em></li>
+</ul>
+<h4 id="53">5.3、系统调用<a class="headerlink" href="#53" title="Permanent link">&para;</a></h4>
+<h5 id="0">0、<a class="headerlink" href="#0" title="Permanent link">&para;</a></h5>
+<ul>
+<li>系统调用在出现错误的时候C库会把错误码写入errno全局变量。通过调用<code>perror</code>库函数，把该变量翻译成用户可以理解的错误字符串。</li>
+<li><code>SYSCALL_DEFINE0</code>-这个在2.6.18里没找到啊，直接在<code>/include/linux/syscalls.h</code>中定义了<code>asmlinkage long sys_getpid(void);</code>，实现怎么在time.c了呢？
+    + asmlinkage是个<strong>编译指令</strong>，通知编译器仅从栈中提取该函数的参数
+    + 返回值是long的原因，兼容32位和64位
+    + 系统调用的命名规则是<code>sys_</code>开头</li>
+</ul>
+<h5 id="531">5.3.1、系统调用号<a class="headerlink" href="#531" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>进程不会提及系统调用的名称</strong>，通过系统调用号来关联，<strong>一旦分配就不会再有任何变更</strong></li>
+<li>所有已经注册过的系统调用的列表，存储在sys_call_table中。<em>2.6里搜了一下在arch/x86_64/kernel/syscall.c</em></li>
+<li><em>问题1：何时删除系统调用号呢？ 问题2：系统调用号存在哪？</em></li>
+<li>其它
+    + <code>sys_ni_syscall()</code></li>
+</ul>
+<h5 id="532">5.3.2、系统调用的性能<a class="headerlink" href="#532" title="Permanent link">&para;</a></h5>
+<h4 id="54">5.4、系统调用处理程序<a class="headerlink" href="#54" title="Permanent link">&para;</a></h4>
+<h5 id="0_1">0、<a class="headerlink" href="#0_1" title="Permanent link">&para;</a></h5>
+<ul>
+<li>通知内核的机制是靠<strong>软中断</strong>实现的：通过引发一个异常</li>
+<li>x86系统上预定义的软中断是<strong>中断号128，<code>int $0x80</code>指令</strong>，名称叫<code>system_call()</code></li>
+<li>entry_64.S中用汇编编写</li>
+<li>sysenter的指令</li>
+</ul>
+<h5 id="541">5.4.1、指定恰当的系统调用<a class="headerlink" href="#541" title="Permanent link">&para;</a></h5>
+<ul>
+<li>在x86上，<strong>系统调用号是通过eax寄存器传递给内核的</strong>。<em>eax寄存器是啥？lionel，问题1，什么时候传给eax寄存器的，用什么方式传的？</em></li>
+<li><em>表项是64位存放的，所以要乘4，不太懂啥意思，lionel</em></li>
+</ul>
+<h5 id="542">5.4.2、参数传递<a class="headerlink" href="#542" title="Permanent link">&para;</a></h5>
+<ul>
+<li>x86-32系统上，<strong>ebx，ecx，edx，esi和edi按照顺序存放前5个参数</strong>。</li>
+</ul>
+<h4 id="55">5.5、系统调用的实现<a class="headerlink" href="#55" title="Permanent link">&para;</a></h4>
+<h5 id="551">5.5.1、实现系统调用<a class="headerlink" href="#551" title="Permanent link">&para;</a></h5>
+<ul>
+<li><em>通过思考这个过程，去想一下，日常的接口怎么设计？lionel</em></li>
+</ul>
+<h5 id="552">5.5.2、参数验证<a class="headerlink" href="#552" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>copy_from_user()</code>和<code>copy_to_user()</code></li>
+<li>书上以<code>kernel/sys.c</code>中的<code>sys_reboot()</code>为例，说了些要注意的权限问题</li>
+<li><code>CAP_SYS_BOOT</code>，权限的定义在<code>/include/linux/capability.h</code>中，<em>以CAP开头，是因为capability.h的命名</em></li>
+</ul>
+<h4 id="56">5.6、系统调用上下文<a class="headerlink" href="#56" title="Permanent link">&para;</a></h4>
+<h5 id="0_2">0、<a class="headerlink" href="#0_2" title="Permanent link">&para;</a></h5>
+<ul>
+<li><em>问题，为何可以休眠，是比较重要的呢</em></li>
+</ul>
+<h5 id="561">5.6.1、绑定一个系统调用的最后步骤<a class="headerlink" href="#561" title="Permanent link">&para;</a></h5>
+<ul>
+<li>注册
+    + 1、在系统调用表的最后加入一个表项，<code>entry.S</code>
+    + 2、支持各种体系结构，系统调用号都必须定义于<code>&lt;asm/unistd.h&gt;</code>
+    + 3、<strong>系统调用必须被编译进内核映像（不能被编译成模块）</strong>，放在<code>kernel/</code>下的一个相关文件就可以了，比如sys.c</li>
+</ul>
+<h5 id="562">5.6.2、从用户空间访问系统调用<a class="headerlink" href="#562" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>_syscalln</code>，n的范围是0-6，表示<strong>需要传递给系统调用的参数个数</strong>。</li>
+<li><em>lionel，这个没具体看，想实践一下，怎么编进内核，怎么写了跟内核交互，系统调用</em></li>
+</ul>
+<h5 id="563">5.6.3、为什么不通过系统调用的方式实现<a class="headerlink" href="#563" title="Permanent link">&para;</a></h5>
+<ul>
+<li>系统调用有好处（创建容易且使用方便，性能高），但有问题：</li>
+<li>替代方法：（<em>不太懂</em>）
+    + 实现一个设备节点，并对此实现<code>read()</code>和<code>write()</code>
+        + 像信号量这样的某些接口
+        + 把增加的信息作为一个文件放在sysfs的合适位置</li>
+</ul>
+<h4 id="57">5.7、小结<a class="headerlink" href="#57" title="Permanent link">&para;</a></h4>
+<h3 id="chap6">chap6、内核数据结构<a class="headerlink" href="#chap6" title="Permanent link">&para;</a></h3>
+<h4 id="61">6.1、链表<a class="headerlink" href="#61" title="Permanent link">&para;</a></h4>
+<h5 id="0_3">0、<a class="headerlink" href="#0_3" title="Permanent link">&para;</a></h5>
+<h5 id="611">6.1.1、单向链表和双向链表<a class="headerlink" href="#611" title="Permanent link">&para;</a></h5>
+<h5 id="612">6.1.2、环形链表<a class="headerlink" href="#612" title="Permanent link">&para;</a></h5>
+<h5 id="613">6.1.3、沿链表移动<a class="headerlink" href="#613" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>只能是线性移动</strong></li>
+</ul>
+<h5 id="614linux">6.1.4、Linux内核中的实现<a class="headerlink" href="#614linux" title="Permanent link">&para;</a></h5>
+<ul>
+<li>0、
+    + <strong>linux内核，将链表节点塞入数据结构，不是将数据结构塞入链表</strong>。</li>
+<li>1、链表数据结构
+    + linux/list.h</li>
+<li>2、定义一个链表</li>
+<li>3、链表头</li>
+</ul>
+<h5 id="615">6.1.5、操作链表<a class="headerlink" href="#615" title="Permanent link">&para;</a></h5>
+<ul>
+<li>0、</li>
+<li>1、向链表中增加一个节点
+    + <code>list_add()</code></li>
+<li>2、从链表中删除一个节点
+    + <code>list_del()</code></li>
+<li>3、移动和合并链表节点
+    + <code>list_move()</code>
+    + <code>list_move_tail()</code>
+    + <code>list_empty()</code></li>
+</ul>
+<h5 id="616">6.1.6、遍历链表<a class="headerlink" href="#616" title="Permanent link">&para;</a></h5>
+<ul>
+<li>0、</li>
+<li>1、</li>
+<li>2、</li>
+<li>3、反向遍历链表
+    + <code>list_for_each_entry_reverse()</code> </li>
+<li>4、遍历的同时删除
+    + <code>list_for_each_entry_safe()</code></li>
+<li>5、其它链表方法</li>
+</ul>
+<h4 id="62">6.2、队列<a class="headerlink" href="#62" title="Permanent link">&para;</a></h4>
+<h5 id="0_4">0、<a class="headerlink" href="#0_4" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>linux/kfifo.h</code></li>
+</ul>
+<h5 id="621kfifo">6.2.1、kfifo<a class="headerlink" href="#621kfifo" title="Permanent link">&para;</a></h5>
+<ul>
+<li>kfifo对象维护了两个偏移量：入口偏移和出口偏移（<strong>下一次出队列时的位置</strong>）</li>
+<li>enqueue</li>
+<li>dequeue</li>
+</ul>
+<h5 id="622">6.2.2、创建队列<a class="headerlink" href="#622" title="Permanent link">&para;</a></h5>
+<ul>
+<li>动态创建<code>kfifo_alloc()</code></li>
+<li>静态创建</li>
+</ul>
+<h5 id="623">6.2.3、推入队列数据<a class="headerlink" href="#623" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>kfifo_in()</code></li>
+</ul>
+<h5 id="624">6.2.4、摘取队列数据<a class="headerlink" href="#624" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>kfifo_out()</code></li>
+</ul>
+<h5 id="625">6.2.5、获取队列数据<a class="headerlink" href="#625" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>kfifo_size()</code></li>
+</ul>
+<h5 id="626">6.2.6、重置和撤销队列<a class="headerlink" href="#626" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>kfifo_reset()</code></li>
+</ul>
+<h5 id="627">6.2.7、队列使用举例<a class="headerlink" href="#627" title="Permanent link">&para;</a></h5>
+<ul>
+<li><em>未看，lionel</em></li>
+</ul>
+<h4 id="63">6.3、映射<a class="headerlink" href="#63" title="Permanent link">&para;</a></h4>
+<h5 id="0_5">0、<a class="headerlink" href="#0_5" title="Permanent link">&para;</a></h5>
+<h5 id="631idr">6.3.1、初始化一个idr<a class="headerlink" href="#631idr" title="Permanent link">&para;</a></h5>
+<h5 id="632uid">6.3.2、分配一个新的UID<a class="headerlink" href="#632uid" title="Permanent link">&para;</a></h5>
+<ul>
+<li>第一步，告诉idr你需要分配新的UID，允许其在必要时调整后备树的大小</li>
+<li>第二步，才是真正请求新的UID</li>
+</ul>
+<h5 id="633uid">6.3.3、查找UID<a class="headerlink" href="#633uid" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>idr_find</code></li>
+</ul>
+<h5 id="634uid">6.3.4、删除UID<a class="headerlink" href="#634uid" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>idr_move</code></li>
+</ul>
+<h5 id="635idr">6.3.5、撤销idr<a class="headerlink" href="#635idr" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>idr_destroy</code></li>
+</ul>
+<h4 id="64">6.4、二叉树<a class="headerlink" href="#64" title="Permanent link">&para;</a></h4>
+<h5 id="641bst">6.4.1、二叉搜索树（BST）<a class="headerlink" href="#641bst" title="Permanent link">&para;</a></h5>
+<h5 id="642">6.4.2、自平衡二叉搜索树<a class="headerlink" href="#642" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、红黑树</li>
+<li>2、rbtree
+    + linux/rbtree.h
+    + lib/rbtree.c</li>
+</ul>
+<h4 id="65">6.5、数据结构以及选择<a class="headerlink" href="#65" title="Permanent link">&para;</a></h4>
+<ul>
+<li>遍历数据，就使用链表</li>
+<li>如果需要存储大量数据，并且检索迅速，那么红黑树最好</li>
+</ul>
+<h4 id="66">6.6、算法复杂度<a class="headerlink" href="#66" title="Permanent link">&para;</a></h4>
+<h5 id="661">6.6.1、算法<a class="headerlink" href="#661" title="Permanent link">&para;</a></h5>
+<h5 id="662o">6.6.2、大O符号<a class="headerlink" href="#662o" title="Permanent link">&para;</a></h5>
+<h5 id="663xita">6.6.3、大xita符号<a class="headerlink" href="#663xita" title="Permanent link">&para;</a></h5>
+<h5 id="664">6.6.4、时间复杂度<a class="headerlink" href="#664" title="Permanent link">&para;</a></h5>
+<h4 id="67">6.7、小结<a class="headerlink" href="#67" title="Permanent link">&para;</a></h4>
+<h3 id="chap9">chap9、内核同步介绍<a class="headerlink" href="#chap9" title="Permanent link">&para;</a></h3>
+<h4 id="91">9.1、临界区和竞争条件<a class="headerlink" href="#91" title="Permanent link">&para;</a></h4>
+<h5 id="0_6">0、<a class="headerlink" href="#0_6" title="Permanent link">&para;</a></h5>
+<ul>
+<li>临界区</li>
+<li>竞争条件race coditions</li>
+</ul>
+<h5 id="911">9.1.1、为什么我们需要保护<a class="headerlink" href="#911" title="Permanent link">&para;</a></h5>
+<h5 id="912">9.1.2、单个变量<a class="headerlink" href="#912" title="Permanent link">&para;</a></h5>
+<h4 id="92">9.2、加锁<a class="headerlink" href="#92" title="Permanent link">&para;</a></h4>
+<h5 id="0_7">0、<a class="headerlink" href="#0_7" title="Permanent link">&para;</a></h5>
+<ul>
+<li><em>lionel，没太看懂啊</em></li>
+</ul>
+<h5 id="921">9.2.1、造成并发执行的原因<a class="headerlink" href="#921" title="Permanent link">&para;</a></h5>
+<ul>
+<li>内核中有类似可能造成并发执行的原因。它们是
+    + 中断
+    + 软中断和tasklet
+    + 内核抢占
+    + 睡眠及与用户空间的同步
+    + 对称多处理</li>
+</ul>
+<h5 id="922">9.2.2、了解要保护些什么<a class="headerlink" href="#922" title="Permanent link">&para;</a></h5>
+<h4 id="93">9.3、死锁<a class="headerlink" href="#93" title="Permanent link">&para;</a></h4>
+<h4 id="94">9.4、争用和扩展性<a class="headerlink" href="#94" title="Permanent link">&para;</a></h4>
+<h4 id="95">9.5、小结<a class="headerlink" href="#95" title="Permanent link">&para;</a></h4>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

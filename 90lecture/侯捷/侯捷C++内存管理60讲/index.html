@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>侯捷C++内存管理60讲 - lionel的技术笔记</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "\u4faf\u6377C++\u5185\u5b58\u7ba1\u740660\u8bb2";
+        var mkdocs_page_input_path = "90lecture\\\u4faf\u6377\\\u4faf\u6377C++\u5185\u5b58\u7ba1\u740660\u8bb2.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> lionel的技术笔记
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">简介</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../01daily/">daily</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">C++</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../20C%2B%2B/effectiveC%2B%2B/">《Effective C++》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">STL</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../21STL/EffectiveSTL/">《Effective STL》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网络编程</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../10network/TCPIP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">《TCP/IP网络编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../10network/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/">《Linux高性能服务器编程》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">文件系统</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../11filesystem/Linux%E5%86%85%E6%A0%B8%E6%8E%A2%E7%A7%98/">《Linux内核探秘》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../11filesystem/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《文件系统技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../11filesystem/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">《存储技术原理分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">存储</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../12storage/ceph%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《ceph设计原理与实现》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网课</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../01Linux%E9%AB%98%E5%B9%B6%E5%8F%91%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/">《Linux高并发网络编程开发》</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">lionel的技术笔记</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>侯捷C++内存管理60讲</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h3 id="1overview">1、Overview<a class="headerlink" href="#1overview" title="Permanent link">&para;</a></h3>
+<h3 id="2">2、内存分配的每一层面<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>天宝当年，DOS 640K，and extented memory</li>
+</ul>
+<ul>
+<li><em>80286、80386</em></li>
+</ul>
+<h3 id="3">3、四个层面的基本用法<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<h3 id="4newdelete-expression">4、基本构件之一newdelete expression上<a class="headerlink" href="#4newdelete-expression" title="Permanent link">&para;</a></h3>
+<ul>
+<li>new干了2件事：<strong>分配内存，分配好后，调用构造函数</strong></li>
+</ul>
+<ul>
+<li><code>Complex *pc = new Complex(1,2);</code></li>
+</ul>
+<pre class="highlight"><code class="language-c++"> Complex *pc;
+try{
+    //operator new能被重载，*能理解，new本身是个运算符* 【operator new源码实现在newop2.cpp】
+    void *mem=operator new(sizeof(Complex));//allocate
+    pc=static_cast&lt;Complex*&gt;(mem);//cast
+    //通过指针，调用构造函数【注意：只有编译器才可以直接调用ctor】
+    pc-&gt;Complex::Complex(1,2);//construct
+    //注意：只有编译器才可以像上面那样直接呼叫ctor
+}
+catch(std::bad_alloc){
+    //若allocation失败就不执行constructor
+}</code></pre>
+<ul>
+<li>想直接调用ctor，可用placement new：<code>new(p)Complex(1,2);</code></li>
+<li><strong>std::nothrow</strong>的名词解释</li>
+</ul>
+<h3 id="10">10、重载示例（上）<a class="headerlink" href="#10" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>operator new/operator delete</code></li>
+<li>写个demo，<ul>
+<li>（1）看下<code>::new(7)</code>和<code>new Foo(7)</code>对比下两个的区别，在vs环境中。</li>
+<li>（2）看下，<code>~Foo()</code>dtor 加不加<code>virtual</code>除了<code>sizeof()</code>不同外，还有啥区别</li>
+</ul>
+</li>
+</ul>
+<pre class="highlight"><code class="language-cpp">class Foo{
+public:
+    int _id;
+    long _data;
+    string _str;
+public:
+    Foo::_id(0){cout&lt;&lt;"default ctor.this="&lt;&lt;this&lt;&lt;"id="_id&lt;&lt;endl;}
+    Foo(int i):id(i){cout&lt;&lt;"ctor.this="&lt;&lt;this&lt;&lt;"id="&lt;&lt;_id&lt;&lt;endl;}
+//virtual
+    ~Foo() {cout&lt;&lt;"dtor.this="&lt;&lt;this&lt;&lt;"id="&lt;&lt;_id&lt;&lt;endl;}
+    static void *operator new(size_t size);
+    static void operator delete(void* pdead, size_t size);
+    static void *operator new[](size_t size);
+    static void operator delete[](void* pdead, size_t size);
+}
+
+void *Foo::operator new(size_t size) {
+    Foo *p = (Foo*)malloc(size);
+    cout&lt;&lt;"...";
+    return p;
+}
+void Foo::operator delete(void* pdead, size_t size) {
+    cout&lt;&lt;"...";
+    free(pdead);
+}
+void *Foo::operator new[](size_t size) {
+    Foo *p = (Foo*)malloc(size);
+    cout&lt;&lt;"...";
+    return p;
+}
+void Foo::operator delete[](void* pdead, size_t size) {
+    cout&lt;&lt;"...";
+    free(pdead);
+}
+
+//使用场景
+Foo *pf = new Foo;
+delete pf;
+
+//若无members就调用globals
+Foo*pf = ::new Foo; // void* ::operator new(size_t);
+::delete pf; //void ::operator delete(void*);
+
+//demo
+cout&lt;&lt;"sizeof(Foo)"&lt;&lt;sizeof(Foo)&lt;&lt;endl;
+Foo*p = new Foo(7);
+delete p;
+
+Foo *pArray = new Foo[5];
+delete []pArray;</code></pre>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '../../..';</script>
+    <script src="../../../js/theme_extra.js" defer></script>
+    <script src="../../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
