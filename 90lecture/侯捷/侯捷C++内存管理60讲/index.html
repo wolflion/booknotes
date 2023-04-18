@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../../img/favicon.ico" />
-    <title>侯捷C++内存管理60讲 - lionel的技术笔记</title>
+    <title>《侯捷C++内存管理60讲》 - lionel的技术笔记</title>
     <link rel="stylesheet" href="../../../css/theme.css" />
     <link rel="stylesheet" href="../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "\u4faf\u6377C++\u5185\u5b58\u7ba1\u740660\u8bb2";
+        var mkdocs_page_name = "\u300a\u4faf\u6377C++\u5185\u5b58\u7ba1\u740660\u8bb2\u300b";
         var mkdocs_page_input_path = "90lecture\\\u4faf\u6377\\\u4faf\u6377C++\u5185\u5b58\u7ba1\u740660\u8bb2.md";
         var mkdocs_page_url = null;
       </script>
@@ -52,9 +52,6 @@
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../20C%2B%2B/effectiveC%2B%2B/">《Effective C++》</a>
                   </li>
-              </ul>
-              <p class="caption"><span class="caption-text">STL</span></p>
-              <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../21STL/EffectiveSTL/">《Effective STL》</a>
                   </li>
               </ul>
@@ -79,9 +76,20 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../12storage/ceph%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《ceph设计原理与实现》</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">网课</span></p>
+              <p class="caption"><span class="caption-text">内核</span></p>
               <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../13kernel/Linux%E5%86%85%E6%A0%B8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《Linux内核设计与实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../13kernel/%E6%B7%B1%E5%85%A5Linux%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%E5%86%85%E6%A0%B8%E6%9C%BA%E5%88%B6/">《深入Linux设备驱动程序内核机制》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网课</span></p>
+              <ul class="current">
                   <li class="toctree-l1"><a class="reference internal" href="../../01Linux%E9%AB%98%E5%B9%B6%E5%8F%91%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/">《Linux高并发网络编程开发》</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">《侯捷C++内存管理60讲》</a>
+    <ul class="current">
+    </ul>
                   </li>
               </ul>
       </div>
@@ -98,7 +106,8 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-      <li>侯捷C++内存管理60讲</li>
+          <li>网课 &raquo;</li>
+      <li>《侯捷C++内存管理60讲》</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -108,6 +117,10 @@
             <div class="section" itemprop="articleBody">
               
                 <h3 id="1overview">1、Overview<a class="headerlink" href="#1overview" title="Permanent link">&para;</a></h3>
+<ul>
+<li>GNU 4.9.2源代码</li>
+<li>gee.cs.oswego.edu/dl，<strong>作者从1986年开始研究malloc算法</strong></li>
+</ul>
 <h3 id="2">2、内存分配的每一层面<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
 <ul>
 <li>天宝当年，DOS 640K，and extented memory</li>
@@ -201,6 +214,9 @@ delete []pArray;</code></pre>
               
             </div>
           </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../01Linux%E9%AB%98%E5%B9%B6%E5%8F%91%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/" class="btn btn-neutral float-left" title="《Linux高并发网络编程开发》"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
 
   <hr/>
 
@@ -221,6 +237,8 @@ delete []pArray;</code></pre>
   <div class="rst-versions" role="note" aria-label="Versions">
   <span class="rst-current-version" data-toggle="rst-current-version">
     
+    
+      <span><a href="../../01Linux%E9%AB%98%E5%B9%B6%E5%8F%91%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
   </span>
