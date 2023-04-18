@@ -41,8 +41,6 @@ nav:
     - C++: 
         - 《Effective C++》: '20C++/effectiveC++.md'
         - 《Effective STL》: '21STL/EffectiveSTL.md'
-    - STL: 
-        - 《Effective STL》: '21STL/EffectiveSTL.md'
     - 网络编程:
         - 《TCP/IP网络编程》: '10network/TCPIP网络编程.md'
         - 《Linux高性能服务器编程》: '10network/Linux高性能服务器编程.md'
@@ -57,4 +55,4 @@ nav:
         - 《深入Linux设备驱动程序内核机制》: '13kernel/深入Linux设备驱动程序内核机制.md'
     - 网课:
         - 《Linux高并发网络编程开发》: '90lecture/01Linux高并发网络编程开发.md'
-        -《侯捷C++内存管理60讲》: '90lecture/侯捷/侯捷C++内存管理60讲.md'
+        - 《侯捷C++内存管理60讲》: '90lecture/侯捷/侯捷C++内存管理60讲.md'
