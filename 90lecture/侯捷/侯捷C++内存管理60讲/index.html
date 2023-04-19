@@ -118,15 +118,31 @@
               
                 <h3 id="1overview">1、Overview<a class="headerlink" href="#1overview" title="Permanent link">&para;</a></h3>
 <ul>
-<li>GNU 4.9.2源代码</li>
+<li>GNU 4.9.2源代码，还提到了vc6.0的一些源码</li>
 <li>gee.cs.oswego.edu/dl，<strong>作者从1986年开始研究malloc算法</strong></li>
+<li>Test-Mem.cpp，<em>作者本节课，给出的代码</em></li>
+<li>本课程<strong>主要是看库中的源码实现</strong></li>
+<li>全课程5讲<ul>
+<li>1讲：primitives（1-16）</li>
+<li>2讲：std::allocator（17-）</li>
+<li>3讲：malloc/free（）</li>
+<li>4讲：loki::allocator</li>
+<li>5讲：other allocators</li>
+</ul>
+</li>
 </ul>
 <h3 id="2">2、内存分配的每一层面<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
 <ul>
 <li>天宝当年，DOS 640K，and extented memory</li>
-</ul>
-<ul>
+<li>1990年之前，msdos，架构在8086，8088之上</li>
 <li><em>80286、80386</em></li>
+<li>C++ Applications几个调用，【<strong>这也是一层层的封装</strong>】<ul>
+<li>C++ Libray（std::allocator）</li>
+<li>C++ primitives（new，new[], new()，::operator new()）</li>
+<li>CRT(malloc/free)</li>
+<li>OSAPI（HeapAlloc，VirtualAlloc...）</li>
+</ul>
+</li>
 </ul>
 <h3 id="3">3、四个层面的基本用法<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
 <h3 id="4newdelete-expression">4、基本构件之一newdelete expression上<a class="headerlink" href="#4newdelete-expression" title="Permanent link">&para;</a></h3>
@@ -211,6 +227,31 @@ delete p;
 
 Foo *pArray = new Foo[5];
 delete []pArray;</code></pre>
+<h3 id="12per-class-allocator1">12、per-class allocator,1<a class="headerlink" href="#12per-class-allocator1" title="Permanent link">&para;</a></h3>
+<ul>
+<li><em>诉求，写一个内存管理</em>，那么思路是啥呢？少调用malloc，空间利用率高点，没有cookies</li>
+</ul>
+<pre class="highlight"><code class="language-cpp">class Screen{
+public:
+    void *operator new(size_t);
+    void operator delete(void *, size_t);
+private:
+    Screen *next; //这种设计会引发多耗用一个next指针的疑虑
+private:
+    int i;
+}</code></pre>
+<h3 id="16new-handler">16、New Handler<a class="headerlink" href="#16new-handler" title="Permanent link">&para;</a></h3>
+<h3 id="17vc6-malloc">17、VC6 malloc()<a class="headerlink" href="#17vc6-malloc" title="Permanent link">&para;</a></h3>
+<ul>
+<li>每次malloc()后都会，上下都有<strong>cookie</strong>（每个cookie，8个字节），<em>分配内存的大小，必须是16的倍数</em> 【是不是跟内核的页有关系？】</li>
+<li>本节有个图<strong>VC6下的malloc()内存块布局</strong></li>
+<li><em>本意是，只要10个字节的时候，其实内部分配了不止10个字节，想去除掉这个多余的消耗</em></li>
+<li>不同的编译器有不同的实现，<em>作者就列了几种</em></li>
+</ul>
+<h3 id="18vc6">18、VC6标准分配器之实现<a class="headerlink" href="#18vc6" title="Permanent link">&para;</a></h3>
+<ul>
+<li></li>
+</ul>
               
             </div>
           </div><footer>

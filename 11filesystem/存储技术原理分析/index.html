@@ -74,35 +74,37 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#82">8.2、文件系统对象</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#821">8.2.1、</a>
+    <li class="toctree-l3"><a class="reference internal" href="#821file_system_type">8.2.1、file_system_type：文件系统类型</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#822">8.2.2、</a>
+    <li class="toctree-l3"><a class="reference internal" href="#822super_blockvfs">8.2.2、super_block：vfs超级块</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#823">8.2.3、</a>
+    <li class="toctree-l3"><a class="reference internal" href="#823inodevfs">8.2.3、inode：vfs索引节点</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#824">8.2.4、</a>
+    <li class="toctree-l3"><a class="reference internal" href="#824dentryvfs">8.2.4、dentry：vfs目录项</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#825">8.2.5、</a>
+    <li class="toctree-l3"><a class="reference internal" href="#825vfsmount">8.2.5、vfsmount：文件系统装载</a>
     </li>
         </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#83">8.3、装载文件系统</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#831">8.3.1、</a>
+    <li class="toctree-l3"><a class="reference internal" href="#0">0、</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#832">8.3.2、</a>
+    <li class="toctree-l3"><a class="reference internal" href="#831mount">8.3.1、mount系统调用的处理流程</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#833">8.3.3、</a>
+    <li class="toctree-l3"><a class="reference internal" href="#832">8.3.2、构建子文件系统装载实例</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#834">8.3.4、</a>
+    <li class="toctree-l3"><a class="reference internal" href="#833">8.3.3、 关联文件系统的超级块实例</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#835">8.3.5、</a>
+    <li class="toctree-l3"><a class="reference internal" href="#834">8.3.4、调用回调函数填充超级块</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#835">8.3.5、装载到全局文件系统树</a>
     </li>
         </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#84">8.4、路径查找</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#841">8.4.1、</a>
+    <li class="toctree-l3"><a class="reference internal" href="#841">8.4.1、路径查找入口</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#842">8.4.2、逐个分量解析</a>
     </li>
@@ -120,6 +122,10 @@
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#851open">8.5.1、open系统调用的处理流程</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#852">8.5.2、</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#853">8.5.3、</a>
+    </li>
         </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#86">8.6、读文件（重点）</a>
@@ -129,6 +135,32 @@
     <li class="toctree-l3"><a class="reference internal" href="#862io">8.6.2、基于缓冲页面构造I/O请求</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#863io">8.6.3、直接针对页面构造I/O请求</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#864">8.6.4、</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#87">8.7、写文件</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#871write">8.7.1、write系统调用的处理流程</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#872">8.7.2、通知为缓冲写请求作准备</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#873">8.7.3、通知数据已复制到缓冲区</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#88">8.8、冲刷文件</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#881bdi">8.8.1、BDI相关对象</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#882">8.8.2、注册后备设备信息</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#883forker">8.8.3、forker线程执行流程</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#884flusher">8.8.4、flusher线程执行流程</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#885">8.8.5、同步相关系统调用</a>
     </li>
         </ul>
     </li>
@@ -203,120 +235,163 @@
 <li>逻辑块编号：<strong>保存文件的数据</strong>。每个文件有且仅有一个i节点，但可以有0，1或多个逻辑块</li>
 </ul>
 </li>
+<li>文件系统类型、超级块、inode、dentry和vfsmount</li>
+<li>每个文件系统装载实例有四个必备元素：<strong>vfsmount、超级块、根inode和根dentry</strong>。</li>
+<li>一个文件系统类型可以有多个超级块实例、每个超级块实例又可以有多个装载实例。<em>把某个分区，格式化为某个具体的文件系统类型</em></li>
 </ul>
 <h4 id="82">8.2、文件系统对象<a class="headerlink" href="#82" title="Permanent link">&para;</a></h4>
-<h5 id="821">8.2.1、<a class="headerlink" href="#821" title="Permanent link">&para;</a></h5>
+<h5 id="821file_system_type">8.2.1、file_system_type：文件系统类型<a class="headerlink" href="#821file_system_type" title="Permanent link">&para;</a></h5>
 <ul>
 <li>fs/filesystem.c中register_filesystem()</li>
 <li>include/linux/fs.h中的<code>struct file_system_type{};</code></li>
+<li>fs/filesystems.c</li>
+<li>文件系统类型注册的主要目的是<strong>向Linux VFS提供get_sb和kill_sb回调函数</strong>，在Linux装载或卸载时被调用。
+    + get_sb回调函数实现中调用<code>get_sb_bdev</code>
+    + kill_sb回调函数则直接实例化为<code>kill_block_super</code></li>
+<li>文件系统类型将所有超级块实例组装成一个链表，<strong>链表的表头为fs_supers</strong>。超级块对象通过<code>s_instances</code>链接到所属文件系统类型的超级块实例链表中。</li>
 </ul>
-<h5 id="822">8.2.2、<a class="headerlink" href="#822" title="Permanent link">&para;</a></h5>
+<h5 id="822super_blockvfs">8.2.2、super_block：vfs超级块<a class="headerlink" href="#822super_blockvfs" title="Permanent link">&para;</a></h5>
 <ul>
 <li>include/linux/fs.h中的<code>struct super_block{};</code></li>
 </ul>
-<h5 id="823">8.2.3、<a class="headerlink" href="#823" title="Permanent link">&para;</a></h5>
+<h5 id="823inodevfs">8.2.3、inode：vfs索引节点<a class="headerlink" href="#823inodevfs" title="Permanent link">&para;</a></h5>
 <ul>
 <li>include/linux/fs.h中的<code>struct inode{};</code></li>
 <li>以ext2为例，<code>struct ext2_inode_info{};</code></li>
+<li><strong>inode包含了文件系统各种对象的元数据</strong>。</li>
+<li>具体的文件系统，有两种形式的inode，一种是内存inode，另一种是磁盘inode。</li>
+<li><strong>所有inode加入到全局哈希表inode_hashtable中</strong></li>
+<li>inode可以表示多种对象，包含<strong>目录、文件、符号链接、字符设备、块设备</strong>等</li>
 </ul>
-<h5 id="824">8.2.4、<a class="headerlink" href="#824" title="Permanent link">&para;</a></h5>
+<h5 id="824dentryvfs">8.2.4、dentry：vfs目录项<a class="headerlink" href="#824dentryvfs" title="Permanent link">&para;</a></h5>
 <ul>
 <li><strong>inode反映的是文件系统对象的元数据，而dentry则表示文件系统对象在文件系统树中的位置</strong>。dentry和inode是多对一的关系，每个dentry只有一个inode，由d_inode指向；而一个inode可能对应多个dentry（例如硬链接），它将这些dentry组成以i_dentry的链表，每个dentry通过d_alias加入所属inode的i_dentry链表中。</li>
 <li>include/linux/dcache.h中<code>struct dentry{};</code></li>
 </ul>
-<h5 id="825">8.2.5、<a class="headerlink" href="#825" title="Permanent link">&para;</a></h5>
+<h5 id="825vfsmount">8.2.5、vfsmount：文件系统装载<a class="headerlink" href="#825vfsmount" title="Permanent link">&para;</a></h5>
 <ul>
 <li>include/linux/mount.h中的<code>struct vfsmount{};</code></li>
+<li>vfsmount对象反映了一个已装载的文件系统实例。</li>
+<li><strong>跟dentry一样，可以为vfsmount定义父子关系</strong></li>
+<li><strong>除了根vfsmount以外，所有vfsmount加入到一个mount_hashtable全局哈希表中</strong>，哈希项的索引计算基于父vfsmount描述符的地址以及它在父文件系统中的装载点dentry描述符的地址。</li>
+<li>现在文件系统的位置需要由<code>&lt;vfsmount, dentry&gt;</code>二元组来定。</li>
 </ul>
 <h4 id="83">8.3、装载文件系统<a class="headerlink" href="#83" title="Permanent link">&para;</a></h4>
 <ul>
 <li>装载的4个要素：<strong>vfsmount、super_block、根dentry、根inode</strong>。</li>
+<li>【这个地方有人家的学习记录：https://blog.csdn.net/jinking01/article/details/105090539】
+  【https://blog.csdn.net/u012489236/article/details/124523247】<em>这个系列也看一下</em></li>
 </ul>
-<h5 id="831">8.3.1、<a class="headerlink" href="#831" title="Permanent link">&para;</a></h5>
+<h5 id="0">0、<a class="headerlink" href="#0" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>mount -t FILE_SYSTEM_TYPE_B /dev/sda3  /mnt/d/project/</code></li>
+</ul>
+<h5 id="831mount">8.3.1、mount系统调用的处理流程<a class="headerlink" href="#831mount" title="Permanent link">&para;</a></h5>
 <ul>
 <li>fs/namespace.c中的<code>sys_mount()</code></li>
 <li><code>sys_mount()</code>-&gt;<code>do_mount()</code>-&gt;<code>do_new_mount()</code></li>
+<li>新建装载的实例<ul>
+<li>构造子文件系统的装载实例。 <code>do_kern_mount</code></li>
+<li>将子文件系统的装载实例“挂钩到”父文件系统的装载点。 <code>do_add_mount</code></li>
 </ul>
-<h5 id="832">8.3.2、<a class="headerlink" href="#832" title="Permanent link">&para;</a></h5>
+</li>
+</ul>
+<h5 id="832">8.3.2、构建子文件系统装载实例<a class="headerlink" href="#832" title="Permanent link">&para;</a></h5>
 <ul>
 <li><code>sys_mount()</code>-&gt;<code>do_mount()</code>-&gt;<code>do_new_mount()</code>-&gt;<code>do_kern_mount()</code></li>
 <li><code>sys_mount()</code>-&gt;<code>do_mount()</code>-&gt;<code>do_new_mount()</code>-&gt;<code>do_kern_mount()</code>-&gt;<code>vfs_kern_mount()</code></li>
-</ul>
-<ul>
 <li><strong>构建文件系统装载实例</strong>，即构建vfsmount，super_block，根dentry和根inode之间的关系。</li>
+<li>do_kern_mount（fs/super.c）</li>
+<li><strong>vfs_kern_mount函数被交付的任务是构建文件系统装载实例，即构建vfsmount、super_block、根dentry和根inode之间的关系</strong>。</li>
+<li><strong>vfsmount是一个纯内存中的元素</strong>。</li>
 </ul>
-<h5 id="833">8.3.3、<a class="headerlink" href="#833" title="Permanent link">&para;</a></h5>
+<h5 id="833">8.3.3、 关联文件系统的超级块实例<a class="headerlink" href="#833" title="Permanent link">&para;</a></h5>
 <ul>
 <li><code>sys_mount()</code>-&gt;<code>do_mount()</code>-&gt;<code>do_new_mount()</code>-&gt;<code>do_kern_mount()</code>-&gt;<code>vfs_kern_mount()</code>-&gt;<code>minix_get_sb()</code>-&gt;<code>get_sb_bdev()</code></li>
+<li>3种get_sb的实现</li>
 </ul>
-<h5 id="834">8.3.4、<a class="headerlink" href="#834" title="Permanent link">&para;</a></h5>
+<h5 id="834">8.3.4、调用回调函数填充超级块<a class="headerlink" href="#834" title="Permanent link">&para;</a></h5>
 <ul>
 <li><code>sys_mount()</code>-&gt;<code>do_mount()</code>-&gt;<code>do_new_mount()</code>-&gt;<code>do_kern_mount()</code>-&gt;<code>vfs_kern_mount()</code>-&gt;<code>minix_get_sb()</code>-&gt;<code>get_sb_bdev()</code>-&gt;<code>minx_fill_super()</code></li>
 </ul>
-<h5 id="835">8.3.5、<a class="headerlink" href="#835" title="Permanent link">&para;</a></h5>
+<h5 id="835">8.3.5、装载到全局文件系统树<a class="headerlink" href="#835" title="Permanent link">&para;</a></h5>
 <ul>
 <li><code>sys_mount()</code>-&gt;<code>do_mount()</code>-&gt;<code>do_new_mount()</code>-&gt;<code>do_add_mount()</code>【fs/namespace.c中】</li>
 </ul>
 <h4 id="84">8.4、路径查找<a class="headerlink" href="#84" title="Permanent link">&para;</a></h4>
 <ul>
 <li>用户空间表示文件使用的是路径名字符串，内核中对文件的操作需要依据<strong>超级块、inode、dentry以及vfsmount等</strong>。</li>
-</ul>
-<ul>
 <li>include/linux/path.h</li>
-</ul>
-<ul>
 <li>
 <p>某个目录下查找给定名字的文件，有三个动作：</p>
 <ul>
 <li>1、读出目录的内容，找到该文件对应的项，获得其i节点编号</li>
 <li>2、从i节点表中找到该编号的inode，它直接或间接指向包含文件数据的逻辑块</li>
 <li>3、读取这些逻辑块即能获得该文件的内容</li>
+<li>include/linux/namei.h中的<code>struct nameidata{};</code></li>
 </ul>
 </li>
 </ul>
 <ul>
-<li>
-<p>include/linux/namei.h中的<code>struct nameidata{};</code></p>
-<h5 id="841">8.4.1、<a class="headerlink" href="#841" title="Permanent link">&para;</a></h5>
-</li>
+<li>路径名字符串由反斜杠“/”分隔的多个部分组成，每一部分称为<strong>分量（Component）</strong></li>
+<li><strong>路径查找的过程就是分量解析的过程</strong>，根据路径名层次，从第一个分量开始，一层一层推进，直到最后一个分量或者失败。</li>
+<li><strong>路径查找还需要考虑符号链接</strong></li>
+<li><strong>路径查找上下文</strong></li>
 </ul>
+<h5 id="841">8.4.1、路径查找入口<a class="headerlink" href="#841" title="Permanent link">&para;</a></h5>
 <ul>
 <li>
 <p>fs/namei.c中的<code>path_lookup()</code></p>
 <ul>
-<li>
-<p><em>2.6.18代码还是有点的</em></p>
+<li><em>2.6.18代码还是有点的</em></li>
+<li>在不同的条件下调用的用于路径名查找的函数</li>
+<li>path_lookup<ul>
+<li><code>path_lookup()-&gt;do_path_lookup()-&gt;path_walk()-&gt;link_path_walk()</code></li>
+</ul>
+</li>
+<li>kern_path</li>
+<li>user_path_at</li>
+</ul>
+</li>
+</ul>
 <h5 id="842">8.4.2、逐个分量解析<a class="headerlink" href="#842" title="Permanent link">&para;</a></h5>
-</li>
-</ul>
-</li>
-</ul>
 <ul>
-<li>
-<p><code>link_path_walk()</code>，<strong>重点</strong></p>
+<li><code>link_path_walk()</code>，<strong>重点</strong></li>
+<li>include/linux/dcache.c 中的<code>qstr</code>结构</li>
+</ul>
 <h5 id="843">8.4.3、解析单个分量<a class="headerlink" href="#843" title="Permanent link">&para;</a></h5>
-</li>
+<ul>
+<li><code>do_lookup()</code></li>
 </ul>
 <ul>
-<li>
-<p><code>do_lookup()</code></p>
+<li><code>path_lookup()-&gt;do_path_lookup()-&gt;path_walk()-&gt;link_path_walk()-&gt;do_lookup()</code></li>
+<li><strong>do_lookup()真正执行单个分量的查找</strong></li>
+</ul>
 <h5 id="844">8.4.4、上溯通过装载点<a class="headerlink" href="#844" title="Permanent link">&para;</a></h5>
-</li>
+<ul>
+<li><code>follow_dotdot()</code></li>
 </ul>
 <ul>
-<li>
-<p><code>follow_dotdot()</code></p>
+<li><code>path_lookup()-&gt;do_path_lookup()-&gt;path_walk()-&gt;link_path_walk()-&gt;follow_dotdot()</code></li>
+</ul>
 <h5 id="845">8.4.5、下溯通过装载点<a class="headerlink" href="#845" title="Permanent link">&para;</a></h5>
-</li>
+<ul>
+<li><code>follow_mount()</code></li>
 </ul>
 <ul>
-<li>
-<p><code>follow_mount()</code></p>
-<h5 id="846">8.4.6、处理符号链接<a class="headerlink" href="#846" title="Permanent link">&para;</a></h5>
-</li>
+<li><code>path_lookup()-&gt;do_path_lookup()-&gt;path_walk()-&gt;link_path_walk()-&gt;follow_dotdot()-&gt;follow_mount()</code></li>
+<li><code>follow_mount()</code>和<code>_follow_mount()</code>功能相同，参数不同</li>
 </ul>
+<h5 id="846">8.4.6、处理符号链接<a class="headerlink" href="#846" title="Permanent link">&para;</a></h5>
 <ul>
 <li><code>do_follow_link()</code></li>
+<li>符号链接有两种实现方式：<ul>
+<li>一种方式（Slow Symlink）：将符号链接信息保存在标准的磁盘块，如同常规文件一样。</li>
+<li>另一种方式（Fast Symlink）：将链接文本串保存在inode中。</li>
+</ul>
+</li>
+<li><code>path_lookup()-&gt;do_path_lookup()-&gt;path_walk()-&gt;link_path_walk()-&gt;do_follow_link()-&gt;_do_follow_link()-&gt;_vfs_follow_link()</code></li>
+<li>为了避免恶意用户设置大量的符合链接，<strong>Linux内核对符号链接的总数也进行限制</strong>。</li>
 </ul>
 <h4 id="85">8.5、打开文件<a class="headerlink" href="#85" title="Permanent link">&para;</a></h4>
 <ul>
@@ -335,16 +410,27 @@
 <li>include/linux/fs.h中的<code>struct file{};</code></li>
 </ul>
 <ul>
-<li>
-<p>include/linux/fdtable.h中的<code>struct files_struct{};</code></p>
-<h5 id="851open">8.5.1、open系统调用的处理流程<a class="headerlink" href="#851open" title="Permanent link">&para;</a></h5>
-</li>
+<li>include/linux/fdtable.h中的<code>struct files_struct{};</code></li>
 </ul>
+<h5 id="851open">8.5.1、open系统调用的处理流程<a class="headerlink" href="#851open" title="Permanent link">&para;</a></h5>
 <ul>
 <li>分配一个文件描述符，正确设置<code>f_mapping（文件地址空间）</code>和<code>f_op（文件操作表）</code>，在打开文件表中找到一个用于保存它的文件句柄。</li>
-</ul>
-<ul>
 <li>sys_open()-&gt;do_sys_open()-&gt;do_filp_open()-&gt;do_last()-&gt;namidata_to_filp()-&gt;<code>__dentry_open()</code>，lionel，这个要花时间去串一下代码注释，2月17日晚上逐行读一下</li>
+<li><code>sys_open()-&gt;do_sys_open()-&gt;do_filp_open()</code></li>
+</ul>
+<h5 id="852">8.5.2、<a class="headerlink" href="#852" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>sys_open()-&gt;do_sys_open()-&gt;do_filp_open()-&gt;do_last()</code></li>
+</ul>
+<h5 id="853">8.5.3、<a class="headerlink" href="#853" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>sys_open()-&gt;do_sys_open()-&gt;do_filp_open()-&gt;do_last()-&gt;namidata_to_filp()-&gt;__dentry_open()</code></li>
+<li>各种文件打开时的关键处理，
+    + 1、常规文件
+    + 2、字符设备文件
+        + inode的文件操作表指向def_char_fops，它只定义了open回调函数，并且被实例化为<code>chrdev_open</code>
+    + 3、块设备文件
+        + inode的文件操作表指向def_blk_fops，对应的open回调函数是<code>blkdev_open</code></li>
 </ul>
 <h4 id="86">8.6、读文件（重点）<a class="headerlink" href="#86" title="Permanent link">&para;</a></h4>
 <ul>
@@ -363,11 +449,9 @@
 <li><strong>VFS通过调用write_begin通知具体文件系统，准备写文件的字节begin~end到给定的页面</strong>。</li>
 </ul>
 <ul>
-<li>
-<p>include/linux/mm_types.h中的<code>struct page{};</code></p>
-<h5 id="861">8.6.1、<a class="headerlink" href="#861" title="Permanent link">&para;</a></h5>
-</li>
+<li>include/linux/mm_types.h中的<code>struct page{};</code></li>
 </ul>
+<h5 id="861">8.6.1、<a class="headerlink" href="#861" title="Permanent link">&para;</a></h5>
 <ul>
 <li>sys_read()-&gt;vfs_read()-&gt;do_sync_read()-&gt;generic_file_aio_read()-&gt;do_generic_file_read() 【mm/filemap.c】</li>
 </ul>
@@ -377,15 +461,84 @@
 <li>管理缓冲块的数据结构为<code>buffer_head</code>，被称作<strong>缓冲头</strong></li>
 <li>I/O的基本单位已经换成bio，而buffer_head仅被用来提取块映射（通过get_block_t调用），用于跟踪页面的状态（通过page_mapping），以及用于封装bio提交以向后兼容（例如submit_bh）</li>
 <li><em>706/792，把书中的内容提了一下</em>，lionel，把之前的疑惑</li>
+<li>
+<ul>
+<li><code>sys_read()-&gt;vfs_read()-&gt;do_sync_read()-&gt;generic_file_aio_read()-&gt;do_generic_file_read()-&gt;block_read_full_page()-&gt;submit_bh()</code></li>
+</ul>
+</li>
 </ul>
 <h5 id="863io">8.6.3、直接针对页面构造I/O请求<a class="headerlink" href="#863io" title="Permanent link">&para;</a></h5>
 <ul>
 <li>Linux为基于磁盘的文件系统提供另一种策略，构造尽可能大的bio向下层提交。对应的函数为<code>mpage_readpage()</code>，实际上ext3文件系统readpage方法实现为<code>ext3_readpage()</code>【fs/ext3/inode.c】就是直接调用mpage_readpage函数</li>
+<li><code>sys_read()-&gt;vfs_read()-&gt;do_sync_read()-&gt;generic_file_aio_read()-&gt;do_generic_file_read()-&gt;mpage_read()-&gt;do_mpage_readpage()</code></li>
+<li>图8-24，一个页面的逻辑块映射到磁盘块的6种情况
+    + 第一种：
+    + 第六种：页面的所有逻辑块都未被映射到磁盘上，这时会跳过这个页面的处理。</li>
 </ul>
-<p>8.7、写文件</p>
-<p>8.8、冲刷文件</p>
+<h5 id="864">8.6.4、<a class="headerlink" href="#864" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>sys_read()-&gt;vfs_read()-&gt;do_sync_read()-&gt;generic_file_aio_read()-&gt;do_generic_file_read()-&gt;block_read_full_page()-&gt;minix_get_block()-&gt;get_block()</code></li>
+</ul>
+<h4 id="87">8.7、写文件<a class="headerlink" href="#87" title="Permanent link">&para;</a></h4>
+<h5 id="871write">8.7.1、write系统调用的处理流程<a class="headerlink" href="#871write" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>sys_write()-&gt;generic_file_aio_write()-&gt;__generic_file_aio_write()-&gt;generic_file_buffered_write()-&gt;generic_perform_write()</code></li>
+</ul>
+<h5 id="872">8.7.2、通知为缓冲写请求作准备<a class="headerlink" href="#872" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>sys_write()-&gt;generic_file_aio_write()-&gt;__generic_file_aio_write()-&gt;generic_file_buffered_write()-&gt;generic_perform_write()-&gt;__minix_write_begin()-&gt;block_write_begin()-&gt;__block_prepare_write()</code></li>
+</ul>
+<h5 id="873">8.7.3、通知数据已复制到缓冲区<a class="headerlink" href="#873" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>sys_write()-&gt;generic_file_aio_write()-&gt;__generic_file_aio_write()-&gt;generic_file_buffered_write()-&gt;generic_perform_write()-&gt;generic_write_end()-&gt;block_write_end()-&gt;__block_commit_write()</code></li>
+</ul>
+<h4 id="88">8.8、冲刷文件<a class="headerlink" href="#88" title="Permanent link">&para;</a></h4>
+<h5 id="881bdi">8.8.1、BDI相关对象<a class="headerlink" href="#881bdi" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>BDI（Backing Device Information）</strong></li>
+<li>1、后备设备信息：backing_dev_info</li>
+<li>2、BDI回写线程：bdi_writeback</li>
+<li>
+<p>3、BDI回写任务：bdi_work</p>
+<h5 id="882">8.8.2、注册后备设备信息<a class="headerlink" href="#882" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>bdi_register()</code></li>
+</ul>
+<h5 id="883forker">8.8.3、forker线程执行流程<a class="headerlink" href="#883forker" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>forker线程的作用是孵化flusher线程</strong>，当前只有一个BDI能支持forker线程，就是<strong>default_backing_dev_info</strong>。</li>
+<li><code>bdi_forker_task()</code></li>
+</ul>
+<h5 id="884flusher">8.8.4、flusher线程执行流程<a class="headerlink" href="#884flusher" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>bdi_start_fn()</code></li>
+<li>2、冲刷单个inode</li>
+<li>
+<p>3、以缓冲I/O写页面</p>
+<ul>
+<li>fs/buffer.c中的<code>block_write_full_page_endio()</code></li>
+<li>4、缓冲I/O完成回调</li>
+<li>
+<p>fs/buffer.c中的<code>end_buffer_async_write()</code></p>
+<h5 id="885">8.8.5、同步相关系统调用<a class="headerlink" href="#885" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、fsync和fdatasync</li>
+<li>2、sync</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h4 id="89">8.9、块设备文件<a class="headerlink" href="#89" title="Permanent link">&para;</a></h4>
 <h5 id="891inodeinode">8.9.1、块设备的主inode和次inode<a class="headerlink" href="#891inodeinode" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、宿主文件系统的块设备文件inode</li>
+<li>2、bdev文件系统的块设备inode
+    + <code>sys_open()-&gt;do_sys_open()-&gt;do_filp_open()-&gt;do_last()-&gt;nameidata_to_filp()-&gt;__dentry_oepn()-&gt;blkdev_open()-&gt;bd_acquire()</code></li>
+<li>3、主inode与次inode的关联</li>
+</ul>
 <h5 id="892">8.9.2、对块设备文件的操作转换为对块设备的操作<a class="headerlink" href="#892" title="Permanent link">&para;</a></h5>
 <h5 id="893">8.9.3、对块设备文件的读/写作用于块设备之上<a class="headerlink" href="#893" title="Permanent link">&para;</a></h5>
 <h4 id="810">8.10、文件系统编程模式<a class="headerlink" href="#810" title="Permanent link">&para;</a></h4>
