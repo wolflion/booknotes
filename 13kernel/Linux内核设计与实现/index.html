@@ -80,6 +80,124 @@
               <ul class="current">
                   <li class="toctree-l1 current"><a class="reference internal current" href="./">《Linux内核设计与实现》</a>
     <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#chap3">chap3、进程管理</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#31">3.1、进程</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#32">3.2、进程描述符及任务结构</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#321">3.2.1、分配进程描述符</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#322">3.2.2、进程描述符的存放</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#323">3.2.3、进程状态</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#324">3.2.4、设置当前进程状态</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#325">3.2.5、进程上下文</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#326">3.2.6、进程家族树</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#33">3.3、进程创建</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#331">3.3.1、写时拷贝</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#332fork">3.3.2、fork()</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#333vfork">3.3.3、vfork()</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#34linux">3.4、线程在linux中的实现</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#0">0、</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#341">3.4.1、创建线程</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#342">3.4.2、内核线程</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#35">3.5、线程终结</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#0_1">0、</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#351">3.5.1、删除进程描述符</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#352">3.5.2、孤儿进程造成的进退维谷</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#36">3.6、小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap4">chap4、进程调度</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#41">4.1、多任务</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#42linux">4.2、Linux的进程调度</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#43">4.3、策略</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#431io">4.3.1、I/O消耗型和处理器消耗型的进程</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#432">4.3.2、进程优先级</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#433">4.3.3、时间片</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#434">4.3.4、调度策略的活动</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#44linux">4.4、Linux调度算法</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#441">4.4.1、调度器类</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#442unix">4.4.2、Unix系统中的进程调度</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#443">4.4.3、公平调度</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#45linux">4.5、Linux调度的实现</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#451">4.5.1、时间记账</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#452">4.5.2、进程选择</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#453">4.5.3、调度器入口</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#454">4.5.4、睡眠和唤醒</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#46">4.6、抢占和上下文切换</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#461">4.6.1、用户抢占</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#462">4.6.2、内核抢占</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#47">4.7、实时调度策略</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#48">4.8、与调度相关的系统调用</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#481">4.8.1、与调度策略和优先级相关的系统调用</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#482">4.8.2、与处理器绑定有关的系统调用</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#483">4.8.3、放弃处理器时间</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#49">4.9、小结</a>
+    </li>
+        </ul>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="#chap5">chap5、系统调用</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#51">5.1、与内核通信</a>
@@ -88,7 +206,7 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#53">5.3、系统调用</a>
         <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#0">0、</a>
+    <li class="toctree-l4"><a class="reference internal" href="#0_2">0、</a>
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#531">5.3.1、系统调用号</a>
     </li>
@@ -98,7 +216,7 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#54">5.4、系统调用处理程序</a>
         <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#0_1">0、</a>
+    <li class="toctree-l4"><a class="reference internal" href="#0_3">0、</a>
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#541">5.4.1、指定恰当的系统调用</a>
     </li>
@@ -116,7 +234,7 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#56">5.6、系统调用上下文</a>
         <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#0_2">0、</a>
+    <li class="toctree-l4"><a class="reference internal" href="#0_4">0、</a>
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#561">5.6.1、绑定一个系统调用的最后步骤</a>
     </li>
@@ -134,7 +252,7 @@
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#61">6.1、链表</a>
         <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#0_3">0、</a>
+    <li class="toctree-l4"><a class="reference internal" href="#0_5">0、</a>
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#611">6.1.1、单向链表和双向链表</a>
     </li>
@@ -152,7 +270,7 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#62">6.2、队列</a>
         <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#0_4">0、</a>
+    <li class="toctree-l4"><a class="reference internal" href="#0_6">0、</a>
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#621kfifo">6.2.1、kfifo</a>
     </li>
@@ -172,7 +290,7 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#63">6.3、映射</a>
         <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#0_5">0、</a>
+    <li class="toctree-l4"><a class="reference internal" href="#0_7">0、</a>
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#631idr">6.3.1、初始化一个idr</a>
     </li>
@@ -212,11 +330,109 @@
     </li>
         </ul>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap7">chap7、中断和中断处理</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#71">7.1、中断</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#72">7.2、中断处理程序</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#73">7.3、上半部和下半部的对比</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#74">7.4、注册中断处理程序</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#741">7.4.1、中断处理程序标志</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#742">7.4.2、一个中断例子</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#743">7.4.3、释放中断处理程序</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#75">7.5、编写中断处理程序</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#751">7.5.1、共享的中断处理程序</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#752">7.5.2、中断处理程序实例</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#76">7.6、中断上下文</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#77">7.7、中断处理机制的实现</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#78procinterrupts">7.8、/proc/interrupts</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#79">7.9、中断控制</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#791">7.9.1、禁止和激活中断</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#792">7.9.2、禁止指定中断线</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#793">7.9.3、中断系统的状态</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#710">7.10、小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap8">chap8、下半部和推后执行的工作</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#81">8.1、下半部</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#0_8">0、</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#811">8.1.1、为什么要用下半部</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#812">8.1.2、下半部的环境</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#82">8.2、软中断</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#821">8.2.1、软中断的实现</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#822">8.2.2、使用软中断</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#83tasklet">8.3、tasklet</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#831tasklet">8.3.1、tasklet的实现</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#832tasklet">8.3.2、使用tasklet</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#833bh">8.3.3、老的BH机制</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#84">8.4、工作队列</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#0_9">0、</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#841">8.4.1、工作队列的实现</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#842">8.4.2、使用工作队列</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#843">8.4.3、老的任务队列机制</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#85">8.5、下半部机制的选择</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#86">8.6、在下半部之间加锁</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#87">8.7、禁止下半部</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#88">8.8、小结</a>
+    </li>
+        </ul>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="#chap9">chap9、内核同步介绍</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#91">9.1、临界区和竞争条件</a>
         <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#0_6">0、</a>
+    <li class="toctree-l4"><a class="reference internal" href="#0_10">0、</a>
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#911">9.1.1、为什么我们需要保护</a>
     </li>
@@ -226,7 +442,7 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#92">9.2、加锁</a>
         <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#0_7">0、</a>
+    <li class="toctree-l4"><a class="reference internal" href="#0_11">0、</a>
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#921">9.2.1、造成并发执行的原因</a>
     </li>
@@ -250,7 +466,7 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#123">12.3、获得页</a>
         <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#0_8">0、</a>
+    <li class="toctree-l4"><a class="reference internal" href="#0_12">0、</a>
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#12310">12.3.1、获得填充为0的页</a>
     </li>
@@ -260,7 +476,7 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#124kmalloc">12.4、kmalloc</a>
         <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#0_9">0、</a>
+    <li class="toctree-l4"><a class="reference internal" href="#0_13">0、</a>
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#1241gfp_mask">12.4.1、gfp_mask标志</a>
     </li>
@@ -272,7 +488,7 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#126slab">12.6、slab层</a>
         <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#0_10">0、</a>
+    <li class="toctree-l4"><a class="reference internal" href="#0_14">0、</a>
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#1261slab">12.6.1、slab层的设计</a>
     </li>
@@ -282,7 +498,7 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#127">12.7、在栈上的静态分配</a>
         <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#0_11">0、</a>
+    <li class="toctree-l4"><a class="reference internal" href="#0_15">0、</a>
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#1271">12.7.1、单页内核栈</a>
     </li>
@@ -292,7 +508,7 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#128">12.8、高端内存的映射</a>
         <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#0_12">0、</a>
+    <li class="toctree-l4"><a class="reference internal" href="#0_16">0、</a>
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#1281">12.8.1、永久映射</a>
     </li>
@@ -304,7 +520,7 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#1210cpu">12.10、新的每个CPU接口</a>
         <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#0_13">0、</a>
+    <li class="toctree-l4"><a class="reference internal" href="#0_17">0、</a>
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#12101cpu">12.10.1、编译时的每个CPU数据</a>
     </li>
@@ -360,6 +576,194 @@
     </li>
         </ul>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap14io">chap14、块I/O</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#0_18">0、</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#141">14.1、剖析一个块设备</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#142">14.2、缓冲区和缓冲区头</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#143bio">14.3、bio结构体</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#0_19">0、</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1431io">14.3.1、I/O向量</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1432">14.3.2、新老办法对比</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#144">14.4、请求队列</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#145io">14.5、I/O调度程序</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1451io">14.5.1、I/O调度程序的工作</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1452linux">14.5.2、Linux电梯</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1453io">14.5.3、最终期限I/O调试程序</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1454io">14.5.4、预测I/O调度程序</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1455io">14.5.5、完全公正的排队I/O调度程序</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1456io">14.5.6、空操作的I/O调度程序</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1457io">14.5.7、I/O调度程序的选择</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#146">14.6、小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap15">chap15、进程地址空间</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#151">15.1、地址空间</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#152">15.2、内存描述符</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#0_20">0、</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1521">15.2.1、分配内存描述符</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1522">15.2.2、撤销内存描述符</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1523mm_struct">15.2.3、mm_struct与内核线程</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#153">15.3、虚拟内存区域</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#0_21">0、</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1531vma">15.3.1、VMA标志</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1532vma">15.3.2、VMA操作</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1533">15.3.3、内存区域的树型结构和内存区域的链表结构</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1534">15.3.4、实际使用中的内存区域</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#154">15.4、操作内存区域</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1541find_vma">15.4.1、find_vma()</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1542find_vma_prev">15.4.2、find_vma_prev()</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1543find_vma_intersection">15.4.3、find_vma_intersection()</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#155mmapdo_mmap">15.5、mmap和do_mmap：创建地址空间</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#156nummapdo_nummap">15.6、nummap和do_nummap：删除地址区间</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#157">15.7、页表</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#158">15.8、小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap16">chap16、页高速缓存和页回写</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#161">16.1、缓存手段</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1611">16.1.1、写缓存</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1612">16.1.2、缓存回收</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#162linux">16.2、Linux页高速缓存</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1621address_space">16.2.1、address_space对象</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1622address_space">16.2.2、address_space操作</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1623">16.2.3、基树</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1624">16.2.4、以前的页散列表</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#163">16.3、缓冲区高速缓存</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#164flusher">16.4、flusher线程</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1641">16.4.1、膝上型计算机模式</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1642bdflushkupdatedpdflush">16.4.2、历史上的bdflush、kupdated和pdflush</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1643">16.4.3、避免拥塞的方法：使用多线程</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#165">16.5、小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap17">chap17、设备与模块</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#171">17.1、设备类型</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#172">17.2、模块</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1721helloworld">17.2.1、Hello，World</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1722">17.2.2、构建模块</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1723">17.2.3、安装模块</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1724">17.2.4、产生模块的依赖性</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1725">17.2.5、载入模块</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1726">17.2.6、管理配置选项</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1727">17.2.7、模块参数</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1728">17.2.8、导出符号表</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#173">17.3、设备模型</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#0_22">0、</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1731kobject">17.3.1、kobject</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1732ktype">17.3.2、ktype</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1733kset">17.3.3、kset</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1734kobjectktypekset">17.3.4、kobject、ktype和kset的相互关系</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1735kobject">17.3.5、管理和操作kobject</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1736">17.3.6、引用计数</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#174sysfs">17.4、sysfs</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#0_23">0、</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1741sysfskobject">17.4.1、sysfs中添加和删除kobject</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1742sysfs">17.4.2、向sysfs中添加文件</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1743">17.4.3、内核事件层</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#175">17.5、小结</a>
+    </li>
+        </ul>
+    </li>
     </ul>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../%E6%B7%B1%E5%85%A5Linux%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%E5%86%85%E6%A0%B8%E6%9C%BA%E5%88%B6/">《深入Linux设备驱动程序内核机制》</a>
@@ -397,6 +801,147 @@
             <div class="section" itemprop="articleBody">
               
                 <h2 id="linux">《Linux内核设计与实现》<a class="headerlink" href="#linux" title="Permanent link">&para;</a></h2>
+<h3 id="chap3">chap3、进程管理<a class="headerlink" href="#chap3" title="Permanent link">&para;</a></h3>
+<h4 id="31">3.1、进程<a class="headerlink" href="#31" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Linux系统的线程实现非常特别：它对线程和进程并不特别区分</strong>。</li>
+<li>在现代操作系统中，进程提供两种虚拟机制：<strong>虚拟处理器和虚拟内存</strong></li>
+</ul>
+<h4 id="32">3.2、进程描述符及任务结构<a class="headerlink" href="#32" title="Permanent link">&para;</a></h4>
+<ul>
+<li>linux/sched.h中的<code>struct task_struct{};</code>，<strong>在32位机器上，它大约有1.7KB</strong>。</li>
+</ul>
+<h5 id="321">3.2.1、分配进程描述符<a class="headerlink" href="#321" title="Permanent link">&para;</a></h5>
+<ul>
+<li>Linux通过slab分配器分配task_struct结构，asm/thread_info中的<code>struct thread_info{};</code></li>
+</ul>
+<h5 id="322">3.2.2、进程描述符的存放<a class="headerlink" href="#322" title="Permanent link">&para;</a></h5>
+<h5 id="323">3.2.3、进程状态<a class="headerlink" href="#323" title="Permanent link">&para;</a></h5>
+<h5 id="324">3.2.4、设置当前进程状态<a class="headerlink" href="#324" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>set_task_state()</code></li>
+</ul>
+<h5 id="325">3.2.5、进程上下文<a class="headerlink" href="#325" title="Permanent link">&para;</a></h5>
+<h5 id="326">3.2.6、进程家族树<a class="headerlink" href="#326" title="Permanent link">&para;</a></h5>
+<h4 id="33">3.3、进程创建<a class="headerlink" href="#33" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>产生（spawn）进程的机制：</strong> 首先在新的地址空间里创建进程，读入可执行文件，最后开始执行。</li>
+</ul>
+<h5 id="331">3.3.1、写时拷贝<a class="headerlink" href="#331" title="Permanent link">&para;</a></h5>
+<h5 id="332fork">3.3.2、fork()<a class="headerlink" href="#332fork" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>Linux通过<code>clone()</code>系统调用实现<code>fork()</code></strong></li>
+<li>kernel/fork.c中的<code>do_fork()</code>中的<code>copy_process()</code></li>
+</ul>
+<h5 id="333vfork">3.3.3、vfork()<a class="headerlink" href="#333vfork" title="Permanent link">&para;</a></h5>
+<h4 id="34linux">3.4、线程在linux中的实现<a class="headerlink" href="#34linux" title="Permanent link">&para;</a></h4>
+<h5 id="0">0、<a class="headerlink" href="#0" title="Permanent link">&para;</a></h5>
+<h5 id="341">3.4.1、创建线程<a class="headerlink" href="#341" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>调用<code>clone()</code>需要传递一些参数标志来指明需要共享的资源</strong></li>
+</ul>
+<h5 id="342">3.4.2、内核线程<a class="headerlink" href="#342" title="Permanent link">&para;</a></h5>
+<ul>
+<li>内核线程和普通的进程间的区别在于，<strong>内核线程没有独立的地址空间（实际上指向地址空间的mm指针被设置为NULL）</strong></li>
+</ul>
+<h4 id="35">3.5、线程终结<a class="headerlink" href="#35" title="Permanent link">&para;</a></h4>
+<h5 id="0_1">0、<a class="headerlink" href="#0_1" title="Permanent link">&para;</a></h5>
+<ul>
+<li>kernel/exit.c中的<code>do_exit()</code></li>
+</ul>
+<h5 id="351">3.5.1、删除进程描述符<a class="headerlink" href="#351" title="Permanent link">&para;</a></h5>
+<ul>
+<li>当最终需要释放进程描述符时，<code>release_task()</code>会被调用，完成以下工作：
+    + 1、
+    + 2、<code>_exit_signal()</code>释放目前僵死进程所使用的所有剩余资源，并进行最终统计和记录</li>
+</ul>
+<h5 id="352">3.5.2、孤儿进程造成的进退维谷<a class="headerlink" href="#352" title="Permanent link">&para;</a></h5>
+<h4 id="36">3.6、小结<a class="headerlink" href="#36" title="Permanent link">&para;</a></h4>
+<h3 id="chap4">chap4、进程调度<a class="headerlink" href="#chap4" title="Permanent link">&para;</a></h3>
+<h4 id="41">4.1、多任务<a class="headerlink" href="#41" title="Permanent link">&para;</a></h4>
+<ul>
+<li>多任务系统可以划分为两类：
+    + 非抢占式多任务
+    + 抢占式多任务：<strong>强制挂起的动作</strong></li>
+<li>非抢占式多任务模式下，<strong>进程主动挂起自己的操作称为让步（yielding）</strong></li>
+</ul>
+<h4 id="42linux">4.2、Linux的进程调度<a class="headerlink" href="#42linux" title="Permanent link">&para;</a></h4>
+<h4 id="43">4.3、策略<a class="headerlink" href="#43" title="Permanent link">&para;</a></h4>
+<h5 id="431io">4.3.1、I/O消耗型和处理器消耗型的进程<a class="headerlink" href="#431io" title="Permanent link">&para;</a></h5>
+<h5 id="432">4.3.2、进程优先级<a class="headerlink" href="#432" title="Permanent link">&para;</a></h5>
+<ul>
+<li>Linux采用两种不同的优先级范围：
+    + 第一种是用nice值
+    + 第二种是实时优先级</li>
+</ul>
+<h5 id="433">4.3.3、时间片<a class="headerlink" href="#433" title="Permanent link">&para;</a></h5>
+<h5 id="434">4.3.4、调度策略的活动<a class="headerlink" href="#434" title="Permanent link">&para;</a></h5>
+<h4 id="44linux">4.4、Linux调度算法<a class="headerlink" href="#44linux" title="Permanent link">&para;</a></h4>
+<h5 id="441">4.4.1、调度器类<a class="headerlink" href="#441" title="Permanent link">&para;</a></h5>
+<h5 id="442unix">4.4.2、Unix系统中的进程调度<a class="headerlink" href="#442unix" title="Permanent link">&para;</a></h5>
+<h5 id="443">4.4.3、公平调度<a class="headerlink" href="#443" title="Permanent link">&para;</a></h5>
+<h4 id="45linux">4.5、Linux调度的实现<a class="headerlink" href="#45linux" title="Permanent link">&para;</a></h4>
+<ul>
+<li>kernel/sched_fair.c</li>
+<li>关注四个组成部分
+    + 时间记账
+    + 进程选择
+    + 调度器入口
+    + 睡眠和唤醒</li>
+</ul>
+<h5 id="451">4.5.1、时间记账<a class="headerlink" href="#451" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、调度器实体结构
+    + linux/sched.h中的<code>struct sched_entity{};</code></li>
+<li>2、虚拟实时</li>
+</ul>
+<h5 id="452">4.5.2、进程选择<a class="headerlink" href="#452" title="Permanent link">&para;</a></h5>
+<h5 id="453">4.5.3、调度器入口<a class="headerlink" href="#453" title="Permanent link">&para;</a></h5>
+<ul>
+<li>kernel/sched.c中的<code>schedule()</code></li>
+</ul>
+<h5 id="454">4.5.4、睡眠和唤醒<a class="headerlink" href="#454" title="Permanent link">&para;</a></h5>
+<h4 id="46">4.6、抢占和上下文切换<a class="headerlink" href="#46" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>上下文切换</strong>：从一个可执行进程切换到另一个可执行进程，定义在kernel/sched.c中的<code>context_switch()</code>负责，<code>schedule()</code>会调用<code>context_switch()</code>，它完成了两项基本的工作：
+    + asm/mmu_context.h中的<code>switch_mm()</code>，把虚拟内存从上一个进程映射切换到新进程中。
+    + asm/system.h中的<code>switch_to()</code>，从上一个进程的处理器状态切换到新进程的处理器状态</li>
+<li><strong>内核必须知道在什么时候调用schedule()</strong>
+    + need_resched标志</li>
+</ul>
+<h5 id="461">4.6.1、用户抢占<a class="headerlink" href="#461" title="Permanent link">&para;</a></h5>
+<ul>
+<li>用户抢占在以下情况时产生：
+    + 从系统调用返回用户空间时
+    + 从中断处理程序返回用户空间时</li>
+</ul>
+<h5 id="462">4.6.2、内核抢占<a class="headerlink" href="#462" title="Permanent link">&para;</a></h5>
+<ul>
+<li>内核抢占发生在
+    + 中断处理程序正在执行，且返回内核空间之前</li>
+</ul>
+<h4 id="47">4.7、实时调度策略<a class="headerlink" href="#47" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Linux提供了两种调度策略：<strong>SCHED_FIFO和SCHED_RR</strong></li>
+<li>kernel/sched_rt.c</li>
+</ul>
+<h4 id="48">4.8、与调度相关的系统调用<a class="headerlink" href="#48" title="Permanent link">&para;</a></h4>
+<h5 id="481">4.8.1、与调度策略和优先级相关的系统调用<a class="headerlink" href="#481" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>sched_setscheduler()</code></li>
+<li><code>sched_setparam()</code>设置进程的实时优先级</li>
+</ul>
+<h5 id="482">4.8.2、与处理器绑定有关的系统调用<a class="headerlink" href="#482" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>sched_getaffinity()</code></li>
+</ul>
+<h5 id="483">4.8.3、放弃处理器时间<a class="headerlink" href="#483" title="Permanent link">&para;</a></h5>
+<ul>
+<li>Linux通过<code>sched_yield()</code>，提供了一种让进程显式地将处理器时间让给其他等待执行进程的机制。</li>
+<li>内核，可以直接调用yield()，先要确定给定进程确实处于可执行状态，然后再调用<code>sched_yield()</code></li>
+<li>用户空间的应用程序直接使用<code>sched_yield()</code>系统调用就可以了</li>
+</ul>
+<h4 id="49">4.9、小结<a class="headerlink" href="#49" title="Permanent link">&para;</a></h4>
 <h3 id="chap5">chap5、系统调用<a class="headerlink" href="#chap5" title="Permanent link">&para;</a></h3>
 <h4 id="51">5.1、与内核通信<a class="headerlink" href="#51" title="Permanent link">&para;</a></h4>
 <ul>
@@ -409,7 +954,7 @@
 <li>接口设计格言：<strong>提供机制而不是策略</strong>，<em>这个没懂，lionel</em></li>
 </ul>
 <h4 id="53">5.3、系统调用<a class="headerlink" href="#53" title="Permanent link">&para;</a></h4>
-<h5 id="0">0、<a class="headerlink" href="#0" title="Permanent link">&para;</a></h5>
+<h5 id="0_2">0、<a class="headerlink" href="#0_2" title="Permanent link">&para;</a></h5>
 <ul>
 <li>系统调用在出现错误的时候C库会把错误码写入errno全局变量。通过调用<code>perror</code>库函数，把该变量翻译成用户可以理解的错误字符串。</li>
 <li><code>SYSCALL_DEFINE0</code>-这个在2.6.18里没找到啊，直接在<code>/include/linux/syscalls.h</code>中定义了<code>asmlinkage long sys_getpid(void);</code>，实现怎么在time.c了呢？
@@ -427,7 +972,7 @@
 </ul>
 <h5 id="532">5.3.2、系统调用的性能<a class="headerlink" href="#532" title="Permanent link">&para;</a></h5>
 <h4 id="54">5.4、系统调用处理程序<a class="headerlink" href="#54" title="Permanent link">&para;</a></h4>
-<h5 id="0_1">0、<a class="headerlink" href="#0_1" title="Permanent link">&para;</a></h5>
+<h5 id="0_3">0、<a class="headerlink" href="#0_3" title="Permanent link">&para;</a></h5>
 <ul>
 <li>通知内核的机制是靠<strong>软中断</strong>实现的：通过引发一个异常</li>
 <li>x86系统上预定义的软中断是<strong>中断号128，<code>int $0x80</code>指令</strong>，名称叫<code>system_call()</code></li>
@@ -455,7 +1000,7 @@
 <li><code>CAP_SYS_BOOT</code>，权限的定义在<code>/include/linux/capability.h</code>中，<em>以CAP开头，是因为capability.h的命名</em></li>
 </ul>
 <h4 id="56">5.6、系统调用上下文<a class="headerlink" href="#56" title="Permanent link">&para;</a></h4>
-<h5 id="0_2">0、<a class="headerlink" href="#0_2" title="Permanent link">&para;</a></h5>
+<h5 id="0_4">0、<a class="headerlink" href="#0_4" title="Permanent link">&para;</a></h5>
 <ul>
 <li><em>问题，为何可以休眠，是比较重要的呢</em></li>
 </ul>
@@ -482,7 +1027,7 @@
 <h4 id="57">5.7、小结<a class="headerlink" href="#57" title="Permanent link">&para;</a></h4>
 <h3 id="chap6">chap6、内核数据结构<a class="headerlink" href="#chap6" title="Permanent link">&para;</a></h3>
 <h4 id="61">6.1、链表<a class="headerlink" href="#61" title="Permanent link">&para;</a></h4>
-<h5 id="0_3">0、<a class="headerlink" href="#0_3" title="Permanent link">&para;</a></h5>
+<h5 id="0_5">0、<a class="headerlink" href="#0_5" title="Permanent link">&para;</a></h5>
 <h5 id="611">6.1.1、单向链表和双向链表<a class="headerlink" href="#611" title="Permanent link">&para;</a></h5>
 <h5 id="612">6.1.2、环形链表<a class="headerlink" href="#612" title="Permanent link">&para;</a></h5>
 <h5 id="613">6.1.3、沿链表移动<a class="headerlink" href="#613" title="Permanent link">&para;</a></h5>
@@ -522,7 +1067,7 @@
 <li>5、其它链表方法</li>
 </ul>
 <h4 id="62">6.2、队列<a class="headerlink" href="#62" title="Permanent link">&para;</a></h4>
-<h5 id="0_4">0、<a class="headerlink" href="#0_4" title="Permanent link">&para;</a></h5>
+<h5 id="0_6">0、<a class="headerlink" href="#0_6" title="Permanent link">&para;</a></h5>
 <ul>
 <li><code>linux/kfifo.h</code></li>
 </ul>
@@ -558,7 +1103,7 @@
 <li><em>未看，lionel</em></li>
 </ul>
 <h4 id="63">6.3、映射<a class="headerlink" href="#63" title="Permanent link">&para;</a></h4>
-<h5 id="0_5">0、<a class="headerlink" href="#0_5" title="Permanent link">&para;</a></h5>
+<h5 id="0_7">0、<a class="headerlink" href="#0_7" title="Permanent link">&para;</a></h5>
 <h5 id="631idr">6.3.1、初始化一个idr<a class="headerlink" href="#631idr" title="Permanent link">&para;</a></h5>
 <h5 id="632uid">6.3.2、分配一个新的UID<a class="headerlink" href="#632uid" title="Permanent link">&para;</a></h5>
 <ul>
@@ -597,9 +1142,159 @@
 <h5 id="663xita">6.6.3、大xita符号<a class="headerlink" href="#663xita" title="Permanent link">&para;</a></h5>
 <h5 id="664">6.6.4、时间复杂度<a class="headerlink" href="#664" title="Permanent link">&para;</a></h5>
 <h4 id="67">6.7、小结<a class="headerlink" href="#67" title="Permanent link">&para;</a></h4>
+<h3 id="chap7">chap7、中断和中断处理<a class="headerlink" href="#chap7" title="Permanent link">&para;</a></h3>
+<ul>
+<li>让硬件在需要的时候再向内核发出信号，<strong>这就是中断</strong></li>
+</ul>
+<h4 id="71">7.1、中断<a class="headerlink" href="#71" title="Permanent link">&para;</a></h4>
+<ul>
+<li>中断使得硬件得以发出通知给处理器</li>
+<li><strong>中断值通常被称为中断请求（IRQ）线</strong>。</li>
+<li><strong>异常</strong>
+    + 异常也常常称为同步中断。</li>
+</ul>
+<h4 id="72">7.2、中断处理程序<a class="headerlink" href="#72" title="Permanent link">&para;</a></h4>
+<ul>
+<li>中断处理程序（interrupt handler）、中断服务例程（interrupt service routine）</li>
+</ul>
+<h4 id="73">7.3、上半部和下半部的对比<a class="headerlink" href="#73" title="Permanent link">&para;</a></h4>
+<ul>
+<li>中断处理程序是上半部（top half）-接收到一个中断，它就立即开始执行，但只做有严格时限的工作。</li>
+<li><strong>能够被允许稍后完成的工作会推迟到下半部（bottom half）</strong></li>
+</ul>
+<h4 id="74">7.4、注册中断处理程序<a class="headerlink" href="#74" title="Permanent link">&para;</a></h4>
+<ul>
+<li>linux/interrupt.h中的<code>request_irq()</code>注册一个中断处理程序</li>
+</ul>
+<h5 id="741">7.4.1、中断处理程序标志<a class="headerlink" href="#741" title="Permanent link">&para;</a></h5>
+<ul>
+<li>第3个参数：
+    + IRQF_DISABLED</li>
+<li>第4个参数：name，是与中断相关的设备的ASCII文本表示</li>
+<li>第5个参数：dev，用于共享中断线</li>
+</ul>
+<h5 id="742">7.4.2、一个中断例子<a class="headerlink" href="#742" title="Permanent link">&para;</a></h5>
+<h5 id="743">7.4.3、释放中断处理程序<a class="headerlink" href="#743" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>free_irq()</code></li>
+</ul>
+<h4 id="75">7.5、编写中断处理程序<a class="headerlink" href="#75" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>static irqreturn_t intr_handler(int irq, void *dev)</code></li>
+</ul>
+<h5 id="751">7.5.1、共享的中断处理程序<a class="headerlink" href="#751" title="Permanent link">&para;</a></h5>
+<h5 id="752">7.5.2、中断处理程序实例<a class="headerlink" href="#752" title="Permanent link">&para;</a></h5>
+<h4 id="76">7.6、中断上下文<a class="headerlink" href="#76" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>进程上下文</strong>是一种内核所处的操作模式</li>
+</ul>
+<h4 id="77">7.7、中断处理机制的实现<a class="headerlink" href="#77" title="Permanent link">&para;</a></h4>
+<h4 id="78procinterrupts">7.8、/proc/interrupts<a class="headerlink" href="#78procinterrupts" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>show_interrupts()</code> </li>
+</ul>
+<h4 id="79">7.9、中断控制<a class="headerlink" href="#79" title="Permanent link">&para;</a></h4>
+<h5 id="791">7.9.1、禁止和激活中断<a class="headerlink" href="#791" title="Permanent link">&para;</a></h5>
+<h5 id="792">7.9.2、禁止指定中断线<a class="headerlink" href="#792" title="Permanent link">&para;</a></h5>
+<h5 id="793">7.9.3、中断系统的状态<a class="headerlink" href="#793" title="Permanent link">&para;</a></h5>
+<ul>
+<li>asm/system.h中的宏<code>irqs_disable()</code></li>
+<li>linux/hardirq.h中的<code>in_interrupt()</code></li>
+</ul>
+<h4 id="710">7.10、小结<a class="headerlink" href="#710" title="Permanent link">&para;</a></h4>
+<h3 id="chap8">chap8、下半部和推后执行的工作<a class="headerlink" href="#chap8" title="Permanent link">&para;</a></h3>
+<ul>
+<li>局限包括：
+    + 1、中断处理程序以异步方式执行</li>
+</ul>
+<h4 id="81">8.1、下半部<a class="headerlink" href="#81" title="Permanent link">&para;</a></h4>
+<h5 id="0_8">0、<a class="headerlink" href="#0_8" title="Permanent link">&para;</a></h5>
+<ul>
+<li>下半部的任务：<strong>执行与中断处理密切相关但中断处理程序本身不执行的工作</strong>。</li>
+</ul>
+<h5 id="811">8.1.1、为什么要用下半部<a class="headerlink" href="#811" title="Permanent link">&para;</a></h5>
+<h5 id="812">8.1.2、下半部的环境<a class="headerlink" href="#812" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、”下半部“的起源</li>
+<li>2、任务队列</li>
+<li>3、软中断和tasklet</li>
+<li>4、混乱的下半部概念</li>
+</ul>
+<h4 id="82">8.2、软中断<a class="headerlink" href="#82" title="Permanent link">&para;</a></h4>
+<ul>
+<li>kernel/softirq.c</li>
+</ul>
+<h5 id="821">8.2.1、软中断的实现<a class="headerlink" href="#821" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>软中断</strong>是编译期间静态分配的。linux/interrupt.h中的<code>softirq_action{};</code></li>
+<li>1、软中断处理程序</li>
+<li>2、执行软中断</li>
+</ul>
+<h5 id="822">8.2.2、使用软中断<a class="headerlink" href="#822" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、分配索引</li>
+<li>2、注册你的处理程序</li>
+<li>3、触发你的软中断</li>
+</ul>
+<h4 id="83tasklet">8.3、tasklet<a class="headerlink" href="#83tasklet" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>tasklet是利用软中断实现的一种下半部机制</strong>。</li>
+</ul>
+<h5 id="831tasklet">8.3.1、tasklet的实现<a class="headerlink" href="#831tasklet" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、tasklet结构体</li>
+<li>2、调度tasklet</li>
+</ul>
+<h5 id="832tasklet">8.3.2、使用tasklet<a class="headerlink" href="#832tasklet" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、声明你自己的tasklet</li>
+<li>2、编写你自己的tasklet处理程序</li>
+<li>3、调度你自己的tasklet</li>
+<li>4、ksoftirqd</li>
+</ul>
+<h5 id="833bh">8.3.3、老的BH机制<a class="headerlink" href="#833bh" title="Permanent link">&para;</a></h5>
+<ul>
+<li>2.6已经废弃</li>
+</ul>
+<h4 id="84">8.4、工作队列<a class="headerlink" href="#84" title="Permanent link">&para;</a></h4>
+<h5 id="0_9">0、<a class="headerlink" href="#0_9" title="Permanent link">&para;</a></h5>
+<h5 id="841">8.4.1、工作队列的实现<a class="headerlink" href="#841" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、表示线程的数据结构
+    + 工作者线程用<code>struct workqueue_struct{};</code></li>
+<li>2、表示工作的数据结构
+    + linux/workqueue.h中的<code>struct work_struct{};</code></li>
+</ul>
+<h5 id="842">8.4.2、使用工作队列<a class="headerlink" href="#842" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、创建推后的工作</li>
+<li>2、工作队列处理函数</li>
+<li>3、对工作进行调度</li>
+<li>4、刷新操作</li>
+<li>5、创建新的工作队列</li>
+</ul>
+<h5 id="843">8.4.3、老的任务队列机制<a class="headerlink" href="#843" title="Permanent link">&para;</a></h5>
+<h4 id="85">8.5、下半部机制的选择<a class="headerlink" href="#85" title="Permanent link">&para;</a></h4>
+<ul>
+<li>tasklet和软中断，两者很接近。<strong>工作队列，靠内核线程实现</strong></li>
+</ul>
+<h4 id="86">8.6、在下半部之间加锁<a class="headerlink" href="#86" title="Permanent link">&para;</a></h4>
+<ul>
+<li>任何在工作队列中被共享的数据也需要使用锁机制。</li>
+</ul>
+<h4 id="87">8.7、禁止下半部<a class="headerlink" href="#87" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>先得到一个锁然后再禁止下半部的处理</strong>。</li>
+<li>如果需要禁止所有的下半部处理（明确点说，就是所有软中断和所有tasklet），可以调用<code>local_bh_disable()</code>。</li>
+<li>由于软中断和tasklet是异步发生的（就是说，在中断处理返回的时候），所以，内核代码必须禁止它们。</li>
+</ul>
+<h4 id="88">8.8、小结<a class="headerlink" href="#88" title="Permanent link">&para;</a></h4>
+<ul>
+<li>下半部中相当程度地用到了同步和并发。</li>
+</ul>
 <h3 id="chap9">chap9、内核同步介绍<a class="headerlink" href="#chap9" title="Permanent link">&para;</a></h3>
 <h4 id="91">9.1、临界区和竞争条件<a class="headerlink" href="#91" title="Permanent link">&para;</a></h4>
-<h5 id="0_6">0、<a class="headerlink" href="#0_6" title="Permanent link">&para;</a></h5>
+<h5 id="0_10">0、<a class="headerlink" href="#0_10" title="Permanent link">&para;</a></h5>
 <ul>
 <li>临界区</li>
 <li>竞争条件race coditions</li>
@@ -607,7 +1302,7 @@
 <h5 id="911">9.1.1、为什么我们需要保护<a class="headerlink" href="#911" title="Permanent link">&para;</a></h5>
 <h5 id="912">9.1.2、单个变量<a class="headerlink" href="#912" title="Permanent link">&para;</a></h5>
 <h4 id="92">9.2、加锁<a class="headerlink" href="#92" title="Permanent link">&para;</a></h4>
-<h5 id="0_7">0、<a class="headerlink" href="#0_7" title="Permanent link">&para;</a></h5>
+<h5 id="0_11">0、<a class="headerlink" href="#0_11" title="Permanent link">&para;</a></h5>
 <ul>
 <li><em>lionel，没太看懂啊</em></li>
 </ul>
@@ -642,7 +1337,7 @@
 <li><code>struct zone {};</code></li>
 </ul>
 <h4 id="123">12.3、获得页<a class="headerlink" href="#123" title="Permanent link">&para;</a></h4>
-<h5 id="0_8">0、<a class="headerlink" href="#0_8" title="Permanent link">&para;</a></h5>
+<h5 id="0_12">0、<a class="headerlink" href="#0_12" title="Permanent link">&para;</a></h5>
 <ul>
 <li><code>alloc_pages()</code></li>
 <li><code>page_address()</code></li>
@@ -657,7 +1352,7 @@
 <li><strong>内核是完全相信自己的</strong></li>
 </ul>
 <h4 id="124kmalloc">12.4、kmalloc<a class="headerlink" href="#124kmalloc" title="Permanent link">&para;</a></h4>
-<h5 id="0_9">0、<a class="headerlink" href="#0_9" title="Permanent link">&para;</a></h5>
+<h5 id="0_13">0、<a class="headerlink" href="#0_13" title="Permanent link">&para;</a></h5>
 <ul>
 <li><strong>以字节为单位，确保页在物理地址上是连续的</strong>，实现在include/linux/slab.h中</li>
 </ul>
@@ -674,21 +1369,21 @@
 <li><strong>分配的内存虚拟地址是连续的，而物理地址无须连续</strong></li>
 </ul>
 <h4 id="126slab">12.6、slab层<a class="headerlink" href="#126slab" title="Permanent link">&para;</a></h4>
-<h5 id="0_10">0、<a class="headerlink" href="#0_10" title="Permanent link">&para;</a></h5>
+<h5 id="0_14">0、<a class="headerlink" href="#0_14" title="Permanent link">&para;</a></h5>
 <h5 id="1261slab">12.6.1、slab层的设计<a class="headerlink" href="#1261slab" title="Permanent link">&para;</a></h5>
 <h5 id="1262slab">12.6.2、slab分配器的接口<a class="headerlink" href="#1262slab" title="Permanent link">&para;</a></h5>
 <ul>
 <li><code>kmem_cache_create()</code></li>
 </ul>
 <h4 id="127">12.7、在栈上的静态分配<a class="headerlink" href="#127" title="Permanent link">&para;</a></h4>
-<h5 id="0_11">0、<a class="headerlink" href="#0_11" title="Permanent link">&para;</a></h5>
+<h5 id="0_15">0、<a class="headerlink" href="#0_15" title="Permanent link">&para;</a></h5>
 <ul>
 <li><strong>32位和64位体系结构的页面大小分别是4KB和8KB，所以通常它们的内核栈的大小分别是8KB和16KB</strong>。</li>
 </ul>
 <h5 id="1271">12.7.1、单页内核栈<a class="headerlink" href="#1271" title="Permanent link">&para;</a></h5>
 <h5 id="1272">12.7.2、在栈上光明正大地工作<a class="headerlink" href="#1272" title="Permanent link">&para;</a></h5>
 <h4 id="128">12.8、高端内存的映射<a class="headerlink" href="#128" title="Permanent link">&para;</a></h4>
-<h5 id="0_12">0、<a class="headerlink" href="#0_12" title="Permanent link">&para;</a></h5>
+<h5 id="0_16">0、<a class="headerlink" href="#0_16" title="Permanent link">&para;</a></h5>
 <ul>
 <li><strong>在高端内存中的页不能永久地映射到内核地址空间上</strong>。</li>
 </ul>
@@ -708,7 +1403,7 @@
     + 如果另一个</li>
 </ul>
 <h4 id="1210cpu">12.10、新的每个CPU接口<a class="headerlink" href="#1210cpu" title="Permanent link">&para;</a></h4>
-<h5 id="0_13">0、<a class="headerlink" href="#0_13" title="Permanent link">&para;</a></h5>
+<h5 id="0_17">0、<a class="headerlink" href="#0_17" title="Permanent link">&para;</a></h5>
 <ul>
 <li><strong>percpu</strong>，简化了创建和操作每个CPU的数据。</li>
 </ul>
@@ -790,6 +1485,281 @@
 <h4 id="1313">13.13、和文件系统相关的数据结构<a class="headerlink" href="#1313" title="Permanent link">&para;</a></h4>
 <h4 id="1314">13.14、和进程相关的数据结构<a class="headerlink" href="#1314" title="Permanent link">&para;</a></h4>
 <h4 id="1315">13.15、小结<a class="headerlink" href="#1315" title="Permanent link">&para;</a></h4>
+<h3 id="chap14io">chap14、块I/O<a class="headerlink" href="#chap14io" title="Permanent link">&para;</a></h3>
+<h4 id="0_18">0、<a class="headerlink" href="#0_18" title="Permanent link">&para;</a></h4>
+<ul>
+<li>系统中能够<strong>随机（不需要按顺序）访问</strong>固定大小数据片（chunks）的硬件设备称为<strong>块设备</strong>，这些固定大小的数据片就称作<strong>块</strong>（磁盘）</li>
+</ul>
+<h4 id="141">14.1、剖析一个块设备<a class="headerlink" href="#141" title="Permanent link">&para;</a></h4>
+<ul>
+<li>块设备中最小的可寻址单元是<strong>扇区</strong>，最常见是512字节。</li>
+<li>块大小【<strong>文件系统的最小寻址单元</strong>】一般是扇区的2倍。</li>
+</ul>
+<h4 id="142">14.2、缓冲区和缓冲区头<a class="headerlink" href="#142" title="Permanent link">&para;</a></h4>
+<ul>
+<li>linux/buffer_head.h中的<code>struct buffer_head{};</code></li>
+<li><strong>缓冲区头</strong>的目的在于描述磁盘块和物理内存缓冲区（在特定页面上的字节序列）之间的映射关系。</li>
+<li>缓冲区头的弊端
+    + 1、是一个很大且不易控制的数据结构体
+    + 2、它仅能描述单个缓冲区</li>
+</ul>
+<h4 id="143bio">14.3、bio结构体<a class="headerlink" href="#143bio" title="Permanent link">&para;</a></h4>
+<h5 id="0_19">0、<a class="headerlink" href="#0_19" title="Permanent link">&para;</a></h5>
+<ul>
+<li>linux/bio.h中的<code>struct bio{};</code> 代表了正在现场的（活动的）以片断（segment）链表形式组织的块I/O操作。<strong>一个片段是一小块连续的内存缓冲区</strong>。</li>
+</ul>
+<h5 id="1431io">14.3.1、I/O向量<a class="headerlink" href="#1431io" title="Permanent link">&para;</a></h5>
+<ul>
+<li>bi_io_vec域指向一个<code>bio_vec</code>结构体数组，结构形式为<code>&lt;page,offset,len&gt;</code>，片段所在的物理页、块在物理页中的偏移位置、从给定偏移量开始的块长度</li>
+</ul>
+<h5 id="1432">14.3.2、新老办法对比<a class="headerlink" href="#1432" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>利用bio结构体代替buffer_head结构</strong>还有以下好处：
+    + bio结构体很容易处理高端内存</li>
+</ul>
+<h4 id="144">14.4、请求队列<a class="headerlink" href="#144" title="Permanent link">&para;</a></h4>
+<ul>
+<li>linux/blkdev.h中的<code>reques_queue{}</code>，<strong>包含一个双向请求链表以及相关控制信息</strong>。</li>
+</ul>
+<h4 id="145io">14.5、I/O调度程序<a class="headerlink" href="#145io" title="Permanent link">&para;</a></h4>
+<h5 id="1451io">14.5.1、I/O调度程序的工作<a class="headerlink" href="#1451io" title="Permanent link">&para;</a></h5>
+<ul>
+<li>两种方法减少磁盘寻址时间：<strong>合并与排序</strong></li>
+<li>合并：</li>
+</ul>
+<h5 id="1452linux">14.5.2、Linux电梯<a class="headerlink" href="#1452linux" title="Permanent link">&para;</a></h5>
+<ul>
+<li><em>加入尾部太多的话，会导致饥饿问题？lionel</em></li>
+<li>一个请求加入队列中时，有可能发生四种操作，依次是：
+    + 1）如果队列中已存在一个对相邻磁盘扇区操作的请求，那么新请求将和这个已经存在的请求合并成一个请求
+    + 2）如果队列中存一个驻留时间过长的请求，那么新请求将被插入到队列尾部，以防止其他旧的请求饥饿发生
+    + 3）如果队列中以扇区方向为序存在合适的插入位置，那么新的请求将被插入到该位置，保证队列中的请求是以被访问磁盘物理位置为序进行排序的
+       + 4）如果队列中不存在合适的请求插入位置，请求将插入到队列尾部</li>
+</ul>
+<h5 id="1453io">14.5.3、最终期限I/O调试程序<a class="headerlink" href="#1453io" title="Permanent link">&para;</a></h5>
+<ul>
+<li>block/deadline-iosched.c</li>
+<li>deadline，解决电梯中的饥饿问题</li>
+<li><strong>写-饥饿-读（writes-starving-reads）</strong></li>
+<li>有3个队列
+    + 读请求FIFO队列
+    + 写请求FIFO队列
+    + 排序队列</li>
+<li><strong>降低了系统吞吐量</strong></li>
+</ul>
+<h5 id="1454io">14.5.4、预测I/O调度程序<a class="headerlink" href="#1454io" title="Permanent link">&para;</a></h5>
+<ul>
+<li>block/as-ioshed.c</li>
+<li><strong>在保持良好的读响应的同时也能提供良好的全局吞吐量</strong>，最主要的改进是<strong>它增加了预测启发（anticipation-heuristic）能力</strong>。</li>
+</ul>
+<h5 id="1455io">14.5.5、完全公正的排队I/O调度程序<a class="headerlink" href="#1455io" title="Permanent link">&para;</a></h5>
+<ul>
+<li>block/cfq-iosched.c</li>
+<li>（Complete Fair Queuing，CFQ），<strong>根据引起I/O请求的进程组织的</strong>，即每一个提交I/O的进程都有自己的队列。</li>
+<li>以时间片轮转调度队列，从每个队列中选取请求数（默认值为4，可配置），然后进行下一轮调度。</li>
+</ul>
+<h5 id="1456io">14.5.6、空操作的I/O调度程序<a class="headerlink" href="#1456io" title="Permanent link">&para;</a></h5>
+<ul>
+<li>block/noop-iosched.c</li>
+<li><strong>不进行排序，也不进行其他形式的预寻址操作</strong>，忘不了执行合并</li>
+</ul>
+<h5 id="1457io">14.5.7、I/O调度程序的选择<a class="headerlink" href="#1457io" title="Permanent link">&para;</a></h5>
+<ul>
+<li>内核命令行选项 <code>elevator=as</code> ，表示启用 <strong>预测I/O</strong></li>
+</ul>
+<h4 id="146">14.6、小结<a class="headerlink" href="#146" title="Permanent link">&para;</a></h4>
+<h3 id="chap15">chap15、进程地址空间<a class="headerlink" href="#chap15" title="Permanent link">&para;</a></h3>
+<h4 id="151">15.1、地址空间<a class="headerlink" href="#151" title="Permanent link">&para;</a></h4>
+<ul>
+<li>内存区域可以包含各种内存对象：
+    + 可执行文件代码的内存映射，称为<strong>代码段（text section）</strong></li>
+</ul>
+<h4 id="152">15.2、内存描述符<a class="headerlink" href="#152" title="Permanent link">&para;</a></h4>
+<h5 id="0_20">0、<a class="headerlink" href="#0_20" title="Permanent link">&para;</a></h5>
+<ul>
+<li>内存描述符<strong>表示进程的地址空间</strong>，linux/sched.h中的<code>struct mm_struct{};</code></li>
+<li><strong>所有的mm_struct结构体都通过自身的mmlist域连接在一个双向链表中，该链表的首元素是init_mm内存描述符，它代表init进程的地址空间</strong>。需要使用kernel/fork.c中的<code>mmlist_lock</code>锁来防止并发访问</li>
+</ul>
+<h5 id="1521">15.2.1、分配内存描述符<a class="headerlink" href="#1521" title="Permanent link">&para;</a></h5>
+<ul>
+<li><em>没太完全明白，lionel</em></li>
+</ul>
+<h5 id="1522">15.2.2、撤销内存描述符<a class="headerlink" href="#1522" title="Permanent link">&para;</a></h5>
+<ul>
+<li>kernel/exit.c中的<code>exit_mm()</code>函数，常规的撤销工作</li>
+</ul>
+<h5 id="1523mm_struct">15.2.3、mm_struct与内核线程<a class="headerlink" href="#1523mm_struct" title="Permanent link">&para;</a></h5>
+<h4 id="153">15.3、虚拟内存区域<a class="headerlink" href="#153" title="Permanent link">&para;</a></h4>
+<h5 id="0_21">0、<a class="headerlink" href="#0_21" title="Permanent link">&para;</a></h5>
+<ul>
+<li>linux/mm_types.h中的<code>vm_area_struct</code>，<strong>指定地址空间内连续区间上的一个独立内存范围</strong>。</li>
+</ul>
+<h5 id="1531vma">15.3.1、VMA标志<a class="headerlink" href="#1531vma" title="Permanent link">&para;</a></h5>
+<ul>
+<li>是个位标志</li>
+</ul>
+<h5 id="1532vma">15.3.2、VMA操作<a class="headerlink" href="#1532vma" title="Permanent link">&para;</a></h5>
+<ul>
+<li>linux/mm.h中的<code>vm_operations_struct</code>结构体</li>
+</ul>
+<h5 id="1533">15.3.3、内存区域的树型结构和内存区域的链表结构<a class="headerlink" href="#1533" title="Permanent link">&para;</a></h5>
+<ul>
+<li>mmap域使用单独链表连接所有的内存区域对象</li>
+<li>mm_rb域使用红-黑树连接所有的内存区域对象</li>
+</ul>
+<h5 id="1534">15.3.4、实际使用中的内存区域<a class="headerlink" href="#1534" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong><code>pmap</code>工具查看给定进程的内存空间和其中所含的内存区域</strong></li>
+</ul>
+<h4 id="154">15.4、操作内存区域<a class="headerlink" href="#154" title="Permanent link">&para;</a></h4>
+<ul>
+<li>linux/mm.h中</li>
+</ul>
+<h5 id="1541find_vma">15.4.1、find_vma()<a class="headerlink" href="#1541find_vma" title="Permanent link">&para;</a></h5>
+<h5 id="1542find_vma_prev">15.4.2、find_vma_prev()<a class="headerlink" href="#1542find_vma_prev" title="Permanent link">&para;</a></h5>
+<h5 id="1543find_vma_intersection">15.4.3、find_vma_intersection()<a class="headerlink" href="#1543find_vma_intersection" title="Permanent link">&para;</a></h5>
+<ul>
+<li>返回第一个和指定地址区间相交的VMA</li>
+</ul>
+<h4 id="155mmapdo_mmap">15.5、mmap和do_mmap：创建地址空间<a class="headerlink" href="#155mmapdo_mmap" title="Permanent link">&para;</a></h4>
+<ul>
+<li>linux/mm.h中的<code>do_mmap()</code>，<strong>将一个地址区间加入到进程的地址空间中</strong></li>
+<li>file指定的文件，具体映射的是文件中从偏移offset处开始，长度为len字节的范围内的数据。如果file参数是NULL并且offset参数也是0，那么就代表这次映射没有和文件有关，称为<strong>匿名映射（anonymous mapping）</strong></li>
+</ul>
+<h4 id="156nummapdo_nummap">15.6、nummap和do_nummap：删除地址区间<a class="headerlink" href="#156nummapdo_nummap" title="Permanent link">&para;</a></h4>
+<ul>
+<li>linux/mm.h中的<code>do_mummap()</code>从特定的进程地址空间中删除指定地址区间</li>
+</ul>
+<h4 id="157">15.7、页表<a class="headerlink" href="#157" title="Permanent link">&para;</a></h4>
+<ul>
+<li>页表定义在asm/page.h中</li>
+<li>顶级页表是<strong>页全局目录（PGD）</strong>，它包含一个pgd_t类型数组，</li>
+<li>二级页表是<strong>中间页目录（PMD）</strong>，它是个pmd_t类型数组，其中的表项<strong>指向PTE中的表项</strong>。</li>
+<li>最后一级的页表简称<strong>页表</strong>，其中包含了pte_t类型的页表项，<strong>该页表指向物理页面</strong></li>
+<li>（translate lookaside buffer，TLB），<strong>一个将虚拟地址映射到物理地址的硬件缓存</strong>。</li>
+</ul>
+<h4 id="158">15.8、小结<a class="headerlink" href="#158" title="Permanent link">&para;</a></h4>
+<h3 id="chap16">chap16、页高速缓存和页回写<a class="headerlink" href="#chap16" title="Permanent link">&para;</a></h3>
+<h4 id="161">16.1、缓存手段<a class="headerlink" href="#161" title="Permanent link">&para;</a></h4>
+<h5 id="1611">16.1.1、写缓存<a class="headerlink" href="#1611" title="Permanent link">&para;</a></h5>
+<ul>
+<li>缓存一般被实现成下面三种策略之一：
+    + 第一种：不缓存（nowrite）
+    + 第二种：写透缓存（write-through cache）：<strong>写操作将自动更新内存缓存，同时也更新磁盘文件</strong>。
+    + 第三种：回写，<strong>脏页链表</strong></li>
+</ul>
+<h5 id="1612">16.1.2、缓存回收<a class="headerlink" href="#1612" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、最近最少使用</li>
+<li>2、双链策略</li>
+</ul>
+<h4 id="162linux">16.2、Linux页高速缓存<a class="headerlink" href="#162linux" title="Permanent link">&para;</a></h4>
+<h5 id="1621address_space">16.2.1、address_space对象<a class="headerlink" href="#1621address_space" title="Permanent link">&para;</a></h5>
+<ul>
+<li>linux/fs.h中的<code>struct address_space{};</code></li>
+</ul>
+<h5 id="1622address_space">16.2.2、address_space操作<a class="headerlink" href="#1622address_space" title="Permanent link">&para;</a></h5>
+<ul>
+<li>linux/fs.h中的<code>struct address_space_operations{};</code></li>
+</ul>
+<h5 id="1623">16.2.3、基树<a class="headerlink" href="#1623" title="Permanent link">&para;</a></h5>
+<ul>
+<li>lib/radix-tree.c</li>
+<li>linux/radix_tree.h</li>
+</ul>
+<h5 id="1624">16.2.4、以前的页散列表<a class="headerlink" href="#1624" title="Permanent link">&para;</a></h5>
+<h4 id="163">16.3、缓冲区高速缓存<a class="headerlink" href="#163" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>内核提供了<code>bread()</code>实现从磁盘读一个块的底层操作</strong>。</li>
+</ul>
+<h4 id="164flusher">16.4、flusher线程<a class="headerlink" href="#164flusher" title="Permanent link">&para;</a></h4>
+<h5 id="1641">16.4.1、膝上型计算机模式<a class="headerlink" href="#1641" title="Permanent link">&para;</a></h5>
+<h5 id="1642bdflushkupdatedpdflush">16.4.2、历史上的bdflush、kupdated和pdflush<a class="headerlink" href="#1642bdflushkupdatedpdflush" title="Permanent link">&para;</a></h5>
+<h5 id="1643">16.4.3、避免拥塞的方法：使用多线程<a class="headerlink" href="#1643" title="Permanent link">&para;</a></h5>
+<h4 id="165">16.5、小结<a class="headerlink" href="#165" title="Permanent link">&para;</a></h4>
+<h3 id="chap17">chap17、设备与模块<a class="headerlink" href="#chap17" title="Permanent link">&para;</a></h3>
+<ul>
+<li>设备类型：在所有Unix系统中为了统一普通设备的操作所采用的分类</li>
+<li>模块：Linux内核中用于按需加载和卸载目标码的机制</li>
+<li>内核对象：内核数据结构中支持面向对象的简单操作，还支持维护对象之间的父子关系</li>
+<li>sysfs：表示系统中设备树的一个文件系统</li>
+</ul>
+<h4 id="171">17.1、设备类型<a class="headerlink" href="#171" title="Permanent link">&para;</a></h4>
+<ul>
+<li>3种设备类型：
+    + 块设备：blkdev
+    + 字符设备：cdev
+    + 网络设备：ethernet devices</li>
+<li><strong>杂项设备（miscellaneous device）</strong>：miscdev</li>
+<li><strong>伪设备（pseudo device）</strong></li>
+</ul>
+<h4 id="172">17.2、模块<a class="headerlink" href="#172" title="Permanent link">&para;</a></h4>
+<h5 id="1721helloworld">17.2.1、Hello，World<a class="headerlink" href="#1721helloworld" title="Permanent link">&para;</a></h5>
+<h5 id="1722">17.2.2、构建模块<a class="headerlink" href="#1722" title="Permanent link">&para;</a></h5>
+<h5 id="1723">17.2.3、安装模块<a class="headerlink" href="#1723" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>/lib/modules/version/kernel</code></li>
+<li>命令：<code>make modules_install</code></li>
+</ul>
+<h5 id="1724">17.2.4、产生模块的依赖性<a class="headerlink" href="#1724" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>depmod -A</code></li>
+<li>模块依赖关系信息存放在<code>/lib/modules/version/modules.dep</code></li>
+</ul>
+<h5 id="1725">17.2.5、载入模块<a class="headerlink" href="#1725" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>insmod</code></li>
+</ul>
+<h5 id="1726">17.2.6、管理配置选项<a class="headerlink" href="#1726" title="Permanent link">&para;</a></h5>
+<h5 id="1727">17.2.7、模块参数<a class="headerlink" href="#1727" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>module_param()</code>宏</li>
+</ul>
+<h5 id="1728">17.2.8、导出符号表<a class="headerlink" href="#1728" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>EXPORT_SYMBOL()</code></li>
+</ul>
+<h4 id="173">17.3、设备模型<a class="headerlink" href="#173" title="Permanent link">&para;</a></h4>
+<h5 id="0_22">0、<a class="headerlink" href="#0_22" title="Permanent link">&para;</a></h5>
+<ul>
+<li>2.6增加了新特性：<strong>统一设备模型（device model）</strong>，提供了一个独立的机制专门来表示设备，并描述其在系统中的拓扑结构</li>
+</ul>
+<h5 id="1731kobject">17.3.1、kobject<a class="headerlink" href="#1731kobject" title="Permanent link">&para;</a></h5>
+<ul>
+<li>linux/kobject.h中的<code>struct kobject{};</code></li>
+</ul>
+<h5 id="1732ktype">17.3.2、ktype<a class="headerlink" href="#1732ktype" title="Permanent link">&para;</a></h5>
+<ul>
+<li>linux/kobject.h中的<code>struct kobj_type{};</code></li>
+</ul>
+<h5 id="1733kset">17.3.3、kset<a class="headerlink" href="#1733kset" title="Permanent link">&para;</a></h5>
+<ul>
+<li>linux/kobject.h中的<code>struct kset{};</code></li>
+</ul>
+<h5 id="1734kobjectktypekset">17.3.4、kobject、ktype和kset的相互关系<a class="headerlink" href="#1734kobjectktypekset" title="Permanent link">&para;</a></h5>
+<h5 id="1735kobject">17.3.5、管理和操作kobject<a class="headerlink" href="#1735kobject" title="Permanent link">&para;</a></h5>
+<h5 id="1736">17.3.6、引用计数<a class="headerlink" href="#1736" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、递增和递减引用计数</li>
+<li>2、kref</li>
+</ul>
+<h4 id="174sysfs">17.4、sysfs<a class="headerlink" href="#174sysfs" title="Permanent link">&para;</a></h4>
+<h5 id="0_23">0、<a class="headerlink" href="#0_23" title="Permanent link">&para;</a></h5>
+<h5 id="1741sysfskobject">17.4.1、sysfs中添加和删除kobject<a class="headerlink" href="#1741sysfskobject" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>kobject_add()</code></li>
+</ul>
+<h5 id="1742sysfs">17.4.2、向sysfs中添加文件<a class="headerlink" href="#1742sysfs" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、</li>
+<li>2、创建新属性</li>
+<li>3、删除新属性</li>
+</ul>
+<h5 id="1743">17.4.3、内核事件层<a class="headerlink" href="#1743" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>kobject_uevent()</code></li>
+</ul>
+<h4 id="175">17.5、小结<a class="headerlink" href="#175" title="Permanent link">&para;</a></h4>
               
             </div>
           </div><footer>

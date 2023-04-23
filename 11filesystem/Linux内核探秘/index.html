@@ -407,6 +407,203 @@ MODULE_VERSION("Ver 0.1");
 <h5 id="233">2.3.3、文件系统的挂载过程<a class="headerlink" href="#233" title="Permanent link">&para;</a></h5>
 <h5 id="234">2.3.4、文件打开的代码分析<a class="headerlink" href="#234" title="Permanent link">&para;</a></h5>
 <h4 id="24">2.4、本章小结<a class="headerlink" href="#24" title="Permanent link">&para;</a></h4>
+<h3 id="chap10-143155232">chap10、文件系统读写   143（155/232）<a class="headerlink" href="#chap10-143155232" title="Permanent link">&para;</a></h3>
+<h4 id="101page-cache">10.1、page cache机制<a class="headerlink" href="#101page-cache" title="Permanent link">&para;</a></h4>
+<ul>
+<li>其存储的数据在I/O完成后并不回收，而是一直保留在内存中，除非内存紧张，才开始回收。</li>
+</ul>
+<h5 id="1011buffer-iodirect-io">10.1.1、buffer I/O和direct I/O<a class="headerlink" href="#1011buffer-iodirect-io" title="Permanent link">&para;</a></h5>
+<ul>
+<li>buffer I/O，是内核缓存</li>
+<li>direct I/O，是应用提供的内存</li>
+<li><strong>应用提供的<code>read</code>和<code>write</code>接口，是同步I/O接口</strong>。</li>
+</ul>
+<h5 id="1012buffer-head">10.1.2、buffer head和块缓存<a class="headerlink" href="#1012buffer-head" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>struct buffer_head{}</code></li>
+</ul>
+<h5 id="1013page-cache">10.1.3、page cache的管理<a class="headerlink" href="#1013page-cache" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>通过数据结构address_space管理page cache</strong></li>
+<li><code>add_to_page_cache()</code>，插入页面到page cache</li>
+</ul>
+<h5 id="1014page-cache">10.1.4、page cache的状态<a class="headerlink" href="#1014page-cache" title="Permanent link">&para;</a></h5>
+<ul>
+<li>
+<p>page cache的状态：</p>
+<ul>
+<li>PG_dirty：</li>
+<li>块缓存</li>
+<li>BH_Mapped</li>
+</ul>
+</li>
+</ul>
+<h4 id="102">10.2、文件预读<a class="headerlink" href="#102" title="Permanent link">&para;</a></h4>
+<ul>
+<li>readhead.c中<code>struct backing_dev_info{}</code></li>
+</ul>
+<h4 id="103">10.3、文件锁<a class="headerlink" href="#103" title="Permanent link">&para;</a></h4>
+<ul>
+<li>实现机制不同：<ul>
+<li>建议锁</li>
+<li>强制锁</li>
+</ul>
+</li>
+<li>访问方式不同：<ul>
+<li>读锁（共享锁）</li>
+<li>写锁（互斥锁）</li>
+</ul>
+</li>
+</ul>
+<h4 id="104">10.4、文件读过程代码分析<a class="headerlink" href="#104" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>sys_read()</code></li>
+</ul>
+<h4 id="105">10.5、读过程返回<a class="headerlink" href="#105" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>文件系统通过mpage_bio_submit提交一个I/O</strong>。这个I/O什么时候返回？通过什么机制通知上层？这涉及内核I/O过程的阻塞点设计。</li>
+</ul>
+<h4 id="106">10.6、文件写过程代码分析<a class="headerlink" href="#106" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>sys_write()</code></li>
+</ul>
+<h4 id="107">10.7、本章小结<a class="headerlink" href="#107" title="Permanent link">&para;</a></h4>
+<ul>
+<li>涉及文件中一些复杂参数的计算和page cache中页面缓存的状态处理。</li>
+</ul>
+<h3 id="chap11scsi-170182232">chap11、通用块层和scsi层   170（182/232）<a class="headerlink" href="#chap11scsi-170182232" title="Permanent link">&para;</a></h3>
+<ul>
+<li><em>lionel，这里面会涉及到一些I/O管理？</em></li>
+</ul>
+<ul>
+<li>上接文件系统的VFS层，下接硬盘驱动。<strong>处理I/O的合并或者排序</strong></li>
+</ul>
+<h4 id="111">11.1、块设备队列<a class="headerlink" href="#111" title="Permanent link">&para;</a></h4>
+<h5 id="1111scsi">11.1.1、scsi块设备队列处理函数<a class="headerlink" href="#1111scsi" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>scsi_alloc_queue()</code></li>
+</ul>
+<h5 id="1112">11.1.2、电梯算法和对象<a class="headerlink" href="#1112" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>struct elevator_type{}</code>
+  11.2、硬盘HBA抽象层</li>
+<li><code>struct scsi_host_template{}</code></li>
+</ul>
+<h4 id="113io">11.3、I/O的顺序控制<a class="headerlink" href="#113io" title="Permanent link">&para;</a></h4>
+<h4 id="114io">11.4、I/O调度算法<a class="headerlink" href="#114io" title="Permanent link">&para;</a></h4>
+<h5 id="1141noop">11.4.1、noop调度算法<a class="headerlink" href="#1141noop" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>noop_add_request()</code></li>
+</ul>
+<ul>
+<li>
+<p><code>noop_dispatch()</code></p>
+<h5 id="1142deadline">11.4.2、deadline调度算法<a class="headerlink" href="#1142deadline" title="Permanent link">&para;</a></h5>
+</li>
+</ul>
+<ul>
+<li><code>struct deadline_data{}</code></li>
+</ul>
+<ul>
+<li><code>deadline_add_request()</code></li>
+</ul>
+<h4 id="115io">11.5、I/O的处理过程<a class="headerlink" href="#115io" title="Permanent link">&para;</a></h4>
+<h5 id="1151io">11.5.1、I/O插入队列的过程分析<a class="headerlink" href="#1151io" title="Permanent link">&para;</a></h5>
+<h6 id="11511submit_bio">11.5.1.1、submit_bio函数<a class="headerlink" href="#11511submit_bio" title="Permanent link">&para;</a></h6>
+<h6 id="11512generic_make_request">11.5.1.2、generic_make_request函数<a class="headerlink" href="#11512generic_make_request" title="Permanent link">&para;</a></h6>
+<h6 id="11513__generic_make_request">11.5.1.3、<code>__generic_make_request</code>函数<a class="headerlink" href="#11513__generic_make_request" title="Permanent link">&para;</a></h6>
+<h6 id="11514elv_merge">11.5.1.4、elv_merge函数<a class="headerlink" href="#11514elv_merge" title="Permanent link">&para;</a></h6>
+<h6 id="11515__elv_add_request">11.5.1.5、<code>__elv_add_request</code>函数<a class="headerlink" href="#11515__elv_add_request" title="Permanent link">&para;</a></h6>
+<h6 id="11516elv_insert">11.5.1.6、elv_insert函数<a class="headerlink" href="#11516elv_insert" title="Permanent link">&para;</a></h6>
+<h5 id="1152io">11.5.2、I/O出队列的过程分析<a class="headerlink" href="#1152io" title="Permanent link">&para;</a></h5>
+<h6 id="11521unplug">11.5.2.1、unplug函数<a class="headerlink" href="#11521unplug" title="Permanent link">&para;</a></h6>
+<h6 id="11522scsi_request_fn">11.5.2.2、scsi_request_fn函数<a class="headerlink" href="#11522scsi_request_fn" title="Permanent link">&para;</a></h6>
+<h6 id="11523elv_nex_request">11.5.2.3、elv_nex_request函数<a class="headerlink" href="#11523elv_nex_request" title="Permanent link">&para;</a></h6>
+<h6 id="11524blk_do_ordered">11.5.2.4、blk_do_ordered函数<a class="headerlink" href="#11524blk_do_ordered" title="Permanent link">&para;</a></h6>
+<h6 id="11525start_ordered">11.5.2.5、start_ordered函数<a class="headerlink" href="#11525start_ordered" title="Permanent link">&para;</a></h6>
+<h6 id="11526scsi_dispatch_cmd">11.5.2.6、scsi_dispatch_cmd函数<a class="headerlink" href="#11526scsi_dispatch_cmd" title="Permanent link">&para;</a></h6>
+<h5 id="1153io">11.5.3、I/O返回路径<a class="headerlink" href="#1153io" title="Permanent link">&para;</a></h5>
+<h6 id="11531sd_rw_intr">11.5.3.1、sd_rw_intr函数<a class="headerlink" href="#11531sd_rw_intr" title="Permanent link">&para;</a></h6>
+<h6 id="11532scsi_io_completion">11.5.3.2、scsi_io_completion函数<a class="headerlink" href="#11532scsi_io_completion" title="Permanent link">&para;</a></h6>
+<h6 id="11533scsi_end_request">11.5.3.3、scsi_end_request函数<a class="headerlink" href="#11533scsi_end_request" title="Permanent link">&para;</a></h6>
+<h4 id="116">11.6、本章小结<a class="headerlink" href="#116" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>通用块层、I/O调度算法和scsi层，共同构建了文件系统之下的I/O处理流程</strong>。</li>
+</ul>
+<h3 id="chap12-204216232">chap12、内核回写机制   204（216/232）<a class="headerlink" href="#chap12-204216232" title="Permanent link">&para;</a></h3>
+<h4 id="121">12.1、内核的触发条件<a class="headerlink" href="#121" title="Permanent link">&para;</a></h4>
+<ul>
+<li>文件系统的写函数<code>generic_file_buffered_write()</code>要调用<code>balance_dirty_pages_ratelimited()</code></li>
+<li>内核定时器触发</li>
+<li>当系统申请内存失败，或者文件系统执行同步（sync）操作，或者内存管理模块试图释放更多内存的时候，都可能触发<strong>pdflush线程回写页面</strong>。</li>
+</ul>
+<h4 id="122">12.2、内核回写控制参数<a class="headerlink" href="#122" title="Permanent link">&para;</a></h4>
+<h4 id="123">12.3、定时器触发回写<a class="headerlink" href="#123" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>start_kernel()</code>启动了一个定时器</li>
+</ul>
+<h5 id="1231">12.3.1、启动定时器<a class="headerlink" href="#1231" title="Permanent link">&para;</a></h5>
+<ul>
+<li>调用<code>page_writeback_init()</code>函数启动定时器</li>
+</ul>
+<h5 id="1232">12.3.2、执行回写操作<a class="headerlink" href="#1232" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>wb_kupdate()</code></li>
+</ul>
+<h5 id="1233">12.3.3、检查需要回写的页面<a class="headerlink" href="#1233" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>writeback_inodes()</code>扫描系统的超级块，检查需要回写的页面</li>
+</ul>
+<h5 id="1234inode">12.3.4、回写超级块内的inode<a class="headerlink" href="#1234inode" title="Permanent link">&para;</a></h5>
+<ul>
+<li>
+<p><code>sync_sb_inodes()</code></p>
+<h5 id="12341">12.3.4.1、<a class="headerlink" href="#12341" title="Permanent link">&para;</a></h5>
+<h5 id="12342">12.3.4.2、<a class="headerlink" href="#12342" title="Permanent link">&para;</a></h5>
+<h5 id="12343">12.3.4.3、<a class="headerlink" href="#12343" title="Permanent link">&para;</a></h5>
+<h5 id="12344">12.3.4.4、<a class="headerlink" href="#12344" title="Permanent link">&para;</a></h5>
+</li>
+</ul>
+<h4 id="124">12.4、平衡写<a class="headerlink" href="#124" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>balance_dirty_pages_ratelimited()</code>检查脏页面是否到达限值，是否进行平衡写操作</li>
+</ul>
+<ul>
+<li>
+<p><code>balance_dirty_pages()</code></p>
+<h5 id="1241">12.4.1、检查直接回写的条件<a class="headerlink" href="#1241" title="Permanent link">&para;</a></h5>
+</li>
+</ul>
+<ul>
+<li>
+<p><code>balance_dirty_pages_ratelimited_nr()</code></p>
+<h5 id="1242">12.4.2、回写系统脏页面的条件<a class="headerlink" href="#1242" title="Permanent link">&para;</a></h5>
+<h5 id="1243">12.4.3、检查计算机模式<a class="headerlink" href="#1243" title="Permanent link">&para;</a></h5>
+</li>
+</ul>
+<h4 id="125">12.5、本章小结<a class="headerlink" href="#125" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Linux内核的回写机制提供了一种缓写机制，真实的写并不是直接写入硬盘，而是在page cache中缓存，等待合适的时机才真正执行写入</strong>。</li>
+</ul>
+<h3 id="chap13ext2-217229232">chap13、一个真实文件系统ext2   217（229/232）<a class="headerlink" href="#chap13ext2-217229232" title="Permanent link">&para;</a></h3>
+<h4 id="131ext2">13.1、ext2的硬盘布局<a class="headerlink" href="#131ext2" title="Permanent link">&para;</a></h4>
+<h4 id="132ext2">13.2、ext2文件系统目录树<a class="headerlink" href="#132ext2" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>struct ext2_dir_entry_2{};</code></li>
+<li><strong>根目录是一个固定的inode，它的inode号是2</strong>。</li>
+</ul>
+<h4 id="133ext2">13.3、ext2文件内容管理<a class="headerlink" href="#133ext2" title="Permanent link">&para;</a></h4>
+<ul>
+<li>ext2的inode信息可以存放15个块的地址，用户数据就存在这些块中。</li>
+<li>15块中前12块是直接数据块，<strong>第13块是一级索引块，第14块是二级索引块，第15块是三级索引块</strong></li>
+</ul>
+<h4 id="134ext2">13.4、ext2文件系统读写<a class="headerlink" href="#134ext2" title="Permanent link">&para;</a></h4>
+<ul>
+<li>通过文件系统的目录树，可以获得文件所在目录的上级目录。</li>
+<li>读上级目录的内容，就可以获得文件的inode号和文件名称。</li>
+<li>根据文件的inode号，可以获得文件的inode信息，也就获得了文件的类型、创建修改时间、文件大小等信息，完成打开文件的过程。</li>
+</ul>
+<h4 id="135">13.5、本章小结<a class="headerlink" href="#135" title="Permanent link">&para;</a></h4>
               
             </div>
           </div><footer>

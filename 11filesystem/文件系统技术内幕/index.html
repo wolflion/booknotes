@@ -68,7 +68,57 @@
                   </li>
                   <li class="toctree-l1 current"><a class="reference internal current" href="./">《文件系统技术内幕》</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#28">2.8、文件的零拷贝</a>
+    <li class="toctree-l2"><a class="reference internal" href="#chap1">chap1、从文件系统是什么说起</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap2">chap2、如何使用文件系统</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#21">2.1、准备开发环境</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#22">2.2、读/写文件</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#23">2.3、如何遍历目录中的文件</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#24">2.4、格式化文件和挂载</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#25">2.5、文件系统与权限管理</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#26">2.6、文件系统的锁机制</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#261">2.6.1、文件锁的分类与模式</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#262linux">2.6.2、Linux文件锁的使用</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#27">2.7、文件系统的扩展属性</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#28">2.8、文件的零拷贝</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#281">2.8.1、零拷贝的基本原理</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#282api">2.8.2、零拷贝的系统API</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap3">chap3、本地文件系统原理及核心技术</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#31linux">3.1、Linux文件系统整体架构简介</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#311vfs">3.1.1、从VFS到具体文件系统</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#312">3.1.2、关键处理流程举例</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#32">3.2、本地文件系统的关键技术与特性</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#321layout">3.2.1、磁盘空间布局（Layout）</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
     </li>
     </ul>
                   </li>
@@ -118,8 +168,82 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h3 id="chap2">chap2、如何使用文件系统<a class="headerlink" href="#chap2" title="Permanent link">&para;</a></h3>
+                <h2 id="_1">《文件系统技术内幕》<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h3 id="chap1">chap1、从文件系统是什么说起<a class="headerlink" href="#chap1" title="Permanent link">&para;</a></h3>
+<h3 id="chap2">chap2、如何使用文件系统<a class="headerlink" href="#chap2" title="Permanent link">&para;</a></h3>
+<h4 id="21">2.1、准备开发环境<a class="headerlink" href="#21" title="Permanent link">&para;</a></h4>
+<h4 id="22">2.2、读/写文件<a class="headerlink" href="#22" title="Permanent link">&para;</a></h4>
+<h4 id="23">2.3、如何遍历目录中的文件<a class="headerlink" href="#23" title="Permanent link">&para;</a></h4>
+<h4 id="24">2.4、格式化文件和挂载<a class="headerlink" href="#24" title="Permanent link">&para;</a></h4>
+<ul>
+<li>格式化，相当于在块设备上创建一个文件系统</li>
+<li>挂载，将文件系统激活（在操作系统目录树呈现）的过程</li>
+</ul>
+<h4 id="25">2.5、文件系统与权限管理<a class="headerlink" href="#25" title="Permanent link">&para;</a></h4>
+<h4 id="26">2.6、文件系统的锁机制<a class="headerlink" href="#26" title="Permanent link">&para;</a></h4>
+<h5 id="261">2.6.1、文件锁的分类与模式<a class="headerlink" href="#261" title="Permanent link">&para;</a></h5>
+<ul>
+<li>从大类上来分，分为<ul>
+<li>劝告锁（Advisory Lock）</li>
+<li>强制锁（Mandatory Lock）</li>
+</ul>
+</li>
+<li>在<strong>使用上</strong>，无论哪种锁都分为<strong>共享锁和排他锁</strong>两种</li>
+</ul>
+<h5 id="262linux">2.6.2、Linux文件锁的使用<a class="headerlink" href="#262linux" title="Permanent link">&para;</a></h5>
+<h6 id="2621flock">2.6.2.1、flock()函数的使用简析<a class="headerlink" href="#2621flock" title="Permanent link">&para;</a></h6>
+<ul>
+<li><code>int flock(int fd, int operation);</code></li>
+</ul>
+<h6 id="2622fcntl">2.6.2.2、fcntl()函数的使用简析<a class="headerlink" href="#2622fcntl" title="Permanent link">&para;</a></h6>
+<ul>
+<li><code>int fcntl(int fd, int cmd, struct flock *lock);</code></li>
+</ul>
+<h4 id="27">2.7、文件系统的扩展属性<a class="headerlink" href="#27" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>getfattr</code>命令</li>
+</ul>
 <h4 id="28">2.8、文件的零拷贝<a class="headerlink" href="#28" title="Permanent link">&para;</a></h4>
+<h5 id="281">2.8.1、零拷贝的基本原理<a class="headerlink" href="#281" title="Permanent link">&para;</a></h5>
+<h5 id="282api">2.8.2、零拷贝的系统API<a class="headerlink" href="#282api" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>sendfile()</code>，<strong>无法对数据进行修改</strong></li>
+<li><code>mmap()</code></li>
+</ul>
+<h3 id="chap3">chap3、本地文件系统原理及核心技术<a class="headerlink" href="#chap3" title="Permanent link">&para;</a></h3>
+<h4 id="31linux">3.1、Linux文件系统整体架构简介<a class="headerlink" href="#31linux" title="Permanent link">&para;</a></h4>
+<ul>
+<li>图3-1</li>
+</ul>
+<h5 id="311vfs">3.1.1、从VFS到具体文件系统<a class="headerlink" href="#311vfs" title="Permanent link">&para;</a></h5>
+<ul>
+<li>写入数据，函数调用流程</li>
+</ul>
+<h5 id="312">3.1.2、关键处理流程举例<a class="headerlink" href="#312" title="Permanent link">&para;</a></h5>
+<h6 id="3121">3.1.2.1、文件系统的注册<a class="headerlink" href="#3121" title="Permanent link">&para;</a></h6>
+<ul>
+<li>mount()主要作用：**从存储介质读取超级块信息，并创建该文件系统根目录的dentry实例。</li>
+</ul>
+<h6 id="3122">3.1.2.2、打开文件的流程<a class="headerlink" href="#3122" title="Permanent link">&para;</a></h6>
+<ul>
+<li>（1）如何通过一个字符串路径来打开一个文件？</li>
+<li>（2）为什么通过一个文件描述符就可以实现文件的访问？</li>
+<li>打开文件有2个流程，<code>do_sys_open()-&gt;do_sys_openat2()-&gt;do_filp_open()-&gt;path_openat()</code><ul>
+<li>流程1：解析：<code>link_path_walk()-&gt;walk_component()-&gt;lookup_slow()-&gt;inode-&gt;i_op-&gt;lookup()-&gt;ext4_lookup()</code></li>
+<li>流程2：打开：<code>do_open()-&gt;vfs_open()-&gt;do_dentry_open()-&gt;f-&gt;f_op-&gt;open()-&gt;ext4_file_open()</code></li>
+</ul>
+</li>
+</ul>
+<h6 id="3122_1">3.1.2.2、挂载文件系统<a class="headerlink" href="#3122_1" title="Permanent link">&para;</a></h6>
+<ul>
+<li>关键流程：<code>do_mount()-&gt;do_new_mount()-&gt;do_new_mount_fc()-&gt;do_add_mount()-&gt;graft_tree()-&gt;attach_recursive_mnt()</code></li>
+</ul>
+<h6 id="3122_2">3.1.2.2、读/写数据流程<a class="headerlink" href="#3122_2" title="Permanent link">&para;</a></h6>
+<ul>
+<li>通过在inode注册的函数指针完成的，函数指针会赋值给file结构体中的成员<code>f_op</code></li>
+</ul>
+<h4 id="32">3.2、本地文件系统的关键技术与特性<a class="headerlink" href="#32" title="Permanent link">&para;</a></h4>
+<h5 id="321layout">3.2.1、磁盘空间布局（Layout）<a class="headerlink" href="#321layout" title="Permanent link">&para;</a></h5>
               
             </div>
           </div><footer>
