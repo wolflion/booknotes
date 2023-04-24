@@ -48,6 +48,7 @@ nav:
         - 《Linux内核探秘》: '11filesystem/Linux内核探秘.md'
         - 《文件系统技术内幕》: '11filesystem/文件系统技术内幕.md'
         - 《存储技术原理分析》: '11filesystem/存储技术原理分析.md'
+        - 《操作系统导论》: '408/操作系统导论.md'
     - 存储:
         - 《ceph设计原理与实现》: '12storage/ceph设计原理与实现.md'
     - 内核:
