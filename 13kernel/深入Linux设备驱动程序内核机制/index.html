@@ -70,6 +70,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">《存储技术原理分析》</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA/">《操作系统导论》</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">存储</span></p>
               <ul>
@@ -82,29 +84,211 @@
                   </li>
                   <li class="toctree-l1 current"><a class="reference internal current" href="./">《深入Linux设备驱动程序内核机制》</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#0">0、</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#11">1.1、内核模块的文件格式</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#12export_symbol">1.2、EXPORT_SYMBOL的内核实现</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#13">1.3、模块的加载过程</a>
+    <li class="toctree-l2"><a class="reference internal" href="#chap1">chap1、内核模块</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#0_1">0、</a>
+    <li class="toctree-l3"><a class="reference internal" href="#0">0、</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#131sys_init_module">1.3.1、sys_init_module（第一部分）</a>
+    <li class="toctree-l3"><a class="reference internal" href="#11">1.1、内核模块的文件格式</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#132struct-module">1.3.2、struct module</a>
+    <li class="toctree-l3"><a class="reference internal" href="#12export_symbol">1.2、EXPORT_SYMBOL的内核实现</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#133load_module">1.3.3、load_module（本节重点）</a>
+    <li class="toctree-l3"><a class="reference internal" href="#13">1.3、模块的加载过程</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#0_1">0、</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#134sys_init_module">1.3.4、sys_init_module（第二部分）</a>
+    <li class="toctree-l4"><a class="reference internal" href="#131sys_init_module">1.3.1、sys_init_module（第一部分）</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#135">1.3.5、模块的卸载</a>
+    <li class="toctree-l4"><a class="reference internal" href="#132struct-module">1.3.2、struct module</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#133load_module">1.3.3、load_module（本节重点）</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#134sys_init_module">1.3.4、sys_init_module（第二部分）</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#135">1.3.5、模块的卸载</a>
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#14">1.4、本章小结</a>
+    <li class="toctree-l3"><a class="reference internal" href="#14">1.4、本章小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap2">chap2、字符设备驱动程序</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#21">2.1、应用程序与设备驱动程序互动实例</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#22struct-file_operations">2.2、struct file_operations</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#23">2.3、字符设备的内核抽象</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#24">2.4、设备号的构成与分配</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#241">2.4.1、设备号的构成</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#242">2.4.2、设备号的分配与管理</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#25">2.5、字符设备的注册</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#26">2.6、设备文件节点的生成</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#27">2.7、字符设备文件的打开操作</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#28">2.8、本章小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap3-87102538">chap3、分配内存  87（102/538）</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#31">3.1、物理内存的管理</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#311node">3.1.1、内存节点node</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#312zone">3.1.2、内存区域zone</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#313">3.1.3、内存页</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#32page-allocator">3.2、页面分配器（page allocator）</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#0_2">0、</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#321gfp_mask">3.2.1、gfp_mask</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#322alloc_pages">3.2.2、alloc_pages</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#323_get_free_pages">3.2.3、_get_free_pages</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#324get_zeroed_page">3.2.4、get_zeroed_page</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#325_get_dma_pages">3.2.5、_get_dma_pages</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#33slabslab-allocator">3.3、slab分配器（slab allocator）</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#331slab">3.3.1、管理slab的数据结构</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#332kmallockzalloc">3.3.2、kmalloc与kzalloc</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#333kmem_cache_createkmem_cache_alloc">3.3.3、kmem_cache_create与kmem_cache_alloc</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#34">3.4、内存池</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#35">3.5、虚拟内存的管理</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#351">3.5.1、内核虚拟地址空间构成</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#352vmallocvfree">3.5.2、vmalloc与vfree</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#353ioremap">3.5.3、ioremap</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#36per-cpu">3.6、per-CPU变量</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#0_3">0、</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#361per-cpu">3.6.1、静态per-CPU变量的声明与定义</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#362per-cpu">3.6.2、静态per-CPU变量的链接脚本</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#363setup_per_cpu_areas">3.6.3、setup_per_cpu_areas函数</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#364per-cpu">3.6.4、使用per-CPU变量</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#37">3.7、本章小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap7-231246538">chap7、设备文件的高级操作  231（246/538）</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#71ioctl">7.1、ioctl文件操作</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#711ioctl">7.1.1、ioctl的系统调用</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#712ioctl">7.1.2、ioctl的命令编码</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#713copy_from_usercopy_to_user">7.1.3、copy_from_user和copy_to_user</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#72io">7.2、字符设备的I/O模型</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#73io">7.3、同步阻塞型I/O</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#731wait_event_interruptible">7.3.1、wait_event_interruptible</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#732wait_up_interruptible">7.3.2、wait_up_interruptible</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#74io">7.4、同步非阻塞型I/O</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#75io">7.5、异步阻塞型I/O</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#76io">7.6、异步非阻塞型I/O</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#77fsync">7.7、驱动程序的fsync例程</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#78fasync">7.8、fasync例程</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#79llseek">7.9、llseek例程</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#710">7.10、访问权能</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#711">7.11、本章小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap11-407422538">chap11、块设备驱动程序  407（422/538）</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#111">11.1、块子系统初始化</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#112ramdisk">11.2、ramdisk源码实例</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1121make_requestram-disk">11.2.1、make_request版本的RAM DISK源码</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1122requestram-disk">11.2.2、request版本的RAM DISK源码</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1123ramdisk">11.2.3、ramdisk的使用</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#113">11.3、块设备号的注册与管理</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#114block_device">11.4、block_device</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#115struct-gendisk">11.5、struct gendisk</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#116struct-hd_struct">11.6、struct hd_struct</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#117alloc_diskgendisk">11.7、用alloc_disk分配gendisk对象</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#118add_disk">11.8、向系统添加个块设备add_disk</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#119block_device_operations">11.9、block_device_operations</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#1110">11.10、块设备文件的打开</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#1111blk_init_queue">11.11、blk_init_queue</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#1112blk_queue_make_request">11.12、blk_queue_make_request</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#1113">11.13、向队列提交请求</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#1114">11.14、块设备的请求处理函数</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#1115bio">11.15、bio结构</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#1116">11.16、本章小结</a>
+    </li>
+        </ul>
     </li>
     </ul>
                   </li>
@@ -140,7 +324,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h3 id="chap1">chap1、内核模块<a class="headerlink" href="#chap1" title="Permanent link">&para;</a></h3>
+                <h2 id="linux">《深入Linux设备驱动程序内核机制》<a class="headerlink" href="#linux" title="Permanent link">&para;</a></h2>
+<h3 id="chap1">chap1、内核模块<a class="headerlink" href="#chap1" title="Permanent link">&para;</a></h3>
 <h4 id="0">0、<a class="headerlink" href="#0" title="Permanent link">&para;</a></h4>
 <ul>
 <li>内核模块可以在系统运行期间动态扩展系统功能而无须重新启动系统。</li>
@@ -197,13 +382,264 @@
 <li>非函数指针是<code>struct module *owner</code></li>
 </ul>
 <h4 id="23">2.3、字符设备的内核抽象<a class="headerlink" href="#23" title="Permanent link">&para;</a></h4>
+<ul>
+<li>include/linux/cdev.h中的<code>struct cdev{};</code></li>
+<li>fs/char_dev.c中的<code>cdev_alloc()</code></li>
+</ul>
 <h4 id="24">2.4、设备号的构成与分配<a class="headerlink" href="#24" title="Permanent link">&para;</a></h4>
 <h5 id="241">2.4.1、设备号的构成<a class="headerlink" href="#241" title="Permanent link">&para;</a></h5>
+<ul>
+<li>include/linux/tyes.h中的<code>typedef __u32 __kernel_dev_t</code></li>
+</ul>
 <h5 id="242">2.4.2、设备号的分配与管理<a class="headerlink" href="#242" title="Permanent link">&para;</a></h5>
+<ul>
+<li>fs/char_dev.c中的<code>register_chrdev_region()</code>，<code>alloc_chrdev_region()</code></li>
+</ul>
 <h4 id="25">2.5、字符设备的注册<a class="headerlink" href="#25" title="Permanent link">&para;</a></h4>
+<ul>
+<li>fs/char_dev.c中的<code>cdev_add()</code></li>
+<li>drivers/base/map.c中的<code>struct kobj_map{};</code></li>
+</ul>
 <h4 id="26">2.6、设备文件节点的生成<a class="headerlink" href="#26" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>用户空间的应用程序要想使用驱动程序提供的服务，需要经过设备文件来达成</strong>。</li>
+<li>fs/node.c中的<code>init_special_inode();</code></li>
+<li>fs/block_dev.c中的<code>def_blk_fops={};</code></li>
+</ul>
 <h4 id="27">2.7、字符设备文件的打开操作<a class="headerlink" href="#27" title="Permanent link">&para;</a></h4>
+<ul>
+<li>图2-8，sys_open到chrdev_open调用流程</li>
+<li>fs/file_table.c中的<code>fput()</code></li>
+</ul>
 <h4 id="28">2.8、本章小结<a class="headerlink" href="#28" title="Permanent link">&para;</a></h4>
+<h3 id="chap3-87102538">chap3、分配内存  87（102/538）<a class="headerlink" href="#chap3-87102538" title="Permanent link">&para;</a></h3>
+<h4 id="31">3.1、物理内存的管理<a class="headerlink" href="#31" title="Permanent link">&para;</a></h4>
+<h5 id="311node">3.1.1、内存节点node<a class="headerlink" href="#311node" title="Permanent link">&para;</a></h5>
+<ul>
+<li>UMA模型</li>
+<li>NUMA模型（Non-Uniform Memory Access）</li>
+</ul>
+<h5 id="312zone">3.1.2、内存区域zone<a class="headerlink" href="#312zone" title="Permanent link">&para;</a></h5>
+<ul>
+<li>include/linux/mmzone.h中的<code>enum zone_type{};</code></li>
+</ul>
+<h5 id="313">3.1.3、内存页<a class="headerlink" href="#313" title="Permanent link">&para;</a></h5>
+<ul>
+<li>struct page对象。</li>
+</ul>
+<h4 id="32page-allocator">3.2、页面分配器（page allocator）<a class="headerlink" href="#32page-allocator" title="Permanent link">&para;</a></h4>
+<h5 id="0_2">0、<a class="headerlink" href="#0_2" title="Permanent link">&para;</a></h5>
+<ul>
+<li>图3-2、<strong>mem_map、物理页面及虚地址空间关系</strong></li>
+</ul>
+<h5 id="321gfp_mask">3.2.1、gfp_mask<a class="headerlink" href="#321gfp_mask" title="Permanent link">&para;</a></h5>
+<ul>
+<li>include/linux/gfp.h</li>
+</ul>
+<h5 id="322alloc_pages">3.2.2、alloc_pages<a class="headerlink" href="#322alloc_pages" title="Permanent link">&para;</a></h5>
+<ul>
+<li>include/linux/gfp.h中的<code>alloc_pages()</code></li>
+</ul>
+<h5 id="323_get_free_pages">3.2.3、<code>_get_free_pages</code><a class="headerlink" href="#323_get_free_pages" title="Permanent link">&para;</a></h5>
+<ul>
+<li>mm/page_alloc.c中<code>__get_free_pages()</code></li>
+</ul>
+<h5 id="324get_zeroed_page">3.2.4、get_zeroed_page<a class="headerlink" href="#324get_zeroed_page" title="Permanent link">&para;</a></h5>
+<ul>
+<li>mm/page_alloc.c中<code>get_zeroed_page()</code></li>
+</ul>
+<h5 id="325_get_dma_pages">3.2.5、<code>_get_dma_pages</code><a class="headerlink" href="#325_get_dma_pages" title="Permanent link">&para;</a></h5>
+<h4 id="33slabslab-allocator">3.3、slab分配器（slab allocator）<a class="headerlink" href="#33slabslab-allocator" title="Permanent link">&para;</a></h4>
+<h5 id="331slab">3.3.1、管理slab的数据结构<a class="headerlink" href="#331slab" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>struct kmem_cache和struct slab</strong>是slab分配器的基石</li>
+<li>include/linux/slab_def.h中的<code>struct kmem_cache{};</code></li>
+<li>mm/slab.c中的<code>struct slab{};</code></li>
+<li>include/linux/slab_def.h中的<code>struct cache_sizes{};</code></li>
+<li>mm/slab.c中的<code>kernel_cache_init()</code></li>
+</ul>
+<h5 id="332kmallockzalloc">3.3.2、kmalloc与kzalloc<a class="headerlink" href="#332kmallockzalloc" title="Permanent link">&para;</a></h5>
+<ul>
+<li>kmalloc分配出来的内存空间在物理上是连续的，<strong>不负责把分配出的内存空间中的内容清零</strong>，建立在<strong>slab分配器基础之上</strong></li>
+<li>mm/slab.c中的<code>cache_grow()</code></li>
+<li>include/linux/gfp.h中的</li>
+</ul>
+<h5 id="333kmem_cache_createkmem_cache_alloc">3.3.3、kmem_cache_create与kmem_cache_alloc<a class="headerlink" href="#333kmem_cache_createkmem_cache_alloc" title="Permanent link">&para;</a></h5>
+<ul>
+<li>mm/slab.c中的<code>__cache_shrink()</code></li>
+</ul>
+<h4 id="34">3.4、内存池<a class="headerlink" href="#34" title="Permanent link">&para;</a></h4>
+<h4 id="35">3.5、虚拟内存的管理<a class="headerlink" href="#35" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>内核代码中用<code>PAGE_OFFSET</code>宏来标示虚拟地址空间中内核部分的起始地址</strong>。</li>
+</ul>
+<h5 id="351">3.5.1、内核虚拟地址空间构成<a class="headerlink" href="#351" title="Permanent link">&para;</a></h5>
+<ul>
+<li>内核会将1GB的内核大体上分为三部分：
+    + 第一部分位于1GB空间的开头，用于对系统物理内存的直接映射（线性映射），内核用全局变量high_memory来表示这段空间的上界
+    + 第二部分，主要用于vmalloc函数
+    + 第三部分，位于1GB空间的结尾部分</li>
+</ul>
+<h5 id="352vmallocvfree">3.5.2、vmalloc与vfree<a class="headerlink" href="#352vmallocvfree" title="Permanent link">&para;</a></h5>
+<ul>
+<li>vmalloc特点是分配的虚拟地址空间是连续的，但这段虚拟地址空间所映射的物理地址可能是不连续的。</li>
+<li><strong>驱动程序中并不鼓励使用vmalloc函数</strong>：
+    + 首先，vmalloc的实现机制决定了它的使用效率没有kmalloc这样的函数高</li>
+<li>include/linux/vmalloc.h中的<code>struct vm_struct{};</code></li>
+<li>mm/vmalloc.c中的<code>map_vm_area()</code></li>
+</ul>
+<h5 id="353ioremap">3.5.3、ioremap<a class="headerlink" href="#353ioremap" title="Permanent link">&para;</a></h5>
+<h4 id="36per-cpu">3.6、per-CPU变量<a class="headerlink" href="#36per-cpu" title="Permanent link">&para;</a></h4>
+<h5 id="0_3">0、<a class="headerlink" href="#0_3" title="Permanent link">&para;</a></h5>
+<h5 id="361per-cpu">3.6.1、静态per-CPU变量的声明与定义<a class="headerlink" href="#361per-cpu" title="Permanent link">&para;</a></h5>
+<ul>
+<li>include/linux/percpu_defs.h</li>
+</ul>
+<h5 id="362per-cpu">3.6.2、静态per-CPU变量的链接脚本<a class="headerlink" href="#362per-cpu" title="Permanent link">&para;</a></h5>
+<ul>
+<li>kernel/vmlinux.lds</li>
+</ul>
+<h5 id="363setup_per_cpu_areas">3.6.3、setup_per_cpu_areas函数<a class="headerlink" href="#363setup_per_cpu_areas" title="Permanent link">&para;</a></h5>
+<h5 id="364per-cpu">3.6.4、使用per-CPU变量<a class="headerlink" href="#364per-cpu" title="Permanent link">&para;</a></h5>
+<ul>
+<li>mm/percpu.c中的<code>__per_cpu_offset()</code></li>
+</ul>
+<h4 id="37">3.7、本章小结<a class="headerlink" href="#37" title="Permanent link">&para;</a></h4>
+<ul>
+<li>基于伙伴系统的页面分配器</li>
+<li>基于slab分配器的kmalloc函数和kmem_cache_alloc函数</li>
+<li>vmalloc函数</li>
+<li>用在多处理器系统中，即per-CPU内存分配器</li>
+</ul>
+<h3 id="chap7-231246538">chap7、设备文件的高级操作  231（246/538）<a class="headerlink" href="#chap7-231246538" title="Permanent link">&para;</a></h3>
+<h4 id="71ioctl">7.1、ioctl文件操作<a class="headerlink" href="#71ioctl" title="Permanent link">&para;</a></h4>
+<ul>
+<li>ioctl一般用来在用户空间的应用程序和驱动程序模块之间传递控制参数。</li>
+</ul>
+<h5 id="711ioctl">7.1.1、ioctl的系统调用<a class="headerlink" href="#711ioctl" title="Permanent link">&para;</a></h5>
+<ul>
+<li>include/linux/fs.h中的<code>struct file_operations{};</code></li>
+<li>fs/ioctl.c中有<code>sys_ioctl()</code>，<code>do_vfs_ioctl()</code>，<code>vfs_ioctl()</code></li>
+<li><strong>大内核锁，虽然还在2.6版本的内核中，但应该避免使用</strong></li>
+</ul>
+<h5 id="712ioctl">7.1.2、ioctl的命令编码<a class="headerlink" href="#712ioctl" title="Permanent link">&para;</a></h5>
+<h5 id="713copy_from_usercopy_to_user">7.1.3、copy_from_user和copy_to_user<a class="headerlink" href="#713copy_from_usercopy_to_user" title="Permanent link">&para;</a></h5>
+<ul>
+<li>include/asm-generic/uaccess.h中的<code>copy_from_user()</code>
+    + arch/x86/lib/usercopy_32.c中的<code>__copy_user_zeroing()</code></li>
+</ul>
+<h4 id="72io">7.2、字符设备的I/O模型<a class="headerlink" href="#72io" title="Permanent link">&para;</a></h4>
+<ul>
+<li>4种</li>
+</ul>
+<h4 id="73io">7.3、同步阻塞型I/O<a class="headerlink" href="#73io" title="Permanent link">&para;</a></h4>
+<h5 id="731wait_event_interruptible">7.3.1、wait_event_interruptible<a class="headerlink" href="#731wait_event_interruptible" title="Permanent link">&para;</a></h5>
+<ul>
+<li>include/linux/wait.h中的</li>
+</ul>
+<h5 id="732wait_up_interruptible">7.3.2、wait_up_interruptible<a class="headerlink" href="#732wait_up_interruptible" title="Permanent link">&para;</a></h5>
+<ul>
+<li>include/linux/wait.h中的</li>
+<li>kernel/sched.c中的<code>__wake_up()</code>，<code>__wake_up_common()</code>，<code>try_to_wake_up()</code></li>
+</ul>
+<h4 id="74io">7.4、同步非阻塞型I/O<a class="headerlink" href="#74io" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>filp-&gt;f_flags</code>的<code>O_NONBLOCK</code>位</li>
+</ul>
+<h4 id="75io">7.5、异步阻塞型I/O<a class="headerlink" href="#75io" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>在设备驱动程序中如何实现poll方法</strong></li>
+<li>include/asm/poll.h中的<code>struct pollfd{};</code>，<code>poll_wait()</code></li>
+<li>fs/select.c中的<code>__pollwait()</code>，<code>pollwake()</code></li>
+</ul>
+<h4 id="76io">7.6、异步非阻塞型I/O<a class="headerlink" href="#76io" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>实现file_operations对象中的<code>aio_read()</code>和<code>aio_write()</code></strong></li>
+<li>include/linux/aio.h中</li>
+</ul>
+<h4 id="77fsync">7.7、驱动程序的fsync例程<a class="headerlink" href="#77fsync" title="Permanent link">&para;</a></h4>
+<ul>
+<li>字符设备没有实现，**块设备，使用通用的<code>block_fsync()</code>作为fsync例程的实现</li>
+</ul>
+<h4 id="78fasync">7.8、fasync例程<a class="headerlink" href="#78fasync" title="Permanent link">&para;</a></h4>
+<ul>
+<li>fs/fcntl.c中的<code>fasync_helper()</code>，<code>kill_fasync()</code></li>
+<li><em>lionel，这部分没太看懂</em></li>
+</ul>
+<h4 id="79llseek">7.9、llseek例程<a class="headerlink" href="#79llseek" title="Permanent link">&para;</a></h4>
+<ul>
+<li>fs/read-write.c中的<code>lseek()</code>，<code>vfs_llseek()</code></li>
+<li>fs/open.c中的<code>nonseekable_open()</code></li>
+</ul>
+<h4 id="710">7.10、访问权能<a class="headerlink" href="#710" title="Permanent link">&para;</a></h4>
+<ul>
+<li>kernel/capabiltiy.c中的<code>capable()</code></li>
+<li>include/linux/security.h中的<code>security_capable()</code></li>
+<li>security/commoncap.c中的<code>cap_capable()</code></li>
+</ul>
+<h4 id="711">7.11、本章小结<a class="headerlink" href="#711" title="Permanent link">&para;</a></h4>
+<ul>
+<li>字符型设备驱动程序最常用的是ioctl例程。</li>
+<li>fasync实现一个异步通知机制，<strong>主要依赖内核的fasync_helper和kill_fasync</strong>，前者将需要通知的进程加入一个链表，后者在应用程序关注的事件发生时通过信号发送的方式来通知应用程序。</li>
+</ul>
+<h3 id="chap11-407422538">chap11、块设备驱动程序  407（422/538）<a class="headerlink" href="#chap11-407422538" title="Permanent link">&para;</a></h3>
+<h4 id="111">11.1、块子系统初始化<a class="headerlink" href="#111" title="Permanent link">&para;</a></h4>
+<h4 id="112ramdisk">11.2、ramdisk源码实例<a class="headerlink" href="#112ramdisk" title="Permanent link">&para;</a></h4>
+<h5 id="1121make_requestram-disk">11.2.1、make_request版本的RAM DISK源码<a class="headerlink" href="#1121make_requestram-disk" title="Permanent link">&para;</a></h5>
+<h5 id="1122requestram-disk">11.2.2、request版本的RAM DISK源码<a class="headerlink" href="#1122requestram-disk" title="Permanent link">&para;</a></h5>
+<h5 id="1123ramdisk">11.2.3、ramdisk的使用<a class="headerlink" href="#1123ramdisk" title="Permanent link">&para;</a></h5>
+<h4 id="113">11.3、块设备号的注册与管理<a class="headerlink" href="#113" title="Permanent link">&para;</a></h4>
+<ul>
+<li>block/genhd.c中的<code>register_blkdev()</code></li>
+</ul>
+<h4 id="114block_device">11.4、block_device<a class="headerlink" href="#114block_device" title="Permanent link">&para;</a></h4>
+<ul>
+<li>include/linux/fs.h中的<code>struct block_device{};</code></li>
+</ul>
+<h4 id="115struct-gendisk">11.5、struct gendisk<a class="headerlink" href="#115struct-gendisk" title="Permanent link">&para;</a></h4>
+<ul>
+<li>include/linux/genhd.h中的<code>struct gendisk{};</code></li>
+</ul>
+<h4 id="116struct-hd_struct">11.6、struct hd_struct<a class="headerlink" href="#116struct-hd_struct" title="Permanent link">&para;</a></h4>
+<ul>
+<li>include/linux/genhd.h中的<code>struct hd_struct{};</code></li>
+</ul>
+<h4 id="117alloc_diskgendisk">11.7、用alloc_disk分配gendisk对象<a class="headerlink" href="#117alloc_diskgendisk" title="Permanent link">&para;</a></h4>
+<h4 id="118add_disk">11.8、向系统添加个块设备add_disk<a class="headerlink" href="#118add_disk" title="Permanent link">&para;</a></h4>
+<ul>
+<li>fs/partitions/check.c中的<code>register_disk()</code></li>
+<li>fs/block_dev.c中的<code>bdget()</code></li>
+</ul>
+<h4 id="119block_device_operations">11.9、block_device_operations<a class="headerlink" href="#119block_device_operations" title="Permanent link">&para;</a></h4>
+<ul>
+<li>include/linux/blkdev.h中的<code>block_device_operations{};</code></li>
+</ul>
+<h4 id="1110">11.10、块设备文件的打开<a class="headerlink" href="#1110" title="Permanent link">&para;</a></h4>
+<ul>
+<li>fs/inode.c中的<code>init_special_inode()</code></li>
+<li>fs/block_dev.c中的<code>def_blk_fops=</code></li>
+</ul>
+<h4 id="1111blk_init_queue">11.11、blk_init_queue<a class="headerlink" href="#1111blk_init_queue" title="Permanent link">&para;</a></h4>
+<ul>
+<li>block/blk-core.c</li>
+<li>include/linux/blkdev.h中的<code>struct request_queue{};</code></li>
+<li>include/linux/blkdev.h中的<code>struct request{};</code></li>
+</ul>
+<h4 id="1112blk_queue_make_request">11.12、blk_queue_make_request<a class="headerlink" href="#1112blk_queue_make_request" title="Permanent link">&para;</a></h4>
+<ul>
+<li>block/blk-settings.c中的<code>blk_queue_make_request()</code></li>
+</ul>
+<h4 id="1113">11.13、向队列提交请求<a class="headerlink" href="#1113" title="Permanent link">&para;</a></h4>
+<ul>
+<li>block/blk-core.c中的<code>submit_bio()</code>，<code>generic_make_request()</code></li>
+<li>drivers/block/brd.c中的<code>ramdisk</code></li>
+</ul>
+<h4 id="1114">11.14、块设备的请求处理函数<a class="headerlink" href="#1114" title="Permanent link">&para;</a></h4>
+<h4 id="1115bio">11.15、bio结构<a class="headerlink" href="#1115bio" title="Permanent link">&para;</a></h4>
+<ul>
+<li>include/linux/bio.h中的<code>struct bio{};</code>，<code>struct bio_vec{};</code></li>
+</ul>
+<h4 id="1116">11.16、本章小结<a class="headerlink" href="#1116" title="Permanent link">&para;</a></h4>
               
             </div>
           </div><footer>

@@ -70,113 +70,119 @@
                   </li>
                   <li class="toctree-l1 current"><a class="reference internal current" href="./">《存储技术原理分析》</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#81">8.1、概述</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#82">8.2、文件系统对象</a>
+    <li class="toctree-l2"><a class="reference internal" href="#chap8">chap8、文件系统</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#821file_system_type">8.2.1、file_system_type：文件系统类型</a>
+    <li class="toctree-l3"><a class="reference internal" href="#81">8.1、概述</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#822super_blockvfs">8.2.2、super_block：vfs超级块</a>
+    <li class="toctree-l3"><a class="reference internal" href="#82">8.2、文件系统对象</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#821file_system_type">8.2.1、file_system_type：文件系统类型</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#823inodevfs">8.2.3、inode：vfs索引节点</a>
+    <li class="toctree-l4"><a class="reference internal" href="#822super_blockvfs">8.2.2、super_block：vfs超级块</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#824dentryvfs">8.2.4、dentry：vfs目录项</a>
+    <li class="toctree-l4"><a class="reference internal" href="#823inodevfs">8.2.3、inode：vfs索引节点</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#825vfsmount">8.2.5、vfsmount：文件系统装载</a>
+    <li class="toctree-l4"><a class="reference internal" href="#824dentryvfs">8.2.4、dentry：vfs目录项</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#825vfsmount">8.2.5、vfsmount：文件系统装载</a>
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#83">8.3、装载文件系统</a>
+    <li class="toctree-l3"><a class="reference internal" href="#83">8.3、装载文件系统</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#0">0、</a>
+    <li class="toctree-l4"><a class="reference internal" href="#0">0、</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#831mount">8.3.1、mount系统调用的处理流程</a>
+    <li class="toctree-l4"><a class="reference internal" href="#831mount">8.3.1、mount系统调用的处理流程</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#832">8.3.2、构建子文件系统装载实例</a>
+    <li class="toctree-l4"><a class="reference internal" href="#832">8.3.2、构建子文件系统装载实例</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#833">8.3.3、 关联文件系统的超级块实例</a>
+    <li class="toctree-l4"><a class="reference internal" href="#833">8.3.3、 关联文件系统的超级块实例</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#834">8.3.4、调用回调函数填充超级块</a>
+    <li class="toctree-l4"><a class="reference internal" href="#834">8.3.4、调用回调函数填充超级块</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#835">8.3.5、装载到全局文件系统树</a>
+    <li class="toctree-l4"><a class="reference internal" href="#835">8.3.5、装载到全局文件系统树</a>
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#84">8.4、路径查找</a>
+    <li class="toctree-l3"><a class="reference internal" href="#84">8.4、路径查找</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#841">8.4.1、路径查找入口</a>
+    <li class="toctree-l4"><a class="reference internal" href="#841">8.4.1、路径查找入口</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#842">8.4.2、逐个分量解析</a>
+    <li class="toctree-l4"><a class="reference internal" href="#842">8.4.2、逐个分量解析</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#843">8.4.3、解析单个分量</a>
+    <li class="toctree-l4"><a class="reference internal" href="#843">8.4.3、解析单个分量</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#844">8.4.4、上溯通过装载点</a>
+    <li class="toctree-l4"><a class="reference internal" href="#844">8.4.4、上溯通过装载点</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#845">8.4.5、下溯通过装载点</a>
+    <li class="toctree-l4"><a class="reference internal" href="#845">8.4.5、下溯通过装载点</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#846">8.4.6、处理符号链接</a>
+    <li class="toctree-l4"><a class="reference internal" href="#846">8.4.6、处理符号链接</a>
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#85">8.5、打开文件</a>
+    <li class="toctree-l3"><a class="reference internal" href="#85">8.5、打开文件</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#851open">8.5.1、open系统调用的处理流程</a>
+    <li class="toctree-l4"><a class="reference internal" href="#851open">8.5.1、open系统调用的处理流程</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#852">8.5.2、</a>
+    <li class="toctree-l4"><a class="reference internal" href="#852">8.5.2、</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#853">8.5.3、</a>
+    <li class="toctree-l4"><a class="reference internal" href="#853">8.5.3、</a>
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#86">8.6、读文件（重点）</a>
+    <li class="toctree-l3"><a class="reference internal" href="#86">8.6、读文件（重点）</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#861">8.6.1、</a>
+    <li class="toctree-l4"><a class="reference internal" href="#861">8.6.1、</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#862io">8.6.2、基于缓冲页面构造I/O请求</a>
+    <li class="toctree-l4"><a class="reference internal" href="#862io">8.6.2、基于缓冲页面构造I/O请求</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#863io">8.6.3、直接针对页面构造I/O请求</a>
+    <li class="toctree-l4"><a class="reference internal" href="#863io">8.6.3、直接针对页面构造I/O请求</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#864">8.6.4、</a>
+    <li class="toctree-l4"><a class="reference internal" href="#864">8.6.4、</a>
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#87">8.7、写文件</a>
+    <li class="toctree-l3"><a class="reference internal" href="#87">8.7、写文件</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#871write">8.7.1、write系统调用的处理流程</a>
+    <li class="toctree-l4"><a class="reference internal" href="#871write">8.7.1、write系统调用的处理流程</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#872">8.7.2、通知为缓冲写请求作准备</a>
+    <li class="toctree-l4"><a class="reference internal" href="#872">8.7.2、通知为缓冲写请求作准备</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#873">8.7.3、通知数据已复制到缓冲区</a>
+    <li class="toctree-l4"><a class="reference internal" href="#873">8.7.3、通知数据已复制到缓冲区</a>
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#88">8.8、冲刷文件</a>
+    <li class="toctree-l3"><a class="reference internal" href="#88">8.8、冲刷文件</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#881bdi">8.8.1、BDI相关对象</a>
+    <li class="toctree-l4"><a class="reference internal" href="#881bdi">8.8.1、BDI相关对象</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#882">8.8.2、注册后备设备信息</a>
+    <li class="toctree-l4"><a class="reference internal" href="#882">8.8.2、注册后备设备信息</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#883forker">8.8.3、forker线程执行流程</a>
+    <li class="toctree-l4"><a class="reference internal" href="#883forker">8.8.3、forker线程执行流程</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#884flusher">8.8.4、flusher线程执行流程</a>
+    <li class="toctree-l4"><a class="reference internal" href="#884flusher">8.8.4、flusher线程执行流程</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#885">8.8.5、同步相关系统调用</a>
+    <li class="toctree-l4"><a class="reference internal" href="#885">8.8.5、同步相关系统调用</a>
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#89">8.9、块设备文件</a>
+    <li class="toctree-l3"><a class="reference internal" href="#89">8.9、块设备文件</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#891inodeinode">8.9.1、块设备的主inode和次inode</a>
+    <li class="toctree-l4"><a class="reference internal" href="#891inodeinode">8.9.1、块设备的主inode和次inode</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#892">8.9.2、对块设备文件的操作转换为对块设备的操作</a>
+    <li class="toctree-l4"><a class="reference internal" href="#892">8.9.2、对块设备文件的操作转换为对块设备的操作</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#893">8.9.3、对块设备文件的读/写作用于块设备之上</a>
+    <li class="toctree-l4"><a class="reference internal" href="#893">8.9.3、对块设备文件的读/写作用于块设备之上</a>
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#810">8.10、文件系统编程模式</a>
+    <li class="toctree-l3"><a class="reference internal" href="#810">8.10、文件系统编程模式</a>
+    </li>
+        </ul>
     </li>
     </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA/">《操作系统导论》</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">存储</span></p>
@@ -222,7 +228,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h3 id="chap8">chap8、文件系统<a class="headerlink" href="#chap8" title="Permanent link">&para;</a></h3>
+                <h2 id="_1">《存储技术原理分析》<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h3 id="chap8">chap8、文件系统<a class="headerlink" href="#chap8" title="Permanent link">&para;</a></h3>
 <h4 id="81">8.1、概述<a class="headerlink" href="#81" title="Permanent link">&para;</a></h4>
 <ul>
 <li>VFS在系统启动时建立，在系统关闭时消亡。</li>
@@ -561,7 +568,7 @@
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
         <a href="../%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/" class="btn btn-neutral float-left" title="《文件系统技术内幕》"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../../12storage/ceph%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/" class="btn btn-neutral float-right" title="《ceph设计原理与实现》">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../../408/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA/" class="btn btn-neutral float-right" title="《操作系统导论》">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -587,7 +594,7 @@
       <span><a href="../%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../../12storage/ceph%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../../408/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

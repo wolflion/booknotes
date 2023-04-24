@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>《操作系统导论》 - lionel的技术笔记</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "\u300a\u64cd\u4f5c\u7cfb\u7edf\u5bfc\u8bba\u300b";
+        var mkdocs_page_input_path = "408\\\u64cd\u4f5c\u7cfb\u7edf\u5bfc\u8bba.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> lionel的技术笔记
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">简介</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../01daily/">daily</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">C++</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../20C%2B%2B/effectiveC%2B%2B/">《Effective C++》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/EffectiveSTL/">《Effective STL》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网络编程</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/TCPIP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">《TCP/IP网络编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/">《Linux高性能服务器编程》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">文件系统</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/Linux%E5%86%85%E6%A0%B8%E6%8E%A2%E7%A7%98/">《Linux内核探秘》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《文件系统技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">《存储技术原理分析》</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">《操作系统导论》</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#chap25">chap25、并发的对话</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap26">chap26、并发：简介</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#263">26.3、问题的核心：自由安排</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#264">26.4、原子性</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap27api">chap27、插曲：线程API</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#271">27.1、线程创建</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#272">27.2、线程完成</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#273">27.3、锁</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#274">27.4、条件变量</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#275">27.5、编译和运行</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#276">27.6、小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap28">chap28、锁</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#281">28.1、锁的基本思想</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#282pthread">28.2、pthread锁</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#283">28.3、实现一个锁</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#284">28.4、评价锁</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#285">28.5、控制中断</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#286">28.6、测试并设置指令（原子交换）</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#287">28.7、实现可用的自旋锁</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#288">28.8、评价自旋锁</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#289">28.9、比较并交换</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2810">28.10、链接的加载和条件式存储指令</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2811">28.11、获取并增加</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2812">28.12、自旋过多：怎么办</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2813">28.13、简单方法：让出来吧，宝贝</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2814">28.14、使用队列：休眠替代自旋</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2815">28.15、不同操作系统，不同实现</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2816">28.16、两阶段锁</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2817">28.17、小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap29">chap29、基于锁的并发数据结构</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#291">29.1、并发计数器</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#292">29.2、并发链表</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#293">29.3、并发队列</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#294">29.4、并发散列表</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#295">29.5、小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap30">chap30、条件变量</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#301">30.1、定义和程序</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#302">30.2、生产者/消费者（有界缓冲区）问题</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#303">30.3、覆盖条件</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap31">chap31、信号量</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#311">31.1、信号量的含义</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#312">31.2、二值信号量（锁）</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#313">31.3、信号量用作条件变量</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#314">31.4、生产者/消费者（有界缓冲区）问题</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#315-">31.5、读者-写者锁</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#316">31.6、哲学家就餐问题</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#317">31.7、如何实现信号量</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#318">31.8、小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap32">chap32、常见并发问题</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#321">32.1、有哪些类型的缺陷</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#322">32.2、非死锁缺陷</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#323">32.3、死锁缺陷</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#324">32.4、小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap33">chap33、基于事件的并发（进阶）</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#331">33.1、基本想法：事件循环</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#332apiselectpoll">33.2、重要API：select()（或poll()）</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#333select">33.3、使用select()</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#334">33.4、为何更简单？无须锁</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#335">33.5、一个问题：阻塞系统调用</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#336io">33.6、解决方案：异步I/O</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#337">33.7、另一个问题：状态管理</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#338">33.8、什么事情仍然很难</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap34">chap34、并发的总结对话</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">存储</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../12storage/ceph%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《ceph设计原理与实现》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">内核</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/Linux%E5%86%85%E6%A0%B8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《Linux内核设计与实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5Linux%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%E5%86%85%E6%A0%B8%E6%9C%BA%E5%88%B6/">《深入Linux设备驱动程序内核机制》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网课</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/01Linux%E9%AB%98%E5%B9%B6%E5%8F%91%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/">《Linux高并发网络编程开发》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/%E4%BE%AF%E6%8D%B7/%E4%BE%AF%E6%8D%B7C%2B%2B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%8660%E8%AE%B2/">《侯捷C++内存管理60讲》</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">lionel的技术笔记</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+          <li>文件系统 &raquo;</li>
+      <li>《操作系统导论》</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h3 id="partiiconcurrency">PartII：Concurrency并发<a class="headerlink" href="#partiiconcurrency" title="Permanent link">&para;</a></h3>
+<h4 id="chap25">chap25、并发的对话<a class="headerlink" href="#chap25" title="Permanent link">&para;</a></h4>
+<ul>
+<li>吃一个桃子？</li>
+</ul>
+<h4 id="chap26">chap26、并发：简介<a class="headerlink" href="#chap26" title="Permanent link">&para;</a></h4>
+<h5 id="263">26.3、问题的核心：自由安排<a class="headerlink" href="#263" title="Permanent link">&para;</a></h5>
+<h5 id="264">26.4、原子性<a class="headerlink" href="#264" title="Permanent link">&para;</a></h5>
+<h4 id="chap27api">chap27、插曲：线程API<a class="headerlink" href="#chap27api" title="Permanent link">&para;</a></h4>
+<h5 id="271">27.1、线程创建<a class="headerlink" href="#271" title="Permanent link">&para;</a></h5>
+<h5 id="272">27.2、线程完成<a class="headerlink" href="#272" title="Permanent link">&para;</a></h5>
+<ul>
+<li>如果你想等待线程完成，会发生什么情况？你需要做一些特别的事情来等待完成。</li>
+</ul>
+<ul>
+<li><code>pthread_join(pthread_t, )</code><ul>
+<li>第1个参数，用于指定要等待的线程</li>
+<li>第2个参数，指向你希望得到的返回值</li>
+</ul>
+</li>
+</ul>
+<h5 id="273">27.3、锁<a class="headerlink" href="#273" title="Permanent link">&para;</a></h5>
+<ul>
+<li>通过<strong>锁来互斥进入临界区</strong>的那些函数</li>
+</ul>
+<h5 id="274">27.4、条件变量<a class="headerlink" href="#274" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>当线程之间必须发生某种信号时，如果一个线程在等待另一个线程继续执行某些操作</strong>，条件变量就很有用。</li>
+<li><strong>要使用条件变量，必须另外有一个与此条件相关的锁</strong>。</li>
+<li><code>int pthread_cond_wait(pthread_cond_t *cond, pthread_mutex_t *mutex);</code><strong>使调用线程进入休眠状态</strong>，因此等待其它线程发出信号，通常当程序中的某些内容发生变化时，现在正在休眠的线程可能会关心它。</li>
+</ul>
+<h5 id="275">27.5、编译和运行<a class="headerlink" href="#275" title="Permanent link">&para;</a></h5>
+<ul>
+<li>增加<code>-pthread</code>标记，例：<code>gcc -o main main.c -Wall -pthread</code></li>
+</ul>
+<h5 id="276">27.6、小结<a class="headerlink" href="#276" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>man -k pthread</code></li>
+<li><strong>线程难的部分不是API，而是如何构建并发程序的棘手逻辑</strong>。</li>
+</ul>
+<h4 id="chap28">chap28、锁<a class="headerlink" href="#chap28" title="Permanent link">&para;</a></h4>
+<h5 id="281">28.1、锁的基本思想<a class="headerlink" href="#281" title="Permanent link">&para;</a></h5>
+<ul>
+<li>锁为程序员提供了最小程度的调度控制。通过给临界区加锁，可以保证临界区内只有一个线程活跃。<strong>锁将原本由操作系统调度的混乱状态变得更为可控</strong>。</li>
+</ul>
+<pre class="highlight"><code class="language-c++">lock_t mutex;//some globally-allocated lock 'mutex'
+...
+lock(&amp;mutex);
+balance = balance + 1;
+unlock(&amp;mutex);</code></pre>
+<h5 id="282pthread">28.2、pthread锁<a class="headerlink" href="#282pthread" title="Permanent link">&para;</a></h5>
+<ul>
+<li>POSIX库将锁称为<strong>互斥量（mutex）</strong>，因为它被用来提供线程之间的互斥。即当一个线程在临界区，它能够阻止其他线程进入直到本线程离开临界区。</li>
+</ul>
+<h5 id="283">28.3、实现一个锁<a class="headerlink" href="#283" title="Permanent link">&para;</a></h5>
+<ul>
+<li>怎样实现一个锁？</li>
+<li><strong>我们需要硬件和操作系统的帮助来实现一个可用的锁</strong>。</li>
+</ul>
+<h5 id="284">28.4、评价锁<a class="headerlink" href="#284" title="Permanent link">&para;</a></h5>
+<h5 id="285">28.5、控制中断<a class="headerlink" href="#285" title="Permanent link">&para;</a></h5>
+<h5 id="286">28.6、测试并设置指令（原子交换）<a class="headerlink" href="#286" title="Permanent link">&para;</a></h5>
+<h5 id="287">28.7、实现可用的自旋锁<a class="headerlink" href="#287" title="Permanent link">&para;</a></h5>
+<h5 id="288">28.8、评价自旋锁<a class="headerlink" href="#288" title="Permanent link">&para;</a></h5>
+<h5 id="289">28.9、比较并交换<a class="headerlink" href="#289" title="Permanent link">&para;</a></h5>
+<h5 id="2810">28.10、链接的加载和条件式存储指令<a class="headerlink" href="#2810" title="Permanent link">&para;</a></h5>
+<h5 id="2811">28.11、获取并增加<a class="headerlink" href="#2811" title="Permanent link">&para;</a></h5>
+<h5 id="2812">28.12、自旋过多：怎么办<a class="headerlink" href="#2812" title="Permanent link">&para;</a></h5>
+<h5 id="2813">28.13、简单方法：让出来吧，宝贝<a class="headerlink" href="#2813" title="Permanent link">&para;</a></h5>
+<h5 id="2814">28.14、使用队列：休眠替代自旋<a class="headerlink" href="#2814" title="Permanent link">&para;</a></h5>
+<h5 id="2815">28.15、不同操作系统，不同实现<a class="headerlink" href="#2815" title="Permanent link">&para;</a></h5>
+<h5 id="2816">28.16、两阶段锁<a class="headerlink" href="#2816" title="Permanent link">&para;</a></h5>
+<h5 id="2817">28.17、小结<a class="headerlink" href="#2817" title="Permanent link">&para;</a></h5>
+<h4 id="chap29">chap29、基于锁的并发数据结构<a class="headerlink" href="#chap29" title="Permanent link">&para;</a></h4>
+<h5 id="291">29.1、并发计数器<a class="headerlink" href="#291" title="Permanent link">&para;</a></h5>
+<h5 id="292">29.2、并发链表<a class="headerlink" href="#292" title="Permanent link">&para;</a></h5>
+<h5 id="293">29.3、并发队列<a class="headerlink" href="#293" title="Permanent link">&para;</a></h5>
+<h5 id="294">29.4、并发散列表<a class="headerlink" href="#294" title="Permanent link">&para;</a></h5>
+<h5 id="295">29.5、小结<a class="headerlink" href="#295" title="Permanent link">&para;</a></h5>
+<h4 id="chap30">chap30、条件变量<a class="headerlink" href="#chap30" title="Permanent link">&para;</a></h4>
+<h5 id="301">30.1、定义和程序<a class="headerlink" href="#301" title="Permanent link">&para;</a></h5>
+<h5 id="302">30.2、生产者/消费者（有界缓冲区）问题<a class="headerlink" href="#302" title="Permanent link">&para;</a></h5>
+<h5 id="303">30.3、覆盖条件<a class="headerlink" href="#303" title="Permanent link">&para;</a></h5>
+<h4 id="chap31">chap31、信号量<a class="headerlink" href="#chap31" title="Permanent link">&para;</a></h4>
+<h5 id="311">31.1、信号量的含义<a class="headerlink" href="#311" title="Permanent link">&para;</a></h5>
+<h5 id="312">31.2、二值信号量（锁）<a class="headerlink" href="#312" title="Permanent link">&para;</a></h5>
+<h5 id="313">31.3、信号量用作条件变量<a class="headerlink" href="#313" title="Permanent link">&para;</a></h5>
+<h5 id="314">31.4、生产者/消费者（有界缓冲区）问题<a class="headerlink" href="#314" title="Permanent link">&para;</a></h5>
+<h5 id="315-">31.5、读者-写者锁<a class="headerlink" href="#315-" title="Permanent link">&para;</a></h5>
+<h5 id="316">31.6、哲学家就餐问题<a class="headerlink" href="#316" title="Permanent link">&para;</a></h5>
+<h5 id="317">31.7、如何实现信号量<a class="headerlink" href="#317" title="Permanent link">&para;</a></h5>
+<h5 id="318">31.8、小结<a class="headerlink" href="#318" title="Permanent link">&para;</a></h5>
+<h4 id="chap32">chap32、常见并发问题<a class="headerlink" href="#chap32" title="Permanent link">&para;</a></h4>
+<h5 id="321">32.1、有哪些类型的缺陷<a class="headerlink" href="#321" title="Permanent link">&para;</a></h5>
+<h5 id="322">32.2、非死锁缺陷<a class="headerlink" href="#322" title="Permanent link">&para;</a></h5>
+<h5 id="323">32.3、死锁缺陷<a class="headerlink" href="#323" title="Permanent link">&para;</a></h5>
+<h5 id="324">32.4、小结<a class="headerlink" href="#324" title="Permanent link">&para;</a></h5>
+<h4 id="chap33">chap33、基于事件的并发（进阶）<a class="headerlink" href="#chap33" title="Permanent link">&para;</a></h4>
+<h5 id="331">33.1、基本想法：事件循环<a class="headerlink" href="#331" title="Permanent link">&para;</a></h5>
+<h5 id="332apiselectpoll">33.2、重要API：select()（或poll()）<a class="headerlink" href="#332apiselectpoll" title="Permanent link">&para;</a></h5>
+<h5 id="333select">33.3、使用select()<a class="headerlink" href="#333select" title="Permanent link">&para;</a></h5>
+<h5 id="334">33.4、为何更简单？无须锁<a class="headerlink" href="#334" title="Permanent link">&para;</a></h5>
+<h5 id="335">33.5、一个问题：阻塞系统调用<a class="headerlink" href="#335" title="Permanent link">&para;</a></h5>
+<h5 id="336io">33.6、解决方案：异步I/O<a class="headerlink" href="#336io" title="Permanent link">&para;</a></h5>
+<h5 id="337">33.7、另一个问题：状态管理<a class="headerlink" href="#337" title="Permanent link">&para;</a></h5>
+<h5 id="338">33.8、什么事情仍然很难<a class="headerlink" href="#338" title="Permanent link">&para;</a></h5>
+<h4 id="chap34">chap34、并发的总结对话<a class="headerlink" href="#chap34" title="Permanent link">&para;</a></h4>
+<h3 id="part3">Part3、持久性<a class="headerlink" href="#part3" title="Permanent link">&para;</a></h3>
+<h4 id="chap35">chap35、关于持久性的对话<a class="headerlink" href="#chap35" title="Permanent link">&para;</a></h4>
+<h2 id="_1">履历<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<ul>
+<li>2022年27W（7.5-7.）看Part2并发的chap26，但习题没做和练习，只是有个概念</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../11filesystem/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/" class="btn btn-neutral float-left" title="《存储技术原理分析》"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../12storage/ceph%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/" class="btn btn-neutral float-right" title="《ceph设计原理与实现》">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../../11filesystem/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../12storage/ceph%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

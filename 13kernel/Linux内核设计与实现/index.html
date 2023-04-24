@@ -70,6 +70,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">《存储技术原理分析》</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA/">《操作系统导论》</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">存储</span></p>
               <ul>
@@ -458,6 +460,136 @@
     </li>
         </ul>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap10-158353">chap10、内核同步方法 （158/353）</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#101">10.1、原子操作</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1011">10.1.1、原子整数操作</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#101264">10.1.2、64位原子操作</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1013">10.1.3、原子位操作</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#102">10.2、自旋锁</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#0_12">0、</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1021">10.2.1、自旋锁方法</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1022">10.2.2、其他针对自旋锁的操作</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1023">10.2.3、自旋锁和下半部</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#103-">10.3、读写-自旋锁</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#104">10.4、信号量</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#0_13">0、</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1041">10.4.1、计数信号量和二值信号量</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1042">10.4.2、创建和初始化信号量</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1043">10.4.3、使用信号量</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#105-">10.5、读写-信号量</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#106">10.6、互斥体</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#0_14">0、</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1061">10.6.1、信号量和互斥体</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1062">10.6.2、自旋锁和互斥体</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#107">10.7、完成变量</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#108blk">10.8、BLK：大内核锁</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#109">10.9、顺序锁</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#1010">10.10、禁止抢占</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#1011_1">10.11、顺序和屏障</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#1012">10.12、小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap11183353">chap11、定时器和时间管理（183/353）</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#111">11.1、内核中的时间概念</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#112hz">11.2、节拍率：HZ</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#0_15">0、</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1121hz">11.2.1、理想的HZ值</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1122hz">11.2.2、高HZ的优势</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1123hz">11.2.3、高HZ的劣势</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#113jiffies">11.3、jiffies</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#0_16">0、</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1131jiffies">11.3.1、jiffies的内部表示</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1132jiffies">11.3.2、jiffies的回绕</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1133hz">11.3.3、用户空间和HZ</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#114">11.4、硬时钟和定时器</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1141">11.4.1、实时时钟</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1142">11.4.2、系统定时器</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#115">11.5、时钟中断处理程序</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#116">11.6、实际时间</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#117">11.7、定时器</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#0_17">0、</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1171">11.7.1、使用定时器</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1172">11.7.2、定时器竞争条件</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1173">11.7.3、实现定时器</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#118">11.8、延迟执行</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1181">11.8.1、忙等待</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1182">11.8.2、短延迟</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1183schedule-timeout">11.8.3、schedule timeout()</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#119">11.9、小结</a>
+    </li>
+        </ul>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="#chap12">chap12、内存管理</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#121">12.1、页</a>
@@ -466,7 +598,7 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#123">12.3、获得页</a>
         <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#0_12">0、</a>
+    <li class="toctree-l4"><a class="reference internal" href="#0_18">0、</a>
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#12310">12.3.1、获得填充为0的页</a>
     </li>
@@ -476,7 +608,7 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#124kmalloc">12.4、kmalloc</a>
         <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#0_13">0、</a>
+    <li class="toctree-l4"><a class="reference internal" href="#0_19">0、</a>
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#1241gfp_mask">12.4.1、gfp_mask标志</a>
     </li>
@@ -488,7 +620,7 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#126slab">12.6、slab层</a>
         <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#0_14">0、</a>
+    <li class="toctree-l4"><a class="reference internal" href="#0_20">0、</a>
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#1261slab">12.6.1、slab层的设计</a>
     </li>
@@ -498,7 +630,7 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#127">12.7、在栈上的静态分配</a>
         <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#0_15">0、</a>
+    <li class="toctree-l4"><a class="reference internal" href="#0_21">0、</a>
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#1271">12.7.1、单页内核栈</a>
     </li>
@@ -508,7 +640,7 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#128">12.8、高端内存的映射</a>
         <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#0_16">0、</a>
+    <li class="toctree-l4"><a class="reference internal" href="#0_22">0、</a>
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#1281">12.8.1、永久映射</a>
     </li>
@@ -520,7 +652,7 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#1210cpu">12.10、新的每个CPU接口</a>
         <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#0_17">0、</a>
+    <li class="toctree-l4"><a class="reference internal" href="#0_23">0、</a>
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#12101cpu">12.10.1、编译时的每个CPU数据</a>
     </li>
@@ -578,7 +710,7 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#chap14io">chap14、块I/O</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#0_18">0、</a>
+    <li class="toctree-l3"><a class="reference internal" href="#0_24">0、</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#141">14.1、剖析一个块设备</a>
     </li>
@@ -586,7 +718,7 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#143bio">14.3、bio结构体</a>
         <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#0_19">0、</a>
+    <li class="toctree-l4"><a class="reference internal" href="#0_25">0、</a>
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#1431io">14.3.1、I/O向量</a>
     </li>
@@ -624,7 +756,7 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#152">15.2、内存描述符</a>
         <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#0_20">0、</a>
+    <li class="toctree-l4"><a class="reference internal" href="#0_26">0、</a>
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#1521">15.2.1、分配内存描述符</a>
     </li>
@@ -636,7 +768,7 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#153">15.3、虚拟内存区域</a>
         <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#0_21">0、</a>
+    <li class="toctree-l4"><a class="reference internal" href="#0_27">0、</a>
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#1531vma">15.3.1、VMA标志</a>
     </li>
@@ -732,7 +864,7 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#173">17.3、设备模型</a>
         <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#0_22">0、</a>
+    <li class="toctree-l4"><a class="reference internal" href="#0_28">0、</a>
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#1731kobject">17.3.1、kobject</a>
     </li>
@@ -750,7 +882,7 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#174sysfs">17.4、sysfs</a>
         <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#0_23">0、</a>
+    <li class="toctree-l4"><a class="reference internal" href="#0_29">0、</a>
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#1741sysfskobject">17.4.1、sysfs中添加和删除kobject</a>
     </li>
@@ -1319,6 +1451,126 @@
 <h4 id="93">9.3、死锁<a class="headerlink" href="#93" title="Permanent link">&para;</a></h4>
 <h4 id="94">9.4、争用和扩展性<a class="headerlink" href="#94" title="Permanent link">&para;</a></h4>
 <h4 id="95">9.5、小结<a class="headerlink" href="#95" title="Permanent link">&para;</a></h4>
+<h3 id="chap10-158353">chap10、内核同步方法 （158/353）<a class="headerlink" href="#chap10-158353" title="Permanent link">&para;</a></h3>
+<h4 id="101">10.1、原子操作<a class="headerlink" href="#101" title="Permanent link">&para;</a></h4>
+<h5 id="1011">10.1.1、原子整数操作<a class="headerlink" href="#1011" title="Permanent link">&para;</a></h5>
+<ul>
+<li>linux/types.h中<code>atomic_t</code>类型，占用32位中的24位。</li>
+</ul>
+<h5 id="101264">10.1.2、64位原子操作<a class="headerlink" href="#101264" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>atomic64_t</code>类型</li>
+</ul>
+<h5 id="1013">10.1.3、原子位操作<a class="headerlink" href="#1013" title="Permanent link">&para;</a></h5>
+<ul>
+<li>asm/bitops.h</li>
+</ul>
+<h4 id="102">10.2、自旋锁<a class="headerlink" href="#102" title="Permanent link">&para;</a></h4>
+<h5 id="0_12">0、<a class="headerlink" href="#0_12" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>自旋锁（spin lock）最多只能被一个可执行线程持有</strong>，浪费处理器时间</li>
+</ul>
+<h5 id="1021">10.2.1、自旋锁方法<a class="headerlink" href="#1021" title="Permanent link">&para;</a></h5>
+<ul>
+<li>asm/spinlock.h或linux/spinlock.h</li>
+</ul>
+<h5 id="1022">10.2.2、其他针对自旋锁的操作<a class="headerlink" href="#1022" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>spin_lock_init()</code>初始化动态创建的自旋锁</li>
+</ul>
+<h5 id="1023">10.2.3、自旋锁和下半部<a class="headerlink" href="#1023" title="Permanent link">&para;</a></h5>
+<h4 id="103-">10.3、读写-自旋锁<a class="headerlink" href="#103-" title="Permanent link">&para;</a></h4>
+<h4 id="104">10.4、信号量<a class="headerlink" href="#104" title="Permanent link">&para;</a></h4>
+<h5 id="0_13">0、<a class="headerlink" href="#0_13" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>睡眠锁</strong>，信号量会将其推进一个等待队列，然后让其睡眠。</li>
+</ul>
+<h5 id="1041">10.4.1、计数信号量和二值信号量<a class="headerlink" href="#1041" title="Permanent link">&para;</a></h5>
+<h5 id="1042">10.4.2、创建和初始化信号量<a class="headerlink" href="#1042" title="Permanent link">&para;</a></h5>
+<ul>
+<li>asm/semaphore.h</li>
+</ul>
+<h5 id="1043">10.4.3、使用信号量<a class="headerlink" href="#1043" title="Permanent link">&para;</a></h5>
+<h4 id="105-">10.5、读写-信号量<a class="headerlink" href="#105-" title="Permanent link">&para;</a></h4>
+<ul>
+<li>linux/rwsem.h</li>
+</ul>
+<h4 id="106">10.6、互斥体<a class="headerlink" href="#106" title="Permanent link">&para;</a></h4>
+<h5 id="0_14">0、<a class="headerlink" href="#0_14" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>互斥体是一种互斥信号</strong></li>
+</ul>
+<h5 id="1061">10.6.1、信号量和互斥体<a class="headerlink" href="#1061" title="Permanent link">&para;</a></h5>
+<h5 id="1062">10.6.2、自旋锁和互斥体<a class="headerlink" href="#1062" title="Permanent link">&para;</a></h5>
+<h4 id="107">10.7、完成变量<a class="headerlink" href="#107" title="Permanent link">&para;</a></h4>
+<ul>
+<li>linux/completion.h中<code>DECLARE_COMPLETION(mr_comp);</code></li>
+<li><code>init_completion()</code></li>
+</ul>
+<h4 id="108blk">10.8、BLK：大内核锁<a class="headerlink" href="#108blk" title="Permanent link">&para;</a></h4>
+<ul>
+<li>linux/smp_lock.h</li>
+</ul>
+<h4 id="109">10.9、顺序锁<a class="headerlink" href="#109" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>seqlock_t</code></li>
+</ul>
+<h4 id="1010">10.10、禁止抢占<a class="headerlink" href="#1010" title="Permanent link">&para;</a></h4>
+<h4 id="1011_1">10.11、顺序和屏障<a class="headerlink" href="#1011_1" title="Permanent link">&para;</a></h4>
+<h4 id="1012">10.12、小结<a class="headerlink" href="#1012" title="Permanent link">&para;</a></h4>
+<h3 id="chap11183353">chap11、定时器和时间管理（183/353）<a class="headerlink" href="#chap11183353" title="Permanent link">&para;</a></h3>
+<h4 id="111">11.1、内核中的时间概念<a class="headerlink" href="#111" title="Permanent link">&para;</a></h4>
+<h4 id="112hz">11.2、节拍率：HZ<a class="headerlink" href="#112hz" title="Permanent link">&para;</a></h4>
+<h5 id="0_15">0、<a class="headerlink" href="#0_15" title="Permanent link">&para;</a></h5>
+<ul>
+<li>asm/param.h</li>
+</ul>
+<h5 id="1121hz">11.2.1、理想的HZ值<a class="headerlink" href="#1121hz" title="Permanent link">&para;</a></h5>
+<h5 id="1122hz">11.2.2、高HZ的优势<a class="headerlink" href="#1122hz" title="Permanent link">&para;</a></h5>
+<h5 id="1123hz">11.2.3、高HZ的劣势<a class="headerlink" href="#1123hz" title="Permanent link">&para;</a></h5>
+<h4 id="113jiffies">11.3、jiffies<a class="headerlink" href="#113jiffies" title="Permanent link">&para;</a></h4>
+<h5 id="0_16">0、<a class="headerlink" href="#0_16" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>全局变量jiffies用来记录自系统启动以来产生的节拍的总数</strong>。</li>
+<li>linux/jiffies.h中的<code>extern unsigned long volatile jiffies;</code></li>
+</ul>
+<h5 id="1131jiffies">11.3.1、jiffies的内部表示<a class="headerlink" href="#1131jiffies" title="Permanent link">&para;</a></h5>
+<h5 id="1132jiffies">11.3.2、jiffies的回绕<a class="headerlink" href="#1132jiffies" title="Permanent link">&para;</a></h5>
+<h5 id="1133hz">11.3.3、用户空间和HZ<a class="headerlink" href="#1133hz" title="Permanent link">&para;</a></h5>
+<h4 id="114">11.4、硬时钟和定时器<a class="headerlink" href="#114" title="Permanent link">&para;</a></h4>
+<h5 id="1141">11.4.1、实时时钟<a class="headerlink" href="#1141" title="Permanent link">&para;</a></h5>
+<ul>
+<li>实时时钟（RTC）是用来持久存放系统时间的设备。<strong>靠主板上的微型电池</strong></li>
+</ul>
+<h5 id="1142">11.4.2、系统定时器<a class="headerlink" href="#1142" title="Permanent link">&para;</a></h5>
+<h4 id="115">11.5、时钟中断处理程序<a class="headerlink" href="#115" title="Permanent link">&para;</a></h4>
+<h4 id="116">11.6、实际时间<a class="headerlink" href="#116" title="Permanent link">&para;</a></h4>
+<ul>
+<li>kernel/time/timekeeping.c中的<code>struct timespec xtime;</code></li>
+</ul>
+<h4 id="117">11.7、定时器<a class="headerlink" href="#117" title="Permanent link">&para;</a></h4>
+<h5 id="0_17">0、<a class="headerlink" href="#0_17" title="Permanent link">&para;</a></h5>
+<h5 id="1171">11.7.1、使用定时器<a class="headerlink" href="#1171" title="Permanent link">&para;</a></h5>
+<ul>
+<li>linux/timer.h</li>
+</ul>
+<h5 id="1172">11.7.2、定时器竞争条件<a class="headerlink" href="#1172" title="Permanent link">&para;</a></h5>
+<h5 id="1173">11.7.3、实现定时器<a class="headerlink" href="#1173" title="Permanent link">&para;</a></h5>
+<h4 id="118">11.8、延迟执行<a class="headerlink" href="#118" title="Permanent link">&para;</a></h4>
+<h5 id="1181">11.8.1、忙等待<a class="headerlink" href="#1181" title="Permanent link">&para;</a></h5>
+<h5 id="1182">11.8.2、短延迟<a class="headerlink" href="#1182" title="Permanent link">&para;</a></h5>
+<ul>
+<li>linux/delay.h和asm/delay.h中，<strong>处理ms、ns和ms级别的延迟函数</strong>，<code>void udelay(unsigned long usecs);</code></li>
+</ul>
+<h5 id="1183schedule-timeout">11.8.3、schedule timeout()<a class="headerlink" href="#1183schedule-timeout" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、schedule timeout()的实现</li>
+<li>2、设置好超时时间，在等待队列上睡眠</li>
+</ul>
+<h4 id="119">11.9、小结<a class="headerlink" href="#119" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>只要你编写驱动程序，就需要处理内核定时器</strong></li>
+</ul>
 <h3 id="chap12">chap12、内存管理<a class="headerlink" href="#chap12" title="Permanent link">&para;</a></h3>
 <h4 id="121">12.1、页<a class="headerlink" href="#121" title="Permanent link">&para;</a></h4>
 <ul>
@@ -1337,7 +1589,7 @@
 <li><code>struct zone {};</code></li>
 </ul>
 <h4 id="123">12.3、获得页<a class="headerlink" href="#123" title="Permanent link">&para;</a></h4>
-<h5 id="0_12">0、<a class="headerlink" href="#0_12" title="Permanent link">&para;</a></h5>
+<h5 id="0_18">0、<a class="headerlink" href="#0_18" title="Permanent link">&para;</a></h5>
 <ul>
 <li><code>alloc_pages()</code></li>
 <li><code>page_address()</code></li>
@@ -1352,7 +1604,7 @@
 <li><strong>内核是完全相信自己的</strong></li>
 </ul>
 <h4 id="124kmalloc">12.4、kmalloc<a class="headerlink" href="#124kmalloc" title="Permanent link">&para;</a></h4>
-<h5 id="0_13">0、<a class="headerlink" href="#0_13" title="Permanent link">&para;</a></h5>
+<h5 id="0_19">0、<a class="headerlink" href="#0_19" title="Permanent link">&para;</a></h5>
 <ul>
 <li><strong>以字节为单位，确保页在物理地址上是连续的</strong>，实现在include/linux/slab.h中</li>
 </ul>
@@ -1369,21 +1621,21 @@
 <li><strong>分配的内存虚拟地址是连续的，而物理地址无须连续</strong></li>
 </ul>
 <h4 id="126slab">12.6、slab层<a class="headerlink" href="#126slab" title="Permanent link">&para;</a></h4>
-<h5 id="0_14">0、<a class="headerlink" href="#0_14" title="Permanent link">&para;</a></h5>
+<h5 id="0_20">0、<a class="headerlink" href="#0_20" title="Permanent link">&para;</a></h5>
 <h5 id="1261slab">12.6.1、slab层的设计<a class="headerlink" href="#1261slab" title="Permanent link">&para;</a></h5>
 <h5 id="1262slab">12.6.2、slab分配器的接口<a class="headerlink" href="#1262slab" title="Permanent link">&para;</a></h5>
 <ul>
 <li><code>kmem_cache_create()</code></li>
 </ul>
 <h4 id="127">12.7、在栈上的静态分配<a class="headerlink" href="#127" title="Permanent link">&para;</a></h4>
-<h5 id="0_15">0、<a class="headerlink" href="#0_15" title="Permanent link">&para;</a></h5>
+<h5 id="0_21">0、<a class="headerlink" href="#0_21" title="Permanent link">&para;</a></h5>
 <ul>
 <li><strong>32位和64位体系结构的页面大小分别是4KB和8KB，所以通常它们的内核栈的大小分别是8KB和16KB</strong>。</li>
 </ul>
 <h5 id="1271">12.7.1、单页内核栈<a class="headerlink" href="#1271" title="Permanent link">&para;</a></h5>
 <h5 id="1272">12.7.2、在栈上光明正大地工作<a class="headerlink" href="#1272" title="Permanent link">&para;</a></h5>
 <h4 id="128">12.8、高端内存的映射<a class="headerlink" href="#128" title="Permanent link">&para;</a></h4>
-<h5 id="0_16">0、<a class="headerlink" href="#0_16" title="Permanent link">&para;</a></h5>
+<h5 id="0_22">0、<a class="headerlink" href="#0_22" title="Permanent link">&para;</a></h5>
 <ul>
 <li><strong>在高端内存中的页不能永久地映射到内核地址空间上</strong>。</li>
 </ul>
@@ -1403,7 +1655,7 @@
     + 如果另一个</li>
 </ul>
 <h4 id="1210cpu">12.10、新的每个CPU接口<a class="headerlink" href="#1210cpu" title="Permanent link">&para;</a></h4>
-<h5 id="0_17">0、<a class="headerlink" href="#0_17" title="Permanent link">&para;</a></h5>
+<h5 id="0_23">0、<a class="headerlink" href="#0_23" title="Permanent link">&para;</a></h5>
 <ul>
 <li><strong>percpu</strong>，简化了创建和操作每个CPU的数据。</li>
 </ul>
@@ -1486,7 +1738,7 @@
 <h4 id="1314">13.14、和进程相关的数据结构<a class="headerlink" href="#1314" title="Permanent link">&para;</a></h4>
 <h4 id="1315">13.15、小结<a class="headerlink" href="#1315" title="Permanent link">&para;</a></h4>
 <h3 id="chap14io">chap14、块I/O<a class="headerlink" href="#chap14io" title="Permanent link">&para;</a></h3>
-<h4 id="0_18">0、<a class="headerlink" href="#0_18" title="Permanent link">&para;</a></h4>
+<h4 id="0_24">0、<a class="headerlink" href="#0_24" title="Permanent link">&para;</a></h4>
 <ul>
 <li>系统中能够<strong>随机（不需要按顺序）访问</strong>固定大小数据片（chunks）的硬件设备称为<strong>块设备</strong>，这些固定大小的数据片就称作<strong>块</strong>（磁盘）</li>
 </ul>
@@ -1504,7 +1756,7 @@
     + 2、它仅能描述单个缓冲区</li>
 </ul>
 <h4 id="143bio">14.3、bio结构体<a class="headerlink" href="#143bio" title="Permanent link">&para;</a></h4>
-<h5 id="0_19">0、<a class="headerlink" href="#0_19" title="Permanent link">&para;</a></h5>
+<h5 id="0_25">0、<a class="headerlink" href="#0_25" title="Permanent link">&para;</a></h5>
 <ul>
 <li>linux/bio.h中的<code>struct bio{};</code> 代表了正在现场的（活动的）以片断（segment）链表形式组织的块I/O操作。<strong>一个片段是一小块连续的内存缓冲区</strong>。</li>
 </ul>
@@ -1575,7 +1827,7 @@
     + 可执行文件代码的内存映射，称为<strong>代码段（text section）</strong></li>
 </ul>
 <h4 id="152">15.2、内存描述符<a class="headerlink" href="#152" title="Permanent link">&para;</a></h4>
-<h5 id="0_20">0、<a class="headerlink" href="#0_20" title="Permanent link">&para;</a></h5>
+<h5 id="0_26">0、<a class="headerlink" href="#0_26" title="Permanent link">&para;</a></h5>
 <ul>
 <li>内存描述符<strong>表示进程的地址空间</strong>，linux/sched.h中的<code>struct mm_struct{};</code></li>
 <li><strong>所有的mm_struct结构体都通过自身的mmlist域连接在一个双向链表中，该链表的首元素是init_mm内存描述符，它代表init进程的地址空间</strong>。需要使用kernel/fork.c中的<code>mmlist_lock</code>锁来防止并发访问</li>
@@ -1590,7 +1842,7 @@
 </ul>
 <h5 id="1523mm_struct">15.2.3、mm_struct与内核线程<a class="headerlink" href="#1523mm_struct" title="Permanent link">&para;</a></h5>
 <h4 id="153">15.3、虚拟内存区域<a class="headerlink" href="#153" title="Permanent link">&para;</a></h4>
-<h5 id="0_21">0、<a class="headerlink" href="#0_21" title="Permanent link">&para;</a></h5>
+<h5 id="0_27">0、<a class="headerlink" href="#0_27" title="Permanent link">&para;</a></h5>
 <ul>
 <li>linux/mm_types.h中的<code>vm_area_struct</code>，<strong>指定地址空间内连续区间上的一个独立内存范围</strong>。</li>
 </ul>
@@ -1643,7 +1895,7 @@
 <h4 id="161">16.1、缓存手段<a class="headerlink" href="#161" title="Permanent link">&para;</a></h4>
 <h5 id="1611">16.1.1、写缓存<a class="headerlink" href="#1611" title="Permanent link">&para;</a></h5>
 <ul>
-<li>缓存一般被实现成下面三种策略之一：
+<li>缓存一般被实现成下面三种策略之一:
     + 第一种：不缓存（nowrite）
     + 第二种：写透缓存（write-through cache）：<strong>写操作将自动更新内存缓存，同时也更新磁盘文件</strong>。
     + 第三种：回写，<strong>脏页链表</strong></li>
@@ -1686,7 +1938,7 @@
 </ul>
 <h4 id="171">17.1、设备类型<a class="headerlink" href="#171" title="Permanent link">&para;</a></h4>
 <ul>
-<li>3种设备类型：
+<li>3种设备类型:
     + 块设备：blkdev
     + 字符设备：cdev
     + 网络设备：ethernet devices</li>
@@ -1720,7 +1972,7 @@
 <li><code>EXPORT_SYMBOL()</code></li>
 </ul>
 <h4 id="173">17.3、设备模型<a class="headerlink" href="#173" title="Permanent link">&para;</a></h4>
-<h5 id="0_22">0、<a class="headerlink" href="#0_22" title="Permanent link">&para;</a></h5>
+<h5 id="0_28">0、<a class="headerlink" href="#0_28" title="Permanent link">&para;</a></h5>
 <ul>
 <li>2.6增加了新特性：<strong>统一设备模型（device model）</strong>，提供了一个独立的机制专门来表示设备，并描述其在系统中的拓扑结构</li>
 </ul>
@@ -1744,7 +1996,7 @@
 <li>2、kref</li>
 </ul>
 <h4 id="174sysfs">17.4、sysfs<a class="headerlink" href="#174sysfs" title="Permanent link">&para;</a></h4>
-<h5 id="0_23">0、<a class="headerlink" href="#0_23" title="Permanent link">&para;</a></h5>
+<h5 id="0_29">0、<a class="headerlink" href="#0_29" title="Permanent link">&para;</a></h5>
 <h5 id="1741sysfskobject">17.4.1、sysfs中添加和删除kobject<a class="headerlink" href="#1741sysfskobject" title="Permanent link">&para;</a></h5>
 <ul>
 <li><code>kobject_add()</code></li>

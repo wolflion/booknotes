@@ -66,51 +66,173 @@
               <ul class="current">
                   <li class="toctree-l1 current"><a class="reference internal current" href="./">《Linux内核探秘》</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#21">2.1、文件系统的基本概念</a>
+    <li class="toctree-l2"><a class="reference internal" href="#chap2-1224232">chap2、文件系统   12（24/232）</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#211vfs">2.1.1、什么是VFS</a>
+    <li class="toctree-l3"><a class="reference internal" href="#21">2.1、文件系统的基本概念</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#211vfs">2.1.1、什么是VFS</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#212super_block">2.1.2、超级块super_block</a>
+    <li class="toctree-l4"><a class="reference internal" href="#212super_block">2.1.2、超级块super_block</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#213dentry">2.1.3、目录项dentry</a>
+    <li class="toctree-l4"><a class="reference internal" href="#213dentry">2.1.3、目录项dentry</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#214inode">2.1.4、索引节点inode</a>
+    <li class="toctree-l4"><a class="reference internal" href="#214inode">2.1.4、索引节点inode</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#215">2.1.5、文件</a>
+    <li class="toctree-l4"><a class="reference internal" href="#215">2.1.5、文件</a>
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#22">2.2、文件系统的架构</a>
+    <li class="toctree-l3"><a class="reference internal" href="#22">2.2、文件系统的架构</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#221">2.2.1、超级块作用分析</a>
+    <li class="toctree-l4"><a class="reference internal" href="#221">2.2.1、超级块作用分析</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#222dentry">2.2.2、dentry作用分析</a>
+    <li class="toctree-l4"><a class="reference internal" href="#222dentry">2.2.2、dentry作用分析</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#223inode">2.2.3、inode作用分析</a>
+    <li class="toctree-l4"><a class="reference internal" href="#223inode">2.2.3、inode作用分析</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#224">2.2.4、文件作用分析</a>
+    <li class="toctree-l4"><a class="reference internal" href="#224">2.2.4、文件作用分析</a>
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#23">2.3、从代码层次深入分析文件系统</a>
+    <li class="toctree-l3"><a class="reference internal" href="#23">2.3、从代码层次深入分析文件系统</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#231aufs">2.3.1、一个最简单的文件系统aufs</a>
+    <li class="toctree-l4"><a class="reference internal" href="#231aufs">2.3.1、一个最简单的文件系统aufs</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#232">2.3.2、文件系统如何管理目录和文件</a>
+    <li class="toctree-l4"><a class="reference internal" href="#232">2.3.2、文件系统如何管理目录和文件</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#233">2.3.3、文件系统的挂载过程</a>
+    <li class="toctree-l4"><a class="reference internal" href="#233">2.3.3、文件系统的挂载过程</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#234">2.3.4、文件打开的代码分析</a>
+    <li class="toctree-l4"><a class="reference internal" href="#234">2.3.4、文件打开的代码分析</a>
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#24">2.4、本章小结</a>
+    <li class="toctree-l3"><a class="reference internal" href="#24">2.4、本章小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap10-143155232">chap10、文件系统读写   143（155/232）</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#101page-cache">10.1、page cache机制</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1011buffer-iodirect-io">10.1.1、buffer I/O和direct I/O</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1012buffer-head">10.1.2、buffer head和块缓存</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1013page-cache">10.1.3、page cache的管理</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1014page-cache">10.1.4、page cache的状态</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#102">10.2、文件预读</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#103">10.3、文件锁</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#104">10.4、文件读过程代码分析</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#105">10.5、读过程返回</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#106">10.6、文件写过程代码分析</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#107">10.7、本章小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap11scsi-170182232">chap11、通用块层和scsi层   170（182/232）</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#111">11.1、块设备队列</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1111scsi">11.1.1、scsi块设备队列处理函数</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1112">11.1.2、电梯算法和对象</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#112hba">11.2、硬盘HBA抽象层</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#113io">11.3、I/O的顺序控制</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#114io">11.4、I/O调度算法</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1141noop">11.4.1、noop调度算法</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#115io">11.5、I/O的处理过程</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1151io">11.5.1、I/O插入队列的过程分析</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1152io">11.5.2、I/O出队列的过程分析</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1153io">11.5.3、I/O返回路径</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#116">11.6、本章小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap12-204216232">chap12、内核回写机制   204（216/232）</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#121">12.1、内核的触发条件</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#122">12.2、内核回写控制参数</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#123">12.3、定时器触发回写</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1231">12.3.1、启动定时器</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1232">12.3.2、执行回写操作</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1233">12.3.3、检查需要回写的页面</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1234inode">12.3.4、回写超级块内的inode</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#12341">12.3.4.1、</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#12342">12.3.4.2、</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#12343">12.3.4.3、</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#12344">12.3.4.4、</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#124">12.4、平衡写</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1241">12.4.1、检查直接回写的条件</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1242">12.4.2、回写系统脏页面的条件</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1243">12.4.3、检查计算机模式</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#125">12.5、本章小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap13ext2-217229232">chap13、一个真实文件系统ext2   217（229/232）</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#131ext2">13.1、ext2的硬盘布局</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#132ext2">13.2、ext2文件系统目录树</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#133ext2">13.3、ext2文件内容管理</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#134ext2">13.4、ext2文件系统读写</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#135">13.5、本章小结</a>
+    </li>
+        </ul>
     </li>
     </ul>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《文件系统技术内幕》</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">《存储技术原理分析》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA/">《操作系统导论》</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">存储</span></p>
@@ -156,7 +278,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h3 id="chap2-1224232">chap2、文件系统   12（24/232）<a class="headerlink" href="#chap2-1224232" title="Permanent link">&para;</a></h3>
+                <h2 id="linux">《Linux内核探秘》<a class="headerlink" href="#linux" title="Permanent link">&para;</a></h2>
+<h3 id="chap2-1224232">chap2、文件系统   12（24/232）<a class="headerlink" href="#chap2-1224232" title="Permanent link">&para;</a></h3>
 <h4 id="21">2.1、文件系统的基本概念<a class="headerlink" href="#21" title="Permanent link">&para;</a></h4>
 <h5 id="211vfs">2.1.1、什么是VFS<a class="headerlink" href="#211vfs" title="Permanent link">&para;</a></h5>
 <ul>
@@ -458,14 +581,59 @@ MODULE_VERSION("Ver 0.1");
 <h4 id="104">10.4、文件读过程代码分析<a class="headerlink" href="#104" title="Permanent link">&para;</a></h4>
 <ul>
 <li><code>sys_read()</code></li>
+<li>read_write.c中的<code>sys_read()</code>【根据fd，得到file结构；取得文件当前位置】</li>
+<li>read_write.c中的<code>vfs_read()</code>【校验权限；看是否有自定义的read】</li>
+<li>1、generic_file_read函数
+    + <code>vfs_read()</code>-&gt;filemap.c中的<code>generic_file_read()</code> 【<strong>解决文件同步和异步操作问题</strong>，<code>kiocb</code>结构】
+    + <code>kiocb</code>结构定义在include/aio.h中，实现在aio.c中</li>
+<li>2、<code>__generic_file_aio_read</code>函数
+    + file_map.c中，函数比较长，分3部分
+        + 第一部分：校验
+        + 第二部分：处理direct I/O
+        + 第三部分：使用了读描述符结构desc</li>
+<li>3、do_generic_file_read函数
+    + file_map.c中，<strong>内核提供的通用读函数</strong></li>
+<li>4、do_generic_mapping_read函数
+    + file_map.c中，计算文件读操作涉及的页面参数，<strong>比较复杂</strong>，分7个部分：
+        + 第一部分：
+        + 第三部分：处理页面状态是最新的情况
+        + 第七部分：更新文件的位置，修改文件的预读状态。
+    + <strong>从硬盘读数据是通过文件系统提供的readpage函数实现的</strong>。
+    + ext2文件系统提供的读页面函数是 inode.c中的<code>ext2_readpage()</code>，直接调用<code>mpage_readpage()</code><strong>内核提供的一个通用函数</strong>，它调用<code>do_mpage_readpage</code>将读请求转换为一个bio结构，如果bio有效，则提交bio给底层去执行读操作。</li>
+<li><strong>文件系统的读写请求，最终要转换成对块设备的读写请求</strong>，这涉及几个问题：
+    + 文件对用户呈现了一个连续的读写接口，但是文件在真正物理设备硬盘上的存储可能并不是连续的，如果是不连续的，对文件的读写就不能用同一个I/O完成，而是需要拆分。
+    + 内核通过<code>submit_bio</code>来提交一个I/O给底层。同时内核又提供了一个函数<code>submit_bh</code>来提交块。submit_bh最终也是通过submit_bio来实现，<strong>它只是多了将块地址转换为硬盘物理扇区地址的过程</strong>。</li>
+<li>5、do_mpage_readpage函数
+    + 也分了几个部分
+        + 第六部分：confused分支代码</li>
+<li>6、block_read_full_page函数
+    + 前面与do_mpage_readpage前面部分流程类似
+    + arr数组，保存了页面内的每一个文件块的物理块号</li>
 </ul>
 <h4 id="105">10.5、读过程返回<a class="headerlink" href="#105" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>文件系统通过mpage_bio_submit提交一个I/O</strong>。这个I/O什么时候返回？通过什么机制通知上层？这涉及内核I/O过程的阻塞点设计。</li>
+<li>mpage.c中的<code>mpage_bio_submit()</code>，调用<code>mpage_bio_read()</code>【在I/O完成后的中断过程中调用的】</li>
+<li>mpage.c中的<code>mpage_end_io_read()</code>要遍历bio结构的每个向量，看相关页面是否获得最新的数据。</li>
 </ul>
 <h4 id="106">10.6、文件写过程代码分析<a class="headerlink" href="#106" title="Permanent link">&para;</a></h4>
 <ul>
 <li><code>sys_write()</code></li>
+<li>1、generic_file_wirte函数<ul>
+<li>filemap.c中的，buffer I/O读写对象是page cache，<strong>当用户希望真正写到硬盘时，文件就需要设置SYNC标志</strong>，调用<code>sync_page_range</code>把page cache的页面写入硬盘。</li>
+</ul>
+</li>
+<li>2、generic_file_buffered_write函数
+    + <code>__generic_file_io_write_nolock()</code>
+    + 分为4部分
+        + 第四部分：检查文件是否具有SYNC标志</li>
+<li>3、获得文件块的物理块号
+    + <code>prepare_write()</code>和<code>commit_write()</code>功能，对于ext2而言就是<code>ext2_prepare_write()</code>和<code>generic_commit_write()</code>
+    + <code>ext2_prepare_write()</code>真正实现的是buffer.c中的<code>__block_preapre_write()</code>
+        + 第一部分
+        + 第二部分
+        + 第三部分：检查前面的处理过程是否产生了读请求
+    + <code>generic_commit_write()</code>作用是，逐个遍历所有文件块，检查块缓存是否最新。</li>
 </ul>
 <h4 id="107">10.7、本章小结<a class="headerlink" href="#107" title="Permanent link">&para;</a></h4>
 <ul>
@@ -482,12 +650,25 @@ MODULE_VERSION("Ver 0.1");
 <h5 id="1111scsi">11.1.1、scsi块设备队列处理函数<a class="headerlink" href="#1111scsi" title="Permanent link">&para;</a></h5>
 <ul>
 <li><code>scsi_alloc_queue()</code></li>
+<li>为scsi块设备创建队列结构时调用。</li>
+<li>默认为scsi设备提供了出队列函数<code>scsi_request_fn()</code>和软中断完成函数<code>scsi_softirq_done()</code></li>
 </ul>
 <h5 id="1112">11.1.2、电梯算法和对象<a class="headerlink" href="#1112" title="Permanent link">&para;</a></h5>
 <ul>
-<li><code>struct elevator_type{}</code>
-  11.2、硬盘HBA抽象层</li>
+<li>
+<p><code>struct elevator_type{}</code></p>
+<h4 id="112hba">11.2、硬盘HBA抽象层<a class="headerlink" href="#112hba" title="Permanent link">&para;</a></h4>
+</li>
+</ul>
+<ul>
 <li><code>struct scsi_host_template{}</code></li>
+</ul>
+<ul>
+<li>
+<ul>
+<li><code>static struct elevator_type elevator_noop = {};</code></li>
+</ul>
+</li>
 </ul>
 <h4 id="113io">11.3、I/O的顺序控制<a class="headerlink" href="#113io" title="Permanent link">&para;</a></h4>
 <h4 id="114io">11.4、I/O调度算法<a class="headerlink" href="#114io" title="Permanent link">&para;</a></h4>
@@ -496,9 +677,14 @@ MODULE_VERSION("Ver 0.1");
 <li><code>noop_add_request()</code></li>
 </ul>
 <ul>
-<li>
-<p><code>noop_dispatch()</code></p>
-<h5 id="1142deadline">11.4.2、deadline调度算法<a class="headerlink" href="#1142deadline" title="Permanent link">&para;</a></h5>
+<li><code>noop_dispatch()</code></li>
+</ul>
+<ul>
+<li>noop，基本什么都没做，等同于一个先进先出的调度算法，本身没对I/O进行真正的排序。入队列函数决定了I/O是如何插入电梯队列的，<strong>加入noop的链表</strong>。</li>
+</ul>
+<ul>
+<li>I/O调度算法的出队列函数决定了I/O是如何被挑选，然后由硬盘驱动执行。<p>+ <strong>I/O从块设备队列到驱动执行的过程，是由scsi层控制的</strong></p>
+<p>##### 11.4.2、deadline调度算法</p>
 </li>
 </ul>
 <ul>
@@ -507,25 +693,94 @@ MODULE_VERSION("Ver 0.1");
 <ul>
 <li><code>deadline_add_request()</code></li>
 </ul>
+<ul>
+<li>内部启用了一个红黑树结构来对I/O进行排序，保证出队列时，<strong>已经按照扇区地址排好顺序了</strong>。block/deadline-iosched.c中的</li>
+</ul>
+<ul>
+<li><code>deadline_data</code>结构有2个队列，<strong>一个是红黑树sort_list，另一个是链表fifo_list</strong>（读写请求分别保存在不同的队列中）</li>
+</ul>
+<ul>
+<li>出队列函数是<code>deadline_dispatch_requests()</code>
+    + 第一部分，判断是否连续的批模式
+    + 第二部分，检查读写请求的饥饿时间
+    + 第三部分，挑选一个出队列的I/O
+    + 最后，重新开启一轮循环，<code>deadline_find_first_drq()</code></li>
+</ul>
 <h4 id="115io">11.5、I/O的处理过程<a class="headerlink" href="#115io" title="Permanent link">&para;</a></h4>
 <h5 id="1151io">11.5.1、I/O插入队列的过程分析<a class="headerlink" href="#1151io" title="Permanent link">&para;</a></h5>
-<h6 id="11511submit_bio">11.5.1.1、submit_bio函数<a class="headerlink" href="#11511submit_bio" title="Permanent link">&para;</a></h6>
-<h6 id="11512generic_make_request">11.5.1.2、generic_make_request函数<a class="headerlink" href="#11512generic_make_request" title="Permanent link">&para;</a></h6>
-<h6 id="11513__generic_make_request">11.5.1.3、<code>__generic_make_request</code>函数<a class="headerlink" href="#11513__generic_make_request" title="Permanent link">&para;</a></h6>
-<h6 id="11514elv_merge">11.5.1.4、elv_merge函数<a class="headerlink" href="#11514elv_merge" title="Permanent link">&para;</a></h6>
-<h6 id="11515__elv_add_request">11.5.1.5、<code>__elv_add_request</code>函数<a class="headerlink" href="#11515__elv_add_request" title="Permanent link">&para;</a></h6>
-<h6 id="11516elv_insert">11.5.1.6、elv_insert函数<a class="headerlink" href="#11516elv_insert" title="Permanent link">&para;</a></h6>
+<ul>
+<li>1、submit_bio函数
+    + 是文件系统VFS层和通用块层的衔接点，调用generic_make_request函数</li>
+<li>2、generic_make_request函数
+    + 把入参的bio结构转换为底层处理的请求结构
+        + 第一部分，检查最大扇区限制
+        + 第二部分，检查I/O的大小不应该超过块设备的最大可处理扇区</li>
+<li>3、<code>__generic_make_request</code>函数
+    + 第一部分，从bio结构获得I/O的起始扇区地址和以扇区度量的I/O大小
+    + 第二部分，首先检查是否需要bounce，其次检查I/O是否barrier I/O
+    + 第三部分，处理后向合并
+    + 第四部分，处理前向合并
+    + 第五部分，申请请求</li>
+<li>4、elv_merge函数
+    + 判断两个I/O能否合并，通过两步：
+        + 第一步，判断能否和块设备队列的最后一个请求合并
+        + 第二步，调用电梯队列提供的函数判断能否合并</li>
+<li>5、<code>__elv_add_request</code>函数
+    + 对于不能合并的I/O，需要把一个请求插入到队列。</li>
+<li>6、elv_insert函数
+    + 第一部分，处理前向插入
+    + 第二部分，处理后向插入
+    + 第三部分，处理按顺序插入和重插
+    + 第四部分，检查队列的限制</li>
+</ul>
 <h5 id="1152io">11.5.2、I/O出队列的过程分析<a class="headerlink" href="#1152io" title="Permanent link">&para;</a></h5>
-<h6 id="11521unplug">11.5.2.1、unplug函数<a class="headerlink" href="#11521unplug" title="Permanent link">&para;</a></h6>
-<h6 id="11522scsi_request_fn">11.5.2.2、scsi_request_fn函数<a class="headerlink" href="#11522scsi_request_fn" title="Permanent link">&para;</a></h6>
-<h6 id="11523elv_nex_request">11.5.2.3、elv_nex_request函数<a class="headerlink" href="#11523elv_nex_request" title="Permanent link">&para;</a></h6>
-<h6 id="11524blk_do_ordered">11.5.2.4、blk_do_ordered函数<a class="headerlink" href="#11524blk_do_ordered" title="Permanent link">&para;</a></h6>
-<h6 id="11525start_ordered">11.5.2.5、start_ordered函数<a class="headerlink" href="#11525start_ordered" title="Permanent link">&para;</a></h6>
-<h6 id="11526scsi_dispatch_cmd">11.5.2.6、scsi_dispatch_cmd函数<a class="headerlink" href="#11526scsi_dispatch_cmd" title="Permanent link">&para;</a></h6>
+<ul>
+<li>0
+    + I/O从队列出来真正下发到硬盘？以下几个条件
+        + 第一个I/O启动了3毫秒的定时器，时间到了，会执行unplug函数，开始下发I/O
+        + 请求数目超过设定的限制（默认是4），执行unplug函数，开始下发
+        + 带有sync标志的I/O，立即执行unplug函数，开始下发
+        + barrier I/O，需要先清空电梯队列，然后执行unplug函数，开始下发
+        + 当硬盘执行完毕一个I/O，也要unplug队列，检查是否有I/O可以执行</li>
+<li>1、unplug函数
+    + 先检查队列是否设置了stop标志，其次清除队列的plug标志，然后调用队列的request_fn函数</li>
+<li>2、scsi_request_fn函数
+    + 第一部分，调用<code>elv_next_request()</code>从块设备队列获得一个请求
+    + 第二部分，检查各种异常情况
+    + 第三部分，初始化保存scsi错误返回值的数据buffer，然后调用<code>scsi_dispatch_cmd()</code>将I/O下发到驱动
+    + 第四部分，两个处理错误分支</li>
+<li>3、elv_next_request函数
+    + 从块设备队列获得一个I/O
+    + 第一部分，调用<code>__elv_next_request()</code>从队列中获得一个I/O请求
+    + 第二部分，调用队列的<code>prep_rq_fn()</code>来预处理I/O</li>
+<li>4、blk_do_ordered函数
+    + 检查I/O的顺序，<strong>为了处理barrier I/O</strong>
+    + 第一部分，
+    + 第二部分，处理特殊情况</li>
+<li>5、start_ordered函数
+    + 根据要求设置同步cache命令，保证同步cache命令之前的I/O必须完成
+    + 第一部分，设置I/O请求的必要参数
+    + 第二部分，设置同步cache的命令</li>
+<li>6、scsi_dispatch_cmd函数</li>
+</ul>
 <h5 id="1153io">11.5.3、I/O返回路径<a class="headerlink" href="#1153io" title="Permanent link">&para;</a></h5>
-<h6 id="11531sd_rw_intr">11.5.3.1、sd_rw_intr函数<a class="headerlink" href="#11531sd_rw_intr" title="Permanent link">&para;</a></h6>
-<h6 id="11532scsi_io_completion">11.5.3.2、scsi_io_completion函数<a class="headerlink" href="#11532scsi_io_completion" title="Permanent link">&para;</a></h6>
-<h6 id="11533scsi_end_request">11.5.3.3、scsi_end_request函数<a class="headerlink" href="#11533scsi_end_request" title="Permanent link">&para;</a></h6>
+<ul>
+<li>0
+    + <code>scsi_done()</code>是I/O返回路径上的第一个函数
+    + <code>blk_complete_request()</code>
+    + <code>scsi_softirq_done()</code></li>
+<li><strong><code>scsi_decide_disposition()</code>值得仔细研究，总结了所有的scsi错误类型</strong>，并给出了处理措施</li>
+<li>1、sd_rw_intr函数
+    + 对scsi命令的各种错误进行处理
+    + 第一部分，如果scsi命令的返回结果result不为0，说明命令执行中产生了错误。
+    + 第二部分，检查scsi命令的sense key</li>
+<li>2、scsi_io_completion函数
+    + 第一部分，
+    + 第二部分
+    + 第三部分</li>
+<li>3、scsi_end_request函数</li>
+<li><strong>bio设置的回调函数是<code>mpage_end_io_read()</code></strong>.</li>
+</ul>
 <h4 id="116">11.6、本章小结<a class="headerlink" href="#116" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>通用块层、I/O调度算法和scsi层，共同构建了文件系统之下的I/O处理流程</strong>。</li>
