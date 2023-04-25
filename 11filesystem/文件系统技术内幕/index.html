@@ -116,7 +116,107 @@
         <ul>
     <li class="toctree-l4"><a class="reference internal" href="#321layout">3.2.1、磁盘空间布局（Layout）</a>
     </li>
+    <li class="toctree-l4"><a class="reference internal" href="#322">3.2.2、文件的数据管理</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#323">3.2.3 缓存技术</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#324">3.2.4、快照与克隆技术</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#325">3.2.5 日志技术</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#326">3.2.6 权限管理</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#327">3.2.7 配额管理</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#328">3.2.8 文件锁的原理</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#329-ads">3.2.9 扩展属性与ADS</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#3210">3.2.10 其他技术简介</a>
+    </li>
         </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#33">3.3、常见本地文件系统简介</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#331-extx">3.3.1 ExtX 文件系统</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#332-xfs">3.3.2 XFS 文件系统</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#333-zfs">3.3.3 ZFS 文件系统</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#334-btrfs">3.3.4 Btrfs 文件系统</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#335-fat">3.3.5 FAT 文件系统</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#336-ntfs">3.3.6 NTFS 文件系统</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap4ext2">chap4、Ext2 文件系统代码详解</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#41">4.1、本地文件系统的分析方法与工具</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#411">4.1.1、基于文件构建文件系统</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#412">4.1.2、了解函数调用流程的利器</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#42-ext2">4.2 从 Ext2 文件系统磁盘布局说起</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#421-ext2">4.2.1 Ext2 文件系统整体布局概述</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#422-superblock">4.2.2 超级块（SuperBlock）</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#423-block-group-descriptor">4.2.3 块组描述符（Block Group Descriptor）</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#424-block-bitmap">4.2.4 块位图（Block Bitmap）</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#425-inode-inode-bitmap">4.2.5 inode 位图（inode Bitmap）</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#426-inode-inode">4.2.6 inode 与 inode 表</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#43ext2">4.3、Ext2 文件系统的根目录与目录数据布局</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#44ext2">4.4、Ext2 文件系统的挂载</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#45">4.5 如何创建一个文件</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#0">0、</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#451">4.5.1 创建普通文件</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#452">4.5.2 创建软硬链接</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#453">4.5.3、创建目录</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#46-ext2-125">4.6 Ext2 文件系统删除文件的流程 . 125</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#47-ext2-129">4.7 Ext2 文件系统中文件的数据管理与写数据流程 . 129</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#48">4.8、读数据的流程分析</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#481">4.8.1、缓存命中场景</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#482">4.8.2、非缓存命中场景</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#483">4.8.3、数据预读逻辑</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#49">4.9、如何分配磁盘空间</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#410-ext2-154">4.10 Ext2 文件系统的扩展属性 . 154</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#411-163">4.11 权限管理代码解析 . 163</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#412-165">4.12 文件锁代码解析 . 165</a>
     </li>
         </ul>
     </li>
@@ -172,9 +272,23 @@
               
                 <h2 id="_1">《文件系统技术内幕》<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <h3 id="chap1">chap1、从文件系统是什么说起<a class="headerlink" href="#chap1" title="Permanent link">&para;</a></h3>
+<p>1.1 什么是文件系统 . 1</p>
+<p>1.1.1 普通用户角度的文件系统 . 3</p>
+<p>1.1.2 操作系统层面的文件系统 . 9</p>
+<p>1.1.3 文件系统的基本原理 . 12</p>
+<p>1.2 常见文件系统及分类 . 13</p>
+<p>1.2.1 本地文件系统 . 14</p>
+<p>1.2.2 伪文件系统 . 14</p>
+<p>1.2.3 网络文件系统 . 15</p>
+<p>1.2.4 集群文件系统 . 16</p>
+<p>1.2.5 分布式文件系统 . 16</p>
 <h3 id="chap2">chap2、如何使用文件系统<a class="headerlink" href="#chap2" title="Permanent link">&para;</a></h3>
 <h4 id="21">2.1、准备开发环境<a class="headerlink" href="#21" title="Permanent link">&para;</a></h4>
 <h4 id="22">2.2、读/写文件<a class="headerlink" href="#22" title="Permanent link">&para;</a></h4>
+<p>2.2.1 文件系统的 API . 18</p>
+<p>2.2.2 文件访问的一般流程 . 19</p>
+<p>2.2.3 文件内容的读/写实例 . 20</p>
+<p>2.2.4 关于 API 函数的进一步解释 . 22</p>
 <h4 id="23">2.3、如何遍历目录中的文件<a class="headerlink" href="#23" title="Permanent link">&para;</a></h4>
 <h4 id="24">2.4、格式化文件和挂载<a class="headerlink" href="#24" title="Permanent link">&para;</a></h4>
 <ul>
@@ -182,6 +296,9 @@
 <li>挂载，将文件系统激活（在操作系统目录树呈现）的过程</li>
 </ul>
 <h4 id="25">2.5、文件系统与权限管理<a class="headerlink" href="#25" title="Permanent link">&para;</a></h4>
+<p>2.5.1 Linux 权限管理简介 . 30</p>
+<p>2.5.2 设置文件的 RWX 权限 . 31</p>
+<p>2.5.3 设置文件的 ACL 权限 . 34</p>
 <h4 id="26">2.6、文件系统的锁机制<a class="headerlink" href="#26" title="Permanent link">&para;</a></h4>
 <h5 id="261">2.6.1、文件锁的分类与模式<a class="headerlink" href="#261" title="Permanent link">&para;</a></h5>
 <ul>
@@ -246,6 +363,184 @@
 </ul>
 <h4 id="32">3.2、本地文件系统的关键技术与特性<a class="headerlink" href="#32" title="Permanent link">&para;</a></h4>
 <h5 id="321layout">3.2.1、磁盘空间布局（Layout）<a class="headerlink" href="#321layout" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>元数据区</strong>：对数据区进行管理的地方</li>
+</ul>
+<h6 id="3211">3.2.1.1、基于固定功能区的磁盘空间布局<a class="headerlink" href="#3211" title="Permanent link">&para;</a></h6>
+<ul>
+<li>元数据区，又分为:<ul>
+<li>数据块位图</li>
+<li>inode位图</li>
+<li>inode表</li>
+</ul>
+</li>
+<li><strong>块组</strong>：</li>
+<li>块组0:<ul>
+<li>引导块：<strong>预留给操作系统的</strong></li>
+<li>超级块</li>
+<li>块组描述符</li>
+<li>预留GDT块</li>
+<li>数据块位图</li>
+<li>inode位图</li>
+<li>inode表</li>
+<li>数据块</li>
+</ul>
+</li>
+</ul>
+<h6 id="3212">3.2.1.2、基于非固定功能区的磁盘空间布局<a class="headerlink" href="#3212" title="Permanent link">&para;</a></h6>
+<h6 id="3213">3.2.1.3、基于数据追加的磁盘空间布局<a class="headerlink" href="#3213" title="Permanent link">&para;</a></h6>
+<h5 id="322">3.2.2、文件的数据管理<a class="headerlink" href="#322" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>将文件的逻辑块与磁盘的物理块建立关系</strong></li>
+</ul>
+<h6 id="3221">3.2.2.1、基于连续区域的文件数据管理<a class="headerlink" href="#3221" title="Permanent link">&para;</a></h6>
+<h6 id="3221_1">3.2.2.1、基于链表的文件数据管理<a class="headerlink" href="#3221_1" title="Permanent link">&para;</a></h6>
+<h6 id="3221_2">3.2.2.1、基于索引的文件数据管理<a class="headerlink" href="#3221_2" title="Permanent link">&para;</a></h6>
+<ul>
+<li>1、基于间接块的文件数据管理<ul>
+<li><strong>元数据与数据有一个固定的对应关系</strong>，也就是数据越多，需要的元数据越多。</li>
+</ul>
+</li>
+<li>2、基于Extent的文件数据管理<ul>
+<li>每一个索引项记录的值不是一个数据块的地址，而是<strong>数据块的起始地址和长度</strong>。</li>
+</ul>
+</li>
+</ul>
+<h5 id="323">3.2.3 缓存技术<a class="headerlink" href="#323" title="Permanent link">&para;</a></h5>
+<h6 id="3231">3.2.3.1、缓存的替换算法<a class="headerlink" href="#3231" title="Permanent link">&para;</a></h6>
+<ul>
+<li>1、LRU算法</li>
+<li>2、LFU算法</li>
+</ul>
+<h6 id="3232">3.2.3.2、预读算法<a class="headerlink" href="#3232" title="Permanent link">&para;</a></h6>
+<h5 id="324">3.2.4、快照与克隆技术<a class="headerlink" href="#324" title="Permanent link">&para;</a></h5>
+<h6 id="3241">3.2.4.1、快照技术原理简析<a class="headerlink" href="#3241" title="Permanent link">&para;</a></h6>
+<h6 id="3242">3.2.4.2、克隆技术原理简析<a class="headerlink" href="#3242" title="Permanent link">&para;</a></h6>
+<h6 id="3243">3.2.4.3、应用实例<a class="headerlink" href="#3243" title="Permanent link">&para;</a></h6>
+<h5 id="325">3.2.5 日志技术<a class="headerlink" href="#325" title="Permanent link">&para;</a></h5>
+<h5 id="326">3.2.6 权限管理<a class="headerlink" href="#326" title="Permanent link">&para;</a></h5>
+<h6 id="3261rwx">3.2.6.1、RWX权限控制的原理<a class="headerlink" href="#3261rwx" title="Permanent link">&para;</a></h6>
+<ul>
+<li>root,group,other这些属主的rwx权限</li>
+</ul>
+<h6 id="3262acl">3.2.6.2、ACL权限控制的原理<a class="headerlink" href="#3262acl" title="Permanent link">&para;</a></h6>
+<ul>
+<li>accessACL</li>
+<li>defaultACL</li>
+</ul>
+<h6 id="3263selinux">3.2.6.3、SELinux权限管理<a class="headerlink" href="#3263selinux" title="Permanent link">&para;</a></h6>
+<ul>
+<li>关键是SElinux策略数据库的建立</li>
+</ul>
+<h5 id="327">3.2.7 配额管理<a class="headerlink" href="#327" title="Permanent link">&para;</a></h5>
+<ul>
+<li>软上限</li>
+<li>硬上限</li>
+<li>宽限期：<strong>针对软上限而言</strong>，即几天内允许数据量超过软上限</li>
+</ul>
+<h5 id="328">3.2.8 文件锁的原理<a class="headerlink" href="#328" title="Permanent link">&para;</a></h5>
+<h5 id="329-ads">3.2.9 扩展属性与ADS<a class="headerlink" href="#329-ads" title="Permanent link">&para;</a></h5>
+<h5 id="3210">3.2.10 其他技术简介<a class="headerlink" href="#3210" title="Permanent link">&para;</a></h5>
+<h6 id="32101">3.2.10.1、数据加密<a class="headerlink" href="#32101" title="Permanent link">&para;</a></h6>
+<ul>
+<li>透明数据加密，<strong>对用户来说是感知不到的</strong></li>
+</ul>
+<h6 id="32102">3.2.10.2、数据压缩<a class="headerlink" href="#32102" title="Permanent link">&para;</a></h6>
+<h4 id="33">3.3、常见本地文件系统简介<a class="headerlink" href="#33" title="Permanent link">&para;</a></h4>
+<h5 id="331-extx">3.3.1 ExtX 文件系统<a class="headerlink" href="#331-extx" title="Permanent link">&para;</a></h5>
+<h5 id="332-xfs">3.3.2 XFS 文件系统<a class="headerlink" href="#332-xfs" title="Permanent link">&para;</a></h5>
+<h5 id="333-zfs">3.3.3 ZFS 文件系统<a class="headerlink" href="#333-zfs" title="Permanent link">&para;</a></h5>
+<h5 id="334-btrfs">3.3.4 Btrfs 文件系统<a class="headerlink" href="#334-btrfs" title="Permanent link">&para;</a></h5>
+<h5 id="335-fat">3.3.5 FAT 文件系统<a class="headerlink" href="#335-fat" title="Permanent link">&para;</a></h5>
+<h5 id="336-ntfs">3.3.6 NTFS 文件系统<a class="headerlink" href="#336-ntfs" title="Permanent link">&para;</a></h5>
+<h3 id="chap4ext2">chap4、Ext2 文件系统代码详解<a class="headerlink" href="#chap4ext2" title="Permanent link">&para;</a></h3>
+<h4 id="41">4.1、本地文件系统的分析方法与工具<a class="headerlink" href="#41" title="Permanent link">&para;</a></h4>
+<h5 id="411">4.1.1、基于文件构建文件系统<a class="headerlink" href="#411" title="Permanent link">&para;</a></h5>
+<ul>
+<li>dd命令生成一个全0的二进制文件<code>dd if=/dev/zero of=./ext2.bin bs=1M count=100</code></li>
+<li>格式化<code>mkfs.ext2 ext2.bin</code></li>
+<li>使用loop设备，<code>losetup /dev/loop10 ./ext2.bin</code></li>
+<li>挂载，<code>mount /dev/loop10 /tmp/ext2/</code></li>
+</ul>
+<h5 id="412">4.1.2、了解函数调用流程的利器<a class="headerlink" href="#412" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>ftrace</strong></li>
+</ul>
+<h4 id="42-ext2">4.2 从 Ext2 文件系统磁盘布局说起<a class="headerlink" href="#42-ext2" title="Permanent link">&para;</a></h4>
+<h5 id="421-ext2">4.2.1 Ext2 文件系统整体布局概述<a class="headerlink" href="#421-ext2" title="Permanent link">&para;</a></h5>
+<h5 id="422-superblock">4.2.2 超级块（SuperBlock）<a class="headerlink" href="#422-superblock" title="Permanent link">&para;</a></h5>
+<ul>
+<li>超级块，是<strong>文件系统的起始位置，是整个文件系统的入口</strong></li>
+</ul>
+<h5 id="423-block-group-descriptor">4.2.3 块组描述符（Block Group Descriptor）<a class="headerlink" href="#423-block-group-descriptor" title="Permanent link">&para;</a></h5>
+<ul>
+<li>以列表形式跟在超级块之后</li>
+<li><code>dumpe2fs</code></li>
+</ul>
+<h5 id="424-block-bitmap">4.2.4 块位图（Block Bitmap）<a class="headerlink" href="#424-block-bitmap" title="Permanent link">&para;</a></h5>
+<h5 id="425-inode-inode-bitmap">4.2.5 inode 位图（inode Bitmap）<a class="headerlink" href="#425-inode-inode-bitmap" title="Permanent link">&para;</a></h5>
+<h5 id="426-inode-inode">4.2.6 inode 与 inode 表<a class="headerlink" href="#426-inode-inode" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>inode表</strong>，以列表的形式紧跟在inode位图之后，每一项就是一个inode节点。</li>
+</ul>
+<h4 id="43ext2">4.3、Ext2 文件系统的根目录与目录数据布局<a class="headerlink" href="#43ext2" title="Permanent link">&para;</a></h4>
+<ul>
+<li>目录本质上也是一个文件，<strong>其存储的数据是一个特定的、格式化的数据</strong></li>
+<li><strong>目录项entry</strong></li>
+</ul>
+<h4 id="44ext2">4.4、Ext2 文件系统的挂载<a class="headerlink" href="#44ext2" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>ext2_mount()</code></li>
+</ul>
+<h4 id="45">4.5 如何创建一个文件<a class="headerlink" href="#45" title="Permanent link">&para;</a></h4>
+<h5 id="0">0、<a class="headerlink" href="#0" title="Permanent link">&para;</a></h5>
+<ul>
+<li>创建文件的步骤:<ul>
+<li>1.从inode表中申请一个inode</li>
+<li>2.在目录中创建一个目录项</li>
+<li>3.申请磁盘空间存储数据（如果存在写数据）</li>
+</ul>
+</li>
+</ul>
+<h5 id="451">4.5.1 创建普通文件<a class="headerlink" href="#451" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>ext2_create()</code></li>
+</ul>
+<h5 id="452">4.5.2 创建软硬链接<a class="headerlink" href="#452" title="Permanent link">&para;</a></h5>
+<ul>
+<li>0</li>
+<li>1、硬链接的创建流程<ul>
+<li><code>ext2_link()</code></li>
+</ul>
+</li>
+<li>2、软链接的创建流程<ul>
+<li><code>ext2_symlink()</code></li>
+</ul>
+</li>
+</ul>
+<h5 id="453">4.5.3、创建目录<a class="headerlink" href="#453" title="Permanent link">&para;</a></h5>
+<h4 id="46-ext2-125">4.6 Ext2 文件系统删除文件的流程 . 125<a class="headerlink" href="#46-ext2-125" title="Permanent link">&para;</a></h4>
+<h4 id="47-ext2-129">4.7 Ext2 文件系统中文件的数据管理与写数据流程 . 129<a class="headerlink" href="#47-ext2-129" title="Permanent link">&para;</a></h4>
+<p>4.7.1 Ext2 文件系统中的文件数据是如何管理的 . 129
+4.7.2 从 VFS 到 Ext2 文件系统的写流程. 130
+4.7.3 不同写模式的流程分析 . 134
+4.7.4 缓存数据刷写及流程 . 138</p>
+<h4 id="48">4.8、读数据的流程分析<a class="headerlink" href="#48" title="Permanent link">&para;</a></h4>
+<h5 id="481">4.8.1、缓存命中场景<a class="headerlink" href="#481" title="Permanent link">&para;</a></h5>
+<h5 id="482">4.8.2、非缓存命中场景<a class="headerlink" href="#482" title="Permanent link">&para;</a></h5>
+<h5 id="483">4.8.3、数据预读逻辑<a class="headerlink" href="#483" title="Permanent link">&para;</a></h5>
+<h4 id="49">4.9、如何分配磁盘空间<a class="headerlink" href="#49" title="Permanent link">&para;</a></h4>
+<p>4.9.1 计算存储路径 . 150
+4.9.2 获取存储路径 . 152
+4.9.3 分配磁盘空间 . 153</p>
+<h4 id="410-ext2-154">4.10 Ext2 文件系统的扩展属性 . 154<a class="headerlink" href="#410-ext2-154" title="Permanent link">&para;</a></h4>
+<p>4.10.1 Ext2 文件系统扩展属性是怎么在磁盘存储的 . 154
+4.10.2 设置扩展属性的 VFS 流程 . 157
+4.10.3 Ext2 文件系统扩展属性接口实现 . 159</p>
+<h4 id="411-163">4.11 权限管理代码解析 . 163<a class="headerlink" href="#411-163" title="Permanent link">&para;</a></h4>
+<p>4.11.1 ACL 的设置与获取 . 163
+4.11.2 ACL 权限检查 . 164</p>
+<h4 id="412-165">4.12 文件锁代码解析 . 165<a class="headerlink" href="#412-165" title="Permanent link">&para;</a></h4>
               
             </div>
           </div><footer>

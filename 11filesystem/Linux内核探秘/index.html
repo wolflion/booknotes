@@ -156,6 +156,8 @@
         <ul>
     <li class="toctree-l4"><a class="reference internal" href="#1141noop">11.4.1、noop调度算法</a>
     </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1142deadline">11.4.2、deadline调度算法</a>
+    </li>
         </ul>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#115io">11.5、I/O的处理过程</a>
@@ -581,34 +583,58 @@ MODULE_VERSION("Ver 0.1");
 <h4 id="104">10.4、文件读过程代码分析<a class="headerlink" href="#104" title="Permanent link">&para;</a></h4>
 <ul>
 <li><code>sys_read()</code></li>
-<li>read_write.c中的<code>sys_read()</code>【根据fd，得到file结构；取得文件当前位置】</li>
-<li>read_write.c中的<code>vfs_read()</code>【校验权限；看是否有自定义的read】</li>
-<li>1、generic_file_read函数
-    + <code>vfs_read()</code>-&gt;filemap.c中的<code>generic_file_read()</code> 【<strong>解决文件同步和异步操作问题</strong>，<code>kiocb</code>结构】
-    + <code>kiocb</code>结构定义在include/aio.h中，实现在aio.c中</li>
-<li>2、<code>__generic_file_aio_read</code>函数
-    + file_map.c中，函数比较长，分3部分
-        + 第一部分：校验
-        + 第二部分：处理direct I/O
-        + 第三部分：使用了读描述符结构desc</li>
-<li>3、do_generic_file_read函数
-    + file_map.c中，<strong>内核提供的通用读函数</strong></li>
-<li>4、do_generic_mapping_read函数
-    + file_map.c中，计算文件读操作涉及的页面参数，<strong>比较复杂</strong>，分7个部分：
-        + 第一部分：
-        + 第三部分：处理页面状态是最新的情况
-        + 第七部分：更新文件的位置，修改文件的预读状态。
-    + <strong>从硬盘读数据是通过文件系统提供的readpage函数实现的</strong>。
-    + ext2文件系统提供的读页面函数是 inode.c中的<code>ext2_readpage()</code>，直接调用<code>mpage_readpage()</code><strong>内核提供的一个通用函数</strong>，它调用<code>do_mpage_readpage</code>将读请求转换为一个bio结构，如果bio有效，则提交bio给底层去执行读操作。</li>
+<li>read_write.c中的<code>sys_read()</code><ul>
+<li>根据fd，得到file结构；取得文件当前位置</li>
+</ul>
+</li>
+<li>read_write.c中的<code>vfs_read()</code><ul>
+<li>校验权限；看是否有自定义的read</li>
+</ul>
+</li>
+<li>1.generic_file_read函数<ul>
+<li><code>vfs_read()</code>-&gt;filemap.c中的<code>generic_file_read()</code>    <strong>解决文件同步和异步操作问题</strong>，<code>kiocb</code>结构</li>
+<li><code>kiocb</code>结构定义在include/aio.h中，实现在aio.c中</li>
+</ul>
+</li>
+<li>2.<code>__generic_file_aio_read</code>函数<ul>
+<li>file_map.c中，函数比较长，分3部分<ul>
+<li>第一部分：校验</li>
+<li>第二部分：处理direct I/O</li>
+<li>第三部分：使用了读描述符结构desc</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>3.do_generic_file_read函数<ul>
+<li>file_map.c中，<strong>内核提供的通用读函数</strong></li>
+</ul>
+</li>
+<li>4.do_generic_mapping_read函数<ul>
+<li>file_map.c中，计算文件读操作涉及的页面参数，<strong>比较复杂</strong>，分7个部分：<ul>
+<li>第一部分：</li>
+<li>第三部分：处理页面状态是最新的情况</li>
+<li>第七部分：更新文件的位置，修改文件的预读状态。</li>
+</ul>
+</li>
+<li><strong>从硬盘读数据是通过文件系统提供的readpage函数实现的</strong>。</li>
+<li>ext2文件系统提供的读页面函数是 inode.c中的<code>ext2_readpage()</code>，直接调用<code>mpage_readpage()</code><strong>内核提供的一个通用函数</strong>，它调用<code>do_mpage_readpage</code>将读请求转换为一个bio结构，如果bio有效，则提交bio给底层去执行读操作。</li>
+</ul>
+</li>
 <li><strong>文件系统的读写请求，最终要转换成对块设备的读写请求</strong>，这涉及几个问题：
     + 文件对用户呈现了一个连续的读写接口，但是文件在真正物理设备硬盘上的存储可能并不是连续的，如果是不连续的，对文件的读写就不能用同一个I/O完成，而是需要拆分。
     + 内核通过<code>submit_bio</code>来提交一个I/O给底层。同时内核又提供了一个函数<code>submit_bh</code>来提交块。submit_bh最终也是通过submit_bio来实现，<strong>它只是多了将块地址转换为硬盘物理扇区地址的过程</strong>。</li>
-<li>5、do_mpage_readpage函数
-    + 也分了几个部分
-        + 第六部分：confused分支代码</li>
-<li>6、block_read_full_page函数
-    + 前面与do_mpage_readpage前面部分流程类似
-    + arr数组，保存了页面内的每一个文件块的物理块号</li>
+<li>5.do_mpage_readpage函数<ul>
+<li>也分了几个部分<ul>
+<li>第六部分：confused分支代码</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>6.block_read_full_page函数<ul>
+<li>前面与do_mpage_readpage前面部分流程类似</li>
+<li>arr数组，保存了页面内的每一个文件块的物理块号</li>
+</ul>
+</li>
 </ul>
 <h4 id="105">10.5、读过程返回<a class="headerlink" href="#105" title="Permanent link">&para;</a></h4>
 <ul>
@@ -619,15 +645,15 @@ MODULE_VERSION("Ver 0.1");
 <h4 id="106">10.6、文件写过程代码分析<a class="headerlink" href="#106" title="Permanent link">&para;</a></h4>
 <ul>
 <li><code>sys_write()</code></li>
-<li>1、generic_file_wirte函数<ul>
+<li>1.generic_file_wirte函数<ul>
 <li>filemap.c中的，buffer I/O读写对象是page cache，<strong>当用户希望真正写到硬盘时，文件就需要设置SYNC标志</strong>，调用<code>sync_page_range</code>把page cache的页面写入硬盘。</li>
 </ul>
 </li>
-<li>2、generic_file_buffered_write函数
+<li>2.generic_file_buffered_write函数
     + <code>__generic_file_io_write_nolock()</code>
     + 分为4部分
         + 第四部分：检查文件是否具有SYNC标志</li>
-<li>3、获得文件块的物理块号
+<li>3.获得文件块的物理块号
     + <code>prepare_write()</code>和<code>commit_write()</code>功能，对于ext2而言就是<code>ext2_prepare_write()</code>和<code>generic_commit_write()</code>
     + <code>ext2_prepare_write()</code>真正实现的是buffer.c中的<code>__block_preapre_write()</code>
         + 第一部分
@@ -655,20 +681,14 @@ MODULE_VERSION("Ver 0.1");
 </ul>
 <h5 id="1112">11.1.2、电梯算法和对象<a class="headerlink" href="#1112" title="Permanent link">&para;</a></h5>
 <ul>
-<li>
-<p><code>struct elevator_type{}</code></p>
-<h4 id="112hba">11.2、硬盘HBA抽象层<a class="headerlink" href="#112hba" title="Permanent link">&para;</a></h4>
-</li>
+<li><code>struct elevator_type{}</code></li>
 </ul>
+<h4 id="112hba">11.2、硬盘HBA抽象层<a class="headerlink" href="#112hba" title="Permanent link">&para;</a></h4>
 <ul>
 <li><code>struct scsi_host_template{}</code></li>
 </ul>
 <ul>
-<li>
-<ul>
 <li><code>static struct elevator_type elevator_noop = {};</code></li>
-</ul>
-</li>
 </ul>
 <h4 id="113io">11.3、I/O的顺序控制<a class="headerlink" href="#113io" title="Permanent link">&para;</a></h4>
 <h4 id="114io">11.4、I/O调度算法<a class="headerlink" href="#114io" title="Permanent link">&para;</a></h4>
@@ -684,9 +704,9 @@ MODULE_VERSION("Ver 0.1");
 </ul>
 <ul>
 <li>I/O调度算法的出队列函数决定了I/O是如何被挑选，然后由硬盘驱动执行。<p>+ <strong>I/O从块设备队列到驱动执行的过程，是由scsi层控制的</strong></p>
-<p>##### 11.4.2、deadline调度算法</p>
 </li>
 </ul>
+<h5 id="1142deadline">11.4.2、deadline调度算法<a class="headerlink" href="#1142deadline" title="Permanent link">&para;</a></h5>
 <ul>
 <li><code>struct deadline_data{}</code></li>
 </ul>
@@ -811,31 +831,25 @@ MODULE_VERSION("Ver 0.1");
 </ul>
 <h5 id="1234inode">12.3.4、回写超级块内的inode<a class="headerlink" href="#1234inode" title="Permanent link">&para;</a></h5>
 <ul>
-<li>
-<p><code>sync_sb_inodes()</code></p>
+<li><code>sync_sb_inodes()</code></li>
+</ul>
 <h5 id="12341">12.3.4.1、<a class="headerlink" href="#12341" title="Permanent link">&para;</a></h5>
 <h5 id="12342">12.3.4.2、<a class="headerlink" href="#12342" title="Permanent link">&para;</a></h5>
 <h5 id="12343">12.3.4.3、<a class="headerlink" href="#12343" title="Permanent link">&para;</a></h5>
 <h5 id="12344">12.3.4.4、<a class="headerlink" href="#12344" title="Permanent link">&para;</a></h5>
-</li>
-</ul>
 <h4 id="124">12.4、平衡写<a class="headerlink" href="#124" title="Permanent link">&para;</a></h4>
 <ul>
 <li><code>balance_dirty_pages_ratelimited()</code>检查脏页面是否到达限值，是否进行平衡写操作</li>
 </ul>
 <ul>
-<li>
-<p><code>balance_dirty_pages()</code></p>
-<h5 id="1241">12.4.1、检查直接回写的条件<a class="headerlink" href="#1241" title="Permanent link">&para;</a></h5>
-</li>
+<li><code>balance_dirty_pages()</code></li>
 </ul>
+<h5 id="1241">12.4.1、检查直接回写的条件<a class="headerlink" href="#1241" title="Permanent link">&para;</a></h5>
 <ul>
-<li>
-<p><code>balance_dirty_pages_ratelimited_nr()</code></p>
+<li><code>balance_dirty_pages_ratelimited_nr()</code></li>
+</ul>
 <h5 id="1242">12.4.2、回写系统脏页面的条件<a class="headerlink" href="#1242" title="Permanent link">&para;</a></h5>
 <h5 id="1243">12.4.3、检查计算机模式<a class="headerlink" href="#1243" title="Permanent link">&para;</a></h5>
-</li>
-</ul>
 <h4 id="125">12.5、本章小结<a class="headerlink" href="#125" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Linux内核的回写机制提供了一种缓写机制，真实的写并不是直接写入硬盘，而是在page cache中缓存，等待合适的时机才真正执行写入</strong>。</li>

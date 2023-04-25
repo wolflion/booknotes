@@ -206,6 +206,76 @@
     </li>
         </ul>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap4-127142538">chap4、互斥与同步  127（142/538）</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#41">4.1、并发的来源</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#42local_irq_enablelocal_irq_disable">4.2、local_irq_enable和local_irq_disable</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#43">4.3、自旋锁</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#431spin_lock">4.3.1、spin_lock</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#432spin_lock">4.3.2、spin_lock的变体</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#433spin_lock">4.3.3、单处理器上的spin_lock函数</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#434rwlock">4.3.4、读取者和写入者自旋锁rwlock</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#44">4.4、信号量</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#441">4.4.1、信号量的定义与初始化</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#442down">4.4.2、DOWN操作</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#443up">4.4.3、UP操作</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#444rwsem">4.4.4、读取者与写入者信号量rwsem</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#45">4.5、互斥锁</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#451">4.5.1、互斥锁的定义与初始化</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#452down">4.5.2、互斥锁的DOWN操作</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#453up">4.5.3、互斥锁的UP操作</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#46seqlock">4.6、顺序锁seqlock</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#47rcu">4.7、RCU</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#471rcu">4.7.1、读取者的RCU临界区</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#472rcu">4.7.2、写入者的RCU操作</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#473rcu">4.7.3、RCU使用的特点</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#48">4.8、原子变量和位操作</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#49">4.9、等待队列</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#491wait_queue_head_t">4.9.1、等待队列头wait_queue_head_t</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#492">4.9.2、等待队列的节点</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#493">4.9.3、等待队列的应用</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#410completion">4.10、完成接口completion</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#411">4.11、本章小结</a>
+    </li>
+        </ul>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="#chap7-231246538">chap7、设备文件的高级操作  231（246/538）</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#71ioctl">7.1、ioctl文件操作</a>
@@ -510,6 +580,94 @@
 <li>基于slab分配器的kmalloc函数和kmem_cache_alloc函数</li>
 <li>vmalloc函数</li>
 <li>用在多处理器系统中，即per-CPU内存分配器</li>
+</ul>
+<h3 id="chap4-127142538">chap4、互斥与同步  127（142/538）<a class="headerlink" href="#chap4-127142538" title="Permanent link">&para;</a></h3>
+<h4 id="41">4.1、并发的来源<a class="headerlink" href="#41" title="Permanent link">&para;</a></h4>
+<h4 id="42local_irq_enablelocal_irq_disable">4.2、local_irq_enable和local_irq_disable<a class="headerlink" href="#42local_irq_enablelocal_irq_disable" title="Permanent link">&para;</a></h4>
+<ul>
+<li>在单处理器不可抢占系统中，使用local_irq_enable和local_irq_disable是消除异步并发源的有效方式。</li>
+<li>include/linux/irqflags.h</li>
+</ul>
+<h4 id="43">4.3、自旋锁<a class="headerlink" href="#43" title="Permanent link">&para;</a></h4>
+<h5 id="431spin_lock">4.3.1、spin_lock<a class="headerlink" href="#431spin_lock" title="Permanent link">&para;</a></h5>
+<ul>
+<li>include/linux/spinlock.h</li>
+<li>include/linux/spinlock_types.h</li>
+</ul>
+<h5 id="432spin_lock">4.3.2、spin_lock的变体<a class="headerlink" href="#432spin_lock" title="Permanent link">&para;</a></h5>
+<h5 id="433spin_lock">4.3.3、单处理器上的spin_lock函数<a class="headerlink" href="#433spin_lock" title="Permanent link">&para;</a></h5>
+<h5 id="434rwlock">4.3.4、读取者和写入者自旋锁rwlock<a class="headerlink" href="#434rwlock" title="Permanent link">&para;</a></h5>
+<ul>
+<li><em>读写者的机制？</em></li>
+</ul>
+<h4 id="44">4.4、信号量<a class="headerlink" href="#44" title="Permanent link">&para;</a></h4>
+<ul>
+<li>相对于自旋锁，<strong>信号量的最大特点是允许调用它的线程进入睡眠状态</strong>。</li>
+</ul>
+<h5 id="441">4.4.1、信号量的定义与初始化<a class="headerlink" href="#441" title="Permanent link">&para;</a></h5>
+<ul>
+<li>include/linux/semaphore.h中<code>struct semaphore{};</code></li>
+</ul>
+<h5 id="442down">4.4.2、DOWN操作<a class="headerlink" href="#442down" title="Permanent link">&para;</a></h5>
+<h5 id="443up">4.4.3、UP操作<a class="headerlink" href="#443up" title="Permanent link">&para;</a></h5>
+<ul>
+<li>kernel/semaphore.c中的<code>up()</code></li>
+<li>include/linux/rwsem-spinlok.h中的<code>struct rw_semaphore{};</code></li>
+</ul>
+<h5 id="444rwsem">4.4.4、读取者与写入者信号量rwsem<a class="headerlink" href="#444rwsem" title="Permanent link">&para;</a></h5>
+<h4 id="45">4.5、互斥锁<a class="headerlink" href="#45" title="Permanent link">&para;</a></h4>
+<h5 id="451">4.5.1、互斥锁的定义与初始化<a class="headerlink" href="#451" title="Permanent link">&para;</a></h5>
+<ul>
+<li>include/linux/mutex.h中的<code>struct mutex{};</code></li>
+</ul>
+<h5 id="452down">4.5.2、互斥锁的DOWN操作<a class="headerlink" href="#452down" title="Permanent link">&para;</a></h5>
+<ul>
+<li>kernel/mutex.c中的<code>mutex_lock()</code></li>
+</ul>
+<h5 id="453up">4.5.3、互斥锁的UP操作<a class="headerlink" href="#453up" title="Permanent link">&para;</a></h5>
+<h4 id="46seqlock">4.6、顺序锁seqlock<a class="headerlink" href="#46seqlock" title="Permanent link">&para;</a></h4>
+<ul>
+<li>设计思想是：<strong>对某一共享数据读取时不加锁，写的时候加锁</strong>，读取前与读取后，对比这个sequence，如果有变化，说明数据变更过。</li>
+<li>include/linux/seqlock.h中</li>
+</ul>
+<h4 id="47rcu">4.7、RCU<a class="headerlink" href="#47rcu" title="Permanent link">&para;</a></h4>
+<ul>
+<li>RCU全称是<strong>Read-Copy-Update</strong>，<strong>免锁机制</strong>
+    + 读者通过p来访问，写者通过p来更新，<strong>免锁是靠双方恪守一定的规则达成</strong></li>
+</ul>
+<h5 id="471rcu">4.7.1、读取者的RCU临界区<a class="headerlink" href="#471rcu" title="Permanent link">&para;</a></h5>
+<ul>
+<li>调用rcu_read_lock和rcu_read_unlock函数构建自己所谓的读取者侧的临界区，然后在临界区中获得指向共享数据区的指针</li>
+</ul>
+<h5 id="472rcu">4.7.2、写入者的RCU操作<a class="headerlink" href="#472rcu" title="Permanent link">&para;</a></h5>
+<h5 id="473rcu">4.7.3、RCU使用的特点<a class="headerlink" href="#473rcu" title="Permanent link">&para;</a></h5>
+<ul>
+<li>是对读取者与写入者自旋锁rwlock的一种优化</li>
+</ul>
+<h4 id="48">4.8、原子变量和位操作<a class="headerlink" href="#48" title="Permanent link">&para;</a></h4>
+<h4 id="49">4.9、等待队列<a class="headerlink" href="#49" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>等待队列并不是一种互斥机制</strong>，本质上是一<strong>双向链表</strong>，由等待队列头和队列节点构成</li>
+</ul>
+<h5 id="491wait_queue_head_t">4.9.1、等待队列头wait_queue_head_t<a class="headerlink" href="#491wait_queue_head_t" title="Permanent link">&para;</a></h5>
+<ul>
+<li>include/linux/wait.h中的</li>
+</ul>
+<h5 id="492">4.9.2、等待队列的节点<a class="headerlink" href="#492" title="Permanent link">&para;</a></h5>
+<h5 id="493">4.9.3、等待队列的应用<a class="headerlink" href="#493" title="Permanent link">&para;</a></h5>
+<ul>
+<li>实现进程的睡眠等待，当某一进程在运行过程中需要的资源暂时无法获得时，进程将进入睡眠状态以让出处理器资源给其他进程。</li>
+<li>内核中对等待队列的核心操作是等待（wait）与唤醒（wake up）</li>
+</ul>
+<h4 id="410completion">4.10、完成接口completion<a class="headerlink" href="#410completion" title="Permanent link">&para;</a></h4>
+<ul>
+<li>include/linux/completion.h中<code>struct completion{};</code></li>
+<li>kernel/sched.c中的</li>
+</ul>
+<h4 id="411">4.11、本章小结<a class="headerlink" href="#411" title="Permanent link">&para;</a></h4>
+<ul>
+<li>自旋锁不会进入睡眠，因而最适合在不允许睡眠的上下文环境中执行，比如中断处理函数。</li>
+<li>互斥锁的实现来源于信号量，所以如果一个进程在进入临界区试图调用互斥锁时，有可能会进入休眠状态，所以<strong>在中断上下文中严格禁止使用互斥锁和信号量</strong>。</li>
 </ul>
 <h3 id="chap7-231246538">chap7、设备文件的高级操作  231（246/538）<a class="headerlink" href="#chap7-231246538" title="Permanent link">&para;</a></h3>
 <h4 id="71ioctl">7.1、ioctl文件操作<a class="headerlink" href="#71ioctl" title="Permanent link">&para;</a></h4>
