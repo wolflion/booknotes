@@ -306,34 +306,36 @@ MODULE_VERSION("Ver 0.1");
 #### 10.4、文件读过程代码分析
 
 + `sys_read()`
-+ read_write.c中的`sys_read()`【根据fd，得到file结构；取得文件当前位置】
-+ read_write.c中的`vfs_read()`【校验权限；看是否有自定义的read】
-+ 1、generic_file_read函数
-	+ `vfs_read()`->filemap.c中的`generic_file_read()` 【**解决文件同步和异步操作问题**，`kiocb`结构】
-	+ `kiocb`结构定义在include/aio.h中，实现在aio.c中
-+ 2、`__generic_file_aio_read`函数
-	+ file_map.c中，函数比较长，分3部分
-		+ 第一部分：校验
-		+ 第二部分：处理direct I/O
-		+ 第三部分：使用了读描述符结构desc
-+ 3、do_generic_file_read函数
-	+ file_map.c中，**内核提供的通用读函数**
-+ 4、do_generic_mapping_read函数
-	+ file_map.c中，计算文件读操作涉及的页面参数，**比较复杂**，分7个部分：
-		+ 第一部分：
-		+ 第三部分：处理页面状态是最新的情况
-		+ 第七部分：更新文件的位置，修改文件的预读状态。
-	+ **从硬盘读数据是通过文件系统提供的readpage函数实现的**。
-	+ ext2文件系统提供的读页面函数是 inode.c中的`ext2_readpage()`，直接调用`mpage_readpage()`**内核提供的一个通用函数**，它调用`do_mpage_readpage`将读请求转换为一个bio结构，如果bio有效，则提交bio给底层去执行读操作。
++ read_write.c中的`sys_read()`
+  + 根据fd，得到file结构；取得文件当前位置
++ read_write.c中的`vfs_read()`
+  + 校验权限；看是否有自定义的read
++ 1.generic_file_read函数
+  + `vfs_read()`->filemap.c中的`generic_file_read()`    **解决文件同步和异步操作问题**，`kiocb`结构
+  + `kiocb`结构定义在include/aio.h中，实现在aio.c中
++ 2.`__generic_file_aio_read`函数
+  + file_map.c中，函数比较长，分3部分
+  	+ 第一部分：校验
+  	+ 第二部分：处理direct I/O
+  	+ 第三部分：使用了读描述符结构desc
++ 3.do_generic_file_read函数
+  + file_map.c中，**内核提供的通用读函数**
++ 4.do_generic_mapping_read函数
+  + file_map.c中，计算文件读操作涉及的页面参数，**比较复杂**，分7个部分：
+  	+ 第一部分：
+  	+ 第三部分：处理页面状态是最新的情况
+  	+ 第七部分：更新文件的位置，修改文件的预读状态。
+  + **从硬盘读数据是通过文件系统提供的readpage函数实现的**。
+  + ext2文件系统提供的读页面函数是 inode.c中的`ext2_readpage()`，直接调用`mpage_readpage()`**内核提供的一个通用函数**，它调用`do_mpage_readpage`将读请求转换为一个bio结构，如果bio有效，则提交bio给底层去执行读操作。
 + **文件系统的读写请求，最终要转换成对块设备的读写请求**，这涉及几个问题：
 	+ 文件对用户呈现了一个连续的读写接口，但是文件在真正物理设备硬盘上的存储可能并不是连续的，如果是不连续的，对文件的读写就不能用同一个I/O完成，而是需要拆分。
 	+ 内核通过`submit_bio`来提交一个I/O给底层。同时内核又提供了一个函数`submit_bh`来提交块。submit_bh最终也是通过submit_bio来实现，**它只是多了将块地址转换为硬盘物理扇区地址的过程**。
-+ 5、do_mpage_readpage函数
-	+ 也分了几个部分
-		+ 第六部分：confused分支代码
-+ 6、block_read_full_page函数
-	+ 前面与do_mpage_readpage前面部分流程类似
-	+ arr数组，保存了页面内的每一个文件块的物理块号
++ 5.do_mpage_readpage函数
+  + 也分了几个部分
+  	+ 第六部分：confused分支代码
++ 6.block_read_full_page函数
+  + 前面与do_mpage_readpage前面部分流程类似
+  + arr数组，保存了页面内的每一个文件块的物理块号
 
 #### 10.5、读过程返回
 
@@ -344,13 +346,13 @@ MODULE_VERSION("Ver 0.1");
 #### 10.6、文件写过程代码分析
 
 + `sys_write()`
-+ 1、generic_file_wirte函数
++ 1.generic_file_wirte函数
   + filemap.c中的，buffer I/O读写对象是page cache，**当用户希望真正写到硬盘时，文件就需要设置SYNC标志**，调用`sync_page_range`把page cache的页面写入硬盘。
-+ 2、generic_file_buffered_write函数
++ 2.generic_file_buffered_write函数
 	+ `__generic_file_io_write_nolock()`
 	+ 分为4部分
 		+ 第四部分：检查文件是否具有SYNC标志
-+ 3、获得文件块的物理块号
++ 3.获得文件块的物理块号
 	+ `prepare_write()`和`commit_write()`功能，对于ext2而言就是`ext2_prepare_write()`和`generic_commit_write()`
 	+ `ext2_prepare_write()`真正实现的是buffer.c中的`__block_preapre_write()`
 		+ 第一部分
@@ -380,11 +382,11 @@ MODULE_VERSION("Ver 0.1");
 
 + `struct elevator_type{}`
   
-  #### 11.2、硬盘HBA抽象层
-  
+#### 11.2、硬盘HBA抽象层
+
 + `struct scsi_host_template{}`
 
-+ + `static struct elevator_type elevator_noop = {};`
++ `static struct elevator_type elevator_noop = {};`
 
 #### 11.3、I/O的顺序控制
 
@@ -402,8 +404,8 @@ MODULE_VERSION("Ver 0.1");
 	
 	+ **I/O从块设备队列到驱动执行的过程，是由scsi层控制的**
 	
-	##### 11.4.2、deadline调度算法
-	
+##### 11.4.2、deadline调度算法
+
 + `struct deadline_data{}`
 
 + `deadline_add_request()`
@@ -528,13 +530,13 @@ MODULE_VERSION("Ver 0.1");
 
 + `sync_sb_inodes()`
 
-  ##### 12.3.4.1、
+##### 12.3.4.1、
 
-  ##### 12.3.4.2、
+##### 12.3.4.2、
 
-  ##### 12.3.4.3、
+##### 12.3.4.3、
 
-  ##### 12.3.4.4、
+##### 12.3.4.4、
 
 #### 12.4、平衡写
 
@@ -542,13 +544,13 @@ MODULE_VERSION("Ver 0.1");
 
 + `balance_dirty_pages()`
 
-  ##### 12.4.1、检查直接回写的条件
+##### 12.4.1、检查直接回写的条件
 
 + `balance_dirty_pages_ratelimited_nr()`
 
-  ##### 12.4.2、回写系统脏页面的条件
+##### 12.4.2、回写系统脏页面的条件
 
-  ##### 12.4.3、检查计算机模式
+##### 12.4.3、检查计算机模式
 
 #### 12.5、本章小结
 
