@@ -156,6 +156,61 @@
 + vmalloc函数
 + 用在多处理器系统中，即per-CPU内存分配器
 
+### chap4、互斥与同步  127（142/538）
+#### 4.1、并发的来源
+#### 4.2、local_irq_enable和local_irq_disable
++ 在单处理器不可抢占系统中，使用local_irq_enable和local_irq_disable是消除异步并发源的有效方式。
++ include/linux/irqflags.h
+#### 4.3、自旋锁
+##### 4.3.1、spin_lock
++ include/linux/spinlock.h
++ include/linux/spinlock_types.h
+##### 4.3.2、spin_lock的变体
+##### 4.3.3、单处理器上的spin_lock函数
+##### 4.3.4、读取者和写入者自旋锁rwlock
++ *读写者的机制？*
+#### 4.4、信号量
++ 相对于自旋锁，**信号量的最大特点是允许调用它的线程进入睡眠状态**。
+##### 4.4.1、信号量的定义与初始化
++ include/linux/semaphore.h中`struct semaphore{};`
+##### 4.4.2、DOWN操作
+##### 4.4.3、UP操作
++ kernel/semaphore.c中的`up()`
++ include/linux/rwsem-spinlok.h中的`struct rw_semaphore{};`
+##### 4.4.4、读取者与写入者信号量rwsem
+#### 4.5、互斥锁
+##### 4.5.1、互斥锁的定义与初始化
++ include/linux/mutex.h中的`struct mutex{};`
+##### 4.5.2、互斥锁的DOWN操作
++ kernel/mutex.c中的`mutex_lock()`
+##### 4.5.3、互斥锁的UP操作
+#### 4.6、顺序锁seqlock
++ 设计思想是：**对某一共享数据读取时不加锁，写的时候加锁**，读取前与读取后，对比这个sequence，如果有变化，说明数据变更过。
++ include/linux/seqlock.h中
+#### 4.7、RCU
++ RCU全称是**Read-Copy-Update**，**免锁机制**
+	+ 读者通过p来访问，写者通过p来更新，**免锁是靠双方恪守一定的规则达成**
+##### 4.7.1、读取者的RCU临界区
++ 调用rcu_read_lock和rcu_read_unlock函数构建自己所谓的读取者侧的临界区，然后在临界区中获得指向共享数据区的指针
+##### 4.7.2、写入者的RCU操作
+##### 4.7.3、RCU使用的特点
++ 是对读取者与写入者自旋锁rwlock的一种优化
+#### 4.8、原子变量和位操作
+#### 4.9、等待队列
++ **等待队列并不是一种互斥机制**，本质上是一**双向链表**，由等待队列头和队列节点构成
+##### 4.9.1、等待队列头wait_queue_head_t
++ include/linux/wait.h中的
+##### 4.9.2、等待队列的节点
+##### 4.9.3、等待队列的应用
++ 实现进程的睡眠等待，当某一进程在运行过程中需要的资源暂时无法获得时，进程将进入睡眠状态以让出处理器资源给其他进程。
++ 内核中对等待队列的核心操作是等待（wait）与唤醒（wake up）
+#### 4.10、完成接口completion
++ include/linux/completion.h中`struct completion{};`
++ kernel/sched.c中的
+#### 4.11、本章小结
++ 自旋锁不会进入睡眠，因而最适合在不允许睡眠的上下文环境中执行，比如中断处理函数。
++ 互斥锁的实现来源于信号量，所以如果一个进程在进入临界区试图调用互斥锁时，有可能会进入休眠状态，所以**在中断上下文中严格禁止使用互斥锁和信号量**。
+
 ### chap7、设备文件的高级操作  231（246/538）
 #### 7.1、ioctl文件操作
 + ioctl一般用来在用户空间的应用程序和驱动程序模块之间传递控制参数。
