@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>深入理解Linux虚拟内存管理 - lionel的技术笔记</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "\u6df1\u5165\u7406\u89e3Linux\u865a\u62df\u5185\u5b58\u7ba1\u7406";
+        var mkdocs_page_input_path = "13kernel\\\u6df1\u5165\u7406\u89e3Linux\u865a\u62df\u5185\u5b58\u7ba1\u7406.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> lionel的技术笔记
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">简介</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../01daily/">daily</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">C++</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../20C%2B%2B/effectiveC%2B%2B/">《Effective C++》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/EffectiveSTL/">《Effective STL》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网络编程</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/TCPIP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">《TCP/IP网络编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/">《Linux高性能服务器编程》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">文件系统</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/Linux%E5%86%85%E6%A0%B8%E6%8E%A2%E7%A7%98/">《Linux内核探秘》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《文件系统技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">《存储技术原理分析》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA/">《操作系统导论》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">存储</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../12storage/ceph%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《ceph设计原理与实现》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">内核</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../Linux%E5%86%85%E6%A0%B8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《Linux内核设计与实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../%E6%B7%B1%E5%85%A5Linux%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%E5%86%85%E6%A0%B8%E6%9C%BA%E5%88%B6/">《深入Linux设备驱动程序内核机制》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网课</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/01Linux%E9%AB%98%E5%B9%B6%E5%8F%91%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/">《Linux高并发网络编程开发》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/%E4%BE%AF%E6%8D%B7/%E4%BE%AF%E6%8D%B7C%2B%2B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%8660%E8%AE%B2/">《侯捷C++内存管理60讲》</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">lionel的技术笔记</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>深入理解Linux虚拟内存管理</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="linux">《深入理解Linux虚拟内存管理》<a class="headerlink" href="#linux" title="Permanent link">&para;</a></h2>
+<ul>
+<li>200页是理论的，后面的附录，是代码方面</li>
+<li>目录 在（10/674）</li>
+</ul>
+<h3 id="chap2-28674">chap2、描述物理内存   （28/674）<a class="headerlink" href="#chap2-28674" title="Permanent link">&para;</a></h3>
+<h4 id="0">0、<a class="headerlink" href="#0" title="Permanent link">&para;</a></h4>
+<ul>
+<li>每个簇都被认为是一个节点，在linux中的<code>struct pg_data_t</code>体现了这一概念</li>
+<li>在内存中，每个节点被分成很多的称为<strong>管理区（zone）</strong> 的块，用于表示内存中的某个范围。一个管理区由一个<code>struct zone_struct</code>描述，并被<strong>定义为<code>zone_t</code></strong></li>
+<li>管理区分为几段:
+    + ZONE_DMA，内存的首部16MB
+    + ZONE_NORAML，16~896MB
+    + ZONE_HIGHMEM，896~末尾</li>
+<li>系统的内存划分成大小确定的许多块，这些块也称为<strong>页面帧</strong>。每个物理页面帧由一个<code>struct page</code>描述，所有的结构都存储在一个<strong>全局mem_map数组中</strong>，该数组通常存放在<code>ZONE_NORMAL</code>的首部。</li>
+<li>图2.1，<strong>节点、管理区和页面的关系</strong></li>
+</ul>
+<h4 id="21">2.1、节点<a class="headerlink" href="#21" title="Permanent link">&para;</a></h4>
+<ul>
+<li>linux/mmzone.h中<code>typedef struct pglist_data{}pg_data_t;</code></li>
+<li><code>pgdat_list</code>链表维护，由函数<code>init_bootmem_core()</code>初始化节点</li>
+</ul>
+<h4 id="22">2.2、管理区<a class="headerlink" href="#22" title="Permanent link">&para;</a></h4>
+<ul>
+<li>linux/mmzone.h中的<code>struct zone_t{};</code>描述，<code>zone_structs</code>用于<strong>跟踪诸如页面使用情况统计数，空闲区域信息和锁信息</strong>。</li>
+</ul>
+<h5 id="221">2.2.1、管理区极值<a class="headerlink" href="#221" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>当系统中的可用内存很少时，守护程序kswapd被唤醒开始释放页面</strong>。</li>
+<li>每个管理区有3个极值:
+    + pages_low
+    + pages_min
+    + pages_high</li>
+</ul>
+<h5 id="222">2.2.2、计算管理区大小<a class="headerlink" href="#222" title="Permanent link">&para;</a></h5>
+<ul>
+<li>用<code>setup_memory()</code></li>
+<li>mm/bootmem.c</li>
+</ul>
+<h5 id="223">2.2.3、管理区等待队列表<a class="headerlink" href="#223" title="Permanent link">&para;</a></h5>
+<h4 id="23">2.3、管理区的初始化<a class="headerlink" href="#23" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>paging_init()</code></li>
+</ul>
+<h4 id="24mem_map">2.4、初始化mem_map<a class="headerlink" href="#24mem_map" title="Permanent link">&para;</a></h4>
+<ul>
+<li>在NUMA系统中，全局mem_map被处理为一个起始于<code>PAGE_OFFSET</code>的虚拟数组。<code>free_area_init_node()</code></li>
+<li>在UMA系统中，<code>free_are_init()</code>使用config_page_data作为结点，并将全局mem_map作为该节点的局部mem_map</li>
+</ul>
+<h4 id="25">2.5、页面<a class="headerlink" href="#25" title="Permanent link">&para;</a></h4>
+<ul>
+<li>linux/mm.h中的<code>struct page{};</code>，类型<code>mem_map_t</code></li>
+<li><strong>表2.1 描述页面状态的标志位</strong></li>
+</ul>
+<h4 id="26">2.6、页面映射到管理区<a class="headerlink" href="#26" title="Permanent link">&para;</a></h4>
+<ul>
+<li>linux/page_alloc.c中的<code>zone_table</code></li>
+</ul>
+<h4 id="27">2.7、高端内存<a class="headerlink" href="#27" title="Permanent link">&para;</a></h4>
+<ul>
+<li>内核通过<code>kmap()</code>将高端内存的页面临时映射成<code>ZONE_NORMAL</code></li>
+</ul>
+<h4 id="2826">2.8、2.6中有哪些新特性<a class="headerlink" href="#2826" title="Permanent link">&para;</a></h4>
+<ul>
+<li>节点</li>
+<li>管理区</li>
+<li>页面</li>
+<li>Per-CPU上的页面链表</li>
+</ul>
+<h3 id="chap3-45674">chap3、页表管理  （45/674）<a class="headerlink" href="#chap3-45674" title="Permanent link">&para;</a></h3>
+<h4 id="0_1">0、<a class="headerlink" href="#0_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>三层页表机制来完成内存管理</strong></li>
+</ul>
+<h4 id="31">3.1、描述页目录<a class="headerlink" href="#31" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>每个进程都有一个指向其自己PGD的指针（<code>mm_struct-&gt;pgd</code>），它其实就是一个物理页面帧</strong>。</li>
+<li>asm/page.h中的<code>pgd_t</code>类型</li>
+<li><code>PMD_SHIFT</code>表示在线性地址中第二级页表所映射的位。</li>
+</ul>
+<h4 id="32">3.2、描述页表项<a class="headerlink" href="#32" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>三层页表中的每一个项PTE，PMD，PGD分别由pte_t，pmd_t，pgd_t描述</strong></li>
+</ul>
+<h4 id="33">3.3、页表项的使用<a class="headerlink" href="#33" title="Permanent link">&para;</a></h4>
+<ul>
+<li>asm/pgtable.h中
+    + <code>pgd_offset()</code></li>
+<li>mm/memory.c中<code>follow_page()</code></li>
+</ul>
+<h4 id="34">3.4、页表项的转换和设置<a class="headerlink" href="#34" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>mk_pte()</code></li>
+<li><code>pte_page()</code></li>
+<li><code>set_pte()</code></li>
+</ul>
+<h4 id="35">3.5、页表的分配和释放<a class="headerlink" href="#35" title="Permanent link">&para;</a></h4>
+<h4 id="36">3.6、内核页表<a class="headerlink" href="#36" title="Permanent link">&para;</a></h4>
+<h5 id="361">3.6.1、引导初始化<a class="headerlink" href="#361" title="Permanent link">&para;</a></h5>
+<ul>
+<li>arch/i386/kernel/head.S中的<code>startup_32()</code></li>
+</ul>
+<h5 id="362">3.6.2、收尾工作<a class="headerlink" href="#362" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>paging_init()</code></li>
+</ul>
+<h4 id="37struct-page">3.7、地址和struct page之间的映射<a class="headerlink" href="#37struct-page" title="Permanent link">&para;</a></h4>
+<h5 id="371">3.7.1、物理和虚拟内核地址之间的映射<a class="headerlink" href="#371" title="Permanent link">&para;</a></h5>
+<ul>
+<li>asm-i386/page.h中</li>
+</ul>
+<h5 id="372struct-page">3.7.2、struct page和物理地址间的映射<a class="headerlink" href="#372struct-page" title="Permanent link">&para;</a></h5>
+<ul>
+<li>asm-i386/pae.h中</li>
+</ul>
+<h4 id="38tlb">3.8、转换后援缓冲区（TLB）<a class="headerlink" href="#38tlb" title="Permanent link">&para;</a></h4>
+<ul>
+<li>asm/pgtable.h中</li>
+</ul>
+<h4 id="39cpu">3.9、一级CPU高速缓存管理<a class="headerlink" href="#39cpu" title="Permanent link">&para;</a></h4>
+<ul>
+<li>asm/pgtable.h中</li>
+</ul>
+<h4 id="31026">3.10、2.6中有哪些新特性<a class="headerlink" href="#31026" title="Permanent link">&para;</a></h4>
+<ul>
+<li>MMU-less体系结构的支持</li>
+<li>反向映射</li>
+<li>基于对象的反向映射</li>
+<li>高端内存中的PTE</li>
+<li>大型TLB文件系统
+    + linux/hugetlb.h中</li>
+<li>高速缓存刷新管理
+    + <code>flush_page_to_ram()</code></li>
+</ul>
+<h3 id="chap4-65674">chap4、进程地址空间  （65/674）<a class="headerlink" href="#chap4-65674" title="Permanent link">&para;</a></h3>
+<h4 id="41">4.1、线性地址空间<a class="headerlink" href="#41" title="Permanent link">&para;</a></h4>
+<ul>
+<li>地址空间分为两个部分：
+    + 一个是随上下文切换而改变的用户空间部分
+    + 一个是保持不变的内核空间部分  <strong>两者的分界点由PAGE_OFFSET决定，在x86中它的值是<code>0xC0000000</code></strong></li>
+</ul>
+<h4 id="42">4.2、地址空间的管理<a class="headerlink" href="#42" title="Permanent link">&para;</a></h4>
+<ul>
+<li>进程可使用的地址空间由<code>mm_struct</code>管理</li>
+</ul>
+<h4 id="43">4.3、进程地址空间描述符<a class="headerlink" href="#43" title="Permanent link">&para;</a></h4>
+<h5 id="0_2">0、<a class="headerlink" href="#0_2" title="Permanent link">&para;</a></h5>
+<ul>
+<li>linux/sched.h中的<code>mm_struct</code></li>
+</ul>
+<h5 id="431">4.3.1、分配一个描述符<a class="headerlink" href="#431" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>Allocate_mm()</code>只是一个预处理宏，它从slab allocator中分配一个mm_struct</li>
+<li><code>mm_alloc()</code>从slab中分配，然后调用<code>mm_init()</code>对其初始化</li>
+</ul>
+<h5 id="432">4.3.2、初始化一个描述符<a class="headerlink" href="#432" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>mm_struct</code>通过<code>init_mm()</code>初始化</li>
+</ul>
+<h5 id="433">4.3.3、销毁一个描述符<a class="headerlink" href="#433" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>如果mm_users变成0，所有的映射区域通过<code>exit_mmap()</code>释放，同时释放页表</strong>。</li>
+</ul>
+<h4 id="44">4.4、内存区域<a class="headerlink" href="#44" title="Permanent link">&para;</a></h4>
+<ul>
+<li>linux/mm.h中的<code>struct vm_area_struct{};</code></li>
+</ul>
+<h5 id="441">4.4.1、内存区域的操作<a class="headerlink" href="#441" title="Permanent link">&para;</a></h5>
+<h4 id="45">4.5、异常处理<a class="headerlink" href="#45" title="Permanent link">&para;</a></h4>
+<h4 id="46">4.6、缺页中断<a class="headerlink" href="#46" title="Permanent link">&para;</a></h4>
+<h4 id="47">4.7、复制到用户空间/从用户空间复制<a class="headerlink" href="#47" title="Permanent link">&para;</a></h4>
+<h4 id="4826">4.8、2.6中有哪些新特性<a class="headerlink" href="#4826" title="Permanent link">&para;</a></h4>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
