@@ -41,6 +41,8 @@ nav:
     - C++: 
         - 《Effective C++》: '20C++/effectiveC++.md'
         - 《Effective STL》: '21STL/EffectiveSTL.md'
+    - 基础知识:
+        - 《操作系统导论》: '408/操作系统导论.md'
     - 网络编程:
         - 《TCP/IP网络编程》: '10network/TCPIP网络编程.md'
         - 《Linux高性能服务器编程》: '10network/Linux高性能服务器编程.md'
@@ -48,12 +50,13 @@ nav:
         - 《Linux内核探秘》: '11filesystem/Linux内核探秘.md'
         - 《文件系统技术内幕》: '11filesystem/文件系统技术内幕.md'
         - 《存储技术原理分析》: '11filesystem/存储技术原理分析.md'
-        - 《操作系统导论》: '408/操作系统导论.md'
     - 存储:
         - 《ceph设计原理与实现》: '12storage/ceph设计原理与实现.md'
     - 内核:
         - 《Linux内核设计与实现》: '13kernel/Linux内核设计与实现.md'
         - 《深入Linux设备驱动程序内核机制》: '13kernel/深入Linux设备驱动程序内核机制.md'
+    - 网课:
+        - 《剑指offer专项突破》: '91leetcode/剑指offer专项突破.md'
     - 网课:
         - 《Linux高并发网络编程开发》: '90lecture/01Linux高并发网络编程开发.md'
         - 《侯捷C++内存管理60讲》: '90lecture/侯捷/侯捷C++内存管理60讲.md'
