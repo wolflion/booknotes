@@ -55,6 +55,11 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../21STL/EffectiveSTL/">《Effective STL》</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">基础知识</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA/">《操作系统导论》</a>
+                  </li>
+              </ul>
               <p class="caption"><span class="caption-text">网络编程</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../10network/TCPIP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">《TCP/IP网络编程》</a>
@@ -70,8 +75,6 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">《存储技术原理分析》</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA/">《操作系统导论》</a>
-                  </li>
               </ul>
               <p class="caption"><span class="caption-text">存储</span></p>
               <ul>
@@ -83,6 +86,11 @@
                   <li class="toctree-l1"><a class="reference internal" href="../Linux%E5%86%85%E6%A0%B8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《Linux内核设计与实现》</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../%E6%B7%B1%E5%85%A5Linux%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%E5%86%85%E6%A0%B8%E6%9C%BA%E5%88%B6/">《深入Linux设备驱动程序内核机制》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网课</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/">《剑指offer专项突破》</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">网课</span></p>
@@ -287,6 +295,215 @@
 <h4 id="46">4.6、缺页中断<a class="headerlink" href="#46" title="Permanent link">&para;</a></h4>
 <h4 id="47">4.7、复制到用户空间/从用户空间复制<a class="headerlink" href="#47" title="Permanent link">&para;</a></h4>
 <h4 id="4826">4.8、2.6中有哪些新特性<a class="headerlink" href="#4826" title="Permanent link">&para;</a></h4>
+<h3 id="chap5-88101674">chap5、引导内存分配器   88（101/674）<a class="headerlink" href="#chap5-88101674" title="Permanent link">&para;</a></h3>
+<h4 id="51">5.1、表示引导内存映射<a class="headerlink" href="#51" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>系统内存中的每一个节点都存在一个<code>bootmem_data</code>结构</strong>，在linux/bootmem.h中</li>
+</ul>
+<h4 id="52">5.2、初始化引导内存分配器<a class="headerlink" href="#52" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>每一种体系结构中都提供了一个<code>setup_arch()</code></strong>，用于获取初始化引导内存分配器时所必须的参数信息。</li>
+</ul>
+<h4 id="53bootmem_data">5.3、初始化bootmem_data<a class="headerlink" href="#53bootmem_data" title="Permanent link">&para;</a></h4>
+<ul>
+<li>一旦<code>setup_memory()</code>确定了可用物理页面的界限。</li>
+</ul>
+<h4 id="54">5.4、分配内存<a class="headerlink" href="#54" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>reserve_bootmem()</code>函数用于保存调用者所需的页面</li>
+<li>UMA结构中，4个简单的分配函数:
+    + alloc_bootmem()
+    + alloc_bootmem_low()
+    + alloc_bootmem_pages()
+    + alloc_bootmem_low_pages()</li>
+<li>NUMA结构中，同样有相似函数</li>
+</ul>
+<h4 id="55">5.5、释放内存<a class="headerlink" href="#55" title="Permanent link">&para;</a></h4>
+<ul>
+<li>只有2种，<strong>用于UMA的<code>free_bootmem()</code>，和用于NUMA的<code>free_bootmem_node()</code></strong>，两者都调用<code>free_bootmem_core()</code>，<strong>只是NUMA中的不提供参数pgdat</strong>。</li>
+</ul>
+<h4 id="56">5.6、销毁引导内存分配器<a class="headerlink" href="#56" title="Permanent link">&para;</a></h4>
+<ul>
+<li>启动过程的末期，系统调用函数<code>start_kernel()</code>，这个函数知道此时可以安全地移除启动分配器和与之相关的所有数据结构。<strong>每种体系都要求提供<code>mem_init()</code>函数，该函数负责清除启动内存分配器和与之相关的结构</strong>。</li>
+</ul>
+<h4 id="5726">5.7、2.6中有哪些新特性<a class="headerlink" href="#5726" title="Permanent link">&para;</a></h4>
+<ul>
+<li>第1个优化是在bootmem_data_t结构中增加了last_success字段</li>
+<li>第2个优化也和线性搜索有关</li>
+<li>最后的一个变更与NUMA体系结构及相似的体系结构有关</li>
+</ul>
+<h3 id="chap6-94109674">chap6、物理页面分析  94（109/674）<a class="headerlink" href="#chap6-94109674" title="Permanent link">&para;</a></h3>
+<h4 id="61">6.1、管理空闲块<a class="headerlink" href="#61" title="Permanent link">&para;</a></h4>
+<ul>
+<li>linux/mm.h中</li>
+<li><strong>内存对于每一个阶都维护数据结构数组<code>free_area_t</code>，用于指向一个空闲页面块的链表</strong>。</li>
+</ul>
+<h4 id="62">6.2、分配页面<a class="headerlink" href="#62" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>alloc_pages()</code></li>
+</ul>
+<h4 id="63">6.3、释放页面<a class="headerlink" href="#63" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>__free_page()</code></li>
+</ul>
+<h4 id="64gfp">6.4、获得空闲页面（GFP）标志位<a class="headerlink" href="#64gfp" title="Permanent link">&para;</a></h4>
+<h4 id="65">6.5、进程标志位<a class="headerlink" href="#65" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>内外部碎片问题</strong></li>
+<li>外部碎片，是由于可用内存全部是小块而不能满足要求</li>
+<li>内部碎片，是由于一个大的块必须被分开来响应一些小的请求而浪费的空间</li>
+<li>影响分配器行为的进程标志位:
+    + PF_MEMALLOC
+    + PF_MEMDIE
+    + PF_FREE_PAGES</li>
+</ul>
+<h4 id="66">6.6、防止碎片<a class="headerlink" href="#66" title="Permanent link">&para;</a></h4>
+<ul>
+<li>用slab分配器将页面块切割为小的内存块进行分配</li>
+</ul>
+<h4 id="6726">6.7、2.6中有哪些新特性<a class="headerlink" href="#6726" title="Permanent link">&para;</a></h4>
+<ul>
+<li>分配页面</li>
+<li>Per-CPU的页面链表</li>
+<li>空闲页面</li>
+<li>GFP标志位</li>
+</ul>
+<h3 id="chap7-120674">chap7、非连续内存分配   （120/674）<a class="headerlink" href="#chap7-120674" title="Permanent link">&para;</a></h3>
+<h4 id="71">7.1、描述虚拟内存区<a class="headerlink" href="#71" title="Permanent link">&para;</a></h4>
+<ul>
+<li>linux/malloc.h中的<code>vm_struct</code></li>
+</ul>
+<h4 id="72">7.2、分配非连续区域<a class="headerlink" href="#72" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>vmalloc()</code>，<code>vmalloc_dma()</code>，<code>vmalloc_32()</code>在连续的虚拟地址空间分配内存</li>
+</ul>
+<h4 id="73">7.3、释放非连续区域<a class="headerlink" href="#73" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>vfree()</code></li>
+</ul>
+<h4 id="7426">7.4、2.6中有哪些新特性<a class="headerlink" href="#7426" title="Permanent link">&para;</a></h4>
+<ul>
+<li>所有的页表都由<code>_vmalloc()</code>预先分配，然后存储在一个数组中并传递给函数<code>map_vm_area()</code>，由它向内核表中插入页面</li>
+</ul>
+<h3 id="chap8slab-110125674">chap8、Slab分配器   110（125/674）<a class="headerlink" href="#chap8slab-110125674" title="Permanent link">&para;</a></h3>
+<h4 id="0_3">0、<a class="headerlink" href="#0_3" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Slab分配器的基本思想是:<strong>将内核中经常使用的对象放到高速缓存中，并且由系统保持为初始的可利用状态</strong>。</li>
+</ul>
+<h4 id="81">8.1、高速缓存<a class="headerlink" href="#81" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>cat /proc/slabinfo</code></li>
+</ul>
+<h5 id="811">8.1.1、高速缓存描述符<a class="headerlink" href="#811" title="Permanent link">&para;</a></h5>
+<ul>
+<li>mm/slab.c中的<code>struct kmem_cache_s</code></li>
+</ul>
+<h5 id="812">8.1.2、高速缓存静态标志位<a class="headerlink" href="#812" title="Permanent link">&para;</a></h5>
+<ul>
+<li>linux/slab.h中</li>
+</ul>
+<h5 id="813">8.1.3、高速缓存动态标志位<a class="headerlink" href="#813" title="Permanent link">&para;</a></h5>
+<h5 id="814">8.1.4、高速缓存分配标志位<a class="headerlink" href="#814" title="Permanent link">&para;</a></h5>
+<h5 id="816">8.1.6、创建高速缓存<a class="headerlink" href="#816" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>kmem_cache_create()</code></li>
+</ul>
+<h5 id="817">8.1.7、回收高速缓存<a class="headerlink" href="#817" title="Permanent link">&para;</a></h5>
+<h5 id="818">8.1.8、收缩高速缓存<a class="headerlink" href="#818" title="Permanent link">&para;</a></h5>
+<h5 id="819">8.1.9、销毁高速缓存<a class="headerlink" href="#819" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>kmem_cache_destroy()</code></li>
+</ul>
+<h4 id="82slabs">8.2、Slabs<a class="headerlink" href="#82slabs" title="Permanent link">&para;</a></h4>
+<h5 id="821slab">8.2.1、存储slab描述符<a class="headerlink" href="#821slab" title="Permanent link">&para;</a></h5>
+<h5 id="822slab">8.2.2、创建slab<a class="headerlink" href="#822slab" title="Permanent link">&para;</a></h5>
+<h5 id="823">8.2.3、跟踪空闲对象<a class="headerlink" href="#823" title="Permanent link">&para;</a></h5>
+<h5 id="824kmem_bufctl_t">8.2.4、初始化kmem_bufctl_t数组<a class="headerlink" href="#824kmem_bufctl_t" title="Permanent link">&para;</a></h5>
+<h5 id="825">8.2.5、查找下一个空闲对象<a class="headerlink" href="#825" title="Permanent link">&para;</a></h5>
+<h5 id="826kmem_bufctl_t">8.2.6、更新kmem_bufctl_t<a class="headerlink" href="#826kmem_bufctl_t" title="Permanent link">&para;</a></h5>
+<h5 id="827slab">8.2.7、计算slab中对象的数量<a class="headerlink" href="#827slab" title="Permanent link">&para;</a></h5>
+<h5 id="828slab">8.2.8、销毁slab<a class="headerlink" href="#828slab" title="Permanent link">&para;</a></h5>
+<h4 id="83">8.3、对象<a class="headerlink" href="#83" title="Permanent link">&para;</a></h4>
+<h5 id="831slab">8.3.1、初始化slab中的对象<a class="headerlink" href="#831slab" title="Permanent link">&para;</a></h5>
+<h5 id="832">8.3.2、分配对象<a class="headerlink" href="#832" title="Permanent link">&para;</a></h5>
+<h5 id="833">8.3.3、释放对象<a class="headerlink" href="#833" title="Permanent link">&para;</a></h5>
+<h4 id="84">8.4、指定大小的高速缓存<a class="headerlink" href="#84" title="Permanent link">&para;</a></h4>
+<h5 id="841kmalloc">8.4.1、kmalloc()<a class="headerlink" href="#841kmalloc" title="Permanent link">&para;</a></h5>
+<h5 id="842kfree">8.4.2、kfree()<a class="headerlink" href="#842kfree" title="Permanent link">&para;</a></h5>
+<h4 id="85per-cpu">8.5、per-CPU对象高速缓存<a class="headerlink" href="#85per-cpu" title="Permanent link">&para;</a></h4>
+<h5 id="851per-cpu">8.5.1、描述per-CPU对象高速缓存<a class="headerlink" href="#851per-cpu" title="Permanent link">&para;</a></h5>
+<h5 id="852per-cpu">8.5.2、在per-CPU高速缓存中添加/移除对象<a class="headerlink" href="#852per-cpu" title="Permanent link">&para;</a></h5>
+<h5 id="853per-cpu">8.5.3、启用per-CPU高速缓存<a class="headerlink" href="#853per-cpu" title="Permanent link">&para;</a></h5>
+<h5 id="854per-cpu">8.5.4、更新per-CPU高速缓存的信息<a class="headerlink" href="#854per-cpu" title="Permanent link">&para;</a></h5>
+<h5 id="855per-cpu">8.5.5、清理per-CPU高速缓存<a class="headerlink" href="#855per-cpu" title="Permanent link">&para;</a></h5>
+<h4 id="86slab">8.6、初始化Slab分配器<a class="headerlink" href="#86slab" title="Permanent link">&para;</a></h4>
+<h4 id="87">8.7、伙伴分配器接口<a class="headerlink" href="#87" title="Permanent link">&para;</a></h4>
+<h4 id="8826">8.8、2.6中有哪些新特性<a class="headerlink" href="#8826" title="Permanent link">&para;</a></h4>
+<ul>
+<li>高速缓存描述符</li>
+<li>高速缓存静态标志位</li>
+<li>回收高速缓存</li>
+<li>其他的改变</li>
+</ul>
+<h3 id="chap9">chap9、高端内存管理<a class="headerlink" href="#chap9" title="Permanent link">&para;</a></h3>
+<h4 id="9726">9.7、2.6中有哪些新特性<a class="headerlink" href="#9726" title="Permanent link">&para;</a></h4>
+<ul>
+<li>内存池</li>
+<li>映射高端内存页面</li>
+<li>进行I/O</li>
+</ul>
+<h3 id="chap10-149164674">chap10、页面帧回收  149（164/674）<a class="headerlink" href="#chap10-149164674" title="Permanent link">&para;</a></h3>
+<ul>
+<li>第1个讨论</li>
+<li>第2个讨论，页面高速缓存</li>
+<li>第3个讨论，LRU链表</li>
+</ul>
+<h4 id="101">10.1、页面替换策略<a class="headerlink" href="#101" title="Permanent link">&para;</a></h4>
+<ul>
+<li>LRU，并不是完全准确。</li>
+<li>Linux中的LRU链包含两个链，分别是<code>active_list</code>和<code>inactive_list</code></li>
+</ul>
+<h4 id="102">10.2、页面高速缓存<a class="headerlink" href="#102" title="Permanent link">&para;</a></h4>
+<h4 id="10726">10.7、2.6中有哪些新特性<a class="headerlink" href="#10726" title="Permanent link">&para;</a></h4>
+<h3 id="chap11-165180674">chap11、交换管理  165（180/674）<a class="headerlink" href="#chap11-165180674" title="Permanent link">&para;</a></h3>
+<h4 id="111">11.1、描述交换区<a class="headerlink" href="#111" title="Permanent link">&para;</a></h4>
+<h4 id="112">11.2、映射页表项到交换项<a class="headerlink" href="#112" title="Permanent link">&para;</a></h4>
+<h4 id="13">1.3、分配一个交换槽<a class="headerlink" href="#13" title="Permanent link">&para;</a></h4>
+<h4 id="114">11.4、<a class="headerlink" href="#114" title="Permanent link">&para;</a></h4>
+<h4 id="111026">11.10、2.6中有哪些新特性<a class="headerlink" href="#111026" title="Permanent link">&para;</a></h4>
+<h3 id="chap12-180195674">chap12、共享内存虚拟文件系统  180（195/674）<a class="headerlink" href="#chap12-180195674" title="Permanent link">&para;</a></h3>
+<ul>
+<li>内核利用shm为匿名页创建后援文件并由shmget()生成后援区域。该文件系统由<code>kern_mount()</code>加载，所以它在内部加载，并不为用户所见</li>
+<li>tmpfs是一个临时文件系统，它可以有选择地加载到/tmp/以获得一个基于RAM的临时文件系统。tmpfs的另一个用途是被加载到/dev/shm</li>
+</ul>
+<h4 id="121">12.1、初始化虚拟文件系统<a class="headerlink" href="#121" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>init_tmpfs()</code>初始化虚拟文件系统，<code>kern_mount()</code></li>
+<li>linux/shmem_fs.h中</li>
+</ul>
+<h4 id="122shmem">12.2、使用shmem函数<a class="headerlink" href="#122shmem" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>hmem_aops</code>和<code>shmem_vm_ops</code>分别具有<code>struct address_space_operations</code>和<code>struct vm_opertions_struct</code>，分别对应于<strong>换页中的缺页处理和写页面到后援存储区</strong></li>
+</ul>
+<h4 id="123tmpfs">12.3、在tmpfs中创建文件<a class="headerlink" href="#123tmpfs" title="Permanent link">&para;</a></h4>
+<h4 id="124">12.4、虚拟文件中的缺页中断<a class="headerlink" href="#124" title="Permanent link">&para;</a></h4>
+<h5 id="1241">12.4.1、定位交换页面<a class="headerlink" href="#1241" title="Permanent link">&para;</a></h5>
+<h5 id="1242">12.4.2、向交换区写页面<a class="headerlink" href="#1242" title="Permanent link">&para;</a></h5>
+<h4 id="125tmps">12.5、tmps中的文件操作<a class="headerlink" href="#125tmps" title="Permanent link">&para;</a></h4>
+<ul>
+<li>虚拟文件支持4种操作，<strong>mmap()、read()、write()和fsync()</strong>，这些函数的指针都存放在<code>shmem_file_operations</code>中</li>
+</ul>
+<h4 id="126tmps">12.6、tmps中索引节点操作<a class="headerlink" href="#126tmps" title="Permanent link">&para;</a></h4>
+<h4 id="127">12.7、建立共享区<a class="headerlink" href="#127" title="Permanent link">&para;</a></h4>
+<h4 id="128system-v-ipc">12.8、System V IPC<a class="headerlink" href="#128system-v-ipc" title="Permanent link">&para;</a></h4>
+<h4 id="12926">12.9、2.6中有哪些新特性<a class="headerlink" href="#12926" title="Permanent link">&para;</a></h4>
+<h3 id="chap13">chap13、内存溢出管理<a class="headerlink" href="#chap13" title="Permanent link">&para;</a></h3>
+<h4 id="131">13.1、检查可用内存<a class="headerlink" href="#131" title="Permanent link">&para;</a></h4>
+<h4 id="132oom">13.2、确定OOM状态<a class="headerlink" href="#132oom" title="Permanent link">&para;</a></h4>
+<h4 id="133">13.3、选择进程<a class="headerlink" href="#133" title="Permanent link">&para;</a></h4>
+<h4 id="134">13.4、杀死选定的进程<a class="headerlink" href="#134" title="Permanent link">&para;</a></h4>
+<h4 id="135">13.5、是这样吗？<a class="headerlink" href="#135" title="Permanent link">&para;</a></h4>
+<h4 id="13626">13.6、2.6中有哪些新特性<a class="headerlink" href="#13626" title="Permanent link">&para;</a></h4>
               
             </div>
           </div><footer>

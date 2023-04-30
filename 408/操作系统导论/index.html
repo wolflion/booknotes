@@ -55,6 +55,237 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../21STL/EffectiveSTL/">《Effective STL》</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">基础知识</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">《操作系统导论》</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#chap13">chap13、抽象:地址空间</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#131">13.1、早期系统</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#132">13.2、多道程序和时分共享</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#133">13.3、地址空间</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#134">13.4、目标</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#135">13.5、小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap14api">chap14、插叙：内存操作API</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#141">14.1、内存类型</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#142malloc">14.2、malloc()调用</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#143free">14.3、free()调用</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#144">14.4、常见错误</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#145">14.5、底层操作系统支持</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#146">14.6、其他调用</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#147">14.7、小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap15">chap15、机制：地址转换</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#0">0、</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#151">15.1、假设</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#152">15.2、一个例子</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#153">15.3、动态（基于硬件）重定位</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#154">15.4、硬件支持：总结</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#155">15.5、操作系统的问题</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#156">15.6、小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap16">chap16、分段</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#0_1">0、</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#161">16.1、分段：泛化的基址/界限</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#162">16.2、我们引用哪个段</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#163">16.3、栈怎么办</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#164">16.4、支持共享</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#165">16.5、细粒度与粗粒度的分段</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#166">16.6、操作系统支持</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#167">16.7、小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap23vaxvms">chap23、VAX/VMS虚拟内存系统</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap24">chap24、内存虚拟化总结对话</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#chap25">chap25、并发的对话</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#chap26">chap26、并发：简介</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#263">26.3、问题的核心：自由安排</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#264">26.4、原子性</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#chap27api">chap27、插曲：线程API</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#271">27.1、线程创建</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#272">27.2、线程完成</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#273">27.3、锁</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#274">27.4、条件变量</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#275">27.5、编译和运行</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#276">27.6、小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#chap28">chap28、锁</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#281">28.1、锁的基本思想</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#282pthread">28.2、pthread锁</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#283">28.3、实现一个锁</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#284">28.4、评价锁</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#285">28.5、控制中断</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#286">28.6、测试并设置指令（原子交换）</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#287">28.7、实现可用的自旋锁</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#288">28.8、评价自旋锁</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#289">28.9、比较并交换</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#2810">28.10、链接的加载和条件式存储指令</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#2811">28.11、获取并增加</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#2812">28.12、自旋过多：怎么办</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#2813">28.13、简单方法：让出来吧，宝贝</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#2814">28.14、使用队列：休眠替代自旋</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#2815">28.15、不同操作系统，不同实现</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#2816">28.16、两阶段锁</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#2817">28.17、小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#chap29">chap29、基于锁的并发数据结构</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#291">29.1、并发计数器</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#292">29.2、并发链表</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#293">29.3、并发队列</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#294">29.4、并发散列表</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#295">29.5、小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#chap30">chap30、条件变量</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#301">30.1、定义和程序</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#302">30.2、生产者/消费者（有界缓冲区）问题</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#303">30.3、覆盖条件</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#chap31">chap31、信号量</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#311">31.1、信号量的含义</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#312">31.2、二值信号量（锁）</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#313">31.3、信号量用作条件变量</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#314">31.4、生产者/消费者（有界缓冲区）问题</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#315-">31.5、读者-写者锁</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#316">31.6、哲学家就餐问题</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#317">31.7、如何实现信号量</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#318">31.8、小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#chap32">chap32、常见并发问题</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#321">32.1、有哪些类型的缺陷</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#322">32.2、非死锁缺陷</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#323">32.3、死锁缺陷</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#324">32.4、小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#chap33">chap33、基于事件的并发（进阶）</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#331">33.1、基本想法：事件循环</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#332apiselectpoll">33.2、重要API：select()（或poll()）</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#333select">33.3、使用select()</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#334">33.4、为何更简单？无须锁</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#335">33.5、一个问题：阻塞系统调用</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#336io">33.6、解决方案：异步I/O</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#337">33.7、另一个问题：状态管理</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#338">33.8、什么事情仍然很难</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#chap34">chap34、并发的总结对话</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_2"></a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#chap35">chap35、关于持久性的对话</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+              </ul>
               <p class="caption"><span class="caption-text">网络编程</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../10network/TCPIP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">《TCP/IP网络编程》</a>
@@ -63,158 +294,12 @@
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">文件系统</span></p>
-              <ul class="current">
+              <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/Linux%E5%86%85%E6%A0%B8%E6%8E%A2%E7%A7%98/">《Linux内核探秘》</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《文件系统技术内幕》</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">《存储技术原理分析》</a>
-                  </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" href="./">《操作系统导论》</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#chap25">chap25、并发的对话</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#chap26">chap26、并发：简介</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#263">26.3、问题的核心：自由安排</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#264">26.4、原子性</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#chap27api">chap27、插曲：线程API</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#271">27.1、线程创建</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#272">27.2、线程完成</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#273">27.3、锁</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#274">27.4、条件变量</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#275">27.5、编译和运行</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#276">27.6、小结</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#chap28">chap28、锁</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#281">28.1、锁的基本思想</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#282pthread">28.2、pthread锁</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#283">28.3、实现一个锁</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#284">28.4、评价锁</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#285">28.5、控制中断</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#286">28.6、测试并设置指令（原子交换）</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#287">28.7、实现可用的自旋锁</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#288">28.8、评价自旋锁</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#289">28.9、比较并交换</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#2810">28.10、链接的加载和条件式存储指令</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#2811">28.11、获取并增加</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#2812">28.12、自旋过多：怎么办</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#2813">28.13、简单方法：让出来吧，宝贝</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#2814">28.14、使用队列：休眠替代自旋</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#2815">28.15、不同操作系统，不同实现</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#2816">28.16、两阶段锁</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#2817">28.17、小结</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#chap29">chap29、基于锁的并发数据结构</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#291">29.1、并发计数器</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#292">29.2、并发链表</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#293">29.3、并发队列</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#294">29.4、并发散列表</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#295">29.5、小结</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#chap30">chap30、条件变量</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#301">30.1、定义和程序</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#302">30.2、生产者/消费者（有界缓冲区）问题</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#303">30.3、覆盖条件</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#chap31">chap31、信号量</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#311">31.1、信号量的含义</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#312">31.2、二值信号量（锁）</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#313">31.3、信号量用作条件变量</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#314">31.4、生产者/消费者（有界缓冲区）问题</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#315-">31.5、读者-写者锁</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#316">31.6、哲学家就餐问题</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#317">31.7、如何实现信号量</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#318">31.8、小结</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#chap32">chap32、常见并发问题</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#321">32.1、有哪些类型的缺陷</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#322">32.2、非死锁缺陷</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#323">32.3、死锁缺陷</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#324">32.4、小结</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#chap33">chap33、基于事件的并发（进阶）</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#331">33.1、基本想法：事件循环</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#332apiselectpoll">33.2、重要API：select()（或poll()）</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#333select">33.3、使用select()</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#334">33.4、为何更简单？无须锁</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#335">33.5、一个问题：阻塞系统调用</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#336io">33.6、解决方案：异步I/O</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#337">33.7、另一个问题：状态管理</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#338">33.8、什么事情仍然很难</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#chap34">chap34、并发的总结对话</a>
-    </li>
-    </ul>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">存储</span></p>
@@ -227,6 +312,11 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../13kernel/Linux%E5%86%85%E6%A0%B8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《Linux内核设计与实现》</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5Linux%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%E5%86%85%E6%A0%B8%E6%9C%BA%E5%88%B6/">《深入Linux设备驱动程序内核机制》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网课</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/">《剑指offer专项突破》</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">网课</span></p>
@@ -250,7 +340,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-          <li>文件系统 &raquo;</li>
+          <li>基础知识 &raquo;</li>
       <li>《操作系统导论》</li>
     <li class="wy-breadcrumbs-aside">
     </li>
@@ -260,7 +350,133 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h3 id="partiiconcurrency">PartII：Concurrency并发<a class="headerlink" href="#partiiconcurrency" title="Permanent link">&para;</a></h3>
+                <h2 id="_1">《操作系统导论》<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Part1、虚拟化<ul>
+<li>虚拟化CPU（3-11）</li>
+<li>虚拟化内存（12-24）</li>
+</ul>
+</li>
+<li>PartII：Concurrency并发（25-34）</li>
+<li>Part3、持久性（35-）</li>
+</ul>
+<h3 id="chap13">chap13、抽象:地址空间<a class="headerlink" href="#chap13" title="Permanent link">&para;</a></h3>
+<h4 id="131">13.1、早期系统<a class="headerlink" href="#131" title="Permanent link">&para;</a></h4>
+<ul>
+<li>没有抽象</li>
+</ul>
+<h4 id="132">13.2、多道程序和时分共享<a class="headerlink" href="#132" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>分时共享的方法</strong>，让一个进程单独占用全部内存一小段时间，然后停止它，并将它所有状态信息保存在磁盘上</li>
+</ul>
+<h4 id="133">13.3、地址空间<a class="headerlink" href="#133" title="Permanent link">&para;</a></h4>
+<ul>
+<li>address space，<strong>运行的程序看到的系统中的内存</strong></li>
+</ul>
+<h4 id="134">13.4、目标<a class="headerlink" href="#134" title="Permanent link">&para;</a></h4>
+<ul>
+<li>一个目标是<strong>透明</strong>，运行的程序不感知</li>
+<li>另一个目标是<strong>效率</strong>，尽可能高效，有时不得不依赖硬件</li>
+<li>第三个目标是<strong>保护</strong>，不受其他进程影响，操作系统本身也不会受进程影响</li>
+</ul>
+<h4 id="135">13.5、小结<a class="headerlink" href="#135" title="Permanent link">&para;</a></h4>
+<h3 id="chap14api">chap14、插叙：内存操作API<a class="headerlink" href="#chap14api" title="Permanent link">&para;</a></h3>
+<h4 id="141">14.1、内存类型<a class="headerlink" href="#141" title="Permanent link">&para;</a></h4>
+<ul>
+<li>栈内存，由编译器隐式管理</li>
+<li>堆内存，程序员显式调用</li>
+</ul>
+<h4 id="142malloc">14.2、malloc()调用<a class="headerlink" href="#142malloc" title="Permanent link">&para;</a></h4>
+<h4 id="143free">14.3、free()调用<a class="headerlink" href="#143free" title="Permanent link">&para;</a></h4>
+<h4 id="144">14.4、常见错误<a class="headerlink" href="#144" title="Permanent link">&para;</a></h4>
+<ul>
+<li>忘记分配内存</li>
+<li>没有分配足够的内存</li>
+<li>忘记释放内存</li>
+<li>在用完之前释放内存</li>
+<li>反复释放内存</li>
+<li>错误地调用free()</li>
+<li>忘记初始化分配的内存</li>
+<li>小结<ul>
+<li>利用<code>purify</code>和<code>valgrind</code>工具</li>
+</ul>
+</li>
+</ul>
+<h4 id="145">14.5、底层操作系统支持<a class="headerlink" href="#145" title="Permanent link">&para;</a></h4>
+<ul>
+<li>malloc和free是库调用，不是系统调用，<code>brk()</code>或<code>sbrk()</code>才是系统调用。</li>
+<li><code>mmap()</code>调用从操作系统获取内存</li>
+</ul>
+<h4 id="146">14.6、其他调用<a class="headerlink" href="#146" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>calloc()</code>和<code>realloc()</code></li>
+</ul>
+<h4 id="147">14.7、小结<a class="headerlink" href="#147" title="Permanent link">&para;</a></h4>
+<h3 id="chap15">chap15、机制：地址转换<a class="headerlink" href="#chap15" title="Permanent link">&para;</a></h3>
+<h4 id="0">0、<a class="headerlink" href="#0" title="Permanent link">&para;</a></h4>
+<h4 id="151">15.1、假设<a class="headerlink" href="#151" title="Permanent link">&para;</a></h4>
+<ul>
+<li>先假设用户的地址空间必须连续地放在物理内存中</li>
+<li>假设每个地址空间大小完全一样</li>
+</ul>
+<h4 id="152">15.2、一个例子<a class="headerlink" href="#152" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>理解地址转换需要什么</strong></li>
+</ul>
+<h4 id="153">15.3、动态（基于硬件）重定位<a class="headerlink" href="#153" title="Permanent link">&para;</a></h4>
+<ul>
+<li>基址加虚拟地址（可以看作是地址空间的偏移量）的方式，很容易得到物理地址。<strong>虚拟地址“过大”或者为负数时，会导致异常</strong></li>
+</ul>
+<h4 id="154">15.4、硬件支持：总结<a class="headerlink" href="#154" title="Permanent link">&para;</a></h4>
+<ul>
+<li>特权模式（privileged mode）也叫<strong>内核模式</strong></li>
+<li>用户模式</li>
+</ul>
+<h4 id="155">15.5、操作系统的问题<a class="headerlink" href="#155" title="Permanent link">&para;</a></h4>
+<h4 id="156">15.6、小结<a class="headerlink" href="#156" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>地址转换（address translation），扩展了受限直接访问的概念</strong></li>
+<li>利用地址转换，操作系统可以控制进程的所有内存访问，确保访问在地址空间的界限内</li>
+<li><strong>避免内存碎片</strong>，得到了<strong>分段（segmentation）的概念</strong></li>
+</ul>
+<h3 id="chap16">chap16、分段<a class="headerlink" href="#chap16" title="Permanent link">&para;</a></h3>
+<h4 id="0_1">0、<a class="headerlink" href="#0_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li>之前，一直假设把所有进程的地址空间完整地加载到内存中。</li>
+<li><strong>怎样支持大地址空间</strong></li>
+</ul>
+<h4 id="161">16.1、分段：泛化的基址/界限<a class="headerlink" href="#161" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>在典型的地址空间里有3个逻辑不同的段：代码、栈和堆</strong></li>
+<li>分段的机制使得操作系统能够将不同的段放到不同的物理内存区域，从而避免了虚拟地址空间中的未使用部分占用物理内存</li>
+</ul>
+<h4 id="162">16.2、我们引用哪个段<a class="headerlink" href="#162" title="Permanent link">&para;</a></h4>
+<ul>
+<li>硬件在地址转换时使用段寄存器。<strong>它如何知道段内的偏移量，以及地址引用了哪个段？</strong></li>
+</ul>
+<h4 id="163">16.3、栈怎么办<a class="headerlink" href="#163" title="Permanent link">&para;</a></h4>
+<h4 id="164">16.4、支持共享<a class="headerlink" href="#164" title="Permanent link">&para;</a></h4>
+<h4 id="165">16.5、细粒度与粗粒度的分段<a class="headerlink" href="#165" title="Permanent link">&para;</a></h4>
+<h4 id="166">16.6、操作系统支持<a class="headerlink" href="#166" title="Permanent link">&para;</a></h4>
+<ul>
+<li>分段带来的问题:<ul>
+<li>第一个是，<strong>操作系统在上下文切换时应该做什么？</strong>各个段寄存器中的内容必须保存和恢复</li>
+<li>第二个是，<strong>管理物理内存的空闲空间</strong></li>
+</ul>
+</li>
+</ul>
+<h4 id="167">16.7、小结<a class="headerlink" href="#167" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>分段的好处是：代码共享</strong></li>
+</ul>
+<p>chap17、空闲空间管理</p>
+<p>chap18、分页：介绍</p>
+<p>chap19、分页：快速地址转换（TLB）</p>
+<p>chap20、分页：较小的表</p>
+<p>chap21、超越物理内存：机制</p>
+<p>chap22、超越物理内存：策略</p>
+<h3 id="chap23vaxvms">chap23、VAX/VMS虚拟内存系统<a class="headerlink" href="#chap23vaxvms" title="Permanent link">&para;</a></h3>
+<h3 id="chap24">chap24、内存虚拟化总结对话<a class="headerlink" href="#chap24" title="Permanent link">&para;</a></h3>
 <h4 id="chap25">chap25、并发的对话<a class="headerlink" href="#chap25" title="Permanent link">&para;</a></h4>
 <ul>
 <li>吃一个桃子？</li>
@@ -367,9 +583,9 @@ unlock(&amp;mutex);</code></pre>
 <h5 id="337">33.7、另一个问题：状态管理<a class="headerlink" href="#337" title="Permanent link">&para;</a></h5>
 <h5 id="338">33.8、什么事情仍然很难<a class="headerlink" href="#338" title="Permanent link">&para;</a></h5>
 <h4 id="chap34">chap34、并发的总结对话<a class="headerlink" href="#chap34" title="Permanent link">&para;</a></h4>
-<h3 id="part3">Part3、持久性<a class="headerlink" href="#part3" title="Permanent link">&para;</a></h3>
+<h3 id="_2"><a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <h4 id="chap35">chap35、关于持久性的对话<a class="headerlink" href="#chap35" title="Permanent link">&para;</a></h4>
-<h2 id="_1">履历<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h2 id="_3">履历<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <ul>
 <li>2022年27W（7.5-7.）看Part2并发的chap26，但习题没做和练习，只是有个概念</li>
 </ul>
@@ -377,8 +593,8 @@ unlock(&amp;mutex);</code></pre>
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../../11filesystem/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/" class="btn btn-neutral float-left" title="《存储技术原理分析》"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../../12storage/ceph%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/" class="btn btn-neutral float-right" title="《ceph设计原理与实现》">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../../21STL/EffectiveSTL/" class="btn btn-neutral float-left" title="《Effective STL》"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../10network/TCPIP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="btn btn-neutral float-right" title="《TCP/IP网络编程》">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -401,10 +617,10 @@ unlock(&amp;mutex);</code></pre>
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../../11filesystem/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../../21STL/EffectiveSTL/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../../12storage/ceph%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../../10network/TCPIP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

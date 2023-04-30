@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>《剑指offer专项突破》 - lionel的技术笔记</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "\u300a\u5251\u6307offer\u4e13\u9879\u7a81\u7834\u300b";
+        var mkdocs_page_input_path = "91leetcode\\\u5251\u6307offer\u4e13\u9879\u7a81\u7834.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> lionel的技术笔记
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">简介</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../01daily/">daily</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">C++</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../20C%2B%2B/effectiveC%2B%2B/">《Effective C++》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/EffectiveSTL/">《Effective STL》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">基础知识</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA/">《操作系统导论》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网络编程</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/TCPIP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">《TCP/IP网络编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/">《Linux高性能服务器编程》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">文件系统</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/Linux%E5%86%85%E6%A0%B8%E6%8E%A2%E7%A7%98/">《Linux内核探秘》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《文件系统技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">《存储技术原理分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">存储</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../12storage/ceph%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《ceph设计原理与实现》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">内核</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/Linux%E5%86%85%E6%A0%B8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《Linux内核设计与实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5Linux%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%E5%86%85%E6%A0%B8%E6%9C%BA%E5%88%B6/">《深入Linux设备驱动程序内核机制》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网课</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">《剑指offer专项突破》</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#chap1">chap1、整数</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#_1">基础知识</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_2">题目</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1">1、整数除法</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#2">2、二进制加法</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#3-n-1">3、前 n 个数字二进制中 1 的个数</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#4">4、只出现一次的数字</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#5">5、单词长度的最大乘积</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#6">6、排序数组中两个数字之和</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap2">chap2、数组</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#_3">题目</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#7-0-undo">7、数组中和为 0 的三个数，undo</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#8-target">8、和大于等于 target 的最短子数组</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#9-k">9、乘积小于 K 的子数组</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap314-20">chap3、字符串（14-20）</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#_4">基础知识</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_5">题目</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#14">14、字符串中的变位词</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#18">18、有效的回文</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap421-29">chap4、链表（21-29）</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#_6">题目</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#22">22、链表中环的入口节点</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#24">24、反转链表</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap530-35">chap5、哈希（30-35）</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#_7">题目</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#32">32、有效的变位词</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap6">chap6、栈</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#1_1">1、基础知识</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2_1">2、栈的应用</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap7">chap7、队列</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#1_2">1、基础知识</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2_2">2、队列的应用</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap8">chap8、树</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#1_3">1、基础知识</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2_3">2、二叉树的深度优先搜索</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#3">3、二叉搜索树</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#4treesettreemap">4、TreeSet和TreeMap的应用</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap9">chap9、堆</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#1_4">1、基础知识</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2_4">2、堆的应用</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap10">chap10、前缀树</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#1_5">1、基础知识</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2_5">2、前缀树的应用</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap11">chap11、二分查找</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#1_6">1、基础知识</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2_6">2、在排序数组中二分查找</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#3_1">3、在数值范围内二分查找</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap12">chap12、排序</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#1_7">1、基础知识</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2_7">2、计数排序</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_8">快速排序</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_9">归并排序</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap1379-87">chap13、回溯法（79-87）</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#1_8">1、基础知识</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2_8">2、集合的组合、排列</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#87ip">87、复原IP</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_10">使用回溯法解决其他类型的问题</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap1488-104">chap14、动态规划（88-104）</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap15105-119">chap15、图（105-119）</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#1_9">1、基础知识</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2_9">2、图的搜索</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网课</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/01Linux%E9%AB%98%E5%B9%B6%E5%8F%91%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/">《Linux高并发网络编程开发》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/%E4%BE%AF%E6%8D%B7/%E4%BE%AF%E6%8D%B7C%2B%2B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%8660%E8%AE%B2/">《侯捷C++内存管理60讲》</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">lionel的技术笔记</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+          <li>网课 &raquo;</li>
+      <li>《剑指offer专项突破》</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="offer">《剑指offer专项突破版》<a class="headerlink" href="#offer" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/422908736">滑动窗口详解</a><ul>
+<li>https://leetcode.cn/circle/article/9gcJBk/</li>
+</ul>
+</li>
+</ul>
+<h3 id="chap1">chap1、整数<a class="headerlink" href="#chap1" title="Permanent link">&para;</a></h3>
+<h4 id="_1">基础知识<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h4>
+<h4 id="_2">题目<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
+<h5 id="1">1、整数除法<a class="headerlink" href="#1" title="Permanent link">&para;</a></h5>
+<h5 id="2">2、二进制加法<a class="headerlink" href="#2" title="Permanent link">&para;</a></h5>
+<h5 id="3-n-1">3、前 n 个数字二进制中 1 的个数<a class="headerlink" href="#3-n-1" title="Permanent link">&para;</a></h5>
+<h5 id="4">4、<a href="https://leetcode.cn/problems/WGki4K/?envType=study-plan&amp;id=lcof-ii&amp;plan=lcof&amp;plan_progress=x95pysw2">只出现一次的数字</a><a class="headerlink" href="#4" title="Permanent link">&para;</a></h5>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/single-number-ii/">137</a></li>
+<li>自己想到了hash，<em>但hash的用法，不太熟</em></li>
+<li>参考链接：<strong>位运算</strong>的思路，<ul>
+<li>https://blog.csdn.net/qq_32523711/article/details/108041437</li>
+<li>https://www.jb51.net/article/217687.htm</li>
+</ul>
+</li>
+</ul>
+<pre class="highlight"><code class="language-cpp">//给你一个整数数组 nums ，除某个元素仅出现一次外，其余每个元素都恰出现三次。请你找出并返回那个只出现了一次的元素
+//nums = [2,2,3,2]，返回3
+int singleNumber(vector&lt;int&gt;&amp; nums) {
+    map&lt;int,int&gt; val;
+    for(auto i:nums){
+        val[i]++;
+    }
+
+    for(auto c: nums){
+        if(val[c] == 1){
+           return c;
+        }
+    }
+    return 0;
+}</code></pre>
+<h5 id="5">5、单词长度的最大乘积<a class="headerlink" href="#5" title="Permanent link">&para;</a></h5>
+<h5 id="6">6、排序数组中两个数字之和<a class="headerlink" href="#6" title="Permanent link">&para;</a></h5>
+<h3 id="chap2">chap2、数组<a class="headerlink" href="#chap2" title="Permanent link">&para;</a></h3>
+<h4 id="_3">题目<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
+<h5 id="7-0-undo">7、<a href="https://leetcode.cn/problems/1fGaJU/?envType=study-plan&amp;id=lcof-ii&amp;plan=lcof&amp;plan_progress=x95pysw2">数组中和为 0 的三个数</a>，undo<a class="headerlink" href="#7-0-undo" title="Permanent link">&para;</a></h5>
+<ul>
+<li><a href="[leetcode.cn/problems/3sum/](https://leetcode.cn/problems/3sum/)">15</a><ul>
+<li><strong>快排+对撞指针</strong>，2个我都不太熟悉（<em>为啥要排序</em>，之前觉得排序打乱输出位置了，其实最后并不会影响）</li>
+<li>https://blog.csdn.net/weixin_44294809/article/details/106097652</li>
+<li>https://blog.csdn.net/Innocence02/article/details/127427598</li>
+<li>https://blog.csdn.net/weixin_45629285/article/details/117060550 【详细题解】</li>
+<li>https://www.bilibili.com/video/BV1i3411R71x/?vd_source=66d6345790c729dfa0a136a5183762c9</li>
+</ul>
+</li>
+</ul>
+<pre class="highlight"><code class="language-cpp">//给你一个整数数组 nums ，判断是否存在三元组 [nums[i], nums[j], nums[k]] 满足 i != j、i != k 且 j != k ，同时还满足 nums[i] + nums[j] + nums[k] == 0 。请你返回所有和为 0 且不重复的三元组。
+//输入：nums = [-1,0,1,2,-1,-4]
+//输出：[[-1,-1,2],[-1,0,1]]
+//lionel，先尝试看看能不能看懂，或真正理解了
+    vector&lt;vector&lt;int&gt;&gt; threeSum(vector&lt;int&gt;&amp; nums) {
+        vector&lt;vector&lt;int&gt; &gt; res;
+        if(nums.size()&lt;3)//边界条件
+            return res;
+
+        sort(nums.begin(),nums.end());//对数组排序
+
+        for(int k=0;k&lt;nums.size()-2;k++)
+        {
+            //当nums[k]&gt;0时直接跳出,因为nums[j]&gt;=nums[i]&gt;=nums[k]&gt;0,三数和必大于零
+            if(nums[k]&gt;0)
+                break;
+
+            //当k&gt;0且nums[k]==nums[k-1]时跳过nums[k]：因为已经将nums[k-1]的所有组合加入到结果中，
+            //本次搜索只会得到重复组合。
+            if(k&gt;0 &amp;&amp; nums[k]==nums[k-1])
+                continue;
+
+            int i=k+1,j=nums.size()-1;//双指针
+            while(i&lt;j)
+            {
+                int sum=nums[k]+nums[i]+nums[j];
+                vector&lt;int&gt; temp;
+                if(sum==0)
+                {
+                    temp.push_back(nums[k]);
+                    temp.push_back(nums[i]);
+                    temp.push_back(nums[j]);
+                    res.push_back(temp);//将满足条件的组合存入结果
+                    while(i&lt;j &amp;&amp; nums[i]==nums[++i]) ;//跳过重复的nums[i]
+                    while(i&lt;j &amp;&amp; nums[j]==nums[--j]) ;//跳过重复的nums[j]
+                }
+                else if(sum&lt;0)
+                {
+                    while(i&lt;j &amp;&amp; nums[i]==nums[++i]) ;//跳过重复的nums[i]
+                }
+                else  //sum&gt;0
+                {
+                    while(i&lt;j &amp;&amp; nums[j]==nums[--j]) ;//跳过重复的nums[j]
+                }
+            }  
+        }
+
+        return res;
+    }</code></pre>
+<h5 id="8-target">8、<a href="https://leetcode.cn/problems/2VG8Kg/">和大于等于 target 的最短子数组</a><a class="headerlink" href="#8-target" title="Permanent link">&para;</a></h5>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/minimum-size-subarray-sum/">209</a><ul>
+<li>看到视频讲解的一道题</li>
+</ul>
+</li>
+</ul>
+<pre class="highlight"><code class="language-cpp">int minSubArrayLen(int target, vector&lt;int&gt;&amp; nums){
+        //时间复杂度O(n)
+        //空间复杂度O(1)
+        int l=0,r=-1;//nums[l...r]为我们的滑动窗口
+        int sum = 0;
+        int res=nums.size()+1;
+
+        while(l&lt;nums.size()){
+            if(r+1&lt;nums.size()&amp;&amp;sum&lt;target){
+                r++;
+                sum+=nums[r]; //右边界拓展
+            } else{
+                //sum-=nums[l++];//先减去，然后再++
+                sum-=nums[l];
+                l++;
+            }
+
+            if(sum&gt;=target){
+                res = min(res,r-l+1);
+            }
+        }
+        if(res==nums.size()+1)
+            return 0;
+        return res;
+    }</code></pre>
+<h5 id="9-k">9、乘积小于 K 的子数组<a class="headerlink" href="#9-k" title="Permanent link">&para;</a></h5>
+<p>10、和为 k 的子数组</p>
+<p>11、0 和 1 个数相同的子数组</p>
+<p>12、左右两边子数组的和相等</p>
+<p>13、二维子矩阵的和</p>
+<h3 id="chap314-20">chap3、字符串（14-20）<a class="headerlink" href="#chap314-20" title="Permanent link">&para;</a></h3>
+<h4 id="_4">基础知识<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
+<h4 id="_5">题目<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
+<h5 id="14">14、字符串中的变位词<a class="headerlink" href="#14" title="Permanent link">&para;</a></h5>
+<p>15、字符串中的所有变位词</p>
+<p>16、不含重复字符的最长子字符串</p>
+<p>17、含有所有字符的最短字符串</p>
+<h5 id="18">18、有效的回文<a class="headerlink" href="#18" title="Permanent link">&para;</a></h5>
+<p>19、最多删除一个字符得到回文</p>
+<p>20、回文子字符串的个数</p>
+<h3 id="chap421-29">chap4、链表（21-29）<a class="headerlink" href="#chap421-29" title="Permanent link">&para;</a></h3>
+<h4 id="_6">题目<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
+<p>21、删除链表的倒数第 n 个结点</p>
+<h5 id="22">22、链表中环的入口节点<a class="headerlink" href="#22" title="Permanent link">&para;</a></h5>
+<p>23、两个链表的第一个重合节点</p>
+<h5 id="24">24、反转链表<a class="headerlink" href="#24" title="Permanent link">&para;</a></h5>
+<p>25、链表中的两数相加</p>
+<p>26、重排链表</p>
+<p>27、回文链表</p>
+<p>28、展平多级双向链表</p>
+<p>29、排序的循环链表</p>
+<h3 id="chap530-35">chap5、哈希（30-35）<a class="headerlink" href="#chap530-35" title="Permanent link">&para;</a></h3>
+<h4 id="_7">题目<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h4>
+<p>插入、删除和随机访问都是 O(1) 的容器</p>
+<p>最近最少使用缓存</p>
+<h5 id="32">32、<a href="https://leetcode.cn/problems/dKk3P7/?envType=study-plan&amp;id=lcof-ii&amp;plan=lcof&amp;plan_progress=x95pysw2">有效的变位词</a><a class="headerlink" href="#32" title="Permanent link">&para;</a></h5>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/valid-anagram/">242</a><ul>
+<li>虽然我解出来了，但官方的答案比我的优秀</li>
+</ul>
+</li>
+</ul>
+<pre class="highlight"><code class="language-cpp">//给定两个字符串 s 和 t ，编写一个函数来判断它们是不是一组变位词（字母异位词）。
+//输入: s = "anagram", t = "nagaram"
+//输出: true
+bool isAnagram(string s, string t) {
+        if(s.size()!=t.size()) return false;   //1、为啥用size()而不用length()，区别在哪？
+        if(s==t) return false;          //2、两个判断相等，其实可以直接判断，不用再逐个字符判断
+        vector&lt;int&gt; vt1(26,0),vt2(26,0);  //3、用vector去存的，而并没有用所谓的hash里的一些map的用法，【26的取值，以及-'a'的操作，都值得学一下】
+        for(int i=0;i&lt;s.size();i++){
+            vt1[s[i]-'a']++;
+            vt2[t[i]-'a']++;
+        }
+        return vt1==vt2;
+    }</code></pre>
+<p>变位词组</p>
+<p>外星语言是否排序</p>
+<p>最小时间差</p>
+<h3 id="chap6">chap6、栈<a class="headerlink" href="#chap6" title="Permanent link">&para;</a></h3>
+<h4 id="1_1">1、基础知识<a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h4>
+<h4 id="2_1">2、栈的应用<a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h4>
+<p>后缀表达式</p>
+<p>小行星碰撞</p>
+<p>每日温度</p>
+<p>直方图最大矩形面积</p>
+<p>矩阵中最大的矩形</p>
+<h3 id="chap7">chap7、队列<a class="headerlink" href="#chap7" title="Permanent link">&para;</a></h3>
+<h4 id="1_2">1、基础知识<a class="headerlink" href="#1_2" title="Permanent link">&para;</a></h4>
+<h4 id="2_2">2、队列的应用<a class="headerlink" href="#2_2" title="Permanent link">&para;</a></h4>
+<p>滑动窗口的平均值</p>
+<p>最近请求次数</p>
+<p>往完全二叉树添加节点</p>
+<p>二叉树每层的最大值</p>
+<p>二叉树最底层最左边的值</p>
+<p>二叉树的右侧视图</p>
+<h3 id="chap8">chap8、树<a class="headerlink" href="#chap8" title="Permanent link">&para;</a></h3>
+<h4 id="1_3">1、基础知识<a class="headerlink" href="#1_3" title="Permanent link">&para;</a></h4>
+<h4 id="2_3">2、二叉树的深度优先搜索<a class="headerlink" href="#2_3" title="Permanent link">&para;</a></h4>
+<p>二叉树剪枝</p>
+<p>序列化与反序列化二叉树</p>
+<p>从根节点到叶节点的路径数字之和</p>
+<p>向下的路径节点之和</p>
+<p>节点之和最大的路径</p>
+<h4 id="3">3、二叉搜索树<a class="headerlink" href="#3" title="Permanent link">&para;</a></h4>
+<p>展平二叉搜索树</p>
+<p>二叉搜索树中的中序后继</p>
+<p>所有大于等于节点的值之和</p>
+<p>二叉搜索树迭代器</p>
+<p>二叉搜索树中两个节点之和</p>
+<p>值和下标之差都在给定的范围内</p>
+<h4 id="4treesettreemap">4、TreeSet和TreeMap的应用<a class="headerlink" href="#4treesettreemap" title="Permanent link">&para;</a></h4>
+<p>日程表</p>
+<h3 id="chap9">chap9、堆<a class="headerlink" href="#chap9" title="Permanent link">&para;</a></h3>
+<h4 id="1_4">1、基础知识<a class="headerlink" href="#1_4" title="Permanent link">&para;</a></h4>
+<h4 id="2_4">2、堆的应用<a class="headerlink" href="#2_4" title="Permanent link">&para;</a></h4>
+<p>数据流的第 K 大数值</p>
+<p>出现频率最高的 k 个数字</p>
+<p>和最小的 k 个数对</p>
+<h3 id="chap10">chap10、前缀树<a class="headerlink" href="#chap10" title="Permanent link">&para;</a></h3>
+<h4 id="1_5">1、基础知识<a class="headerlink" href="#1_5" title="Permanent link">&para;</a></h4>
+<h4 id="2_5">2、前缀树的应用<a class="headerlink" href="#2_5" title="Permanent link">&para;</a></h4>
+<p>实现前缀树</p>
+<p>替换单词</p>
+<p>神奇的字典</p>
+<p>最短的单词编码</p>
+<p>单词之和</p>
+<p>最大的异或</p>
+<h3 id="chap11">chap11、二分查找<a class="headerlink" href="#chap11" title="Permanent link">&para;</a></h3>
+<h4 id="1_6">1、基础知识<a class="headerlink" href="#1_6" title="Permanent link">&para;</a></h4>
+<h4 id="2_6">2、在排序数组中二分查找<a class="headerlink" href="#2_6" title="Permanent link">&para;</a></h4>
+<p>查找插入位置</p>
+<p>山峰数组的顶部</p>
+<p>排序数组中只出现一次的数字</p>
+<p>按权重生成随机数</p>
+<p>求平方根</p>
+<p>狒狒吃香蕉</p>
+<h4 id="3_1">3、在数值范围内二分查找<a class="headerlink" href="#3_1" title="Permanent link">&para;</a></h4>
+<h3 id="chap12">chap12、排序<a class="headerlink" href="#chap12" title="Permanent link">&para;</a></h3>
+<h4 id="1_7">1、基础知识<a class="headerlink" href="#1_7" title="Permanent link">&para;</a></h4>
+<h4 id="2_7">2、计数排序<a class="headerlink" href="#2_7" title="Permanent link">&para;</a></h4>
+<p>合并区间</p>
+<p>数组相对排序</p>
+<h4 id="_8">快速排序<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h4>
+<p>数组中的第 k 大的数字</p>
+<h4 id="_9">归并排序<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h4>
+<p>链表排序</p>
+<p>合并排序链表</p>
+<h3 id="chap1379-87">chap13、回溯法（79-87）<a class="headerlink" href="#chap1379-87" title="Permanent link">&para;</a></h3>
+<h4 id="1_8">1、基础知识<a class="headerlink" href="#1_8" title="Permanent link">&para;</a></h4>
+<h4 id="2_8">2、集合的组合、排列<a class="headerlink" href="#2_8" title="Permanent link">&para;</a></h4>
+<p>所有子集</p>
+<p>含有 k 个元素的组合</p>
+<p>允许重复选择元素的组合</p>
+<p>含有重复元素集合的组合</p>
+<h5 id="87ip">87、复原IP<a class="headerlink" href="#87ip" title="Permanent link">&para;</a></h5>
+<h4 id="_10">使用回溯法解决其他类型的问题<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h4>
+<h3 id="chap1488-104">chap14、动态规划（88-104）<a class="headerlink" href="#chap1488-104" title="Permanent link">&para;</a></h3>
+<p>双序列问题</p>
+<p>矩阵路径问题</p>
+<p>背包问题</p>
+<h3 id="chap15105-119">chap15、图（105-119）<a class="headerlink" href="#chap15105-119" title="Permanent link">&para;</a></h3>
+<h4 id="1_9">1、基础知识<a class="headerlink" href="#1_9" title="Permanent link">&para;</a></h4>
+<h4 id="2_9">2、图的搜索<a class="headerlink" href="#2_9" title="Permanent link">&para;</a></h4>
+<p>拓扑排序</p>
+<p>并查集</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../13kernel/%E6%B7%B1%E5%85%A5Linux%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%E5%86%85%E6%A0%B8%E6%9C%BA%E5%88%B6/" class="btn btn-neutral float-left" title="《深入Linux设备驱动程序内核机制》"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../90lecture/01Linux%E9%AB%98%E5%B9%B6%E5%8F%91%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/" class="btn btn-neutral float-right" title="《Linux高并发网络编程开发》">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../../13kernel/%E6%B7%B1%E5%85%A5Linux%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%E5%86%85%E6%A0%B8%E6%9C%BA%E5%88%B6/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../90lecture/01Linux%E9%AB%98%E5%B9%B6%E5%8F%91%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

@@ -55,6 +55,11 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../21STL/EffectiveSTL/">《Effective STL》</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">基础知识</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA/">《操作系统导论》</a>
+                  </li>
+              </ul>
               <p class="caption"><span class="caption-text">网络编程</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../10network/TCPIP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">《TCP/IP网络编程》</a>
@@ -255,20 +260,46 @@
         </ul>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#49">4.9、如何分配磁盘空间</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#491">4.9.1、计算存储路径</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#410-ext2-154">4.10 Ext2 文件系统的扩展属性 . 154</a>
+    <li class="toctree-l4"><a class="reference internal" href="#492">4.9.2、获取存储路径</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#411-163">4.11 权限管理代码解析 . 163</a>
+    <li class="toctree-l4"><a class="reference internal" href="#493">4.9.3、分配磁盘空间</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#412-165">4.12 文件锁代码解析 . 165</a>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#410-ext2">4.10 Ext2 文件系统的扩展属性</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#4101ext2">4.10.1、Ext2 文件系统扩展属性是怎么在磁盘存储的</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#4102-vfs">4.10.2、设置扩展属性的 VFS 流程</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#4103ext2">4.10.3、Ext2 文件系统扩展属性接口实现</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#411_1">4.11、权限管理代码解析</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#4111acl">4.11.1、ACL 的设置与获取</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#4112acl">4.11.2、ACL 权限检查</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#412_1">4.12、文件锁代码解析</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#4121flock">4.12.1、flock()函数的内核实现</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#4122fcntl">4.12.2、fcntl()函数的内核实现</a>
+    </li>
+        </ul>
     </li>
         </ul>
     </li>
     </ul>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">《存储技术原理分析》</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA/">《操作系统导论》</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">存储</span></p>
@@ -281,6 +312,11 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../13kernel/Linux%E5%86%85%E6%A0%B8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《Linux内核设计与实现》</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5Linux%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%E5%86%85%E6%A0%B8%E6%9C%BA%E5%88%B6/">《深入Linux设备驱动程序内核机制》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网课</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/">《剑指offer专项突破》</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">网课</span></p>
@@ -729,17 +765,58 @@
 <h5 id="482">4.8.2、非缓存命中场景<a class="headerlink" href="#482" title="Permanent link">&para;</a></h5>
 <h5 id="483">4.8.3、数据预读逻辑<a class="headerlink" href="#483" title="Permanent link">&para;</a></h5>
 <h4 id="49">4.9、如何分配磁盘空间<a class="headerlink" href="#49" title="Permanent link">&para;</a></h4>
-<p>4.9.1 计算存储路径 . 150
-4.9.2 获取存储路径 . 152
-4.9.3 分配磁盘空间 . 153</p>
-<h4 id="410-ext2-154">4.10 Ext2 文件系统的扩展属性 . 154<a class="headerlink" href="#410-ext2-154" title="Permanent link">&para;</a></h4>
-<p>4.10.1 Ext2 文件系统扩展属性是怎么在磁盘存储的 . 154
-4.10.2 设置扩展属性的 VFS 流程 . 157
-4.10.3 Ext2 文件系统扩展属性接口实现 . 159</p>
-<h4 id="411-163">4.11 权限管理代码解析 . 163<a class="headerlink" href="#411-163" title="Permanent link">&para;</a></h4>
-<p>4.11.1 ACL 的设置与获取 . 163
-4.11.2 ACL 权限检查 . 164</p>
-<h4 id="412-165">4.12 文件锁代码解析 . 165<a class="headerlink" href="#412-165" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>ext2_get_blocks()</code></li>
+</ul>
+<h5 id="491">4.9.1、计算存储路径<a class="headerlink" href="#491" title="Permanent link">&para;</a></h5>
+<ul>
+<li>0<ul>
+<li><code>ext2_block_to_path()</code></li>
+</ul>
+</li>
+<li>1级间接块偏移值为0</li>
+<li>2级间接块偏移值为0</li>
+<li>3级间接块偏移值为4</li>
+</ul>
+<h5 id="492">4.9.2、获取存储路径<a class="headerlink" href="#492" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>ext2_get_branch()</code></li>
+</ul>
+<h5 id="493">4.9.3、分配磁盘空间<a class="headerlink" href="#493" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>ext2_alloc_branch()</code></li>
+</ul>
+<h4 id="410-ext2">4.10 Ext2 文件系统的扩展属性<a class="headerlink" href="#410-ext2" title="Permanent link">&para;</a></h4>
+<h5 id="4101ext2">4.10.1、Ext2 文件系统扩展属性是怎么在磁盘存储的<a class="headerlink" href="#4101ext2" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>struct ext2_xattr_header{};</code></li>
+</ul>
+<h5 id="4102-vfs">4.10.2、设置扩展属性的 VFS 流程<a class="headerlink" href="#4102-vfs" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>fsetxattr()</code></li>
+</ul>
+<h5 id="4103ext2">4.10.3、Ext2 文件系统扩展属性接口实现<a class="headerlink" href="#4103ext2" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>ext2_xattr_user_set()</code></li>
+</ul>
+<h4 id="411_1">4.11、权限管理代码解析<a class="headerlink" href="#411_1" title="Permanent link">&para;</a></h4>
+<h5 id="4111acl">4.11.1、ACL 的设置与获取<a class="headerlink" href="#4111acl" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>setfacl()</code></li>
+</ul>
+<h5 id="4112acl">4.11.2、ACL 权限检查<a class="headerlink" href="#4112acl" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>may_open()</code></li>
+</ul>
+<h4 id="412_1">4.12、文件锁代码解析<a class="headerlink" href="#412_1" title="Permanent link">&para;</a></h4>
+<h5 id="4121flock">4.12.1、flock()函数的内核实现<a class="headerlink" href="#4121flock" title="Permanent link">&para;</a></h5>
+<ul>
+<li>fs/locks.c中</li>
+</ul>
+<h5 id="4122fcntl">4.12.2、fcntl()函数的内核实现<a class="headerlink" href="#4122fcntl" title="Permanent link">&para;</a></h5>
+<ul>
+<li>fs/fcntl.c中</li>
+</ul>
               
             </div>
           </div><footer>
