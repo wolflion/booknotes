@@ -175,9 +175,65 @@ int minSubArrayLen(int target, vector<int>& nums){
 
 17、含有所有字符的最短字符串
 
-##### 18、有效的回文
+##### 18、[有效的回文](https://leetcode.cn/problems/XltzEq/)
 
-19、最多删除一个字符得到回文
++ [125]( https://leetcode-cn.com/problems/valid-palindrome/)
+  + 知道**用指针了**，但啥时候**该转大小写，数字判断又迷糊了**
+  + https://www.jb51.net/article/217081.htm
+  + https://blog.csdn.net/qq_40416052/article/details/82504029
+
+```cpp
+//给定一个字符串 s ，验证 s 是否是 回文串 ，只考虑字母和数字字符，可以忽略字母的大小写。
+//输入: s = "A man, a plan, a canal: Panama"
+//输出: true
+bool isPalindrome(string s) {
+        int left = 0, right = s.size() - 1 ;
+        while (left < right) {
+            if (!isalnum(s[left])) ++left;
+            else if (!isalnum(s[right])) --right;
+            else if ((s[left] + 32 - 'a') %32 != (s[right] + 32 - 'a') % 32) return false;
+            else {
+                ++left; --right;
+            }
+        }
+        return true;
+    }
+```
+
+
+
+##### 19、[最多删除一个字符得到回文](https://leetcode.cn/problems/RQku0D/?envType=study-plan&id=lcof-ii&plan=lcof&plan_progress=x95pysw2)
+
++ [680](https://leetcode-cn.com/problems/valid-palindrome-ii/)
+  + https://www.cnblogs.com/zzxcm/p/15864818.html *这个写得复杂了，我就没参考，但确实符合我第一次看到题的思路*
+  + https://zxi.mytechroad.com/blog/string/leetcode-680-valid-palindrome-ii/  【这个答案有点儿意思】，我用了这个
+  + https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/680.%20Valid%20Palindrome%20II.cpp *感觉都是这么写的*
+
+```cpp
+//给定一个非空字符串 s，请判断如果 最多 从字符串中删除一个字符能否得到一个回文字符串。
+//输入: s = "aba"
+//输出: true
+class Solution {
+public:
+    bool validPalindrome(const string& s) {
+        int l = -1;
+        int r = s.length();
+        while (++l < --r)
+            if (s[l] != s[r])
+                return isPalindrome(s, l+1, r) 
+                    || isPalindrome(s, l, r-1);
+        return true;
+    }
+private:
+    bool isPalindrome(const string& s, int l, int r) {
+        while (l < r)
+            if (s[l++] != s[r--]) return false;
+        return true;
+    }
+};
+```
+
+
 
  20、回文子字符串的个数
 
@@ -413,3 +469,7 @@ bool isAnagram(string s, string t) {
 拓扑排序
 
 并查集
+
+
+
+https://zxi.mytechroad.com/blog/leetcode-problem-categories/  题目列表
