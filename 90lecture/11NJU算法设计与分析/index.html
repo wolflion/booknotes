@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>11NJU算法设计与分析 - lionel的技术笔记</title>
+    <title>《NJU算法设计与分析》 - lionel的技术笔记</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "11NJU\u7b97\u6cd5\u8bbe\u8ba1\u4e0e\u5206\u6790";
+        var mkdocs_page_name = "\u300aNJU\u7b97\u6cd5\u8bbe\u8ba1\u4e0e\u5206\u6790\u300b";
         var mkdocs_page_input_path = "90lecture\\11NJU\u7b97\u6cd5\u8bbe\u8ba1\u4e0e\u5206\u6790.md";
         var mkdocs_page_url = null;
       </script>
@@ -87,6 +87,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5Linux%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%E5%86%85%E6%A0%B8%E6%9C%BA%E5%88%B6/">《深入Linux设备驱动程序内核机制》</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">《深入理解Linux虚拟内存管理》</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">网课</span></p>
               <ul>
@@ -94,10 +96,46 @@
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">网课</span></p>
-              <ul>
+              <ul class="current">
                   <li class="toctree-l1"><a class="reference internal" href="../01Linux%E9%AB%98%E5%B9%B6%E5%8F%91%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/">《Linux高并发网络编程开发》</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../%E4%BE%AF%E6%8D%B7/%E4%BE%AF%E6%8D%B7C%2B%2B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%8660%E8%AE%B2/">《侯捷C++内存管理60讲》</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">《NJU算法设计与分析》</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#_2">一、计算模型</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_3">二、排序问题</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#4quciksort">4、QucikSort 快速排序</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_4">三、选择和搜索</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_5">四、图遍历</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_6">五、图优化</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#18">18、最小生成树</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_7">六、动态规划</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#211">21、动态规划1</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#221">22、动态规划1</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#23tutorial-6">23、Tutorial 6</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#np">七、NP完全初探</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_8">八、总结</a>
+    </li>
+    </ul>
                   </li>
               </ul>
       </div>
@@ -114,7 +152,8 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-      <li>11NJU算法设计与分析</li>
+          <li>网课 &raquo;</li>
+      <li>《NJU算法设计与分析》</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -175,6 +214,9 @@
               
             </div>
           </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../%E4%BE%AF%E6%8D%B7/%E4%BE%AF%E6%8D%B7C%2B%2B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%8660%E8%AE%B2/" class="btn btn-neutral float-left" title="《侯捷C++内存管理60讲》"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
 
   <hr/>
 
@@ -195,6 +237,8 @@
   <div class="rst-versions" role="note" aria-label="Versions">
   <span class="rst-current-version" data-toggle="rst-current-version">
     
+    
+      <span><a href="../%E4%BE%AF%E6%8D%B7/%E4%BE%AF%E6%8D%B7C%2B%2B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%8660%E8%AE%B2/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
   </span>

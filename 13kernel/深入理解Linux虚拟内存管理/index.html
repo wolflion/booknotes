@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>深入理解Linux虚拟内存管理 - lionel的技术笔记</title>
+    <title>《深入理解Linux虚拟内存管理》 - lionel的技术笔记</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "\u6df1\u5165\u7406\u89e3Linux\u865a\u62df\u5185\u5b58\u7ba1\u7406";
+        var mkdocs_page_name = "\u300a\u6df1\u5165\u7406\u89e3Linux\u865a\u62df\u5185\u5b58\u7ba1\u7406\u300b";
         var mkdocs_page_input_path = "13kernel\\\u6df1\u5165\u7406\u89e3Linux\u865a\u62df\u5185\u5b58\u7ba1\u7406.md";
         var mkdocs_page_url = null;
       </script>
@@ -82,10 +82,322 @@
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">内核</span></p>
-              <ul>
+              <ul class="current">
                   <li class="toctree-l1"><a class="reference internal" href="../Linux%E5%86%85%E6%A0%B8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《Linux内核设计与实现》</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../%E6%B7%B1%E5%85%A5Linux%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%E5%86%85%E6%A0%B8%E6%9C%BA%E5%88%B6/">《深入Linux设备驱动程序内核机制》</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">《深入理解Linux虚拟内存管理》</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#chap2-28674">chap2、描述物理内存   （28/674）</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#0">0、</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#21">2.1、节点</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#22">2.2、管理区</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#221">2.2.1、管理区极值</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#222">2.2.2、计算管理区大小</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#223">2.2.3、管理区等待队列表</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#23">2.3、管理区的初始化</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#24mem_map">2.4、初始化mem_map</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#25">2.5、页面</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#26">2.6、页面映射到管理区</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#27">2.7、高端内存</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2826">2.8、2.6中有哪些新特性</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap3-45674">chap3、页表管理  （45/674）</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#0_1">0、</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#31">3.1、描述页目录</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#32">3.2、描述页表项</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#33">3.3、页表项的使用</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#34">3.4、页表项的转换和设置</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#35">3.5、页表的分配和释放</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#36">3.6、内核页表</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#361">3.6.1、引导初始化</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#362">3.6.2、收尾工作</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#37struct-page">3.7、地址和struct page之间的映射</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#371">3.7.1、物理和虚拟内核地址之间的映射</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#372struct-page">3.7.2、struct page和物理地址间的映射</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#38tlb">3.8、转换后援缓冲区（TLB）</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#39cpu">3.9、一级CPU高速缓存管理</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#31026">3.10、2.6中有哪些新特性</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap4-65674">chap4、进程地址空间  （65/674）</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#41">4.1、线性地址空间</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#42">4.2、地址空间的管理</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#43">4.3、进程地址空间描述符</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#0_2">0、</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#431">4.3.1、分配一个描述符</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#432">4.3.2、初始化一个描述符</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#433">4.3.3、销毁一个描述符</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#44">4.4、内存区域</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#441">4.4.1、内存区域的操作</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#45">4.5、异常处理</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#46">4.6、缺页中断</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#47">4.7、复制到用户空间/从用户空间复制</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#4826">4.8、2.6中有哪些新特性</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap5-88101674">chap5、引导内存分配器   88（101/674）</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#51">5.1、表示引导内存映射</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#52">5.2、初始化引导内存分配器</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#53bootmem_data">5.3、初始化bootmem_data</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#54">5.4、分配内存</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#55">5.5、释放内存</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#56">5.6、销毁引导内存分配器</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#5726">5.7、2.6中有哪些新特性</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap6-94109674">chap6、物理页面分析  94（109/674）</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#61">6.1、管理空闲块</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#62">6.2、分配页面</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#63">6.3、释放页面</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#64gfp">6.4、获得空闲页面（GFP）标志位</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#65">6.5、进程标志位</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#66">6.6、防止碎片</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#6726">6.7、2.6中有哪些新特性</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap7-120674">chap7、非连续内存分配   （120/674）</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#71">7.1、描述虚拟内存区</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#72">7.2、分配非连续区域</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#73">7.3、释放非连续区域</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#7426">7.4、2.6中有哪些新特性</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap8slab-110125674">chap8、Slab分配器   110（125/674）</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#0_3">0、</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#81">8.1、高速缓存</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#811">8.1.1、高速缓存描述符</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#812">8.1.2、高速缓存静态标志位</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#813">8.1.3、高速缓存动态标志位</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#814">8.1.4、高速缓存分配标志位</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#816">8.1.6、创建高速缓存</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#817">8.1.7、回收高速缓存</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#818">8.1.8、收缩高速缓存</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#819">8.1.9、销毁高速缓存</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#82slabs">8.2、Slabs</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#821slab">8.2.1、存储slab描述符</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#822slab">8.2.2、创建slab</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#823">8.2.3、跟踪空闲对象</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#824kmem_bufctl_t">8.2.4、初始化kmem_bufctl_t数组</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#825">8.2.5、查找下一个空闲对象</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#826kmem_bufctl_t">8.2.6、更新kmem_bufctl_t</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#827slab">8.2.7、计算slab中对象的数量</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#828slab">8.2.8、销毁slab</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#83">8.3、对象</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#831slab">8.3.1、初始化slab中的对象</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#832">8.3.2、分配对象</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#833">8.3.3、释放对象</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#84">8.4、指定大小的高速缓存</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#841kmalloc">8.4.1、kmalloc()</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#842kfree">8.4.2、kfree()</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#85per-cpu">8.5、per-CPU对象高速缓存</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#851per-cpu">8.5.1、描述per-CPU对象高速缓存</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#852per-cpu">8.5.2、在per-CPU高速缓存中添加/移除对象</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#853per-cpu">8.5.3、启用per-CPU高速缓存</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#854per-cpu">8.5.4、更新per-CPU高速缓存的信息</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#855per-cpu">8.5.5、清理per-CPU高速缓存</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#86slab">8.6、初始化Slab分配器</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#87">8.7、伙伴分配器接口</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#8826">8.8、2.6中有哪些新特性</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap9">chap9、高端内存管理</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#9726">9.7、2.6中有哪些新特性</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap10-149164674">chap10、页面帧回收  149（164/674）</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#101">10.1、页面替换策略</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#102">10.2、页面高速缓存</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#10726">10.7、2.6中有哪些新特性</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap11-165180674">chap11、交换管理  165（180/674）</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#111">11.1、描述交换区</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#112">11.2、映射页表项到交换项</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#13">1.3、分配一个交换槽</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#114">11.4、</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#111026">11.10、2.6中有哪些新特性</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap12-180195674">chap12、共享内存虚拟文件系统  180（195/674）</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#121">12.1、初始化虚拟文件系统</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#122shmem">12.2、使用shmem函数</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#123tmpfs">12.3、在tmpfs中创建文件</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#124">12.4、虚拟文件中的缺页中断</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1241">12.4.1、定位交换页面</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1242">12.4.2、向交换区写页面</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#125tmps">12.5、tmps中的文件操作</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#126tmps">12.6、tmps中索引节点操作</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#127">12.7、建立共享区</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#128system-v-ipc">12.8、System V IPC</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#12926">12.9、2.6中有哪些新特性</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap13">chap13、内存溢出管理</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#131">13.1、检查可用内存</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#132oom">13.2、确定OOM状态</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#133">13.3、选择进程</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#134">13.4、杀死选定的进程</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#135">13.5、是这样吗？</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#13626">13.6、2.6中有哪些新特性</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">网课</span></p>
@@ -98,6 +410,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../90lecture/01Linux%E9%AB%98%E5%B9%B6%E5%8F%91%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/">《Linux高并发网络编程开发》</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../90lecture/%E4%BE%AF%E6%8D%B7/%E4%BE%AF%E6%8D%B7C%2B%2B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%8660%E8%AE%B2/">《侯捷C++内存管理60讲》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/11NJU%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">《NJU算法设计与分析》</a>
                   </li>
               </ul>
       </div>
@@ -114,7 +428,8 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-      <li>深入理解Linux虚拟内存管理</li>
+          <li>内核 &raquo;</li>
+      <li>《深入理解Linux虚拟内存管理》</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -507,6 +822,10 @@
               
             </div>
           </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../%E6%B7%B1%E5%85%A5Linux%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%E5%86%85%E6%A0%B8%E6%9C%BA%E5%88%B6/" class="btn btn-neutral float-left" title="《深入Linux设备驱动程序内核机制》"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../91leetcode/%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/" class="btn btn-neutral float-right" title="《剑指offer专项突破》">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
 
   <hr/>
 
@@ -528,6 +847,10 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
+      <span><a href="../%E6%B7%B1%E5%85%A5Linux%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%E5%86%85%E6%A0%B8%E6%9C%BA%E5%88%B6/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../91leetcode/%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

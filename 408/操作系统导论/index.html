@@ -59,6 +59,84 @@
               <ul class="current">
                   <li class="toctree-l1 current"><a class="reference internal current" href="./">《操作系统导论》</a>
     <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#chap1">chap1、关于本书的对话</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap2">chap2、操作系统介绍</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#21cpu">2.1、虚拟化CPU</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#22">2.2、虚拟化内存</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#23">2.3、并发</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#24">2.4、持久性</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#25">2.5、设计目标</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#26">2.6、简单历史</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#_2">早期操作系统：只是一些库</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#_3">超越库：保护</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#_4">多道程序时代</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#_5">摩登时代</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#27">2.7、小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap3">chap3、关于虚拟化的对话</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap4">chap4、抽象：进程</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#41">4.1、抽象：进程</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#42api">4.2、进程API</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#43">4.3、进程创建：更多细节</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#44">4.4、进程状态</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#45">4.5、数据结构</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#46">4.6、小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap5api">chap5、插叙：进程API</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#51fork">5.1、fork()系统调用</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#52wait">5.2、wait()系统调用</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#53exec">5.3、最后是exec()系统调用</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#54api">5.4、为什么这样设计API</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#55api">5.5、其他API</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#56">5.6、小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap6">chap6、机制：受限直接执行</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap7">chap7、进程调度：介绍</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap8">chap8、调度：多级反馈队列</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap9">chap9、调度：比例份额</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap10">chap10、多处理器调度（高级）</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap11cpu">chap11、关于CPU虚拟化的总结对话</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap12">chap12、关于内存虚拟化的对话</a>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="#chap13">chap13、抽象:地址空间</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#131">13.1、早期系统</a>
@@ -129,7 +207,145 @@
     </li>
         </ul>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap17">chap17、空闲空间管理</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#171">17.1、假设</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#172">17.2、底层机制</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#173">17.3、基本策略</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#174">17.4、其他方式</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#175">17.5、小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap18">chap18、分页：介绍</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#181">18.1、一个简单的例子</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#182">18.2、页表存在哪里</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#183">18.3、列表中究竟有什么</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#184">18.4、分页：也很慢</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#185">18.5、内存追踪</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#186">18.6、小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap19tlb">chap19、分页：快速地址转换（TLB）</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#191tlb">19.1、TLB的基本算法</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#192">19.2、示例：访问数组</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#193tlb">19.3、谁来处理TLB未命中</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#194tlb">19.4、TLB的内容</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#195tlb">19.5、上下文切换时对TLB的处理</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#196tlb">19.6、TLB替换策略</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#197tlb">19.7、实际系统的TLB表项</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap20">chap20、分页：较小的表</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#201">20.1、简单的解决方案：更大的页</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#202">20.2、混合方法：分页和分段</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#203">20.3、多级页表</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#_6">详细的多级示例</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#_7">超过两级</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#tlb">地址转换过程：记住TLB</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#204">20.4、反向页表</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#205">20.5、将页表交换到磁盘</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#206">20.6、小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap21">chap21、超越物理内存：机制</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#211">21.1、交换空间</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#212">21.2、存在位</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#213">21.3、页错误</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#214">21.4、内存满了怎么办</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#215">21.5、页错误处理流程</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#216">21.6、交换何时真正发生</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#217">21.7、小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap22">chap22、超越物理内存：策略</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#221">22.1、缓存管理</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#222">22.2、最优替换策略</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#223fifo">22.3、简单策略：FIFO</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#224">22.4、另一简单策略：随机</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#225lru">22.5、利用历史数据：LRU</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#226">22.6、工作负载示例</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#227">22.7、实现基于历史信息的算法</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#228lru">22.8、近似LRU</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#229">22.9、考虑脏页</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2210">22.10、其他虚拟内存策略</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2211">22.11、抖动</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2212">22.12、小结</a>
+    </li>
+        </ul>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="#chap23vaxvms">chap23、VAX/VMS虚拟内存系统</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#231">23.1、背景</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#232">23.2、内存管理硬件</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#233">23.3、一个真实的地址空间</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#234">23.4、页替换</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#fifo">分段FIFO</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#_8">页聚集</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#235">23.5、其他漂亮的虚拟内存技巧</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#236">23.6、小结</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#chap24">chap24、内存虚拟化总结对话</a>
         <ul>
@@ -277,7 +493,7 @@
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#_2"></a>
+    <li class="toctree-l2"><a class="reference internal" href="#_9"></a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#chap35">chap35、关于持久性的对话</a>
     </li>
@@ -313,6 +529,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5Linux%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%E5%86%85%E6%A0%B8%E6%9C%BA%E5%88%B6/">《深入Linux设备驱动程序内核机制》</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">《深入理解Linux虚拟内存管理》</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">网课</span></p>
               <ul>
@@ -324,6 +542,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../90lecture/01Linux%E9%AB%98%E5%B9%B6%E5%8F%91%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/">《Linux高并发网络编程开发》</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../90lecture/%E4%BE%AF%E6%8D%B7/%E4%BE%AF%E6%8D%B7C%2B%2B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%8660%E8%AE%B2/">《侯捷C++内存管理60讲》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/11NJU%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">《NJU算法设计与分析》</a>
                   </li>
               </ul>
       </div>
@@ -360,6 +580,123 @@
 <li>PartII：Concurrency并发（25-34）</li>
 <li>Part3、持久性（35-）</li>
 </ul>
+<h3 id="chap1">chap1、关于本书的对话<a class="headerlink" href="#chap1" title="Permanent link">&para;</a></h3>
+<h3 id="chap2">chap2、操作系统介绍<a class="headerlink" href="#chap2" title="Permanent link">&para;</a></h3>
+<h4 id="21cpu">2.1、虚拟化CPU<a class="headerlink" href="#21cpu" title="Permanent link">&para;</a></h4>
+<h4 id="22">2.2、虚拟化内存<a class="headerlink" href="#22" title="Permanent link">&para;</a></h4>
+<h4 id="23">2.3、并发<a class="headerlink" href="#23" title="Permanent link">&para;</a></h4>
+<h4 id="24">2.4、持久性<a class="headerlink" href="#24" title="Permanent link">&para;</a></h4>
+<h4 id="25">2.5、设计目标<a class="headerlink" href="#25" title="Permanent link">&para;</a></h4>
+<h4 id="26">2.6、简单历史<a class="headerlink" href="#26" title="Permanent link">&para;</a></h4>
+<h5 id="_2">早期操作系统：只是一些库<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h5>
+<h5 id="_3">超越库：保护<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h5>
+<h5 id="_4">多道程序时代<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h5>
+<h5 id="_5">摩登时代<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h5>
+<h4 id="27">2.7、小结<a class="headerlink" href="#27" title="Permanent link">&para;</a></h4>
+<h3 id="chap3">chap3、关于虚拟化的对话<a class="headerlink" href="#chap3" title="Permanent link">&para;</a></h3>
+<h3 id="chap4">chap4、抽象：进程<a class="headerlink" href="#chap4" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>进程，就是运行中的程序</strong></li>
+</ul>
+<ul>
+<li>关键问题：<strong>如何提供有许多CPU的假象？</strong><ul>
+<li>时分共享（time sharing）CPU技术</li>
+</ul>
+</li>
+<li><strong>机制</strong>（mechanism）：低级机制，<strong>是一些低级方法或协议，实现了所需的功能</strong></li>
+<li><strong>策略</strong>：智能，<strong>在操作系统内做出某种决定的算法</strong></li>
+</ul>
+<h4 id="41">4.1、抽象：进程<a class="headerlink" href="#41" title="Permanent link">&para;</a></h4>
+<ul>
+<li>操作系统为正在运行的程序提供的抽象，就是<strong>所谓的进程（process）</strong></li>
+</ul>
+<h4 id="42api">4.2、进程API<a class="headerlink" href="#42api" title="Permanent link">&para;</a></h4>
+<ul>
+<li>创建</li>
+<li>销毁</li>
+<li>等待</li>
+<li>其他控制</li>
+<li>状态</li>
+</ul>
+<h4 id="43">4.3、进程创建：更多细节<a class="headerlink" href="#43" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>程序如何转化为进程，也就是说，OS如何启动并运行一个程序？进程创建实际如何进行？</strong><ul>
+<li>第一件事是将代码和所有静态数据加载到内在中，加载到进程的地址空间中</li>
+<li>创建和初始化栈以及执行与I/O设置相关的其他工作</li>
+<li>启动程序，即main()，跳转到main()例程，OS将CPU的控制权转移到新创建的进程中，从而程序开始执行</li>
+</ul>
+</li>
+</ul>
+<h4 id="44">4.4、进程状态<a class="headerlink" href="#44" title="Permanent link">&para;</a></h4>
+<ul>
+<li>运行</li>
+<li>就绪</li>
+<li>阻塞</li>
+</ul>
+<h4 id="45">4.5、数据结构<a class="headerlink" href="#45" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>struct context{};</code></li>
+</ul>
+<ul>
+<li><code>struct proc{};</code></li>
+</ul>
+<h4 id="46">4.6、小结<a class="headerlink" href="#46" title="Permanent link">&para;</a></h4>
+<ul>
+<li>实现进程所需的低级机制和以智能方式调度这些进程所需的高级策略</li>
+</ul>
+<h3 id="chap5api">chap5、插叙：进程API<a class="headerlink" href="#chap5api" title="Permanent link">&para;</a></h3>
+<h4 id="51fork">5.1、fork()系统调用<a class="headerlink" href="#51fork" title="Permanent link">&para;</a></h4>
+<h4 id="52wait">5.2、wait()系统调用<a class="headerlink" href="#52wait" title="Permanent link">&para;</a></h4>
+<h4 id="53exec">5.3、最后是exec()系统调用<a class="headerlink" href="#53exec" title="Permanent link">&para;</a></h4>
+<h4 id="54api">5.4、为什么这样设计API<a class="headerlink" href="#54api" title="Permanent link">&para;</a></h4>
+<ul>
+<li>分享fork()和exec()的做法，<strong>给了shell在fork之后exec之前运行代码的机会</strong></li>
+</ul>
+<h4 id="55api">5.5、其他API<a class="headerlink" href="#55api" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>kill()</code></li>
+</ul>
+<h4 id="56">5.6、小结<a class="headerlink" href="#56" title="Permanent link">&para;</a></h4>
+<h3 id="chap6">chap6、机制：受限直接执行<a class="headerlink" href="#chap6" title="Permanent link">&para;</a></h3>
+<p>6.1、基本技巧：受限直接执行</p>
+<p>6.2、问题1：受限制的操作</p>
+<p>6.3、问题2：在进程之间切换</p>
+<p>6.4、担心并发吗</p>
+<h3 id="chap7">chap7、进程调度：介绍<a class="headerlink" href="#chap7" title="Permanent link">&para;</a></h3>
+<p>7.1、工作负载假设</p>
+<p>7.2、调度指标</p>
+<p>7.3、先进先出（FIFO）</p>
+<p>7.4、最短任务优先（SJF）</p>
+<p>7.5、最短完成时间优先（STCF）</p>
+<p>7.6、新度量指标：响应时间</p>
+<p>7.7、轮转</p>
+<p>7.8、结合I/O</p>
+<p>7.9、无法预知</p>
+<h3 id="chap8">chap8、调度：多级反馈队列<a class="headerlink" href="#chap8" title="Permanent link">&para;</a></h3>
+<p>8.1、MLFQ：基本规则</p>
+<p>8.2、尝试1：如何改变优先级</p>
+<p>8.3、尝试2：提升优先级</p>
+<p>8.4、尝试3：更好的计时方式</p>
+<p>8.5、MLFQ：调优及其他问题</p>
+<p>8.6、MLFQ：小结</p>
+<h3 id="chap9">chap9、调度：比例份额<a class="headerlink" href="#chap9" title="Permanent link">&para;</a></h3>
+<p>9.1、基本概念：彩票数表示份额</p>
+<p>9.2、彩票机制</p>
+<p>9.3、实现</p>
+<p>9.4、一个例子</p>
+<p>9.5、如何分配彩票</p>
+<p>9.6、为什么不是确定的</p>
+<p>9.7、小结</p>
+<h3 id="chap10">chap10、多处理器调度（高级）<a class="headerlink" href="#chap10" title="Permanent link">&para;</a></h3>
+<p>10.1、背景：多处理架构</p>
+<p>10.2、别忘了同步</p>
+<p>10.3、最后一个问题：缓存亲和度</p>
+<p>10.4、单队列调度</p>
+<p>10.5、多队列调度</p>
+<p>10.6、Linux多处理器调度</p>
+<p>10.7、小结</p>
+<h3 id="chap11cpu">chap11、关于CPU虚拟化的总结对话<a class="headerlink" href="#chap11cpu" title="Permanent link">&para;</a></h3>
+<h3 id="chap12">chap12、关于内存虚拟化的对话<a class="headerlink" href="#chap12" title="Permanent link">&para;</a></h3>
 <h3 id="chap13">chap13、抽象:地址空间<a class="headerlink" href="#chap13" title="Permanent link">&para;</a></h3>
 <h4 id="131">13.1、早期系统<a class="headerlink" href="#131" title="Permanent link">&para;</a></h4>
 <ul>
@@ -469,13 +806,142 @@
 <ul>
 <li><strong>分段的好处是：代码共享</strong></li>
 </ul>
-<p>chap17、空闲空间管理</p>
-<p>chap18、分页：介绍</p>
-<p>chap19、分页：快速地址转换（TLB）</p>
-<p>chap20、分页：较小的表</p>
-<p>chap21、超越物理内存：机制</p>
-<p>chap22、超越物理内存：策略</p>
+<h3 id="chap17">chap17、空闲空间管理<a class="headerlink" href="#chap17" title="Permanent link">&para;</a></h3>
+<h4 id="171">17.1、假设<a class="headerlink" href="#171" title="Permanent link">&para;</a></h4>
+<ul>
+<li>在堆上管理空闲空间的数据结构通常称为空闲列表（free list）。<strong>该结构包含了管理内存区域中所有空闲块的引用</strong>。</li>
+</ul>
+<h4 id="172">17.2、底层机制<a class="headerlink" href="#172" title="Permanent link">&para;</a></h4>
+<h4 id="173">17.3、基本策略<a class="headerlink" href="#173" title="Permanent link">&para;</a></h4>
+<ul>
+<li>最优匹配（best fit）</li>
+<li>最差匹配（worst fit）</li>
+<li>首次匹配（first fit）</li>
+<li>下次匹配（next fit）</li>
+<li>例子</li>
+</ul>
+<h4 id="174">17.4、其他方式<a class="headerlink" href="#174" title="Permanent link">&para;</a></h4>
+<ul>
+<li>分离空闲列表（segregated list）<ul>
+<li><strong>如果某个应用程序经常申请一种（或几种）大小的内存空间，那就用一个独立的列表，只管理这样大小的对象</strong>。</li>
+</ul>
+</li>
+<li>伙伴系统<ul>
+<li>2的整数次幂大小的空闲块</li>
+</ul>
+</li>
+<li>其他想法</li>
+</ul>
+<h4 id="175">17.5、小结<a class="headerlink" href="#175" title="Permanent link">&para;</a></h4>
+<ul>
+<li>讨论了最基本的内存分配程序形式。</li>
+</ul>
+<h3 id="chap18">chap18、分页：介绍<a class="headerlink" href="#chap18" title="Permanent link">&para;</a></h3>
+<ul>
+<li>关键问题：<strong>如何通过页来实现虚拟内存</strong></li>
+</ul>
+<h4 id="181">18.1、一个简单的例子<a class="headerlink" href="#181" title="Permanent link">&para;</a></h4>
+<ul>
+<li>操作系统通常为每个进程保存一个数据结构，称为<strong>页表</strong>（page table），主要作用是：<strong>为地址空间的每个虚拟页面保存地址转换（address translation），从而让我们知道每个页在物理内存中的位置</strong>。</li>
+</ul>
+<h4 id="182">18.2、页表存在哪里<a class="headerlink" href="#182" title="Permanent link">&para;</a></h4>
+<h4 id="183">18.3、列表中究竟有什么<a class="headerlink" href="#183" title="Permanent link">&para;</a></h4>
+<h4 id="184">18.4、分页：也很慢<a class="headerlink" href="#184" title="Permanent link">&para;</a></h4>
+<h4 id="185">18.5、内存追踪<a class="headerlink" href="#185" title="Permanent link">&para;</a></h4>
+<h4 id="186">18.6、小结<a class="headerlink" href="#186" title="Permanent link">&para;</a></h4>
+<ul>
+<li>分页（paging）比起分段有优点，<strong>不会导致外部碎片、非常灵活</strong></li>
+<li>缺点：机器变慢和内存浪费</li>
+</ul>
+<h3 id="chap19tlb">chap19、分页：快速地址转换（TLB）<a class="headerlink" href="#chap19tlb" title="Permanent link">&para;</a></h3>
+<h4 id="191tlb">19.1、TLB的基本算法<a class="headerlink" href="#191tlb" title="Permanent link">&para;</a></h4>
+<h4 id="192">19.2、示例：访问数组<a class="headerlink" href="#192" title="Permanent link">&para;</a></h4>
+<h4 id="193tlb">19.3、谁来处理TLB未命中<a class="headerlink" href="#193tlb" title="Permanent link">&para;</a></h4>
+<h4 id="194tlb">19.4、TLB的内容<a class="headerlink" href="#194tlb" title="Permanent link">&para;</a></h4>
+<ul>
+<li>硬件TLB中的内容，典型的TLB有32项、64项或128项，<strong>并且是全相联的（fully associative）</strong></li>
+</ul>
+<h4 id="195tlb">19.5、上下文切换时对TLB的处理<a class="headerlink" href="#195tlb" title="Permanent link">&para;</a></h4>
+<h4 id="196tlb">19.6、TLB替换策略<a class="headerlink" href="#196tlb" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>缓存策略</strong>（cache replacement）</li>
+<li>关键问题：<strong>如何设计TLB替换策略</strong></li>
+</ul>
+<h4 id="197tlb">19.7、实际系统的TLB表项<a class="headerlink" href="#197tlb" title="Permanent link">&para;</a></h4>
+<h3 id="chap20">chap20、分页：较小的表<a class="headerlink" href="#chap20" title="Permanent link">&para;</a></h3>
+<ul>
+<li>解决分页引入的第二个问题：<strong>页表太大，因而消耗的内存太多</strong></li>
+<li>关键问题：<strong>如何让页表更小？</strong></li>
+</ul>
+<h4 id="201">20.1、简单的解决方案：更大的页<a class="headerlink" href="#201" title="Permanent link">&para;</a></h4>
+<h4 id="202">20.2、混合方法：分页和分段<a class="headerlink" href="#202" title="Permanent link">&para;</a></h4>
+<h4 id="203">20.3、多级页表<a class="headerlink" href="#203" title="Permanent link">&para;</a></h4>
+<h5 id="_6">详细的多级示例<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h5>
+<h5 id="_7">超过两级<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h5>
+<h5 id="tlb">地址转换过程：记住TLB<a class="headerlink" href="#tlb" title="Permanent link">&para;</a></h5>
+<h4 id="204">20.4、反向页表<a class="headerlink" href="#204" title="Permanent link">&para;</a></h4>
+<h4 id="205">20.5、将页表交换到磁盘<a class="headerlink" href="#205" title="Permanent link">&para;</a></h4>
+<h4 id="206">20.6、小结<a class="headerlink" href="#206" title="Permanent link">&para;</a></h4>
+<ul>
+<li>构建真正的页表，不一定只是线性数组，<strong>而是更复杂的数据结构</strong>。</li>
+</ul>
+<h3 id="chap21">chap21、超越物理内存：机制<a class="headerlink" href="#chap21" title="Permanent link">&para;</a></h3>
+<ul>
+<li>关键问题：<strong>如何超越物理内存</strong></li>
+</ul>
+<h4 id="211">21.1、交换空间<a class="headerlink" href="#211" title="Permanent link">&para;</a></h4>
+<h4 id="212">21.2、存在位<a class="headerlink" href="#212" title="Permanent link">&para;</a></h4>
+<h4 id="213">21.3、页错误<a class="headerlink" href="#213" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>为什么硬件不能处理页错误</strong></li>
+</ul>
+<h4 id="214">21.4、内存满了怎么办<a class="headerlink" href="#214" title="Permanent link">&para;</a></h4>
+<ul>
+<li>页交换策略</li>
+</ul>
+<h4 id="215">21.5、页错误处理流程<a class="headerlink" href="#215" title="Permanent link">&para;</a></h4>
+<h4 id="216">21.6、交换何时真正发生<a class="headerlink" href="#216" title="Permanent link">&para;</a></h4>
+<ul>
+<li>为了保证有少量的空闲内存，大多数操作系统会设置高水位线（High Watermark，HW）和低水位线（Low Watermark，LW），来帮助决定何时从内存中清除页。</li>
+</ul>
+<h4 id="217">21.7、小结<a class="headerlink" href="#217" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>存在位</strong>（present bit），告诉我们页是不是在内存中</li>
+</ul>
+<h3 id="chap22">chap22、超越物理内存：策略<a class="headerlink" href="#chap22" title="Permanent link">&para;</a></h3>
+<h4 id="221">22.1、缓存管理<a class="headerlink" href="#221" title="Permanent link">&para;</a></h4>
+<h4 id="222">22.2、最优替换策略<a class="headerlink" href="#222" title="Permanent link">&para;</a></h4>
+<h4 id="223fifo">22.3、简单策略：FIFO<a class="headerlink" href="#223fifo" title="Permanent link">&para;</a></h4>
+<h4 id="224">22.4、另一简单策略：随机<a class="headerlink" href="#224" title="Permanent link">&para;</a></h4>
+<h4 id="225lru">22.5、利用历史数据：LRU<a class="headerlink" href="#225lru" title="Permanent link">&para;</a></h4>
+<h4 id="226">22.6、工作负载示例<a class="headerlink" href="#226" title="Permanent link">&para;</a></h4>
+<h4 id="227">22.7、实现基于历史信息的算法<a class="headerlink" href="#227" title="Permanent link">&para;</a></h4>
+<ul>
+<li>关键问题：<strong>如何实现LRU替换策略</strong></li>
+</ul>
+<h4 id="228lru">22.8、近似LRU<a class="headerlink" href="#228lru" title="Permanent link">&para;</a></h4>
+<h4 id="229">22.9、考虑脏页<a class="headerlink" href="#229" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>硬件应该包括一个修改位（modified bit）</strong></li>
+</ul>
+<h4 id="2210">22.10、其他虚拟内存策略<a class="headerlink" href="#2210" title="Permanent link">&para;</a></h4>
+<h4 id="2211">22.11、抖动<a class="headerlink" href="#2211" title="Permanent link">&para;</a></h4>
+<h4 id="2212">22.12、小结<a class="headerlink" href="#2212" title="Permanent link">&para;</a></h4>
 <h3 id="chap23vaxvms">chap23、VAX/VMS虚拟内存系统<a class="headerlink" href="#chap23vaxvms" title="Permanent link">&para;</a></h3>
+<h4 id="231">23.1、背景<a class="headerlink" href="#231" title="Permanent link">&para;</a></h4>
+<h4 id="232">23.2、内存管理硬件<a class="headerlink" href="#232" title="Permanent link">&para;</a></h4>
+<h4 id="233">23.3、一个真实的地址空间<a class="headerlink" href="#233" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>为什么空指针访问会导致段错误</strong>，硬件试图在TLB中查找VPN（这里是0），遇到TLB未命中。查询页表，并且发现VPN 0的条目被标记为无效。把控制权交给OS</li>
+</ul>
+<h4 id="234">23.4、页替换<a class="headerlink" href="#234" title="Permanent link">&para;</a></h4>
+<h5 id="fifo">分段FIFO<a class="headerlink" href="#fifo" title="Permanent link">&para;</a></h5>
+<h5 id="_8">页聚集<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h5>
+<h4 id="235">23.5、其他漂亮的虚拟内存技巧<a class="headerlink" href="#235" title="Permanent link">&para;</a></h4>
+<ul>
+<li>VMS有另外两个现在成为标准和技巧：<strong>按需置零和写入时复制</strong></li>
+</ul>
+<h4 id="236">23.6、小结<a class="headerlink" href="#236" title="Permanent link">&para;</a></h4>
 <h3 id="chap24">chap24、内存虚拟化总结对话<a class="headerlink" href="#chap24" title="Permanent link">&para;</a></h3>
 <h4 id="chap25">chap25、并发的对话<a class="headerlink" href="#chap25" title="Permanent link">&para;</a></h4>
 <ul>
@@ -583,9 +1049,9 @@ unlock(&amp;mutex);</code></pre>
 <h5 id="337">33.7、另一个问题：状态管理<a class="headerlink" href="#337" title="Permanent link">&para;</a></h5>
 <h5 id="338">33.8、什么事情仍然很难<a class="headerlink" href="#338" title="Permanent link">&para;</a></h5>
 <h4 id="chap34">chap34、并发的总结对话<a class="headerlink" href="#chap34" title="Permanent link">&para;</a></h4>
-<h3 id="_2"><a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<h3 id="_9"><a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <h4 id="chap35">chap35、关于持久性的对话<a class="headerlink" href="#chap35" title="Permanent link">&para;</a></h4>
-<h2 id="_3">履历<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h2 id="_10">履历<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
 <ul>
 <li>2022年27W（7.5-7.）看Part2并发的chap26，但习题没做和练习，只是有个概念</li>
 </ul>
