@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>《NJU算法设计与分析》 - lionel的技术笔记</title>
+    <title>12NJU操作系统设计与实现 - lionel的技术笔记</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "\u300aNJU\u7b97\u6cd5\u8bbe\u8ba1\u4e0e\u5206\u6790\u300b";
-        var mkdocs_page_input_path = "90lecture\\11NJU\u7b97\u6cd5\u8bbe\u8ba1\u4e0e\u5206\u6790.md";
+        var mkdocs_page_name = "12NJU\u64cd\u4f5c\u7cfb\u7edf\u8bbe\u8ba1\u4e0e\u5b9e\u73b0";
+        var mkdocs_page_input_path = "90lecture\\12NJU\u64cd\u4f5c\u7cfb\u7edf\u8bbe\u8ba1\u4e0e\u5b9e\u73b0.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -96,46 +96,12 @@
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">网课</span></p>
-              <ul class="current">
+              <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../01Linux%E9%AB%98%E5%B9%B6%E5%8F%91%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/">《Linux高并发网络编程开发》</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../%E4%BE%AF%E6%8D%B7/%E4%BE%AF%E6%8D%B7C%2B%2B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%8660%E8%AE%B2/">《侯捷C++内存管理60讲》</a>
                   </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" href="./">《NJU算法设计与分析》</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#_2">一、计算模型</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#_3">二、排序问题</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#4quciksort">4、QucikSort 快速排序</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#_4">三、选择和搜索</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#_5">四、图遍历</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#_6">五、图优化</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#18">18、最小生成树</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#_7">六、动态规划</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#211">21、动态规划1</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#221">22、动态规划1</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#23tutorial-6">23、Tutorial 6</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#np">七、NP完全初探</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#_8">八、总结</a>
-    </li>
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../11NJU%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">《NJU算法设计与分析》</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">英语专</span></p>
@@ -157,8 +123,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-          <li>网课 &raquo;</li>
-      <li>《NJU算法设计与分析》</li>
+      <li>12NJU操作系统设计与实现</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -167,62 +132,154 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h2 id="_1">《算法设计与分析》<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+                <h2 id="_1">《操作系统：设计与实现》<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
-<li>https://paragonlight.github.io/ ，徐经纬</li>
-<li>思考：<ul>
-<li>1、如何从数据结构、算法的角度去分别理解（排序、以及图的一些操作）</li>
-<li>2、看动态规划的过程，忽然觉得<strong>算法本质就是递归</strong>，无非是怎么设计的问题？</li>
+<li>32讲，<a href="https://space.bilibili.com/202224425/channel/collectiondetail?sid=192498">视频链接</a></li>
+<li>http://jyywiki.cn/OS/2022/  课程视频</li>
 </ul>
-</li>
-</ul>
-<h3 id="_2">一、计算模型<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
-<h3 id="_3">二、排序问题<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<h4 id="4quciksort">4、QucikSort 快速排序<a class="headerlink" href="#4quciksort" title="Permanent link">&para;</a></h4>
+<h3 id="1">并发1<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Comparison-Based Sorting<ul>
-<li>插入、冒泡、都是<strong>基于比较</strong>的</li>
-<li>Critical operation <strong>关键操作</strong><ul>
-<li>Comparsion between two keys</li>
+<li>对应25、26、27三章</li>
+</ul>
+<h4 id="_2">多处理器编程：从入门到放弃<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
+<h5 id="_3">上一级复习<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h5>
+<ul>
+<li>状态机</li>
+<li><strong>只能改变内存的状态</strong></li>
+</ul>
+<h5 id="three-easy-pieces">Three Easy Pieces：并发<a class="headerlink" href="#three-easy-pieces" title="Permanent link">&para;</a></h5>
+<ul>
+<li>为什么这门课（先）讲并发？</li>
+</ul>
+<h5 id="_4">并发的基本单位：线程<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h5>
+<ul>
+<li>共享内存的多个执行流<ul>
+<li>执行流拥有独立的堆栈/寄存器</li>
+<li>共享全部的内存（指针可以互相引用）</li>
 </ul>
 </li>
 </ul>
-</li>
-<li>As Simple as Inserting <strong>插入排序</strong><ul>
-<li>2...n重复插入，<strong>可以造个轮子</strong></li>
+<ul>
+<li>用状态机的视角来理解</li>
+</ul>
+<h5 id="threadhapi">入门：thread.h简化的线程API<a class="headerlink" href="#threadhapi" title="Permanent link">&para;</a></h5>
+<ul>
+<li>create(fn)</li>
+<li>join()</li>
+<li>编译时需要增加 -lpthread</li>
+</ul>
+<h5 id="contd">入门（cont‘d）<a class="headerlink" href="#contd" title="Permanent link">&para;</a></h5>
+<ul>
+<li>Hello, Multi-threaded World!</li>
+</ul>
+<pre class="highlight"><code class="language-c">#include "thread.h"
+void Ta() { while (1) { printf("a");
+void Tb() { while (1) { printf("b");
+int main() {
+create(Ta);
+create(Tb);</code></pre>
+<h5 id="contd_1">入门（cont‘d）<a class="headerlink" href="#contd_1" title="Permanent link">&para;</a></h5>
+<ul>
+<li>如何证明线程确实共享内存？<ul>
+<li>shm-test.c</li>
 </ul>
 </li>
-<li>24min/1h34min，<em>有点蒙了，lionel</em>【要自行搜一下了，跟不上了】</li>
-<li>Inversion and Sorting  <strong>逆序</strong></li>
-<li>Eliminating Inverses：Worst Case<ul>
-<li>一次只能消除一个逆序对</li>
+<li>如何证明线程具有独立堆栈（以及确定它们的范围？）<ul>
+<li>stack-probe.c</li>
+<li><code>| -sort nk</code>，<strong>线程大概是8M</strong></li>
+<li><code>strace</code>查看系统调用</li>
 </ul>
 </li>
-<li>Eliminating Inverses：Average Case</li>
-<li>QuickSort：the Strategy<ul>
-<li>第2次课，54min/1h34min</li>
+<li>更多的习题：<ul>
+<li>创建线程使用的是哪个系统调用</li>
+<li>能不能用gdb调试？</li>
+<li>基本原则：<strong>有需求，就能做到（RTFM）</strong></li>
 </ul>
 </li>
 </ul>
-<h3 id="_4">三、选择和搜索<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<h3 id="_5">四、图遍历<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
-<h3 id="_6">五、图优化<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
-<h4 id="18">18、最小生成树<a class="headerlink" href="#18" title="Permanent link">&para;</a></h4>
-<p>19、</p>
-<p>20、</p>
-<h3 id="_7">六、动态规划<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
-<h4 id="211">21、动态规划1<a class="headerlink" href="#211" title="Permanent link">&para;</a></h4>
-<h4 id="221">22、动态规划1<a class="headerlink" href="#221" title="Permanent link">&para;</a></h4>
-<h4 id="23tutorial-6">23、Tutorial 6<a class="headerlink" href="#23tutorial-6" title="Permanent link">&para;</a></h4>
-<h3 id="np">七、NP完全初探<a class="headerlink" href="#np" title="Permanent link">&para;</a></h3>
-<h3 id="_8">八、总结<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<h5 id="threadhposix-threads">thread.h背后：POSIX Threads<a class="headerlink" href="#threadhposix-threads" title="Permanent link">&para;</a></h5>
+<ul>
+<li>设置更大的线程栈</li>
+</ul>
+<h5 id="2-1">第2课  放弃（1）：原子性<a class="headerlink" href="#2-1" title="Permanent link">&para;</a></h5>
+<h5 id="_5">例子：山寨多线程支付宝<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h5>
+<h5 id="microsoft-diablo">例子：Microsoft Diablo 复制物品<a class="headerlink" href="#microsoft-diablo" title="Permanent link">&para;</a></h5>
+<h5 id="_6">例子：求和<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h5>
+<pre class="highlight"><code class="language-c">#define N 100000000
+long sum = 0;
+void Tsum() { for (int i = 0; i &lt; N;
+int main() {
+create(Tsum);
+create(Tsum);
+join();
+printf("sum = %ld\n", sum);
+}</code></pre>
+<h5 id="_7">原子性的丧失<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h5>
+<ul>
+<li>单处理器多线程</li>
+<li>多处理器多线程<ul>
+<li>线程根本就是并发执行的</li>
+</ul>
+</li>
+</ul>
+<h5 id="_8">原子性的丧失：有没有感到后怕？<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h5>
+<ul>
+<li>printf还能在多线程程序里调用吗？</li>
+</ul>
+<h5 id="_9">实现原子性<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>互斥和原子性是本学期的重要主题</strong><ul>
+<li>lock(&amp;lk)</li>
+<li>unlock(&amp;加)</li>
+</ul>
+</li>
+</ul>
+<h5 id="2">放弃（2）：顺序<a class="headerlink" href="#2" title="Permanent link">&para;</a></h5>
+<h5 id="_10">例子：求和（再次出现）<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h5>
+<h5 id="_11">顺序的丧失<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>编译器对内存访问"eventually consistent"的处理导致共享内存作为线程同步工具的失效</strong></li>
+</ul>
+<h5 id="_12">实现源代码的按顺序翻译<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h5>
+<h5 id="3">放弃（3）：可见性<a class="headerlink" href="#3" title="Permanent link">&para;</a></h5>
+<h5 id="_13">例子<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h5>
+<pre class="highlight"><code class="language-c">int x = 0, y = 0;
+void T1() {
+x = 1;
+asm volatile("" : : "memory"); //
+printf("y = %d\n", y);
+}
+void T2() {
+y = 1;
+asm volatile("" : : "memory"); //
+printf("x = %d\n", x);
+}</code></pre>
+<h5 id="_14">现代处理器：处理器也是（动态）编译器<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h5>
+<h5 id="_15">多处理器间即时可见性的丧失<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h5>
+<h5 id="relaxedweak-memory-model">宽松内存模型（Relaxed/Weak Memory Model）<a class="headerlink" href="#relaxedweak-memory-model" title="Permanent link">&para;</a></h5>
+<h5 id="_16">实现顺序一致性<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h5>
+<h5 id="_17">总结<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h5>
+<h5 id="_18">总结<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h5>
+<ul>
+<li>本次课回答的问题</li>
+<li>Q：如何理解多处理器系统？<ul>
+<li>Take-away message</li>
+</ul>
+</li>
+<li>多处理器入门<ul>
+<li>多处理器程序=状态机（共享内存；非确定选择线程执行）</li>
+<li>thread.h=create+join</li>
+</ul>
+</li>
+<li>多处理器编程：<strong>放弃你对“程序”的旧理解</strong><ul>
+<li>不原子、能乱序、不立即可见</li>
+</ul>
+</li>
+</ul>
+<h4 id="_19">理解并发程序执行<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h4>
               
             </div>
           </div><footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../%E4%BE%AF%E6%8D%B7/%E4%BE%AF%E6%8D%B7C%2B%2B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%8660%E8%AE%B2/" class="btn btn-neutral float-left" title="《侯捷C++内存管理60讲》"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../../60English/00794%E7%BB%BC%E5%90%88%E8%8B%B1%E8%AF%AD%E4%B8%80%E4%B8%8A/" class="btn btn-neutral float-right" title="《综合英语(一)上》">Next <span class="icon icon-circle-arrow-right"></span></a>
-    </div>
 
   <hr/>
 
@@ -244,10 +301,6 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../%E4%BE%AF%E6%8D%B7/%E4%BE%AF%E6%8D%B7C%2B%2B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%8660%E8%AE%B2/" style="color: #fcfcfc">&laquo; Previous</a></span>
-    
-    
-      <span><a href="../../60English/00794%E7%BB%BC%E5%90%88%E8%8B%B1%E8%AF%AD%E4%B8%80%E4%B8%8A/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
