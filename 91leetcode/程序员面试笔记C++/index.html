@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>程序员面试笔记C++ - lionel的技术笔记</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "\u7a0b\u5e8f\u5458\u9762\u8bd5\u7b14\u8bb0C++";
+        var mkdocs_page_input_path = "91leetcode\\\u7a0b\u5e8f\u5458\u9762\u8bd5\u7b14\u8bb0C++.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> lionel的技术笔记
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">简介</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../01daily/">daily</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">C++</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../20C%2B%2B/effectiveC%2B%2B/">《Effective C++》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/EffectiveSTL/">《Effective STL》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">基础知识</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA/">《操作系统导论》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网络编程</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/TCPIP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">《TCP/IP网络编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/">《Linux高性能服务器编程》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">文件系统</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/Linux%E5%86%85%E6%A0%B8%E6%8E%A2%E7%A7%98/">《Linux内核探秘》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《文件系统技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">《存储技术原理分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">存储</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../12storage/ceph%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《ceph设计原理与实现》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">内核</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/Linux%E5%86%85%E6%A0%B8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《Linux内核设计与实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5Linux%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%E5%86%85%E6%A0%B8%E6%9C%BA%E5%88%B6/">《深入Linux设备驱动程序内核机制》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">《深入理解Linux虚拟内存管理》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">刷题</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/">《剑指offer专项突破》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网课</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/01Linux%E9%AB%98%E5%B9%B6%E5%8F%91%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/">《Linux高并发网络编程开发》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/%E4%BE%AF%E6%8D%B7/%E4%BE%AF%E6%8D%B7C%2B%2B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%8660%E8%AE%B2/">《侯捷C++内存管理60讲》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/11NJU%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">《NJU算法设计与分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">英语专</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../60English/00794%E7%BB%BC%E5%90%88%E8%8B%B1%E8%AF%AD%E4%B8%80%E4%B8%8A/">《综合英语(一)上》</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">lionel的技术笔记</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>程序员面试笔记C++</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="_1">《程序员面试笔记》<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>要着重区分一下，哪些是没有真正搞懂的</strong>（只是感觉自己懂了，但并没有真的懂）</li>
+</ul>
+<ul>
+<li>chap10<ul>
+<li>10.7的位运算，还是不太会刷题啊</li>
+</ul>
+</li>
+<li>chap11<ul>
+<li>11.2常量指针与指针常量，<em>如何去记？或者 如何理解？</em></li>
+</ul>
+</li>
+</ul>
+<h3 id="chap10c">chap10、C++程序设计基础<a class="headerlink" href="#chap10c" title="Permanent link">&para;</a></h3>
+<h4 id="101">10.1、程序的编译与执行<a class="headerlink" href="#101" title="Permanent link">&para;</a></h4>
+<h4 id="106">10.6、内存分配<a class="headerlink" href="#106" title="Permanent link">&para;</a></h4>
+<ul>
+<li>1、malloc()和free()</li>
+<li>2、返回一个64整数倍的内存地址<ul>
+<li><code>align64malloc()</code>，<code>align64free()</code></li>
+</ul>
+</li>
+<li>3、简述malloc/free与new/delete的区别</li>
+<li>4、简述delete与delete[]的区别</li>
+</ul>
+<h4 id="107">10.7、位运算<a class="headerlink" href="#107" title="Permanent link">&para;</a></h4>
+<ul>
+<li>1、</li>
+<li>2、计算二进制数中1的个数<ul>
+<li>思路：<strong>每次右移再与1进行 与 运算</strong>，<em>这个还没有完全弄明白，lionel，是指没有真弄明白</em></li>
+</ul>
+</li>
+<li>3、将二进制数倒数第M位的前N位取反<ul>
+<li><em>直接就是不会</em></li>
+</ul>
+</li>
+<li>4、</li>
+<li>5、</li>
+</ul>
+<h4 id="108main">10.8、main函数<a class="headerlink" href="#108main" title="Permanent link">&para;</a></h4>
+<ul>
+<li>1、简述main函数执行前后都发生了什么</li>
+</ul>
+<h3 id="chap11">chap11、指针与引用<a class="headerlink" href="#chap11" title="Permanent link">&para;</a></h3>
+<h4 id="111">11.1、指针及其应用<a class="headerlink" href="#111" title="Permanent link">&para;</a></h4>
+<ul>
+<li>1、</li>
+<li>2、区分指针与数组</li>
+</ul>
+<pre class="highlight"><code class="language-c++">void equal(char str7[], char str8[]){
+    printf("%d\n",str7==str8);
+}
+
+int main(){
+    char str1[15]="hello, world";
+    char str2[15]="hello, world";
+    char str3[]="hello, world";
+    char str4[]="hello, world";
+
+    char *str5 = "hello, world";
+    char *str6 = "hello, world";
+
+    printf("%d\n", str1==str2);
+    printf("%d\n", str3==str4);
+    printf("%d\n", str5==str6);
+
+    equal(str1, str2);
+    getchar();
+}</code></pre>
+<ul>
+<li>3、简述指针和句柄的区别</li>
+</ul>
+<h4 id="112">11.2、指针常量与常量指针<a class="headerlink" href="#112" title="Permanent link">&para;</a></h4>
+<ul>
+<li>1、指针常量与常量指针的常见错误</li>
+<li>2、指针常量用作函数参数</li>
+<li>3、指针常量与字符串常量的冲突</li>
+</ul>
+<h4 id="113">11.3、指针数组与数组指针<a class="headerlink" href="#113" title="Permanent link">&para;</a></h4>
+<ul>
+<li>概念<ul>
+<li><strong>指针数组</strong>，首先是个数组，里面存放的是指针，<code>int *p[3];</code></li>
+<li><strong>数组指针</strong>，是个指针，数组是指针指向的一个类型，表示指针指向一个数组，<code>int(*p)[3];</code></li>
+</ul>
+</li>
+<li>1、简述数组指针与二维数组的区别</li>
+<li>2、简述数组地址与数组首元素地址的区别</li>
+<li>3、简述指针数组与指向指针的指针的区别</li>
+</ul>
+<h4 id="114">11.4、指向指针的指针<a class="headerlink" href="#114" title="Permanent link">&para;</a></h4>
+<ul>
+<li>1、指针作为参数的常见错误</li>
+<li>2、指向指针的指针与二维数组的区别</li>
+</ul>
+<h4 id="115">11.5、函数指针<a class="headerlink" href="#115" title="Permanent link">&para;</a></h4>
+<ul>
+<li>1、通过函数指针实现四则运算</li>
+<li>2、简化超长的函数指针类型</li>
+</ul>
+<h4 id="116this">11.6、this指针<a class="headerlink" href="#116this" title="Permanent link">&para;</a></h4>
+<ul>
+<li>基础知识</li>
+<li>1、</li>
+<li>2、链式访问对象成员</li>
+<li>3、通过空指针调用类的成员函数</li>
+</ul>
+<h4 id="117">11.7、空指针与野指针<a class="headerlink" href="#117" title="Permanent link">&para;</a></h4>
+<ul>
+<li>基本概念<ul>
+<li>空指针：没有指向的指针</li>
+<li>野指针：指向垃圾的指针</li>
+</ul>
+</li>
+<li>1、常见的野指针</li>
+<li>2、在构造函数中释放对象本身</li>
+</ul>
+<h4 id="118">11.8、引用<a class="headerlink" href="#118" title="Permanent link">&para;</a></h4>
+<ul>
+<li>1、简述指针与引用的区别</li>
+<li>2、</li>
+<li>3、使用常量初始化引用<ul>
+<li><strong>想使用常量初始化引用，应该使用常量引用</strong></li>
+</ul>
+</li>
+</ul>
+<pre class="highlight"><code class="language-c++">void printAge(int &amp;age){
+    cout&lt;&lt;"The age of the dog is "&lt;&lt;age&lt;&lt;endl;
+}
+int main(){
+    int &amp;a = 10;//error，右边不能是常量
+    int b = 10;
+    printAge(a);
+    printAge(b);
+    printAge(10);
+    getchar();
+}</code></pre>
+<h3 id="chap12">chap12、内存管理<a class="headerlink" href="#chap12" title="Permanent link">&para;</a></h3>
+<h4 id="121">12.1、堆内存和栈内存<a class="headerlink" href="#121" title="Permanent link">&para;</a></h4>
+<ul>
+<li>1、简述程序中的四大存储区</li>
+<li>2、简述栈空间与堆空间的区别</li>
+<li>3、简述递归程序潜在的风险</li>
+</ul>
+<h4 id="122">12.2、内存泄漏<a class="headerlink" href="#122" title="Permanent link">&para;</a></h4>
+<ul>
+<li>1、预防内存泄漏的方法</li>
+<li>2、找出不易察觉的内存泄漏</li>
+</ul>
+<h4 id="123">12.3、内存越界<a class="headerlink" href="#123" title="Permanent link">&para;</a></h4>
+<ul>
+<li>1、访问vector元素时的越界问题</li>
+</ul>
+<pre class="highlight"><code class="language-c++">int main(){
+    vector&lt;int&gt; ivec(10);
+    cout&lt;&lt;ivec[0]&lt;&lt;endl;
+    cout&lt;&lt;ivec[100]&lt;&lt;endl;
+    getchar();
+}</code></pre>
+<ul>
+<li>2、越界操作导致程序崩溃的原理</li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
