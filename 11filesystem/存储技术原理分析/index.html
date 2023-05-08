@@ -75,6 +75,112 @@
                   </li>
                   <li class="toctree-l1 current"><a class="reference internal current" href="./">《存储技术原理分析》</a>
     <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#chap5io">chap5、块I/O子系统</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#51">5.1、概述</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#52io">5.2、块I/O子系统对象</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#521gendisk">5.2.1、gendisk：通用磁盘</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#522hd_struct">5.2.2、hd_struct：分区</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#523block_device">5.2.3、block_device：块设备</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#524request_queue">5.2.4、request_queue：请求队列</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#525request">5.2.5、request：块设备驱动层请求</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#526bioincludelinuxbioh">5.2.6、bio：通用块层请求【include/linux/bio.h】</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#53">5.3、添加磁盘到系统</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#531">5.3.1、分配通用磁盘操作符</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#532sysfs">5.3.2、添加到sysfs文件系统</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#533">5.3.3、获取磁盘块设备描述符</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#534">5.3.4、打开磁盘块设备描述符</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#535">5.3.5、重新扫描磁盘分区</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#536">5.3.6、设备号映射机制</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#54">5.4、请求处理过程</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#541io">5.4.1、上层向块I/O子系统提交请求</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#542">5.4.2、构造、排序或合并请求</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#543scsi">5.4.3、scsi策略例程逐个处理请求</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#544scsi">5.4.4、为请求构造scsi命令</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#545scsi">5.4.5、为scsi命令准备聚散列表</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#546sisi">5.4.6、派发sisi命令到低层驱动</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#55io">5.5、I/O调度算法</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#551io">5.5.1、为请求队列建立关联的I/O调度队列</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#552biorequest">5.5.2、判断bio是否可以被合并到request</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#553io">5.5.3、将请求添加到I/O调度队列或请求队列</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#554io">5.5.4、从I/O调度队列派发请求到请求队列</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#56">5.6、请求处理完成</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#561">5.6.1、低层驱动调用完成回调函数</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#562io">5.6.2、引发块I/O子系统的软中断</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#563">5.6.3、调用请求队列的软中断回调</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#564">5.6.4、调用上层的完成回调函数</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#57iobarrier">5.7、屏障I/O（barrier）处理</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#571io">5.7.1、屏障I/O接口</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#572">5.7.2、添加屏障请求</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#573">5.7.3、处理屏障请求</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#574">5.7.4、完成屏障请求</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#58">5.8、完整性保护</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#581">5.8.1、数据完整性对象</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#582">5.8.2、为块设备注册完整性能力</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#583bio">5.8.3、为bio准备完整性元数据</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#584">5.8.4、校验完整性元数据</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#585bio">5.8.5、修正bio基准标签</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#59">5.9、磁盘类设备驱动编程模式</a>
+    </li>
+        </ul>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="#chap8">chap8、文件系统</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#81">8.1、概述</a>
@@ -246,6 +352,128 @@
             <div class="section" itemprop="articleBody">
               
                 <h2 id="_1">《存储技术原理分析》<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h3 id="chap5io">chap5、块I/O子系统<a class="headerlink" href="#chap5io" title="Permanent link">&para;</a></h3>
+<h4 id="51">5.1、概述<a class="headerlink" href="#51" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p>块I/O子系统，在<strong>SCSI子系统</strong>上层，<strong>文件系统层</strong>下面，分为三个部分</p>
+<ul>
+<li>通用块层（block_device，gendisk），接上层发出的磁盘请求，并最终发出I/O请求。</li>
+<li>I/O调度层（noop，deadline，cfq），收到请求后，会试图合并一些请求，并根据设置好的调度算法，回调驱动层提供的请求处理函数。</li>
+<li>块设备驱动层（md驱动、Device Mapper驱动），对于大多数逻辑块设备，并不需要和硬件打交道，<strong>对于SCSI块设备</strong>才与SCSI子系统联系起来。</li>
+</ul>
+<ul>
+<li><strong>与SISI子系统</strong>共用<strong>磁盘驱动（sd）</strong></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>
+<p>块I/O子系统的一般的I/O处理流程是：</p>
+<ul>
+<li>上层调用通用块层提供的接口向I/O子系统提交I/O请求，放到I/O调度层调度队列，各种处理后派发到具体块设备的等待队列，由后者的驱动进一步处理。</li>
+<li>两种形式的I/O请求：<ul>
+<li>通用块层的I/O请求，<code>bio结构</code></li>
+<li>块设备驱动层的I/O请求，要调度层转换一下，<code>request描述</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>
+<p><strong>聚散I/O（scatter/gather I/O）</strong>机制：将对磁盘上连续，但内存中不连续的数据访问由单次操作即可完成。</p>
+<ul>
+<li>在单次操作中，从磁盘的连续扇区中的数据读取到几个物理上不连续</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>块I/O子系统的代码主要在block目录，主要功能是：<ul>
+<li>在内存中构建通用磁盘、分区和块设备之间的关系</li>
+<li>向上层提供I/O请求API，并实现I/O调试，并请求派发到具体块设备的请求队列执行</li>
+<li>提供请求完成的下半部处理API，直至最终调用上层的请求完成回调函数结束I/O</li>
+</ul>
+</li>
+</ul>
+<h4 id="52io">5.2、块I/O子系统对象<a class="headerlink" href="#52io" title="Permanent link">&para;</a></h4>
+<h5 id="521gendisk">5.2.1、gendisk：通用磁盘<a class="headerlink" href="#521gendisk" title="Permanent link">&para;</a></h5>
+<h5 id="522hd_struct">5.2.2、hd_struct：分区<a class="headerlink" href="#522hd_struct" title="Permanent link">&para;</a></h5>
+<h5 id="523block_device">5.2.3、block_device：块设备<a class="headerlink" href="#523block_device" title="Permanent link">&para;</a></h5>
+<h5 id="524request_queue">5.2.4、request_queue：请求队列<a class="headerlink" href="#524request_queue" title="Permanent link">&para;</a></h5>
+<h5 id="525request">5.2.5、request：块设备驱动层请求<a class="headerlink" href="#525request" title="Permanent link">&para;</a></h5>
+<h5 id="526bioincludelinuxbioh">5.2.6、bio：通用块层请求【include/linux/bio.h】<a class="headerlink" href="#526bioincludelinuxbioh" title="Permanent link">&para;</a></h5>
+<h4 id="53">5.3、添加磁盘到系统<a class="headerlink" href="#53" title="Permanent link">&para;</a></h4>
+<h5 id="531">5.3.1、分配通用磁盘操作符<a class="headerlink" href="#531" title="Permanent link">&para;</a></h5>
+<ul>
+<li>block/genhd.c中<code>alloc_disk()</code>-&gt;<code>alloc_disk_node()</code></li>
+<li>block/genhd.c中<code>add_disk()</code></li>
+</ul>
+<h5 id="532sysfs">5.3.2、添加到sysfs文件系统<a class="headerlink" href="#532sysfs" title="Permanent link">&para;</a></h5>
+<ul>
+<li>fs/partitions/check.c中的<code>add_disk()</code>-&gt;<code>register_disk()</code></li>
+</ul>
+<h5 id="533">5.3.3、获取磁盘块设备描述符<a class="headerlink" href="#533" title="Permanent link">&para;</a></h5>
+<ul>
+<li>block/genhd.c中的<code>add_disk()</code>-&gt;<code>register_disk()</code>-&gt;<code>bdget_disk()</code></li>
+<li>fs/block_dev.c中的<code>sd_poobe()</code>-&gt;<code>add_disk()</code>-&gt;<code>register_disk()</code>-&gt;<code>bdget_disk()</code>-&gt;<code>bdget()</code></li>
+</ul>
+<h5 id="534">5.3.4、打开磁盘块设备描述符<a class="headerlink" href="#534" title="Permanent link">&para;</a></h5>
+<ul>
+<li>fs/block_dev.c中的<code>add_disk()</code>-&gt;<code>register_disk()</code>-&gt;<code>blkdev_get()</code>-&gt;<code>_blkdev_get()</code></li>
+</ul>
+<h5 id="535">5.3.5、重新扫描磁盘分区<a class="headerlink" href="#535" title="Permanent link">&para;</a></h5>
+<ul>
+<li>中的<code>add_disk()</code>-&gt;<code>register_disk()</code>-&gt;<code>blkdev_get()</code>-&gt;<code>_blkdev_get()</code>-&gt;<code>rescan_partitions()</code></li>
+</ul>
+<h5 id="536">5.3.6、设备号映射机制<a class="headerlink" href="#536" title="Permanent link">&para;</a></h5>
+<h4 id="54">5.4、请求处理过程<a class="headerlink" href="#54" title="Permanent link">&para;</a></h4>
+<h5 id="541io">5.4.1、上层向块I/O子系统提交请求<a class="headerlink" href="#541io" title="Permanent link">&para;</a></h5>
+<h5 id="542">5.4.2、构造、排序或合并请求<a class="headerlink" href="#542" title="Permanent link">&para;</a></h5>
+<h5 id="543scsi">5.4.3、scsi策略例程逐个处理请求<a class="headerlink" href="#543scsi" title="Permanent link">&para;</a></h5>
+<h5 id="544scsi">5.4.4、为请求构造scsi命令<a class="headerlink" href="#544scsi" title="Permanent link">&para;</a></h5>
+<h5 id="545scsi">5.4.5、为scsi命令准备聚散列表<a class="headerlink" href="#545scsi" title="Permanent link">&para;</a></h5>
+<h5 id="546sisi">5.4.6、派发sisi命令到低层驱动<a class="headerlink" href="#546sisi" title="Permanent link">&para;</a></h5>
+<h4 id="55io">5.5、I/O调度算法<a class="headerlink" href="#55io" title="Permanent link">&para;</a></h4>
+<h5 id="551io">5.5.1、为请求队列建立关联的I/O调度队列<a class="headerlink" href="#551io" title="Permanent link">&para;</a></h5>
+<h5 id="552biorequest">5.5.2、判断bio是否可以被合并到request<a class="headerlink" href="#552biorequest" title="Permanent link">&para;</a></h5>
+<h5 id="553io">5.5.3、将请求添加到I/O调度队列或请求队列<a class="headerlink" href="#553io" title="Permanent link">&para;</a></h5>
+<h5 id="554io">5.5.4、从I/O调度队列派发请求到请求队列<a class="headerlink" href="#554io" title="Permanent link">&para;</a></h5>
+<h4 id="56">5.6、请求处理完成<a class="headerlink" href="#56" title="Permanent link">&para;</a></h4>
+<h5 id="561">5.6.1、低层驱动调用完成回调函数<a class="headerlink" href="#561" title="Permanent link">&para;</a></h5>
+<h5 id="562io">5.6.2、引发块I/O子系统的软中断<a class="headerlink" href="#562io" title="Permanent link">&para;</a></h5>
+<h5 id="563">5.6.3、调用请求队列的软中断回调<a class="headerlink" href="#563" title="Permanent link">&para;</a></h5>
+<h5 id="564">5.6.4、调用上层的完成回调函数<a class="headerlink" href="#564" title="Permanent link">&para;</a></h5>
+<h4 id="57iobarrier">5.7、屏障I/O（barrier）处理<a class="headerlink" href="#57iobarrier" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Linux 2.6引入</li>
+<li>屏障I/O有2个目的：<strong>排序和冲刷</strong></li>
+</ul>
+<h5 id="571io">5.7.1、屏障I/O接口<a class="headerlink" href="#571io" title="Permanent link">&para;</a></h5>
+<ul>
+<li>block/blk-barrier.c中的<code>sd_probe()</code>-&gt;<code>sd_probe_async()</code>-&gt;<code>sd_revalidate_disk()</code>-&gt;<code>blk_queue_ordered()</code></li>
+</ul>
+<h5 id="572">5.7.2、添加屏障请求<a class="headerlink" href="#572" title="Permanent link">&para;</a></h5>
+<ul>
+<li>block/elevator.c中的</li>
+</ul>
+<h5 id="573">5.7.3、处理屏障请求<a class="headerlink" href="#573" title="Permanent link">&para;</a></h5>
+<ul>
+<li>block/blk_barrier.c中的<code>submit_bio()</code>-&gt;<code>generic_make_request()</code>-&gt;...-&gt;<code>blk_peek_request()</code>-&gt;<code>__elv_next_request()</code>-&gt;<code>blk_do_ordered()</code></li>
+<li><em>lionel，函数未写完</em></li>
+</ul>
+<h5 id="574">5.7.4、完成屏障请求<a class="headerlink" href="#574" title="Permanent link">&para;</a></h5>
+<ul>
+<li>block/elevator.c</li>
+<li>block/blk_barrier.c</li>
+</ul>
+<h4 id="58">5.8、完整性保护<a class="headerlink" href="#58" title="Permanent link">&para;</a></h4>
+<h5 id="581">5.8.1、数据完整性对象<a class="headerlink" href="#581" title="Permanent link">&para;</a></h5>
+<h5 id="582">5.8.2、为块设备注册完整性能力<a class="headerlink" href="#582" title="Permanent link">&para;</a></h5>
+<h5 id="583bio">5.8.3、为bio准备完整性元数据<a class="headerlink" href="#583bio" title="Permanent link">&para;</a></h5>
+<h5 id="584">5.8.4、校验完整性元数据<a class="headerlink" href="#584" title="Permanent link">&para;</a></h5>
+<h5 id="585bio">5.8.5、修正bio基准标签<a class="headerlink" href="#585bio" title="Permanent link">&para;</a></h5>
+<h4 id="59">5.9、磁盘类设备驱动编程模式<a class="headerlink" href="#59" title="Permanent link">&para;</a></h4>
 <h3 id="chap8">chap8、文件系统<a class="headerlink" href="#chap8" title="Permanent link">&para;</a></h3>
 <h4 id="81">8.1、概述<a class="headerlink" href="#81" title="Permanent link">&para;</a></h4>
 <ul>
