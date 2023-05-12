@@ -671,7 +671,7 @@
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#chap13">chap13、</a>
+    <li class="toctree-l2"><a class="reference internal" href="#chap13">chap13、虚拟文件系统</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#131">13.1、通用文件系统接口</a>
     </li>
@@ -691,6 +691,8 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#139">13.9、目录项对象</a>
         <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#0_24">0、</a>
+    </li>
     <li class="toctree-l4"><a class="reference internal" href="#1391">13.9.1、目录项状态</a>
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#1392">13.9.2、目录项缓存</a>
@@ -713,7 +715,7 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#chap14io">chap14、块I/O</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#0_24">0、</a>
+    <li class="toctree-l3"><a class="reference internal" href="#0_25">0、</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#141">14.1、剖析一个块设备</a>
     </li>
@@ -721,7 +723,7 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#143bio">14.3、bio结构体</a>
         <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#0_25">0、</a>
+    <li class="toctree-l4"><a class="reference internal" href="#0_26">0、</a>
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#1431io">14.3.1、I/O向量</a>
     </li>
@@ -759,7 +761,7 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#152">15.2、内存描述符</a>
         <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#0_26">0、</a>
+    <li class="toctree-l4"><a class="reference internal" href="#0_27">0、</a>
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#1521">15.2.1、分配内存描述符</a>
     </li>
@@ -771,7 +773,7 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#153">15.3、虚拟内存区域</a>
         <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#0_27">0、</a>
+    <li class="toctree-l4"><a class="reference internal" href="#0_28">0、</a>
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#1531vma">15.3.1、VMA标志</a>
     </li>
@@ -867,7 +869,7 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#173">17.3、设备模型</a>
         <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#0_28">0、</a>
+    <li class="toctree-l4"><a class="reference internal" href="#0_29">0、</a>
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#1731kobject">17.3.1、kobject</a>
     </li>
@@ -885,7 +887,7 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#174sysfs">17.4、sysfs</a>
         <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#0_29">0、</a>
+    <li class="toctree-l4"><a class="reference internal" href="#0_30">0、</a>
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#1741sysfskobject">17.4.1、sysfs中添加和删除kobject</a>
     </li>
@@ -1755,7 +1757,7 @@
 <li>在内核中分配内存并非总是轻而易举，因为你必须小心地<strong>确保分配过程遵从内核特定的状态约束</strong>。</li>
 <li><strong>分配内存相对复杂</strong>是内核开发和用户开发的最大区别之一。</li>
 </ul>
-<h3 id="chap13">chap13、<a class="headerlink" href="#chap13" title="Permanent link">&para;</a></h3>
+<h3 id="chap13">chap13、虚拟文件系统<a class="headerlink" href="#chap13" title="Permanent link">&para;</a></h3>
 <h4 id="131">13.1、通用文件系统接口<a class="headerlink" href="#131" title="Permanent link">&para;</a></h4>
 <h4 id="132">13.2、文件系统抽象层<a class="headerlink" href="#132" title="Permanent link">&para;</a></h4>
 <h4 id="133unix">13.3、Unix文件系统<a class="headerlink" href="#133unix" title="Permanent link">&para;</a></h4>
@@ -1767,6 +1769,7 @@
 <li>安装点（mount point）</li>
 </ul>
 </li>
+<li>文件的相关信息和文件本身是两个概念，<strong>文件的元数据</strong>（文件的相关信息）被存储在一个单独的数据结构中，被称为索引节点（inode）。</li>
 </ul>
 <h4 id="134vfs">13.4、VFS对象及其数据结构<a class="headerlink" href="#134vfs" title="Permanent link">&para;</a></h4>
 <ul>
@@ -1802,18 +1805,44 @@
 <li>最重要的一个域<code>s_op</code></li>
 </ul>
 <h4 id="137">13.7、索引节点对象<a class="headerlink" href="#137" title="Permanent link">&para;</a></h4>
+<ul>
+<li><em>lionel，Q1，是不是每个文件都有inode?</em></li>
+<li><strong>没有索引节点的文件系统通常将文件的描述信息作为文件的一部分来存放</strong></li>
+<li>linux/fs.h中的</li>
+<li>一个索引节点代表文件系统中的一个文件，也可以是特殊文件</li>
+</ul>
 <h4 id="138">13.8、索引节点操作<a class="headerlink" href="#138" title="Permanent link">&para;</a></h4>
 <h4 id="139">13.9、目录项对象<a class="headerlink" href="#139" title="Permanent link">&para;</a></h4>
+<h5 id="0_24">0、<a class="headerlink" href="#0_24" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>为了便于查找操作</strong>，引入了目录项，每个dentry代表路径中的一个特定部分</li>
+<li><strong>目录项，也可包括安装点</strong>，linux/dcache.h中，即dentry cache</li>
+<li>目录项对象并非真正保存在磁盘上，所以目录项结构体没有是否被修改的标志</li>
+</ul>
 <h5 id="1391">13.9.1、目录项状态<a class="headerlink" href="#1391" title="Permanent link">&para;</a></h5>
+<ul>
+<li>3种状态<ul>
+<li>被使用</li>
+<li>未被使用</li>
+<li>负状态</li>
+</ul>
+</li>
+</ul>
 <h5 id="1392">13.9.2、目录项缓存<a class="headerlink" href="#1392" title="Permanent link">&para;</a></h5>
+<ul>
+<li>包括3个主要部分</li>
+</ul>
 <h4 id="1310">13.10、目录项操作<a class="headerlink" href="#1310" title="Permanent link">&para;</a></h4>
 <h4 id="1311">13.11、文件对象<a class="headerlink" href="#1311" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>文件结构体（对象）表示已经打开的文件</strong></li>
+</ul>
 <h4 id="1312">13.12、文件操作<a class="headerlink" href="#1312" title="Permanent link">&para;</a></h4>
 <h4 id="1313">13.13、和文件系统相关的数据结构<a class="headerlink" href="#1313" title="Permanent link">&para;</a></h4>
 <h4 id="1314">13.14、和进程相关的数据结构<a class="headerlink" href="#1314" title="Permanent link">&para;</a></h4>
 <h4 id="1315">13.15、小结<a class="headerlink" href="#1315" title="Permanent link">&para;</a></h4>
 <h3 id="chap14io">chap14、块I/O<a class="headerlink" href="#chap14io" title="Permanent link">&para;</a></h3>
-<h4 id="0_24">0、<a class="headerlink" href="#0_24" title="Permanent link">&para;</a></h4>
+<h4 id="0_25">0、<a class="headerlink" href="#0_25" title="Permanent link">&para;</a></h4>
 <ul>
 <li>系统中能够<strong>随机（不需要按顺序）访问</strong>固定大小数据片（chunks）的硬件设备称为<strong>块设备</strong>，这些固定大小的数据片就称作<strong>块</strong>（磁盘）</li>
 </ul>
@@ -1831,7 +1860,7 @@
     + 2、它仅能描述单个缓冲区</li>
 </ul>
 <h4 id="143bio">14.3、bio结构体<a class="headerlink" href="#143bio" title="Permanent link">&para;</a></h4>
-<h5 id="0_25">0、<a class="headerlink" href="#0_25" title="Permanent link">&para;</a></h5>
+<h5 id="0_26">0、<a class="headerlink" href="#0_26" title="Permanent link">&para;</a></h5>
 <ul>
 <li>linux/bio.h中的<code>struct bio{};</code> 代表了正在现场的（活动的）以片断（segment）链表形式组织的块I/O操作。<strong>一个片段是一小块连续的内存缓冲区</strong>。</li>
 </ul>
@@ -1902,7 +1931,7 @@
     + 可执行文件代码的内存映射，称为<strong>代码段（text section）</strong></li>
 </ul>
 <h4 id="152">15.2、内存描述符<a class="headerlink" href="#152" title="Permanent link">&para;</a></h4>
-<h5 id="0_26">0、<a class="headerlink" href="#0_26" title="Permanent link">&para;</a></h5>
+<h5 id="0_27">0、<a class="headerlink" href="#0_27" title="Permanent link">&para;</a></h5>
 <ul>
 <li>内存描述符<strong>表示进程的地址空间</strong>，linux/sched.h中的<code>struct mm_struct{};</code></li>
 <li><strong>所有的mm_struct结构体都通过自身的mmlist域连接在一个双向链表中，该链表的首元素是init_mm内存描述符，它代表init进程的地址空间</strong>。需要使用kernel/fork.c中的<code>mmlist_lock</code>锁来防止并发访问</li>
@@ -1917,7 +1946,7 @@
 </ul>
 <h5 id="1523mm_struct">15.2.3、mm_struct与内核线程<a class="headerlink" href="#1523mm_struct" title="Permanent link">&para;</a></h5>
 <h4 id="153">15.3、虚拟内存区域<a class="headerlink" href="#153" title="Permanent link">&para;</a></h4>
-<h5 id="0_27">0、<a class="headerlink" href="#0_27" title="Permanent link">&para;</a></h5>
+<h5 id="0_28">0、<a class="headerlink" href="#0_28" title="Permanent link">&para;</a></h5>
 <ul>
 <li>linux/mm_types.h中的<code>vm_area_struct</code>，<strong>指定地址空间内连续区间上的一个独立内存范围</strong>。</li>
 </ul>
@@ -2047,7 +2076,7 @@
 <li><code>EXPORT_SYMBOL()</code></li>
 </ul>
 <h4 id="173">17.3、设备模型<a class="headerlink" href="#173" title="Permanent link">&para;</a></h4>
-<h5 id="0_28">0、<a class="headerlink" href="#0_28" title="Permanent link">&para;</a></h5>
+<h5 id="0_29">0、<a class="headerlink" href="#0_29" title="Permanent link">&para;</a></h5>
 <ul>
 <li>2.6增加了新特性：<strong>统一设备模型（device model）</strong>，提供了一个独立的机制专门来表示设备，并描述其在系统中的拓扑结构</li>
 </ul>
@@ -2071,7 +2100,7 @@
 <li>2、kref</li>
 </ul>
 <h4 id="174sysfs">17.4、sysfs<a class="headerlink" href="#174sysfs" title="Permanent link">&para;</a></h4>
-<h5 id="0_29">0、<a class="headerlink" href="#0_29" title="Permanent link">&para;</a></h5>
+<h5 id="0_30">0、<a class="headerlink" href="#0_30" title="Permanent link">&para;</a></h5>
 <h5 id="1741sysfskobject">17.4.1、sysfs中添加和删除kobject<a class="headerlink" href="#1741sysfskobject" title="Permanent link">&para;</a></h5>
 <ul>
 <li><code>kobject_add()</code></li>

@@ -81,6 +81,8 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#52io">5.2、块I/O子系统对象</a>
         <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#0">0、</a>
+    </li>
     <li class="toctree-l4"><a class="reference internal" href="#521gendisk">5.2.1、gendisk：通用磁盘</a>
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#522hd_struct">5.2.2、hd_struct：分区</a>
@@ -91,12 +93,14 @@
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#525request">5.2.5、request：块设备驱动层请求</a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#526bioincludelinuxbioh">5.2.6、bio：通用块层请求【include/linux/bio.h】</a>
+    <li class="toctree-l4"><a class="reference internal" href="#526bio">5.2.6、bio：通用块层请求</a>
     </li>
         </ul>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#53">5.3、添加磁盘到系统</a>
         <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#0_1">0、</a>
+    </li>
     <li class="toctree-l4"><a class="reference internal" href="#531">5.3.1、分配通用磁盘操作符</a>
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#532sysfs">5.3.2、添加到sysfs文件系统</a>
@@ -201,7 +205,7 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#83">8.3、装载文件系统</a>
         <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#0">0、</a>
+    <li class="toctree-l4"><a class="reference internal" href="#0_2">0、</a>
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#831mount">8.3.1、mount系统调用的处理流程</a>
     </li>
@@ -397,13 +401,49 @@
 </li>
 </ul>
 <h4 id="52io">5.2、块I/O子系统对象<a class="headerlink" href="#52io" title="Permanent link">&para;</a></h4>
+<h5 id="0">0、<a class="headerlink" href="#0" title="Permanent link">&para;</a></h5>
+<ul>
+<li>在内存中构造磁盘/分区关系</li>
+<li>在Linux内核实现中，请求合并就是将多个bio链入到同一个request.</li>
+</ul>
 <h5 id="521gendisk">5.2.1、gendisk：通用磁盘<a class="headerlink" href="#521gendisk" title="Permanent link">&para;</a></h5>
+<ul>
+<li>include/linux/genhd.h</li>
+<li>每个分区都有相对于磁盘的分区编号</li>
+</ul>
 <h5 id="522hd_struct">5.2.2、hd_struct：分区<a class="headerlink" href="#522hd_struct" title="Permanent link">&para;</a></h5>
+<ul>
+<li>include/linux/hd_struct.h</li>
+<li>需要两个域来指定分区的范围：<code>start_sect</code>和<code>nr_sects</code></li>
+<li>分区用<code>disk_part_tbl</code>结构，在include/linux/genhd.h中</li>
+</ul>
 <h5 id="523block_device">5.2.3、block_device：块设备<a class="headerlink" href="#523block_device" title="Permanent link">&para;</a></h5>
+<ul>
+<li>include/linux/fs.h</li>
+<li>block_device和inode被绑定在一起，组成另一个<code>bdev_inode</code>结构</li>
+</ul>
 <h5 id="524request_queue">5.2.4、request_queue：请求队列<a class="headerlink" href="#524request_queue" title="Permanent link">&para;</a></h5>
+<ul>
+<li>request_queue，可能包含<strong>派发队列和I/O调度队列</strong></li>
+<li>include/linux/blkdev.h</li>
+</ul>
 <h5 id="525request">5.2.5、request：块设备驱动层请求<a class="headerlink" href="#525request" title="Permanent link">&para;</a></h5>
-<h5 id="526bioincludelinuxbioh">5.2.6、bio：通用块层请求【include/linux/bio.h】<a class="headerlink" href="#526bioincludelinuxbioh" title="Permanent link">&para;</a></h5>
+<ul>
+<li>include/linux/blkdev.h</li>
+<li>一个双向命令对于两个request</li>
+</ul>
+<h5 id="526bio">5.2.6、bio：通用块层请求<a class="headerlink" href="#526bio" title="Permanent link">&para;</a></h5>
+<ul>
+<li>include/linux/bio.h</li>
+<li>每个bio表示不同的访问上下文</li>
+<li>还有<code>bio_vec</code>结构</li>
+<li>调用上层在构造bio请求时保存在bi_end_io域的I/O完成回调函数</li>
+</ul>
 <h4 id="53">5.3、添加磁盘到系统<a class="headerlink" href="#53" title="Permanent link">&para;</a></h4>
+<h5 id="0_1">0、<a class="headerlink" href="#0_1" title="Permanent link">&para;</a></h5>
+<ul>
+<li>块I/O子系统为此提供了alloc_disk和add_disk两个对应的API函数</li>
+</ul>
 <h5 id="531">5.3.1、分配通用磁盘操作符<a class="headerlink" href="#531" title="Permanent link">&para;</a></h5>
 <ul>
 <li>block/genhd.c中<code>alloc_disk()</code>-&gt;<code>alloc_disk_node()</code></li>
@@ -427,13 +467,41 @@
 <li>中的<code>add_disk()</code>-&gt;<code>register_disk()</code>-&gt;<code>blkdev_get()</code>-&gt;<code>_blkdev_get()</code>-&gt;<code>rescan_partitions()</code></li>
 </ul>
 <h5 id="536">5.3.6、设备号映射机制<a class="headerlink" href="#536" title="Permanent link">&para;</a></h5>
+<ul>
+<li>drivers/base/map.c中的<code>kobj_map</code>中的<code>probe</code>结构</li>
+</ul>
 <h4 id="54">5.4、请求处理过程<a class="headerlink" href="#54" title="Permanent link">&para;</a></h4>
+<ul>
+<li>上层在构造好bio请求之后，调用<code>submit_io</code>提交给Linux通用块层处理</li>
+</ul>
 <h5 id="541io">5.4.1、上层向块I/O子系统提交请求<a class="headerlink" href="#541io" title="Permanent link">&para;</a></h5>
+<ul>
+<li>block/blk_core.c</li>
+<li><code>submit_bio</code>-&gt;<code>generic_make_request()</code>-&gt;<code>__generic_make_request()</code></li>
+</ul>
 <h5 id="542">5.4.2、构造、排序或合并请求<a class="headerlink" href="#542" title="Permanent link">&para;</a></h5>
+<ul>
+<li>Linux块设备驱动程序可以分为三类，顺序访问物理设备、随机访问物理设备和逻辑设备（即“栈式”设备）</li>
+<li><code>submit_bio</code>-&gt;<code>generic_make_request()</code>-&gt;<code>__generic_make_request()</code>-&gt;<code>__make_request()</code>-&gt;<code>init_request_from_bio()</code></li>
+</ul>
 <h5 id="543scsi">5.4.3、scsi策略例程逐个处理请求<a class="headerlink" href="#543scsi" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>submit_bio</code>-&gt;<code>generic_make_request()</code>-&gt;<code>__generic_make_request()</code>-&gt;<code>__make_request()</code>-&gt;<code>__generic_unplug_device()</code>-&gt;<code>scsi_request_fn()</code>-&gt;<code>blk_peek_request()</code></li>
+</ul>
 <h5 id="544scsi">5.4.4、为请求构造scsi命令<a class="headerlink" href="#544scsi" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>submit_bio</code>-&gt;<code>generic_make_request()</code>-&gt;<code>__generic_make_request()</code>-&gt;<code>__make_request()</code>-&gt;<code>__generic_unplug_device()</code>-&gt;<code>scsi_request_fn()</code>-&gt;<code>blk_peek_request()</code>-&gt;<code>scsi_prep_fn()</code>-&gt;<code>scsi_setup_blk_pc_cmnd()</code></li>
+</ul>
 <h5 id="545scsi">5.4.5、为scsi命令准备聚散列表<a class="headerlink" href="#545scsi" title="Permanent link">&para;</a></h5>
+<ul>
+<li>include/asm-generic/scatterlist.h</li>
+<li><code>scatterlist</code>结构</li>
+<li><code>sg_table</code>结构</li>
+</ul>
 <h5 id="546sisi">5.4.6、派发sisi命令到低层驱动<a class="headerlink" href="#546sisi" title="Permanent link">&para;</a></h5>
+<ul>
+<li>drivers/scsi/scsi.c中的<code>scsi_dispatch_cmd()</code></li>
+</ul>
 <h4 id="55io">5.5、I/O调度算法<a class="headerlink" href="#55io" title="Permanent link">&para;</a></h4>
 <h5 id="551io">5.5.1、为请求队列建立关联的I/O调度队列<a class="headerlink" href="#551io" title="Permanent link">&para;</a></h5>
 <h5 id="552biorequest">5.5.2、判断bio是否可以被合并到request<a class="headerlink" href="#552biorequest" title="Permanent link">&para;</a></h5>
@@ -534,7 +602,7 @@
 <li>【这个地方有人家的学习记录：https://blog.csdn.net/jinking01/article/details/105090539】
   【https://blog.csdn.net/u012489236/article/details/124523247】<em>这个系列也看一下</em></li>
 </ul>
-<h5 id="0">0、<a class="headerlink" href="#0" title="Permanent link">&para;</a></h5>
+<h5 id="0_2">0、<a class="headerlink" href="#0_2" title="Permanent link">&para;</a></h5>
 <ul>
 <li><code>mount -t FILE_SYSTEM_TYPE_B /dev/sda3  /mnt/d/project/</code></li>
 </ul>
