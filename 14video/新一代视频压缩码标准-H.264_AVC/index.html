@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>新一代视频压缩码标准 H.264 AVC - lionel的技术笔记</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "\u65b0\u4e00\u4ee3\u89c6\u9891\u538b\u7f29\u7801\u6807\u51c6 H.264 AVC";
+        var mkdocs_page_input_path = "14video\\\u65b0\u4e00\u4ee3\u89c6\u9891\u538b\u7f29\u7801\u6807\u51c6-H.264_AVC.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> lionel的技术笔记
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">简介</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../01daily/">daily</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">C++</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../20C%2B%2B/effectiveC%2B%2B/">《Effective C++》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/EffectiveSTL/">《Effective STL》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">基础知识</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA/">《操作系统导论》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网络编程</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/TCPIP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">《TCP/IP网络编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/">《Linux高性能服务器编程》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">文件系统</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/Linux%E5%86%85%E6%A0%B8%E6%8E%A2%E7%A7%98/">《Linux内核探秘》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《文件系统技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">《存储技术原理分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">存储</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../12storage/ceph%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《ceph设计原理与实现》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">内核</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/Linux%E5%86%85%E6%A0%B8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《Linux内核设计与实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5Linux%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%E5%86%85%E6%A0%B8%E6%9C%BA%E5%88%B6/">《深入Linux设备驱动程序内核机制》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">《深入理解Linux虚拟内存管理》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">刷题</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/">《剑指offer专项突破》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网课</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/01Linux%E9%AB%98%E5%B9%B6%E5%8F%91%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/">《Linux高并发网络编程开发》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/%E4%BE%AF%E6%8D%B7/%E4%BE%AF%E6%8D%B7C%2B%2B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%8660%E8%AE%B2/">《侯捷C++内存管理60讲》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/11NJU%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">《NJU算法设计与分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">英语专</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../60English/00794%E7%BB%BC%E5%90%88%E8%8B%B1%E8%AF%AD%E4%B8%80%E4%B8%8A/">《综合英语(一)上》</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">lionel的技术笔记</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>新一代视频压缩码标准 H.264 AVC</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h3 id="chap1">chap1、绪论<a class="headerlink" href="#chap1" title="Permanent link">&para;</a></h3>
+<h4 id="14">1.4、视频压缩编码技术综述<a class="headerlink" href="#14" title="Permanent link">&para;</a></h4>
+<h5 id="141">1.4.1、基本结构<a class="headerlink" href="#141" title="Permanent link">&para;</a></h5>
+<ul>
+<li>分析-&gt;量化-&gt;编码-&gt;传输</li>
+</ul>
+<ul>
+<li>根据<strong>信源模型</strong>（分析），视频编码分为两部分:<ul>
+<li>基于波形的编码</li>
+<li>基于内容的编码</li>
+</ul>
+</li>
+</ul>
+<h5 id="142">1.4.2、基于波形的编码<a class="headerlink" href="#142" title="Permanent link">&para;</a></h5>
+<h5 id="143">1.4.3、基于内容的编码<a class="headerlink" href="#143" title="Permanent link">&para;</a></h5>
+<h5 id="144">1.4.4、立体（三维）视频编码<a class="headerlink" href="#144" title="Permanent link">&para;</a></h5>
+<h3 id="chap2">chap2、数字视频<a class="headerlink" href="#chap2" title="Permanent link">&para;</a></h3>
+<h3 id="chap3">chap3、视频压缩编码的基本原理<a class="headerlink" href="#chap3" title="Permanent link">&para;</a></h3>
+<h4 id="31">3.1、预测编码<a class="headerlink" href="#31" title="Permanent link">&para;</a></h4>
+<h5 id="311">3.1.1、预测编码的基本概念<a class="headerlink" href="#311" title="Permanent link">&para;</a></h5>
+<ul>
+<li>经过压缩编码后传输的是<strong>像素的预测值和实际值之差</strong>，利用了<strong>同一幅图像的邻近元素之间有着相关性</strong></li>
+<li><strong>差分脉冲编码（DPCM）</strong></li>
+</ul>
+<h5 id="312">3.1.2、帧内预测编码<a class="headerlink" href="#312" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、一维最佳预测</li>
+<li>2、二维最佳预测</li>
+<li>3、预测编码增益</li>
+<li>4、预测编码的量化器</li>
+<li>5、二维预测编码器</li>
+</ul>
+<h5 id="313">3.1.3、帧间预测编码<a class="headerlink" href="#313" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、单向预测<ul>
+<li>（1）预测原理</li>
+<li>（2）基于块匹配算法的运动矢量估计</li>
+<li>（3）搜索方法</li>
+</ul>
+</li>
+<li>2、双向预测</li>
+<li>3、基于块运动补偿OBMC</li>
+</ul>
+<h5 id="314">3.1.4、运动估计<a class="headerlink" href="#314" title="Permanent link">&para;</a></h5>
+<h4 id="32">3.2、变换编码<a class="headerlink" href="#32" title="Permanent link">&para;</a></h4>
+<h5 id="321">3.2.1、变换编码的基本概念<a class="headerlink" href="#321" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>平坦区域和内容缓慢变化区域</strong>占大部分（<strong>即，图像中直流和低频区占大部分</strong>），空间域的图像变换到频域或所谓的变换域，会产生相关性很小的一些变换系数，并可对其进行压缩编码，即<strong>所谓的变换编码</strong></li>
+<li>正交变换</li>
+</ul>
+<h5 id="322k-l">3.2.2、K-L变换<a class="headerlink" href="#322k-l" title="Permanent link">&para;</a></h5>
+<ul>
+<li>Hotelling变换</li>
+</ul>
+<h5 id="323dct">3.2.3、离散余弦变换（DCT）<a class="headerlink" href="#323dct" title="Permanent link">&para;</a></h5>
+<ul>
+<li>一维DCT变换</li>
+<li>二维DCT变换</li>
+</ul>
+<h5 id="324">3.2.4、锯齿型扫描和游程编码<a class="headerlink" href="#324" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、锯齿型扫描</li>
+<li>2、游程编码</li>
+</ul>
+<h4 id="33">3.3、变换编码与预测编码的比较<a class="headerlink" href="#33" title="Permanent link">&para;</a></h4>
+<h4 id="34">3.4、熵编码<a class="headerlink" href="#34" title="Permanent link">&para;</a></h4>
+<h5 id="341">3.4.1、变长编码<a class="headerlink" href="#341" title="Permanent link">&para;</a></h5>
+<h5 id="342">3.4.2、算术编码<a class="headerlink" href="#342" title="Permanent link">&para;</a></h5>
+<h3 id="chap464300">chap4、视频编码标准简介（64/300）<a class="headerlink" href="#chap464300" title="Permanent link">&para;</a></h3>
+<p>4.1、视频编码发展简史</p>
+<p>4.2、H.261标准</p>
+<p>4.3、H.263标准</p>
+<p>4.4、MPEG-1标准</p>
+<p>4.5、MPEG-2标准</p>
+<p>4.6、MPEG-4标准</p>
+<p>4.7、JPEG标准</p>
+<p>4.8、JPEG2000标准</p>
+<p>4.9、AVS标准</p>
+<h3 id="chap5h264avc89300">chap5、H.264/AVC编码器原理（89/300）<a class="headerlink" href="#chap5h264avc89300" title="Permanent link">&para;</a></h3>
+<h4 id="51">5.1、概述<a class="headerlink" href="#51" title="Permanent link">&para;</a></h4>
+<ul>
+<li>AVC</li>
+</ul>
+<h4 id="52h264avc">5.2、H.264/AVC编解码器<a class="headerlink" href="#52h264avc" title="Permanent link">&para;</a></h4>
+<h5 id="521h264">5.2.1、H.264编解码器特点<a class="headerlink" href="#521h264" title="Permanent link">&para;</a></h5>
+<h5 id="522h264">5.2.2、H.264编码器<a class="headerlink" href="#522h264" title="Permanent link">&para;</a></h5>
+<h5 id="523h264">5.2.3、H.264解码器<a class="headerlink" href="#523h264" title="Permanent link">&para;</a></h5>
+<h4 id="53h264avc">5.3、H.264/AVC的结构<a class="headerlink" href="#53h264avc" title="Permanent link">&para;</a></h4>
+<h5 id="531">5.3.1、名词解释<a class="headerlink" href="#531" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、场和帧<ul>
+<li>视频的一场或一帧可用来产生一个编码图像</li>
+<li>视频帧可分成两种类型：连续或隔行视频帧</li>
+</ul>
+</li>
+<li>2、宏块、片<ul>
+<li>一个编码图像通常划分成若干宏块组成</li>
+<li>I宏块</li>
+<li>P宏块</li>
+<li>B宏块</li>
+</ul>
+</li>
+</ul>
+<h5 id="532">5.3.2、档次和级<a class="headerlink" href="#532" title="Permanent link">&para;</a></h5>
+<ul>
+<li>基本档次</li>
+<li>主要档次</li>
+<li>扩展档次</li>
+</ul>
+<h5 id="533">5.3.3、编码数据格式<a class="headerlink" href="#533" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、H.264的视频格式</li>
+<li>2、H.264的编码格式<ul>
+<li>（1）得到高的视频压缩比</li>
+<li>（2）具有良好的网络亲和性</li>
+</ul>
+</li>
+<li>H.264的功能分为两层:视频编码层（VCL，Video Coding Layer）和网络提取层（NAL，Network Abstraction Layer）VCL数据，即编码处理的输出，它表示被压缩编码后的视频数据序列</li>
+</ul>
+<h5 id="534">5.3.4、参数图像<a class="headerlink" href="#534" title="Permanent link">&para;</a></h5>
+<h5 id="535">5.3.5、片和片组<a class="headerlink" href="#535" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、片</li>
+<li>2、片组</li>
+</ul>
+<h4 id="54">5.4、帧内预测<a class="headerlink" href="#54" title="Permanent link">&para;</a></h4>
+<ul>
+<li>I_PCM用于以下目的:<ul>
+<li>(1) 允许编码器精确地表示像素值</li>
+</ul>
+</li>
+</ul>
+<h5 id="54144">5.4.1、4*4亮度预测模式<a class="headerlink" href="#54144" title="Permanent link">&para;</a></h5>
+<h5 id="5421616">5.4.2、16*16亮度预测模式<a class="headerlink" href="#5421616" title="Permanent link">&para;</a></h5>
+<h5 id="54388">5.4.3、8*8色度块预测模式<a class="headerlink" href="#54388" title="Permanent link">&para;</a></h5>
+<h5 id="544">5.4.4、帧内预测模式的选择和编码<a class="headerlink" href="#544" title="Permanent link">&para;</a></h5>
+<h4 id="55">5.5、帧间预测<a class="headerlink" href="#55" title="Permanent link">&para;</a></h4>
+<h4 id="56h264spsi">5.6、H.264的SP/SI帧技术<a class="headerlink" href="#56h264spsi" title="Permanent link">&para;</a></h4>
+<h4 id="57">5.7、整数变换与量化<a class="headerlink" href="#57" title="Permanent link">&para;</a></h4>
+<h4 id="58cavlc">5.8、CAVLC<a class="headerlink" href="#58cavlc" title="Permanent link">&para;</a></h4>
+<h4 id="59cabac">5.9、CABAC<a class="headerlink" href="#59cabac" title="Permanent link">&para;</a></h4>
+<h4 id="510">5.10、码率控制<a class="headerlink" href="#510" title="Permanent link">&para;</a></h4>
+<h4 id="511">5.11、去方块滤波<a class="headerlink" href="#511" title="Permanent link">&para;</a></h4>
+<h4 id="512">5.12、其余特征<a class="headerlink" href="#512" title="Permanent link">&para;</a></h4>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

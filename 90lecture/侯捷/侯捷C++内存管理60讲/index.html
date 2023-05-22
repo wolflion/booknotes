@@ -101,6 +101,30 @@
                   </li>
                   <li class="toctree-l1 current"><a class="reference internal current" href="./">《侯捷C++内存管理60讲》</a>
     <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1overview">1、Overview</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2">2、内存分配的每一层面</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3">3、四个层面的基本用法</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4newdelete-expression">4、基本构件之一newdelete expression上</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#10">10、重载示例（上）</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#12per-class-allocator1">12、per-class allocator,1</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#14static-allocator">14、Static allocator</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#15macro-for-static-allocator">15、macro for static allocator</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#16new-handler">16、New Handler</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#17vc6-malloc">17、VC6 malloc()</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#18vc6">18、VC6标准分配器之实现</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_1">最后</a>
+    </li>
     </ul>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../11NJU%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">《NJU算法设计与分析》</a>
@@ -135,7 +159,11 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h3 id="1overview">1、Overview<a class="headerlink" href="#1overview" title="Permanent link">&para;</a></h3>
+                <h2 id="60">《内存管理60讲》<a class="headerlink" href="#60" title="Permanent link">&para;</a></h2>
+<ul>
+<li>第一课：1-16</li>
+</ul>
+<h3 id="1overview">1、Overview<a class="headerlink" href="#1overview" title="Permanent link">&para;</a></h3>
 <ul>
 <li>GNU 4.9.2源代码，还提到了vc6.0的一些源码</li>
 <li>gee.cs.oswego.edu/dl，<strong>作者从1986年开始研究malloc算法</strong></li>
@@ -259,7 +287,141 @@ private:
 private:
     int i;
 }</code></pre>
+<h3 id="14static-allocator">14、Static allocator<a class="headerlink" href="#14static-allocator" title="Permanent link">&para;</a></h3>
+<ul>
+<li>41/145，课件，<em>要把课件上的代码，熟悉好</em></li>
+<li>将一个总是分配特定尺寸之区块的memory allocator概念包装起来，使它容易被使用，<strong>有点分配器的意思</strong></li>
+</ul>
+<pre class="highlight"><code class="language-cpp">class allocator{
+private:
+    struct obj {
+        struct obj *next;
+    }
+public:
+    void* allocate(size_t);
+    void deallocate(void*, size_t);
+private:
+    obj* freeStore = nullptr;
+    const int CHUNK = 5;//以小一些便观察
+}
+
+//在Foo中使用
+class Foo{
+public:
+    long L;
+    string str;
+    static allocator myAlloc;
+public:
+    Foo(long l):L(l) {}
+    static void* operator new(size_t size){
+        return myAlloc.allocate(size);
+    }
+    static void operator delete(void* pdead, size_t size){
+        return myAlloc.deallocate(pdead, size);
+    }
+};
+allocator Foo::myAlloc;
+
+//测试结果  [**每5个会相邻**，申请的chunk大小是5]
+Foo *p[100];
+cout&lt;&lt;"sizeof(Foo)="&lt;&lt;sizeof(Foo)&lt;&lt;endl;
+for(int i=0;i&lt;23;++i){//随意看看结果
+    p[i]=new Foo(i);
+    cout&lt;&lt;p[i]&lt;&lt;''&lt;&lt;p[i]-&gt;L&lt;&lt;endl;
+}
+for(int i=0;i&lt;23;++i){
+    delete p[i];
+}</code></pre>
+<h3 id="15macro-for-static-allocator">15、macro for static allocator<a class="headerlink" href="#15macro-for-static-allocator" title="Permanent link">&para;</a></h3>
+<ul>
+<li>写法比较制式，把里面抽象出来</li>
+</ul>
+<pre class="highlight"><code class="language-cpp">class Foo{
+public:
+    long L;
+    string str;
+    static allocator myAlloc;//制式一
+public:
+    Foo(long l):L(l) {}
+    //制式二
+    static void* operator new(size_t size){
+        return myAlloc.allocate(size);
+    }
+    static void operator delete(void* pdead, size_t size){
+        return myAlloc.deallocate(pdead, size);
+    }
+    //制式二，结束
+};
+allocator Foo::myAlloc;//制式三
+
+//抽象
+//IMPLEMENT_POOL_ALLOC -- used in class definition
+#define DECLARE_POOL_ALLOC()
+public:\
+    void* operator new(size_t size){
+        return myAlloc.allocate(p);
+    }\
+    void operator delete(void* p){
+        return myAlloc.deallocate(pdead, 0);
+    }\
+protected:
+static allocator myAlloc;
+
+//IMPLEMENT_POOL_ALLOC --used in class implementation file
+#define IMPLEMENT_POOL_ALLOC(class_name)\
+allocator class_name::myAlloc;
+//抽象后
+
+//可以改写成,**MFC中，就是宏满天飞，用到了极致**
+class Foo{
+    DECLARE_POOL_ALLOC()
+public:
+    long L;
+    string str;
+public:
+    Foo(long l):L(l){}
+};
+IMPLEMENT_POOL_ALLOC(Foo);
+
+//改成版本4了，还是要测试一下</code></pre>
 <h3 id="16new-handler">16、New Handler<a class="headerlink" href="#16new-handler" title="Permanent link">&para;</a></h3>
+<ul>
+<li>课件上 47/145</li>
+<li><strong>nothrow形式</strong>，<code>new (nothrow) Foo;</code></li>
+<li>抛出exception之前会先（不只一次）调用一个可由client指定的handler，<code>typedef void(*new_handler)();  new_hander set_new_handler(new_handler p) throw();</code></li>
+<li><strong>set_new_handler</strong>是C++提供的函数</li>
+</ul>
+<pre class="highlight"><code class="language-cpp">//举例子</code></pre>
+<ul>
+<li>新增的2个关键字<code>=default, =delete</code><ul>
+<li>如果是default，那么问题来了，<strong>默认版本具体是指啥？</strong>（编译器合成版本，指的是那个版本）<strong>default还可以用于 operator new和operator delete</strong></li>
+</ul>
+</li>
+</ul>
+<pre class="highlight"><code class="language-cpp">class Foo{
+public:
+    Foo() = default;
+    Foo(const Foo&amp;) = delete;
+    Foo&amp; operator=(const Foo&amp;) = delete;
+    ~Foo()=default;
+};
+
+class Foo1{
+public:
+    long _x;
+public:
+    Foo(long x = 0): _x(x){}
+    static void* operator new(size_t size) =default;  //编译错
+    static void operator delete(void *pdead, size_t size) = default;
+    static void* operator new[](size_t size) = delete;
+    static void operator delete[](void* pdead, size_t size) = delete;
+};
+
+//使用示例
+Foo1 *p1 = new Foo1(5);
+delete p1;
+Foo1 *pF = new Foo1[10];
+delete[] pF;</code></pre>
 <h3 id="17vc6-malloc">17、VC6 malloc()<a class="headerlink" href="#17vc6-malloc" title="Permanent link">&para;</a></h3>
 <ul>
 <li>每次malloc()后都会，上下都有<strong>cookie</strong>（每个cookie，8个字节），<em>分配内存的大小，必须是16的倍数</em> 【是不是跟内核的页有关系？】</li>
@@ -270,6 +432,13 @@ private:
 <h3 id="18vc6">18、VC6标准分配器之实现<a class="headerlink" href="#18vc6" title="Permanent link">&para;</a></h3>
 <ul>
 <li></li>
+</ul>
+<h3 id="_1">最后<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>2023-05-17之前，1，2，3，4，10，12，17</li>
+</ul>
+<ul>
+<li>2023-05-17，14,15,16课 【16课里的new handler，不太熟悉，没太完全明白】</li>
 </ul>
               
             </div>

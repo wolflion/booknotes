@@ -901,6 +901,70 @@
     </li>
         </ul>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap18">chap18、调试</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#181">18.1、准备开始</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#182bug">18.2、内核中的bug</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#183">18.3、通过打印来调试</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1831">18.3.1、健壮性</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1832">18.3.2、日志等级</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1833">18.3.3、记录缓冲区</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1834syslogdklogd">18.3.4、syslogd和klogd</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1835printfprintk">18.3.5、从printf到printk的转换</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#184oops">18.4、oops</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1841ksymoops">18.4.1、ksymoops</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1842kallsyms">18.4.2、kallsyms</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#185">18.5、内核调试配置选项</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#186bug">18.6、引发bug并打印信息</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#187">18.7、神奇的系统请求键</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#188">18.8、内核调试器的传奇</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1881gdb">18.8.1、gdb</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1882kgdb">18.8.2、kgdb</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#189">18.9、探测系统</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1891uid">18.9.1、用UID作为选择条件</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1892">18.9.2、使用条件变量</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1893">18.9.3、使用统计量</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1894">18.9.4、重复频率限制</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#1810">18.10、用二分查找法找出引发罪恶的变更</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#1811git">18.11、使用Git进行二分搜索</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#1812">18.12、当所有的努力都失败时：社区</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#1813">18.13、小结</a>
+    </li>
+        </ul>
+    </li>
     </ul>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../%E6%B7%B1%E5%85%A5Linux%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%E5%86%85%E6%A0%B8%E6%9C%BA%E5%88%B6/">《深入Linux设备驱动程序内核机制》</a>
@@ -1239,36 +1303,59 @@
 <h5 id="0_5">0、<a class="headerlink" href="#0_5" title="Permanent link">&para;</a></h5>
 <h5 id="611">6.1.1、单向链表和双向链表<a class="headerlink" href="#611" title="Permanent link">&para;</a></h5>
 <h5 id="612">6.1.2、环形链表<a class="headerlink" href="#612" title="Permanent link">&para;</a></h5>
+<ul>
+<li>末尾元素指向链表的首元素，因为<strong>首尾相连</strong>，被称为是环形链表</li>
+<li>Linux内核的标准链表就是采用环形双向链表形式实现的</li>
+</ul>
 <h5 id="613">6.1.3、沿链表移动<a class="headerlink" href="#613" title="Permanent link">&para;</a></h5>
 <ul>
 <li><strong>只能是线性移动</strong></li>
+<li>使用链表存放数据的理想情况是，需要遍历所有数据或需要动态加入和删除数据时。</li>
+<li><strong>头指针</strong></li>
 </ul>
 <h5 id="614linux">6.1.4、Linux内核中的实现<a class="headerlink" href="#614linux" title="Permanent link">&para;</a></h5>
 <ul>
 <li>0、
     + <strong>linux内核，将链表节点塞入数据结构，不是将数据结构塞入链表</strong>。</li>
 <li>1、链表数据结构
-    + linux/list.h</li>
+    + linux/list.h
+    + <strong>理解list_head结构是如何使用的</strong></li>
 <li>2、定义一个链表</li>
 <li>3、链表头</li>
 </ul>
 <h5 id="615">6.1.5、操作链表<a class="headerlink" href="#615" title="Permanent link">&para;</a></h5>
 <ul>
-<li>0、</li>
+<li>0、<ul>
+<li>都是O(1)</li>
+</ul>
+</li>
 <li>1、向链表中增加一个节点
-    + <code>list_add()</code></li>
+    + <code>list_add(struct list_head *new, struct list_head *head)</code>
+    + <code>list_add_tail(struct list_head *new, struct list_head *head)</code></li>
 <li>2、从链表中删除一个节点
-    + <code>list_del()</code></li>
+    + <code>list_del(struct list_head *entry)</code>
+    + <code>list_del_init(struct list_head *entry)</code></li>
 <li>3、移动和合并链表节点
-    + <code>list_move()</code>
-    + <code>list_move_tail()</code>
-    + <code>list_empty()</code></li>
+    + <code>list_move(struct list_head *new, struct list_head *head)</code>
+    + <code>list_move_tail(struct list_head *new, struct list_head *head)</code>
+    + <code>list_empty(struct list_head *head)</code>
+    + <code>list_splice(struct list_head *list, struct list_head *head)</code>
+    + <code>list_splice_init(struct list_head *list, struct list_head *head)</code></li>
 </ul>
 <h5 id="616">6.1.6、遍历链表<a class="headerlink" href="#616" title="Permanent link">&para;</a></h5>
 <ul>
-<li>0、</li>
-<li>1、</li>
-<li>2、</li>
+<li>0、<ul>
+<li>O(n)</li>
+</ul>
+</li>
+<li>1、基本方法<ul>
+<li><code>list_for_each()</code>宏</li>
+</ul>
+</li>
+<li>2、可用的方法<ul>
+<li><code>list_for_each_entry()</code>宏</li>
+</ul>
+</li>
 <li>3、反向遍历链表
     + <code>list_for_each_entry_reverse()</code> </li>
 <li>4、遍历的同时删除
@@ -1333,9 +1420,31 @@
 </ul>
 <h4 id="64">6.4、二叉树<a class="headerlink" href="#64" title="Permanent link">&para;</a></h4>
 <h5 id="641bst">6.4.1、二叉搜索树（BST）<a class="headerlink" href="#641bst" title="Permanent link">&para;</a></h5>
+<ul>
+<li>BST法则<ul>
+<li>根的左分支节点值都小于根节点值</li>
+<li>右分支节点值都大于根节点值</li>
+<li>所有的子树也都是BST</li>
+</ul>
+</li>
+</ul>
 <h5 id="642">6.4.2、自平衡二叉搜索树<a class="headerlink" href="#642" title="Permanent link">&para;</a></h5>
 <ul>
-<li>1、红黑树</li>
+<li>0、<ul>
+<li><strong>平衡二叉搜索树</strong>是一个所有叶子节点深度差不超过1的二叉搜索树</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>1、红黑树<ul>
+<li>（1）所有节点要么是黑色，要么是红色</li>
+<li>（2）叶子节点都是黑色</li>
+<li>（3）叶子节点不包含数据</li>
+<li>（4）所有非叶子节点都有两个子节点</li>
+<li>（5）如果一个节点是红色，则它的子节点都是黑色</li>
+<li>（6）在一个节点到其叶子节点的路径中，如果总是包含同样数目的黑色节点，则该路径相比其他路径是最短的</li>
+</ul>
+</li>
 <li>2、rbtree
     + linux/rbtree.h
     + lib/rbtree.c</li>
@@ -1505,10 +1614,19 @@
 <h4 id="91">9.1、临界区和竞争条件<a class="headerlink" href="#91" title="Permanent link">&para;</a></h4>
 <h5 id="0_10">0、<a class="headerlink" href="#0_10" title="Permanent link">&para;</a></h5>
 <ul>
-<li>临界区</li>
-<li>竞争条件race coditions</li>
+<li>临界区<ul>
+<li>访问和操作共享数据的代码段</li>
+</ul>
+</li>
+<li>竞争条件race coditions<ul>
+<li>如果两个执行线程有可能处于同一个临界区中同时执行，那么这就是程序包含的一个bug。<strong>这种情况发生了</strong>，称它为竞争条件</li>
+</ul>
+</li>
 </ul>
 <h5 id="911">9.1.1、为什么我们需要保护<a class="headerlink" href="#911" title="Permanent link">&para;</a></h5>
+<ul>
+<li><em>以取钱为例</em></li>
+</ul>
 <h5 id="912">9.1.2、单个变量<a class="headerlink" href="#912" title="Permanent link">&para;</a></h5>
 <h4 id="92">9.2、加锁<a class="headerlink" href="#92" title="Permanent link">&para;</a></h4>
 <h5 id="0_11">0、<a class="headerlink" href="#0_11" title="Permanent link">&para;</a></h5>
@@ -1527,6 +1645,9 @@
 <h5 id="922">9.2.2、了解要保护些什么<a class="headerlink" href="#922" title="Permanent link">&para;</a></h5>
 <h4 id="93">9.3、死锁<a class="headerlink" href="#93" title="Permanent link">&para;</a></h4>
 <h4 id="94">9.4、争用和扩展性<a class="headerlink" href="#94" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>锁的争用（争用）lock contention</strong>，是指当锁正在被占用时，有其他线程试图获得该锁。</li>
+</ul>
 <h4 id="95">9.5、小结<a class="headerlink" href="#95" title="Permanent link">&para;</a></h4>
 <h3 id="chap10-158353">chap10、内核同步方法 （158/353）<a class="headerlink" href="#chap10-158353" title="Permanent link">&para;</a></h3>
 <h4 id="101">10.1、原子操作<a class="headerlink" href="#101" title="Permanent link">&para;</a></h4>
@@ -1658,7 +1779,7 @@
 </ul>
 <h4 id="122">12.2、区<a class="headerlink" href="#122" title="Permanent link">&para;</a></h4>
 <ul>
-<li><strong>内核把页划分为不同的区（zone）</strong>,Linux主要使用了四种区
+<li><strong>内核把页划分为不同的区（zone）</strong>,Linux主要使用了四种区:
     + ZONE_DMA
     + ZONE_DMA32
     + ZONE_NORMAL
@@ -1686,23 +1807,49 @@
 <li><strong>以字节为单位，确保页在物理地址上是连续的</strong>，实现在include/linux/slab.h中</li>
 </ul>
 <h5 id="1241gfp_mask">12.4.1、gfp_mask标志<a class="headerlink" href="#1241gfp_mask" title="Permanent link">&para;</a></h5>
+<p>标志分为<strong>3种</strong></p>
 <ul>
-<li>标志分为<strong>3种</strong></li>
-<li>1、行为修饰符</li>
-<li>2、区修饰符</li>
-<li>3、类型标志</li>
+<li>1、行为修饰符<ul>
+<li>内存应当如何分配所需的内存</li>
+</ul>
+</li>
+<li>2、区修饰符<ul>
+<li>表示从哪儿分配内存</li>
+</ul>
+</li>
+<li>3、类型标志<ul>
+<li>组合了行为修饰符和区修饰符</li>
+</ul>
+</li>
 </ul>
 <h5 id="1242kfree">12.4.2、kfree<a class="headerlink" href="#1242kfree" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>void kfree(const void *ptr);</code></li>
+</ul>
 <h4 id="125vmalloc">12.5、vmalloc<a class="headerlink" href="#125vmalloc" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>分配的内存虚拟地址是连续的，而物理地址无须连续</strong></li>
+<li>vmalloc()函数为了把物理上不连续的页转称为虚拟地址空间上连续的页，必须专门建立页表项，糟糕的是，通过vmalloc()获得的页必须一个个地进行映射（因为它们物理上是不连续的），这就会导致比直接内存映射大得多的TLB抖动。<strong>vmalloc()仅在不得已时才会使用</strong></li>
 </ul>
 <h4 id="126slab">12.6、slab层<a class="headerlink" href="#126slab" title="Permanent link">&para;</a></h4>
 <h5 id="0_20">0、<a class="headerlink" href="#0_20" title="Permanent link">&para;</a></h5>
+<ul>
+<li>slab分配器扮演了通用数据结构缓存层的角色</li>
+</ul>
 <h5 id="1261slab">12.6.1、slab层的设计<a class="headerlink" href="#1261slab" title="Permanent link">&para;</a></h5>
+<ul>
+<li>slab层把不同对象划分为所谓的高速缓存组，slab由一个或多个物理上连续的页组成</li>
+<li>每个高速缓存都使用kmem_cache结构来表示。(mm/slab.c中定义)，该结构包含三个链表：slabs_full, slabs_partial和slabs_empty，均存放在kmem_list3结构内。</li>
+</ul>
 <h5 id="1262slab">12.6.2、slab分配器的接口<a class="headerlink" href="#1262slab" title="Permanent link">&para;</a></h5>
 <ul>
+<li>0、<ul>
 <li><code>kmem_cache_create()</code></li>
+<li>撤销一个高速缓存，<code>int kmem_cache_destroy(struct kmem_cache *cachep)</code></li>
+</ul>
+</li>
+<li>1、从缓存中分配</li>
+<li>2、slab分配器的使用实例</li>
 </ul>
 <h4 id="127">12.7、在栈上的静态分配<a class="headerlink" href="#127" title="Permanent link">&para;</a></h4>
 <h5 id="0_21">0、<a class="headerlink" href="#0_21" title="Permanent link">&para;</a></h5>
@@ -1710,19 +1857,25 @@
 <li><strong>32位和64位体系结构的页面大小分别是4KB和8KB，所以通常它们的内核栈的大小分别是8KB和16KB</strong>。</li>
 </ul>
 <h5 id="1271">12.7.1、单页内核栈<a class="headerlink" href="#1271" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>中断栈</strong></li>
+</ul>
 <h5 id="1272">12.7.2、在栈上光明正大地工作<a class="headerlink" href="#1272" title="Permanent link">&para;</a></h5>
 <h4 id="128">12.8、高端内存的映射<a class="headerlink" href="#128" title="Permanent link">&para;</a></h4>
 <h5 id="0_22">0、<a class="headerlink" href="#0_22" title="Permanent link">&para;</a></h5>
 <ul>
 <li><strong>在高端内存中的页不能永久地映射到内核地址空间上</strong>。</li>
+<li>x86体系结构上，高于896MB的所有物理内存的范围大都是高端内存</li>
 </ul>
 <h5 id="1281">12.8.1、永久映射<a class="headerlink" href="#1281" title="Permanent link">&para;</a></h5>
 <ul>
-<li><code>kmap()</code></li>
+<li>linux/highmem.h</li>
+<li><code>void *kmap(struct page *page)</code></li>
+<li><code>void *kunmap(struct page *page)</code></li>
 </ul>
 <h5 id="1282">12.8.2、临时映射<a class="headerlink" href="#1282" title="Permanent link">&para;</a></h5>
 <ul>
-<li><code>kmap_atomic()</code></li>
+<li><code>void *kmap_atomic(struct page *page, enum km_type type)</code></li>
 </ul>
 <h4 id="129cpu">12.9、每个CPU的分配<a class="headerlink" href="#129cpu" title="Permanent link">&para;</a></h4>
 <ul>
@@ -1735,6 +1888,7 @@
 <h5 id="0_23">0、<a class="headerlink" href="#0_23" title="Permanent link">&para;</a></h5>
 <ul>
 <li><strong>percpu</strong>，简化了创建和操作每个CPU的数据。</li>
+<li>linux/percpu.h</li>
 </ul>
 <h5 id="12101cpu">12.10.1、编译时的每个CPU数据<a class="headerlink" href="#12101cpu" title="Permanent link">&para;</a></h5>
 <h5 id="12102cpu">12.10.2、运行时的每个CPU数据<a class="headerlink" href="#12102cpu" title="Permanent link">&para;</a></h5>
@@ -1812,6 +1966,9 @@
 <li>一个索引节点代表文件系统中的一个文件，也可以是特殊文件</li>
 </ul>
 <h4 id="138">13.8、索引节点操作<a class="headerlink" href="#138" title="Permanent link">&para;</a></h4>
+<ul>
+<li>i指向给定的索引节点，<code>truncate()</code>是由索引节点i所在的文件系统定义的</li>
+</ul>
 <h4 id="139">13.9、目录项对象<a class="headerlink" href="#139" title="Permanent link">&para;</a></h4>
 <h5 id="0_24">0、<a class="headerlink" href="#0_24" title="Permanent link">&para;</a></h5>
 <ul>
@@ -1836,9 +1993,14 @@
 <h4 id="1311">13.11、文件对象<a class="headerlink" href="#1311" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>文件结构体（对象）表示已经打开的文件</strong></li>
+<li>进程直接处理文件，而不是超级块、索引节点或目录项</li>
 </ul>
 <h4 id="1312">13.12、文件操作<a class="headerlink" href="#1312" title="Permanent link">&para;</a></h4>
 <h4 id="1313">13.13、和文件系统相关的数据结构<a class="headerlink" href="#1313" title="Permanent link">&para;</a></h4>
+<ul>
+<li>file_system_type结构体，用来描述各种特定文件系统类型，linux/fs.h</li>
+<li>vfsmount结构体，用来描述一个安装文件系统的实例，linux/mount.h</li>
+</ul>
 <h4 id="1314">13.14、和进程相关的数据结构<a class="headerlink" href="#1314" title="Permanent link">&para;</a></h4>
 <h4 id="1315">13.15、小结<a class="headerlink" href="#1315" title="Permanent link">&para;</a></h4>
 <h3 id="chap14io">chap14、块I/O<a class="headerlink" href="#chap14io" title="Permanent link">&para;</a></h3>
@@ -2116,6 +2278,38 @@
 <li><code>kobject_uevent()</code></li>
 </ul>
 <h4 id="175">17.5、小结<a class="headerlink" href="#175" title="Permanent link">&para;</a></h4>
+<h3 id="chap18">chap18、调试<a class="headerlink" href="#chap18" title="Permanent link">&para;</a></h3>
+<h4 id="181">18.1、准备开始<a class="headerlink" href="#181" title="Permanent link">&para;</a></h4>
+<h4 id="182bug">18.2、内核中的bug<a class="headerlink" href="#182bug" title="Permanent link">&para;</a></h4>
+<h4 id="183">18.3、通过打印来调试<a class="headerlink" href="#183" title="Permanent link">&para;</a></h4>
+<h5 id="1831">18.3.1、健壮性<a class="headerlink" href="#1831" title="Permanent link">&para;</a></h5>
+<h5 id="1832">18.3.2、日志等级<a class="headerlink" href="#1832" title="Permanent link">&para;</a></h5>
+<ul>
+<li>printk()可以指定日志等级（<strong>printf()不可以</strong>）</li>
+<li>linux/kernel.h中定义，<code>KERN_WARING</code>和<code>KERN_DEBUG</code></li>
+<li>没有指定时，会选用默认的<code>DEFAULT_MESSAGE_LOGLEVEL</code>，也就是<code>KERN_WARING</code></li>
+</ul>
+<h5 id="1833">18.3.3、记录缓冲区<a class="headerlink" href="#1833" title="Permanent link">&para;</a></h5>
+<h5 id="1834syslogdklogd">18.3.4、syslogd和klogd<a class="headerlink" href="#1834syslogdklogd" title="Permanent link">&para;</a></h5>
+<h5 id="1835printfprintk">18.3.5、从printf到printk的转换<a class="headerlink" href="#1835printfprintk" title="Permanent link">&para;</a></h5>
+<h4 id="184oops">18.4、oops<a class="headerlink" href="#184oops" title="Permanent link">&para;</a></h4>
+<h5 id="1841ksymoops">18.4.1、ksymoops<a class="headerlink" href="#1841ksymoops" title="Permanent link">&para;</a></h5>
+<h5 id="1842kallsyms">18.4.2、kallsyms<a class="headerlink" href="#1842kallsyms" title="Permanent link">&para;</a></h5>
+<h4 id="185">18.5、内核调试配置选项<a class="headerlink" href="#185" title="Permanent link">&para;</a></h4>
+<h4 id="186bug">18.6、引发bug并打印信息<a class="headerlink" href="#186bug" title="Permanent link">&para;</a></h4>
+<h4 id="187">18.7、神奇的系统请求键<a class="headerlink" href="#187" title="Permanent link">&para;</a></h4>
+<h4 id="188">18.8、内核调试器的传奇<a class="headerlink" href="#188" title="Permanent link">&para;</a></h4>
+<h5 id="1881gdb">18.8.1、gdb<a class="headerlink" href="#1881gdb" title="Permanent link">&para;</a></h5>
+<h5 id="1882kgdb">18.8.2、kgdb<a class="headerlink" href="#1882kgdb" title="Permanent link">&para;</a></h5>
+<h4 id="189">18.9、探测系统<a class="headerlink" href="#189" title="Permanent link">&para;</a></h4>
+<h5 id="1891uid">18.9.1、用UID作为选择条件<a class="headerlink" href="#1891uid" title="Permanent link">&para;</a></h5>
+<h5 id="1892">18.9.2、使用条件变量<a class="headerlink" href="#1892" title="Permanent link">&para;</a></h5>
+<h5 id="1893">18.9.3、使用统计量<a class="headerlink" href="#1893" title="Permanent link">&para;</a></h5>
+<h5 id="1894">18.9.4、重复频率限制<a class="headerlink" href="#1894" title="Permanent link">&para;</a></h5>
+<h4 id="1810">18.10、用二分查找法找出引发罪恶的变更<a class="headerlink" href="#1810" title="Permanent link">&para;</a></h4>
+<h4 id="1811git">18.11、使用Git进行二分搜索<a class="headerlink" href="#1811git" title="Permanent link">&para;</a></h4>
+<h4 id="1812">18.12、当所有的努力都失败时：社区<a class="headerlink" href="#1812" title="Permanent link">&para;</a></h4>
+<h4 id="1813">18.13、小结<a class="headerlink" href="#1813" title="Permanent link">&para;</a></h4>
               
             </div>
           </div><footer>
