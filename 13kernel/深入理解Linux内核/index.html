@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>深入理解Linux内核 - lionel的技术笔记</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "\u6df1\u5165\u7406\u89e3Linux\u5185\u6838";
+        var mkdocs_page_input_path = "13kernel\\\u6df1\u5165\u7406\u89e3Linux\u5185\u6838.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> lionel的技术笔记
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">简介</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../01daily/">daily</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">C++</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../20C%2B%2B/effectiveC%2B%2B/">《Effective C++》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/EffectiveSTL/">《Effective STL》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">基础知识</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA/">《操作系统导论》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网络编程</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/TCPIP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">《TCP/IP网络编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/">《Linux高性能服务器编程》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">文件系统</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/Linux%E5%86%85%E6%A0%B8%E6%8E%A2%E7%A7%98/">《Linux内核探秘》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《文件系统技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">《存储技术原理分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">存储</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../12storage/ceph%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《ceph设计原理与实现》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">内核</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../Linux%E5%86%85%E6%A0%B8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《Linux内核设计与实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../%E6%B7%B1%E5%85%A5Linux%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%E5%86%85%E6%A0%B8%E6%9C%BA%E5%88%B6/">《深入Linux设备驱动程序内核机制》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">《深入理解Linux虚拟内存管理》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">刷题</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/">《剑指offer专项突破》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网课</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/01Linux%E9%AB%98%E5%B9%B6%E5%8F%91%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/">《Linux高并发网络编程开发》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/%E4%BE%AF%E6%8D%B7/%E4%BE%AF%E6%8D%B7C%2B%2B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%8660%E8%AE%B2/">《侯捷C++内存管理60讲》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/11NJU%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">《NJU算法设计与分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">英语专</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../60English/00794%E7%BB%BC%E5%90%88%E8%8B%B1%E8%AF%AD%E4%B8%80%E4%B8%8A/">《综合英语(一)上》</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">lionel的技术笔记</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>深入理解Linux内核</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="linux">《深入理解Linux内核》<a class="headerlink" href="#linux" title="Permanent link">&para;</a></h2>
+<h3 id="chap3">chap3、进程<a class="headerlink" href="#chap3" title="Permanent link">&para;</a></h3>
+<h4 id="31">3.1、进程、轻量级进程、线程<a class="headerlink" href="#31" title="Permanent link">&para;</a></h4>
+<h4 id="32">3.2、进程描述符<a class="headerlink" href="#32" title="Permanent link">&para;</a></h4>
+<h5 id="0">0、<a class="headerlink" href="#0" title="Permanent link">&para;</a></h5>
+<h5 id="321">3.2.1、进程状态<a class="headerlink" href="#321" title="Permanent link">&para;</a></h5>
+<ul>
+<li>state字段</li>
+</ul>
+<h5 id="322">3.2.2、标识一个进程<a class="headerlink" href="#322" title="Permanent link">&para;</a></h5>
+<ul>
+<li>0<ul>
+<li>pid字段，<strong>pidmap-array位图来表示当前已分配的PID号和闲置的PID号</strong></li>
+</ul>
+</li>
+<li>3.2.2.1、进程描述符处理</li>
+<li>3.2.2.2、标识当前进程</li>
+<li>3.2.2.3、双向链表</li>
+<li>3.2.2.4、进程链表</li>
+<li>3.2.2.5、TASK_RUNNING状态的进程链表</li>
+</ul>
+<h5 id="323">3.2.3、进程间的关系<a class="headerlink" href="#323" title="Permanent link">&para;</a></h5>
+<ul>
+<li>0</li>
+<li>3.2.3.1、pidhash表及链表</li>
+</ul>
+<h5 id="324">3.2.4、如何组织进程<a class="headerlink" href="#324" title="Permanent link">&para;</a></h5>
+<ul>
+<li>0</li>
+<li>3.2.4.1、等待队列</li>
+<li>3.2.4.2、等待队列的操作</li>
+</ul>
+<h5 id="325">3.2.5、进程资源限制<a class="headerlink" href="#325" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>current-&gt;signal-&gt;rlim</code>字段</li>
+</ul>
+<h4 id="33">3.3、进程切换<a class="headerlink" href="#33" title="Permanent link">&para;</a></h4>
+<h5 id="331">3.3.1、硬件上下文<a class="headerlink" href="#331" title="Permanent link">&para;</a></h5>
+<h5 id="332">3.3.2、任务状态段<a class="headerlink" href="#332" title="Permanent link">&para;</a></h5>
+<ul>
+<li>0</li>
+<li>3.3.2.1、thread字段</li>
+</ul>
+<h5 id="333">3.3.3、执行进程切换<a class="headerlink" href="#333" title="Permanent link">&para;</a></h5>
+<h5 id="334fpummuxmm">3.3.4、保存和加载FPU、MMU及XMM寄存器<a class="headerlink" href="#334fpummuxmm" title="Permanent link">&para;</a></h5>
+<ul>
+<li>0</li>
+<li>3.3.4.1、保存FPU寄存器</li>
+<li>3.3.4.2、装载FPU寄存器</li>
+</ul>
+<h4 id="34">3.4、创建进程<a class="headerlink" href="#34" title="Permanent link">&para;</a></h4>
+<h5 id="0_1">0、<a class="headerlink" href="#0_1" title="Permanent link">&para;</a></h5>
+<ul>
+<li><em>lionel，OS是怎么样的？</em>（shell创建一个新进程，新进程执行shell的另一个拷贝）</li>
+</ul>
+<ul>
+<li>传统的Unix操作系统</li>
+</ul>
+<ul>
+<li>现代Unix的引入三种机制<ul>
+<li>写时复制技术，允许父子进程读相同的物理页。<strong>两者任一试图写一个物理页，内核就把这个页的内容拷贝到一个新的物理页</strong></li>
+<li>轻量级进程</li>
+<li>vfork()创建的进程能共享父进程的内存地址空间</li>
+</ul>
+</li>
+</ul>
+<h5 id="341cloneforkvfork">3.4.1、clone()、fork()及vfork()系统调用<a class="headerlink" href="#341cloneforkvfork" title="Permanent link">&para;</a></h5>
+<ul>
+<li>0<ul>
+<li>轻量级进程是由名为clone()的函数创建的</li>
+<li>fork()在Linux中是用clone()实现的</li>
+<li>vfork()在Linux中也是用clone()实现的</li>
+</ul>
+</li>
+<li>3.4.1.1、do_fork()函数<ul>
+<li><strong>主要步骤</strong></li>
+</ul>
+</li>
+<li>3.4.1.2、copy_process()函数<ul>
+<li><strong>主要步骤</strong></li>
+</ul>
+</li>
+</ul>
+<h5 id="342">3.4.2、内核线程<a class="headerlink" href="#342" title="Permanent link">&para;</a></h5>
+<ul>
+<li>0<ul>
+<li><strong>内核线程不受不必要的用户态上下文的拖累</strong></li>
+</ul>
+</li>
+<li>3.4.2.1、创建一个内核线程<ul>
+<li><code>kernel_thread()</code></li>
+</ul>
+</li>
+<li>3.4.2.2、进程0<ul>
+<li><strong>所有进程的祖先</strong></li>
+</ul>
+</li>
+<li>3.4.2.3、进程1<ul>
+<li>init()调用execve()系统调用装入可执行程序init。结果，<strong>init内核线程变为一个普通进程</strong></li>
+</ul>
+</li>
+<li>3.4.2.4、其他内核线程</li>
+</ul>
+<h4 id="35">3.5、撤销进程<a class="headerlink" href="#35" title="Permanent link">&para;</a></h4>
+<h5 id="351">3.5.1、进程终止<a class="headerlink" href="#351" title="Permanent link">&para;</a></h5>
+<ul>
+<li>3.5.1.1、do_group_exit()函数</li>
+<li>3.5.1.2、do_exit()函数</li>
+</ul>
+<h5 id="352">3.5.2、进程删除<a class="headerlink" href="#352" title="Permanent link">&para;</a></h5>
+<h3 id="chap4">chap4、中断和异常<a class="headerlink" href="#chap4" title="Permanent link">&para;</a></h3>
+<p>4.1、中断信号的作用</p>
+<h3 id="chap18ext2ext3">chap18、ext2和ext3文件系统<a class="headerlink" href="#chap18ext2ext3" title="Permanent link">&para;</a></h3>
+<h4 id="181ext2">18.1、Ext2的一般特征<a class="headerlink" href="#181ext2" title="Permanent link">&para;</a></h4>
+<ul>
+<li>下列特点有助于Ext2的效率<ul>
+<li>当创建Ext2文件系统时，系统管理员可以根据预期的文件平均长度来选择最佳块大小（从1024B~4096B）</li>
+</ul>
+</li>
+<li>Ext2还包含一些特点：<ul>
+<li>在启动时支持对文件系统的状态进行自动的一致性检查。<strong>检查是由外部程序e2fsck完成的</strong></li>
+</ul>
+</li>
+<li>考虑引入另外几个特性<ul>
+<li>块片（block fragmentation）</li>
+<li>透明地处理压缩和加密文件</li>
+<li>逻辑删除</li>
+<li>日志</li>
+</ul>
+</li>
+</ul>
+<h4 id="182ext2">18.2、Ext2磁盘数据结构<a class="headerlink" href="#182ext2" title="Permanent link">&para;</a></h4>
+<h5 id="0_2">0、<a class="headerlink" href="#0_2" title="Permanent link">&para;</a></h5>
+<ul>
+<li>
+<p>块组中的每个块包含下列信息之一：</p>
+<ul>
+<li>文件系统的超级块的一个拷贝</li>
+</ul>
+<ul>
+<li>一组块组描述符的拷贝</li>
+</ul>
+<ul>
+<li>一个数据块位图</li>
+</ul>
+<ul>
+<li>一个索引节点位图</li>
+</ul>
+<ul>
+<li>一个索引节表</li>
+</ul>
+<ul>
+<li>属于文件的一大块数据，即数据块</li>
+</ul>
+</li>
+</ul>
+<h5 id="1821">18.2.1、超级块<a class="headerlink" href="#1821" title="Permanent link">&para;</a></h5>
+<h5 id="1822">18.2.2、组描述符和位图<a class="headerlink" href="#1822" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>ext2_group_desc</code>结构</li>
+</ul>
+<h5 id="1823">18.2.3、索引节点表<a class="headerlink" href="#1823" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>bg_inode_table</code>字段中</li>
+</ul>
+<ul>
+<li><code>ext2_inode</code>结构</li>
+</ul>
+<h5 id="1824extended-attribute">18.2.4、索引节点的增强属性（extended attribute）<a class="headerlink" href="#1824extended-attribute" title="Permanent link">&para;</a></h5>
+<h5 id="1825">18.2.5、访问控制列表<a class="headerlink" href="#1825" title="Permanent link">&para;</a></h5>
+<h5 id="1826">18.2.6、各种文件类型如何使用磁盘块<a class="headerlink" href="#1826" title="Permanent link">&para;</a></h5>
+<ul>
+<li>普通文件</li>
+</ul>
+<ul>
+<li>目录</li>
+</ul>
+<ul>
+<li>符号链接</li>
+</ul>
+<ul>
+<li>设备文件、管道和套接字</li>
+</ul>
+<h4 id="183ext2">18.3、Ext2的内存数据结构<a class="headerlink" href="#183ext2" title="Permanent link">&para;</a></h4>
+<h5 id="0_3">0、<a class="headerlink" href="#0_3" title="Permanent link">&para;</a></h5>
+<h5 id="1831ext2">18.3.1、Ext2的超级块对象<a class="headerlink" href="#1831ext2" title="Permanent link">&para;</a></h5>
+<h5 id="1832ext2">18.3.2、Ext2的索引节点对象<a class="headerlink" href="#1832ext2" title="Permanent link">&para;</a></h5>
+<h4 id="184ext2">18.4、创建Ext2文件系统<a class="headerlink" href="#184ext2" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Ext2文件系统是由<code>mke2fs</code>创建的</li>
+<li>执行下列操作</li>
+<li>命令,<code>dd if=/dev/fd0</code></li>
+</ul>
+<h4 id="185ext2">18.5、Ext2的方法<a class="headerlink" href="#185ext2" title="Permanent link">&para;</a></h4>
+<h5 id="1851ext2">18.5.1、Ext2超级块的操作<a class="headerlink" href="#1851ext2" title="Permanent link">&para;</a></h5>
+<h5 id="1852ext2">18.5.2、Ext2索引节点的操作<a class="headerlink" href="#1852ext2" title="Permanent link">&para;</a></h5>
+<h5 id="1853ext2">18.5.3、Ext2的文件操作<a class="headerlink" href="#1853ext2" title="Permanent link">&para;</a></h5>
+<h4 id="186ext2">18.6、管理Ext2磁盘空间<a class="headerlink" href="#186ext2" title="Permanent link">&para;</a></h4>
+<h5 id="0_4">0、<a class="headerlink" href="#0_4" title="Permanent link">&para;</a></h5>
+<h5 id="1861">18.6.1、创建索引节点<a class="headerlink" href="#1861" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>ext2_new_inode()</code></li>
+</ul>
+<h5 id="1862">18.6.2、删除索引节点<a class="headerlink" href="#1862" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>ext2_free_inode()</code></li>
+</ul>
+<h5 id="1863">18.6.3、数据块寻址<a class="headerlink" href="#1863" title="Permanent link">&para;</a></h5>
+<h5 id="1864">18.6.4、文件的洞<a class="headerlink" href="#1864" title="Permanent link">&para;</a></h5>
+<h5 id="1865">18.6.5、分配数据块<a class="headerlink" href="#1865" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>ext2_get_block()</code></li>
+</ul>
+<h5 id="1866">18.6.6、释放数据块<a class="headerlink" href="#1866" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>ext2_free_blocks()</code></li>
+</ul>
+<h4 id="187ext3">18.7、Ext3文件系统<a class="headerlink" href="#187ext3" title="Permanent link">&para;</a></h4>
+<p>0、</p>
+<h5 id="1871">18.7.1、日志文件系统<a class="headerlink" href="#1871" title="Permanent link">&para;</a></h5>
+<ul>
+<li>Ext2文件系统的状态存放在磁盘上超级块的s_mount_state字段中。</li>
+</ul>
+<h5 id="1872ext3">18.7.2、Ext3日志文件系统<a class="headerlink" href="#1872ext3" title="Permanent link">&para;</a></h5>
+<ul>
+<li>
+<p>当从系统故障中恢复时，e2fsck程序区分下列两种情况：</p>
+<ul>
+<li>提交到日志之前系统故障发生</li>
+</ul>
+<ul>
+<li>提交到日志之后系统故障发生</li>
+</ul>
+</li>
+</ul>
+<h5 id="1873">18.7.3、日志块设备层<a class="headerlink" href="#1873" title="Permanent link">&para;</a></h5>
+<ul>
+<li>
+<p>0</p>
+<ul>
+<li>Ext3日志通常存放名为<code>.journal</code>的隐藏文件中。该文件位于文件系统的根目录。</li>
+<li><strong>Ext3文件系统本身不处理日志，而是利用所谓日志块设备（Journaling Block Device，JBD）的通用内核层</strong>。</li>
+<li><strong>JBD也必须保护自己免受任何系统故障引起的日志损坏</strong></li>
+<li>Ext3与JDB之间的交互本质上基于三个基本单元<ul>
+<li>日志记录</li>
+<li>原子操作处理</li>
+<li>事务</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>日志记录</li>
+</ul>
+<ul>
+<li>原子操作处理</li>
+</ul>
+<ul>
+<li>事务</li>
+</ul>
+<h5 id="1874">18.7.4、日志如何工作<a class="headerlink" href="#1874" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、write()系统调用，是由generic_file_write()实现的</li>
+</ul>
+<ul>
+<li>2、几次调用address_space对象的prepare_write方法，对于Ext3来说，是由ext3_prepare_write()实现的</li>
+</ul>
+<ul>
+<li>3、ext3_prepare_write()调用journal_start()</li>
+</ul>
+<ul>
+<li>4、ext3_prepare_write()调用block_prepare_write()，传递给它的参数为ext3_get_block()函数的地址</li>
+</ul>
+<ul>
+<li>5、当内核必须确定Ext3文件系统的逻辑块号时，就执行ext3_get_block()函数</li>
+</ul>
+<ul>
+<li>6、如果Ext3文件系统已经以“日志”模式安装，则ext3_prepare_write()函数在写操作触及的每个缓冲区上也调用journal_get_write_access()</li>
+</ul>
+<ul>
+<li>7、</li>
+</ul>
+<ul>
+<li>8、</li>
+</ul>
+<ul>
+<li>9、</li>
+</ul>
+<ul>
+<li>10、</li>
+</ul>
+<ul>
+<li>11、内核周期性地为日志中每个完成的事务激活检查活动。检查点主要验证由journal_commit_transaction()触发的I/O数据传送是否已经成功结束。</li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

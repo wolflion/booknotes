@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Wireshark网络分析实战 - lionel的技术笔记</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Wireshark\u7f51\u7edc\u5206\u6790\u5b9e\u6218";
+        var mkdocs_page_input_path = "15tool\\Wireshark\u7f51\u7edc\u5206\u6790\u5b9e\u6218.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> lionel的技术笔记
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">简介</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../01daily/">daily</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">C++</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../20C%2B%2B/effectiveC%2B%2B/">《Effective C++》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/EffectiveSTL/">《Effective STL》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">基础知识</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA/">《操作系统导论》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网络编程</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/TCPIP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">《TCP/IP网络编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/">《Linux高性能服务器编程》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">文件系统</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/Linux%E5%86%85%E6%A0%B8%E6%8E%A2%E7%A7%98/">《Linux内核探秘》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《文件系统技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">《存储技术原理分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">存储</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../12storage/ceph%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《ceph设计原理与实现》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">内核</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/Linux%E5%86%85%E6%A0%B8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《Linux内核设计与实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5Linux%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%E5%86%85%E6%A0%B8%E6%9C%BA%E5%88%B6/">《深入Linux设备驱动程序内核机制》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">《深入理解Linux虚拟内存管理》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">刷题</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/">《剑指offer专项突破》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网课</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/01Linux%E9%AB%98%E5%B9%B6%E5%8F%91%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/">《Linux高并发网络编程开发》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/%E4%BE%AF%E6%8D%B7/%E4%BE%AF%E6%8D%B7C%2B%2B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%8660%E8%AE%B2/">《侯捷C++内存管理60讲》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/11NJU%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">《NJU算法设计与分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">英语专</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../60English/00794%E7%BB%BC%E5%90%88%E8%8B%B1%E8%AF%AD%E4%B8%80%E4%B8%8A/">《综合英语(一)上》</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">lionel的技术笔记</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>Wireshark网络分析实战</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="wireshark">《Wireshark网络分析实战》<a class="headerlink" href="#wireshark" title="Permanent link">&para;</a></h2>
+<h3 id="chap1wireshark">chap1、wireshark简介<a class="headerlink" href="#chap1wireshark" title="Permanent link">&para;</a></h3>
+<h4 id="12wireshark">1.2、安置Wireshark（程序或主机）<a class="headerlink" href="#12wireshark" title="Permanent link">&para;</a></h4>
+<h5 id="0">0、<a class="headerlink" href="#0" title="Permanent link">&para;</a></h5>
+<ul>
+<li>安在哪里？</li>
+</ul>
+<h5 id="121">1.2.1、准备工作<a class="headerlink" href="#121" title="Permanent link">&para;</a></h5>
+<h5 id="122">1.2.2、操作方法<a class="headerlink" href="#122" title="Permanent link">&para;</a></h5>
+<h4 id="13">1.3、<a class="headerlink" href="#13" title="Permanent link">&para;</a></h4>
+<h5 id="133">1.3.3、幕后原理<a class="headerlink" href="#133" title="Permanent link">&para;</a></h5>
+<h5 id="134">1.3.4、拾遗补缺<a class="headerlink" href="#134" title="Permanent link">&para;</a></h5>
+<ul>
+<li>利用<strong>NTP（网络时间协议）</strong>让wireshark主机/抓包对象与某个中心时钟源同步时间</li>
+</ul>
+<h5 id="135">1.3.5、进阶阅读<a class="headerlink" href="#135" title="Permanent link">&para;</a></h5>
+<h4 id="14">1.4、配置启动窗口<a class="headerlink" href="#14" title="Permanent link">&para;</a></h4>
+<h5 id="141">1.4.1、准备工作<a class="headerlink" href="#141" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>视图</strong>下面的3点要熟悉<ul>
+<li>主工具条</li>
+<li>过滤器工具栏</li>
+<li>状态栏</li>
+</ul>
+</li>
+</ul>
+<h5 id="142">1.4.2、配置方法<a class="headerlink" href="#142" title="Permanent link">&para;</a></h5>
+<ul>
+<li>定制工具条</li>
+<li>定制抓包主窗口</li>
+<li>名字解析</li>
+<li>为数据包着色</li>
+</ul>
+<h4 id="15">1.5、配置时间参数<a class="headerlink" href="#15" title="Permanent link">&para;</a></h4>
+<h4 id="16">1.6、定义配色规则<a class="headerlink" href="#16" title="Permanent link">&para;</a></h4>
+<ul>
+<li>在解决TCP故障时，启用配色规则A; 解决SIP和IP语音故障时，启用配色规则B</li>
+</ul>
+<h5 id="161">1.6.1、准备工作<a class="headerlink" href="#161" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>视图-&gt;着色规则</strong></li>
+</ul>
+<h5 id="162">1.6.2、配置方法<a class="headerlink" href="#162" title="Permanent link">&para;</a></h5>
+<h4 id="17">1.7、数据文件的保存、打印及导出<a class="headerlink" href="#17" title="Permanent link">&para;</a></h4>
+<h5 id="172">1.7.2、操作方法<a class="headerlink" href="#172" title="Permanent link">&para;</a></h5>
+<ul>
+<li>数据保存操作</li>
+<li>保存数据的格式选取</li>
+<li>如何打印数据</li>
+</ul>
+<h5 id="173">1.7.3、幕后原理<a class="headerlink" href="#173" title="Permanent link">&para;</a></h5>
+<h4 id="18editpreferenceswireshark">1.8、通过Edit菜单中的Preferences菜单项，来配置Wireshark主界面<a class="headerlink" href="#18editpreferenceswireshark" title="Permanent link">&para;</a></h4>
+<h5 id="181">1.8.1、配置准备<a class="headerlink" href="#181" title="Permanent link">&para;</a></h5>
+<h5 id="182">1.8.2、配置方法<a class="headerlink" href="#182" title="Permanent link">&para;</a></h5>
+<ul>
+<li>调整及添加数据包属性列</li>
+<li>调整跟执行抓包任务有关的配置</li>
+<li>调整名字解析</li>
+</ul>
+<h5 id="183">1.8.3、幕后原理<a class="headerlink" href="#183" title="Permanent link">&para;</a></h5>
+<h4 id="19preferencesprotocol">1.9、配置Preferences窗口中的Protocol选项<a class="headerlink" href="#19preferencesprotocol" title="Permanent link">&para;</a></h4>
+<h5 id="191">1.9.1、配置准备<a class="headerlink" href="#191" title="Permanent link">&para;</a></h5>
+<h5 id="192">1.9.2、配置方法<a class="headerlink" href="#192" title="Permanent link">&para;</a></h5>
+<h3 id="chap2">chap2、抓包过滤器的用法<a class="headerlink" href="#chap2" title="Permanent link">&para;</a></h3>
+<h4 id="21">2.1、简介<a class="headerlink" href="#21" title="Permanent link">&para;</a></h4>
+<ul>
+<li>抓包过滤器（配置在抓包之前），显示过滤器（配置在抓包之后）</li>
+</ul>
+<h4 id="22">2.2、配置抓包过滤器<a class="headerlink" href="#22" title="Permanent link">&para;</a></h4>
+<p>2.3、配置Ethernet过滤器</p>
+<p>2.4、配置主机和网络过滤器</p>
+<p>2.5、配置TCP/UDP及端口过滤器</p>
+<p>2.6、配置复合型过滤器</p>
+<p>2.7、配置字节偏移和净载匹配型过滤器</p>
+<h3 id="chap3">chap3、显示过滤器的用法<a class="headerlink" href="#chap3" title="Permanent link">&para;</a></h3>
+<p>3.1、简介</p>
+<h4 id="32">3.2、配置显示过滤器<a class="headerlink" href="#32" title="Permanent link">&para;</a></h4>
+<p>3.3、配置Ethernet、ARP、主机和网络过滤器</p>
+<p>3.4、配置TCP/UDP过滤器</p>
+<p>3.5、配置协议所独有的显示过滤器</p>
+<p>3.6、配置字节偏移过滤器</p>
+<p>3.7、配置显示过滤器宏</p>
+<h3 id="chap4">chap4、基本信息统计工具的用法<a class="headerlink" href="#chap4" title="Permanent link">&para;</a></h3>
+<p>4.1、简介</p>
+<p>4.2、Statistics菜单中Summary工具的用法</p>
+<h4 id="42statisticsprotocol-hierarchy">4.2、Statistics菜单中Protocol Hierarchy工具的用法<a class="headerlink" href="#42statisticsprotocol-hierarchy" title="Permanent link">&para;</a></h4>
+<p>4.2、Statistics菜单中Conversation工具的用法</p>
+<p>4.2、Statistics菜单中Endpoints工具的用法</p>
+<p>4.2、Statistics菜单中HTTP工具的用法</p>
+<p>4.7、配置Flow Graph（数据流图），来查看TCP流</p>
+<p>4.8、生成与IP属性有关的统计信息</p>
+<h3 id="chap8arpip">chap8、ARP和IP故障分析<a class="headerlink" href="#chap8arpip" title="Permanent link">&para;</a></h3>
+<p>8.1、简介</p>
+<p>8.2、与ARP有关的连通性网络故障分析</p>
+<p>8.3、IP流量分析工具的用法</p>
+<p>8.4、利用GeoIP来查询IP地址的归属地</p>
+<p>8.5、利用IP包分片问题</p>
+<p>8.6、路由选择故障分析</p>
+<p>8.7、发现IP地址冲突</p>
+<p>8.8、DHCP故障分析</p>
+<h3 id="chap9udptcp">chap9、UDP/TCP故障分析<a class="headerlink" href="#chap9udptcp" title="Permanent link">&para;</a></h3>
+<p>9.1、简介</p>
+<p>9.2、配置</p>
+<p>9.3、TCP连接故障</p>
+<p>9.4、TCP重传现象-源头及原因</p>
+<p>9.5、重复确认（duplicate ACKs）和快速重传（fast retransmissions）现象</p>
+<p>9.6、TCP报文段失序现象</p>
+<p>9.7、TCP Zero Window、</p>
+<h4 id="98tcpreset">9.8、TCP重置（reset）及原因<a class="headerlink" href="#98tcpreset" title="Permanent link">&para;</a></h4>
+<h3 id="chap12sipip">chap12、SIP、多媒体和IP电话<a class="headerlink" href="#chap12sipip" title="Permanent link">&para;</a></h3>
+<p>12.1、简介</p>
+<p>12.2、使用内置于</p>
+<p>12.3、SIP故障分析</p>
+<h4 id="124rtprtcp">12.4、RTP/RTCP故障分析<a class="headerlink" href="#124rtprtcp" title="Permanent link">&para;</a></h4>
+<h5 id="1241">12.4.1、准备工作<a class="headerlink" href="#1241" title="Permanent link">&para;</a></h5>
+<ul>
+<li>端口镜像功能</li>
+<li>将交换机上连接该用户UA的端口的流量重定向至Wireshark主机</li>
+</ul>
+<h5 id="1242">12.4.2、操作方法<a class="headerlink" href="#1242" title="Permanent link">&para;</a></h5>
+<ul>
+<li>Telephony菜单（电话菜单）</li>
+<li>若怀疑通话质量不佳是由高网络延迟所引发，<strong>按以下思路来定位</strong><ul>
+<li>1、用ping来了解UA之间的网络延迟状况</li>
+</ul>
+</li>
+<li>若怀疑网络中存在高抖动现象，<strong>按以下思路来定位</strong><ul>
+<li>1、上面的方法</li>
+<li>2、</li>
+</ul>
+</li>
+<li>若怀疑网络中存在丢包问题，<strong>按以下思路来定位</strong><ul>
+<li>1、ping，了解UA之间是否存在丢包现象</li>
+<li>2、若存在，检查UA间每一段链路的丢包状况</li>
+<li>3、选一个RTP数据包，电话菜单，<strong>流分析</strong>菜单项</li>
+</ul>
+</li>
+</ul>
+<h5 id="1243">12.4.3、幕后原理<a class="headerlink" href="#1243" title="Permanent link">&para;</a></h5>
+<ul>
+<li>RTP协议的运作原理</li>
+<li>RTCP协议的运作原理</li>
+</ul>
+<h5 id="1244">12.4.4、拾遗补缺<a class="headerlink" href="#1244" title="Permanent link">&para;</a></h5>
+<ul>
+<li>引入延迟的地方<ul>
+<li>编/解码延迟：数模转换导致的</li>
+<li>处理延迟（"打包"延迟）</li>
+<li>串行延迟：数据包在链路上发送所产生的延迟，取决于<strong>RTP数据包的大小及通信链路的带宽</strong></li>
+</ul>
+</li>
+</ul>
+<h4 id="125">12.5、视频及视频监控应用排障场景<a class="headerlink" href="#125" title="Permanent link">&para;</a></h4>
+<h5 id="1251">12.5.1、准备工作<a class="headerlink" href="#1251" title="Permanent link">&para;</a></h5>
+<h5 id="1252">12.5.2、操作方法<a class="headerlink" href="#1252" title="Permanent link">&para;</a></h5>
+<p>12.6、IPTV应用排障场景</p>
+<p>12.7、视频会议应用排障场景</p>
+<h4 id="128rtsp">12.8、排除RTSP协议故障<a class="headerlink" href="#128rtsp" title="Permanent link">&para;</a></h4>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

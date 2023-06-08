@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>TCPIP详解卷1 - lionel的技术笔记</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "TCPIP\u8be6\u89e3\u53771";
+        var mkdocs_page_input_path = "10network\\TCPIP\u8be6\u89e3\u53771.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> lionel的技术笔记
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">简介</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../01daily/">daily</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">C++</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../20C%2B%2B/effectiveC%2B%2B/">《Effective C++》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/EffectiveSTL/">《Effective STL》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">基础知识</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA/">《操作系统导论》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网络编程</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../TCPIP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">《TCP/IP网络编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/">《Linux高性能服务器编程》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">文件系统</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/Linux%E5%86%85%E6%A0%B8%E6%8E%A2%E7%A7%98/">《Linux内核探秘》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《文件系统技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">《存储技术原理分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">存储</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../12storage/ceph%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《ceph设计原理与实现》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">内核</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/Linux%E5%86%85%E6%A0%B8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《Linux内核设计与实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5Linux%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%E5%86%85%E6%A0%B8%E6%9C%BA%E5%88%B6/">《深入Linux设备驱动程序内核机制》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">《深入理解Linux虚拟内存管理》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">刷题</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/">《剑指offer专项突破》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网课</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/01Linux%E9%AB%98%E5%B9%B6%E5%8F%91%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/">《Linux高并发网络编程开发》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/%E4%BE%AF%E6%8D%B7/%E4%BE%AF%E6%8D%B7C%2B%2B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%8660%E8%AE%B2/">《侯捷C++内存管理60讲》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/11NJU%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">《NJU算法设计与分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">英语专</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../60English/00794%E7%BB%BC%E5%90%88%E8%8B%B1%E8%AF%AD%E4%B8%80%E4%B8%8A/">《综合英语(一)上》</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">lionel的技术笔记</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>TCPIP详解卷1</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h3 id="1">《卷1协议》<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>某乎上网友（17-20）是重点</li>
+<li>TCP（17-24）</li>
+</ul>
+<h3 id="chap17tcp">chap17、TCP<a class="headerlink" href="#chap17tcp" title="Permanent link">&para;</a></h3>
+<h4 id="171">17.1、引言<a class="headerlink" href="#171" title="Permanent link">&para;</a></h4>
+<h4 id="172tcp">17.2、TCP的服务<a class="headerlink" href="#172tcp" title="Permanent link">&para;</a></h4>
+<ul>
+<li>TCP通过下列方式来提供可靠性<ul>
+<li>应用数据被分割成TCP认为最适合发送的数据块</li>
+<li>TCP发送一个段后，<strong>启用定时器</strong>，等待目的端确认收到这个报文段</li>
+<li>收到后会发送确认，<strong>但不是立即发送，而是推迟几分之一秒</strong></li>
+<li>将保持它首部和数据的检验和</li>
+<li>数据报会失序，<strong>如果必要，收到后会重排</strong></li>
+<li>TCP接收端必须丢弃重复的数据</li>
+<li>流量控制</li>
+</ul>
+</li>
+<li><em>字节流服务，没太懂，上面的都懂了</em></li>
+</ul>
+<h4 id="173tcp">17.3、TCP的首部<a class="headerlink" href="#173tcp" title="Permanent link">&para;</a></h4>
+<ul>
+<li><em>感觉也没必要背这个字段</em></li>
+<li>https://lxr.missinglinkelectronics.com/linux+v5.0/include/uapi/linux/tcp.h#L25 中定义了<code>struct tcphdr{}</code></li>
+</ul>
+<pre class="highlight"><code class="language-c">struct tcphdr {  
+    __u16   source;  //16位源端口号
+    __u16   dest;    //16位目的端口号
+    __u32   seq;     // 32位序号
+    __u32   ack_seq; // 32位确认序号
+    //4位首部长度
+    //6位保留
+    //urg,ack,psh,rst,syn,fin 各占1位
+    __u16   window;   //16位窗口大小
+    __u16   check;    //16位检验和
+    __u16   urg_ptr;  //16位紧急指针
+    //选项
+    //数据
+};</code></pre>
+<h4 id="174">17.4、小结<a class="headerlink" href="#174" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Telnet、Rlogin、FTP和SMTP都使用TCP.</li>
+</ul>
+<h4 id="_1">习题<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li>17.4、为什么在TCP首部的开始便是源和目的端口号?</li>
+</ul>
+<h3 id="chap18tcp">chap18、TCP连接的建立与终止<a class="headerlink" href="#chap18tcp" title="Permanent link">&para;</a></h3>
+<h4 id="181">18.1、引言<a class="headerlink" href="#181" title="Permanent link">&para;</a></h4>
+<h4 id="182">18.2、连接的建立与终止<a class="headerlink" href="#182" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>telnet bsdi discard</code>，<em>暂时我还不知道是啥意思</em></li>
+</ul>
+<h5 id="1821tcpdump">18.2.1、tcpdump的输出<a class="headerlink" href="#1821tcpdump" title="Permanent link">&para;</a></h5>
+<p>18.2.2、时间系列</p>
+<p>18.2.3、建立连接协议</p>
+<p>18.2.4、连接终止协议</p>
+<p>18.2.5、正常的tcpdump输出</p>
+<h4 id="183">18.3、连接建立的超时<a class="headerlink" href="#183" title="Permanent link">&para;</a></h4>
+<h5 id="1831">18.3.1、第一次超时时间<a class="headerlink" href="#1831" title="Permanent link">&para;</a></h5>
+<h5 id="1832">18.3.2、服务类型字段<a class="headerlink" href="#1832" title="Permanent link">&para;</a></h5>
+<h4 id="184">18.4、最大报文段长度<a class="headerlink" href="#184" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>MSS选项只能出现在SYN报文段中</strong></li>
+</ul>
+<h4 id="185tcp">18.5、TCP的半关闭<a class="headerlink" href="#185tcp" title="Permanent link">&para;</a></h4>
+<h4 id="186tcp">18.6、TCP的状态变迁图<a class="headerlink" href="#186tcp" title="Permanent link">&para;</a></h4>
+<ul>
+<li>183/424的<strong>图18-12</strong>，自己记一下</li>
+</ul>
+<h5 id="18612msl">18.6.1、2MSL等待状态<a class="headerlink" href="#18612msl" title="Permanent link">&para;</a></h5>
+<h5 id="1862">18.6.2、平静时间的概念<a class="headerlink" href="#1862" title="Permanent link">&para;</a></h5>
+<h5 id="1863fin_wait_2">18.6.3、FIN_WAIT_2状态<a class="headerlink" href="#1863fin_wait_2" title="Permanent link">&para;</a></h5>
+<h4 id="187">18.7、复位报文段<a class="headerlink" href="#187" title="Permanent link">&para;</a></h4>
+<h5 id="1871">18.7.1、找不存在的端口的连接请求<a class="headerlink" href="#1871" title="Permanent link">&para;</a></h5>
+<h5 id="1872">18.7.2、异常终止一个连接<a class="headerlink" href="#1872" title="Permanent link">&para;</a></h5>
+<h5 id="1873">18.7.3、检测半打开连接<a class="headerlink" href="#1873" title="Permanent link">&para;</a></h5>
+<h4 id="188">18.8、同时打开<a class="headerlink" href="#188" title="Permanent link">&para;</a></h4>
+<h4 id="189">18.9、同时关闭<a class="headerlink" href="#189" title="Permanent link">&para;</a></h4>
+<h4 id="1810tcp">18.10、TCP选项<a class="headerlink" href="#1810tcp" title="Permanent link">&para;</a></h4>
+<h4 id="1811tcp">18.11、TCP服务器的设计<a class="headerlink" href="#1811tcp" title="Permanent link">&para;</a></h4>
+<h5 id="18111tcp">18.11.1、TCP服务器端口号<a class="headerlink" href="#18111tcp" title="Permanent link">&para;</a></h5>
+<h5 id="18112ip">18.11.2、限定的本地IP地址<a class="headerlink" href="#18112ip" title="Permanent link">&para;</a></h5>
+<h5 id="18113ip">18.11.3、限定的远端IP地址<a class="headerlink" href="#18113ip" title="Permanent link">&para;</a></h5>
+<h5 id="18114">18.11.4、呼入连接请求队列<a class="headerlink" href="#18114" title="Permanent link">&para;</a></h5>
+<h4 id="1812">18.12、小结<a class="headerlink" href="#1812" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>弄清TCP操作的关键在于它的状态变迁图</strong></li>
+</ul>
+<h4 id="_2">习题<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
+<ul>
+<li>18.3、半打开连接和半关闭连接的区别是什么？</li>
+</ul>
+<h3 id="chap19tcp">chap19、TCP的交互数据流<a class="headerlink" href="#chap19tcp" title="Permanent link">&para;</a></h3>
+<h3 id="chap20tcp">chap20、TCP的成块数据流<a class="headerlink" href="#chap20tcp" title="Permanent link">&para;</a></h3>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

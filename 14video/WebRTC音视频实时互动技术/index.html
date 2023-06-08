@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>WebRTC音视频实时互动技术 - lionel的技术笔记</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "WebRTC\u97f3\u89c6\u9891\u5b9e\u65f6\u4e92\u52a8\u6280\u672f";
+        var mkdocs_page_input_path = "14video\\WebRTC\u97f3\u89c6\u9891\u5b9e\u65f6\u4e92\u52a8\u6280\u672f.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> lionel的技术笔记
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">简介</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../01daily/">daily</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">C++</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../20C%2B%2B/effectiveC%2B%2B/">《Effective C++》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/EffectiveSTL/">《Effective STL》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">基础知识</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA/">《操作系统导论》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网络编程</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/TCPIP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">《TCP/IP网络编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/">《Linux高性能服务器编程》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">文件系统</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/Linux%E5%86%85%E6%A0%B8%E6%8E%A2%E7%A7%98/">《Linux内核探秘》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《文件系统技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">《存储技术原理分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">存储</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../12storage/ceph%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《ceph设计原理与实现》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">内核</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/Linux%E5%86%85%E6%A0%B8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《Linux内核设计与实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5Linux%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%E5%86%85%E6%A0%B8%E6%9C%BA%E5%88%B6/">《深入Linux设备驱动程序内核机制》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">《深入理解Linux虚拟内存管理》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">刷题</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/">《剑指offer专项突破》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网课</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/01Linux%E9%AB%98%E5%B9%B6%E5%8F%91%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/">《Linux高并发网络编程开发》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/%E4%BE%AF%E6%8D%B7/%E4%BE%AF%E6%8D%B7C%2B%2B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%8660%E8%AE%B2/">《侯捷C++内存管理60讲》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/11NJU%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">《NJU算法设计与分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">英语专</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../60English/00794%E7%BB%BC%E5%90%88%E8%8B%B1%E8%AF%AD%E4%B8%80%E4%B8%8A/">《综合英语(一)上》</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">lionel的技术笔记</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>WebRTC音视频实时互动技术</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="webrtc">《WebRTC音视频实时互动技术》<a class="headerlink" href="#webrtc" title="Permanent link">&para;</a></h2>
+<h3 id="chap1">chap1、音视频直播的前世今生<a class="headerlink" href="#chap1" title="Permanent link">&para;</a></h3>
+<h4 id="11">1.1、音视频的历史<a class="headerlink" href="#11" title="Permanent link">&para;</a></h4>
+<h4 id="12">1.2、移动互联网<a class="headerlink" href="#12" title="Permanent link">&para;</a></h4>
+<h4 id="13">1.3、音视频直播的两条技术路线<a class="headerlink" href="#13" title="Permanent link">&para;</a></h4>
+<ul>
+<li>2条技术路线<ul>
+<li>以音视频会议为代表的实时互动直播<ul>
+<li>WebEx</li>
+<li>时延500ms</li>
+</ul>
+</li>
+<li>以娱乐直播为代表的流媒体分发<ul>
+<li>时延3s</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>不同的直播技术<ul>
+<li>WebRTC</li>
+<li>RTMP</li>
+<li>HTTP-FLV</li>
+<li>HLS</li>
+<li>DASH</li>
+</ul>
+</li>
+</ul>
+<h4 id="14">1.4、音视频直播的现状<a class="headerlink" href="#14" title="Permanent link">&para;</a></h4>
+<h4 id="15">1.5、音视频直播的未来<a class="headerlink" href="#15" title="Permanent link">&para;</a></h4>
+<ul>
+<li>有了AI后，可以对视频进行二次处理</li>
+</ul>
+<h4 id="16">1.6、小结<a class="headerlink" href="#16" title="Permanent link">&para;</a></h4>
+<h3 id="chap2webrtc">chap2、为什么要使用WebRTC<a class="headerlink" href="#chap2webrtc" title="Permanent link">&para;</a></h3>
+<h4 id="21">2.1、自研直播客户端架构<a class="headerlink" href="#21" title="Permanent link">&para;</a></h4>
+<ul>
+<li>29/476</li>
+</ul>
+<h5 id="211">2.1.1、拆分音视频模块<a class="headerlink" href="#211" title="Permanent link">&para;</a></h5>
+<h5 id="212">2.1.2、跨平台<a class="headerlink" href="#212" title="Permanent link">&para;</a></h5>
+<h5 id="213">2.1.3、插件化管理<a class="headerlink" href="#213" title="Permanent link">&para;</a></h5>
+<h5 id="214">2.1.4、其他<a class="headerlink" href="#214" title="Permanent link">&para;</a></h5>
+<ul>
+<li>音视频不同步</li>
+<li>回音</li>
+<li>音视频的实时性</li>
+<li><strong>网络拥塞，丢包，延时，抖动，混音</strong></li>
+</ul>
+<h4 id="22webrtc">2.2、WebRTC客户端架构<a class="headerlink" href="#22webrtc" title="Permanent link">&para;</a></h4>
+<ul>
+<li>42/476</li>
+</ul>
+<h4 id="23">2.3、小结<a class="headerlink" href="#23" title="Permanent link">&para;</a></h4>
+<h3 id="chap3">chap3、音视频实时通信的本质<a class="headerlink" href="#chap3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>线上与线下的区别<ul>
+<li>一是实时性不够</li>
+<li>二是业务数据有损失<ul>
+<li>1、摄像头采集的角度过于狭小</li>
+<li>2、设备的质量无法保障</li>
+<li>3、现场的气氛是无法通过摄像头和麦克风采集到的</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="31">3.1、两种指标<a class="headerlink" href="#31" title="Permanent link">&para;</a></h4>
+<h5 id="311">3.1.1、实时通信延迟指标<a class="headerlink" href="#311" title="Permanent link">&para;</a></h5>
+<h5 id="312">3.1.2、音视频服务质量指标<a class="headerlink" href="#312" title="Permanent link">&para;</a></h5>
+<h4 id="32">3.2、实时通信的主要矛盾<a class="headerlink" href="#32" title="Permanent link">&para;</a></h4>
+<h5 id="321">3.2.1、增加带宽<a class="headerlink" href="#321" title="Permanent link">&para;</a></h5>
+<h5 id="322">3.2.2、减少数据量<a class="headerlink" href="#322" title="Permanent link">&para;</a></h5>
+<h5 id="323">3.2.3、适当增加时延<a class="headerlink" href="#323" title="Permanent link">&para;</a></h5>
+<h5 id="324">3.2.4、提高网络质量<a class="headerlink" href="#324" title="Permanent link">&para;</a></h5>
+<h5 id="325">3.2.5、快速准确地评估带宽<a class="headerlink" href="#325" title="Permanent link">&para;</a></h5>
+<h4 id="33">3.3、小结<a class="headerlink" href="#33" title="Permanent link">&para;</a></h4>
+<h3 id="chap4webrtc">chap4、构建WebRTC一对一信令服务器<a class="headerlink" href="#chap4webrtc" title="Permanent link">&para;</a></h3>
+<h4 id="41webrtc">4.1、WebRTC一对一架构<a class="headerlink" href="#41webrtc" title="Permanent link">&para;</a></h4>
+<h4 id="42">4.2、细化架构<a class="headerlink" href="#42" title="Permanent link">&para;</a></h4>
+<h4 id="43">4.3、信令<a class="headerlink" href="#43" title="Permanent link">&para;</a></h4>
+<h5 id="431">4.3.1、信令定义<a class="headerlink" href="#431" title="Permanent link">&para;</a></h5>
+<h5 id="432">4.3.2、信令时序<a class="headerlink" href="#432" title="Permanent link">&para;</a></h5>
+<h5 id="433">4.3.3、信令传输协议的选择<a class="headerlink" href="#433" title="Permanent link">&para;</a></h5>
+<h4 id="44">4.4、构建信令服务器<a class="headerlink" href="#44" title="Permanent link">&para;</a></h4>
+<h5 id="441">4.4.1、信令服务器的实现方案<a class="headerlink" href="#441" title="Permanent link">&para;</a></h5>
+<h5 id="442">4.4.2、信令服务器的业务逻辑<a class="headerlink" href="#442" title="Permanent link">&para;</a></h5>
+<h5 id="443">4.4.3、信令服务器的实现<a class="headerlink" href="#443" title="Permanent link">&para;</a></h5>
+<h5 id="444">4.4.4、信令服务器的安装与部署<a class="headerlink" href="#444" title="Permanent link">&para;</a></h5>
+<h5 id="445">4.4.5、信令服务器的完整代码<a class="headerlink" href="#445" title="Permanent link">&para;</a></h5>
+<h4 id="45">4.5、小结<a class="headerlink" href="#45" title="Permanent link">&para;</a></h4>
+<h3 id="chap5webrtc">chap5、WebRTC实现一对一通信<a class="headerlink" href="#chap5webrtc" title="Permanent link">&para;</a></h3>
+<h4 id="51webrtc">5.1、浏览器对WebRTC的支持<a class="headerlink" href="#51webrtc" title="Permanent link">&para;</a></h4>
+<h4 id="52">5.2、遍历音视频设备<a class="headerlink" href="#52" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>enumerateDevices()</code></li>
+<li><code>MediaDeviceInfo</code>结构体</li>
+</ul>
+<h4 id="53">5.3、采集音视频数据<a class="headerlink" href="#53" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>getUserMedia()</code></li>
+<li><code>MediaStreamConstrains</code>结构体</li>
+</ul>
+<h4 id="54mediastreammediastreamtrack">5.4、MediaStream与MediaStreamTrack<a class="headerlink" href="#54mediastreammediastreamtrack" title="Permanent link">&para;</a></h4>
+<h4 id="55">5.5、本地视频预览<a class="headerlink" href="#55" title="Permanent link">&para;</a></h4>
+<h4 id="56">5.6、信令状态机<a class="headerlink" href="#56" title="Permanent link">&para;</a></h4>
+<h4 id="57rtcpeerconnection">5.7、RTCPeerConnection<a class="headerlink" href="#57rtcpeerconnection" title="Permanent link">&para;</a></h4>
+<h5 id="571rtcpeerconnection">5.7.1、创建RTCPeerConnection对象<a class="headerlink" href="#571rtcpeerconnection" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>new RTCPeerConnection(configuration)</code></li>
+</ul>
+<h5 id="572rtcpeerconnection">5.7.2、RTCPeerConnection与本地音视频数据<a class="headerlink" href="#572rtcpeerconnection" title="Permanent link">&para;</a></h5>
+<h5 id="573">5.7.3、媒体协商<a class="headerlink" href="#573" title="Permanent link">&para;</a></h5>
+<h5 id="574ice">5.7.4、ICE<a class="headerlink" href="#574ice" title="Permanent link">&para;</a></h5>
+<h6 id="1candidate">1、什么是Candidate<a class="headerlink" href="#1candidate" title="Permanent link">&para;</a></h6>
+<h6 id="2candidate">2、收集Candidate<a class="headerlink" href="#2candidate" title="Permanent link">&para;</a></h6>
+<h6 id="3candidate">3、交换Candidate<a class="headerlink" href="#3candidate" title="Permanent link">&para;</a></h6>
+<h6 id="4">4、尝试连接<a class="headerlink" href="#4" title="Permanent link">&para;</a></h6>
+<h5 id="575sdpcandidate">5.7.5、SDP与Candidate消息的交换<a class="headerlink" href="#575sdpcandidate" title="Permanent link">&para;</a></h5>
+<h5 id="576">5.7.6、远端音视频渲染<a class="headerlink" href="#576" title="Permanent link">&para;</a></h5>
+<h5 id="577">5.7.7、客户端完整例子<a class="headerlink" href="#577" title="Permanent link">&para;</a></h5>
+<h4 id="58">5.8、小结<a class="headerlink" href="#58" title="Permanent link">&para;</a></h4>
+<h3 id="chap6webrtcice">chap6、WebRTC中的ICE实现<a class="headerlink" href="#chap6webrtcice" title="Permanent link">&para;</a></h3>
+<h4 id="61candidate">6.1、Candidate种类与优先级<a class="headerlink" href="#61candidate" title="Permanent link">&para;</a></h4>
+<h4 id="62ice">6.2、ICE策略<a class="headerlink" href="#62ice" title="Permanent link">&para;</a></h4>
+<h4 id="63p2p">6.3、P2P连接<a class="headerlink" href="#63p2p" title="Permanent link">&para;</a></h4>
+<h5 id="635nat">6.3.5、NAT类型检测<a class="headerlink" href="#635nat" title="Permanent link">&para;</a></h5>
+<h4 id="64">6.4、网络中继<a class="headerlink" href="#64" title="Permanent link">&para;</a></h4>
+<h4 id="65">6.5、小结<a class="headerlink" href="#65" title="Permanent link">&para;</a></h4>
+<h3 id="chap7webrtcsdp">chap7、WebRTC中的SDP<a class="headerlink" href="#chap7webrtcsdp" title="Permanent link">&para;</a></h3>
+<ul>
+<li>SDP（Session Description Protocol）是WebRTC的灵魂</li>
+</ul>
+<h4 id="71sdp">7.1、SDP标准规范<a class="headerlink" href="#71sdp" title="Permanent link">&para;</a></h4>
+<p>7.2、WebRTC中的SDP的整体结构</p>
+<p>7.3、媒体信息</p>
+<p>7.4、PlanB与UnifiedPlan</p>
+<p>7.5、WebRTC如何保证数据安全</p>
+<p>7.6、RTP扩展头</p>
+<p>7.7、服务质量</p>
+<p>7.8、SDP详解</p>
+<p>7.9、ORTC</p>
+<p>7.10、小结</p>
+<h3 id="chap8">chap8、各端的互联互通<a class="headerlink" href="#chap8" title="Permanent link">&para;</a></h3>
+<h4 id="81webrtc-native">8.1、WebRTC Native的核心<a class="headerlink" href="#81webrtc-native" title="Permanent link">&para;</a></h4>
+<ul>
+<li>web端的核心是<strong>RTCPeerConnection对象</strong></li>
+<li>native的核心对象是<strong>PeerConnectionFactory</strong>，不能传输数据，<strong>传输数据</strong>是由<strong>PeerConnection对象</strong></li>
+<li>223/476，中的图</li>
+</ul>
+<h4 id="82android">8.2、Android端的实现<a class="headerlink" href="#82android" title="Permanent link">&para;</a></h4>
+<h4 id="83ios">8.3、iOS端的实现<a class="headerlink" href="#83ios" title="Permanent link">&para;</a></h4>
+<h4 id="84pcmac">8.4、PC端与Mac端的实现<a class="headerlink" href="#84pcmac" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Native方案，底层API</li>
+<li>Electron，基于Chrome浏览器内核<ul>
+<li>javascript</li>
+</ul>
+</li>
+<li>Flutter方案<ul>
+<li>google推出，目标是开发一套代码让所有类型的终端都可运行</li>
+</ul>
+</li>
+</ul>
+<h4 id="85">8.5、小结<a class="headerlink" href="#85" title="Permanent link">&para;</a></h4>
+<ul>
+<li>实现一对一实时通信的逻辑：<ul>
+<li>申请访问音视频设备权限</li>
+<li>引入WebRTC库（Web端不需要）</li>
+<li>采集音视频数据，并创建音视频数据通道</li>
+<li>采集音视频并展示本地预览</li>
+<li>与服务器建立信令通道，并通过信令驱动程序的运转</li>
+<li>进行媒体协商</li>
+<li>渲染远端视频</li>
+</ul>
+</li>
+</ul>
+<h3 id="chap9rtprtcp">chap9、网络传输协议RTP与RTCP<a class="headerlink" href="#chap9rtprtcp" title="Permanent link">&para;</a></h3>
+<h4 id="91udptcp">9.1、如何选择UDP与TCP<a class="headerlink" href="#91udptcp" title="Permanent link">&para;</a></h4>
+<ul>
+<li>乱序（抖动）</li>
+<li><strong>TCP的丢包重传机制</strong></li>
+<li>基于UDP，通过<strong>NACK、FEC、Jitter Buffer以及NetEQ技术</strong>解决丢包和抖动问题，又不产生影响服务质量的时延</li>
+</ul>
+<h4 id="92rtp">9.2、RTP<a class="headerlink" href="#92rtp" title="Permanent link">&para;</a></h4>
+<ul>
+<li>UDP<strong>传输一些有前后逻辑关系的数据时</strong>就不太行，而音视频就是这类数据，所以在<strong>UDP之上增加一个协议，RTP</strong>，RTP与HTTP一样，都是应用层</li>
+<li>问题1：RTP是如何传输有前后关系的音视频数据的？<em>lionel问题</em></li>
+</ul>
+<h5 id="921rtp">9.2.1、RTP的协议头<a class="headerlink" href="#921rtp" title="Permanent link">&para;</a></h5>
+<ul>
+<li>发送的数据包都打上了一个编号，对应的字段，叫做<strong>Sequence Number字段</strong></li>
+<li>接收端从同一个端口中通过<strong>PayLoadType字段</strong>，来区分不同类型的数据<ul>
+<li>VP8的PT一般是96</li>
+<li>Opus的PT一般是111</li>
+</ul>
+</li>
+<li><strong>SSRC字段</strong>区分啥呢？<strong>多个不同源（参与人）通过同一个端口发送</strong><ul>
+<li>每个源的SSRC必须唯一</li>
+<li>每个SSRC所代表的数据流的Sequence Number都是单独计数的</li>
+</ul>
+</li>
+<li><em>276/476的还有些要扩展的，lionel</em></li>
+</ul>
+<h5 id="922rtp">9.2.2、RTP的使用<a class="headerlink" href="#922rtp" title="Permanent link">&para;</a></h5>
+<ul>
+<li>创建/解析RTP包<ul>
+<li><code>RtpPacket</code>类，module/rtp_rtcp_source目录中的rtp_packet.h/cc</li>
+</ul>
+</li>
+<li>根据RTP包进行逻辑处理<ul>
+<li><strong>通过缓冲队列JitterBuffer</strong>解决抖动问题</li>
+<li>279/476再好好看看，<em>lionel</em></li>
+</ul>
+</li>
+</ul>
+<h5 id="923rtp">9.2.3、RTP的扩展头<a class="headerlink" href="#923rtp" title="Permanent link">&para;</a></h5>
+<h5 id="924rtp">9.2.4、RTP中的填充数据<a class="headerlink" href="#924rtp" title="Permanent link">&para;</a></h5>
+<h4 id="93rtcp">9.3、RTCP<a class="headerlink" href="#93rtcp" title="Permanent link">&para;</a></h4>
+<ul>
+<li>与RTP处于同一层级，可以做<strong>丢包控制</strong>，接收端可以使用RTCP的RR报文向发送端发送接收报告，记录着从上次报告到本次报告之间丢失了多少包，丢包率是多少，延时是多少。</li>
+</ul>
+<h5 id="931rtcp">9.3.1、RTCP报文分类<a class="headerlink" href="#931rtcp" title="Permanent link">&para;</a></h5>
+<ul>
+<li>293/476</li>
+</ul>
+<ul>
+<li>SR</li>
+<li>RR（Receiver Report packet）</li>
+</ul>
+<h5 id="932rtp">9.3.2、RTP协议头<a class="headerlink" href="#932rtp" title="Permanent link">&para;</a></h5>
+<ul>
+<li>RTP中的PT值是在SDP中定义的，而RTCP的PT值来自（SR,RR）这些</li>
+<li>RFC3550</li>
+</ul>
+<h5 id="933webrtc">9.3.3、WebRTC的反馈报文<a class="headerlink" href="#933webrtc" title="Permanent link">&para;</a></h5>
+<ul>
+<li>PF为205（RTPFB报文，反馈RTP相关的信息）和206（PSFB报文，反馈负载相关的信息）的报文类型属于<strong>反馈报文</strong></li>
+<li>297/476</li>
+</ul>
+<h4 id="94">9.4、小结<a class="headerlink" href="#94" title="Permanent link">&para;</a></h4>
+<ul>
+<li>RTP特别适用于音视频数据传输</li>
+</ul>
+<h3 id="chap10webrtc">chap10、WebRTC拥塞控制<a class="headerlink" href="#chap10webrtc" title="Permanent link">&para;</a></h3>
+<h4 id="101webrtc">10.1、WebRTC的拥塞控制算法<a class="headerlink" href="#101webrtc" title="Permanent link">&para;</a></h4>
+<h5 id="1011goog-remb">10.1.1、Goog-REMB<a class="headerlink" href="#1011goog-remb" title="Permanent link">&para;</a></h5>
+<h5 id="1012transport-cc">10.1.2、Transport-CC<a class="headerlink" href="#1012transport-cc" title="Permanent link">&para;</a></h5>
+<h5 id="1013">10.1.3、基于丢包的拥塞评估算法原理<a class="headerlink" href="#1013" title="Permanent link">&para;</a></h5>
+<h5 id="1014webrtc">10.1.4、WebRTC拥塞控制流程<a class="headerlink" href="#1014webrtc" title="Permanent link">&para;</a></h5>
+<h4 id="102">10.2、拥塞控制算法比较<a class="headerlink" href="#102" title="Permanent link">&para;</a></h4>
+<h4 id="103">10.3、小结<a class="headerlink" href="#103" title="Permanent link">&para;</a></h4>
+<h3 id="chap11webrtc">chap11、WebRTC源码分析入门<a class="headerlink" href="#chap11webrtc" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>读开源项目的源码是开发人员的一门必修课</strong></li>
+</ul>
+<h4 id="111webrtc">11.1、WebRTC源码的选择<a class="headerlink" href="#111webrtc" title="Permanent link">&para;</a></h4>
+<p>11.2、WebRTC开发环境的搭建</p>
+<h4 id="114webrtc">11.4、WebRTC目录结构<a class="headerlink" href="#114webrtc" title="Permanent link">&para;</a></h4>
+<h5 id="1141webrtc">11.4.1、WebRTC主目录<a class="headerlink" href="#1141webrtc" title="Permanent link">&para;</a></h5>
+<ul>
+<li>接口层，api目录</li>
+<li>业务处理层<ul>
+<li>pc目录（PerrConnection）</li>
+<li>call目录（与session业务类似）</li>
+<li>media目录（媒体引擎）</li>
+</ul>
+</li>
+<li>音频处理层<ul>
+<li>audio</li>
+<li>video</li>
+<li>common_audio，<strong>音频的基本算法</strong></li>
+<li>common_videosdk，<strong>视频算法工具</strong></li>
+</ul>
+</li>
+<li>基础支撑层<ul>
+<li>sdk目录，Android端的视频采集</li>
+<li>p2p目录，端到端的网络连接，dtls，stun协议实现</li>
+<li>stats目录，统计相关</li>
+<li>rt_base目录</li>
+<li>rt_tools目录</li>
+<li>tools_webrtc目录</li>
+<li>system_wrapper目录</li>
+</ul>
+</li>
+</ul>
+<h5 id="1142modules">11.4.2、modules目录<a class="headerlink" href="#1142modules" title="Permanent link">&para;</a></h5>
+<ul>
+<li>音频处理类<ul>
+<li>audio_coding</li>
+<li>audio_device</li>
+</ul>
+</li>
+<li>视频处理类</li>
+<li>网络及流控类<ul>
+<li>rtp_rtcp</li>
+<li>bitrate_controller</li>
+<li>congestion_controller</li>
+<li>remote_bitrate_estimator</li>
+<li>pcing</li>
+</ul>
+</li>
+</ul>
+<h4 id="115">11.5、小结<a class="headerlink" href="#115" title="Permanent link">&para;</a></h4>
+<h3 id="chap12webrtc">chap12、分析WebRTC源码的必经之路<a class="headerlink" href="#chap12webrtc" title="Permanent link">&para;</a></h3>
+<h4 id="121">12.1、信令服务器实现分析<a class="headerlink" href="#121" title="Permanent link">&para;</a></h4>
+<h5 id="1211">12.1.1、信令服务器的组成<a class="headerlink" href="#1211" title="Permanent link">&para;</a></h5>
+<h5 id="1212">12.1.2、信令服务器的工作流程<a class="headerlink" href="#1212" title="Permanent link">&para;</a></h5>
+<h4 id="122peerconnection">12.2、PeerConnection客户端分析<a class="headerlink" href="#122peerconnection" title="Permanent link">&para;</a></h4>
+<h5 id="1221peerconnection_client">12.2.1、运行peerconnection_client<a class="headerlink" href="#1221peerconnection_client" title="Permanent link">&para;</a></h5>
+<h5 id="1222peerconnection_client">12.2.2、peerconnection_client的组成<a class="headerlink" href="#1222peerconnection_client" title="Permanent link">&para;</a></h5>
+<h5 id="1223">12.2.3、界面的展示<a class="headerlink" href="#1223" title="Permanent link">&para;</a></h5>
+<h5 id="1224">12.2.4、视频的渲染<a class="headerlink" href="#1224" title="Permanent link">&para;</a></h5>
+<h5 id="1225webrtc">12.2.5、WebRTC的使用<a class="headerlink" href="#1225webrtc" title="Permanent link">&para;</a></h5>
+<ul>
+<li>与chap8对应起来看</li>
+</ul>
+<h5 id="1226">12.2.6、信令的处理<a class="headerlink" href="#1226" title="Permanent link">&para;</a></h5>
+<h4 id="123">12.3、小结<a class="headerlink" href="#123" title="Permanent link">&para;</a></h4>
+<ul>
+<li>剖析了WebRTC中的peerconnection程序的实现细节</li>
+<li><strong>环境搭建好</strong></li>
+</ul>
+<h3 id="chap13webrtc">chap13、WebRTC源码分析<a class="headerlink" href="#chap13webrtc" title="Permanent link">&para;</a></h3>
+<h4 id="131webrtc">13.1、WebRTC的数据流<a class="headerlink" href="#131webrtc" title="Permanent link">&para;</a></h4>
+<ul>
+<li>408/476，图13.1，WebRTC数据流</li>
+<li>带宽的评估，有两种方法<ul>
+<li>基于丢包的评估方法</li>
+<li>基于延迟的评估方法<ul>
+<li>基于接收端，Goog-REMB，<strong>已被淘汰</strong></li>
+<li>基于发送端，Transport-CC</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>WebRTC对于丢包有2种处理方法：<ul>
+<li>通过RTCP的NACK消息：<strong>让发送端将丢失的包重新补发</strong></li>
+<li>使用FEC算法，<strong>发送一些冗余数据来修复丢失的包</strong>，以避免通过NACK重发包带来的延迟</li>
+</ul>
+</li>
+</ul>
+<h4 id="132webrtc">13.2、WebRTC线程模型<a class="headerlink" href="#132webrtc" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>学习和掌握任何一个系统或开源库，了解并掌握其线程模型是至关重要的</strong></li>
+<li>411/476，WebRTC线程模型</li>
+</ul>
+<h5 id="1321webrtc">13.2.1、WebRTC线程的创建与使用<a class="headerlink" href="#1321webrtc" title="Permanent link">&para;</a></h5>
+<ul>
+<li>从创建的角度看，WebRTC线程被划分为两层<ul>
+<li>第一层: 网络线程、工作线程、信令线程</li>
+<li>第二层：音视频相关线程（没有开启相关业务，就没有相关线程）</li>
+</ul>
+</li>
+<li>从运行的角度，WebRTC线程被划分为三层<ul>
+<li>第一层: 网络线程、工作线程、信令线程</li>
+<li>第二层:音视频编解码层</li>
+<li>第三层:硬件访问层，用于进行音视频的采集与渲染</li>
+</ul>
+</li>
+</ul>
+<h5 id="1322">13.2.2、线程切换<a class="headerlink" href="#1322" title="Permanent link">&para;</a></h5>
+<h6 id="1postposttask">1、利用Post()和PostTask()方法切换线程<a class="headerlink" href="#1postposttask" title="Permanent link">&para;</a></h6>
+<ul>
+<li>rtc_base目录中的thread.h中的<code>Post()</code></li>
+</ul>
+<h6 id="2sendinvoke">2、利用Send()和Invoke()方法切换线程<a class="headerlink" href="#2sendinvoke" title="Permanent link">&para;</a></h6>
+<h6 id="3">3、外部接口的线程切换<a class="headerlink" href="#3" title="Permanent link">&para;</a></h6>
+<h4 id="133">13.3、网络传输<a class="headerlink" href="#133" title="Permanent link">&para;</a></h4>
+<h5 id="1331">13.3.1、网络接收与分发模块类关系图<a class="headerlink" href="#1331" title="Permanent link">&para;</a></h5>
+<ul>
+<li>435/476中图13.7，8大模块<ul>
+<li>1、</li>
+<li>7、定义了创建Socket的工厂类</li>
+<li>8、机制的封装</li>
+</ul>
+</li>
+</ul>
+<h5 id="1332">13.3.2、网络连接的建立<a class="headerlink" href="#1332" title="Permanent link">&para;</a></h5>
+<ul>
+<li>WebRTC中，有三种建立网络连接的方法<ul>
+<li>1、在收集Candidate并返回给应用层的过程中，如果已经收到Remote Candidate，则会创建Connection对象</li>
+<li>2、</li>
+</ul>
+</li>
+</ul>
+<h4 id="134">13.4、音视频数据采集<a class="headerlink" href="#134" title="Permanent link">&para;</a></h4>
+<h5 id="1341">13.4.1、音频采集与播放<a class="headerlink" href="#1341" title="Permanent link">&para;</a></h5>
+<ul>
+<li>445/476，音频处理流程</li>
+</ul>
+<h5 id="1342">13.4.2、视频采集与渲染<a class="headerlink" href="#1342" title="Permanent link">&para;</a></h5>
+<ul>
+<li>452/476，视频数据流转</li>
+</ul>
+<h4 id="135">13.5、音视频编解码<a class="headerlink" href="#135" title="Permanent link">&para;</a></h4>
+<h5 id="1351">13.5.1、音频编码<a class="headerlink" href="#1351" title="Permanent link">&para;</a></h5>
+<ul>
+<li>AudioCodingModuleImpl类中的<code>encoder_stack_</code>成员指定的</li>
+</ul>
+<h5 id="1352">13.5.2、音频解码<a class="headerlink" href="#1352" title="Permanent link">&para;</a></h5>
+<ul>
+<li>460/476，音频编码与发送</li>
+</ul>
+<h5 id="1353">13.5.3、视频编码<a class="headerlink" href="#1353" title="Permanent link">&para;</a></h5>
+<h5 id="1354">13.5.4、视频解码<a class="headerlink" href="#1354" title="Permanent link">&para;</a></h5>
+<h4 id="136">13.6、小结<a class="headerlink" href="#136" title="Permanent link">&para;</a></h4>
+<h3 id="_1">学习过程<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>05-31，中午1个cubi，晚上1个cubi，把书上chap7-13给初步看了一下，<strong>chap13确实是精华</strong>；跑完步回来，又花了1个cubi，把1-6快速给过了一下，（4-6没太好好读，时间有限），更偏向于客户端吧，目前精力不在这。</li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
