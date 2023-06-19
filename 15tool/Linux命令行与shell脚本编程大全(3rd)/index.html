@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>Linux命令行与shell脚本编程大全(3rd) - lionel的技术笔记</title>
+    <title>《Linux命令行与shell脚本编程大全(3rd)》 - lionel的技术笔记</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Linux\u547d\u4ee4\u884c\u4e0eshell\u811a\u672c\u7f16\u7a0b\u5927\u5168(3rd)";
-        var mkdocs_page_input_path = "30other\\Linux\u547d\u4ee4\u884c\u4e0eshell\u811a\u672c\u7f16\u7a0b\u5927\u5168(3rd).md";
+        var mkdocs_page_name = "\u300aLinux\u547d\u4ee4\u884c\u4e0eshell\u811a\u672c\u7f16\u7a0b\u5927\u5168(3rd)\u300b";
+        var mkdocs_page_input_path = "15tool\\Linux\u547d\u4ee4\u884c\u4e0eshell\u811a\u672c\u7f16\u7a0b\u5927\u5168(3rd).md";
         var mkdocs_page_url = null;
       </script>
     
@@ -108,8 +108,50 @@
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">工具</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/Wireshark%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98/">《Wireshark网络分析实战》</a>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../Wireshark%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98/">《Wireshark网络分析实战》</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">《Linux命令行与shell脚本编程大全(3rd)》</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#chap17">chap17、创建函数</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#171">17.1、基本的脚本函数</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#172">17.2、返回值</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#173">17.3、在函数中使用变量</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1731">17.3.1、向函数传递参数</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1732">17.3.2、在函数中处理变量</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#174">17.4、数组变量和函数</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1741">17.4.1、向函数传数组参数</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1742">17.4.2、从函数返回数组</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#175">17.5、函数递归</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#176">17.6、创建库</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#177">17.7、在命令行上使用函数</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#178">17.8、实例</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#179">17.9、小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap19sedgawk">chap19、初始sed和gawk</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap20">chap20、正则表达式</a>
+    </li>
+    </ul>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">刷题</span></p>
@@ -145,7 +187,8 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-      <li>Linux命令行与shell脚本编程大全(3rd)</li>
+          <li>工具 &raquo;</li>
+      <li>《Linux命令行与shell脚本编程大全(3rd)》</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -216,6 +259,10 @@ name() {commands} #关键的()</code></pre>
               
             </div>
           </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../Wireshark%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98/" class="btn btn-neutral float-left" title="《Wireshark网络分析实战》"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../91leetcode/%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/" class="btn btn-neutral float-right" title="《剑指offer专项突破》">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
 
   <hr/>
 
@@ -237,6 +284,10 @@ name() {commands} #关键的()</code></pre>
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
+      <span><a href="../Wireshark%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../91leetcode/%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
