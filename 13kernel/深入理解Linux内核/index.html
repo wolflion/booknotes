@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>深入理解Linux内核 - lionel的技术笔记</title>
+    <title>《深入理解Linux内核》 - lionel的技术笔记</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "\u6df1\u5165\u7406\u89e3Linux\u5185\u6838";
+        var mkdocs_page_name = "\u300a\u6df1\u5165\u7406\u89e3Linux\u5185\u6838\u300b";
         var mkdocs_page_input_path = "13kernel\\\u6df1\u5165\u7406\u89e3Linux\u5185\u6838.md";
         var mkdocs_page_url = null;
       </script>
@@ -68,6 +68,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../10network/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/">《Linux高性能服务器编程》</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/TCPIP%E8%AF%A6%E8%A7%A3%E5%8D%B71/">《TCPIP详解卷1》</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">文件系统</span></p>
               <ul>
@@ -83,13 +85,163 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../12storage/ceph%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《ceph设计原理与实现》</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">内核</span></p>
+              <p class="caption"><span class="caption-text">视频</span></p>
               <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/FFmpeg%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/">《FFmpeg入门到精通》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/WebRTC%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AE%9E%E6%97%B6%E4%BA%92%E5%8A%A8%E6%8A%80%E6%9C%AF/">《WebRTC音视频实时互动技术》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/%E6%96%B0%E4%B8%80%E4%BB%A3%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9%E7%A0%81%E6%A0%87%E5%87%86-H.264_AVC/">《新一代视频压缩码标准-H.264_AVC》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">内核</span></p>
+              <ul class="current">
                   <li class="toctree-l1"><a class="reference internal" href="../Linux%E5%86%85%E6%A0%B8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《Linux内核设计与实现》</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../%E6%B7%B1%E5%85%A5Linux%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%E5%86%85%E6%A0%B8%E6%9C%BA%E5%88%B6/">《深入Linux设备驱动程序内核机制》</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">《深入理解Linux虚拟内存管理》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《深入理解Linux网络技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">《深入理解Linux内核》</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#chap3">chap3、进程</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#31">3.1、进程、轻量级进程、线程</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#32">3.2、进程描述符</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#0">0、</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#321">3.2.1、进程状态</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#322">3.2.2、标识一个进程</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#323">3.2.3、进程间的关系</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#324">3.2.4、如何组织进程</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#325">3.2.5、进程资源限制</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#33">3.3、进程切换</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#331">3.3.1、硬件上下文</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#332">3.3.2、任务状态段</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#333">3.3.3、执行进程切换</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#334fpummuxmm">3.3.4、保存和加载FPU、MMU及XMM寄存器</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#34">3.4、创建进程</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#0_1">0、</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#341cloneforkvfork">3.4.1、clone()、fork()及vfork()系统调用</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#342">3.4.2、内核线程</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#35">3.5、撤销进程</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#351">3.5.1、进程终止</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#352">3.5.2、进程删除</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap4">chap4、中断和异常</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap18ext2ext3">chap18、ext2和ext3文件系统</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#181ext2">18.1、Ext2的一般特征</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#182ext2">18.2、Ext2磁盘数据结构</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#0_2">0、</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1821">18.2.1、超级块</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1822">18.2.2、组描述符和位图</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1823">18.2.3、索引节点表</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1824extended-attribute">18.2.4、索引节点的增强属性（extended attribute）</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1825">18.2.5、访问控制列表</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1826">18.2.6、各种文件类型如何使用磁盘块</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#183ext2">18.3、Ext2的内存数据结构</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#0_3">0、</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1831ext2">18.3.1、Ext2的超级块对象</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1832ext2">18.3.2、Ext2的索引节点对象</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#184ext2">18.4、创建Ext2文件系统</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#185ext2">18.5、Ext2的方法</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1851ext2">18.5.1、Ext2超级块的操作</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1852ext2">18.5.2、Ext2索引节点的操作</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1853ext2">18.5.3、Ext2的文件操作</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#186ext2">18.6、管理Ext2磁盘空间</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#0_4">0、</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1861">18.6.1、创建索引节点</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1862">18.6.2、删除索引节点</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1863">18.6.3、数据块寻址</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1864">18.6.4、文件的洞</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1865">18.6.5、分配数据块</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1866">18.6.6、释放数据块</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#187ext3">18.7、Ext3文件系统</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1871">18.7.1、日志文件系统</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1872ext3">18.7.2、Ext3日志文件系统</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1873">18.7.3、日志块设备层</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1874">18.7.4、日志如何工作</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">工具</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/Wireshark%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98/">《Wireshark网络分析实战》</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">刷题</span></p>
@@ -125,7 +277,8 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-      <li>深入理解Linux内核</li>
+          <li>内核 &raquo;</li>
+      <li>《深入理解Linux内核》</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -432,6 +585,10 @@
               
             </div>
           </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/" class="btn btn-neutral float-left" title="《深入理解Linux网络技术内幕》"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../15tool/Wireshark%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98/" class="btn btn-neutral float-right" title="《Wireshark网络分析实战》">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
 
   <hr/>
 
@@ -453,6 +610,10 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
+      <span><a href="../%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../15tool/Wireshark%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

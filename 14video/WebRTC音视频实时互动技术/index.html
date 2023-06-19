@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>WebRTC音视频实时互动技术 - lionel的技术笔记</title>
+    <title>《WebRTC音视频实时互动技术》 - lionel的技术笔记</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "WebRTC\u97f3\u89c6\u9891\u5b9e\u65f6\u4e92\u52a8\u6280\u672f";
+        var mkdocs_page_name = "\u300aWebRTC\u97f3\u89c6\u9891\u5b9e\u65f6\u4e92\u52a8\u6280\u672f\u300b";
         var mkdocs_page_input_path = "14video\\WebRTC\u97f3\u89c6\u9891\u5b9e\u65f6\u4e92\u52a8\u6280\u672f.md";
         var mkdocs_page_url = null;
       </script>
@@ -68,6 +68,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../10network/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/">《Linux高性能服务器编程》</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/TCPIP%E8%AF%A6%E8%A7%A3%E5%8D%B71/">《TCPIP详解卷1》</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">文件系统</span></p>
               <ul>
@@ -83,6 +85,331 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../12storage/ceph%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《ceph设计原理与实现》</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">视频</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../FFmpeg%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/">《FFmpeg入门到精通》</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">《WebRTC音视频实时互动技术》</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#chap1">chap1、音视频直播的前世今生</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#11">1.1、音视频的历史</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#12">1.2、移动互联网</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#13">1.3、音视频直播的两条技术路线</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#14">1.4、音视频直播的现状</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#15">1.5、音视频直播的未来</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#16">1.6、小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap2webrtc">chap2、为什么要使用WebRTC</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#21">2.1、自研直播客户端架构</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#211">2.1.1、拆分音视频模块</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#212">2.1.2、跨平台</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#213">2.1.3、插件化管理</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#214">2.1.4、其他</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#22webrtc">2.2、WebRTC客户端架构</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#23">2.3、小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap3">chap3、音视频实时通信的本质</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#31">3.1、两种指标</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#311">3.1.1、实时通信延迟指标</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#312">3.1.2、音视频服务质量指标</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#32">3.2、实时通信的主要矛盾</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#321">3.2.1、增加带宽</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#322">3.2.2、减少数据量</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#323">3.2.3、适当增加时延</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#324">3.2.4、提高网络质量</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#325">3.2.5、快速准确地评估带宽</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#33">3.3、小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap4webrtc">chap4、构建WebRTC一对一信令服务器</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#41webrtc">4.1、WebRTC一对一架构</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#42">4.2、细化架构</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#43">4.3、信令</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#431">4.3.1、信令定义</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#432">4.3.2、信令时序</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#433">4.3.3、信令传输协议的选择</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#44">4.4、构建信令服务器</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#441">4.4.1、信令服务器的实现方案</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#442">4.4.2、信令服务器的业务逻辑</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#443">4.4.3、信令服务器的实现</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#444">4.4.4、信令服务器的安装与部署</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#445">4.4.5、信令服务器的完整代码</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#45">4.5、小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap5webrtc">chap5、WebRTC实现一对一通信</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#51webrtc">5.1、浏览器对WebRTC的支持</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#52">5.2、遍历音视频设备</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#53">5.3、采集音视频数据</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#54mediastreammediastreamtrack">5.4、MediaStream与MediaStreamTrack</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#55">5.5、本地视频预览</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#56">5.6、信令状态机</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#57rtcpeerconnection">5.7、RTCPeerConnection</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#571rtcpeerconnection">5.7.1、创建RTCPeerConnection对象</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#572rtcpeerconnection">5.7.2、RTCPeerConnection与本地音视频数据</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#573">5.7.3、媒体协商</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#574ice">5.7.4、ICE</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#575sdpcandidate">5.7.5、SDP与Candidate消息的交换</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#576">5.7.6、远端音视频渲染</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#577">5.7.7、客户端完整例子</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#58">5.8、小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap6webrtcice">chap6、WebRTC中的ICE实现</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#61candidate">6.1、Candidate种类与优先级</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#62ice">6.2、ICE策略</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#63p2p">6.3、P2P连接</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#635nat">6.3.5、NAT类型检测</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#64">6.4、网络中继</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#65">6.5、小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap7webrtcsdp">chap7、WebRTC中的SDP</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#71sdp">7.1、SDP标准规范</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap8">chap8、各端的互联互通</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#81webrtc-native">8.1、WebRTC Native的核心</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#82android">8.2、Android端的实现</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#83ios">8.3、iOS端的实现</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#84pcmac">8.4、PC端与Mac端的实现</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#85">8.5、小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap9rtprtcp">chap9、网络传输协议RTP与RTCP</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#91udptcp">9.1、如何选择UDP与TCP</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#92rtp">9.2、RTP</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#921rtp">9.2.1、RTP的协议头</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#922rtp">9.2.2、RTP的使用</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#923rtp">9.2.3、RTP的扩展头</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#924rtp">9.2.4、RTP中的填充数据</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#93rtcp">9.3、RTCP</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#931rtcp">9.3.1、RTCP报文分类</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#932rtp">9.3.2、RTP协议头</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#933webrtc">9.3.3、WebRTC的反馈报文</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#94">9.4、小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap10webrtc">chap10、WebRTC拥塞控制</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#101webrtc">10.1、WebRTC的拥塞控制算法</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1011goog-remb">10.1.1、Goog-REMB</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1012transport-cc">10.1.2、Transport-CC</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1013">10.1.3、基于丢包的拥塞评估算法原理</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1014webrtc">10.1.4、WebRTC拥塞控制流程</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#102">10.2、拥塞控制算法比较</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#103">10.3、小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap11webrtc">chap11、WebRTC源码分析入门</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#111webrtc">11.1、WebRTC源码的选择</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#114webrtc">11.4、WebRTC目录结构</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1141webrtc">11.4.1、WebRTC主目录</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1142modules">11.4.2、modules目录</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#115">11.5、小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap12webrtc">chap12、分析WebRTC源码的必经之路</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#121">12.1、信令服务器实现分析</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1211">12.1.1、信令服务器的组成</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1212">12.1.2、信令服务器的工作流程</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#122peerconnection">12.2、PeerConnection客户端分析</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1221peerconnection_client">12.2.1、运行peerconnection_client</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1222peerconnection_client">12.2.2、peerconnection_client的组成</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1223">12.2.3、界面的展示</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1224">12.2.4、视频的渲染</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1225webrtc">12.2.5、WebRTC的使用</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1226">12.2.6、信令的处理</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#123">12.3、小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap13webrtc">chap13、WebRTC源码分析</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#131webrtc">13.1、WebRTC的数据流</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#132webrtc">13.2、WebRTC线程模型</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1321webrtc">13.2.1、WebRTC线程的创建与使用</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1322">13.2.2、线程切换</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#133">13.3、网络传输</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1331">13.3.1、网络接收与分发模块类关系图</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1332">13.3.2、网络连接的建立</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#134">13.4、音视频数据采集</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1341">13.4.1、音频采集与播放</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1342">13.4.2、视频采集与渲染</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#135">13.5、音视频编解码</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1351">13.5.1、音频编码</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1352">13.5.2、音频解码</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1353">13.5.3、视频编码</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1354">13.5.4、视频解码</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#136">13.6、小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_1">学习过程</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../%E6%96%B0%E4%B8%80%E4%BB%A3%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9%E7%A0%81%E6%A0%87%E5%87%86-H.264_AVC/">《新一代视频压缩码标准-H.264_AVC》</a>
+                  </li>
+              </ul>
               <p class="caption"><span class="caption-text">内核</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../13kernel/Linux%E5%86%85%E6%A0%B8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《Linux内核设计与实现》</a>
@@ -90,6 +417,15 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5Linux%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%E5%86%85%E6%A0%B8%E6%9C%BA%E5%88%B6/">《深入Linux设备驱动程序内核机制》</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">《深入理解Linux虚拟内存管理》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《深入理解Linux网络技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E5%86%85%E6%A0%B8/">《深入理解Linux内核》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">工具</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/Wireshark%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98/">《Wireshark网络分析实战》</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">刷题</span></p>
@@ -125,7 +461,8 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-      <li>WebRTC音视频实时互动技术</li>
+          <li>视频 &raquo;</li>
+      <li>《WebRTC音视频实时互动技术》</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -547,6 +884,10 @@
               
             </div>
           </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../FFmpeg%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/" class="btn btn-neutral float-left" title="《FFmpeg入门到精通》"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../%E6%96%B0%E4%B8%80%E4%BB%A3%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9%E7%A0%81%E6%A0%87%E5%87%86-H.264_AVC/" class="btn btn-neutral float-right" title="《新一代视频压缩码标准-H.264_AVC》">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
 
   <hr/>
 
@@ -568,6 +909,10 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
+      <span><a href="../FFmpeg%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../%E6%96%B0%E4%B8%80%E4%BB%A3%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9%E7%A0%81%E6%A0%87%E5%87%86-H.264_AVC/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
