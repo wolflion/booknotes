@@ -43,6 +43,7 @@ nav:
         - 《Effective STL》: '21STL/EffectiveSTL.md'
     - 基础知识:
         - 《操作系统导论》: '408/操作系统导论.md'
+        - 《大话设计模式》: '408/大话设计模式.md'
     - 网络编程:
         - 《TCP/IP网络编程》: '10network/TCPIP网络编程.md'
         - 《Linux高性能服务器编程》: '10network/Linux高性能服务器编程.md'
