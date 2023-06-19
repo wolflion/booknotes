@@ -192,7 +192,48 @@
 <h3 id="chap7">chap7、代理模式<a class="headerlink" href="#chap7" title="Permanent link">&para;</a></h3>
 <h3 id="chap8">chap8、工厂方法模式<a class="headerlink" href="#chap8" title="Permanent link">&para;</a></h3>
 <h3 id="chap9">chap9、原型模式<a class="headerlink" href="#chap9" title="Permanent link">&para;</a></h3>
+<h4 id="91">9.1、夸张的简历<a class="headerlink" href="#91" title="Permanent link">&para;</a></h4>
+<ul>
+<li>简历类，设置性别和年龄，设置工作经历，需要写3份</li>
+</ul>
+<h4 id="92">9.2、简历代码初步实现<a class="headerlink" href="#92" title="Permanent link">&para;</a></h4>
+<ul>
+<li>3份简历，需要3次实例化</li>
+</ul>
+<h4 id="93prototype">9.3、原型模式（Prototype）<a class="headerlink" href="#93prototype" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>用原型实例指定创建对象的种类，并且通过拷贝这些原型创建新的对象</strong>。（从一个对象再创建另一个可定制的对象，而且不需知道任何创建的细节）</li>
+<li>原型类（接口，<em>clone()是个纯虚函数？</em>）</li>
+<li>具体原型类</li>
+<li>客户端代码（调用 原型类）</li>
+</ul>
+<h4 id="94">9.4、简历的原型实现<a class="headerlink" href="#94" title="Permanent link">&para;</a></h4>
+<ul>
+<li><em>为啥要调用clone()，直接赋值不行吗？</em>  【<strong>主要是为了省构造函数的时间</strong>-lionel，目前是猜的】</li>
+</ul>
+<h4 id="95">9.5、浅复制与深复制<a class="headerlink" href="#95" title="Permanent link">&para;</a></h4>
+<h4 id="96">9.6、简历的深复制实现<a class="headerlink" href="#96" title="Permanent link">&para;</a></h4>
+<h4 id="97-vs">9.7、复制简历 vs. 手写求职信<a class="headerlink" href="#97-vs" title="Permanent link">&para;</a></h4>
 <h3 id="chap10">chap10、模板方法模式<a class="headerlink" href="#chap10" title="Permanent link">&para;</a></h3>
+<h4 id="101">10.1、选择题不会做，蒙呗！<a class="headerlink" href="#101" title="Permanent link">&para;</a></h4>
+<ul>
+<li>考试题目抄错了，就算会错，最后也白搭</li>
+</ul>
+<h4 id="102">10.2、重复=易错+难改<a class="headerlink" href="#102" title="Permanent link">&para;</a></h4>
+<ul>
+<li>A和B都抄了题目</li>
+</ul>
+<h4 id="103">10.3、提炼代码<a class="headerlink" href="#103" title="Permanent link">&para;</a></h4>
+<ul>
+<li>老师出试卷，学生填答案</li>
+<li><em>没太理解，lionel</em></li>
+</ul>
+<h4 id="104templatemethod">10.4、模板方法模式（TemplateMethod）<a class="headerlink" href="#104templatemethod" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>定义一个操作中的算法的骨架，而将一些步骤延迟到子类中。模板方法使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤</strong>。</li>
+</ul>
+<h4 id="105">10.5、模板方法模式特点<a class="headerlink" href="#105" title="Permanent link">&para;</a></h4>
+<h4 id="106">10.6、主观题，看你怎么蒙<a class="headerlink" href="#106" title="Permanent link">&para;</a></h4>
 <h3 id="chap12">chap12、外观模式<a class="headerlink" href="#chap12" title="Permanent link">&para;</a></h3>
 <h3 id="chap13">chap13、建造者模式<a class="headerlink" href="#chap13" title="Permanent link">&para;</a></h3>
 <h3 id="_2">构建者<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>

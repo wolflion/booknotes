@@ -519,13 +519,27 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#2817">28.17、小结</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_17">作业</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_18">问题</a>
+    </li>
         </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#chap29">chap29、基于锁的并发数据结构</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#291">29.1、并发计数器</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#_19">简单但无法扩展</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#_20">可扩展的计数</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#292">29.2、并发链表</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#_21">扩展链表</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#293">29.3、并发队列</a>
     </li>
@@ -540,8 +554,20 @@
     <li class="toctree-l3"><a class="reference internal" href="#301">30.1、定义和程序</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#302">30.2、生产者/消费者（有界缓冲区）问题</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#_22">有问题的方案</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#while">较好但仍有问题的方案：使用while语句</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#_23">单值缓冲区的生产者/消费者方案</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#_24">最终的生产者/消费者方案</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#303">30.3、覆盖条件</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#304">30.4、小结</a>
     </li>
         </ul>
     </li>
@@ -554,10 +580,26 @@
     <li class="toctree-l3"><a class="reference internal" href="#313">31.3、信号量用作条件变量</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#314">31.4、生产者/消费者（有界缓冲区）问题</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#_25">第一次尝试</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#_26">解决方案：增加互斥</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#_27">避免死锁</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#_28">最后，可行的方案</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#315-">31.5、读者-写者锁</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#316">31.6、哲学家就餐问题</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#_29">有问题的解决方案</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#_30">一种方案：破除依赖</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#317">31.7、如何实现信号量</a>
     </li>
@@ -570,8 +612,28 @@
     <li class="toctree-l3"><a class="reference internal" href="#321">32.1、有哪些类型的缺陷</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#322">32.2、非死锁缺陷</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#_31">违反原子性缺陷</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#_32">违反顺序缺陷</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#_33">非死锁缺陷：小结</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#323">32.3、死锁缺陷</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#_34">为什么发生死锁</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#_35">产生死锁的条件</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#_36">预防</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#_37">通过调度避免死锁</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#_38">检查和恢复</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#324">32.4、小结</a>
     </li>
@@ -598,8 +660,6 @@
         </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#chap34">chap34、并发的总结对话</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#_17"></a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#chap35">chap35、关于持久性的对话</a>
     </li>
@@ -1402,45 +1462,208 @@ unlock(&amp;mutex);</code></pre>
 <li><strong>我们需要硬件和操作系统的帮助来实现一个可用的锁</strong>。</li>
 </ul>
 <h4 id="284">28.4、评价锁<a class="headerlink" href="#284" title="Permanent link">&para;</a></h4>
+<ul>
+<li>评价锁是否能工作，应设立一些标准：<ul>
+<li>1、锁是否能完成它的基本任务，即<strong>提供互斥（mutual exclusion）</strong>，锁是否有效，能够阻止多个线程进入临界区</li>
+<li>2、公平性（fairness）：当锁可用时，是否每一个竞争线程有公平的机会抢到锁？</li>
+<li>3、性能（performance）：使用锁之后增加的时间开销</li>
+</ul>
+</li>
+</ul>
 <h4 id="285">28.5、控制中断<a class="headerlink" href="#285" title="Permanent link">&para;</a></h4>
+<ul>
+<li>临界区关闭中断，为单处理器系统开发，<strong>优点是简单、缺点很多</strong><ul>
+<li>1、一个贪婪的程序可能在它开始时就调用lock()，从而独占处理器</li>
+<li>2、不支持多处理器</li>
+<li>3、关闭中断导致中断丢失，可能会导致严重的系统问题</li>
+<li>4、系统低</li>
+</ul>
+</li>
+</ul>
 <h4 id="286">28.6、测试并设置指令（原子交换）<a class="headerlink" href="#286" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>test and set</strong><ul>
+<li>首先实现一个不依赖它的锁，用一个变量标记锁是否被持有</li>
+</ul>
+</li>
+</ul>
 <h4 id="287">28.7、实现可用的自旋锁<a class="headerlink" href="#287" title="Permanent link">&para;</a></h4>
 <h4 id="288">28.8、评价自旋锁<a class="headerlink" href="#288" title="Permanent link">&para;</a></h4>
+<ul>
+<li>1、正确性（correctness）</li>
+<li>2、公平性</li>
+<li>3、性能</li>
+</ul>
 <h4 id="289">28.9、比较并交换<a class="headerlink" href="#289" title="Permanent link">&para;</a></h4>
+<ul>
+<li>比较并交换的思路是：<strong>检测ptr指向的值是否和expected相等</strong></li>
+</ul>
 <h4 id="2810">28.10、链接的加载和条件式存储指令<a class="headerlink" href="#2810" title="Permanent link">&para;</a></h4>
+<ul>
+<li>链接的加载指令</li>
+<li><strong>条件式存储（store-conditional）指令</strong></li>
+</ul>
 <h4 id="2811">28.11、获取并增加<a class="headerlink" href="#2811" title="Permanent link">&para;</a></h4>
+<ul>
+<li>硬件原语：<strong>获取并增加（fetch-and-add）指令</strong></li>
+</ul>
 <h4 id="2812">28.12、自旋过多：怎么办<a class="headerlink" href="#2812" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Key：怎样避免自旋</strong></li>
+</ul>
 <h4 id="2813">28.13、简单方法：让出来吧，宝贝<a class="headerlink" href="#2813" title="Permanent link">&para;</a></h4>
+<ul>
+<li>要自旋的时候，放弃CPU，<strong>调用<code>yield()</code></strong></li>
+</ul>
 <h4 id="2814">28.14、使用队列：休眠替代自旋<a class="headerlink" href="#2814" title="Permanent link">&para;</a></h4>
+<ul>
+<li>park()能够让调用线程休眠，unpark(threadID)则会唤醒threadID标识的线程</li>
+</ul>
 <h4 id="2815">28.15、不同操作系统，不同实现<a class="headerlink" href="#2815" title="Permanent link">&para;</a></h4>
 <h4 id="2816">28.16、两阶段锁<a class="headerlink" href="#2816" title="Permanent link">&para;</a></h4>
+<ul>
+<li>第一阶段会先自旋一段时间，希望它可以获取锁</li>
+<li>如果第一个自旋阶段没有获得锁，第二阶段调用者会睡眠，直到锁可用</li>
+</ul>
 <h4 id="2817">28.17、小结<a class="headerlink" href="#2817" title="Permanent link">&para;</a></h4>
+<h4 id="_17">作业<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h4>
+<h4 id="_18">问题<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h4>
+<ul>
+<li>1、</li>
+<li>9、现在用不同的-i值运行代码。你看到了什么样的不同行为？</li>
+</ul>
 <h3 id="chap29">chap29、基于锁的并发数据结构<a class="headerlink" href="#chap29" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Key：如何给数据结构加锁？</strong></li>
+</ul>
 <h4 id="291">29.1、并发计数器<a class="headerlink" href="#291" title="Permanent link">&para;</a></h4>
+<h5 id="_19">简单但无法扩展<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h5>
+<h5 id="_20">可扩展的计数<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h5>
 <h4 id="292">29.2、并发链表<a class="headerlink" href="#292" title="Permanent link">&para;</a></h4>
+<h5 id="_21">扩展链表<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h5>
 <h4 id="293">29.3、并发队列<a class="headerlink" href="#293" title="Permanent link">&para;</a></h4>
 <h4 id="294">29.4、并发散列表<a class="headerlink" href="#294" title="Permanent link">&para;</a></h4>
+<ul>
+<li>code</li>
+</ul>
+<pre class="highlight"><code class="language-c">#define BUCKETS(101)
+typedef struct _hash_t {
+    list_t lists[BUCKETS];
+}hash_t;
+
+void Hash_Init(hash_t *H) {
+    int i;
+    for(i=0;i&lt;BUCKETS;i++){
+        List_Init(&amp;H-&gt;list[i]);
+    }
+}
+
+int Hash_Insert(hash_t *H, int key) {
+    int bucket = key % BUCKETS;
+    retun list_Insert(&amp;H-&gt;lists[bucket],key);
+}
+
+int Hash_Lookup(hash_t *H, int key) {
+    int bucket = key % BUCKETS;
+    retun list_Lookup(&amp;H-&gt;lists[bucket],key);
+}</code></pre>
 <h4 id="295">29.5、小结<a class="headerlink" href="#295" title="Permanent link">&para;</a></h4>
 <h3 id="chap30">chap30、条件变量<a class="headerlink" href="#chap30" title="Permanent link">&para;</a></h3>
+<ul>
+<li>在很多情况下，线程需要检查某一条件（condition）满足之后，才会继续运行。</li>
+<li><strong>父线程需要检查子线程是否执行完毕【这通常称为join()】</strong></li>
+<li><strong>Key：如何等待一个条件？</strong></li>
+<li>Code</li>
+</ul>
+<pre class="highlight"><code class="language-c">volatile int done = 0;
+void *child(void *arg) {
+    printf("child\n");
+    done = 1;
+    return NULL;
+}
+
+int main(int argc, char *argv[]) {
+    printf("parent:begin\n");
+    pthread_t c;
+    Pthread_create(&amp;c, NULL, child, NULL);// create child
+    while(done == 0)
+        ;//spin
+    printf("parent:end\n");
+    return 0;
+}</code></pre>
 <h4 id="301">30.1、定义和程序<a class="headerlink" href="#301" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>条件变量</strong>是个显式队列，当某些执行状态（即条件，condition）不满足时，线程可以把自己加入队列，等待该条件。</li>
+<li><strong>条件变量有两种相关操作</strong><ul>
+<li>wait()，<strong>线程要睡眠的时候</strong></li>
+<li>signal()，<strong>线程想唤醒等待在某个条件变量上的睡眠线程时</strong></li>
+</ul>
+</li>
+</ul>
 <h4 id="302">30.2、生产者/消费者（有界缓冲区）问题<a class="headerlink" href="#302" title="Permanent link">&para;</a></h4>
+<h5 id="_22">有问题的方案<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h5>
+<h5 id="while">较好但仍有问题的方案：使用while语句<a class="headerlink" href="#while" title="Permanent link">&para;</a></h5>
+<h5 id="_23">单值缓冲区的生产者/消费者方案<a class="headerlink" href="#_23" title="Permanent link">&para;</a></h5>
+<h5 id="_24">最终的生产者/消费者方案<a class="headerlink" href="#_24" title="Permanent link">&para;</a></h5>
 <h4 id="303">30.3、覆盖条件<a class="headerlink" href="#303" title="Permanent link">&para;</a></h4>
+<h4 id="304">30.4、小结<a class="headerlink" href="#304" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>当某些程序状态不符合要求时，通过允许线程进入休眠状态</strong>，条件变量使我们能够漂亮地解决许多重要的同步问题</li>
+</ul>
 <h3 id="chap31">chap31、信号量<a class="headerlink" href="#chap31" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Key：如何使用信号量</strong></li>
+</ul>
 <h4 id="311">31.1、信号量的含义<a class="headerlink" href="#311" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>信号量是有一个整数值的对象，可以用2个函数来操作它</strong>，<code>sem_wait()</code>和<code>sem_post()</code></li>
+</ul>
 <h4 id="312">31.2、二值信号量（锁）<a class="headerlink" href="#312" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>用信号量作为锁</strong></li>
+</ul>
 <h4 id="313">31.3、信号量用作条件变量<a class="headerlink" href="#313" title="Permanent link">&para;</a></h4>
 <h4 id="314">31.4、生产者/消费者（有界缓冲区）问题<a class="headerlink" href="#314" title="Permanent link">&para;</a></h4>
+<h5 id="_25">第一次尝试<a class="headerlink" href="#_25" title="Permanent link">&para;</a></h5>
+<h5 id="_26">解决方案：增加互斥<a class="headerlink" href="#_26" title="Permanent link">&para;</a></h5>
+<h5 id="_27">避免死锁<a class="headerlink" href="#_27" title="Permanent link">&para;</a></h5>
+<h5 id="_28">最后，可行的方案<a class="headerlink" href="#_28" title="Permanent link">&para;</a></h5>
 <h4 id="315-">31.5、读者-写者锁<a class="headerlink" href="#315-" title="Permanent link">&para;</a></h4>
 <h4 id="316">31.6、哲学家就餐问题<a class="headerlink" href="#316" title="Permanent link">&para;</a></h4>
+<h5 id="_29">有问题的解决方案<a class="headerlink" href="#_29" title="Permanent link">&para;</a></h5>
+<h5 id="_30">一种方案：破除依赖<a class="headerlink" href="#_30" title="Permanent link">&para;</a></h5>
 <h4 id="317">31.7、如何实现信号量<a class="headerlink" href="#317" title="Permanent link">&para;</a></h4>
 <h4 id="318">31.8、小结<a class="headerlink" href="#318" title="Permanent link">&para;</a></h4>
 <h3 id="chap32">chap32、常见并发问题<a class="headerlink" href="#chap32" title="Permanent link">&para;</a></h3>
 <h4 id="321">32.1、有哪些类型的缺陷<a class="headerlink" href="#321" title="Permanent link">&para;</a></h4>
+<ul>
+<li>死锁</li>
+<li>非死锁</li>
+</ul>
 <h4 id="322">32.2、非死锁缺陷<a class="headerlink" href="#322" title="Permanent link">&para;</a></h4>
+<h5 id="_31">违反原子性缺陷<a class="headerlink" href="#_31" title="Permanent link">&para;</a></h5>
+<h5 id="_32">违反顺序缺陷<a class="headerlink" href="#_32" title="Permanent link">&para;</a></h5>
+<h5 id="_33">非死锁缺陷：小结<a class="headerlink" href="#_33" title="Permanent link">&para;</a></h5>
 <h4 id="323">32.3、死锁缺陷<a class="headerlink" href="#323" title="Permanent link">&para;</a></h4>
+<h5 id="_34">为什么发生死锁<a class="headerlink" href="#_34" title="Permanent link">&para;</a></h5>
+<h5 id="_35">产生死锁的条件<a class="headerlink" href="#_35" title="Permanent link">&para;</a></h5>
+<h5 id="_36">预防<a class="headerlink" href="#_36" title="Permanent link">&para;</a></h5>
+<h5 id="_37">通过调度避免死锁<a class="headerlink" href="#_37" title="Permanent link">&para;</a></h5>
+<h5 id="_38">检查和恢复<a class="headerlink" href="#_38" title="Permanent link">&para;</a></h5>
 <h4 id="324">32.4、小结<a class="headerlink" href="#324" title="Permanent link">&para;</a></h4>
 <h3 id="chap33">chap33、基于事件的并发（进阶）<a class="headerlink" href="#chap33" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Key：不用线程，如何构建并发服务器</strong></li>
+</ul>
 <h4 id="331">33.1、基本想法：事件循环<a class="headerlink" href="#331" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Code</li>
+</ul>
+<pre class="highlight"><code class="language-c">while(1) {
+    events = getEvents();
+    for (e in events) 
+        processEvent(e);
+}</code></pre>
 <h4 id="332apiselectpoll">33.2、重要API：select()（或poll()）<a class="headerlink" href="#332apiselectpoll" title="Permanent link">&para;</a></h4>
 <h4 id="333select">33.3、使用select()<a class="headerlink" href="#333select" title="Permanent link">&para;</a></h4>
 <h4 id="334">33.4、为何更简单？无须锁<a class="headerlink" href="#334" title="Permanent link">&para;</a></h4>
@@ -1449,7 +1672,9 @@ unlock(&amp;mutex);</code></pre>
 <h4 id="337">33.7、另一个问题：状态管理<a class="headerlink" href="#337" title="Permanent link">&para;</a></h4>
 <h4 id="338">33.8、什么事情仍然很难<a class="headerlink" href="#338" title="Permanent link">&para;</a></h4>
 <h3 id="chap34">chap34、并发的总结对话<a class="headerlink" href="#chap34" title="Permanent link">&para;</a></h3>
-<h3 id="_17"><a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
+<ul>
+<li>尽可能简单。<strong>避免复杂的线程交互，使用已被证实的线程交互方式</strong></li>
+</ul>
 <h3 id="chap35">chap35、关于持久性的对话<a class="headerlink" href="#chap35" title="Permanent link">&para;</a></h3>
 <h3 id="chap36io">chap36、I/O设备<a class="headerlink" href="#chap36io" title="Permanent link">&para;</a></h3>
 <h3 id="chap37">chap37、磁盘驱动器<a class="headerlink" href="#chap37" title="Permanent link">&para;</a></h3>
@@ -1544,7 +1769,7 @@ unlock(&amp;mutex);</code></pre>
 <h3 id="chap48sunnfs">chap48、Sun的网络文件系统（NFS）<a class="headerlink" href="#chap48sunnfs" title="Permanent link">&para;</a></h3>
 <h3 id="chap49andrewafs">chap49、Andrew文件系统（AFS）<a class="headerlink" href="#chap49andrewafs" title="Permanent link">&para;</a></h3>
 <h3 id="chap50">chap50、关于分布式的总结对话<a class="headerlink" href="#chap50" title="Permanent link">&para;</a></h3>
-<h2 id="_18">履历<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h2>
+<h2 id="_39">履历<a class="headerlink" href="#_39" title="Permanent link">&para;</a></h2>
 <ul>
 <li>2022年27W（7.5-7.）看Part2并发的chap26，但习题没做和练习，只是有个概念</li>
 </ul>
