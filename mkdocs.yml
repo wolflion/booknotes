@@ -47,16 +47,25 @@ nav:
     - 网络编程:
         - 《TCP/IP网络编程》: '10network/TCPIP网络编程.md'
         - 《Linux高性能服务器编程》: '10network/Linux高性能服务器编程.md'
+        - 《TCPIP详解卷1》: '10network/TCPIP详解卷1.md'
     - 文件系统:
         - 《Linux内核探秘》: '11filesystem/Linux内核探秘.md'
         - 《文件系统技术内幕》: '11filesystem/文件系统技术内幕.md'
         - 《存储技术原理分析》: '11filesystem/存储技术原理分析.md'
     - 存储:
         - 《ceph设计原理与实现》: '12storage/ceph设计原理与实现.md'
+    - 视频:
+        - 《FFmpeg入门到精通》: '14video/FFmpeg入门到精通.md'
+        - 《WebRTC音视频实时互动技术》: '14video/WebRTC音视频实时互动技术.md'
+        - 《新一代视频压缩码标准-H.264_AVC》: '14video/新一代视频压缩码标准-H.264_AVC.md'
     - 内核:
         - 《Linux内核设计与实现》: '13kernel/Linux内核设计与实现.md'
         - 《深入Linux设备驱动程序内核机制》: '13kernel/深入Linux设备驱动程序内核机制.md'
         - 《深入理解Linux虚拟内存管理》: '13kernel/深入理解Linux虚拟内存管理.md'
+        - 《深入理解Linux网络技术内幕》: '13kernel/深入理解Linux网络技术内幕.md'
+        - 《深入理解Linux内核》: '13kernel/深入理解Linux内核.md'
+    - 工具:
+        - 《Wireshark网络分析实战》: '15tool/Wireshark网络分析实战.md' 
     - 刷题:
         - 《剑指offer专项突破》: '91leetcode/剑指offer专项突破.md'
     - 网课:
