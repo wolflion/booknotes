@@ -66,6 +66,7 @@ nav:
         - 《深入理解Linux内核》: '13kernel/深入理解Linux内核.md'
     - 工具:
         - 《Wireshark网络分析实战》: '15tool/Wireshark网络分析实战.md' 
+        - 《Linux命令行与shell脚本编程大全(3rd)》: '15tool/Linux命令行与shell脚本编程大全(3rd).md' 
     - 刷题:
         - 《剑指offer专项突破》: '91leetcode/剑指offer专项突破.md'
     - 网课:
