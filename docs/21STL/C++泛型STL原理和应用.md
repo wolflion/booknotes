@@ -109,11 +109,36 @@
 
 #### 2.1 类模板的公有数据类型成员
 
++ 原属模板私有的数据类型向外公开，使其成为一种“全局”类型。
+
 ##### 2.1.1 类的数据类型成员
 
 + **类的数据类型成员** ：在一个类中使用`typedef`定义一个已知数据类型的别名。 同时也称为 嵌入式类型(nested type)。
+
 + 例2-1 定义了数据类型成员的类模板示例代码
+
 + 前面要加`typename`关键字，为了与 类静态成员 写法相区分。
+
++ `typedef long double LDBL;`，**LDBL就是数据类型成员，简称类型成员**。
+
++ 类模板中定义的数据类型，也称为**nested type（嵌入式类型）**，既然是类中定义的，就有`public`这样的属性。
+
++ 加一个`typename`以示，与**引用类静态成员区别**
+
+  ```cpp
+  template <typename T1, typename T2>
+  class MyTraits{
+  public:
+      typedef T1 my_Type1;
+  };
+  int main(){
+      typename MyTraits<int,double>::my_Type1 a=100; //多一个typename，以示区别
+      cout<<a<<endl;
+      return 0;
+  }
+  ```
+
+  
 
 ##### 2.1.2 再谈typedef
 
@@ -124,13 +149,32 @@
 #### 2.2 内嵌式数据类型表及数据类型衍生
 
 + **内嵌式数据类型表**：一个类模板会把typedef定义的所有公有数据类型集中形成一个数据类型表，并放在类模板中靠前的位置。这个数据类型表存在于类模板内部。
+
 + 例2-2 编写程序，演示内嵌数据类型表以及数据类型的外部引用。
+
++ *不是太特别理解，lionel*
+
++ ```cpp
+  template <typename T>
+  class map{
+  public:
+      typedef T value_type;
+      typedef T& reference;
+      typedef T* pointer;
+  };
+  
+  map<int>::value_type a=100;
+  ```
+
++ 相当于是`map<int>::`**这种别名的方式**提供了value、reference、pointer的形式。
+
++ 这种内嵌式数据类型表具有自模板传入类型衍生出其他相关类型的能力，所以也叫**类型萃取机**或**类型榨取机**。
 
 #### 2.3 数据类型表
 
 ##### 2.3.1 数据类型表的概念
 
-+ **数据类型表**：一个类模板中，其全部成员都是公有数据类型，那么相对于嵌入式数据类型表，这个类模板就叫做独立数据类型表。
++ **数据类型表**：一个类模板中，其全部成员都是公有数据类型，那么相对于嵌入式数据类型表，这个类模板就叫做独立数据类型表，简称**数据类型表**。数据类型表是一种**类模板**
 + 例2-3
 + 例2-4
 
@@ -142,12 +186,84 @@
 + 特化数据类型表作用
   + 实现同一业务逻辑不同接口的统一。 
 
+#### 
+
+```cpp
+class Test1{
+public:
+    char Compute(int x, int y{
+        return x;}
+};
+                 
+class Test2{
+public:
+    double Compute(int x, int y{
+        return x;}
+};
+                   
+template<typename Arg1, typename Arg2, typename Ret>
+class Test{
+public:
+    Ret Compute(Arg1 x, Arg2 y{
+        return x;}
+};//需要提供3个实参
+
+class Test1; //为使用特化模板而定义的类名
+class Test2;                
+//统一接口
+template <typename T>
+class TypeTbl{};
+
+//特化1
+template<>
+class TypeTbl<Test1> {
+public:
+	typedef char ret_type;
+	typedef int par1_type;
+	typedef double par2_type;
+};
+
+//特化2
+template<>
+class TypeTbl<Test2> {
+public:
+	typedef double ret_type;
+	typedef double par1_type;
+	typedef double par2_type;
+};
+
+template<typename T>
+class Test {
+public:
+	typename TypeTbl<T>::ret_type Compute(
+		typename TypeTbl<T>::par1_type x,
+		typename TypeTbl<T>::par1_type y
+	) {
+		return x;
+	}
+};
+                
+int main(){
+    Test<Test1> t1;
+    cout<<t1.Compute(62,88.5)<<endl;
+    Test<Test1> t2;
+    cout<<t2.Compute(2.26,66)<<endl;
+    return 0;
+}
+```
+
+
+
 #### 2.5 STL中的Traits表
 
 + **Traits**实质上是特化数据类型表在STL中的一个具体应用，也是数据类型表，但因为它构思巧妙，称Traits技巧。
   + 应用背景
   + 使用特化模板实现指针的数据类型表
   + 汇总同类类模板的内嵌数据类型表形成统一接口
++ 1、应用背景
+  + 迭代器
++ 2、使用特化模板实现指针的数据类型表
++ 3、汇总同类类模板的内嵌数据类型表形成统一接口
 
 ### chap3、STL及其使用的其他C++技术
 
@@ -200,6 +316,28 @@
 
 ### chap4、模拟STL三大件
 
+#### 4.1、容器
+
+##### 4.1.1、向量vector的仿真MyVector
+
+##### 4.1.2、列表list的仿真MyList
+
+#### 4.2、迭代器
+
+##### 4.2.1、使用裸指针作为迭代器
+
+##### 4.2.2、迭代器是指针的类封装
+
+##### 4.2.3、迭代器的代码隔离作用
+
+##### 4.2.4、STL迭代器的种类
+
+##### 4.2.5、迭代器的种类标记
+
+##### 4.2.6、STL对迭代器的管理
+
+#### 4.3、通用算法
+
 ### chap5、容器及其应用
 
 ####  5.1 向量vector
@@ -231,12 +369,74 @@
 + [cplusplus-vector](http://www.cplusplus.com/reference/vector/)
 + [C++ vector用法](http://www.cnblogs.com/wang7/archive/2012/04/27/2474138.html)  *不过，这个开始看还行，现在来看，差不多都会了，算法部分接触得少。*
 
-####  5.2 
+####  5.2、列表list
+
+#### 5.3、双向队列deque
 
 #### 5.4 STL关联式容器
 
-### chap6、
+#### 5.5、map容器
 
-### chap7、
+#### 5.6、set容器
 
-### chap8、
+#### 5.7、hash表基础及hast容器
+
+##### 5.7.1、hash表基础
+
+##### 5.7.2、hash容器
+
+### chap6、通用算法
+
+#### 6.1、通用算法的参数
+
+##### 6.1.1、算法的迭代器参数
+
+##### 6.1.2、辅助参数
+
+##### 6.1.3、谓词参数
+
+#### 6.2、算法时间复杂度
+
+#### 6.3、常用通用算法
+
+##### 6.3.1、查找和搜索算法
+
+##### 6.3.2、变异算法
+
+##### 6.3.3、排序算法
+
+##### 6.3.4、算术算法与关系算法
+
+##### 6.3.5、排列组合与集合算法
+
+### chap7、适配器模式在STL基础部件上的应用
+
+#### 7.1、适配器
+
+#### 7.2、STL容器适配器
+
+##### 7.2.1、stack适配器
+
+##### 7.2.2、queue适配器
+
+##### 7.2.3、priority_queue适配器
+
+#### 7.3、迭代器适配器
+
+##### 7.3.1、插入迭代器
+
+##### 7.3.2、反向迭代器
+
+##### 7.3.3、IO流迭代器
+
+#### 7.4、函数对象适配器
+
+##### 7.4.1、函数对象的适配
+
+### chap8、STL容器内存空间分配器
+
+#### 8.1、内存空间配置器及其设计基础
+
+#### 8.2、
+
+#### 8.3、内存池的概念及方法
