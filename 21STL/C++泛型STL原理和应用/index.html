@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>C++泛型STL原理和应用 - lionel的技术笔记</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "C++\u6cdb\u578bSTL\u539f\u7406\u548c\u5e94\u7528";
+        var mkdocs_page_input_path = "21STL\\C++\u6cdb\u578bSTL\u539f\u7406\u548c\u5e94\u7528.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> lionel的技术笔记
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">简介</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../01daily/">daily</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">C++</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../20C%2B%2B/effectiveC%2B%2B/">《Effective C++》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../EffectiveSTL/">《Effective STL》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">基础知识</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA/">《操作系统导论》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E5%A4%A7%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">《大话设计模式》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网络编程</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/TCPIP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">《TCP/IP网络编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/">《Linux高性能服务器编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/TCPIP%E8%AF%A6%E8%A7%A3%E5%8D%B71/">《TCPIP详解卷1》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">文件系统</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/Linux%E5%86%85%E6%A0%B8%E6%8E%A2%E7%A7%98/">《Linux内核探秘》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《文件系统技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">《存储技术原理分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">存储</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../12storage/ceph%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《ceph设计原理与实现》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">视频</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/FFmpeg%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/">《FFmpeg入门到精通》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/WebRTC%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AE%9E%E6%97%B6%E4%BA%92%E5%8A%A8%E6%8A%80%E6%9C%AF/">《WebRTC音视频实时互动技术》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/%E6%96%B0%E4%B8%80%E4%BB%A3%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9%E7%A0%81%E6%A0%87%E5%87%86-H.264_AVC/">《新一代视频压缩码标准-H.264_AVC》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">内核</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/Linux%E5%86%85%E6%A0%B8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《Linux内核设计与实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5Linux%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%E5%86%85%E6%A0%B8%E6%9C%BA%E5%88%B6/">《深入Linux设备驱动程序内核机制》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">《深入理解Linux虚拟内存管理》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《深入理解Linux网络技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E5%86%85%E6%A0%B8/">《深入理解Linux内核》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">工具</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/Wireshark%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98/">《Wireshark网络分析实战》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/Linux%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8Eshell%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B%E5%A4%A7%E5%85%A8%283rd%29/">《Linux命令行与shell脚本编程大全(3rd)》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">刷题</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/">《剑指offer专项突破》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网课</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/01Linux%E9%AB%98%E5%B9%B6%E5%8F%91%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/">《Linux高并发网络编程开发》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/%E4%BE%AF%E6%8D%B7/%E4%BE%AF%E6%8D%B7C%2B%2B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%8660%E8%AE%B2/">《侯捷C++内存管理60讲》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/11NJU%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">《NJU算法设计与分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">英语专</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../60English/00794%E7%BB%BC%E5%90%88%E8%8B%B1%E8%AF%AD%E4%B8%80%E4%B8%8A/">《综合英语(一)上》</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">lionel的技术笔记</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>C++泛型STL原理和应用</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="cstl">《C++泛型STL原理和应用》<a class="headerlink" href="#cstl" title="Permanent link">&para;</a></h2>
+<h3 id="chap1c-">chap1、C++泛型技术基础--模板<a class="headerlink" href="#chap1c-" title="Permanent link">&para;</a></h3>
+<h3 id="11">1.1 泛型和模板<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
+<h4 id="111">1.1.1 泛型的概念<a class="headerlink" href="#111" title="Permanent link">&para;</a></h4>
+<ul>
+<li>泛型（generic type）：就是一种通用类型。</li>
+<li><code>T max( T x, T y) {}</code>  //这里T是类型<strong>占位符</strong>。</li>
+</ul>
+<h4 id="112-c">1.1.2 C++模板及其定义<a class="headerlink" href="#112-c" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>模板</strong>：除了需要声明类型占位符之外，其它内容应与目标实体代码完全相同。 声明一个模板时，需在实体代码前面，加一条说明语句。<em>前面是template关键字。</em><ul>
+<li>函数模板<ul>
+<li><code>template&lt;typename T, typename R, typename S&gt;  T max(R x, S y){}</code></li>
+</ul>
+</li>
+<li>类模板<ul>
+<li>在声明语句前加 <code>template&lt;typename T&gt;</code>  </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="113">1.1.3 几点说明和小结<a class="headerlink" href="#113" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>template&lt;typename T&gt;</code> 早期也写成 <code>template&lt;class T&gt;</code>，但不支持这么写</li>
+<li>C++11和14中，给关键字 <strong>auto</strong> 增加了新的语义，同时增加了 <strong>decltype表达式</strong> <ul>
+<li>auto关键字是为自动推导数据类型所设 <code>auto i=100;</code></li>
+<li>之前auto只对系统的内置数据推荐有效，现在利用<em>编译器的类型记忆能力</em>，可以记住自定义的类型。</li>
+<li>变量类型难以确定的问题主要出现在函数的返回值上，因此函数的返回值类型的位置常常会出现auto关键字，称为 <strong>auto返回值占位</strong></li>
+<li><code>auto Multiply(T t, U u)-&gt;decltype(t*u) {return t*u;}</code></li>
+</ul>
+</li>
+<li>把auto看做数据类型的话，auto其实也可以算一种泛型，不过它无须关键字typename声明。</li>
+<li>C++新标准引入了<strong>变量模板</strong>的概念。<code>pi&lt;T&gt;</code> 【作者没有介绍更多，可以翻看C++11】</li>
+</ul>
+<h3 id="12">1.2 关于模板参数<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
+<h4 id="121">1.2.1 模板参数的种类<a class="headerlink" href="#121" title="Permanent link">&para;</a></h4>
+<ul>
+<li>类型参数<ul>
+<li>以类模板作为函数实参的例子 <code>MyTest&lt;Test1&lt;int&gt;&gt;TT;</code></li>
+</ul>
+</li>
+<li>非类型参数<ul>
+<li><code>template &lt;typename T，/*类型参数*/ int b/*非类型参数*/&gt;</code></li>
+</ul>
+</li>
+<li>模板定义型参数<ul>
+<li>C++也允许以类模板的定义作为类模板参数<ul>
+<li><strong>需要的目的：</strong> 除了强调这个参数的实参必须为类模板之外，还强调这个类模板所具有的参数个数。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="122">1.2.2 模板形参和实参的结合<a class="headerlink" href="#122" title="Permanent link">&para;</a></h4>
+<ul>
+<li>函数模板实参的隐式提供<ul>
+<li><code>add&lt;int&gt;(45,46);</code> 直接变成 <code>add(45,46);</code></li>
+</ul>
+</li>
+<li>指针实参<ul>
+<li>在C++中，指针被看作一种数据类型。</li>
+<li>见具体的代码； 【<em>作者没有描述，我还没太懂这部分</em>】</li>
+</ul>
+</li>
+<li>修饰字const和&amp;的使用<ul>
+<li>见具体的代码示例； 【<em>没见过具体的应用场景</em>】</li>
+</ul>
+</li>
+</ul>
+<h3 id="13">1.3 特化模板和模板具现规则<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
+<h4 id="131">1.3.1 特化(特列化)模板<a class="headerlink" href="#131" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>特化(特列化)模板</strong>：为有特殊算法要求的数据类型另行编写模板<ul>
+<li>通用模板：门票10块</li>
+<li>特化模板：学生和老人半价</li>
+</ul>
+</li>
+<li>函数模板中的特化模板<ul>
+<li>在实体代码前加以下声明 <code>tmplate&lt;&gt;</code></li>
+</ul>
+</li>
+<li>类模板的特化和偏特化<ul>
+<li><strong>偏特化：</strong>只特化参数中的某一个或某几个</li>
+<li>偏特化模板的写法 <code>template&lt;typename T2&gt; struct Test&lt;int,T2&gt;{}</code></li>
+<li>全特化模板的写法 <code>template&lt;&gt; struct Test&lt;int,float&gt;{}</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="132">1.3.2 模板的具现<a class="headerlink" href="#132" title="Permanent link">&para;</a></h4>
+<ul>
+<li>因为有了以上泛型模块的共存，编译器就需要选择一个生成实体模块代码，就有了规则。</li>
+<li>具体的优先顺序<ul>
+<li>特化模板（函数或类）</li>
+<li>偏特化模板（函数或类）</li>
+<li>普通模板（函数或类）</li>
+<li>系统</li>
+</ul>
+</li>
+</ul>
+<h3 id="14">1.4 右值引用和模板<a class="headerlink" href="#14" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>转移语义</strong>是C11推出的新概念和新技术。</li>
+</ul>
+<h4 id="141">1.4.1 右值引用<a class="headerlink" href="#141" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>右值：</strong> 只能出现在赋值运算符右边。<em>仅能代表数据；匿名，无固定地址的对象。</em></li>
+<li><strong>左值：</strong> 既可以出现在赋值运算符左边，又可以出现在赋值运算符右边。<em>有名字，有固定地址的表达式</em></li>
+<li>右值引用<ul>
+<li>C11之前有两种表示方式 <code>T&amp; 别名 = lvalue;//引用</code> 和 <code>const T&amp; 别名 = lvalue;//常引用</code></li>
+<li>C11之后仅定义一种：<code>const T&amp; 别名 = rvalue;</code><ul>
+<li><em>强行为右值命名一个变量名，目的就是为延长右值生命期。</em> </li>
+<li><strong>右值的非常量引用</strong> <code>T&amp;&amp; 名称=rvalue;</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="142-1-">1.4.2 右值引用的应用1--转移语义<a class="headerlink" href="#142-1-" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>深拷贝</strong></li>
+<li><strong>浅拷贝</strong></li>
+</ul>
+<h4 id="143-2-move">1.4.3 右值引用的应用2--转移函数move()<a class="headerlink" href="#143-2-move" title="Permanent link">&para;</a></h4>
+<ul>
+<li>右值引用有好处后，左值也想利用，move的原型 <code>T&amp;&amp; move(T&amp; val);</code></li>
+</ul>
+<h4 id="144-3-">1.4.4 右值引用的应用3--参数完美转发模板()<a class="headerlink" href="#144-3-" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>参数转发</strong></li>
+<li>1 完美转发问题的提出及解决思路</li>
+<li>2 模板参数类型推导规则--引用符折叠规则</li>
+<li>3 参数类型正确转发的保证--forward()函数模板<ul>
+<li><code>static_cast()</code>：这个转换只对参数为右值时有用。</li>
+<li>C++11将<code>static_cast()</code>封装成函数模板std::forward，于是<code>Func(forwad&lt;T&gt;(a));</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="chap2c-">chap2、C++泛型机制的基石--数据类型表<a class="headerlink" href="#chap2c-" title="Permanent link">&para;</a></h3>
+<h4 id="21">2.1 类模板的公有数据类型成员<a class="headerlink" href="#21" title="Permanent link">&para;</a></h4>
+<ul>
+<li>原属模板私有的数据类型向外公开，使其成为一种“全局”类型。</li>
+</ul>
+<h5 id="211">2.1.1 类的数据类型成员<a class="headerlink" href="#211" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>类的数据类型成员</strong> ：在一个类中使用<code>typedef</code>定义一个已知数据类型的别名。 同时也称为 嵌入式类型(nested type)。</li>
+</ul>
+<ul>
+<li>例2-1 定义了数据类型成员的类模板示例代码</li>
+</ul>
+<ul>
+<li>前面要加<code>typename</code>关键字，为了与 类静态成员 写法相区分。</li>
+</ul>
+<ul>
+<li><code>typedef long double LDBL;</code>，<strong>LDBL就是数据类型成员，简称类型成员</strong>。</li>
+</ul>
+<ul>
+<li>类模板中定义的数据类型，也称为<strong>nested type（嵌入式类型）</strong>，既然是类中定义的，就有<code>public</code>这样的属性。</li>
+</ul>
+<ul>
+<li>
+<p>加一个<code>typename</code>以示，与<strong>引用类静态成员区别</strong></p>
+<pre class="highlight"><code class="language-cpp">template &lt;typename T1, typename T2&gt;
+class MyTraits{
+public:
+    typedef T1 my_Type1;
+};
+int main(){
+    typename MyTraits&lt;int,double&gt;::my_Type1 a=100; //多一个typename，以示区别
+    cout&lt;&lt;a&lt;&lt;endl;
+    return 0;
+}</code></pre>
+</li>
+</ul>
+<h5 id="212-typedef">2.1.2 再谈typedef<a class="headerlink" href="#212-typedef" title="Permanent link">&para;</a></h5>
+<ul>
+<li>别名的好处<ul>
+<li>增加可读性；</li>
+<li>编写平台无关的代码；   </li>
+</ul>
+</li>
+</ul>
+<h4 id="22">2.2 内嵌式数据类型表及数据类型衍生<a class="headerlink" href="#22" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>内嵌式数据类型表</strong>：一个类模板会把typedef定义的所有公有数据类型集中形成一个数据类型表，并放在类模板中靠前的位置。这个数据类型表存在于类模板内部。</li>
+</ul>
+<ul>
+<li>例2-2 编写程序，演示内嵌数据类型表以及数据类型的外部引用。</li>
+</ul>
+<ul>
+<li><em>不是太特别理解，lionel</em></li>
+</ul>
+<ul>
+<li>
+<p>```cpp
+  template <typename T>
+  class map{
+  public:
+      typedef T value_type;
+      typedef T&amp; reference;
+      typedef T* pointer;
+  };</p>
+<p>map<int>::value_type a=100;
+```</p>
+</li>
+</ul>
+<ul>
+<li>相当于是<code>map&lt;int&gt;::</code><strong>这种别名的方式</strong>提供了value、reference、pointer的形式。</li>
+</ul>
+<ul>
+<li>这种内嵌式数据类型表具有自模板传入类型衍生出其他相关类型的能力，所以也叫<strong>类型萃取机</strong>或<strong>类型榨取机</strong>。</li>
+</ul>
+<h4 id="23">2.3 数据类型表<a class="headerlink" href="#23" title="Permanent link">&para;</a></h4>
+<h5 id="231">2.3.1 数据类型表的概念<a class="headerlink" href="#231" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>数据类型表</strong>：一个类模板中，其全部成员都是公有数据类型，那么相对于嵌入式数据类型表，这个类模板就叫做独立数据类型表，简称<strong>数据类型表</strong>。数据类型表是一种<strong>类模板</strong></li>
+<li>例2-3</li>
+<li>例2-4</li>
+</ul>
+<h5 id="232">2.3.2 数据类型表的应用<a class="headerlink" href="#232" title="Permanent link">&para;</a></h5>
+<h4 id="24">2.4 特化数据类型表<a class="headerlink" href="#24" title="Permanent link">&para;</a></h4>
+<ul>
+<li>特化数据类型表作用<ul>
+<li>实现同一业务逻辑不同接口的统一。 </li>
+</ul>
+</li>
+</ul>
+<h4 id="_1"><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h4>
+<pre class="highlight"><code class="language-cpp">class Test1{
+public:
+    char Compute(int x, int y{
+        return x;}
+};
+
+class Test2{
+public:
+    double Compute(int x, int y{
+        return x;}
+};
+
+template&lt;typename Arg1, typename Arg2, typename Ret&gt;
+class Test{
+public:
+    Ret Compute(Arg1 x, Arg2 y{
+        return x;}
+};//需要提供3个实参
+
+class Test1; //为使用特化模板而定义的类名
+class Test2;                
+//统一接口
+template &lt;typename T&gt;
+class TypeTbl{};
+
+//特化1
+template&lt;&gt;
+class TypeTbl&lt;Test1&gt; {
+public:
+    typedef char ret_type;
+    typedef int par1_type;
+    typedef double par2_type;
+};
+
+//特化2
+template&lt;&gt;
+class TypeTbl&lt;Test2&gt; {
+public:
+    typedef double ret_type;
+    typedef double par1_type;
+    typedef double par2_type;
+};
+
+template&lt;typename T&gt;
+class Test {
+public:
+    typename TypeTbl&lt;T&gt;::ret_type Compute(
+        typename TypeTbl&lt;T&gt;::par1_type x,
+        typename TypeTbl&lt;T&gt;::par1_type y
+    ) {
+        return x;
+    }
+};
+
+int main(){
+    Test&lt;Test1&gt; t1;
+    cout&lt;&lt;t1.Compute(62,88.5)&lt;&lt;endl;
+    Test&lt;Test1&gt; t2;
+    cout&lt;&lt;t2.Compute(2.26,66)&lt;&lt;endl;
+    return 0;
+}</code></pre>
+<h4 id="25-stltraits">2.5 STL中的Traits表<a class="headerlink" href="#25-stltraits" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Traits</strong>实质上是特化数据类型表在STL中的一个具体应用，也是数据类型表，但因为它构思巧妙，称Traits技巧。<ul>
+<li>应用背景</li>
+<li>使用特化模板实现指针的数据类型表</li>
+<li>汇总同类类模板的内嵌数据类型表形成统一接口</li>
+</ul>
+</li>
+<li>1、应用背景<ul>
+<li>迭代器</li>
+</ul>
+</li>
+<li>2、使用特化模板实现指针的数据类型表</li>
+<li>3、汇总同类类模板的内嵌数据类型表形成统一接口</li>
+</ul>
+<h3 id="chap3stlc">chap3、STL及其使用的其他C++技术<a class="headerlink" href="#chap3stlc" title="Permanent link">&para;</a></h3>
+<h4 id="31-stl">3.1 初识STL<a class="headerlink" href="#31-stl" title="Permanent link">&para;</a></h4>
+<ul>
+<li>例3-1：编写一个数组，里面存放10个随机产生的整型数，把其中的数据从大到小和从小到大排序，最后输出它们。<ul>
+<li>对于这个例子，用到了STL的三大组件：<em>容器、迭代器、通用算法</em>。</li>
+</ul>
+</li>
+</ul>
+<h4 id="32-stlc">3.2 STL常用的C++技术<a class="headerlink" href="#32-stlc" title="Permanent link">&para;</a></h4>
+<h5 id="321">3.2.1 运算符重载<a class="headerlink" href="#321" title="Permanent link">&para;</a></h5>
+<ul>
+<li>例3-2：定义一个复数类，并以友元函数方式为其重载一个全局加法运算符+，使它可以实现复数的加法运算。</li>
+<li>例3-3：把例3-2中双目运算符+重载为类的成员函数。</li>
+<li>例3-4：</li>
+<li>例3-5： </li>
+</ul>
+<h5 id="322">3.2.2 函数对象（仿函数）<a class="headerlink" href="#322" title="Permanent link">&para;</a></h5>
+<ul>
+<li>例3-6 函数对象作为函数参数的示例程序。</li>
+</ul>
+<h5 id="323-lambda">3.2.3 Lambda表达式<a class="headerlink" href="#323-lambda" title="Permanent link">&para;</a></h5>
+<ul>
+<li>例3-7 lambda表达式与具有相同功能的仿函数的比较。<strong>Lambda表达式</strong>又叫 <em>无名仿函数（或匿名仿函数）</em><ul>
+<li><code>[](int x){cout &lt;&lt; 2*x &lt;&lt; endl;} // 相当于在声明function类的同时，又定义了定义该对象</code></li>
+<li><code>[](int x){cout &lt;&lt; 2*x &lt;&lt; endl;}(10) //则是对象调用。</code></li>
+</ul>
+</li>
+<li>例3-8 多种lambda表达式调用示例程序  </li>
+<li>例3-9 当用户输入一个15~20的数据时，输出2倍，否则输出本身。</li>
+<li>例3-10 两个可以修改捕获变量的lambda表达式的示例程序。<ul>
+<li>示例1：演示了引用捕获的程序代码</li>
+<li>示例2：演示了关键字mutable的应用</li>
+</ul>
+</li>
+<li>例3-11 把lambda表达式应用于STL通用算法的一个程序示例</li>
+</ul>
+<h4 id="33">3.3 智能指针<a class="headerlink" href="#33" title="Permanent link">&para;</a></h4>
+<h5 id="331">3.3.1 智能指针的基本原理<a class="headerlink" href="#331" title="Permanent link">&para;</a></h5>
+<ul>
+<li>指针对象与资源的绑定<ul>
+<li><strong>RAII（Resource Acquisition is Initialization）</strong>，是把裸指针（原始指针）和与它相关的操作封装成一个类，创建时调用构造函数，销毁时调用析构函数。重载了<code>opertaor-&gt;</code>和<code>operator *</code></li>
+</ul>
+</li>
+<li>例3-12 编写一年智能指针示例程序</li>
+<li>可共享资源的智能指针<ul>
+<li>创建时加1，销毁时减1，直到0为止。</li>
+</ul>
+</li>
+<li>例3-13 编写一个演示程序</li>
+</ul>
+<h5 id="332-c11">3.3.2 C++11支持的智能指针<a class="headerlink" href="#332-c11" title="Permanent link">&para;</a></h5>
+<ul>
+<li>unique_ptr</li>
+<li>share_ptr</li>
+<li>weak_ptr</li>
+</ul>
+<h3 id="chap4stl">chap4、模拟STL三大件<a class="headerlink" href="#chap4stl" title="Permanent link">&para;</a></h3>
+<h4 id="41">4.1、容器<a class="headerlink" href="#41" title="Permanent link">&para;</a></h4>
+<h5 id="411vectormyvector">4.1.1、向量vector的仿真MyVector<a class="headerlink" href="#411vectormyvector" title="Permanent link">&para;</a></h5>
+<h5 id="412listmylist">4.1.2、列表list的仿真MyList<a class="headerlink" href="#412listmylist" title="Permanent link">&para;</a></h5>
+<h4 id="42">4.2、迭代器<a class="headerlink" href="#42" title="Permanent link">&para;</a></h4>
+<h5 id="421">4.2.1、使用裸指针作为迭代器<a class="headerlink" href="#421" title="Permanent link">&para;</a></h5>
+<h5 id="422">4.2.2、迭代器是指针的类封装<a class="headerlink" href="#422" title="Permanent link">&para;</a></h5>
+<h5 id="423">4.2.3、迭代器的代码隔离作用<a class="headerlink" href="#423" title="Permanent link">&para;</a></h5>
+<h5 id="424stl">4.2.4、STL迭代器的种类<a class="headerlink" href="#424stl" title="Permanent link">&para;</a></h5>
+<h5 id="425">4.2.5、迭代器的种类标记<a class="headerlink" href="#425" title="Permanent link">&para;</a></h5>
+<h5 id="426stl">4.2.6、STL对迭代器的管理<a class="headerlink" href="#426stl" title="Permanent link">&para;</a></h5>
+<h4 id="43">4.3、通用算法<a class="headerlink" href="#43" title="Permanent link">&para;</a></h4>
+<h3 id="chap5">chap5、容器及其应用<a class="headerlink" href="#chap5" title="Permanent link">&para;</a></h3>
+<h4 id="51-vector">5.1 向量vector<a class="headerlink" href="#51-vector" title="Permanent link">&para;</a></h4>
+<ul>
+<li>vector常用构造函数<ul>
+<li><code>vector();</code></li>
+<li><code>vector(vector&amp;&amp; _Right);</code></li>
+<li><code>vector(size_type Count);</code></li>
+<li><code>vector(size_type _Count, const Type&amp; val);</code></li>
+<li><code>template&lt;class InputIterator&gt; vector(InputIterator _First,InputIterator _Last); // 以迭代器_First和_Last之间的元素初始化该向量</code></li>
+</ul>
+</li>
+<li>例5-1 测试vector中的构造函数</li>
+<li>读向量容器元素的操作<ul>
+<li><code>reference front();  const_reference front() const;</code> 返回第一个元素</li>
+<li><code>reference back();  const_reference back() const;</code> 返回最后一个元素</li>
+</ul>
+</li>
+<li>各种用于改变向量容器中数据的成员函数<ul>
+<li><code>clear()</code></li>
+<li><code>erase(position)</code></li>
+<li><code>insert()</code></li>
+<li><code>push_back(elem)</code></li>
+<li><code>pop_back()</code></li>
+<li><code>resize(num)</code></li>
+<li><code>resize(num,elem)</code></li>
+</ul>
+</li>
+<li>例5-2 编写一个程序</li>
+<li>表5-4：计算向量容器大小的操作<ul>
+<li><code>bool empty() const;</code></li>
+<li><code>size_type max_size() const;</code></li>
+</ul>
+</li>
+<li>例5-3 编程程序，测试“表5-4：计算向量容器大小的操作”的成员函数，了解其功能</li>
+<li>例5-4 编写一个在vector上使用C++11新规则的程序。</li>
+<li><a href="http://www.cplusplus.com/reference/vector/">cplusplus-vector</a></li>
+<li><a href="http://www.cnblogs.com/wang7/archive/2012/04/27/2474138.html">C++ vector用法</a>  <em>不过，这个开始看还行，现在来看，差不多都会了，算法部分接触得少。</em></li>
+</ul>
+<h4 id="52list">5.2、列表list<a class="headerlink" href="#52list" title="Permanent link">&para;</a></h4>
+<h4 id="53deque">5.3、双向队列deque<a class="headerlink" href="#53deque" title="Permanent link">&para;</a></h4>
+<h4 id="54-stl">5.4 STL关联式容器<a class="headerlink" href="#54-stl" title="Permanent link">&para;</a></h4>
+<h4 id="55map">5.5、map容器<a class="headerlink" href="#55map" title="Permanent link">&para;</a></h4>
+<h4 id="56set">5.6、set容器<a class="headerlink" href="#56set" title="Permanent link">&para;</a></h4>
+<h4 id="57hashhast">5.7、hash表基础及hast容器<a class="headerlink" href="#57hashhast" title="Permanent link">&para;</a></h4>
+<h5 id="571hash">5.7.1、hash表基础<a class="headerlink" href="#571hash" title="Permanent link">&para;</a></h5>
+<h5 id="572hash">5.7.2、hash容器<a class="headerlink" href="#572hash" title="Permanent link">&para;</a></h5>
+<h3 id="chap6">chap6、通用算法<a class="headerlink" href="#chap6" title="Permanent link">&para;</a></h3>
+<h4 id="61">6.1、通用算法的参数<a class="headerlink" href="#61" title="Permanent link">&para;</a></h4>
+<h5 id="611">6.1.1、算法的迭代器参数<a class="headerlink" href="#611" title="Permanent link">&para;</a></h5>
+<h5 id="612">6.1.2、辅助参数<a class="headerlink" href="#612" title="Permanent link">&para;</a></h5>
+<h5 id="613">6.1.3、谓词参数<a class="headerlink" href="#613" title="Permanent link">&para;</a></h5>
+<h4 id="62">6.2、算法时间复杂度<a class="headerlink" href="#62" title="Permanent link">&para;</a></h4>
+<h4 id="63">6.3、常用通用算法<a class="headerlink" href="#63" title="Permanent link">&para;</a></h4>
+<h5 id="631">6.3.1、查找和搜索算法<a class="headerlink" href="#631" title="Permanent link">&para;</a></h5>
+<h5 id="632">6.3.2、变异算法<a class="headerlink" href="#632" title="Permanent link">&para;</a></h5>
+<h5 id="633">6.3.3、排序算法<a class="headerlink" href="#633" title="Permanent link">&para;</a></h5>
+<h5 id="634">6.3.4、算术算法与关系算法<a class="headerlink" href="#634" title="Permanent link">&para;</a></h5>
+<h5 id="635">6.3.5、排列组合与集合算法<a class="headerlink" href="#635" title="Permanent link">&para;</a></h5>
+<h3 id="chap7stl">chap7、适配器模式在STL基础部件上的应用<a class="headerlink" href="#chap7stl" title="Permanent link">&para;</a></h3>
+<h4 id="71">7.1、适配器<a class="headerlink" href="#71" title="Permanent link">&para;</a></h4>
+<h4 id="72stl">7.2、STL容器适配器<a class="headerlink" href="#72stl" title="Permanent link">&para;</a></h4>
+<h5 id="721stack">7.2.1、stack适配器<a class="headerlink" href="#721stack" title="Permanent link">&para;</a></h5>
+<h5 id="722queue">7.2.2、queue适配器<a class="headerlink" href="#722queue" title="Permanent link">&para;</a></h5>
+<h5 id="723priority_queue">7.2.3、priority_queue适配器<a class="headerlink" href="#723priority_queue" title="Permanent link">&para;</a></h5>
+<h4 id="73">7.3、迭代器适配器<a class="headerlink" href="#73" title="Permanent link">&para;</a></h4>
+<h5 id="731">7.3.1、插入迭代器<a class="headerlink" href="#731" title="Permanent link">&para;</a></h5>
+<h5 id="732">7.3.2、反向迭代器<a class="headerlink" href="#732" title="Permanent link">&para;</a></h5>
+<h5 id="733io">7.3.3、IO流迭代器<a class="headerlink" href="#733io" title="Permanent link">&para;</a></h5>
+<h4 id="74">7.4、函数对象适配器<a class="headerlink" href="#74" title="Permanent link">&para;</a></h4>
+<h5 id="741">7.4.1、函数对象的适配<a class="headerlink" href="#741" title="Permanent link">&para;</a></h5>
+<h3 id="chap8stl">chap8、STL容器内存空间分配器<a class="headerlink" href="#chap8stl" title="Permanent link">&para;</a></h3>
+<h4 id="81">8.1、内存空间配置器及其设计基础<a class="headerlink" href="#81" title="Permanent link">&para;</a></h4>
+<h4 id="82">8.2、<a class="headerlink" href="#82" title="Permanent link">&para;</a></h4>
+<h4 id="83">8.3、内存池的概念及方法<a class="headerlink" href="#83" title="Permanent link">&para;</a></h4>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
