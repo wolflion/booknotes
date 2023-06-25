@@ -1,5 +1,7 @@
 ## 《C++泛型STL原理和应用》
 
++ 书上[代码](https://gitee.com/fewolflion/BookNote/tree/master/01lioneloutput/60BookCode/C++%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8)
+
 ### chap1、C++泛型技术基础--模板
 
 ### 1.1 泛型和模板
@@ -283,15 +285,15 @@ int main(){
 
 ##### 3.2.2 函数对象（仿函数）
 
-+ 例3-6 函数对象作为函数参数的示例程序。
++ [例3-6 函数对象作为函数参数的示例程序](https://gitee.com/fewolflion/BookNote/blob/master/01lioneloutput/60BookCode/C++%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/chap3STL%E5%8F%8A%E5%85%B6%E4%BD%BF%E7%94%A8%E7%9A%84%E5%85%B6%E4%BB%96C++%E6%8A%80%E6%9C%AF/E3-06.cpp)
 
 ##### 3.2.3 Lambda表达式
 
-+ 例3-7 lambda表达式与具有相同功能的仿函数的比较。**Lambda表达式**又叫 *无名仿函数（或匿名仿函数）*
++ [例3-7 lambda表达式与具有相同功能的仿函数的比较](https://gitee.com/fewolflion/BookNote/blob/master/01lioneloutput/60BookCode/C++%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/chap3STL%E5%8F%8A%E5%85%B6%E4%BD%BF%E7%94%A8%E7%9A%84%E5%85%B6%E4%BB%96C++%E6%8A%80%E6%9C%AF/E3-07.cpp)。**Lambda表达式**又叫 *无名仿函数（或匿名仿函数）*
   + `[](int x){cout << 2*x << endl;} // 相当于在声明function类的同时，又定义了定义该对象`
   + `[](int x){cout << 2*x << endl;}(10) //则是对象调用。`
-+ 例3-8 多种lambda表达式调用示例程序  
-+ 例3-9 当用户输入一个15~20的数据时，输出2倍，否则输出本身。
++ [例3-8 多种lambda表达式调用示例程序](https://gitee.com/fewolflion/BookNote/blob/master/01lioneloutput/60BookCode/C++%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/chap3STL%E5%8F%8A%E5%85%B6%E4%BD%BF%E7%94%A8%E7%9A%84%E5%85%B6%E4%BB%96C++%E6%8A%80%E6%9C%AF/E3-08.cpp)  
++ [例3-9 当用户输入一个15~20的数据时，输出2倍，否则输出本身](https://gitee.com/fewolflion/BookNote/blob/master/01lioneloutput/60BookCode/C++%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/chap3STL%E5%8F%8A%E5%85%B6%E4%BD%BF%E7%94%A8%E7%9A%84%E5%85%B6%E4%BB%96C++%E6%8A%80%E6%9C%AF/E3-09.cpp)
 + 例3-10 两个可以修改捕获变量的lambda表达式的示例程序。
   + 示例1：演示了引用捕获的程序代码
   + 示例2：演示了关键字mutable的应用
@@ -301,18 +303,66 @@ int main(){
 
 ##### 3.3.1 智能指针的基本原理
 
-+ 指针对象与资源的绑定
++ 1、指针对象与资源的绑定
   + **RAII（Resource Acquisition is Initialization）**，是把裸指针（原始指针）和与它相关的操作封装成一个类，创建时调用构造函数，销毁时调用析构函数。重载了`opertaor->`和`operator *`
-+ 例3-12 编写一年智能指针示例程序
-+ 可共享资源的智能指针
+  + [例3-12 编写一年智能指针示例程序](https://gitee.com/fewolflion/BookNote/blob/master/01lioneloutput/60BookCode/C++%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/chap3STL%E5%8F%8A%E5%85%B6%E4%BD%BF%E7%94%A8%E7%9A%84%E5%85%B6%E4%BB%96C++%E6%8A%80%E6%9C%AF/E3-12.cpp)
++ 2、可共享资源的智能指针
   + 创建时加1，销毁时减1，直到0为止。
-+ 例3-13 编写一个演示程序
+  + [例3-13 编写一个演示程序](https://gitee.com/fewolflion/BookNote/blob/master/01lioneloutput/60BookCode/C++%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/chap3STL%E5%8F%8A%E5%85%B6%E4%BD%BF%E7%94%A8%E7%9A%84%E5%85%B6%E4%BB%96C++%E6%8A%80%E6%9C%AF/E3-13.cpp)
 
 ##### 3.3.2 C++11支持的智能指针
 
-+ unique_ptr
-+ share_ptr
-+ weak_ptr
++ 1、unique_ptr
+  + 0
+  + unique_ptr用在如下场合
+    + 利用动态指针的RAII特性，保证程序出现异常时能确保动态资源的释放
+    + 返回函数内创建的动态资源
+    + 可放在STL容器中
+    + 管理动态数组
+    + 自定义资源释放操作
++ 2、shared_ptr
+  + 2种方式创建shared_ptr
+    + 通过make_shared辅助函数创建shared_ptr，`auto s_s = make_shared<string>("hello");`
+    + 通过构造函数构建shared_ptr，
+  + 使用
+    + 在if语句中作为转移条件
+    + 定制资源销毁操作deleter
++ 3、weak_ptr
+  + 没有重载operator->和operator*操作符，**不能直接通过weak_ptr使用对象**
+  + **两个类互为对方指针的资源类型，出现了所谓的“循环”引用**，会造成计数器的计数失控，于是产生了**可以共享资源，但不参与计数的weak_ptr来解决这种循环引用**
+
+```c++
+#include <iostream>
+#include <memory>
+using namespace std;
+
+struct B; //类前置声明
+struct A{
+    ~A(){
+        cout<<"~A()"<<endl;
+    }
+    shared_ptr<B>b;
+}
+
+struct B{
+    ~B(){
+        cout<<"~B()"<<endl;
+    }
+    shared_ptr<A>a;  //循环引用，不可用
+    //改成这样
+    weak_ptr<A>a;//在先声明的B中用weak_ptr打破循环引用
+}
+
+int main(){
+    shared_ptr<A> ap(new A);
+    shared_ptr<B> bp(new B);
+    ap->b = bp;
+    bp->a = ap;
+    return 0;
+}
+```
+
+
 
 ### chap4、模拟STL三大件
 
@@ -325,6 +375,9 @@ int main(){
 #### 4.2、迭代器
 
 ##### 4.2.1、使用裸指针作为迭代器
+
++ **以存储空间连续的数组为其存储结构的容器**
++ 例4-3
 
 ##### 4.2.2、迭代器是指针的类封装
 
