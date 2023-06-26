@@ -374,18 +374,45 @@ int main(){
 
 #### 4.2、迭代器
 
++ **中介装置**把容器与算法分离，这样的**智能指针**就叫**迭代器**
+
 ##### 4.2.1、使用裸指针作为迭代器
 
 + **以存储空间连续的数组为其存储结构的容器**
-+ 例4-3
++ [例4-3，程序中定义一个`MyVector<int>`的对象v1，使用裸指针作为对象v1的迭代器并遍历v1](https://gitee.com/fewolflion/BookNote/blob/master/01lioneloutput/60BookCode/C++%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/chap04%E6%A8%A1%E6%8B%9FSTL%E4%B8%89%E5%A4%A7%E4%BB%B6/04_03.cpp)
+  + 与4-1的区别
+  + `typedef Ty* viter;`，以及`MyVector<int>::viter iter;` *这两个的转化过程，要好限理解一下，lionel*
 
 ##### 4.2.2、迭代器是指针的类封装
 
++ 如果存储空间不连续，就需要**加以改造（重载*，++，==，!=运算符）**
++ 例4-4，为MyList容器设计迭代器MyList_iterator并编写程序进行测试
+
 ##### 4.2.3、迭代器的代码隔离作用
+
++ 使用者无需知道
++ 例4-5，程序，使用上述查找函数find()分别在MyVector和MyList容器查找数据100
 
 ##### 4.2.4、STL迭代器的种类
 
++ 0
++ 1、输入迭代器（输入流，**有以下功能**）
++ 2、输出迭代器
+  + 通过`operator*`对容器数据元素进行修改
++ 3、前向迭代器
+  + 输入和输出迭代器的结合体，`operator*`既可以访问元素，也可以修改元素
++ 4、双向迭代器
+  + 在前向迭代器的功能上，**允许向后移动**，支持`operator--`和`operator--(int)`
++ 5、随机存取迭代器
+
 ##### 4.2.5、迭代器的种类标记
+
++ 0
++ 输入迭代器，`struct input_iterator_tag{};`
++ 输出
++ 前向
++ 双向
++ 随机，`struct random_access_iterator_tag:public bidirectional_iterator_tag {};`
 
 ##### 4.2.6、STL对迭代器的管理
 
