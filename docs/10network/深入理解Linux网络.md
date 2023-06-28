@@ -199,39 +199,170 @@
 
 ##### 5.2.3、跨机网络通信汇总
 
++ send
+  + 系统调用
+  + 协议栈（传输层、网络层）
+  + 邻居子系统
+  + 网络设备子系统
+  + 驱动程序
+  + 网卡
++ recvfrom
+  + 进程调度
+  + 协议栈（传输层、网络层）
+  + 网络设备子系统
+  + 驱动程序
+  + 软中断
+  + 硬中断
+  + 网卡
+
 #### 5.3、本机发送过程
 
 ##### 5.3.1、网络层路由
 
++ 网络层入口函数是`ip_queue_xmit()`，net/ipv4/ip_output.c
+
 ##### 5.3.2、本机IP路由
+
++ **选用哪个设备是路由相关函数`__ip_route_output_key()`确定的**
++ **设置本机IP的时候，调用`fib_inetaddr_event()`函数完成设置的**
 
 ##### 5.3.3、网络设备子系统
 
++ 网络设备子系统的入口函数是`dev_queue_xmit()`，net/core/dev.c
+
 ##### 5.3.4、“驱动”程序
 
++ 对于真实的igb网卡来说，它的驱动代码都在drivers/net/ethernet/intel/igb/igb_main.c文件中
++ drivers/net/loopback.c
+  + `loopback_xmit()`
++ net/core/dev.c
+  + `__napi_schedule()`
+
 #### 5.4、本机接收过程
+
++ 软中断处理函数`net_rx_action()`
+
+#### 5.5、本章总结
 
 ### chap6、深度理解TCP连接建立过程
 
 #### 6.2、深入理解listen
 
-6.2.1、listen系统调用
+##### 6.2.1、listen系统调用
 
-6.2.2、协议栈listen
++ net/sock.c中的`listen`
++ `err = sock->ops->listen(sock, backlog);`
 
-6.2.3、接收队列定义
+##### 6.2.2、协议栈listen
+
++ net/ipv4/af_inet.c中的`inet_listen()`
++ **服务端的全连接队列长度**
++ net/ipv4/inet_connection_sock.c中的`inet_csk_listen_start()`
+
+##### 6.2.3、接收队列定义
+
++ include/net/inet_connection_sock.h
++ include/net/request_sock.h中的`struct request_sock_queue{};`
+
+##### 6.2.4、接收队列申请和初始化
+
++ net/ipv4/inet_connection_sock.c中的`inet_csk_listen_start()`
+
+##### 6.2.5、半连接队列长度计算
+
++ net/core/request_sock.c
+
+##### 6.2.6、listen过程小结
+
++ listen最主要的工作，**申请和初始化接收队列，包括全连接队列和半连接队列**
+  + 全连接队列，是个**链表**
+  + 半连接队列，是个**哈希表**
 
 #### 6.3、深入理解connect
 
++ **图6.4 socket数据结构**
+
 ##### 6.3.1、connect调用链展开
+
++ net/sock.c中的`connect`
++ ipv4/af_inet.c中的`inet_stream_connect()`
++ net/ipv4/tcp_ipv4.c中的`tcp_v4_connect()`
 
 ##### 6.3.2、选择可用端口
 
++ net/ipv4/inet_hashtables.c中的`inet_hash_connect()`
+
 ##### 6.3.3、端口被使用过怎么办
+
++ 
 
 ##### 6.3.4、发起syn请求
 
++ net/ipv4/tcp_output.c中的`tcp_connect()`，根据入参sk中的信息，构建一个完美的syn报文，并将它发送出去
+
 ##### 6.3.5、connect小结
 
++ **客户端在执行connect函数的时候，把本地socket状态设置成了TCP_SYN_SENT，选了一个可用的端口，接着发出SYN握手请求并启动重传定时器**。
+
 #### 6.4、完整TCP连接建立过程
+
+##### 6.4.1、客户端connect
+
+##### 6.4.2、服务端响应SYN
+
+##### 6.4.3、客户端响应SYNACK
+
+##### 6.4.4、服务端响应ACK
+
+##### 6.4.5、服务端accept
+
++ net/ipv4/inet_connection_sock.c中的`inet_csk_accept()`
+
+##### 6.4.6、连接建立过程总结
+
+#### 6.5、异常TCP连接建立情况
+
+##### 6.5.1、connect系统调用耗时失控
+
+##### 6.5.2、第一次握手丢包
+
+##### 6.5.3、第三次握手丢包
+
+##### 6.5.4、握手异常总结
+
+#### 6.6、如何查看是否有连接队列溢出发生
+
+##### 6.6.1、全连接队列溢出判断
+
+##### 6.6.2、半连接队列溢出判断
+
+#### 6.7、本章总结
+
+### chap7、一条TCP连接消耗多大内存
+
+#### 7.1、相关实际问题
+
+7.2、Linux内核如何管理内存
+
+7.3、TCP连接相关内核对象
+
+#### 7.4、实测TCP内核对象开销
+
+#### 7.5、本章小结
+
+### chap8、一台机器最多能支持多少条TCP连接
+
+#### 8.2、理解Linux最大文件描述符
+
+#### 8.3、一台服务端机器最多可以支撑多少条TCP连接
+
+#### 8.4、一台客户端机器最多只能发起65535条连接吗
+
+#### 8.5、单机百万并发连接的动手实验
+
+### chap9、网络性能优化建议
+
+### chap10、容器网络虚拟化
+
+#### 10.2、veth设备对
 
