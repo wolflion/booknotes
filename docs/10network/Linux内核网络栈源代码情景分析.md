@@ -10,21 +10,118 @@
 
 #### 0.1、网络栈本质及其分层架构
 
++ **动态扩展**，数据的封装格式必须是可扩展的
++ 七层
+  + 表示层、会话层（本版不涉及，对应了socket.c和af_inet.c）
+  + 传输层（tcp.c，udp.c，icmp.c，igmp.c，snmp.h），L4
+  + 网络层（ip.c，route.c），L3
+  + 链路层（dev.c），L2
+  + 驱动层（drivers子目录）
+  + 物理层（不涉及）
+
 #### 0.2、系统调用接口到内核的请求传递
 
-##### 0.2.1、第一层入口：accept.S
++ 以accept为例
+
+##### 0.2.1、第一层入口：accept.S（glibc-2.0.111）
+
++ glibc-2.0.111/sysdeps/unix/sysv/linux/accept.S
 
 ##### 0.2.2、第二层入口：socket.S
 
++ glibc-2.0.111/sysdeps/unix/sysv/linux/i386/socket.S
++ `int $0x80`软中断调用
+
 ##### 0.2.3、第三层入口：entry.S
+
++ linux-1.2.13/arch/i386/kernel/entry.S
++ `movl _sys_call_table(,%eax,4),%eax`
++ `call *%eax`
 
 ### chap1、网络协议头文件分析
 
 + 基本都在include/linux目录下面
++ 路由器与网关的区别
+  + **路由器，只在使用相同协议的网络中转发数据包**
+  + 网关，可以在工作在七层中
+  + **多协议路由器**，仍然不可对数据包进行协议上的格式转换
 
 #### 1.1、etherdevice.h
 
++ MAC首部的函数
++ eth_header()
++ eth_rebuild_header()
++ eth_trans_type，*是类型还是函数？lionel*
+
 #### 1.2、icmp.h
+
++ ICMP首部和ICMP错误类型，rfc792
+
+1.3、if.h
+
++ 定义了接口标志位、ifaddr、ifreq、ifmap、ifconf结构
+
+1.4、if_arp.h
+
++ ARP首部以及与之相关的常数值
+
+1.5、if_ether.h
+
++ 以太网首部ethhdr定义和一些常量定义。**enet_statistics结构**用于统计信息记录
+
+1.6、if_plip.h
+
++ 并行线网络协议（Parallel Line Internet Protocol）
+
+1.7、if_slip.h
+
++ 串行线上（Serial Line IP），rfc1055
+
+1.8、igmp.h
+
+1.9、in.h
+
++ 地址常量定义
+
+1.10、inet.h
+
+1.11、interrupt.h
+
++ **下半部分（Bottom Half）**
+
+1.12、ip.h
+
+1.13、ip_fw.h
+
++ ip层防火墙
+
+1.14、ipx.h
+
+1.15、net.h
+
+1.16、netdevice.h
+
+1.17、notifier.h
+
+1.18、ppp.h
+
+1.19、route.h
+
+1.20、skbuff.h
+
+1.21、socket.h
+
+1.22、sockios.h
+
+1.23、tcp.h
+
+1.24、timer.h
+
+1.25、udp.h
+
+1.26、un.h
+
+1.27、本章小结
 
 ### chap2、BSD socket层实现分析
 
@@ -120,7 +217,31 @@
 
 #### 4.1、tcp.c
 
-4.2、tcp.h
+##### 0、
+
++ 数据应答是累积的，不可进行跨越式应答
++ 流量控制是TCP一个重要方面
++ TCP的套接字所经过的各种状态
+  + TCP_CLOSED
+  + TCP_LISTEN
+
+##### 4.1.1、头文件声明、相关变量及宏定义
+
++ rfc2233，进行tcp_statistics，是一个tcp_mib结构类型
+
+##### 4.1.2、tcp_set_state
+
++ 套接字状态设置
+
+##### 4.1.12、tcp_ioctl
+
++ 2.6里有
+
+##### 4.1.21、cleanup_rbuf
+
++ 2.6里只有`tcp_cleanup_rbuf()`
+
+#### 4.2、tcp.h
 
 4.3、udp.c
 
