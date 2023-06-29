@@ -112,3 +112,38 @@ grads[2:4] #是['C','D']
 ##### 5.9.1、多行字符串
 
 ##### 5.9.2、文件处理
+
+### chap6、定义函数
+
+#### 6.1、函数的功能
+
+#### 6.2、函数的非正式讨论
+
++ *函数带有参数，如何处理，lionel，之前不太会啊*
++ *main也需要定义？是重定义吗？lionel*
+  + [为什么Python没有main函数？](https://www.zhihu.com/question/587995854/answer/2928659729?utm_id=0)
+
+```python
+#happy.py
+def happy():
+    print("Happy Birthday to you!")
+def sing(person): #冒号不能忘记，参数怎么用
+    happy()
+    happy()
+    print("Happy birthday dear", person + ".")
+    happy()
+    
+def main():
+    sing("Fred")
+    print()
+    sing("Lucy")
+    print()
+    sing("Elmer")
+    
+main() # main也需要定义？是重定义吗？
+    
+```
+
+
+
+#### 6.3、带有函数的终值程序
