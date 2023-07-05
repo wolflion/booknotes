@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>深入应用C++11 - lionel的技术笔记</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "\u6df1\u5165\u5e94\u7528C++11";
+        var mkdocs_page_input_path = "22C++modern\\\u6df1\u5165\u5e94\u7528C++11.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> lionel的技术笔记
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">简介</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../01daily/">daily</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">C++</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../20C%2B%2B/effectiveC%2B%2B/">《Effective C++》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/EffectiveSTL/">《Effective STL》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">基础知识</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA/">《操作系统导论》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E5%A4%A7%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">《大话设计模式》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网络编程</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/TCPIP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">《TCP/IP网络编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/">《Linux高性能服务器编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/TCPIP%E8%AF%A6%E8%A7%A3%E5%8D%B71/">《TCPIP详解卷1》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">文件系统</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/Linux%E5%86%85%E6%A0%B8%E6%8E%A2%E7%A7%98/">《Linux内核探秘》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《文件系统技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">《存储技术原理分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">存储</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../12storage/ceph%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《ceph设计原理与实现》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">视频</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/FFmpeg%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/">《FFmpeg入门到精通》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/WebRTC%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AE%9E%E6%97%B6%E4%BA%92%E5%8A%A8%E6%8A%80%E6%9C%AF/">《WebRTC音视频实时互动技术》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/%E6%96%B0%E4%B8%80%E4%BB%A3%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9%E7%A0%81%E6%A0%87%E5%87%86-H.264_AVC/">《新一代视频压缩码标准-H.264_AVC》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">内核</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/Linux%E5%86%85%E6%A0%B8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《Linux内核设计与实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5Linux%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%E5%86%85%E6%A0%B8%E6%9C%BA%E5%88%B6/">《深入Linux设备驱动程序内核机制》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">《深入理解Linux虚拟内存管理》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《深入理解Linux网络技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E5%86%85%E6%A0%B8/">《深入理解Linux内核》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">工具</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/Wireshark%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98/">《Wireshark网络分析实战》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/Linux%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8Eshell%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B%E5%A4%A7%E5%85%A8%283rd%29/">《Linux命令行与shell脚本编程大全(3rd)》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">刷题</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/">《剑指offer专项突破》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网课</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/01Linux%E9%AB%98%E5%B9%B6%E5%8F%91%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/">《Linux高并发网络编程开发》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/%E4%BE%AF%E6%8D%B7/%E4%BE%AF%E6%8D%B7C%2B%2B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%8660%E8%AE%B2/">《侯捷C++内存管理60讲》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/11NJU%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">《NJU算法设计与分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">英语专</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../60English/00794%E7%BB%BC%E5%90%88%E8%8B%B1%E8%AF%AD%E4%B8%80%E4%B8%8A/">《综合英语(一)上》</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">lionel的技术笔记</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>深入应用C++11</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="c11">《深入应用C++11》<a class="headerlink" href="#c11" title="Permanent link">&para;</a></h2>
+<ul>
+<li>从2019年左右就开始看了，没有真正完全看掉啊，都是整个半拉子工程</li>
+</ul>
+<h3 id="part1c11">Part1、C++11改进我们的程序<a class="headerlink" href="#part1c11" title="Permanent link">&para;</a></h3>
+<h4 id="chap1c11">chap1、C++11让程序更简洁、更现代<a class="headerlink" href="#chap1c11" title="Permanent link">&para;</a></h4>
+<h5 id="11">1.1、类型推导<a class="headerlink" href="#11" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1.1.1、auto类型推导<ul>
+<li>与函数模板参数的自动推导有相似之外，<strong>但auto不能用于函数参数的</strong></li>
+<li>两条规则：<ul>
+<li>不声明为指针或引用时，auto的推导结果和初始化表达式抛弃引用和cv限定符后类型一致</li>
+<li>当声明为指针或引用时，auto的推导结果将保持初始化表达式的cv属性</li>
+</ul>
+</li>
+<li>auto的限制</li>
+<li>什么时候用auto</li>
+</ul>
+</li>
+</ul>
+<pre class="highlight"><code class="language-cpp">auto x = 5; // int，**这里const被丢弃了**
+auto pi = new auto(1); // int*，这里的auto(1)，被推导为new int(1)
+const auto *v = &amp;x, u = 6;//v是const int* ，u是const int，  【不能忘记const】 **u已经被推导出int了（前面的v），但也要赋初值；写6.0则会报错】
+static auto y = 0.0;//仅是double类型
+auto int r; //error：auto不再表示存储类型指示符
+auto s; // error：无法导出s类型
+//结论：auto是个占位符，要马上初始化，方便编译器推断出来，在编译时将auto占位符替换为真正的类型
+
+int x = 0;
+auto *a = &amp;x;  //a的类型是int*, auto被推导为int
+auto b = &amp;x; //b的类型是int*，auto被推导为int*
+auto &amp;c = x; //c的类型是int&amp;，auto被推导为int
+const auto e = x; //e的类型是const int，e被推导为int才对啊，*怎么写的是const int*
+auto f = e; //f被推导为int
+//**auto与引用（指针）结合时，auto的推导将保留表达式的const属性
+const auto&amp; g = x; //g类的类型是const it&amp;， auto 为int
+auto&amp; h = g; //h类型为int&amp;，*这里写的是const int&amp;*</code></pre>
+<ul>
+<li>1.1.2、decltype关键字<ul>
+<li><code>decltype(exp)</code>推导规则<ul>
+<li>1、exp是标识符、类访问表达式，和exp类型一致</li>
+<li>2、exp是函数调用，与返回值的类型一致</li>
+<li>3、其他情况，exp是个左值，是<strong>exp类型的左值引用</strong>，否则，与exp类型一致</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre class="highlight"><code class="language-cpp">int x = 0;
+decltype(x) y = 1; //y-&gt;int
+decltype(x + y) z = 0; //z-&gt;int
+
+const int&amp; i = x;
+decltype(i) j = y; //j-&gt;const int&amp;
+
+const decltype(z) *p= &amp;z;//*p-&gt;const int *
+decltype(z) *pi = &amp;z; //*pi-&gt;int
+decltype(pi)*pp = &amp;pi;//*pp-&gt;int*, pp-&gt;int**</code></pre>
+<ul>
+<li>1.1.3、返回类型后置语法--auto和decltype的结合使用</li>
+</ul>
+<h5 id="12">1.2、模块的细节改进<a class="headerlink" href="#12" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1.2.1、模板的右尖括号<ul>
+<li><code>Foo&lt;A&lt;int&gt;&gt;::type xx;//编译出错</code>，C++98/03会把<code>&gt;&gt;</code>解析成<strong>右移操作符</strong></li>
+</ul>
+</li>
+<li>1.2.2、模板的别名<ul>
+<li><code>typedef</code>无法重定义模板，<strong>使用了<code>using</code></strong>。</li>
+</ul>
+</li>
+<li>1.2.3、函数模板的默认模板参数<ul>
+<li>C++98/03不支持<code>template &lt;typename T = int&gt;  void func(){cout&lt;&lt;"hello";}</code></li>
+</ul>
+</li>
+</ul>
+<h5 id="13initializer-list">1.3、列表初始表（initializer list）<a class="headerlink" href="#13initializer-list" title="Permanent link">&para;</a></h5>
+<ul>
+<li>0<ul>
+<li></li>
+</ul>
+</li>
+<li>1.3.1、统一的初始化<ul>
+<li>C++1.0（98/03）里，普通数组和POD类类型，用的是列表初始化，即<code>{}</code>，<code>int a[2] ={1,2};</code></li>
+<li><strong>C++11中，可以直接在变量名后面直接跟上初始化列表，来进行对象的初始化</strong>。</li>
+<li><code>std::initializer_list&lt;int&gt;</code>作为函数参数类型，可以接收任意长度的初始化列表</li>
+</ul>
+</li>
+<li>1.3.2、列表初始化的使用细节</li>
+<li>1.3.3、初始化列表<ul>
+<li>任意长度的初始化列表</li>
+<li>防止类型收窄</li>
+</ul>
+</li>
+</ul>
+<h5 id="14for">1.4、基于范围的for循环<a class="headerlink" href="#14for" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1.4.1、for循环的新用法<ul>
+<li><code>vector&lt;int&gt;arr; for(char n: arr){}</code></li>
+</ul>
+</li>
+<li>1.4.2、基于范围的for循环使用细节<ul>
+<li><em>在容器中，相对于普通的for那种</em>，所以叫<strong>基于范围的</strong></li>
+</ul>
+</li>
+<li>1.4.3、让基于范围的for循环支持自定义类型<ul>
+<li><em>这个点要搞一下，lionel，我遇到过这类问题</em></li>
+</ul>
+</li>
+</ul>
+<h5 id="15stdfunctionbind">1.5、std::function和bind绑定器<a class="headerlink" href="#15stdfunctionbind" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>可调用对象（Callable Objects）</strong><ul>
+<li>函数指针</li>
+<li>具有operator()成员函数的类对象，<strong>仿函数</strong></li>
+<li>可被转换成为函数指针的类对象</li>
+<li>类成员指针、类成员函数指针</li>
+</ul>
+</li>
+<li>std::function，<strong>提供了一种统一的方式保存、传递一个可调用对象</strong><ul>
+<li><strong>std::function填入合适的 数字签名（函数类型），即 返回值和参数表</strong></li>
+<li><code>function&lt;void(int, int)&gt; f1 = add; // 普通函数，合适的数字签名（函数类型）、返回值和参数表）</code></li>
+</ul>
+</li>
+<li>std::bind，将可调用对象与其参数一起进行绑定</li>
+</ul>
+<h5 id="16lambda">1.6、lambda表达式<a class="headerlink" href="#16lambda" title="Permanent link">&para;</a></h5>
+<ul>
+<li>0<ul>
+<li><strong>函数式编程</strong></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>1.6.1、lambda表达式的概念和基本用法<ul>
+<li><code>[captue](params) opt-&gt;ret(body);</code></li>
+<li><strong><code>mutable</code>的lambda表达式</strong>，相当于取消operator()的const。</li>
+<li><strong>lambda表达式的operator()默认是const的</strong></li>
+</ul>
+</li>
+<li>1.6.2、声明式的编程风格，简洁的代码</li>
+<li>1.6.3、在需要的时间和地点实现闭包，使程序更灵活<ul>
+<li><em>std_bind的例子没熟悉，lambda的反而熟悉了</em></li>
+<li>一般情况下可以直接用lambda来代替function（函数）。</li>
+</ul>
+</li>
+</ul>
+<h5 id="17tupe">1.7、tupe元组<a class="headerlink" href="#17tupe" title="Permanent link">&para;</a></h5>
+<ul>
+<li>固定大小的不同类型值的集合，<strong>泛化的<code>std::pair</code></strong>，可以当结构体使用</li>
+<li><code>tuple&lt;const char*, int&gt; tp = make_tuple(sendPack, nSendSize);   struct{char*p; int len;};//tuple等价于这个结构体</code></li>
+<li><code>auto tp = return std::tie(1,"aa",2); //tp的类型是std::tuple&lt;int&amp;, string&amp;, int&amp;&gt;</code></li>
+<li><code>int len = tp.get&lt;1&gt;(); //获取第2个值</code></li>
+<li><code>std::ignore</code>，占位符</li>
+<li><code>forward_as_tuple</code></li>
+<li>tuple_cat连接多个tuple</li>
+<li><strong>如果用tuple来替代3个以上字段的结构体就不太合适了</strong>。</li>
+</ul>
+<h4 id="chap2c11">chap2、使用C++11改进程序性能<a class="headerlink" href="#chap2c11" title="Permanent link">&para;</a></h4>
+<h5 id="21">2.1、右值引用<a class="headerlink" href="#21" title="Permanent link">&para;</a></h5>
+<ul>
+<li>0：<strong>看能不能对表达式取地址</strong><ul>
+<li>左值：表达式结束后依然存在的持久对象</li>
+<li>右值：表达式结束时就不再存在的临时对象<ul>
+<li>将亡值（xvalue，expiring value）</li>
+<li>纯右值（prvlaue，PureRvalue）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>2.1.1、&amp;&amp;的特性<ul>
+<li>右值不具名，只能通过引用的方式找到它</li>
+<li>&amp;&amp;的总结<ul>
+<li>1、左值和右值是独立于它们的类型的，右值引用类型可能是左值也可能是右值</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>2.1.2、右值引用优化性能，避免深拷贝</li>
+</ul>
+<h5 id="22move">2.2、move语义<a class="headerlink" href="#22move" title="Permanent link">&para;</a></h5>
+<ul>
+<li>std::move方法将左值转换为右值，<strong>只有转移，没有内存拷贝</strong>，将一个左值强制转换为一个右值引用，可以通过右值引用使用该值</li>
+<li>强制转换为右值的目的是<strong>为了方便实现移动构造</strong>。</li>
+</ul>
+<h5 id="23forward">2.3、forward和完美转发<a class="headerlink" href="#23forward" title="Permanent link">&para;</a></h5>
+<ul>
+<li>一个右值引用参数作为函数的形参，在函数内部再转发该参数的时候，它已经变成一个左值了，并不是它原来的类型了。<strong>完美转发，指在函数模板中，完全按照模板的参数类型（即保持参数的左值、右值特征），将参数传递给函数模板中调用的另外一个函数</strong></li>
+</ul>
+<h5 id="24emplace_back">2.4、emplace_back减少内存拷贝和移动<a class="headerlink" href="#24emplace_back" title="Permanent link">&para;</a></h5>
+<ul>
+<li>比<code>push_back</code>，能就地通过参数构造对象，不需要拷贝或者移动内存。<strong>没有构造函数的，会报错</strong></li>
+</ul>
+<h5 id="25unordered-container">2.5、unordered container无序容器<a class="headerlink" href="#25unordered-container" title="Permanent link">&para;</a></h5>
+<ul>
+<li>map和set内部是<strong>红黑树</strong>，插入时自动排序</li>
+<li>无序容器的内部是<strong>散列表</strong>，无序容器的key需要提供hash_value函数</li>
+</ul>
+<h4 id="chap3c11">chap3、使用C++11消除重复，提高代码质量<a class="headerlink" href="#chap3c11" title="Permanent link">&para;</a></h4>
+<h5 id="31type_traits-">3.1、type_traits-类型萃取<a class="headerlink" href="#31type_traits-" title="Permanent link">&para;</a></h5>
+<ul>
+<li>3.1.1、基本的type_traits<ul>
+<li>1、简单的type_traits<ul>
+<li><strong>类中定义编译期常量</strong>，通过<code>GetLeftSize::value</code>来获取，C++11无须自定义static const int或enum类型，用<code>std::integral_constant</code>派生</li>
+<li><code>integral_constant</code>类有一个常量成员变量value</li>
+</ul>
+</li>
+<li>2、类型判断的type_traits</li>
+<li>3、判断两个类型之间的关系traits<ul>
+<li>is_same</li>
+<li>is_base_of：判断继承</li>
+<li>is_convertible</li>
+</ul>
+</li>
+<li>4、类型的转换traits</li>
+</ul>
+</li>
+</ul>
+<pre class="highlight"><code class="language-cpp">template &lt;typename Type&gt;
+struct GetLeftSize{
+    //enum {value = 1;} //与下一行等价
+    static const int value=1;
+};
+
+//C++11的方式，不需要再额外定义变量
+template &lt;typename Type&gt;
+struct GetLeftSize::std;:integral_constant&lt;int,1&gt;{};
+
+//编译期常量包装为一个类型的type_traits
+template&lt;class T, T v&gt;
+struct integral_constant{
+    static const T value = v;
+    typedef T value_type;
+    typedef integral_constant&lt;T,v&gt;type;
+    operator value_type(){return value;}
+};</code></pre>
+<ul>
+<li>3.1.2、根据条件选择的type_traits<ul>
+<li><code>template&lt;bool B, class T, class F&gt; struct conditional</code>原型</li>
+<li><code>typde std::conditional&lt;false,int,float&gt;::type B;</code>//因为是false，所以类型是float </li>
+</ul>
+</li>
+<li>3.1.3、获取可调用对象返回类型的traits<ul>
+<li><code>std::declval</code>能获取任何类型的临时值</li>
+<li><code>std::result_of&lt;A(int)&gt;::type</code></li>
+</ul>
+</li>
+<li>3.14、根据条件禁用或启用某种或某些类型的traits<ul>
+<li><code>std::enable_if</code></li>
+</ul>
+</li>
+</ul>
+<h5 id="32">3.2、可变参数模板<a class="headerlink" href="#32" title="Permanent link">&para;</a></h5>
+<ul>
+<li>
+<p>0：<strong>省略号</strong><code>...</code>的作用</p>
+<ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>
+<p>3.2.1、可变参数模板函数</p>
+<pre class="highlight"><code class="language-cpp">// 要注意 ...的位置，lionel，这个自己项目中写得少
+template&lt;class...T&gt;
+void f(T... args){
+    cout&lt;&lt;sizeof...(args)&lt;&lt;endl;
+}</code></pre>
+<ul>
+<li>1、递归函数方式展开参数包</li>
+<li>2、逗号表达式和初始始化列表方式展开参数包</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>
+<p>3.2.2、可变参数模板类</p>
+<ul>
+<li>1、模板递归和特化方式展开参数包</li>
+<li>2、继承方式展开包</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>
+<p>3.2.3、可变参数模板消除重复代码</p>
+<ul>
+<li><em>在chap8中的代码有体现</em></li>
+</ul>
+</li>
+</ul>
+<h5 id="33type_traits">3.3、可变参数模板和type_traits的结合应用<a class="headerlink" href="#33type_traits" title="Permanent link">&para;</a></h5>
+<ul>
+<li>3.3.1、optional的实现<ul>
+<li>C++14出现，<strong>解决函数返回无效值的问题</strong>，<code>optional&lt;int&gt;op; if(op) cout&lt;&lt;*op&lt;&lt;endl;</code></li>
+</ul>
+</li>
+<li>3.3.2、惰性求值类lazy的实现</li>
+<li>3.3.3、dll帮助类</li>
+<li>3.3.4、lambda链式调用</li>
+<li>3.3.5、any类的实现</li>
+<li>3.3.6、function_traits<ul>
+<li>1、实现function_traits的关键技术</li>
+<li>2、function_traits的实现</li>
+</ul>
+</li>
+<li>3.3.7、variant的实现</li>
+<li>3.3.8、ScopeGuard</li>
+</ul>
+<h4 id="chap4c11">chap4、C++11解决内存泄漏问题<a class="headerlink" href="#chap4c11" title="Permanent link">&para;</a></h4>
+<ul>
+<li>头文件<code>#include &lt;memory&gt;</code></li>
+<li>3种智能指针<code>shared_ptr，unique_ptr，weak_ptr</code></li>
+<li>智能指针可以自动删除分配的内存，使用<strong>引用计数</strong>的原理</li>
+</ul>
+<h5 id="41shared_ptr">4.1、shared_ptr共享的智能指针<a class="headerlink" href="#41shared_ptr" title="Permanent link">&para;</a></h5>
+<ul>
+<li>基本用法<ul>
+<li>初始化：</li>
+<li>获取原始指针：</li>
+<li>指定删除器</li>
+</ul>
+</li>
+<li>使用的注意事项<ul>
+<li>不要用一个原始指针初始化多个shared_ptr</li>
+<li>不要在函数实参中创建shared_ptr</li>
+<li>通过shared_from_this()返回this指针</li>
+<li>避免循环引用
+<pre class="highlight"><code class="language-cpp">class chap04{
+public:
+    void chap0401shared_ptr();
+};
+
+void chap04::chap0401shared_ptr() {
+    // 通过构造函数
+    shared_ptr&lt;int&gt; p1(new int(1));
+    //shared_ptr&lt;int&gt; p1 = new int(1); 2个类型不匹配，强校验
+    shared_ptr&lt;int&gt; p2 = p1;
+    // 通过make_shared&lt;T&gt;
+    shared_ptr&lt;int&gt; p3 = make_shared&lt;int&gt;(1);
+    //通过reset()方法
+    p2.reset(new int(1)); // 参数放p1还不对？
+
+    //获取原始指针，用get()
+    int* rawp1 = p1.get();
+
+    //调用自定义删除器，用的是lambda表达式
+    shared_ptr&lt;int&gt; p4(new int, [](int* p) {delete p; });
+
+    //std::default_delete作为删除器
+    //shared_ptr&lt;int&gt; p5(new int[10], default_delete&lt;int []&gt;); //书中这行例子有问题
+}</code></pre></li>
+</ul>
+</li>
+</ul>
+<h5 id="42unique_ptr">4.2、unique_ptr共享的智能指针<a class="headerlink" href="#42unique_ptr" title="Permanent link">&para;</a></h5>
+<h5 id="43weak_ptr">4.3、weak_ptr弱引用的智能指针<a class="headerlink" href="#43weak_ptr" title="Permanent link">&para;</a></h5>
+<h5 id="44">4.4、通过智能指针管理第三方库分配的内存<a class="headerlink" href="#44" title="Permanent link">&para;</a></h5>
+<h4 id="chap5c11">chap5、使用C++11让多线程开发变得简单<a class="headerlink" href="#chap5c11" title="Permanent link">&para;</a></h4>
+<h5 id="51">5.1、线程<a class="headerlink" href="#51" title="Permanent link">&para;</a></h5>
+<ul>
+<li>5.1.1、线程的创建<ul>
+<li><code>std::thread</code>，只需要提供<strong>线程函数</strong>或者<strong>函数对象</strong>，还可以<strong>指定参数</strong></li>
+<li>detach之后就无法再和线程发生联系了</li>
+<li>线程不能复制，但可以移动</li>
+<li>线程对象，可以用<code>std::bind</code>和lambda表达式来创建</li>
+<li>线程对象的生命周期</li>
+</ul>
+</li>
+<li>5.1.2、线程的基本用法<ul>
+<li>获取当前线程的ID，获取CPU核心数量，<code>t.get_id()</code>和<code>thread::hardware_concurrency()</code></li>
+<li>线程休眠<code>sleep()</code></li>
+</ul>
+</li>
+</ul>
+<h5 id="52">5.2、互斥量<a class="headerlink" href="#52" title="Permanent link">&para;</a></h5>
+<ul>
+<li>0<ul>
+<li>一种同步原语，<strong>线程同步</strong>的手段，用来保护多线程同时访问的共享数据</li>
+<li>有如下4种语义</li>
+</ul>
+</li>
+<li>5.2.1、独占互斥量<code>mutex</code><ul>
+<li>lock()、unlock()、try_unlock()</li>
+<li><strong>尽量使用lock_guard，里面用到了RAII技术</strong>，<code>std::lock_guard&lt;std::mutex&gt; locker(g_lock);//出作用域后自动解锁</code></li>
+</ul>
+</li>
+<li>5.2.2、递归互斥量<code>recursive_mutex</code><ul>
+<li>同一个进程多次获得互斥量</li>
+<li><strong>尽量不要用递归锁</strong><ul>
+<li>1、导致多线程同步引起的晦涩问题（<strong>可以尝试简化其互斥处理</strong>）</li>
+<li>2、效率会低</li>
+<li>3、可获得的最大次数没有明确告知，一旦超过次数会报<code>std::system</code>错误</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>5.2.3、带超时的互斥量<code>timed_mutex</code>和<code>recursive_timed_mutex</code><ul>
+<li>用在不知道获取锁需要多久的场景</li>
+<li>try_lock_for()和try_lock_until()</li>
+</ul>
+</li>
+</ul>
+<h5 id="53">5.3、条件变量<a class="headerlink" href="#53" title="Permanent link">&para;</a></h5>
+<ul>
+<li>阻塞一个或多个线程，<strong>直到收到另外一个线程发出的通知或者超时，才会唤醒当前阻塞的线程</strong>。</li>
+<li><strong>需要与互斥量配合使用</strong></li>
+<li>condition_variable，配合<code>unique_lock&lt;mutex&gt;</code>进行wait操作</li>
+<li>condition_variable_any，和任意带有lock、unlock语义的mutex搭配使用，比较灵活，但效率差一些</li>
+<li>使用过程<ul>
+<li>1、拥有条件变量的线程获取互斥量</li>
+<li>2、循环检查某个条件，不满足则阻塞，满足向下执行</li>
+<li>3、满足条件执行完之后调用notify_one或notify_all唤醒一个或所有的等待线程</li>
+</ul>
+</li>
+<li><strong>可以用条件变量来实现一个同步队列</strong>（code，<em>这个代码重点看下</em>）</li>
+</ul>
+<h5 id="54">5.4、原子变量<a class="headerlink" href="#54" title="Permanent link">&para;</a></h5>
+<ul>
+<li>使用原子变量<code>std::atomic&lt;T&gt;</code>，就不需要使用互斥量来保护该变量了</li>
+<li>计时器实现的差异（code上）</li>
+</ul>
+<h5 id="55call_onceonce_flag">5.5、call_once/once_flag的使用<a class="headerlink" href="#55call_onceonce_flag" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>使用call_once来保证函数在多线程环境中只被调用一次</strong>，需要once_flag作为入参</li>
+</ul>
+<ul>
+<li>
+<p>```cpp
+  std::once_flag flag;
+  void do_once() { std::call_once(flag, <a href="" once_std::endl_="once&quot;&lt;&lt;std::endl;" std::cout_Called="std::cout&lt;&lt;&quot;Called"></a>);}</p>
+<p>//虽然创建了2个，但只会调用1次，也就是只输出1次Called once
+int main {thread t1(do_once); thread t2(do_once); t1.join(); t2.join();}
+```</p>
+</li>
+</ul>
+<ul>
+<li></li>
+</ul>
+<h5 id="56">5.6、异步操作<a class="headerlink" href="#56" title="Permanent link">&para;</a></h5>
+<ul>
+<li>0<ul>
+<li>future作为异步结果的传输通道，可以很方便地获取线程函数的返回值</li>
+<li>promise用来包装一个值，将数据和future绑定起来，方便线程赋值</li>
+<li>package_task用来包装一个可调用对象，将函数和future绑定起来，以便异步调用</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>5.6.1、获取线程函数返回值的类future</li>
+<li>5.6.2、协助线程赋值的类promise</li>
+<li>5.6.3、可调用对象的包装类package_task</li>
+<li>5.6.4、promise、future、package_task三者之间的关系</li>
+</ul>
+<h5 id="57async">5.7、线程异步操作函数async<a class="headerlink" href="#57async" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>更高层次的异步操作</strong>，不用关注线程创建的内部细节</li>
+</ul>
+<h4 id="chap6c11">chap6、使用C++11中便利的工具<a class="headerlink" href="#chap6c11" title="Permanent link">&para;</a></h4>
+<h5 id="61chrono">6.1、处理日期和时间的chrono库<a class="headerlink" href="#61chrono" title="Permanent link">&para;</a></h5>
+<ul>
+<li>6.1.4、计时器timer</li>
+</ul>
+<h5 id="62">6.2、数值类型和字符串的相互转换<a class="headerlink" href="#62" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>to_string(int value)</code></li>
+<li>字符串转整型和浮点<code>atoi,atol,atoll,atof</code></li>
+</ul>
+<h5 id="63">6.3、宽窄字符转换<a class="headerlink" href="#63" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>std::wstring str=L"中国人";</code></li>
+<li><strong>codecvt库中的<code>std::wstring_convert</code></strong></li>
+</ul>
+<h4 id="chap7c11">chap7、C++11的其他特性<a class="headerlink" href="#chap7c11" title="Permanent link">&para;</a></h4>
+<h5 id="71">7.1、委托构造函数和继承构造函数<a class="headerlink" href="#71" title="Permanent link">&para;</a></h5>
+<ul>
+<li>
+<p>7.1.1、委托构造函数</p>
+<ul>
+<li><strong>委托构造函数</strong>：允许在同一个类中一个构造函数可以调用另外一个构造函数，从而可以在初始化时简化变量的初始化。<ul>
+<li><strong>使用了代理构造函数就不能用类成员初始化了</strong></li>
+</ul>
+</li>
+</ul>
+<pre class="highlight"><code class="language-cpp">class class_c{
+public:
+    int max;
+    int min;
+    int middle;
+
+    class_c(int my_max){
+        max = my_max;
+    }
+
+    class_c(int my_max, int my_min):class_c(int my_max){
+        min = my_min;
+    }
+
+    class_c(int my_max, int my_min, int my_middle):class_c(int my_max, int my_min){
+        middle = my_middle;
+    }
+};
+
+int main(){
+    class_c c1{1,3,2}; //递归委托了两个构造函数完成成员变量的初始化
+}</code></pre>
+</li>
+</ul>
+<ul>
+<li>
+<p>7.1.2、继承构造函数</p>
+<ul>
+<li>可以让派生类直接使用基类的构造函数，而无须自己再写构造函数</li>
+</ul>
+<pre class="highlight"><code class="language-cpp">struct Derived:Base{
+    using Base::Base; //声明使用基类构造函数
+};
+
+int main(){
+  int i=1;
+  double j=1.23;
+  Derived d(i);//直接使用基类构造函数来构造派生类对象
+  Derived d1(i,j);
+}</code></pre>
+</li>
+</ul>
+<h5 id="72">7.2、原始的字面量<a class="headerlink" href="#72" title="Permanent link">&para;</a></h5>
+<h5 id="73finaloverride">7.3、final和override关键字<a class="headerlink" href="#73finaloverride" title="Permanent link">&para;</a></h5>
+<h5 id="74">7.4、内存对齐<a class="headerlink" href="#74" title="Permanent link">&para;</a></h5>
+<h5 id="75c11">7.5、C++11新增的便利算法<a class="headerlink" href="#75c11" title="Permanent link">&para;</a></h5>
+<ul>
+<li>0、<a href="http://en.cppreference.com/w/cpp/algorithm">c++11算法</a></li>
+<li>1、all_of、any_of和none_of算法</li>
+<li>2、find_if_not算法</li>
+<li>3、copy_if算法</li>
+<li>5、iota算法</li>
+<li>6、minmax_elemen算法</li>
+<li>7、is_sorted和is_sorted_until算法</li>
+</ul>
+<h2 id="chap08c11">chap08、使用C++11改进我们的模式<a class="headerlink" href="#chap08c11" title="Permanent link">&para;</a></h2>
+<h3 id="81">8.1、改进单例模式<a class="headerlink" href="#81" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>单例模式</strong>：保证一个类仅有一个实例，并提供一个访问它的全局访问点。</li>
+<li>代码清单8-1：支持0~6个参数的单例</li>
+<li>代码清单8-2：C++11借助可变参数模板实现的单例</li>
+</ul>
+<h3 id="82">8.2、改进观察者模式<a class="headerlink" href="#82" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>观察者模式</strong>：定义对象间的一种一对多的依赖关系，当一个对象的状态发生改变时，所有依赖于它的对象都得到通知并被自动更新。</li>
+</ul>
+<h3 id="83">8.3、改进访问者模式<a class="headerlink" href="#83" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>访问者（Visitor）模式</strong>：表示一个作用于某对象结构中的各元素的操作，可用于在不改变各元素的类的前提下定义作用于这些元素的新操作。</li>
+</ul>
+<h3 id="84">8.4、改进命令模式<a class="headerlink" href="#84" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>命令模式</strong>：的作用是将请求封装为一个对象，将请求的发起者的执行者解耦，支持对请求排队、撤销和重做。</li>
+</ul>
+<h3 id="85">8.5、改进对象池模式<a class="headerlink" href="#85" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>对象池的思路</strong>：事先创建好一批对象，放到一个集合中，每当程序需要新的对象时，就从对象池中获取，程序用完该对象后都会把该对象归还给对象池。</li>
+</ul>
+<h3 id="86">8.6、总结<a class="headerlink" href="#86" title="Permanent link">&para;</a></h3>
+<h2 id="chap09c11">chap09、使用C++11开发一个半同步半异步线程池<a class="headerlink" href="#chap09c11" title="Permanent link">&para;</a></h2>
+<h3 id="91">9.1、半同步半异步线程池介绍<a class="headerlink" href="#91" title="Permanent link">&para;</a></h3>
+<ul>
+<li>线程池能避免大量的线程创建和销毁动作，从而节省系统资源。<ul>
+<li>对于多核处理器，由于线程会被分配到多个CPU，会提高并行处理的效率。</li>
+<li>每个线程独立阻塞，可以防止主线程被阻塞而使主流程被阻塞，导致其他的请求得不到响应的问题。</li>
+</ul>
+</li>
+<li>线程池分为<ul>
+<li>半同步半异步线程池<ul>
+<li>第一层（同步服务层）：处理来自上层的任务请求，将这些任务请求放到同步排队层中。</li>
+<li>第二层（同步排队层）：</li>
+<li>第三层（异步服务层）：从同步排队层中取出任务并行的处理。</li>
+</ul>
+</li>
+<li>领导者追随者线程池</li>
+</ul>
+</li>
+</ul>
+<h3 id="92">9.2、线程池实现的关键技术分析<a class="headerlink" href="#92" title="Permanent link">&para;</a></h3>
+<ul>
+<li>线程池呢两个活动过程<ul>
+<li>一个是往同步队列中添加任务过程</li>
+<li>另一个是从同步队列中取任务的过程</li>
+</ul>
+</li>
+</ul>
+<h3 id="93">9.3、同步队列<a class="headerlink" href="#93" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>同步队列的实现代码.cpp</code><ul>
+<li>Take函数</li>
+<li>Add函数</li>
+<li>Stop函数</li>
+<li><em>具体的代码分析没看呢</em>--lionel</li>
+</ul>
+</li>
+<li>同步队列的锁是用来线程同步的，条件变量是用来实现线程通信的，即线程池空了就要等待，不为空就通知一个线程去处理；线程池满了就等待，直到没有满的时候才通知上层添加新任务。</li>
+</ul>
+<h3 id="94">9.4、线程池<a class="headerlink" href="#94" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>线程池的实现.cpp</code></li>
+</ul>
+<h3 id="95">9.5、应用实例<a class="headerlink" href="#95" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>线程池测试例子.cpp</code></li>
+</ul>
+<h3 id="96">9.6、总结<a class="headerlink" href="#96" title="Permanent link">&para;</a></h3>
+<ul>
+<li>利用线程、条件变量、互斥量来实现一个轻巧的线程池，从而避免频繁地创建线程。</li>
+</ul>
+<h2 id="chap10c11aop">chap10、使用C++11开发一个轻量级的AOP库<a class="headerlink" href="#chap10c11aop" title="Permanent link">&para;</a></h2>
+<h3 id="101aop">10.1、AOP介绍<a class="headerlink" href="#101aop" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>OOP中的继承是一种从上而下的关系，不适合定义从左到右的横向关系</strong>。</li>
+</ul>
+<ul>
+<li>AOP（Aspect-Oriented Programming），将程序的非核心逻辑都“横切”出来，将非核心逻辑和核心分离，使我们能集中精力在核心逻辑上。</li>
+</ul>
+<h3 id="102aop">10.2、AOP的简单实现<a class="headerlink" href="#102aop" title="Permanent link">&para;</a></h3>
+<h3 id="103aop">10.3、轻量级的AOP框架的实现<a class="headerlink" href="#103aop" title="Permanent link">&para;</a></h3>
+<h3 id="104">10.4、总结<a class="headerlink" href="#104" title="Permanent link">&para;</a></h3>
+<h2 id="chap11c11ioc">chap11、使用C++11开发一个轻量级的IoC容器<a class="headerlink" href="#chap11c11ioc" title="Permanent link">&para;</a></h2>
+<h3 id="111ioc">11.1、IoC容器是什么<a class="headerlink" href="#111ioc" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>1101直接依赖产生耦合性的例子.cpp</code></li>
+<li>IoC容器实际上具备两种能力：<ul>
+<li>一种是对象工厂的能力，不仅可以创建所有的对象，还能根据配置去创建对象</li>
+<li>另一种能力是可以去创建依赖对象，应用不需要直接创建依赖对象，由IoC容器去创建，实现控制反转。</li>
+</ul>
+</li>
+<li><strong>实现IoC容器需要解决3个问题</strong>：<ul>
+<li>第1个：创建所有类型的对象</li>
+<li>第2个：类型擦除</li>
+<li>第3个：如何创建依赖对象</li>
+</ul>
+</li>
+</ul>
+<h3 id="112ioc">11.2、IoC创建对象<a class="headerlink" href="#112ioc" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>1102可配置的对象工厂.cpp</code></li>
+</ul>
+<h3 id="113">11.3、类型擦除的常用方法<a class="headerlink" href="#113" title="Permanent link">&para;</a></h3>
+<ul>
+<li>通过多态来擦除类型</li>
+<li>通过模板来擦除类型</li>
+<li>通过某种类型容器来擦除类型</li>
+<li>通过某种通用类型来擦除类型</li>
+<li>通过闭包来擦除类型</li>
+</ul>
+<h3 id="114any">11.4、通过Any和闭包来擦除类型<a class="headerlink" href="#114any" title="Permanent link">&para;</a></h3>
+<h3 id="115">11.5、创建依赖的对象<a class="headerlink" href="#115" title="Permanent link">&para;</a></h3>
+<ul>
+<li>IoC容器创建依赖的对象有两种方式：<ul>
+<li>一种方式是通过IoC容器配置依赖关系，并通过IoC容器创建依赖对象</li>
+<li>另一种方式是参数化配置依赖关系，并通IoC容器创建依赖对象创建</li>
+</ul>
+</li>
+</ul>
+<h3 id="116ioc">11.6、完整的IoC容器<a class="headerlink" href="#116ioc" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>1106通过可变参数模版改进对象工厂.cpp</code></li>
+<li><code>1107对象工厂测试代码.cpp</code></li>
+</ul>
+<h3 id="117">11.7、总结<a class="headerlink" href="#117" title="Permanent link">&para;</a></h3>
+<h2 id="chap12c11">chap12、使用C++11开发一个对象的消息总线库<a class="headerlink" href="#chap12c11" title="Permanent link">&para;</a></h2>
+<h3 id="121">12.1、消息总线介绍<a class="headerlink" href="#121" title="Permanent link">&para;</a></h3>
+<ul>
+<li>基于消息总线技术可以有效地解决这些问题，<strong>对象间只通过消息联系，而不是通过直接依赖或者关联</strong>。</li>
+</ul>
+<h3 id="122">12.2、消息总线关键技术<a class="headerlink" href="#122" title="Permanent link">&para;</a></h3>
+<ul>
+<li>消息总线的实现需要解决三个问题：<ul>
+<li>（1）通用的消息定义：让所有的对象都能接受</li>
+<li>（2）消息的注册：让所有对象都可以注册感兴趣的消息</li>
+<li>（3）消息分发：</li>
+</ul>
+</li>
+</ul>
+<h4 id="1221">12.2.1、通用的消息定义<a class="headerlink" href="#1221" title="Permanent link">&para;</a></h4>
+<h4 id="1222">12.2.2、消息的注册<a class="headerlink" href="#1222" title="Permanent link">&para;</a></h4>
+<ul>
+<li>1、lambda表达式转换为std::function<ul>
+<li><code>1201lambda表达式转换为function的实现.cpp</code></li>
+</ul>
+</li>
+<li>2、</li>
+</ul>
+<h4 id="1223">12.2.3、消息分发<a class="headerlink" href="#1223" title="Permanent link">&para;</a></h4>
+<h4 id="1224">12.2.4、消息总线的设计思想<a class="headerlink" href="#1224" title="Permanent link">&para;</a></h4>
+<h3 id="123">12.3、完整的消息总线<a class="headerlink" href="#123" title="Permanent link">&para;</a></h3>
+<ul>
+<li>完整的消息总线需要用到function_traits、NonCopyable和Any，还会用到可变参数模板、右值引用和完美转发等特性。</li>
+<li><code>1203完整的function_traits.cpp</code></li>
+</ul>
+<h3 id="124">12.4、应用实例<a class="headerlink" href="#124" title="Permanent link">&para;</a></h3>
+<h3 id="125">12.5、总结<a class="headerlink" href="#125" title="Permanent link">&para;</a></h3>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

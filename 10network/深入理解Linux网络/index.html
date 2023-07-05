@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>深入理解Linux网络 - lionel的技术笔记</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "\u6df1\u5165\u7406\u89e3Linux\u7f51\u7edc";
+        var mkdocs_page_input_path = "10network\\\u6df1\u5165\u7406\u89e3Linux\u7f51\u7edc.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> lionel的技术笔记
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">简介</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../01daily/">daily</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">C++</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../20C%2B%2B/effectiveC%2B%2B/">《Effective C++》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/EffectiveSTL/">《Effective STL》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">基础知识</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA/">《操作系统导论》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E5%A4%A7%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">《大话设计模式》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网络编程</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../TCPIP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">《TCP/IP网络编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/">《Linux高性能服务器编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../TCPIP%E8%AF%A6%E8%A7%A3%E5%8D%B71/">《TCPIP详解卷1》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">文件系统</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/Linux%E5%86%85%E6%A0%B8%E6%8E%A2%E7%A7%98/">《Linux内核探秘》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《文件系统技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">《存储技术原理分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">存储</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../12storage/ceph%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《ceph设计原理与实现》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">视频</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/FFmpeg%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/">《FFmpeg入门到精通》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/WebRTC%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AE%9E%E6%97%B6%E4%BA%92%E5%8A%A8%E6%8A%80%E6%9C%AF/">《WebRTC音视频实时互动技术》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/%E6%96%B0%E4%B8%80%E4%BB%A3%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9%E7%A0%81%E6%A0%87%E5%87%86-H.264_AVC/">《新一代视频压缩码标准-H.264_AVC》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">内核</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/Linux%E5%86%85%E6%A0%B8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《Linux内核设计与实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5Linux%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%E5%86%85%E6%A0%B8%E6%9C%BA%E5%88%B6/">《深入Linux设备驱动程序内核机制》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">《深入理解Linux虚拟内存管理》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《深入理解Linux网络技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E5%86%85%E6%A0%B8/">《深入理解Linux内核》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">工具</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/Wireshark%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98/">《Wireshark网络分析实战》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/Linux%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8Eshell%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B%E5%A4%A7%E5%85%A8%283rd%29/">《Linux命令行与shell脚本编程大全(3rd)》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">刷题</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/">《剑指offer专项突破》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网课</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/01Linux%E9%AB%98%E5%B9%B6%E5%8F%91%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/">《Linux高并发网络编程开发》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/%E4%BE%AF%E6%8D%B7/%E4%BE%AF%E6%8D%B7C%2B%2B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%8660%E8%AE%B2/">《侯捷C++内存管理60讲》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/11NJU%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">《NJU算法设计与分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">英语专</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../60English/00794%E7%BB%BC%E5%90%88%E8%8B%B1%E8%AF%AD%E4%B8%80%E4%B8%8A/">《综合英语(一)上》</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">lionel的技术笔记</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>深入理解Linux网络</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="linux">《深入理解Linux网络》<a class="headerlink" href="#linux" title="Permanent link">&para;</a></h2>
+<h3 id="chap1">chap1、绪论<a class="headerlink" href="#chap1" title="Permanent link">&para;</a></h3>
+<h4 id="11">1.1、我在工作中的困惑<a class="headerlink" href="#11" title="Permanent link">&para;</a></h4>
+<h5 id="115127001">1.1.5、访问127.0.0.1过网卡吗？<a class="headerlink" href="#115127001" title="Permanent link">&para;</a></h5>
+<h5 id="116">1.1.6、软中断和硬中断<a class="headerlink" href="#116" title="Permanent link">&para;</a></h5>
+<h5 id="117">1.1.7、零拷贝到底是怎么回事<a class="headerlink" href="#117" title="Permanent link">&para;</a></h5>
+<h5 id="118dpdk">1.1.8、DPDK<a class="headerlink" href="#118dpdk" title="Permanent link">&para;</a></h5>
+<h4 id="12">1.2、本书内容结构<a class="headerlink" href="#12" title="Permanent link">&para;</a></h4>
+<h4 id="13">1.3、一些约定<a class="headerlink" href="#13" title="Permanent link">&para;</a></h4>
+<ul>
+<li>内核3.10版本</li>
+</ul>
+<h4 id="14">1.4、一些术语<a class="headerlink" href="#14" title="Permanent link">&para;</a></h4>
+<ul>
+<li>hi：CPU开销中<strong>硬中断消耗的部分</strong></li>
+<li>si：CPU开销中<strong>软中断消耗的部分</strong></li>
+<li>NAPI：2.5内核引入的一种高效网卡数据处理的技术</li>
+</ul>
+<h3 id="chap2">chap2、内核是如何接收网络包的<a class="headerlink" href="#chap2" title="Permanent link">&para;</a></h3>
+<h4 id="21">2.1、相关实际问题<a class="headerlink" href="#21" title="Permanent link">&para;</a></h4>
+<ul>
+<li>1、RingBuffer是什么，RingBuffer为什么会丢包？</li>
+<li>2、网络相关的硬中断、软中断都是什么？</li>
+<li>5、tcpdump是如何工作的？</li>
+<li>6、iptable/netfilter是在哪一层实现的？</li>
+<li>8、网络接收过程中的CPU开销如何查看？</li>
+</ul>
+<h4 id="22">2.2、数据是如何从网卡到协议栈的<a class="headerlink" href="#22" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>read()</code>的系统调用</li>
+</ul>
+<h5 id="221linux">2.2.1、Linux网络收包总览<a class="headerlink" href="#221linux" title="Permanent link">&para;</a></h5>
+<ul>
+<li>图2.2<ul>
+<li>1、</li>
+<li>2、网卡把帧DMA到内存</li>
+<li>3、硬中断通知CPU</li>
+<li>4、</li>
+<li>5、</li>
+<li>6、</li>
+<li>7、</li>
+<li>8、内核唤醒用户进程</li>
+</ul>
+</li>
+</ul>
+<h5 id="222linux">2.2.2、Linux启动<a class="headerlink" href="#222linux" title="Permanent link">&para;</a></h5>
+<ul>
+<li>创建ksoftirqd内核线程<ul>
+<li>kernel/softirq.c</li>
+</ul>
+</li>
+<li>网络子系统初始化<ul>
+<li><code>subsys_initcall()</code>来初始化各个子系统</li>
+</ul>
+</li>
+<li>协议栈注册</li>
+<li>网卡驱动初始化<ul>
+<li><code>module_init()</code></li>
+</ul>
+</li>
+<li>启动网卡<ul>
+<li><code>struct net_device_ops</code>变量</li>
+</ul>
+</li>
+</ul>
+<h5 id="223">2.2.3、迎接数据的到来<a class="headerlink" href="#223" title="Permanent link">&para;</a></h5>
+<ul>
+<li>硬中断处理</li>
+<li>ksoftirqd内核线程处理中断</li>
+</ul>
+<h5 id="224">2.2.4、收包小结<a class="headerlink" href="#224" title="Permanent link">&para;</a></h5>
+<ul>
+<li>收包之前的工作<ul>
+<li>1、创建ksoftirqd线程</li>
+<li>2、协议栈注册，每个协议都会将自己的处理函数注册一下</li>
+<li>3、网卡驱动初始化，把自己的DMA准备好，把NAPI的poll函数地址告诉内核</li>
+<li>4、启动网卡，分配RX，TX队列，注册中断对应的处理函数</li>
+</ul>
+</li>
+<li>数据到来的工作<ul>
+<li>1、网卡将数据帧DMA到内存的RingBuffer中，然后向CPU发起中断通知</li>
+</ul>
+</li>
+</ul>
+<h4 id="23">2.3、本章小结<a class="headerlink" href="#23" title="Permanent link">&para;</a></h4>
+<h3 id="chap3">chap3、内核是如何与用户进程协作的<a class="headerlink" href="#chap3" title="Permanent link">&para;</a></h3>
+<h4 id="31">3.1、相关实际问题<a class="headerlink" href="#31" title="Permanent link">&para;</a></h4>
+<ul>
+<li>1、阻塞到底是怎么一回事？</li>
+<li>2、同步阻塞IO都需要哪些开销？</li>
+<li>3、多路复用epoll为什么就能提高网络性能？</li>
+<li>4、epoll也是阻塞的？</li>
+<li>5、为什么Redis的网络性能很突出？</li>
+</ul>
+<h4 id="32socket">3.2、socket的直接创建<a class="headerlink" href="#32socket" title="Permanent link">&para;</a></h4>
+<ul>
+<li>socket是如何在内核中表示的。<ul>
+<li>socket.c中的<code>sock_create()</code>，又调用af_inet.c中的<code>inet_create()</code></li>
+<li>net/core/sock.c，<em>lionel，这个干啥的？一般都是sock结构体啥的啊，</em>，这里调用了<code>sock_init_data()</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="33">3.3、内核和用户进程协作之阻塞方式<a class="headerlink" href="#33" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>图3.4，同步阻塞工作流程</strong><ul>
+<li>1、创建socket（用户进程）</li>
+<li>2、等待接收（等待队列）</li>
+<li>3、数据包抵达网卡</li>
+<li>4、网卡把帧DMA到内存</li>
+<li>5、硬中断通知CPU</li>
+<li>9、唤醒等待队列上的进程（ksoftirqd内核线程）</li>
+</ul>
+</li>
+</ul>
+<h5 id="331">3.3.1、等待接收消息<a class="headerlink" href="#331" title="Permanent link">&para;</a></h5>
+<ul>
+<li>recv依赖的底层实现，<strong>strace命令跟踪</strong>，clib库函数recv会执行recvfrom系统调用</li>
+<li><strong>图3-5，recvfrom系统调用</strong></li>
+</ul>
+<h5 id="332">3.3.2、软中断模块<a class="headerlink" href="#332" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>图3.9</strong></li>
+<li>net/ipv4/tcp_ipv4.c中的<code>tcp_v4_rcv()</code></li>
+<li>kernel/sched/core.c</li>
+</ul>
+<h5 id="333">3.3.3、同步阻塞总结<a class="headerlink" href="#333" title="Permanent link">&para;</a></h5>
+<ul>
+<li>同步阻塞方式接收网络包的整个过程分两步：<ul>
+<li>1、我们自己代码的代码所在的进程，调用<code>socket()</code>会进入内核态创建必要的内核对象</li>
+<li>2、硬中断、软中断上下文（系统线程ksoftirqd）</li>
+</ul>
+</li>
+</ul>
+<h4 id="34epoll">3.4、内核和用户进程协作之epoll<a class="headerlink" href="#34epoll" title="Permanent link">&para;</a></h4>
+<h5 id="341epoll">3.4.1、epoll内核对象的创建<a class="headerlink" href="#341epoll" title="Permanent link">&para;</a></h5>
+<ul>
+<li>fs/eventpoll.c中的<code>epoll_create</code>，里面有<code>struct eventpoll{}</code>的定义，<code>ep_alloc()</code>会进行初始化</li>
+</ul>
+<h5 id="342epollsocket">3.4.2、为epoll添加socket<a class="headerlink" href="#342epollsocket" title="Permanent link">&para;</a></h5>
+<ul>
+<li>fs/eventpoll.c中的<code>epoll_ctl</code>，</li>
+</ul>
+<h5 id="343epoll_wait">3.4.3、epoll_wait之等待接收<a class="headerlink" href="#343epoll_wait" title="Permanent link">&para;</a></h5>
+<ul>
+<li>fs/eventpoll.c中的<code>epoll_wait</code>，</li>
+</ul>
+<h5 id="344">3.4.4、数据来了<a class="headerlink" href="#344" title="Permanent link">&para;</a></h5>
+<ul>
+<li>net/ipv4/tcp_ipv4.c中的<code>tcp_v4_rcv()</code></li>
+<li>net/ipv4/tcp_input.c中的<code>tcp_rcv_established()</code></li>
+<li>net/core/sock.c中的<code>sock_def_readable()</code></li>
+</ul>
+<h5 id="345">3.4.5、小结<a class="headerlink" href="#345" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>图3.26，epoll原理汇总</strong></li>
+</ul>
+<h4 id="35">3.5、本章总结<a class="headerlink" href="#35" title="Permanent link">&para;</a></h4>
+<h3 id="chap4">chap4、内核是如何发送网络包的<a class="headerlink" href="#chap4" title="Permanent link">&para;</a></h3>
+<p>4.1、相关实际问题</p>
+<p>4.2、网络包发送过程总览</p>
+<h4 id="43">4.3、网卡启动准备<a class="headerlink" href="#43" title="Permanent link">&para;</a></h4>
+<ul>
+<li>drivers/net/ethernet/intel/igb/igb_main.c中的<code>__igb_open()</code><ul>
+<li><strong>真正的RingBuffer构造过程是在<code>igb_setup_tx_resources()</code>中完成的</strong></li>
+</ul>
+</li>
+</ul>
+<h4 id="44">4.4、数据从用户进程到网卡的详细过程<a class="headerlink" href="#44" title="Permanent link">&para;</a></h4>
+<h5 id="441send">4.4.1、send系统调用实现<a class="headerlink" href="#441send" title="Permanent link">&para;</a></h5>
+<ul>
+<li>sendto系统调用</li>
+<li>主要干了2件事情<ul>
+<li>1、在内核中把真正的socket找出来，这个里面记录了各种协议栈的函数地址</li>
+<li>2、构造一个struct msghdr对象，把用户传入的数据，都装进去</li>
+</ul>
+</li>
+</ul>
+<h5 id="442">4.4.2、传输层处理<a class="headerlink" href="#442" title="Permanent link">&para;</a></h5>
+<ul>
+<li>传输层拷贝</li>
+<li>传输层发送</li>
+</ul>
+<h5 id="443">4.4.3、网络层发送处理<a class="headerlink" href="#443" title="Permanent link">&para;</a></h5>
+<ul>
+<li>net/ipv4/ip_output.c中的<code>ip_queue_xmit()</code></li>
+</ul>
+<h5 id="444">4.4.4、邻居子系统<a class="headerlink" href="#444" title="Permanent link">&para;</a></h5>
+<h5 id="445">4.4.5、网络设备子系统<a class="headerlink" href="#445" title="Permanent link">&para;</a></h5>
+<h5 id="446">4.4.6、软中断调度<a class="headerlink" href="#446" title="Permanent link">&para;</a></h5>
+<h5 id="447igb">4.4.7、igb网卡驱动发送<a class="headerlink" href="#447igb" title="Permanent link">&para;</a></h5>
+<p>4.5、RingBuffer内存回收</p>
+<p>4.6、本章总结</p>
+<h3 id="chap5io">chap5、深度理解本机网络IO<a class="headerlink" href="#chap5io" title="Permanent link">&para;</a></h3>
+<h4 id="52">5.2、跨机网络通信过程<a class="headerlink" href="#52" title="Permanent link">&para;</a></h4>
+<h5 id="521">5.2.1、跨机数据发送<a class="headerlink" href="#521" title="Permanent link">&para;</a></h5>
+<h5 id="522">5.2.2、跨机数据接收<a class="headerlink" href="#522" title="Permanent link">&para;</a></h5>
+<h5 id="523">5.2.3、跨机网络通信汇总<a class="headerlink" href="#523" title="Permanent link">&para;</a></h5>
+<ul>
+<li>send<ul>
+<li>系统调用</li>
+<li>协议栈（传输层、网络层）</li>
+<li>邻居子系统</li>
+<li>网络设备子系统</li>
+<li>驱动程序</li>
+<li>网卡</li>
+</ul>
+</li>
+<li>recvfrom<ul>
+<li>进程调度</li>
+<li>协议栈（传输层、网络层）</li>
+<li>网络设备子系统</li>
+<li>驱动程序</li>
+<li>软中断</li>
+<li>硬中断</li>
+<li>网卡</li>
+</ul>
+</li>
+</ul>
+<h4 id="53">5.3、本机发送过程<a class="headerlink" href="#53" title="Permanent link">&para;</a></h4>
+<h5 id="531">5.3.1、网络层路由<a class="headerlink" href="#531" title="Permanent link">&para;</a></h5>
+<ul>
+<li>网络层入口函数是<code>ip_queue_xmit()</code>，net/ipv4/ip_output.c</li>
+</ul>
+<h5 id="532ip">5.3.2、本机IP路由<a class="headerlink" href="#532ip" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>选用哪个设备是路由相关函数<code>__ip_route_output_key()</code>确定的</strong></li>
+<li><strong>设置本机IP的时候，调用<code>fib_inetaddr_event()</code>函数完成设置的</strong></li>
+</ul>
+<h5 id="533">5.3.3、网络设备子系统<a class="headerlink" href="#533" title="Permanent link">&para;</a></h5>
+<ul>
+<li>网络设备子系统的入口函数是<code>dev_queue_xmit()</code>，net/core/dev.c</li>
+</ul>
+<h5 id="534">5.3.4、“驱动”程序<a class="headerlink" href="#534" title="Permanent link">&para;</a></h5>
+<ul>
+<li>对于真实的igb网卡来说，它的驱动代码都在drivers/net/ethernet/intel/igb/igb_main.c文件中</li>
+<li>drivers/net/loopback.c<ul>
+<li><code>loopback_xmit()</code></li>
+</ul>
+</li>
+<li>net/core/dev.c<ul>
+<li><code>__napi_schedule()</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="54">5.4、本机接收过程<a class="headerlink" href="#54" title="Permanent link">&para;</a></h4>
+<ul>
+<li>软中断处理函数<code>net_rx_action()</code></li>
+</ul>
+<h4 id="55">5.5、本章总结<a class="headerlink" href="#55" title="Permanent link">&para;</a></h4>
+<h3 id="chap6tcp">chap6、深度理解TCP连接建立过程<a class="headerlink" href="#chap6tcp" title="Permanent link">&para;</a></h3>
+<h4 id="62listen">6.2、深入理解listen<a class="headerlink" href="#62listen" title="Permanent link">&para;</a></h4>
+<h5 id="621listen">6.2.1、listen系统调用<a class="headerlink" href="#621listen" title="Permanent link">&para;</a></h5>
+<ul>
+<li>net/sock.c中的<code>listen</code></li>
+<li><code>err = sock-&gt;ops-&gt;listen(sock, backlog);</code></li>
+</ul>
+<h5 id="622listen">6.2.2、协议栈listen<a class="headerlink" href="#622listen" title="Permanent link">&para;</a></h5>
+<ul>
+<li>net/ipv4/af_inet.c中的<code>inet_listen()</code></li>
+<li><strong>服务端的全连接队列长度</strong></li>
+<li>net/ipv4/inet_connection_sock.c中的<code>inet_csk_listen_start()</code></li>
+</ul>
+<h5 id="623">6.2.3、接收队列定义<a class="headerlink" href="#623" title="Permanent link">&para;</a></h5>
+<ul>
+<li>include/net/inet_connection_sock.h</li>
+<li>include/net/request_sock.h中的<code>struct request_sock_queue{};</code></li>
+</ul>
+<h5 id="624">6.2.4、接收队列申请和初始化<a class="headerlink" href="#624" title="Permanent link">&para;</a></h5>
+<ul>
+<li>net/ipv4/inet_connection_sock.c中的<code>inet_csk_listen_start()</code></li>
+</ul>
+<h5 id="625">6.2.5、半连接队列长度计算<a class="headerlink" href="#625" title="Permanent link">&para;</a></h5>
+<ul>
+<li>net/core/request_sock.c</li>
+</ul>
+<h5 id="626listen">6.2.6、listen过程小结<a class="headerlink" href="#626listen" title="Permanent link">&para;</a></h5>
+<ul>
+<li>listen最主要的工作，<strong>申请和初始化接收队列，包括全连接队列和半连接队列</strong><ul>
+<li>全连接队列，是个<strong>链表</strong></li>
+<li>半连接队列，是个<strong>哈希表</strong></li>
+</ul>
+</li>
+</ul>
+<h4 id="63connect">6.3、深入理解connect<a class="headerlink" href="#63connect" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>图6.4 socket数据结构</strong></li>
+</ul>
+<h5 id="631connect">6.3.1、connect调用链展开<a class="headerlink" href="#631connect" title="Permanent link">&para;</a></h5>
+<ul>
+<li>net/sock.c中的<code>connect</code></li>
+<li>ipv4/af_inet.c中的<code>inet_stream_connect()</code></li>
+<li>net/ipv4/tcp_ipv4.c中的<code>tcp_v4_connect()</code></li>
+</ul>
+<h5 id="632">6.3.2、选择可用端口<a class="headerlink" href="#632" title="Permanent link">&para;</a></h5>
+<ul>
+<li>net/ipv4/inet_hashtables.c中的<code>inet_hash_connect()</code></li>
+</ul>
+<h5 id="633">6.3.3、端口被使用过怎么办<a class="headerlink" href="#633" title="Permanent link">&para;</a></h5>
+<ul>
+<li></li>
+</ul>
+<h5 id="634syn">6.3.4、发起syn请求<a class="headerlink" href="#634syn" title="Permanent link">&para;</a></h5>
+<ul>
+<li>net/ipv4/tcp_output.c中的<code>tcp_connect()</code>，根据入参sk中的信息，构建一个完美的syn报文，并将它发送出去</li>
+</ul>
+<h5 id="635connect">6.3.5、connect小结<a class="headerlink" href="#635connect" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>客户端在执行connect函数的时候，把本地socket状态设置成了TCP_SYN_SENT，选了一个可用的端口，接着发出SYN握手请求并启动重传定时器</strong>。</li>
+</ul>
+<h4 id="64tcp">6.4、完整TCP连接建立过程<a class="headerlink" href="#64tcp" title="Permanent link">&para;</a></h4>
+<h5 id="641connect">6.4.1、客户端connect<a class="headerlink" href="#641connect" title="Permanent link">&para;</a></h5>
+<h5 id="642syn">6.4.2、服务端响应SYN<a class="headerlink" href="#642syn" title="Permanent link">&para;</a></h5>
+<h5 id="643synack">6.4.3、客户端响应SYNACK<a class="headerlink" href="#643synack" title="Permanent link">&para;</a></h5>
+<h5 id="644ack">6.4.4、服务端响应ACK<a class="headerlink" href="#644ack" title="Permanent link">&para;</a></h5>
+<h5 id="645accept">6.4.5、服务端accept<a class="headerlink" href="#645accept" title="Permanent link">&para;</a></h5>
+<ul>
+<li>net/ipv4/inet_connection_sock.c中的<code>inet_csk_accept()</code></li>
+</ul>
+<h5 id="646">6.4.6、连接建立过程总结<a class="headerlink" href="#646" title="Permanent link">&para;</a></h5>
+<h4 id="65tcp">6.5、异常TCP连接建立情况<a class="headerlink" href="#65tcp" title="Permanent link">&para;</a></h4>
+<h5 id="651connect">6.5.1、connect系统调用耗时失控<a class="headerlink" href="#651connect" title="Permanent link">&para;</a></h5>
+<h5 id="652">6.5.2、第一次握手丢包<a class="headerlink" href="#652" title="Permanent link">&para;</a></h5>
+<h5 id="653">6.5.3、第三次握手丢包<a class="headerlink" href="#653" title="Permanent link">&para;</a></h5>
+<h5 id="654">6.5.4、握手异常总结<a class="headerlink" href="#654" title="Permanent link">&para;</a></h5>
+<h4 id="66">6.6、如何查看是否有连接队列溢出发生<a class="headerlink" href="#66" title="Permanent link">&para;</a></h4>
+<h5 id="661">6.6.1、全连接队列溢出判断<a class="headerlink" href="#661" title="Permanent link">&para;</a></h5>
+<h5 id="662">6.6.2、半连接队列溢出判断<a class="headerlink" href="#662" title="Permanent link">&para;</a></h5>
+<h4 id="67">6.7、本章总结<a class="headerlink" href="#67" title="Permanent link">&para;</a></h4>
+<h3 id="chap7tcp">chap7、一条TCP连接消耗多大内存<a class="headerlink" href="#chap7tcp" title="Permanent link">&para;</a></h3>
+<h4 id="71">7.1、相关实际问题<a class="headerlink" href="#71" title="Permanent link">&para;</a></h4>
+<p>7.2、Linux内核如何管理内存</p>
+<p>7.3、TCP连接相关内核对象</p>
+<h4 id="74tcp">7.4、实测TCP内核对象开销<a class="headerlink" href="#74tcp" title="Permanent link">&para;</a></h4>
+<h4 id="75">7.5、本章小结<a class="headerlink" href="#75" title="Permanent link">&para;</a></h4>
+<h3 id="chap8tcp">chap8、一台机器最多能支持多少条TCP连接<a class="headerlink" href="#chap8tcp" title="Permanent link">&para;</a></h3>
+<h4 id="82linux">8.2、理解Linux最大文件描述符<a class="headerlink" href="#82linux" title="Permanent link">&para;</a></h4>
+<h4 id="83tcp">8.3、一台服务端机器最多可以支撑多少条TCP连接<a class="headerlink" href="#83tcp" title="Permanent link">&para;</a></h4>
+<h4 id="8465535">8.4、一台客户端机器最多只能发起65535条连接吗<a class="headerlink" href="#8465535" title="Permanent link">&para;</a></h4>
+<h4 id="85">8.5、单机百万并发连接的动手实验<a class="headerlink" href="#85" title="Permanent link">&para;</a></h4>
+<h3 id="chap9">chap9、网络性能优化建议<a class="headerlink" href="#chap9" title="Permanent link">&para;</a></h3>
+<h3 id="chap10">chap10、容器网络虚拟化<a class="headerlink" href="#chap10" title="Permanent link">&para;</a></h3>
+<h4 id="102veth">10.2、veth设备对<a class="headerlink" href="#102veth" title="Permanent link">&para;</a></h4>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

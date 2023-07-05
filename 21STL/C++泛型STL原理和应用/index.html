@@ -157,6 +157,9 @@
             <div class="section" itemprop="articleBody">
               
                 <h2 id="cstl">《C++泛型STL原理和应用》<a class="headerlink" href="#cstl" title="Permanent link">&para;</a></h2>
+<ul>
+<li>书上<a href="https://gitee.com/fewolflion/BookNote/tree/master/01lioneloutput/60BookCode/C++%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8">代码</a></li>
+</ul>
 <h3 id="chap1c-">chap1、C++泛型技术基础--模板<a class="headerlink" href="#chap1c-" title="Permanent link">&para;</a></h3>
 <h3 id="11">1.1 泛型和模板<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
 <h4 id="111">1.1.1 泛型的概念<a class="headerlink" href="#111" title="Permanent link">&para;</a></h4>
@@ -478,17 +481,17 @@ int main(){
 </ul>
 <h5 id="322">3.2.2 函数对象（仿函数）<a class="headerlink" href="#322" title="Permanent link">&para;</a></h5>
 <ul>
-<li>例3-6 函数对象作为函数参数的示例程序。</li>
+<li><a href="https://gitee.com/fewolflion/BookNote/blob/master/01lioneloutput/60BookCode/C++%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/chap3STL%E5%8F%8A%E5%85%B6%E4%BD%BF%E7%94%A8%E7%9A%84%E5%85%B6%E4%BB%96C++%E6%8A%80%E6%9C%AF/E3-06.cpp">例3-6 函数对象作为函数参数的示例程序</a></li>
 </ul>
 <h5 id="323-lambda">3.2.3 Lambda表达式<a class="headerlink" href="#323-lambda" title="Permanent link">&para;</a></h5>
 <ul>
-<li>例3-7 lambda表达式与具有相同功能的仿函数的比较。<strong>Lambda表达式</strong>又叫 <em>无名仿函数（或匿名仿函数）</em><ul>
+<li><a href="https://gitee.com/fewolflion/BookNote/blob/master/01lioneloutput/60BookCode/C++%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/chap3STL%E5%8F%8A%E5%85%B6%E4%BD%BF%E7%94%A8%E7%9A%84%E5%85%B6%E4%BB%96C++%E6%8A%80%E6%9C%AF/E3-07.cpp">例3-7 lambda表达式与具有相同功能的仿函数的比较</a>。<strong>Lambda表达式</strong>又叫 <em>无名仿函数（或匿名仿函数）</em><ul>
 <li><code>[](int x){cout &lt;&lt; 2*x &lt;&lt; endl;} // 相当于在声明function类的同时，又定义了定义该对象</code></li>
 <li><code>[](int x){cout &lt;&lt; 2*x &lt;&lt; endl;}(10) //则是对象调用。</code></li>
 </ul>
 </li>
-<li>例3-8 多种lambda表达式调用示例程序  </li>
-<li>例3-9 当用户输入一个15~20的数据时，输出2倍，否则输出本身。</li>
+<li><a href="https://gitee.com/fewolflion/BookNote/blob/master/01lioneloutput/60BookCode/C++%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/chap3STL%E5%8F%8A%E5%85%B6%E4%BD%BF%E7%94%A8%E7%9A%84%E5%85%B6%E4%BB%96C++%E6%8A%80%E6%9C%AF/E3-08.cpp">例3-8 多种lambda表达式调用示例程序</a>  </li>
+<li><a href="https://gitee.com/fewolflion/BookNote/blob/master/01lioneloutput/60BookCode/C++%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/chap3STL%E5%8F%8A%E5%85%B6%E4%BD%BF%E7%94%A8%E7%9A%84%E5%85%B6%E4%BB%96C++%E6%8A%80%E6%9C%AF/E3-09.cpp">例3-9 当用户输入一个15~20的数据时，输出2倍，否则输出本身</a></li>
 <li>例3-10 两个可以修改捕获变量的lambda表达式的示例程序。<ul>
 <li>示例1：演示了引用捕获的程序代码</li>
 <li>示例2：演示了关键字mutable的应用</li>
@@ -499,33 +502,132 @@ int main(){
 <h4 id="33">3.3 智能指针<a class="headerlink" href="#33" title="Permanent link">&para;</a></h4>
 <h5 id="331">3.3.1 智能指针的基本原理<a class="headerlink" href="#331" title="Permanent link">&para;</a></h5>
 <ul>
-<li>指针对象与资源的绑定<ul>
+<li>1、指针对象与资源的绑定<ul>
 <li><strong>RAII（Resource Acquisition is Initialization）</strong>，是把裸指针（原始指针）和与它相关的操作封装成一个类，创建时调用构造函数，销毁时调用析构函数。重载了<code>opertaor-&gt;</code>和<code>operator *</code></li>
+<li><a href="https://gitee.com/fewolflion/BookNote/blob/master/01lioneloutput/60BookCode/C++%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/chap3STL%E5%8F%8A%E5%85%B6%E4%BD%BF%E7%94%A8%E7%9A%84%E5%85%B6%E4%BB%96C++%E6%8A%80%E6%9C%AF/E3-12.cpp">例3-12 编写一年智能指针示例程序</a></li>
 </ul>
 </li>
-<li>例3-12 编写一年智能指针示例程序</li>
-<li>可共享资源的智能指针<ul>
+<li>2、可共享资源的智能指针<ul>
 <li>创建时加1，销毁时减1，直到0为止。</li>
+<li><a href="https://gitee.com/fewolflion/BookNote/blob/master/01lioneloutput/60BookCode/C++%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/chap3STL%E5%8F%8A%E5%85%B6%E4%BD%BF%E7%94%A8%E7%9A%84%E5%85%B6%E4%BB%96C++%E6%8A%80%E6%9C%AF/E3-13.cpp">例3-13 编写一个演示程序</a></li>
 </ul>
 </li>
-<li>例3-13 编写一个演示程序</li>
 </ul>
 <h5 id="332-c11">3.3.2 C++11支持的智能指针<a class="headerlink" href="#332-c11" title="Permanent link">&para;</a></h5>
 <ul>
-<li>unique_ptr</li>
-<li>share_ptr</li>
-<li>weak_ptr</li>
+<li>1、unique_ptr<ul>
+<li>0</li>
+<li>unique_ptr用在如下场合<ul>
+<li>利用动态指针的RAII特性，保证程序出现异常时能确保动态资源的释放</li>
+<li>返回函数内创建的动态资源</li>
+<li>可放在STL容器中</li>
+<li>管理动态数组</li>
+<li>自定义资源释放操作</li>
 </ul>
+</li>
+</ul>
+</li>
+<li>2、shared_ptr<ul>
+<li>2种方式创建shared_ptr<ul>
+<li>通过make_shared辅助函数创建shared_ptr，<code>auto s_s = make_shared&lt;string&gt;("hello");</code></li>
+<li>通过构造函数构建shared_ptr，</li>
+</ul>
+</li>
+<li>使用<ul>
+<li>在if语句中作为转移条件</li>
+<li>定制资源销毁操作deleter</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>3、weak_ptr<ul>
+<li>没有重载operator-&gt;和operator<em>操作符，</em><em>不能直接通过weak_ptr使用对象</em>*</li>
+<li><strong>两个类互为对方指针的资源类型，出现了所谓的“循环”引用</strong>，会造成计数器的计数失控，于是产生了<strong>可以共享资源，但不参与计数的weak_ptr来解决这种循环引用</strong></li>
+</ul>
+</li>
+</ul>
+<pre class="highlight"><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;memory&gt;
+using namespace std;
+
+struct B; //类前置声明
+struct A{
+    ~A(){
+        cout&lt;&lt;"~A()"&lt;&lt;endl;
+    }
+    shared_ptr&lt;B&gt;b;
+}
+
+struct B{
+    ~B(){
+        cout&lt;&lt;"~B()"&lt;&lt;endl;
+    }
+    shared_ptr&lt;A&gt;a;  //循环引用，不可用
+    //改成这样
+    weak_ptr&lt;A&gt;a;//在先声明的B中用weak_ptr打破循环引用
+}
+
+int main(){
+    shared_ptr&lt;A&gt; ap(new A);
+    shared_ptr&lt;B&gt; bp(new B);
+    ap-&gt;b = bp;
+    bp-&gt;a = ap;
+    return 0;
+}</code></pre>
 <h3 id="chap4stl">chap4、模拟STL三大件<a class="headerlink" href="#chap4stl" title="Permanent link">&para;</a></h3>
 <h4 id="41">4.1、容器<a class="headerlink" href="#41" title="Permanent link">&para;</a></h4>
 <h5 id="411vectormyvector">4.1.1、向量vector的仿真MyVector<a class="headerlink" href="#411vectormyvector" title="Permanent link">&para;</a></h5>
 <h5 id="412listmylist">4.1.2、列表list的仿真MyList<a class="headerlink" href="#412listmylist" title="Permanent link">&para;</a></h5>
 <h4 id="42">4.2、迭代器<a class="headerlink" href="#42" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>中介装置</strong>把容器与算法分离，这样的<strong>智能指针</strong>就叫<strong>迭代器</strong></li>
+</ul>
 <h5 id="421">4.2.1、使用裸指针作为迭代器<a class="headerlink" href="#421" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>以存储空间连续的数组为其存储结构的容器</strong></li>
+<li><a href="https://gitee.com/fewolflion/BookNote/blob/master/01lioneloutput/60BookCode/C++%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/chap04%E6%A8%A1%E6%8B%9FSTL%E4%B8%89%E5%A4%A7%E4%BB%B6/04_03.cpp">例4-3，程序中定义一个<code>MyVector&lt;int&gt;</code>的对象v1，使用裸指针作为对象v1的迭代器并遍历v1</a><ul>
+<li>与4-1的区别</li>
+<li><code>typedef Ty* viter;</code>，以及<code>MyVector&lt;int&gt;::viter iter;</code> <em>这两个的转化过程，要好限理解一下，lionel</em></li>
+</ul>
+</li>
+</ul>
 <h5 id="422">4.2.2、迭代器是指针的类封装<a class="headerlink" href="#422" title="Permanent link">&para;</a></h5>
+<ul>
+<li>如果存储空间不连续，就需要<strong>加以改造（重载*，++，==，!=运算符）</strong></li>
+<li>例4-4，为MyList容器设计迭代器MyList_iterator并编写程序进行测试</li>
+</ul>
 <h5 id="423">4.2.3、迭代器的代码隔离作用<a class="headerlink" href="#423" title="Permanent link">&para;</a></h5>
+<ul>
+<li>使用者无需知道</li>
+<li>例4-5，程序，使用上述查找函数find()分别在MyVector和MyList容器查找数据100</li>
+</ul>
 <h5 id="424stl">4.2.4、STL迭代器的种类<a class="headerlink" href="#424stl" title="Permanent link">&para;</a></h5>
+<ul>
+<li>0</li>
+<li>1、输入迭代器（输入流，<strong>有以下功能</strong>）</li>
+<li>2、输出迭代器<ul>
+<li>通过<code>operator*</code>对容器数据元素进行修改</li>
+</ul>
+</li>
+<li>3、前向迭代器<ul>
+<li>输入和输出迭代器的结合体，<code>operator*</code>既可以访问元素，也可以修改元素</li>
+</ul>
+</li>
+<li>4、双向迭代器<ul>
+<li>在前向迭代器的功能上，<strong>允许向后移动</strong>，支持<code>operator--</code>和<code>operator--(int)</code></li>
+</ul>
+</li>
+<li>5、随机存取迭代器</li>
+</ul>
 <h5 id="425">4.2.5、迭代器的种类标记<a class="headerlink" href="#425" title="Permanent link">&para;</a></h5>
+<ul>
+<li>0</li>
+<li>输入迭代器，<code>struct input_iterator_tag{};</code></li>
+<li>输出</li>
+<li>前向</li>
+<li>双向</li>
+<li>随机，<code>struct random_access_iterator_tag:public bidirectional_iterator_tag {};</code></li>
+</ul>
 <h5 id="426stl">4.2.6、STL对迭代器的管理<a class="headerlink" href="#426stl" title="Permanent link">&para;</a></h5>
 <h4 id="43">4.3、通用算法<a class="headerlink" href="#43" title="Permanent link">&para;</a></h4>
 <h3 id="chap5">chap5、容器及其应用<a class="headerlink" href="#chap5" title="Permanent link">&para;</a></h3>
@@ -587,21 +689,78 @@ int main(){
 <h5 id="634">6.3.4、算术算法与关系算法<a class="headerlink" href="#634" title="Permanent link">&para;</a></h5>
 <h5 id="635">6.3.5、排列组合与集合算法<a class="headerlink" href="#635" title="Permanent link">&para;</a></h5>
 <h3 id="chap7stl">chap7、适配器模式在STL基础部件上的应用<a class="headerlink" href="#chap7stl" title="Permanent link">&para;</a></h3>
+<ul>
+<li>20201031</li>
+</ul>
 <h4 id="71">7.1、适配器<a class="headerlink" href="#71" title="Permanent link">&para;</a></h4>
+<ul>
+<li>例子<ul>
+<li>1、不提供基础功能，基础功能来自另一个对象，例如B的基础功能，全来自A</li>
+<li>2、通过转换基础功能对外接口的形式向用户提供服务</li>
+</ul>
+</li>
+</ul>
+<pre class="highlight"><code class="language-cpp">class A {f1();f2();};
+class B {A *a; g() {a-&gt;f1();a-&gt;f2();}};//模块B借助模块A，叫做B适配器</code></pre>
 <h4 id="72stl">7.2、STL容器适配器<a class="headerlink" href="#72stl" title="Permanent link">&para;</a></h4>
+<ul>
+<li>stack、queue单向队列，priority_queue，优先权队列</li>
+</ul>
 <h5 id="721stack">7.2.1、stack适配器<a class="headerlink" href="#721stack" title="Permanent link">&para;</a></h5>
+<ul>
+<li>使用默认deque</li>
+<li>使用vector或list</li>
+</ul>
 <h5 id="722queue">7.2.2、queue适配器<a class="headerlink" href="#722queue" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>双向</strong>，使用<strong>双端开口</strong>的list或deque作为核心，默认deque</li>
+</ul>
 <h5 id="723priority_queue">7.2.3、priority_queue适配器<a class="headerlink" href="#723priority_queue" title="Permanent link">&para;</a></h5>
 <h4 id="73">7.3、迭代器适配器<a class="headerlink" href="#73" title="Permanent link">&para;</a></h4>
+<ul>
+<li>适配的对象是<strong>附属容器的迭代器</strong></li>
+</ul>
 <h5 id="731">7.3.1、插入迭代器<a class="headerlink" href="#731" title="Permanent link">&para;</a></h5>
+<ul>
+<li>反向插入，back_insert</li>
+<li>前向插入，front_insert</li>
+</ul>
 <h5 id="732">7.3.2、反向迭代器<a class="headerlink" href="#732" title="Permanent link">&para;</a></h5>
+<ul>
+<li>reverse_iterator</li>
+</ul>
 <h5 id="733io">7.3.3、IO流迭代器<a class="headerlink" href="#733io" title="Permanent link">&para;</a></h5>
+<ul>
+<li>输入流，instream</li>
+<li>输出流，ostream</li>
+<li>输入缓冲，istreambuf_</li>
+<li>输出缓冲，ostreambuf_</li>
+</ul>
 <h4 id="74">7.4、函数对象适配器<a class="headerlink" href="#74" title="Permanent link">&para;</a></h4>
 <h5 id="741">7.4.1、函数对象的适配<a class="headerlink" href="#741" title="Permanent link">&para;</a></h5>
+<h5 id="742">7.4.2、函数对象配接器<a class="headerlink" href="#742" title="Permanent link">&para;</a></h5>
 <h3 id="chap8stl">chap8、STL容器内存空间分配器<a class="headerlink" href="#chap8stl" title="Permanent link">&para;</a></h3>
+<ul>
+<li>20201031</li>
+</ul>
 <h4 id="81">8.1、内存空间配置器及其设计基础<a class="headerlink" href="#81" title="Permanent link">&para;</a></h4>
-<h4 id="82">8.2、<a class="headerlink" href="#82" title="Permanent link">&para;</a></h4>
+<h5 id="811">8.1.1、什么是内存空间配置器<a class="headerlink" href="#811" title="Permanent link">&para;</a></h5>
+<ul>
+<li>封装了动态请求内存空间的代码，以函数的形式向容器提供了内存空间的请求与释放，不用new本身，而用<code>operator new()</code>和<code>spacement new()</code></li>
+</ul>
+<h5 id="812">8.1.2、内存空间配置器设计基础<a class="headerlink" href="#812" title="Permanent link">&para;</a></h5>
+<h4 id="82stl">8.2、STL空间配置器接口<a class="headerlink" href="#82stl" title="Permanent link">&para;</a></h4>
+<ul>
+<li>处于容器与OS内存管理系统之间</li>
+</ul>
+<h5 id="821stl">8.2.1、STL空间配置器接口及最简单的空间配置器<a class="headerlink" href="#821stl" title="Permanent link">&para;</a></h5>
+<h5 id="822stl">8.2.2、典型STL容器空间的配置<a class="headerlink" href="#822stl" title="Permanent link">&para;</a></h5>
 <h4 id="83">8.3、内存池的概念及方法<a class="headerlink" href="#83" title="Permanent link">&para;</a></h4>
+<ul>
+<li>防止内存碎片、用内存块组成内存池（形成链表）</li>
+</ul>
+<h5 id="831">8.3.1、内存池的规划<a class="headerlink" href="#831" title="Permanent link">&para;</a></h5>
+<h5 id="832">8.3.2、内存池的设计<a class="headerlink" href="#832" title="Permanent link">&para;</a></h5>
               
             </div>
           </div><footer>
