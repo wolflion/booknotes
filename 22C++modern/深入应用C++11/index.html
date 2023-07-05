@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>深入应用C++11 - lionel的技术笔记</title>
+    <title>《深入应用C++11》 - lionel的技术笔记</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "\u6df1\u5165\u5e94\u7528C++11";
+        var mkdocs_page_name = "\u300a\u6df1\u5165\u5e94\u7528C++11\u300b";
         var mkdocs_page_input_path = "22C++modern\\\u6df1\u5165\u5e94\u7528C++11.md";
         var mkdocs_page_url = null;
       </script>
@@ -49,10 +49,116 @@
                 </li>
               </ul>
               <p class="caption"><span class="caption-text">C++</span></p>
-              <ul>
+              <ul class="current">
                   <li class="toctree-l1"><a class="reference internal" href="../../20C%2B%2B/effectiveC%2B%2B/">《Effective C++》</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../21STL/EffectiveSTL/">《Effective STL》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/C%2B%2B%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/">《C++泛型STL原理和应用》</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">《深入应用C++11》</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#part1c11">Part1、C++11改进我们的程序</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#chap1c11">chap1、C++11让程序更简洁、更现代</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#11">1.1、类型推导</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#12">1.2、模块的细节改进</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#13initializer-list">1.3、列表初始表（initializer list）</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#14for">1.4、基于范围的for循环</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#15stdfunctionbind">1.5、std::function和bind绑定器</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#16lambda">1.6、lambda表达式</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#17tupe">1.7、tupe元组</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#chap2c11">chap2、使用C++11改进程序性能</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#21">2.1、右值引用</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#22move">2.2、move语义</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#23forward">2.3、forward和完美转发</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#24emplace_back">2.4、emplace_back减少内存拷贝和移动</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#25unordered-container">2.5、unordered container无序容器</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#chap3c11">chap3、使用C++11消除重复，提高代码质量</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#31type_traits-">3.1、type_traits-类型萃取</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#32">3.2、可变参数模板</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#33type_traits">3.3、可变参数模板和type_traits的结合应用</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#chap4c11">chap4、C++11解决内存泄漏问题</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#41shared_ptr">4.1、shared_ptr共享的智能指针</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#42unique_ptr">4.2、unique_ptr共享的智能指针</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#43weak_ptr">4.3、weak_ptr弱引用的智能指针</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#44">4.4、通过智能指针管理第三方库分配的内存</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#chap5c11">chap5、使用C++11让多线程开发变得简单</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#51">5.1、线程</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#52">5.2、互斥量</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#53">5.3、条件变量</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#54">5.4、原子变量</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#55call_onceonce_flag">5.5、call_once/once_flag的使用</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#56">5.6、异步操作</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#57async">5.7、线程异步操作函数async</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#chap6c11">chap6、使用C++11中便利的工具</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#61chrono">6.1、处理日期和时间的chrono库</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#62">6.2、数值类型和字符串的相互转换</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#63">6.3、宽窄字符转换</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#chap7c11">chap7、C++11的其他特性</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#71">7.1、委托构造函数和继承构造函数</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#72">7.2、原始的字面量</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#73finaloverride">7.3、final和override关键字</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#74">7.4、内存对齐</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#75c11">7.5、C++11新增的便利算法</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    </ul>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">基础知识</span></p>
@@ -69,6 +175,10 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../10network/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/">《Linux高性能服务器编程》</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../10network/TCPIP%E8%AF%A6%E8%A7%A3%E5%8D%B71/">《TCPIP详解卷1》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/Linux%E5%86%85%E6%A0%B8%E7%BD%91%E7%BB%9C%E6%A0%88%E6%BA%90%E4%BB%A3%E7%A0%81%E6%83%85%E6%99%AF%E5%88%86%E6%9E%90/">《Linux内核网络栈源代码情景分析》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C/">《深入理解Linux网络》</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">文件系统</span></p>
@@ -113,6 +223,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../15tool/Linux%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8Eshell%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B%E5%A4%A7%E5%85%A8%283rd%29/">《Linux命令行与shell脚本编程大全(3rd)》</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/python%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%883rd%EF%BC%89/">《python程序设计（3rd）》</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">刷题</span></p>
               <ul>
@@ -147,7 +259,8 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-      <li>深入应用C++11</li>
+          <li>C++ &raquo;</li>
+      <li>《深入应用C++11》</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -859,6 +972,10 @@ int main(){
               
             </div>
           </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../21STL/C%2B%2B%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/" class="btn btn-neutral float-left" title="《C++泛型STL原理和应用》"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../408/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA/" class="btn btn-neutral float-right" title="《操作系统导论》">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
 
   <hr/>
 
@@ -880,6 +997,10 @@ int main(){
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
+      <span><a href="../../21STL/C%2B%2B%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../408/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

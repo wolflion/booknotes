@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>深入理解Linux网络 - lionel的技术笔记</title>
+    <title>《深入理解Linux网络》 - lionel的技术笔记</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "\u6df1\u5165\u7406\u89e3Linux\u7f51\u7edc";
+        var mkdocs_page_name = "\u300a\u6df1\u5165\u7406\u89e3Linux\u7f51\u7edc\u300b";
         var mkdocs_page_input_path = "10network\\\u6df1\u5165\u7406\u89e3Linux\u7f51\u7edc.md";
         var mkdocs_page_url = null;
       </script>
@@ -54,6 +54,10 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../21STL/EffectiveSTL/">《Effective STL》</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/C%2B%2B%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/">《C++泛型STL原理和应用》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../22C%2B%2Bmodern/%E6%B7%B1%E5%85%A5%E5%BA%94%E7%94%A8C%2B%2B11/">《深入应用C++11》</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">基础知识</span></p>
               <ul>
@@ -63,12 +67,250 @@
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">网络编程</span></p>
-              <ul>
+              <ul class="current">
                   <li class="toctree-l1"><a class="reference internal" href="../TCPIP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">《TCP/IP网络编程》</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/">《Linux高性能服务器编程》</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../TCPIP%E8%AF%A6%E8%A7%A3%E5%8D%B71/">《TCPIP详解卷1》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Linux%E5%86%85%E6%A0%B8%E7%BD%91%E7%BB%9C%E6%A0%88%E6%BA%90%E4%BB%A3%E7%A0%81%E6%83%85%E6%99%AF%E5%88%86%E6%9E%90/">《Linux内核网络栈源代码情景分析》</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">《深入理解Linux网络》</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#chap1">chap1、绪论</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#11">1.1、我在工作中的困惑</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#115127001">1.1.5、访问127.0.0.1过网卡吗？</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#116">1.1.6、软中断和硬中断</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#117">1.1.7、零拷贝到底是怎么回事</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#118dpdk">1.1.8、DPDK</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#12">1.2、本书内容结构</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#13">1.3、一些约定</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#14">1.4、一些术语</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap2">chap2、内核是如何接收网络包的</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#21">2.1、相关实际问题</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#22">2.2、数据是如何从网卡到协议栈的</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#221linux">2.2.1、Linux网络收包总览</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#222linux">2.2.2、Linux启动</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#223">2.2.3、迎接数据的到来</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#224">2.2.4、收包小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#23">2.3、本章小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap3">chap3、内核是如何与用户进程协作的</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#31">3.1、相关实际问题</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#32socket">3.2、socket的直接创建</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#33">3.3、内核和用户进程协作之阻塞方式</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#331">3.3.1、等待接收消息</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#332">3.3.2、软中断模块</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#333">3.3.3、同步阻塞总结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#34epoll">3.4、内核和用户进程协作之epoll</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#341epoll">3.4.1、epoll内核对象的创建</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#342epollsocket">3.4.2、为epoll添加socket</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#343epoll_wait">3.4.3、epoll_wait之等待接收</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#344">3.4.4、数据来了</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#345">3.4.5、小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#35">3.5、本章总结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap4">chap4、内核是如何发送网络包的</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#43">4.3、网卡启动准备</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#44">4.4、数据从用户进程到网卡的详细过程</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#441send">4.4.1、send系统调用实现</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#442">4.4.2、传输层处理</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#443">4.4.3、网络层发送处理</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#444">4.4.4、邻居子系统</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#445">4.4.5、网络设备子系统</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#446">4.4.6、软中断调度</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#447igb">4.4.7、igb网卡驱动发送</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap5io">chap5、深度理解本机网络IO</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#52">5.2、跨机网络通信过程</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#521">5.2.1、跨机数据发送</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#522">5.2.2、跨机数据接收</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#523">5.2.3、跨机网络通信汇总</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#53">5.3、本机发送过程</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#531">5.3.1、网络层路由</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#532ip">5.3.2、本机IP路由</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#533">5.3.3、网络设备子系统</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#534">5.3.4、“驱动”程序</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#54">5.4、本机接收过程</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#55">5.5、本章总结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap6tcp">chap6、深度理解TCP连接建立过程</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#62listen">6.2、深入理解listen</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#621listen">6.2.1、listen系统调用</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#622listen">6.2.2、协议栈listen</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#623">6.2.3、接收队列定义</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#624">6.2.4、接收队列申请和初始化</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#625">6.2.5、半连接队列长度计算</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#626listen">6.2.6、listen过程小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#63connect">6.3、深入理解connect</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#631connect">6.3.1、connect调用链展开</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#632">6.3.2、选择可用端口</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#633">6.3.3、端口被使用过怎么办</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#634syn">6.3.4、发起syn请求</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#635connect">6.3.5、connect小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#64tcp">6.4、完整TCP连接建立过程</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#641connect">6.4.1、客户端connect</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#642syn">6.4.2、服务端响应SYN</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#643synack">6.4.3、客户端响应SYNACK</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#644ack">6.4.4、服务端响应ACK</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#645accept">6.4.5、服务端accept</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#646">6.4.6、连接建立过程总结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#65tcp">6.5、异常TCP连接建立情况</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#651connect">6.5.1、connect系统调用耗时失控</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#652">6.5.2、第一次握手丢包</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#653">6.5.3、第三次握手丢包</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#654">6.5.4、握手异常总结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#66">6.6、如何查看是否有连接队列溢出发生</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#661">6.6.1、全连接队列溢出判断</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#662">6.6.2、半连接队列溢出判断</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#67">6.7、本章总结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap7tcp">chap7、一条TCP连接消耗多大内存</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#71">7.1、相关实际问题</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#74tcp">7.4、实测TCP内核对象开销</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#75">7.5、本章小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap8tcp">chap8、一台机器最多能支持多少条TCP连接</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#82linux">8.2、理解Linux最大文件描述符</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#83tcp">8.3、一台服务端机器最多可以支撑多少条TCP连接</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#8465535">8.4、一台客户端机器最多只能发起65535条连接吗</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#85">8.5、单机百万并发连接的动手实验</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap9">chap9、网络性能优化建议</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap10">chap10、容器网络虚拟化</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#102veth">10.2、veth设备对</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">文件系统</span></p>
@@ -113,6 +355,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../15tool/Linux%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8Eshell%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B%E5%A4%A7%E5%85%A8%283rd%29/">《Linux命令行与shell脚本编程大全(3rd)》</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/python%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%883rd%EF%BC%89/">《python程序设计（3rd）》</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">刷题</span></p>
               <ul>
@@ -147,7 +391,8 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-      <li>深入理解Linux网络</li>
+          <li>网络编程 &raquo;</li>
+      <li>《深入理解Linux网络》</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -501,6 +746,10 @@
               
             </div>
           </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../Linux%E5%86%85%E6%A0%B8%E7%BD%91%E7%BB%9C%E6%A0%88%E6%BA%90%E4%BB%A3%E7%A0%81%E6%83%85%E6%99%AF%E5%88%86%E6%9E%90/" class="btn btn-neutral float-left" title="《Linux内核网络栈源代码情景分析》"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../11filesystem/Linux%E5%86%85%E6%A0%B8%E6%8E%A2%E7%A7%98/" class="btn btn-neutral float-right" title="《Linux内核探秘》">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
 
   <hr/>
 
@@ -522,6 +771,10 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
+      <span><a href="../Linux%E5%86%85%E6%A0%B8%E7%BD%91%E7%BB%9C%E6%A0%88%E6%BA%90%E4%BB%A3%E7%A0%81%E6%83%85%E6%99%AF%E5%88%86%E6%9E%90/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../11filesystem/Linux%E5%86%85%E6%A0%B8%E6%8E%A2%E7%A7%98/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

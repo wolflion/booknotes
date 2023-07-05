@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>Python程序设计（3rd） - lionel的技术笔记</title>
+    <title>《python程序设计（3rd）》 - lionel的技术笔记</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Python\u7a0b\u5e8f\u8bbe\u8ba1\uff083rd\uff09";
+        var mkdocs_page_name = "\u300apython\u7a0b\u5e8f\u8bbe\u8ba1\uff083rd\uff09\u300b";
         var mkdocs_page_input_path = "15tool\\python\u7a0b\u5e8f\u8bbe\u8ba1\uff083rd\uff09.md";
         var mkdocs_page_url = null;
       </script>
@@ -54,6 +54,10 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../21STL/EffectiveSTL/">《Effective STL》</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/C%2B%2B%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/">《C++泛型STL原理和应用》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../22C%2B%2Bmodern/%E6%B7%B1%E5%85%A5%E5%BA%94%E7%94%A8C%2B%2B11/">《深入应用C++11》</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">基础知识</span></p>
               <ul>
@@ -69,6 +73,10 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../10network/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/">《Linux高性能服务器编程》</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../10network/TCPIP%E8%AF%A6%E8%A7%A3%E5%8D%B71/">《TCPIP详解卷1》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/Linux%E5%86%85%E6%A0%B8%E7%BD%91%E7%BB%9C%E6%A0%88%E6%BA%90%E4%BB%A3%E7%A0%81%E6%83%85%E6%99%AF%E5%88%86%E6%9E%90/">《Linux内核网络栈源代码情景分析》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C/">《深入理解Linux网络》</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">文件系统</span></p>
@@ -108,10 +116,210 @@
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">工具</span></p>
-              <ul>
+              <ul class="current">
                   <li class="toctree-l1"><a class="reference internal" href="../Wireshark%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98/">《Wireshark网络分析实战》</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../Linux%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8Eshell%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B%E5%A4%A7%E5%85%A8%283rd%29/">《Linux命令行与shell脚本编程大全(3rd)》</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">《python程序设计（3rd）》</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#chap2">chap2、编写简单程序</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#23">2.3、程序要素</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#231">2.3.1、名称</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#232">2.3.2、表达式</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#24">2.4、输出语句</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#25">2.5、赋值语句</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#251">2.5.1、简单赋值</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#252">2.5.2、赋值输入</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#253">2.5.3、同时赋值</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#26">2.6、确定循环</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#27">2.7、示例</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap3">chap3、数字计算</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#32">3.2、类型转换和舍入</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap5">chap5、序列：字符串、列表和文件</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#51">5.1、字符串数据类型</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#52">5.2、简单字符串处理</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#53">5.3、列表作为序列</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#54">5.4、字符串表示和消息编码</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#541">5.4.1、字符串表示</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#542">5.4.2、编写编码器</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#55">5.5、字符串方法</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#551">5.5.1、编写解码器</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#59">5.9、文件处理</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#591">5.9.1、多行字符串</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#592">5.9.2、文件处理</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap6">chap6、定义函数</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#61">6.1、函数的功能</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#62">6.2、函数的非正式讨论</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#63">6.3、带有函数的终值程序</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#64">6.4、函数和参数：令人兴奋的细节</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#65">6.5、返回值的函数</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#66">6.6、修改参数的函数</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#67">6.7、函数和程序结构</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap7">chap7、判断结构</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#71if">7.1、简单判断（if）</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#72if-else">7.2、两路判断（if-else）</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#73if-elif-else">7.3、多路判断（if-elif-else）</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#74">7.4、异常处理</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#75">7.5、设计研究：三者最大</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#76">7.6、小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap8">chap8、循环结构和布尔值</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#81for">8.1、for循环：快速回顾</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#82">8.2、不定循环</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#83">8.3、常见循环模式</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#831">8.3.1、交互式循环</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#832">8.3.2、哨兵循环</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#833">8.3.3、文件循环</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#834">8.3.4、嵌套循环</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#84">8.4、布尔值计算</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#841">8.4.1、布尔运算符</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#842">8.4.2、布尔代数</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#85">8.5、其他常见结构</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#851">8.5.1、后测试循环</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#852">8.5.2、循环加一半</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#853">8.5.3、布尔表达式作为判断</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#86">8.6、示例：一个简单的事件循环</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap9">chap9、模拟与设计</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#91">9.1、模拟短柄壁球</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#911">9.1.1、一个模拟问题</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#912">9.1.2、分析与规格说明</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#92">9.2、伪随机数</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#93">9.3、自顶向下的设计</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#931">9.3.1、顶层设计</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#932">9.3.2、关注点分离</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#933">9.3.3、第二层设计</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#934">9.3.4、</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#935">9.3.5、</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#936">9.3.6、</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#937">9.3.7、</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#94">9.4、自底向上的实现</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#941">9.4.1、单元测试</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#942">9.4.2、模拟结果</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#95">9.5、其他设计技术</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#951">9.5.1、原型与螺旋式开发</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#952">9.5.2、设计的艺术</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap10">chap10、定义类</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap11">chap11、数据集合</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap12">chap12、面向对象设计</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap13">chap13、算法设计与递归</a>
+    </li>
+    </ul>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">刷题</span></p>
@@ -147,7 +355,8 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-      <li>Python程序设计（3rd）</li>
+          <li>工具 &raquo;</li>
+      <li>《python程序设计（3rd）》</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -410,6 +619,10 @@ while i &lt;= 10:
               
             </div>
           </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../Linux%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8Eshell%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B%E5%A4%A7%E5%85%A8%283rd%29/" class="btn btn-neutral float-left" title="《Linux命令行与shell脚本编程大全(3rd)》"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../91leetcode/%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/" class="btn btn-neutral float-right" title="《剑指offer专项突破》">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
 
   <hr/>
 
@@ -431,6 +644,10 @@ while i &lt;= 10:
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
+      <span><a href="../Linux%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8Eshell%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B%E5%A4%A7%E5%85%A8%283rd%29/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../91leetcode/%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

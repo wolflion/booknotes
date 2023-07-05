@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>C++泛型STL原理和应用 - lionel的技术笔记</title>
+    <title>《C++泛型STL原理和应用》 - lionel的技术笔记</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "C++\u6cdb\u578bSTL\u539f\u7406\u548c\u5e94\u7528";
+        var mkdocs_page_name = "\u300aC++\u6cdb\u578bSTL\u539f\u7406\u548c\u5e94\u7528\u300b";
         var mkdocs_page_input_path = "21STL\\C++\u6cdb\u578bSTL\u539f\u7406\u548c\u5e94\u7528.md";
         var mkdocs_page_url = null;
       </script>
@@ -49,10 +49,254 @@
                 </li>
               </ul>
               <p class="caption"><span class="caption-text">C++</span></p>
-              <ul>
+              <ul class="current">
                   <li class="toctree-l1"><a class="reference internal" href="../../20C%2B%2B/effectiveC%2B%2B/">《Effective C++》</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../EffectiveSTL/">《Effective STL》</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">《C++泛型STL原理和应用》</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#chap1c-">chap1、C++泛型技术基础--模板</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#11">1.1 泛型和模板</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#111">1.1.1 泛型的概念</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#112-c">1.1.2 C++模板及其定义</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#113">1.1.3 几点说明和小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#12">1.2 关于模板参数</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#121">1.2.1 模板参数的种类</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#122">1.2.2 模板形参和实参的结合</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#13">1.3 特化模板和模板具现规则</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#131">1.3.1 特化(特列化)模板</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#132">1.3.2 模板的具现</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#14">1.4 右值引用和模板</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#141">1.4.1 右值引用</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#142-1-">1.4.2 右值引用的应用1--转移语义</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#143-2-move">1.4.3 右值引用的应用2--转移函数move()</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#144-3-">1.4.4 右值引用的应用3--参数完美转发模板()</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap2c-">chap2、C++泛型机制的基石--数据类型表</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#21">2.1 类模板的公有数据类型成员</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#211">2.1.1 类的数据类型成员</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#212-typedef">2.1.2 再谈typedef</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#22">2.2 内嵌式数据类型表及数据类型衍生</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#23">2.3 数据类型表</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#231">2.3.1 数据类型表的概念</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#232">2.3.2 数据类型表的应用</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#24">2.4 特化数据类型表</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_1"></a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#25-stltraits">2.5 STL中的Traits表</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap3stlc">chap3、STL及其使用的其他C++技术</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#31-stl">3.1 初识STL</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#32-stlc">3.2 STL常用的C++技术</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#321">3.2.1 运算符重载</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#322">3.2.2 函数对象（仿函数）</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#323-lambda">3.2.3 Lambda表达式</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#33">3.3 智能指针</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#331">3.3.1 智能指针的基本原理</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#332-c11">3.3.2 C++11支持的智能指针</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap4stl">chap4、模拟STL三大件</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#41">4.1、容器</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#411vectormyvector">4.1.1、向量vector的仿真MyVector</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#412listmylist">4.1.2、列表list的仿真MyList</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#42">4.2、迭代器</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#421">4.2.1、使用裸指针作为迭代器</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#422">4.2.2、迭代器是指针的类封装</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#423">4.2.3、迭代器的代码隔离作用</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#424stl">4.2.4、STL迭代器的种类</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#425">4.2.5、迭代器的种类标记</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#426stl">4.2.6、STL对迭代器的管理</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#43">4.3、通用算法</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap5">chap5、容器及其应用</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#51-vector">5.1 向量vector</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#52list">5.2、列表list</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#53deque">5.3、双向队列deque</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#54-stl">5.4 STL关联式容器</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#55map">5.5、map容器</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#56set">5.6、set容器</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#57hashhast">5.7、hash表基础及hast容器</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#571hash">5.7.1、hash表基础</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#572hash">5.7.2、hash容器</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap6">chap6、通用算法</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#61">6.1、通用算法的参数</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#611">6.1.1、算法的迭代器参数</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#612">6.1.2、辅助参数</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#613">6.1.3、谓词参数</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#62">6.2、算法时间复杂度</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#63">6.3、常用通用算法</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#631">6.3.1、查找和搜索算法</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#632">6.3.2、变异算法</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#633">6.3.3、排序算法</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#634">6.3.4、算术算法与关系算法</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#635">6.3.5、排列组合与集合算法</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap7stl">chap7、适配器模式在STL基础部件上的应用</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#71">7.1、适配器</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#72stl">7.2、STL容器适配器</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#721stack">7.2.1、stack适配器</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#722queue">7.2.2、queue适配器</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#723priority_queue">7.2.3、priority_queue适配器</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#73">7.3、迭代器适配器</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#731">7.3.1、插入迭代器</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#732">7.3.2、反向迭代器</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#733io">7.3.3、IO流迭代器</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#74">7.4、函数对象适配器</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#741">7.4.1、函数对象的适配</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#742">7.4.2、函数对象配接器</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap8stl">chap8、STL容器内存空间分配器</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#81">8.1、内存空间配置器及其设计基础</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#811">8.1.1、什么是内存空间配置器</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#812">8.1.2、内存空间配置器设计基础</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#82stl">8.2、STL空间配置器接口</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#821stl">8.2.1、STL空间配置器接口及最简单的空间配置器</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#822stl">8.2.2、典型STL容器空间的配置</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#83">8.3、内存池的概念及方法</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#831">8.3.1、内存池的规划</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#832">8.3.2、内存池的设计</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../22C%2B%2Bmodern/%E6%B7%B1%E5%85%A5%E5%BA%94%E7%94%A8C%2B%2B11/">《深入应用C++11》</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">基础知识</span></p>
@@ -69,6 +313,10 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../10network/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/">《Linux高性能服务器编程》</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../10network/TCPIP%E8%AF%A6%E8%A7%A3%E5%8D%B71/">《TCPIP详解卷1》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/Linux%E5%86%85%E6%A0%B8%E7%BD%91%E7%BB%9C%E6%A0%88%E6%BA%90%E4%BB%A3%E7%A0%81%E6%83%85%E6%99%AF%E5%88%86%E6%9E%90/">《Linux内核网络栈源代码情景分析》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C/">《深入理解Linux网络》</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">文件系统</span></p>
@@ -113,6 +361,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../15tool/Linux%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8Eshell%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B%E5%A4%A7%E5%85%A8%283rd%29/">《Linux命令行与shell脚本编程大全(3rd)》</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/python%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%883rd%EF%BC%89/">《python程序设计（3rd）》</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">刷题</span></p>
               <ul>
@@ -147,7 +397,8 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-      <li>C++泛型STL原理和应用</li>
+          <li>C++ &raquo;</li>
+      <li>《C++泛型STL原理和应用》</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -764,6 +1015,10 @@ class B {A *a; g() {a-&gt;f1();a-&gt;f2();}};//模块B借助模块A，叫做B适
               
             </div>
           </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../EffectiveSTL/" class="btn btn-neutral float-left" title="《Effective STL》"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../22C%2B%2Bmodern/%E6%B7%B1%E5%85%A5%E5%BA%94%E7%94%A8C%2B%2B11/" class="btn btn-neutral float-right" title="《深入应用C++11》">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
 
   <hr/>
 
@@ -785,6 +1040,10 @@ class B {A *a; g() {a-&gt;f1();a-&gt;f2();}};//模块B借助模块A，叫做B适
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
+      <span><a href="../EffectiveSTL/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../22C%2B%2Bmodern/%E6%B7%B1%E5%85%A5%E5%BA%94%E7%94%A8C%2B%2B11/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

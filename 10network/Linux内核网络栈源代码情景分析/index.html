@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>Linux内核网络栈源代码情景分析 - lionel的技术笔记</title>
+    <title>《Linux内核网络栈源代码情景分析》 - lionel的技术笔记</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Linux\u5185\u6838\u7f51\u7edc\u6808\u6e90\u4ee3\u7801\u60c5\u666f\u5206\u6790";
+        var mkdocs_page_name = "\u300aLinux\u5185\u6838\u7f51\u7edc\u6808\u6e90\u4ee3\u7801\u60c5\u666f\u5206\u6790\u300b";
         var mkdocs_page_input_path = "10network\\Linux\u5185\u6838\u7f51\u7edc\u6808\u6e90\u4ee3\u7801\u60c5\u666f\u5206\u6790.md";
         var mkdocs_page_url = null;
       </script>
@@ -54,6 +54,10 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../21STL/EffectiveSTL/">《Effective STL》</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/C%2B%2B%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/">《C++泛型STL原理和应用》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../22C%2B%2Bmodern/%E6%B7%B1%E5%85%A5%E5%BA%94%E7%94%A8C%2B%2B11/">《深入应用C++11》</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">基础知识</span></p>
               <ul>
@@ -63,12 +67,194 @@
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">网络编程</span></p>
-              <ul>
+              <ul class="current">
                   <li class="toctree-l1"><a class="reference internal" href="../TCPIP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">《TCP/IP网络编程》</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/">《Linux高性能服务器编程》</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../TCPIP%E8%AF%A6%E8%A7%A3%E5%8D%B71/">《TCPIP详解卷1》</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">《Linux内核网络栈源代码情景分析》</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#chap0">chap0、网络栈总体架构分析</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#01">0.1、网络栈本质及其分层架构</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#02">0.2、系统调用接口到内核的请求传递</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#021acceptsglibc-20111">0.2.1、第一层入口：accept.S（glibc-2.0.111）</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#022sockets">0.2.2、第二层入口：socket.S</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#023entrys">0.2.3、第三层入口：entry.S</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap1">chap1、网络协议头文件分析</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#11etherdeviceh">1.1、etherdevice.h</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#12icmph">1.2、icmp.h</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap2bsd-socket">chap2、BSD socket层实现分析</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#22socketc">2.2、socket.c文件</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#221">2.2.1、头文件声明、全局变量定义、相关函数声明</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#222move_addr_to_kernelmove_addr_to_user">2.2.2、move_addr_to_kernel和move_addr_to_user函数</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#224sockfd_lookup">2.2.4、sockfd_lookup</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#225sock_alloc">2.2.5、sock_alloc</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#226sock_releasesock_close">2.2.6、sock_release和sock_close</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#227">2.2.7、网络套接字普通文件接口函数</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#2215sock_getsockname">2.2.15、sock_getsockname</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#2221sys_socketcall">2.2.21、sys_socketcall</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#2222sock_registersock_unregister">2.2.22、sock_register和sock_unregister</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#2224sock_init">2.2.24、sock_init</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#2226socketc">2.2.26、socket.c文件小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#chap3inet-socket">chap3、INET socket层实现分析</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#31af_inetc">3.1、af_inet.c文件</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#311">3.1.1、头文件声明、相关宏及变量定义</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#318inet_autobind">3.1.8、inet_autobind</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#319inet_listen">3.1.9、inet_listen</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#3110inet_create">3.1.10、inet_create</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#3111inet_release">3.1.11、inet_release</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#3112inet_bind">3.1.12、inet_bind</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#3117inet_accept">3.1.17、inet_accept</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#3118inet_getname">3.1.18、inet_getname</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#3121inet_shutdown">3.1.21、inet_shutdown</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#3122inet_ioctl">3.1.22、inet_ioctl</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#3124inet">3.1.24、INET层操作函数集定义</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#3126af_inetc">3.1.26、af_inet.c文件小结</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap4">chap4、传输层实现分析</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#41tcpc">4.1、tcp.c</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#0">0、</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#411">4.1.1、头文件声明、相关变量及宏定义</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#412tcp_set_state">4.1.2、tcp_set_state</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#4112tcp_ioctl">4.1.12、tcp_ioctl</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#4121cleanup_rbuf">4.1.21、cleanup_rbuf</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#42tcph">4.2、tcp.h</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap5">chap5、网络层实现分析</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#51routeh">5.1、route.h</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#53iph">5.3、ip.h</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#54ipc">5.4、ip.c</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#541">5.4.1、头文件声明、变量定义</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#542ip_ioctl">5.4.2、ip_ioctl</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#56rawc">5.6、raw.c</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#561raw_err">5.6.1、raw_err</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#562raw_rcv">5.6.2、raw_rcv</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#57rawh">5.7、raw.h</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#58packetc">5.8、packet.c</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#581packet_recv">5.8.1、packet_recv</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap6">chap6、链路层实现分析</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#61dev_mcastc">6.1、dev_mcast.c</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#611dev_mc_add">6.1.1、dev_mc_add</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#615devc">6.15、dev.c</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#6151">6.15.1、头文件声明、系统变量定义</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#61515devc">6.15.15、dev.c文件小结</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#_1">网络栈实现小结</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap7">chap7、网络设备驱动程序分析</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#71">7.1、关键变量、函数定义及网络设备驱动初始化</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#72">7.2、网络设备驱动程序结构</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#73">7.3、本章小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap8">chap8、系统网络栈初始化</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#81">8.1、网络栈初始化流程</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#82">8.2、数据包传送通道解析</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#83">8.3、本章小结</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C/">《深入理解Linux网络》</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">文件系统</span></p>
@@ -113,6 +299,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../15tool/Linux%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8Eshell%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B%E5%A4%A7%E5%85%A8%283rd%29/">《Linux命令行与shell脚本编程大全(3rd)》</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/python%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%883rd%EF%BC%89/">《python程序设计（3rd）》</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">刷题</span></p>
               <ul>
@@ -147,7 +335,8 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-      <li>Linux内核网络栈源代码情景分析</li>
+          <li>网络编程 &raquo;</li>
+      <li>《Linux内核网络栈源代码情景分析》</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -469,6 +658,10 @@
               
             </div>
           </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../TCPIP%E8%AF%A6%E8%A7%A3%E5%8D%B71/" class="btn btn-neutral float-left" title="《TCPIP详解卷1》"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C/" class="btn btn-neutral float-right" title="《深入理解Linux网络》">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
 
   <hr/>
 
@@ -490,6 +683,10 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
+      <span><a href="../TCPIP%E8%AF%A6%E8%A7%A3%E5%8D%B71/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
