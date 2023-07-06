@@ -578,27 +578,75 @@ class B {A *a; g() {a->f1();a->f2();}};//模块B借助模块A，叫做B适配器
 
 + 使用默认deque
 + 使用vector或list
++ 7-1.cpp：使用STL提供的stack适配器并用默认的deque构成栈
+
+```cpp
+deque<int> mydeque(3, 100); //创建具有3个元素 初始值100的队列
+stack<int> Mystack2(mydeque); //创建一个栈用mydeque对其初始化   【这是适配器的精华？】lionel，核心是这个，那原因呢？
+```
+
+
+
++ 7-2.cpp：使用非默认的容器（list或vector）作为基础容器构造stack并测试它
+
+```cpp
+//使用list或vector作为栈的容器
+stack<int, list<int>>a;  //这个用法，不太会呢？lionel，一般只放一个int或啥的
+stack<int, vector<int>>b;
+```
+
+
 
 ##### 7.2.2、queue适配器
 
 + **双向**，使用**双端开口**的list或deque作为核心，默认deque
++ 7-3.cpp：对STL提供的queue适配器进行测试
+  + `queue<int> b;`**表示其使用的是默认的基本容器**
 
 ##### 7.2.3、priority_queue适配器
 
++ *本节，未读*
++ 7-4.cpp：编写一个堆排序程序
++ 7-5.cpp：测试priority_queue的构造函数
++ 7-6.cpp：调用了优先权队列其他成员方法的程序示例
+
 #### 7.3、迭代器适配器
 
-+ 适配的对象是**附属容器的迭代器**
++ 迭代器适配器，在**其类中封装了一个容器对象适配的对象**，但被适配的对象不是容器，而是**附属容器的那个迭代器**
 
 ##### 7.3.1、插入迭代器
 
 + 反向插入，back_insert
++ 1、insert_iterator
+  + 7-7.cpp：vector容器Vect，把3之后的数据插入到list容器Lst中的数据
+
+```cpp
+vector<int> Vect{ 1,2,3,4,5,6,7,8,9,10 };  //lionel,初始化的方式
+//定义插入迭代器insert_it并使其指向被插入容器的待插入位置
+insert_iterator<vector<int>>insert_it(Vect, Vect.begin() + 3);
+//将源数据对象中的数据插入迭代器指示的位置
+copy(Lst.begin(), Lst.end(), insert_it);
+```
+
+
+
++ 2、front_insert_iterator和back_insert_iterator
+  + 7-8.cpp：使用front_insert_iterator和back_insert_iterator迭代器实现数据的插入
 + 前向插入，front_insert
 
 ##### 7.3.2、反向迭代器
 
 + reverse_iterator
++ 7-9.cpp：观察正向和反向迭代器之间的关系
++ 7-10.cpp：使用了rbegin()和rend()操作的反向迭代器应用程序示例
 
 ##### 7.3.3、IO流迭代器
+
++ 1、
+  + 7-11.cpp
++ 2、
+  + 7-12.cpp
+  + 7-13.cpp
 
 + 输入流，instream
 + 输出流，ostream
@@ -608,6 +656,9 @@ class B {A *a; g() {a->f1();a->f2();}};//模块B借助模块A，叫做B适配器
 #### 7.4、函数对象适配器
 
 ##### 7.4.1、函数对象的适配
+
++ 7-14.cpp
++ 7-15.cpp
 
 ##### 7.4.2、函数对象配接器
 
@@ -638,3 +689,7 @@ class B {A *a; g() {a->f1();a->f2();}};//模块B借助模块A，叫做B适配器
 ##### 8.3.1、内存池的规划
 
 ##### 8.3.2、内存池的设计
+
+### 勘误
+
++ 264页，代码中有2处`cout << a.front() << " " << a.back() << endl;`，第2行的输出应该改成`cout << b.front() << " " << b.back() << endl;`
