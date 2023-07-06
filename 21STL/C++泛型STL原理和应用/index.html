@@ -57,42 +57,44 @@
                   <li class="toctree-l1 current"><a class="reference internal current" href="./">《C++泛型STL原理和应用》</a>
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#chap1c-">chap1、C++泛型技术基础--模板</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#11">1.1 泛型和模板</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#111">1.1.1 泛型的概念</a>
+    <li class="toctree-l3"><a class="reference internal" href="#11">1.1 泛型和模板</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#111">1.1.1 泛型的概念</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#112-c">1.1.2 C++模板及其定义</a>
+    <li class="toctree-l4"><a class="reference internal" href="#112-c">1.1.2 C++模板及其定义</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#113">1.1.3 几点说明和小结</a>
+    <li class="toctree-l4"><a class="reference internal" href="#113">1.1.3 几点说明和小结</a>
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#12">1.2 关于模板参数</a>
+    <li class="toctree-l3"><a class="reference internal" href="#12">1.2 关于模板参数</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#121">1.2.1 模板参数的种类</a>
+    <li class="toctree-l4"><a class="reference internal" href="#121">1.2.1 模板参数的种类</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#122">1.2.2 模板形参和实参的结合</a>
+    <li class="toctree-l4"><a class="reference internal" href="#122">1.2.2 模板形参和实参的结合</a>
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#13">1.3 特化模板和模板具现规则</a>
+    <li class="toctree-l3"><a class="reference internal" href="#13">1.3 特化模板和模板具现规则</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#131">1.3.1 特化(特列化)模板</a>
+    <li class="toctree-l4"><a class="reference internal" href="#131">1.3.1 特化(特列化)模板</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#132">1.3.2 模板的具现</a>
+    <li class="toctree-l4"><a class="reference internal" href="#132">1.3.2 模板的具现</a>
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#14">1.4 右值引用和模板</a>
+    <li class="toctree-l3"><a class="reference internal" href="#14">1.4 右值引用和模板</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#141">1.4.1 右值引用</a>
+    <li class="toctree-l4"><a class="reference internal" href="#141">1.4.1 右值引用</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#142-1-">1.4.2 右值引用的应用1--转移语义</a>
+    <li class="toctree-l4"><a class="reference internal" href="#142-1-">1.4.2 右值引用的应用1--转移语义</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#143-2-move">1.4.3 右值引用的应用2--转移函数move()</a>
+    <li class="toctree-l4"><a class="reference internal" href="#143-2-move">1.4.3 右值引用的应用2--转移函数move()</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#144-3-">1.4.4 右值引用的应用3--参数完美转发模板()</a>
+    <li class="toctree-l4"><a class="reference internal" href="#144-3-">1.4.4 右值引用的应用3--参数完美转发模板()</a>
+    </li>
+        </ul>
     </li>
         </ul>
     </li>
@@ -118,8 +120,6 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#24">2.4 特化数据类型表</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#_1"></a>
-    </li>
     <li class="toctree-l3"><a class="reference internal" href="#25-stltraits">2.5 STL中的Traits表</a>
     </li>
         </ul>
@@ -127,6 +127,12 @@
     <li class="toctree-l2"><a class="reference internal" href="#chap3stlc">chap3、STL及其使用的其他C++技术</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#31-stl">3.1 初识STL</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#311stlc">3.1.1、STL是C++标准库中的模板类库</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#312stl">3.1.2、STL应用程序示例</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#32-stlc">3.2 STL常用的C++技术</a>
         <ul>
@@ -337,6 +343,8 @@
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../14video/FFmpeg%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/">《FFmpeg入门到精通》</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/WebRTC%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/">《WebRTC权威指南》</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../14video/WebRTC%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AE%9E%E6%97%B6%E4%BA%92%E5%8A%A8%E6%8A%80%E6%9C%AF/">《WebRTC音视频实时互动技术》</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../14video/%E6%96%B0%E4%B8%80%E4%BB%A3%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9%E7%A0%81%E6%A0%87%E5%87%86-H.264_AVC/">《新一代视频压缩码标准-H.264_AVC》</a>
@@ -351,6 +359,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">《深入理解Linux虚拟内存管理》</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《深入理解Linux网络技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/Linux%E5%86%85%E6%A0%B8%E6%BA%90%E4%BB%A3%E7%A0%81%E5%89%96%E6%9E%90-tcpip%E5%AE%9E%E7%8E%B0/">《Linux内核源代码剖析-TCP/IP实现》</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E5%86%85%E6%A0%B8/">《深入理解Linux内核》</a>
                   </li>
@@ -410,29 +420,49 @@
                 <h2 id="cstl">《C++泛型STL原理和应用》<a class="headerlink" href="#cstl" title="Permanent link">&para;</a></h2>
 <ul>
 <li>书上<a href="https://gitee.com/fewolflion/BookNote/tree/master/01lioneloutput/60BookCode/C++%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8">代码</a></li>
-</ul>
-<h3 id="chap1c-">chap1、C++泛型技术基础--模板<a class="headerlink" href="#chap1c-" title="Permanent link">&para;</a></h3>
-<h3 id="11">1.1 泛型和模板<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
-<h4 id="111">1.1.1 泛型的概念<a class="headerlink" href="#111" title="Permanent link">&para;</a></h4>
-<ul>
-<li>泛型（generic type）：就是一种通用类型。</li>
-<li><code>T max( T x, T y) {}</code>  //这里T是类型<strong>占位符</strong>。</li>
-</ul>
-<h4 id="112-c">1.1.2 C++模板及其定义<a class="headerlink" href="#112-c" title="Permanent link">&para;</a></h4>
-<ul>
-<li><strong>模板</strong>：除了需要声明类型占位符之外，其它内容应与目标实体代码完全相同。 声明一个模板时，需在实体代码前面，加一条说明语句。<em>前面是template关键字。</em><ul>
-<li>函数模板<ul>
-<li><code>template&lt;typename T, typename R, typename S&gt;  T max(R x, S y){}</code></li>
+<li>chap1、模板<ul>
+<li>主要是概念类，自己搞清楚就行，理解一下<strong>特化</strong>，<em>auto与decltype，右值，转移语义，完美转发forward，要配合c++11再看下</em></li>
 </ul>
 </li>
-<li>类模板<ul>
+<li>chap2、<ul>
+<li>数据类型表、类型萃取机，不太熟悉，<em>简单的说，就是把所有类型都定义一遍，这样，类外就可以访问？lionel</em></li>
+</ul>
+</li>
+<li>chap3、<ul>
+<li><strong>运算符重载是基础</strong>，衍生了仿函数，lambda表达式，智能指针</li>
+</ul>
+</li>
+<li>chap4、模拟STL三大件<ul>
+<li>容器、迭代器、算法</li>
+</ul>
+</li>
+</ul>
+<h3 id="chap1c-">chap1、C++泛型技术基础--模板<a class="headerlink" href="#chap1c-" title="Permanent link">&para;</a></h3>
+<ul>
+<li>20201017</li>
+</ul>
+<h4 id="11">1.1 泛型和模板<a class="headerlink" href="#11" title="Permanent link">&para;</a></h4>
+<h5 id="111">1.1.1 泛型的概念<a class="headerlink" href="#111" title="Permanent link">&para;</a></h5>
+<ul>
+<li>泛型（generic type）：就是一种通用类型。</li>
+<li><code>template &lt;typenamet T&gt; T max( T x, T y) {}</code>  //这里T是类型<strong>占位符</strong>。</li>
+<li>使用了类型占位符的代码称为<strong>“模板“</strong>，根据模板和具体类型生成的代码叫<strong>程序实体</strong>，产生程序实体的过程叫<strong>模板的具现</strong>。</li>
+</ul>
+<h5 id="112-c">1.1.2 C++模板及其定义<a class="headerlink" href="#112-c" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>模板</strong>：除了需要声明类型占位符之外，其它内容应与目标实体代码完全相同。 声明一个模板时，需在实体代码前面，加一条说明语句。<em>前面是template关键字。</em><ul>
+<li>函数模板，1-1.cpp<ul>
+<li><code>template&lt;typename T, typename R, typename S&gt;  T max(R x, S y){}</code>，<strong>早期关键字用class，现在用typename</strong>，调用的话是 <code>long max&lt;int, double&gt;(x,y);</code>，<em>都不确定是不是这么写了</em></li>
+</ul>
+</li>
+<li>类模板，1-2.cpp<ul>
 <li>在声明语句前加 <code>template&lt;typename T&gt;</code>  </li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-<h4 id="113">1.1.3 几点说明和小结<a class="headerlink" href="#113" title="Permanent link">&para;</a></h4>
+<h5 id="113">1.1.3 几点说明和小结<a class="headerlink" href="#113" title="Permanent link">&para;</a></h5>
 <ul>
 <li><code>template&lt;typename T&gt;</code> 早期也写成 <code>template&lt;class T&gt;</code>，但不支持这么写</li>
 <li>C++11和14中，给关键字 <strong>auto</strong> 增加了新的语义，同时增加了 <strong>decltype表达式</strong> <ul>
@@ -443,20 +473,28 @@
 </ul>
 </li>
 <li>把auto看做数据类型的话，auto其实也可以算一种泛型，不过它无须关键字typename声明。</li>
+<li>decltype表达式（用在声明和实现时），实现函数返回值类型的自动推导，<code>auto Multiply(T t V v)-&gt;decltype(t*v) {return t*v;}</code></li>
 <li>C++新标准引入了<strong>变量模板</strong>的概念。<code>pi&lt;T&gt;</code> 【作者没有介绍更多，可以翻看C++11】</li>
 </ul>
-<h3 id="12">1.2 关于模板参数<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
-<h4 id="121">1.2.1 模板参数的种类<a class="headerlink" href="#121" title="Permanent link">&para;</a></h4>
+<h4 id="12">1.2 关于模板参数<a class="headerlink" href="#12" title="Permanent link">&para;</a></h4>
+<ul>
+<li>预编译期间进行传递并被编译的</li>
+</ul>
+<h5 id="121">1.2.1 模板参数的种类<a class="headerlink" href="#121" title="Permanent link">&para;</a></h5>
 <ul>
 <li>类型参数<ul>
-<li>以类模板作为函数实参的例子 <code>MyTest&lt;Test1&lt;int&gt;&gt;TT;</code></li>
+<li>以类模板作为函数实参的例子 <code>MyTest&lt;Test1&lt;int&gt;&gt;TT;</code>，<strong>用关键字typename声明的参数</strong></li>
 </ul>
 </li>
-<li>非类型参数<ul>
-<li><code>template &lt;typename T，/*类型参数*/ int b/*非类型参数*/&gt;</code></li>
+<li>非类型参数，1-3.cpp<ul>
+<li><code>template &lt;typename T，/*类型参数*/ int b/*非类型参数*/&gt;</code>，<strong>非类型参数可以定义时赋值，int b = 10</strong><ul>
+<li>是常量，不能被修改</li>
+<li>只能是int、枚举、指针、引用类型</li>
 </ul>
 </li>
-<li>模板定义型参数<ul>
+</ul>
+</li>
+<li>模板定义型参数，1-4.cpp<ul>
 <li>C++也允许以类模板的定义作为类模板参数<ul>
 <li><strong>需要的目的：</strong> 除了强调这个参数的实参必须为类模板之外，还强调这个类模板所具有的参数个数。</li>
 </ul>
@@ -464,10 +502,10 @@
 </ul>
 </li>
 </ul>
-<h4 id="122">1.2.2 模板形参和实参的结合<a class="headerlink" href="#122" title="Permanent link">&para;</a></h4>
+<h5 id="122">1.2.2 模板形参和实参的结合<a class="headerlink" href="#122" title="Permanent link">&para;</a></h5>
 <ul>
 <li>函数模板实参的隐式提供<ul>
-<li><code>add&lt;int&gt;(45,46);</code> 直接变成 <code>add(45,46);</code></li>
+<li><code>add&lt;int&gt;(45,46);</code> 直接变成 <code>add(45,46);</code>，<strong>隐式实例化</strong>，显式的话可以<code>add&lt;double&gt;(45,10.3);</code>返回double类型</li>
 </ul>
 </li>
 <li>指针实参<ul>
@@ -475,15 +513,16 @@
 <li>见具体的代码； 【<em>作者没有描述，我还没太懂这部分</em>】</li>
 </ul>
 </li>
+<li><em>函数模板实参的隐式提供</em></li>
 <li>修饰字const和&amp;的使用<ul>
 <li>见具体的代码示例； 【<em>没见过具体的应用场景</em>】</li>
 </ul>
 </li>
 </ul>
-<h3 id="13">1.3 特化模板和模板具现规则<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
-<h4 id="131">1.3.1 特化(特列化)模板<a class="headerlink" href="#131" title="Permanent link">&para;</a></h4>
+<h4 id="13">1.3 特化模板和模板具现规则<a class="headerlink" href="#13" title="Permanent link">&para;</a></h4>
+<h5 id="131">1.3.1 特化(特列化)模板<a class="headerlink" href="#131" title="Permanent link">&para;</a></h5>
 <ul>
-<li><strong>特化(特列化)模板</strong>：为有特殊算法要求的数据类型另行编写模板<ul>
+<li><strong>特化(特列化)模板</strong>：为有特殊算法要求的数据类型另行编写模板，<code>template&lt;&gt;</code>，1-5.cpp<ul>
 <li>通用模板：门票10块</li>
 <li>特化模板：学生和老人半价</li>
 </ul>
@@ -492,14 +531,14 @@
 <li>在实体代码前加以下声明 <code>tmplate&lt;&gt;</code></li>
 </ul>
 </li>
-<li>类模板的特化和偏特化<ul>
+<li>类模板的特化和偏特化，1-6.cpp<ul>
 <li><strong>偏特化：</strong>只特化参数中的某一个或某几个</li>
 <li>偏特化模板的写法 <code>template&lt;typename T2&gt; struct Test&lt;int,T2&gt;{}</code></li>
 <li>全特化模板的写法 <code>template&lt;&gt; struct Test&lt;int,float&gt;{}</code></li>
 </ul>
 </li>
 </ul>
-<h4 id="132">1.3.2 模板的具现<a class="headerlink" href="#132" title="Permanent link">&para;</a></h4>
+<h5 id="132">1.3.2 模板的具现<a class="headerlink" href="#132" title="Permanent link">&para;</a></h5>
 <ul>
 <li>因为有了以上泛型模块的共存，编译器就需要选择一个生成实体模块代码，就有了规则。</li>
 <li>具体的优先顺序<ul>
@@ -510,15 +549,18 @@
 </ul>
 </li>
 </ul>
-<h3 id="14">1.4 右值引用和模板<a class="headerlink" href="#14" title="Permanent link">&para;</a></h3>
+<h4 id="14">1.4 右值引用和模板<a class="headerlink" href="#14" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>转移语义</strong>是C11推出的新概念和新技术。</li>
 </ul>
-<h4 id="141">1.4.1 右值引用<a class="headerlink" href="#141" title="Permanent link">&para;</a></h4>
+<h5 id="141">1.4.1 右值引用<a class="headerlink" href="#141" title="Permanent link">&para;</a></h5>
+<ul>
+<li>临时对象具有了将资源转移到另一个对象，免去深拷贝的麻烦</li>
+</ul>
 <ul>
 <li><strong>右值：</strong> 只能出现在赋值运算符右边。<em>仅能代表数据；匿名，无固定地址的对象。</em></li>
-<li><strong>左值：</strong> 既可以出现在赋值运算符左边，又可以出现在赋值运算符右边。<em>有名字，有固定地址的表达式</em></li>
-<li>右值引用<ul>
+<li><strong>左值：</strong> 既可以出现在赋值运算符左边，又可以出现在赋值运算符右边。<em>有名字，有固定地址的表达式</em>，<strong>代表一块存储空间</strong></li>
+<li>右值引用，1-8.cpp<ul>
 <li>C11之前有两种表示方式 <code>T&amp; 别名 = lvalue;//引用</code> 和 <code>const T&amp; 别名 = lvalue;//常引用</code></li>
 <li>C11之后仅定义一种：<code>const T&amp; 别名 = rvalue;</code><ul>
 <li><em>强行为右值命名一个变量名，目的就是为延长右值生命期。</em> </li>
@@ -528,16 +570,16 @@
 </ul>
 </li>
 </ul>
-<h4 id="142-1-">1.4.2 右值引用的应用1--转移语义<a class="headerlink" href="#142-1-" title="Permanent link">&para;</a></h4>
+<h5 id="142-1-">1.4.2 右值引用的应用1--转移语义<a class="headerlink" href="#142-1-" title="Permanent link">&para;</a></h5>
 <ul>
 <li><strong>深拷贝</strong></li>
 <li><strong>浅拷贝</strong></li>
 </ul>
-<h4 id="143-2-move">1.4.3 右值引用的应用2--转移函数move()<a class="headerlink" href="#143-2-move" title="Permanent link">&para;</a></h4>
+<h5 id="143-2-move">1.4.3 右值引用的应用2--转移函数move()<a class="headerlink" href="#143-2-move" title="Permanent link">&para;</a></h5>
 <ul>
 <li>右值引用有好处后，左值也想利用，move的原型 <code>T&amp;&amp; move(T&amp; val);</code></li>
 </ul>
-<h4 id="144-3-">1.4.4 右值引用的应用3--参数完美转发模板()<a class="headerlink" href="#144-3-" title="Permanent link">&para;</a></h4>
+<h5 id="144-3-">1.4.4 右值引用的应用3--参数完美转发模板()<a class="headerlink" href="#144-3-" title="Permanent link">&para;</a></h5>
 <ul>
 <li><strong>参数转发</strong></li>
 <li>1 完美转发问题的提出及解决思路</li>
@@ -549,6 +591,9 @@
 </li>
 </ul>
 <h3 id="chap2c-">chap2、C++泛型机制的基石--数据类型表<a class="headerlink" href="#chap2c-" title="Permanent link">&para;</a></h3>
+<ul>
+<li>20201017</li>
+</ul>
 <h4 id="21">2.1 类模板的公有数据类型成员<a class="headerlink" href="#21" title="Permanent link">&para;</a></h4>
 <ul>
 <li>原属模板私有的数据类型向外公开，使其成为一种“全局”类型。</li>
@@ -556,6 +601,9 @@
 <h5 id="211">2.1.1 类的数据类型成员<a class="headerlink" href="#211" title="Permanent link">&para;</a></h5>
 <ul>
 <li><strong>类的数据类型成员</strong> ：在一个类中使用<code>typedef</code>定义一个已知数据类型的别名。 同时也称为 嵌入式类型(nested type)。</li>
+</ul>
+<ul>
+<li>在C++中，这种在类模板中定义的数据类型也称为nested type，嵌入式，可以给相应访问属性</li>
 </ul>
 <ul>
 <li>例2-1 定义了数据类型成员的类模板示例代码</li>
@@ -570,8 +618,11 @@
 <li>类模板中定义的数据类型，也称为<strong>nested type（嵌入式类型）</strong>，既然是类中定义的，就有<code>public</code>这样的属性。</li>
 </ul>
 <ul>
+<li>加一个<code>typename</code>以示，与<strong>引用类静态成员区别</strong></li>
+</ul>
+<ul>
 <li>
-<p>加一个<code>typename</code>以示，与<strong>引用类静态成员区别</strong></p>
+<p><strong>C++规定，凡属于类型的名称前面还必须在类型名前面冠以关键字typename</strong></p>
 <pre class="highlight"><code class="language-cpp">template &lt;typename T1, typename T2&gt;
 class MyTraits{
 public:
@@ -588,11 +639,16 @@ int main(){
 <ul>
 <li>别名的好处<ul>
 <li>增加可读性；</li>
+<li>复杂名称起一个简单别名</li>
 <li>编写平台无关的代码；   </li>
 </ul>
 </li>
 </ul>
 <h4 id="22">2.2 内嵌式数据类型表及数据类型衍生<a class="headerlink" href="#22" title="Permanent link">&para;</a></h4>
+<ul>
+<li>数据类型衍生：就是<code>T &amp;</code>和<code>T *</code></li>
+<li>内嵌式数据类型：<strong>放在类前面</strong></li>
+</ul>
 <ul>
 <li><strong>内嵌式数据类型表</strong>：一个类模板会把typedef定义的所有公有数据类型集中形成一个数据类型表，并放在类模板中靠前的位置。这个数据类型表存在于类模板内部。</li>
 </ul>
@@ -630,14 +686,19 @@ int main(){
 <li>例2-4</li>
 </ul>
 <h5 id="232">2.3.2 数据类型表的应用<a class="headerlink" href="#232" title="Permanent link">&para;</a></h5>
+<ul>
+<li><em>要理解代码才行</em></li>
+<li>2-5.cpp</li>
+</ul>
+<pre class="highlight"><code class="language-cpp">void T function(typename T::value_type x, typename T::reference y, typename T::pointer z) {}</code></pre>
 <h4 id="24">2.4 特化数据类型表<a class="headerlink" href="#24" title="Permanent link">&para;</a></h4>
 <ul>
 <li>特化数据类型表作用<ul>
 <li>实现同一业务逻辑不同接口的统一。 </li>
 </ul>
 </li>
+<li>2-6.cpp，<em>没懂</em></li>
 </ul>
-<h4 id="_1"><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h4>
 <pre class="highlight"><code class="language-cpp">class Test1{
 public:
     char Compute(int x, int y{
@@ -701,6 +762,9 @@ int main(){
 }</code></pre>
 <h4 id="25-stltraits">2.5 STL中的Traits表<a class="headerlink" href="#25-stltraits" title="Permanent link">&para;</a></h4>
 <ul>
+<li><strong>迭代器是类模板，并在模板中包含内嵌数据类型表</strong></li>
+</ul>
+<ul>
 <li><strong>Traits</strong>实质上是特化数据类型表在STL中的一个具体应用，也是数据类型表，但因为它构思巧妙，称Traits技巧。<ul>
 <li>应用背景</li>
 <li>使用特化模板实现指针的数据类型表</li>
@@ -711,11 +775,22 @@ int main(){
 <li>迭代器</li>
 </ul>
 </li>
-<li>2、使用特化模板实现指针的数据类型表</li>
-<li>3、汇总同类类模板的内嵌数据类型表形成统一接口</li>
+<li>2、使用特化模板实现指针的数据类型表<ul>
+<li>2-7.cpp</li>
+</ul>
+</li>
+<li>3、汇总同类类模板的内嵌数据类型表形成统一接口<ul>
+<li>2-8.cpp</li>
+</ul>
+</li>
 </ul>
 <h3 id="chap3stlc">chap3、STL及其使用的其他C++技术<a class="headerlink" href="#chap3stlc" title="Permanent link">&para;</a></h3>
+<ul>
+<li>20201017-20201018</li>
+</ul>
 <h4 id="31-stl">3.1 初识STL<a class="headerlink" href="#31-stl" title="Permanent link">&para;</a></h4>
+<h5 id="311stlc">3.1.1、STL是C++标准库中的模板类库<a class="headerlink" href="#311stlc" title="Permanent link">&para;</a></h5>
+<h5 id="312stl">3.1.2、STL应用程序示例<a class="headerlink" href="#312stl" title="Permanent link">&para;</a></h5>
 <ul>
 <li>例3-1：编写一个数组，里面存放10个随机产生的整型数，把其中的数据从大到小和从小到大排序，最后输出它们。<ul>
 <li>对于这个例子，用到了STL的三大组件：<em>容器、迭代器、通用算法</em>。</li>
@@ -732,12 +807,26 @@ int main(){
 </ul>
 <h5 id="322">3.2.2 函数对象（仿函数）<a class="headerlink" href="#322" title="Permanent link">&para;</a></h5>
 <ul>
+<li><code>sort(intVector.begin(), intVector.end(),greater&lt;int&gt;());</code></li>
+<li>函数指针只代表1个函数，函数对象可以携带其它数据成员以及函数成员</li>
+</ul>
+<ul>
 <li><a href="https://gitee.com/fewolflion/BookNote/blob/master/01lioneloutput/60BookCode/C++%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/chap3STL%E5%8F%8A%E5%85%B6%E4%BD%BF%E7%94%A8%E7%9A%84%E5%85%B6%E4%BB%96C++%E6%8A%80%E6%9C%AF/E3-06.cpp">例3-6 函数对象作为函数参数的示例程序</a></li>
 </ul>
 <h5 id="323-lambda">3.2.3 Lambda表达式<a class="headerlink" href="#323-lambda" title="Permanent link">&para;</a></h5>
 <ul>
+<li>无名/匿名仿函数</li>
+</ul>
+<ul>
 <li><a href="https://gitee.com/fewolflion/BookNote/blob/master/01lioneloutput/60BookCode/C++%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/chap3STL%E5%8F%8A%E5%85%B6%E4%BD%BF%E7%94%A8%E7%9A%84%E5%85%B6%E4%BB%96C++%E6%8A%80%E6%9C%AF/E3-07.cpp">例3-7 lambda表达式与具有相同功能的仿函数的比较</a>。<strong>Lambda表达式</strong>又叫 <em>无名仿函数（或匿名仿函数）</em><ul>
-<li><code>[](int x){cout &lt;&lt; 2*x &lt;&lt; endl;} // 相当于在声明function类的同时，又定义了定义该对象</code></li>
+<li><code>[](int x){cout &lt;&lt; 2*x &lt;&lt; endl;} // 相当于在声明function类的同时，又定义了定义该对象</code><ul>
+<li><code>[]</code>，仿函数中运算符<code>()</code>的重载函数名，也叫<strong>lambda表达式前导符</strong></li>
+<li><code>[]</code>里面“捕获列表”，<code>[]</code>，不捕获，<code>[=]</code>，值传递捕获，<code>[&amp;]</code>，引用捕获</li>
+<li><code>int x</code>中的int，是个<strong>返回值类型</strong></li>
+<li>void和auto关键字可以省略</li>
+<li><strong>mutable关键字</strong></li>
+</ul>
+</li>
 <li><code>[](int x){cout &lt;&lt; 2*x &lt;&lt; endl;}(10) //则是对象调用。</code></li>
 </ul>
 </li>
@@ -751,14 +840,20 @@ int main(){
 <li>例3-11 把lambda表达式应用于STL通用算法的一个程序示例</li>
 </ul>
 <h4 id="33">3.3 智能指针<a class="headerlink" href="#33" title="Permanent link">&para;</a></h4>
+<ul>
+<li>把资源（内存）与指针对象的生命周期绑定起来，创建对象时立即为其分配资源，对象销毁时则立即释放资源</li>
+</ul>
 <h5 id="331">3.3.1 智能指针的基本原理<a class="headerlink" href="#331" title="Permanent link">&para;</a></h5>
 <ul>
 <li>1、指针对象与资源的绑定<ul>
-<li><strong>RAII（Resource Acquisition is Initialization）</strong>，是把裸指针（原始指针）和与它相关的操作封装成一个类，创建时调用构造函数，销毁时调用析构函数。重载了<code>opertaor-&gt;</code>和<code>operator *</code></li>
+<li><strong>RAII（Resource Acquisition is Initialization）</strong>，是把裸指针（原始指针）和与它相关的操作封装成一个类，在创建对象时调用构造函数，对象销毁时调用析构函数。重载了<code>opertaor-&gt;</code>和<code>operator *</code></li>
 <li><a href="https://gitee.com/fewolflion/BookNote/blob/master/01lioneloutput/60BookCode/C++%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/chap3STL%E5%8F%8A%E5%85%B6%E4%BD%BF%E7%94%A8%E7%9A%84%E5%85%B6%E4%BB%96C++%E6%8A%80%E6%9C%AF/E3-12.cpp">例3-12 编写一年智能指针示例程序</a></li>
 </ul>
 </li>
 <li>2、可共享资源的智能指针<ul>
+<li>多个指针指向同一个资源（计数器）</li>
+<li>类中以友元类的方式指定了资源使用者的所属类SharePtr</li>
+<li>第一次创建时，用裸指针进行初始化，计数器置1，以后每创建一个副本，再加1</li>
 <li>创建时加1，销毁时减1，直到0为止。</li>
 <li><a href="https://gitee.com/fewolflion/BookNote/blob/master/01lioneloutput/60BookCode/C++%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/chap3STL%E5%8F%8A%E5%85%B6%E4%BD%BF%E7%94%A8%E7%9A%84%E5%85%B6%E4%BB%96C++%E6%8A%80%E6%9C%AF/E3-13.cpp">例3-13 编写一个演示程序</a></li>
 </ul>
@@ -766,7 +861,11 @@ int main(){
 </ul>
 <h5 id="332-c11">3.3.2 C++11支持的智能指针<a class="headerlink" href="#332-c11" title="Permanent link">&para;</a></h5>
 <ul>
+<li><strong>C++98里的<code>auto_ptr</code>废弃了</strong>，不能放在容器中</li>
+</ul>
+<ul>
 <li>1、unique_ptr<ul>
+<li><strong>无法复制构造/复制赋值，可以移动构造/移动赋值</strong></li>
 <li>0</li>
 <li>unique_ptr用在如下场合<ul>
 <li>利用动态指针的RAII特性，保证程序出现异常时能确保动态资源的释放</li>
@@ -792,6 +891,7 @@ int main(){
 </ul>
 </li>
 <li>3、weak_ptr<ul>
+<li>weak_ptr配合shared_ptr工作</li>
 <li>没有重载operator-&gt;和operator<em>操作符，</em><em>不能直接通过weak_ptr使用对象</em>*</li>
 <li><strong>两个类互为对方指针的资源类型，出现了所谓的“循环”引用</strong>，会造成计数器的计数失控，于是产生了<strong>可以共享资源，但不参与计数的weak_ptr来解决这种循环引用</strong></li>
 </ul>

@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>WebRTC权威指南 - lionel的技术笔记</title>
+    <title>《WebRTC权威指南》 - lionel的技术笔记</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "WebRTC\u6743\u5a01\u6307\u5357";
+        var mkdocs_page_name = "\u300aWebRTC\u6743\u5a01\u6307\u5357\u300b";
         var mkdocs_page_input_path = "14video\\WebRTC\u6743\u5a01\u6307\u5357.md";
         var mkdocs_page_url = null;
       </script>
@@ -94,8 +94,200 @@
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">视频</span></p>
-              <ul>
+              <ul class="current">
                   <li class="toctree-l1"><a class="reference internal" href="../FFmpeg%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/">《FFmpeg入门到精通》</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">《WebRTC权威指南》</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#chap3">chap3、本地媒体</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#31webrtc">3.1、WebRTC中的媒体</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#311">3.1.1、轨道</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#312">3.1.2、流</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#32">3.2、捕获本地媒体</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#33">3.3、媒体选择和控制</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#34">3.4、媒体流示例</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#35">3.5、可运行的本地媒体代码示例</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#351web">3.5.1、Web服务器</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#352webrtc">3.5.2、客户端WebRTC应用程序</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap4">chap4、信令</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#41">4.1、信令的作用</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#411">4.1.1、为何没有建立信令标准</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#412">4.1.2、媒体协商</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#413">4.1.3、标识和身份验证</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#414">4.1.4、控制媒体会话</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#415">4.1.5、双占用分解</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#42">4.2、信令传输</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#421http">4.2.1、HTTP传输</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#422websocket">4.2.2、WebSocket传输</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#423">4.2.3、数据通道传输</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#43">4.3、信令协议</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#431">4.3.1、信令状态机</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#432">4.3.2、信令标识</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#433http">4.3.3、HTTP轮询</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#434websocket">4.3.4、WebSocket代理</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#435googleapi">4.3.5、Google应用程序引擎通道API</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#436websocket-sip">4.3.6、WebSocket SIP</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#437websocket-jingle">4.3.7、WebSocket Jingle</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#438">4.3.8、数据通道专有信令</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#439">4.3.9、使用叠加网络的数据通道</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#44">4.4、信令选项总结</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#45">4.5、可运行的信令通道代码示例</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#451web">4.5.1、Web服务器</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#452">4.5.2、信令通道</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#453webrtc">4.5.3、客户端WebRTC应用程序</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#46">4.6、参考资料</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap5">chap5、对等媒体</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#51webrtc">5.1、WebRTC媒体流</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#511webrtc">5.1.1、不采用WebRTC的媒体流</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#512">5.1.2、采用</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#52webrtc">5.2、WebRTC和网络地址转换</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#521nat">5.2.1、通过多个NAT的对等媒体流</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#522nat">5.2.2、通过通用NAT的对等媒体流</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#523">5.2.3、私有地址和公共地址</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#53stun">5.3、STUN服务器</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#54trun">5.4、TRUN服务器</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#55">5.5、候选项</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap6">chap6、对等连接和提议/应答协商</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#61">6.1、对等连接</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#62">6.2、提议/应答协商</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#63javascript">6.3、JavaScript提议/应答控制</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#64">6.4、可运行的代码示例：对等连接和提议/应答协商</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap7">chap7、数据通道</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#71">7.1、数据通道简介</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#72">7.2、使用数据通道</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#73">7.3、可运行的数据通道代码示例</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap8w3c">chap8、W3C文档</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#81webrtc-api">8.1、WebRTC API参考</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#82webrtc">8.2、WebRTC 建议</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#83webrtc">8.3、WebRTC 草案</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#84">8.4、相关工作</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#841mediastreamapi">8.4.1、MediaStream录制API规范</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#842api">8.4.2、图像捕获API</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#843future">8.4.3、future</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#844">8.4.4、媒体隐私</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#845mediastream">8.4.5、MediaStream的非活动状态</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#85">8.5、参考资料</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap9nat">chap9、NAT和防火墙穿透</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap10">chap10、协议</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap11ietf">chap11、IETF文档</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap12ietfrfc">chap12、与IETF相关的RFC文档</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap13">chap13、安全与隐私</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap14">chap14、实现和应用</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#141">14.1、浏览器</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#142">14.2、其他浏览器</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#143stunturn">14.3、STUN和TURN服务器实现</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#144">14.4、参考资料</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../WebRTC%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AE%9E%E6%97%B6%E4%BA%92%E5%8A%A8%E6%8A%80%E6%9C%AF/">《WebRTC音视频实时互动技术》</a>
                   </li>
@@ -111,6 +303,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">《深入理解Linux虚拟内存管理》</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《深入理解Linux网络技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/Linux%E5%86%85%E6%A0%B8%E6%BA%90%E4%BB%A3%E7%A0%81%E5%89%96%E6%9E%90-tcpip%E5%AE%9E%E7%8E%B0/">《Linux内核源代码剖析-TCP/IP实现》</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E5%86%85%E6%A0%B8/">《深入理解Linux内核》</a>
                   </li>
@@ -157,7 +351,8 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-      <li>WebRTC权威指南</li>
+          <li>视频 &raquo;</li>
+      <li>《WebRTC权威指南》</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -372,6 +567,10 @@
               
             </div>
           </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../FFmpeg%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/" class="btn btn-neutral float-left" title="《FFmpeg入门到精通》"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../WebRTC%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AE%9E%E6%97%B6%E4%BA%92%E5%8A%A8%E6%8A%80%E6%9C%AF/" class="btn btn-neutral float-right" title="《WebRTC音视频实时互动技术》">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
 
   <hr/>
 
@@ -393,6 +592,10 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
+      <span><a href="../FFmpeg%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../WebRTC%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AE%9E%E6%97%B6%E4%BA%92%E5%8A%A8%E6%8A%80%E6%9C%AF/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
