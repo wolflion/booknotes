@@ -113,29 +113,30 @@ string().swap(s1);//清除s并把它的容量变为最小
 ### Part3、关联容器（19-25）
 
 + 有哪些特性：（自动排序，不允许有重复数据）
++ *有序列容器比，关联容器，一般是key,value关联起来组成的，个人看的一些理解，用来记忆一下，lionel，没找到官方的*
 
-#### 19、
+#### 19、理解相等（equality）和等价（equivalence）的区别
 
 + find的相等是`operator==`，std::insert是**等价**，以`operator<`为基础
 
 + **等价关系是以“在已排序的区间中对象值的相对顺序”为基础的**。*不区分大小写？*
 
 + *没有完全看懂啊，lionel*
-#### 20、
+#### 20、为包含指针的关联容器指定比较类型
 
 + `set<string *> ssp;`是`set<string *, less<string*>> ssp;`，最精确的说，是`set<string *, less<string*>, allocator<string*>> ssp;`的缩写。
 	+ **自己编写比较函数子类**
-#### 21、
-#### 22、
-	
+#### 21、总是让比较函数在等值情况下返回false
+#### 22、切勿直接修改set或multiset中的键
+
 + set和multiset时，Key的值是`const`的
-#### 23、
+#### 23、考虑用排序的vector替代关联容器
 
 + 如果只是单纯想查找用**hash**，**关联容器是平衡二叉树**
-#### 24、
+#### 24、当效率至关重要时，请在map::operator[]与map::insert之间谨慎做出选择
 
 + map中的`operator[]`有问题啊
-#### 25、
+#### 25、熟悉非标准的散列容器
 
 + hash_set（标准库，没有啊）
 
@@ -144,15 +145,15 @@ string().swap(s1);//清除s并把它的容量变为最小
 0、
 + 为啥需要4种迭代器？iterator、const_iterator、reverse_iterator、const_reverse_iterator，*是不是废弃掉啦？*
 
-#### 26、
+#### 26、iterator优先于const_iterator、reverse_iterator及const_reverse_iterator
 + iterator优先使用
-#### 27、
+#### 27、使用distance和advance将容器的const_iterator转换成iterator
 + 把const_iterator转换成iterator，*为啥不要用const呢？*
-#### 28、
-#### 29、
+#### 28、正确理解由reverse_iterator的base()成员函数所产生的iterator的用法
+#### 29、对于逐个字符的输入请考虑使用istreambuf_iterator
 + `istream_iterator`使用`operator>>`函数来完成实际的读操作，而默认情况下`operator>>`函数会跳过空白字符。
 
-### Part5、算法
+### Part5、算法（30-37）
 
 #### 30、确保目标区间足够大
 
@@ -170,6 +171,62 @@ string().swap(s1);//清除s并把它的容量变为最小
 + *各种不同排序有其适合的场合，要注意，lionel*
 
 #### 32、如果确实需要删除元素，则需要在remove这一类算法之后调用erase
+
+#### 33、对包含指针的容器使用remove这一类算法时要特别小心
+
+#### 34、了解哪些算法要求使用排序的区间作为参数
+
+#### 35、通过mismatch或lexicographical_compare实现简单的忽略大小写的字符串比较
+
+#### 36、理解copy_if算法的正确实现
+
+#### 37、使用accumulate或者for_each进行区间统计
+
+### Part6、函数子、函数子类、函数及其他（38-42）
+
+#### 38、遵循按值传递的原则来设计函数子类
+
+#### 39、确保判别式是“纯函数”
+
+#### 40、若一个类是函数子，则应使它可配接
+
+#### 41、理解ptr_fun、mem_fun和mem_fun_ref的来由
+
++ *不太会啊*，43用到了mem_fun_ref
+
+#### 42、确保`less<T>`与operator<具有相同的语义
+
+### Part7、在程序中使用STL（43-50）
+
+#### 43、算法调用优先于手写的循环
+
++ 自己手写for循环，与调用`for_each()`算法
+
++ 调用算法通常是更好的选择，它往往优先于任何一个手写循环，理由有3个：
+  + 效率
+  + 正确性
+  + 可维护性
++ STL有70个算法名称，**知道（或查找到）每个算法的所做的事情**，*现在是不是更多啦，在哪找？cppreference，lionel*
+
+#### 44、容器的成员函数优先于同名的算法
+
++ 原因有2个：【算法和成员函数虽然有同样的名称，但它们所做的事情往往不完全相同】
+  + 一，成员函数往往速度更快
+  + 二，成员函数通常与容器（特别是关联容器）结合得更加紧密
+
+#### 45、正确区分count、find、binary_search、lower_bound、upper_bound和equal_range
+
+#### 46、考虑使用函数对象而不是函数作为STL算法的参数
+
+#### 47、避免产生“直写型”（write-only）的代码
+
+#### 48、总是包含（#include）正确的头文件
+
+#### 49、学会分析与STL相关的编译器诊断信息
+
+#### 50、熟悉与STL相关的Web站点
+
+### 参考书目
 
 ### 备注
 
