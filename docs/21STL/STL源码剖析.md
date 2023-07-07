@@ -18,11 +18,22 @@
 
 ### chap2、空间配置器（allocator）
 
++ 隐藏在容器背后，*这个可以听一下，侯捷在b站的视频（关于内存的使用）*
+
 #### 2.1、容器配置器的标准接口
 
-2.2、具备次配能力（sub-allocation）的SGI空间配置器
++ allactor的各种使用
 
-2.2.9、重新充填free lists
+##### 2.1.1、设计一个简单的空间配置器，JJ::allocator
+
++ P44，2jjalloc.h
++ P46，2jjalloc.cpp
+
+#### 2.2、具备次配能力（sub-allocation）的SGI空间配置器
+
+##### 2.2.1、SGI标准的空间配置器，std::allocator
+
+##### 2.2.9、重新充填free lists
 
 ##### 2.2.10、内存池（memory pool）
 
@@ -70,32 +81,99 @@
 
 #### 7.1、仿函数（functor）概观
 
++ 开始叫仿函数，后来规范叫**函数对象**（一种具有函数特质的对象）
++ 函数指针不能满足STL对抽象性的要求，无法和STL其它组件搭配，产生更灵活的变化
+
+```cpp
+//lionel，这两个场景的差异性，第1种，我确实还有点懵的
+greater<int> ig;
+cout<<boolalpha<<ig(4,6);//false  【ig调用其operator()，并赋予两个参数4，6】
+cout<<greater<int>()(6,4);//true  【greater<int>()产生了一个无名（临时）对象，(6,4)是指定两个参数】
+```
+
++ 以操作数分
+  + 一元仿函数
+  + 二元仿函数
++ 以功能分
+  + 算术运算（Arithmetic）
+  + 关系运算（Rational）
+  + 逻辑运算（Logical）
+
 #### 7.2、可配接（adaptable）的关键
 
 ##### 7.2.1、unary_function
 
++ 一元必须继承它
+
 ##### 7.2.2、binary_function
 
-#### 7.3、算术类（）仿函数
++ 二元必须继承它
 
-#### 7.4、关系运算类（）仿函数
+#### 7.3、算术类（Arithmetic）仿函数
 
-#### 7.5、逻辑运算类（）仿函数
++ 内建的“算术类仿函数”
++ P419，7functor-arithmetic.cpp
++ 证同元素（identity element）
+
+#### 7.4、关系运算类（Rational）仿函数
+
++ 内建的“关系运算类仿函数”
++ P421，7functor-rational.cpp
+
+#### 7.5、逻辑运算类（Logical）仿函数
+
++ 内建的“逻辑运算类仿函数”
++ P421，7functor-logical.cpp
 
 #### 7.6、证同（identity）、选择（select）、投射（project）
 
++ *这一节没太懂啥意思，lionel*
+
 ### chap8、配接器（adapters）
+
++ Adapter定义：**将一个class的接口转换为另一个class的接口，使原本因接口不兼容而不能合作的classes，可以一起运作**。
 
 #### 8.1、配接器之概观与分类 
 
-8.1.1、应用于容器，container adapters
+##### 8.1.1、应用于容器，container adapters
 
-8.1.2、应用于迭代器，iterator adapters
++ queue和stack，是配接器，修饰deque
 
-8.1.3、应用于仿函数，functor adapters
+##### 8.1.2、应用于迭代器，iterator adapters
+
++ *没怎么看会，lionel，*
+
+##### 8.1.3、应用于仿函数，functor adapters
+
++ *稍微看了一下，没有贯穿会*
++ P431，8functor-adapter.cpp
 
 #### 8.2、container adapters
 
+##### 8.2.1、stack
+
++ `class Sequence = deque<T>`
+
+##### 8.2.2、queue
+
++ `class Sequence = deque<T>`
+
 #### 8.3、iterator adapters
 
+##### 8.3.1、insert iterators
+
+##### 8.3.2、reverse iterators
+
+##### 8.3.3、stream iterators
+
 #### 8.4、functor adapters
+
+##### 8.4.1、对返回值进行逻辑否定：not1，not2
+
+##### 8.4.2、对参数进行绑定：bind1st，bind2nd
+
+##### 8.4.3、用于函数合成：compose1，compose2
+
+##### 8.4.4、用于函数指针：ptr_fun
+
+##### 8.4.5、用于成员函数指针：mem_fun，mem_fun_ref
