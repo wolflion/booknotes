@@ -488,6 +488,10 @@ int main(){
 
 ####  5.1 向量vector
 
++ 占用连续内存，随机访问，下标和`at()`操作，**尾部开口的设计**，`push_back()`和`pop_back()`，重载了`operator=`
+
+##### 1、vector对象的定义及初始化
+
 + vector常用构造函数
   + `vector();`
   + `vector(vector&& _Right);`
@@ -511,19 +515,114 @@ int main(){
   + `bool empty() const;`
   + `size_type max_size() const;`
 + 例5-3 编程程序，测试“表5-4：计算向量容器大小的操作”的成员函数，了解其功能
++ 新特性
+  + 初始化`vector<int> v1{1,2,3};`，支持这种写法
+  + for遍历，引用传递`for(auto &i :v1) i*=i;` ，平方操作后再返回
 + 例5-4 编写一个在vector上使用C++11新规则的程序。
 + [cplusplus-vector](http://www.cplusplus.com/reference/vector/)
 + [C++ vector用法](http://www.cnblogs.com/wang7/archive/2012/04/27/2474138.html)  *不过，这个开始看还行，现在来看，差不多都会了，算法部分接触得少。*
 
 ####  5.2、列表list
 
++ 核心是**双向链表**，**头和尾插入和删除**，`push_back()`还有`push_front()`，当然对有应的`pop_()`，**不支持随机操作和`at()`操作，只能从到尾或从尾到头顺序地操作**
++ 表5-5：使用list构造函数
++ 表5-6：数据元素插入和删除
+  + `assign()`
++ 例5-5.cpp，在程序中观察push_front()、push_back()以及assign()函数的功能
++ 表5-7，可以返回list关键迭代器的函数
++ 表5-8，可以提供list状态的函数
+
 #### 5.3、双向队列deque
 
-#### 5.4 STL关联式容器
++ **双向开口**，尾和头部操作的函数，`push_back()`还有`push_front()`，当然对有应的`pop_()`，**类似于链表**【分多个段，每个段内连续】
++ 维护了一个**map的指针数组**，*lionel，具体的实现，还得看下代码*
++ deque的特点
+  + 支持随机访问（即支持下标`()`和`at()`），但性能没有vector好
+  + 可以在
+  + 两端
+  + 元素存取和迭代器操作会稍微慢一些，因为deque的内部结构会多一个间接过程
+  + 使用内存比vector和list合理
++ 表5-9：deque的常用构造函数
++ deque有以下两点与vector不同
+  + deque不提供容量操作`capacity()`和`reverse()`
+  + deque直接提供函数完成首尾元素的插入和删除
++ 需要注意的是
+  + 除了`at()`函数，其它成员函数都不会检查索引或迭代器是否有效
+  + 元素的插入和删除可能会导致内存重新分配
++ 例5-6.cpp，测试deque的成员函数，并理解其特点
+
+#### 5.4、STL关联式容器
+
++ 带有键值的数据叫做关联式容器
++ 数据本身并无顺序，那么容器的各数据元素存储单元就必须具有固定的顺序，为**序列式容器**，如果数据本身有序，则容器没有必要一定有序
++ 原本无固定顺序的数据叫**可序数据**，具有固定顺序的数据叫**已序数据**
+
+##### 1、关联式数据与STL二元组类模板pair
+
++ utility.h中的`pair()`，**类模板**，称为**二元组**
+  + 也可用`make_pair()`创建
+
+```cpp
+pair<string,int> pr2("heaven",7);
+pair<string,int> *prp = new pair<string,int>("yards",0);
+//也可用`make_pair()`创建
+typedef struct pair<int,float> PAIR_IF;
+PAIR_IF pair1 = make_pair(18,3.14f);
+```
+
+
+
+##### 2、STL对关联数据的组织与存储
+
++ 二分查找树，*后面没有完全再看看*
++ *还是需要把DS再看一下，复习下tree的章节，lionel*
 
 #### 5.5、map容器
 
++ 以红黑树形式，**pair形式出现的键-值对，叫做映射（map），set中的数据既是键值也是实值，叫做集合（set）**
+
+##### 5.5.1、map容器的定义
+
++ 例5-7.cpp，使用map的默认构造函数创建一个map对象，然后使用insert()函数向其中插入11个pair数据
++ 例5-8.cpp
++ 例5-9.cpp，使用不同的构造函数常见map容器
+
+##### 5.5.2、map的数据插入
+
++ 1、用insert函数插入pair数据
+  + 例5-10.cpp
++ 2、insert()方法中指定数据类型的数据如下插入法
+  + 例5-11.cpp
+  + **当以重复键使用insert()方法插入数据时，只有第一次插入为有效操作，其后的所有都为无效操作，但编译器不报错**
+  + 例5-12.cpp，使用insert()的方法返回值判断插入操作的有效性
++ 3、以下标方式使用键值插入数据
+  + 例5-13.cpp，以下标形式向map对象插入数据
+  + **下标方式可以重复的键值输入数据，后面的输入将覆盖前面的实值**
+
+```cpp
+map<int,string>mapStudent;
+mapStudent[1]="student_one";
+```
+
+##### 5.5.3、map容器的其他常用成员方法
+
++ 1、size()方法
++ 2、count()和find()方法
+  + 例5-14.cpp
++ 3、lower_bound()和upper_bound()方法
+  + 例5-15.cpp
++ 4、erase()方法
+  + 例5-16.cpp
+
+##### 5.5.4、multimap容器
+
++ 例5-17.cpp，multimap容器应用示例程序
+
 #### 5.6、set容器
+
++ **set用来保存只有键值而没有实值这类数据的容器**，也是红黑树，只不过各节点的数据是单一值而不是pair。
++ 元素插入时会默认排序，**默认为`less<>`排序规则
++ 例5-18.cpp，set容器应用示例程序
 
 #### 5.7、hash表基础及hast容器
 
@@ -531,15 +630,58 @@ int main(){
 
 ##### 5.7.2、hash容器
 
++ 例5-19.cpp，unordered_map的应用示例
+
 ### chap6、通用算法
+
++ 模板技术解决了算法的**类型通用**，迭代器解决了算法的**容器通用**
 
 #### 6.1、通用算法的参数
 
++ STL通过两个措施保证了算法的通用性
+  + 一是它把算法都设计成**函数模板**，从而依靠类型占位符保证了算法通用于各种参数类型
+  + 二是它用可以屏蔽容器结构与数据差异的**迭代器**来指定算法的操作数，从而保证算法通用于各类容器
++ STL通用算法的3种参数
+  + 算法的迭代器参数
+  + 辅助参数
+  + 谓词参数
+
 ##### 6.1.1、算法的迭代器参数
+
++ 两个迭代器指定一个区间
++ 1、单区域操作数的迭代器参数
+  + `sort(Vect.begin(),Vect.end());`
++ 2、双区域操作数的迭代器参数
+  + `result = find_first_of(Vect1.begin(), Vect1.end(),(Vect1.begin()+3),(Vect1.end()-2));`
++ 3、迭代器类型对通用算法的限制及容器特有方法
+  + 将迭代器从强到弱规范出5个种类（等级）的迭代器类型
+    + 随机迭代器（random access）
+    + 双向迭代器（bidirectional）
+    + 前向迭代器（forward）
+    + 输入迭代器（input）
+    + 输出迭代器（output）
+  + *本节，没太看懂全部啊，lionel*
 
 ##### 6.1.2、辅助参数
 
++ 格式
+  + `alg(__first,__last,__params);`，**一般find()就这样**，`result = find(Vect.begin(),Vect.end(),num_to_find);`
+
 ##### 6.1.3、谓词参数
+
++ STL算法可以**函数、函数对象、lambda表达式**作为参数，目的是，**为了向算法传递用户自己的功能代码，从而便于实现通用算法的个性化和多样化**
+
++ 1、什么是谓词及谓词参数
+  + **谓词**就是一个功能模块代码
++ 2、谓词的实质是回调函数
+  + **调用**：用户程序使用系统程序
+  + **回调**：系统程序使用用户程序
+  + **回调函数**：用户提供的为系统程序所调用的程序段
+  + 例6-1.cpp
++ 3、STL对谓词的规范
+  + 一元、二元谓词
+  + 例6-2.cpp，按照unary_function格式定义谓词is_negative的程序示例
+  + *这里面有个疑问的，lionel*，`remove_if(Vect.begin(),Vect.end(),is_negative);`，*为什么后面的，不需要`()`了*
 
 #### 6.2、算法时间复杂度
 
@@ -617,13 +759,25 @@ stack<int, vector<int>>b;
 ##### 7.3.1、插入迭代器
 
 + 反向插入，back_insert
+
 + 1、insert_iterator
+  
+  + 插入迭代器，**其实隐含了一个容器**
+  
+  ```cpp
+  insert_iterator{
+      _Container& __x, typename __Container::iterator __i):Container(&__x),iter(__i) ()
+  }
+  ```
+  
+  
+  
   + 7-7.cpp：vector容器Vect，把3之后的数据插入到list容器Lst中的数据
 
 ```cpp
 vector<int> Vect{ 1,2,3,4,5,6,7,8,9,10 };  //lionel,初始化的方式
 //定义插入迭代器insert_it并使其指向被插入容器的待插入位置
-insert_iterator<vector<int>>insert_it(Vect, Vect.begin() + 3);
+insert_iterator<vector<int>>  insert_it(Vect, Vect.begin() + 3);
 //将源数据对象中的数据插入迭代器指示的位置
 copy(Lst.begin(), Lst.end(), insert_it);
 ```
@@ -631,22 +785,24 @@ copy(Lst.begin(), Lst.end(), insert_it);
 
 
 + 2、front_insert_iterator和back_insert_iterator
+  + **默认的插入迭代器**，插入位置为目标的头部或尾部
+  + **只有当容器提供push_front操作时，才能使用front_inserter**
   + 7-8.cpp：使用front_insert_iterator和back_insert_iterator迭代器实现数据的插入
-+ 前向插入，front_insert
 
 ##### 7.3.2、反向迭代器
 
 + reverse_iterator
++ 定义的格式，`vector<int>::reverse_iterator rpos(Vect.end());`
 + 7-9.cpp：观察正向和反向迭代器之间的关系
 + 7-10.cpp：使用了rbegin()和rend()操作的反向迭代器应用程序示例
 
 ##### 7.3.3、IO流迭代器
 
-+ 1、
++ 1、输出流迭代器适配器ostream_iterator
   + 7-11.cpp
-+ 2、
++ 2、输入流迭代器适配器istream_iterator
   + 7-12.cpp
-  + 7-13.cpp
+  + 7-13.cpp，从标准设备中输入一些内容，然后用这些数据对一个向量容器进行初始化，然后显示初始化结果
 
 + 输入流，instream
 + 输出流，ostream
@@ -657,10 +813,28 @@ copy(Lst.begin(), Lst.end(), insert_it);
 
 ##### 7.4.1、函数对象的适配
 
-+ 7-14.cpp
-+ 7-15.cpp
++ **函数对象的适配器仍然是一个函数对象**
+
++ 7-14.cpp，在算法remove_if中验证一元函数对象greater_l的正确性
++ 7-15.cpp，在算法remove_if中验证第二参数绑定适配器binder2nd的正确性
 
 ##### 7.4.2、函数对象配接器
+
++ 例7-16.cpp，在算法remove_if中验证配接器bind2nd的功能
++ 1、简单配接器
+  + 表7-4，简单配接器
+  + 例7-17.cpp，在算法remove_if中验证配接器bind2nd的功能
+  + 例7-18.cpp，在算法sort中验证配接器not2的功能
++ 2、对成员函数进行配接的函数配接器
+  + 表7-5，对成员函数进行配接的函数配接器
+    + `mem_fun_ref(op)`，调用op，op是某对象的一个const成员函数
+  + 例7-19，验证配接器mem_fun_ref(op)和mem_fun(op)的功能
+    + `for_each(coll.begin(),coll.end(),mem_fun_ref(&testCls::print));`
++ 3、针对一般函数（非成员函数）而设计的函数配接器
+  + 表7-6，针对一般函数（非成员函数）而设计的函数配接器
+  + 例7-20，验证配接器mem_fun_ref(op)和mem_fun(op)的功能
++ 4、用户自定义函数对象配接器
+  + 例7-21，定义一个用户函数对象并在transform算法中利用配接器将其作为谓词使用
 
 ### chap8、STL容器内存空间分配器
 
@@ -670,9 +844,18 @@ copy(Lst.begin(), Lst.end(), insert_it);
 
 ##### 8.1.1、什么是内存空间配置器
 
++ 内存的静态分配，动态分配
+
 + 封装了动态请求内存空间的代码，以函数的形式向容器提供了内存空间的请求与释放，不用new本身，而用`operator new()`和`spacement new()`
 
 ##### 8.1.2、内存空间配置器设计基础
+
++ 1、容器内存空间的结构及配置器设计思路
+  + 连续的数组，vector
+  + 非连续的链表，list
+  + 多个连续空间组成的链表模式，deque
++ 2、内存空间配置器设计技术
+  + 例8-1.cpp
 
 #### 8.2、STL空间配置器接口
 
@@ -680,15 +863,33 @@ copy(Lst.begin(), Lst.end(), insert_it);
 
 ##### 8.2.1、STL空间配置器接口及最简单的空间配置器
 
++ 1、STL空间配置器接口内容
+  + **接口**：就一个程序部件提供给用户的那些函数
++ 2、
++ 3、内部不同数据类型数据的空间配置器
+
 ##### 8.2.2、典型STL容器空间的配置
+
++ 例8-2.cpp，使用向量容器对上述容器内存空间配置器进行测试，在测试中编写必要的测试代码以显示配置器的工作过程
++ 例8-3.cpp，修改8-2.cpp，请使用list容器来测试上述内存空间配置器
 
 #### 8.3、内存池的概念及方法
 
-+ 防止内存碎片、用内存块组成内存池（形成链表）
++ **内存池**就是应用程序从系统那里批发来的内存空间。防止内存碎片、用内存块组成内存池（形成链表）
 
 ##### 8.3.1、内存池的规划
 
 ##### 8.3.2、内存池的设计
+
++ 1、MemoryBlock的设计
++ 2、MemoryPool的设计
+  + 例8-5.cpp
+
+### 附录
+
+#### A、关于关键字explicit
+
++ 类的单参数构造函数能实现一个隐式转换，**加上explicit，就禁止转换**，`explicit Test(int x){a = x;}`，本来是支持`Test a=10;//现在就不行`，只能使用`Test a1(10);`
 
 ### 勘误
 
