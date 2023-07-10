@@ -432,11 +432,20 @@ int main(){
 
 ### chap4、模拟STL三大件
 
++ 20201019
+
 #### 4.1、容器
 
 ##### 4.1.1、向量vector的仿真MyVector
 
++ 向量是单端开口的容器，其核心的数据存储装置（原始容器）是一个数组，**开口位置在数组尾部**
+
++ 例4-1.cpp
+
 ##### 4.1.2、列表list的仿真MyList
+
++ 以链表为数据存储核心的容器，**首尾双端开口容器**，双向链表
++ 例4-2.cpp
 
 #### 4.2、迭代器
 
@@ -445,31 +454,34 @@ int main(){
 ##### 4.2.1、使用裸指针作为迭代器
 
 + **以存储空间连续的数组为其存储结构的容器**
-+ [例4-3，程序中定义一个`MyVector<int>`的对象v1，使用裸指针作为对象v1的迭代器并遍历v1](https://gitee.com/fewolflion/BookNote/blob/master/01lioneloutput/60BookCode/C++%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/chap04%E6%A8%A1%E6%8B%9FSTL%E4%B8%89%E5%A4%A7%E4%BB%B6/04_03.cpp)
++ [例4-3.cpp，程序中定义一个`MyVector<int>`的对象v1，使用裸指针作为对象v1的迭代器并遍历v1](https://gitee.com/fewolflion/BookNote/blob/master/01lioneloutput/60BookCode/C++%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/chap04%E6%A8%A1%E6%8B%9FSTL%E4%B8%89%E5%A4%A7%E4%BB%B6/04_03.cpp)
   + 与4-1的区别
   + `typedef Ty* viter;`，以及`MyVector<int>::viter iter;` *这两个的转化过程，要好限理解一下，lionel*
 
 ##### 4.2.2、迭代器是指针的类封装
 
 + 如果存储空间不连续，就需要**加以改造（重载*，++，==，!=运算符）**
-+ 例4-4，为MyList容器设计迭代器MyList_iterator并编写程序进行测试
++ 例4-4.cpp，为MyList容器设计迭代器MyList_iterator并编写程序进行测试
 
 ##### 4.2.3、迭代器的代码隔离作用
 
 + 使用者无需知道
-+ 例4-5，程序，使用上述查找函数find()分别在MyVector和MyList容器查找数据100
++ 重载*，++，==，!=运算符（操作list）
++ 例4-5.cpp，程序，使用上述查找函数find()分别在MyVector和MyList容器查找数据100
 
 ##### 4.2.4、STL迭代器的种类
 
 + 0
 + 1、输入迭代器（输入流，**有以下功能**）
+  + 可复制，取出值，并自动指向下一个，判断是否最后一个，*，++，++(int)，!=，==
 + 2、输出迭代器
-  + 通过`operator*`对容器数据元素进行修改
+  + 除了同1外，还通过`operator*`对容器数据元素进行修改
 + 3、前向迭代器
   + 输入和输出迭代器的结合体，`operator*`既可以访问元素，也可以修改元素
 + 4、双向迭代器
   + 在前向迭代器的功能上，**允许向后移动**，支持`operator--`和`operator--(int)`
 + 5、随机存取迭代器
+  + 双向支持随机
 
 ##### 4.2.5、迭代器的种类标记
 
@@ -479,16 +491,27 @@ int main(){
 + 前向
 + 双向
 + 随机，`struct random_access_iterator_tag:public bidirectional_iterator_tag {};`
++ 例4-6.cpp
++ 例4-7.cpp
 
 ##### 4.2.6、STL对迭代器的管理
 
++ 1、迭代器类模板的数据类型表
++ 2、迭代器的类型总表traits
++ 例4-8.cpp
+
 #### 4.3、通用算法
+
++ 例4-9.cpp
++ 例4-10.cpp，使用例4-3中MyVector容器和上面设计的MySort()算法编写一个测试程序
 
 ### chap5、容器及其应用
 
++ 20201104
+
 ####  5.1 向量vector
 
-+ 占用连续内存，随机访问，下标和`at()`操作，**尾部开口的设计**，`push_back()`和`pop_back()`，重载了`operator=`
++ 占用连续内存，随机访问，下标和`at()`操作，**尾部开口的设计**，`push_back()`和`pop_back()`，重载了`operator=`，**尾部操作效率最高**（*也只有尾部能操作吧*）
 
 ##### 1、vector对象的定义及初始化
 
@@ -535,7 +558,7 @@ int main(){
 #### 5.3、双向队列deque
 
 + **双向开口**，尾和头部操作的函数，`push_back()`还有`push_front()`，当然对有应的`pop_()`，**类似于链表**【分多个段，每个段内连续】
-+ 维护了一个**map的指针数组**，*lionel，具体的实现，还得看下代码*
++ 维护了一个**map的指针数组**，来维护段首地址，这样从map访问deque空间就是连续的，*lionel，具体的实现，还得看下代码*
 + deque的特点
   + 支持随机访问（即支持下标`()`和`at()`），但性能没有vector好
   + 可以在
@@ -559,6 +582,8 @@ int main(){
 
 ##### 1、关联式数据与STL二元组类模板pair
 
++ **关联数据**，多个互相有关联的数据组合成的一个数组组，pair没有指定键值、实值
+
 + utility.h中的`pair()`，**类模板**，称为**二元组**
   + 也可用`make_pair()`创建
 
@@ -575,6 +600,9 @@ PAIR_IF pair1 = make_pair(18,3.14f);
 ##### 2、STL对关联数据的组织与存储
 
 + 二分查找树，*后面没有完全再看看*
++ 平衡二叉树
+  + AVL树
+  + 红黑树
 + *还是需要把DS再看一下，复习下tree的章节，lionel*
 
 #### 5.5、map容器
@@ -582,6 +610,8 @@ PAIR_IF pair1 = make_pair(18,3.14f);
 + 以红黑树形式，**pair形式出现的键-值对，叫做映射（map），set中的数据既是键值也是实值，叫做集合（set）**
 
 ##### 5.5.1、map容器的定义
+
++ *还能带分配器，是啥意思，是不是之前的纸质笔记，写得有问题，lionel*
 
 + 例5-7.cpp，使用map的默认构造函数创建一个map对象，然后使用insert()函数向其中插入11个pair数据
 + 例5-8.cpp
@@ -630,9 +660,13 @@ mapStudent[1]="student_one";
 
 ##### 5.7.2、hash容器
 
++ C++11才纳入标准
+
 + 例5-19.cpp，unordered_map的应用示例
 
 ### chap6、通用算法
+
++ 20201104
 
 + 模板技术解决了算法的**类型通用**，迭代器解决了算法的**容器通用**
 
@@ -653,6 +687,7 @@ mapStudent[1]="student_one";
   + `sort(Vect.begin(),Vect.end());`
 + 2、双区域操作数的迭代器参数
   + `result = find_first_of(Vect1.begin(), Vect1.end(),(Vect1.begin()+3),(Vect1.end()-2));`
+  + swap_ranger()注意事项
 + 3、迭代器类型对通用算法的限制及容器特有方法
   + 将迭代器从强到弱规范出5个种类（等级）的迭代器类型
     + 随机迭代器（random access）
@@ -673,6 +708,7 @@ mapStudent[1]="student_one";
 
 + 1、什么是谓词及谓词参数
   + **谓词**就是一个功能模块代码
+  + *sort，重载预设的谓词，greater()*
 + 2、谓词的实质是回调函数
   + **调用**：用户程序使用系统程序
   + **回调**：系统程序使用用户程序
@@ -680,8 +716,18 @@ mapStudent[1]="student_one";
   + 例6-1.cpp
 + 3、STL对谓词的规范
   + 一元、二元谓词
+    + `struct unary_function{}`
+    + `struct binary_function{}`
   + 例6-2.cpp，按照unary_function格式定义谓词is_negative的程序示例
   + *这里面有个疑问的，lionel*，`remove_if(Vect.begin(),Vect.end(),is_negative);`，*为什么后面的，不需要`()`了*
+  + 常用的STL预设二元谓词模板
+    + less<T>
+    + less_equal<T>
+    + equal<T>
+    + not_equal<T>
+    + greater_equal<T>
+    + greater<T>
+    + not2<B>
 
 #### 6.2、算法时间复杂度
 
@@ -689,13 +735,27 @@ mapStudent[1]="student_one";
 
 ##### 6.3.1、查找和搜索算法
 
++ **不改变容器中数据**，非变异算法
++ 6-3.cpp
++ 6-11.cpp
+
 ##### 6.3.2、变异算法
+
++ 6-12.cpp
++ 6-26.cpp
 
 ##### 6.3.3、排序算法
 
++ 6_27.cpp
++ 6_37.cpp
+
 ##### 6.3.4、算术算法与关系算法
 
++ 6_44.cpp
+
 ##### 6.3.5、排列组合与集合算法
+
++ 6_46.cpp
 
 ### chap7、适配器模式在STL基础部件上的应用
 
