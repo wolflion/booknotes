@@ -42,3 +42,32 @@ https://lxr.missinglinkelectronics.com/linux+v2.6.24/include/linux/skbuff.h，li
 
 + 《TCP/IP网络编程》全书理解80%以上，*考虑先把全书完全读懂，再做下后面习题*，**没有完全不懂的知识点**
 + 《Unix编程手册》socket部分，理解80%以上，**没有完全不懂的知识点**
+
+## STL学习
+
+## 设计模式
+
+### 自我实践之路
+
++ 先啃《大话设计模式》
+
+### ref
+
++ [学习并理解 23 种设计模式](https://github.com/xietao3/Study-Plan/blob/master/DesignPatterns/README.md)
++ https://www.runoob.com/design-pattern/design-pattern-intro.html
++ 脚本之家 写的百家号，23种设计模式，*找不到链接了*
++ https://github.com/datawhalechina/sweetalk-design-pattern **这里面有cpp代码**
+
+## 电子资料
+
+### 电子书
+
++ https://github.com/3masterplus/book
++ https://github.com/weaiken/ebook
+  + http://https//5.34.176.247/?uuid=83a522d4-6ec7-4706-946e-2396abc9b81e  C++版的设计模式
+
+### 其它
+
++ [中科大的计算机课程](https://github.com/USTC-Resource/USTC-Course)，*想看一下，一些OS的实验课*
+  + https://mbinary.xyz/ustc-cs/，从这个网站跳过去的
+  + https://github.com/weaiken/Blog，这个里面也有
