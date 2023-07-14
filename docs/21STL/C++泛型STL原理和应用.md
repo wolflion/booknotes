@@ -357,7 +357,6 @@ int main(){
 ##### 3.2.3 Lambda表达式
 
 + 无名/匿名仿函数
-
 + [例3-7 lambda表达式与具有相同功能的仿函数的比较](https://gitee.com/fewolflion/BookNote/blob/master/01lioneloutput/60BookCode/C++%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/chap3STL%E5%8F%8A%E5%85%B6%E4%BD%BF%E7%94%A8%E7%9A%84%E5%85%B6%E4%BB%96C++%E6%8A%80%E6%9C%AF/E3-07.cpp)。**Lambda表达式**又叫 *无名仿函数（或匿名仿函数）*
   + `[](int x){cout << 2*x << endl;} // 相当于在声明function类的同时，又定义了定义该对象`
     + `[]`，仿函数中运算符`()`的重载函数名，也叫**lambda表达式前导符**
@@ -372,6 +371,7 @@ int main(){
   + 示例1：演示了引用捕获的程序代码
   + 示例2：演示了关键字mutable的应用
 + 例3-11 把lambda表达式应用于STL通用算法的一个程序示例
++ *mutable与exception关键字，同时自己记住各种使用场景，lionel*
 
 #### 3.3 智能指针
 
@@ -745,6 +745,8 @@ mapStudent[1]="student_one";
     + greater_equal<T>
     + greater<T>
     + not2<B>
+  + 上面的问题，就是**谓词，与谓词函数的区别**，目前啥区别，暂时不知道
+    + *想到了，本身传的是函数名*
 
 #### 6.2、算法时间复杂度
 
@@ -753,7 +755,13 @@ mapStudent[1]="student_one";
 ##### 6.3.1、查找和搜索算法
 
 + **不改变容器中数据**，非变异算法
-+ 6-3.cpp
++ 1、adjacent_find算法
+  + 6-3.cpp
++ 2、binary_search算法
++ 3、count和count_if
+  + **因为参数类型只是占位符，无法重载，后面加_if，表示需要谓词**
+  + 例6-5.cpp
+  + 例6-6.cpp，算法count_if()示例
 + 6-11.cpp
 
 ##### 6.3.2、变异算法
