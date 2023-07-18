@@ -203,7 +203,7 @@
 + 0
   + **pimpl手法**（pointer to implementation）
 
-### Part5、实现（26-31）
+### Part5、实现Implementation（26-31）
 
 #### 26、尽可能延后变量定义式的出现时间
 
@@ -288,18 +288,18 @@
 + “声明的依存性”替换“定义的依存性”，**现实中让头文件尽可能自我满足，万一做不到，让它与其它文件内的声明式（而非定义式）相依**。
 + *Handle classes与Interface classes区别？*
 
-### Part6、继承与面向对象设计（32-40）
+### Part6、继承与面向对象设计Inheritance and Object-Oriented Design（32-40）
 
-#### 32、
+#### 32、确定你的public继承塑模出is-a关系 Make sure public inheritance models "is-a."
 
 + Liskov Substitution Principle
 + public继承是"is a"，*private继承是啥？*
-#### 33、
+#### 33、避免遮掩继承而来的名称
 + using声明式，**inline转交函数（forwarding function）**
-#### 34、
+#### 34、区分接口继承和实现继承
 + 声明一个pure virtual函数的目的是为了让derived classes只继承函数接口。
 + 声明简朴的（非纯）inpure virtual函数的目的，是让derived classes继承该函数的接口和缺省实现
-#### 35、
+#### 35、考虑virtual函数以外的其他选择
 + Template Method模式
 + Strategy模式
 + 摘要，有以下几个替换
@@ -307,18 +307,65 @@
 	+ 将virtual函数替换为“函数指针成员变量”
 	+ 以tr1::function成员变量替换virtual函数
 	+ 将继承体系内的virtual函数替换为另一个继承体系内的virtual函数
-#### 36、
+#### 36、绝不重新定义继承而来的non-virtual函数
 + *写个代码来看下差异，lionel* 【重新定义继承来的non-virtual】
-#### 37、
+#### 37、绝不重新定义继承而来的缺省参数值
 + **缺省参数是静态绑定**，virtual是动态绑定
-#### 38、
+#### 38、通过复合塑模出has-a或“根据某物实现出”
 + **复合是has-a**
-#### 39、
+#### 39、明智而审慎地使用private继承
 + **private继承，编译器不会自动将一个derived class对象 转换为一个 base class对象**。
-#### 40、
+#### 40、明智而审慎地使用多重继承
 + 多重继承会导致歧义
 
 ### Part7、模板与泛型编程（41-48）
+
+#### 41、了解隐式接口和编译期多态
+
++ 结论
+  + classes和templates都支持接口（interfaces）和多态（polymorphism）
+  + 对于classes而言接口是显式的（explicit），以函数签名为中心。多态则是通过virtual函数发生于运行期
+  + 对templates参数而言，接口是隐式的（implicit），奠基于有效表达式。多态则是通过template具现化和函数重载解析（function overloading resolution）发生于编译期
+
+#### 42、了解typename的双重意义
+
++ 结论
+  + 声明template参数时，前缀关键字class和typename可互换
+  + 请使用关键字typename标识嵌套从属类型名称；但不得在base class lists（基类列）或member initialization list（成员初值列）内以它作为base class修饰符
+
+#### 43、学习处理模板化基类内的名称
+
++ 结论
+  + 可在derived class templates内通过"this->"指涉base class templates内的成员名称，或藉由一个明白写出的"base class资格修饰符"完成
+
+#### 44、将与参数无关的代码抽象templates
+
++ 结论
+  + Templates生成多个classes和多个函数，所以任何template代码都不该与某个造成膨胀的template参数产生相依关系
+  + 因非类型模板参数（non-type template parameters）而造成的代码膨胀，往往可消除，做法是以函数参数或class成员变量替换template参数
+  + 因类型参数（type parameters）而造成的代码膨胀，往往可降低，做法是让带有完全相同二进制表述（binary representations）的具现类型（instantiation types）共享实现码
+
+#### 45、运用成员函数模板接受所有兼容类型
+
++ 结论
+  + 请使用member function tmeplates（成员函数模板）生成“可接受所有兼容类型”的函数
+  + 如果你声明member templates用于“泛化copy构造”或“泛化assignment操作”，你还是需要声明正常的copy构造函数和copy assignment操作符
+
+#### 46、需要类型转换时请为模板定义非成员函数
+
++ 结论
+  + 当我们编写一个class template，而它所提供之“与此template相关的”函数支持“所有参数之隐式类型转换”时，请将那些函数定义为“class template内部的friend函数”
+
+#### 47、请使用traits classes表现类型信息
+
++ 结论
+  + Traits classes使得“类型相关信息”在编译期可用。它们以templates和"templates特化"完成实现
+  + 整合重载技术（overloading）后，traits classes有可能在编译期对类型执行if...else测试
+
+#### 48、认识template元编程
+
++ Template metaprogramming（TMP，模板元编程）可将工作由运行期移往编译期，因而得以实现早期错误侦测和更高的执行效率
++ TMP可被用来生成“基于政策选择组合”（based on combinations of policy choices）的客户定制代码，也可用来避免生成对某些特殊类型并不适合的代码
 
 ### Part8、定制new和delete（49-52）
 
@@ -326,20 +373,20 @@
 
 + ---定制new和delete--  【new失败了】
 
-#### 49、
+#### 49、了解new-handler的行为
 
 + `operator new`分配失败了，会**调用`new-handler`函数**，设计一个良好的new-handler函数
 + `new(std::nothrow) Widget`发生了两件事
 	+ 1、nothrow版的operator new被调用，用以分配足够内存给Widget对象。
 + 使用nothrow new只能保证operator new不抛掷异常，不保证像“new (std::nothrow) Widget”这样的表达式绝不导致异常。
 
-#### 50、
+#### 50、了解new和delete的合理替换时机
 + 自己实现一个`operator new`，看看哪个开源比较强？
 + *什么场景下，需要自己实现一个operator new？*
 
-#### 51、
+#### 51、编写new和delete时需固守常规
 
-#### 52、
+#### 52、写了placement new也要写placement delete
 + `Widget *pw = new Widget;`有2个函数被调用：
 	+ 用以分配内存的operator new
 	+ Widget的default构造函数
@@ -354,7 +401,7 @@
 + 结论：
   + 
 
-#### 54、熟悉TR1在内的标准程序库
+#### 54、让自己熟悉包括TR1在内的标准程序库
 
 + 结论：
   + C++标准程序库的主要机能由STL、iostream、locals组成。并包含C99标准程序库
@@ -378,7 +425,7 @@
     + type traits
     + result_of：*这个没见过*
 
-#### 55、熟悉boost
+#### 55、让自己熟悉boost
 
 + 结论：
   + Boost提供许多TR1组件实现品，以及其它许多程序库
