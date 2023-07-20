@@ -177,8 +177,94 @@ class A : public Y, public Z{};
 
 ### chap4、Function语意学
 
+4.1、Member的各种调用方式
+
+4.2、Virtual Member Function（虚拟成员函数）
+
+4.3、函数的效能
+
+4.4、指向Member Functionsr的指针（）
+
+4.4.1、支持“指向Virtual Member Functions”之指针
+
+##### 4.4.2、在多重继承之下，指向Member Functions的指针
+
+4.4.3、“指向Member Functions之指针”的效率
+
+#### 4.5、Inline Functions
+
+4.5.1、形式对数（）
+
+4.5.2、局部变量（Local Variables）
+
 ### chap5、构造、解构、拷贝语意学
+
+#### 5.0、
+
+##### 5.0.1、纯虚拟函数的存在（Presence of a Pure Virtual Function）
+
+5.0.2、虚拟规格的存在（）
+
+5.0.3、虚拟规格中const的存在
+
+##### 5.0.4、重新考虑class的声明
+
+#### 5.1、无继承情况下的对象构造
+
+5.1.1、抽象数据类型（）
+
+5.1.2、为继承做准备
+
+5.2、继承体系下的对象构造
+
+##### 5.2.1、虚拟继承（Virtual Inheritance）
+
+##### 5.2.2、初始化语意学（The Semantics of the vptr Initialization）
+
+5.3、对象复制语意学（）
+
+5.4、对象的功能（）
+
+5.5、解构语意学（Semantics of Destruction）
 
 ### chap6、执行期语意学
 
+6.1、对象的构造和解构
+
+6.1.1、全局对象
+
+6.1.2、局部静态对象
+
+6.1.3、对象数据
+
+6.1.4、Default Constructors和数组
+
+6.2、new和delete运算符
+
+6.2.1、针对数组的new语意
+
+6.2.2、Placement Operator new的语意
+
+6.3、临时性对象
+
+6.3.1、临时性对象的迷思
+
 ### chap7、站在对象模型的类端
+
+7.1、Template
+
+7.2、异常处理（Exception Handing）
+
+7.3、执行期类型识别（，RTTI）
+
+7.4、效率有了，弹性呢？
+
+7.4.1、动态共享函数库
+
+7.4.2、共享内存
+
+### 最后
+
+#### 履历
+
++ 20230720开始看这本书，全天大概过了一遍，chap2确实不太好懂，看前言建议**chap1、3、4先看**，先过一遍，把脉络架起来，边思考边琢磨
