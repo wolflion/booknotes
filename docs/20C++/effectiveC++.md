@@ -4,9 +4,7 @@
 
 + Accustoming Yourself to C++
 
-#### 1、视C++为一个语言联邦
-
-+ View C++ as a federation of languages
+#### 1、视C++为一个语言联邦，View C++ as a federation of languages
 
 + 结论：
   + C++高效编程守则视状况而变化，取决于你使用C++的哪一部分
@@ -17,9 +15,7 @@
   + STL
 + *不知道C++11，C++20的特性会不会再加大这个区分*
 
-#### 2、尽量以const,enum,inline替换#define
-
-+ Perfer consts, enums,and inlines to #define
+#### 2、尽量以const,enum,inline替换#define，Perfer consts, enums,and inlines to #define
 
 + 结论：
   + 对于单纯常量，最好以const对象或enums替换#defines
@@ -27,9 +23,7 @@
 + 0
   + `#define`时**宏名有可能并未记入符号表**。
 
-#### 3、尽可能使用const
-
-+ Use const whenever possible
+#### 3、尽可能使用const，Use const whenever possible
 
 + 结论：
   + 将某些东西声明为const，可帮助编译器侦测出错误用法。const可被施加于任何作用域内的对象、函数参数、函数返回类型、成员函数本体。
@@ -54,9 +48,7 @@
 
 ##### 3.2、const和non-const成员函数中避免重复
 
-#### 4、确定对象被使用前已被初始化
-
-+ Make sure that objects are initialized before they're used
+#### 4、确定对象被使用前已被初始化，Make sure that objects are initialized before they're used
 
 + 结论：
   + 为内置型对象进行手工初始化，因为C++不保证初始化它们
@@ -81,15 +73,15 @@
 
 + 几乎你写的每一个class都会有一或多个构造函数、一个析构函数、一个copy assignment操作符。
 
-#### 5、Know what functions C++ silently writes and calls
+#### 5、了解C++默默编写并调用哪些函数，Know what functions C++ silently writes and calls
 
 + **编译器可以暗自为class创建default构造函数、copy构造函数、copy assignment操作符，以及析构函数。
 
-#### 6、Explicitly disallow the use of compiler-generated functions you do not want
+#### 6、若不想使用编译器自动生成的函数，就该明确拒绝，Explicitly disallow the use of compiler-generated functions you do not want
 
 + **为了驳回编译器自动（暗自）提供的机能，可将相应的成员函数声明为private并且不予实现**。使用像Uncopyable这样的base class也是一种方法。
 
-#### 7、Declare destructions virtual in polymorphic base classes
+#### 7、为多态基类声明virtual析构函数，Declare destructions virtual in polymorphic base classes
 
 + *虚析构函数，声明的价值在哪？*
 + polymorphic（带多态性质的）base classes 应该声明一个virtual析构函数。如果class带有任何virtual函数，它就应该拥有一个virtual析构函数。
@@ -124,14 +116,36 @@
 
 ### Part3、资源管理（13-17）
 
-#### 16、
+#### 13、以对象管理资源
+
++ 结论：
+  + 为防止资源泄漏，请使用RAII对象。它们在构造函数中获得资源并在析构函数中释放资源
+  + 两个常被使用的RAII classes分别是tr1::shared_ptr和auto_ptr。【**后一个废弃了**】前者通常是较佳选择，因为其copy行为比较直观。若选择auto_ptr，复制动作会使它（被复制物）指向null
+
+#### 14、在资源管理类中小心copying行为
+
++ 结论：
+  + 复制RAII对象必须一并复制它所管理的资源，所以资源的copying行为决定RAII对象的copying行为。
+  + 普遍而常见的RAII class copying行为是：抑制copying、施行引用计数法（reference counting）。不过其他行为也都可以被实现。
+
+#### 15、在资源管理类中提供对原始资源的访问
+
++ 结论：
+  + APIs往往要求访问原始资源（raw resources），所以每一个RAII class应该提供一个“取得其所管理之资源”的办法
+  + 对原始资源的访问可能经由显式转换或隐式转换。一般而言显式转换比较安全，但隐式转换对客户比较方便。
+
+#### 16、成对使用new和delete时要采用相同形式
 
 + new和delete配对
++ 结论
+  + 如果你在new表达式中使用[]，必须在相应的delete表达式中也使用[]。如果你在new表达式中不使用[]，一定不要在相应的delete表达式中使用[]
 
-#### 17、
+#### 17、以独立语句将newed对象置入智能指针
 
 + newed对象
 + `std::tr1::shared_ptr<Widget> pw(new Widget); //在单独语句内以智能指针存储newed所得对象`
++ 结论
+  + 以独立语句将newed对象存储于（置入）智能指针内。如果不这样做，一旦异常被抛出，有可能导致难以觉察的资源泄漏
 
 ### Part4、设计与声明（18-25）
 
@@ -168,7 +182,7 @@
 + 结论：
   + 绝不要返回pointer或reference指向一个local stack对象，或返回reference指向一个heap-allocated对象，或返回pointer或reference指向一个local static对象而有可能同时需要多个这样的对象。item4已经为“在单线程环境中合理返回reference指向一个local static对象”提供了一份设计实例。
 
-#### 22、成员变量声明为private
+#### 22、将成员变量声明为private
 
 + 结论：
   + 切记将成员变量声明为private。这可赋予客户访问数据的一致性、可细微划分访问控制、允诺约束条件获得保证，并提供class作者以充分的实现弹性。
