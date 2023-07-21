@@ -80,7 +80,7 @@
   + 速度快：所有的函数引发操作都在编译时期解析完成，对象建构起来时不需要设置virtual机制
   + 空间紧凑：因为每一个class object不需要负担传统上为了支持virtual机制而需要的额外负荷
 
-### chap02构造函数语义学
+### chap02、构造函数语义学
 
 #### 2.1、Default Constructor的建构操作
 
@@ -177,25 +177,70 @@ class A : public Y, public Z{};
 
 ### chap4、Function语意学
 
-4.1、Member的各种调用方式
+#### 4.1、Member的各种调用方式
 
-4.2、Virtual Member Function（虚拟成员函数）
++ 最开始C++只支持nonstatic member functions
++ virtual是20世纪80年代中期加进来的
++ static member functions是最后被引入，1987年
 
-4.3、函数的效能
+##### 4.1.1、Nonstatic Member Functions
 
-4.4、指向Member Functionsr的指针（）
++ **至少要和一般的member functions有相同的效率**
++ member function被内化为nonmember的形式，转步步骤：
+  + 1、改写函数的signature（函数原型）以安插一个额外的参数到member function中，**用以提供一个存取管道**，使class object得以调用该函数，**该额外参数被称为this指针**
+  + 2、将每一个“对nonstatic data member的存取操作”改为经由this指针来存取
+  + 3、将member function重新写成一个外部函数，对函数名称进行“mangling”处理，使它在程序中成为独一无二的语汇
 
-4.4.1、支持“指向Virtual Member Functions”之指针
+###### 4.1.1.1、名称的特殊处理（Name Mangling）
+
+##### 4.1.2、Virtual Member Functions（）
+
++ 虚成员函数normalize`ptr->normalize()`被会内部转化为`(*ptr->vptr[1])(ptr)`;
+  + vptr是个
+  + vptr[1]中的1是virtual table slot的索引值，关联到normalize()函数
+  + **第2个ptr表示this指针**（*lionel，这个自己不熟*）
+
+##### 4.1.3、Static Member Functions（）
+
++ **主要特性是它没有this指针**
+
+#### 4.2、Virtual Member Functions（虚拟成员函数）
+
++ 多态是**“以一个public base class的指针（或reference），寻址出一个derived class object”**的意思
++ 在实现上，可以在每一个多态的class object身上增加两个members:
+  + 1、一个字符串或数字，表示class的类型
+  + 2、一个指针，指向某表格，表格中带有程序的virtual functions的执行期地址
++ 问题是，如何找到表格中的地址，也分2步：
+  + 1、为了找到表格    157（189/358）
+  + 2、为了找到函数地址，每一个virtual function被指派一个表格索引值
+
+##### 4.2.1、多重继承下的Virtual Functions
+
+##### 4.2.2、虚拟继承下的Virtual Functions
+
+#### 4.3、函数的效能
+
+#### 4.4、指向Member Functionsr的指针（Pointer-to-Member Functions）
+
++ 取一个nonstatic data member的地址，**得到的是该member在class布局中的bytes位置（再加1）**，需要绑定到某个class object的地址上，才能够被存取
+
+##### 4.4.1、支持“指向Virtual Member Functions”之指针
 
 ##### 4.4.2、在多重继承之下，指向Member Functions的指针
 
-4.4.3、“指向Member Functions之指针”的效率
+##### 4.4.3、“指向Member Functions之指针”的效率
 
 #### 4.5、Inline Functions
 
-4.5.1、形式对数（）
++ 一般而言，处理一个inline函数，有两个阶段：
+  + 1、分析函数定义，以决定函数的"intrinsic inline ability"（本质的inline能力）
+  + 2、真正的inline函数扩展操作是在调用的那一点上，这会带来参数的求值操作（evaluation）以及临时性对象的管理
 
-4.5.2、局部变量（Local Variables）
+##### 4.5.1、形式参数（Formal Argument）
+
++ **每一个形式参数都会被对应的实际参数取代**
+
+##### 4.5.2、局部变量（Local Variables）
 
 ### chap5、构造、解构、拷贝语意学
 
