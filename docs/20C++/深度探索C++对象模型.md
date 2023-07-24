@@ -84,25 +84,60 @@
 
 #### 2.1、Default Constructor的建构操作
 
++ 在需要的时候？创建
+  + 是程序的需要
+  + 还是编译器的需要
++ nontrivial default constructor四种情况（就是2.1.1-2.1.4）
+
 ##### 2.1.1、“带有Default Constructor“的Member Class Object
+
++ **被合成的default constructor只满足编译器的需要，而不是程序的需要**。
++ C++语言要求以"**member objects在class中的声明次序**"来调用各个constructors。
 
 ##### 2.1.2、“带有Default Constructor“的Base Class
 
 ##### 2.1.3、“带有一个Virtual Function“的Class
 
++ 需要合成出default constructor的两种场景：
+  + class声明（或继承）一个virtual function
+  + class派生自一个继承串链，其中有一个或更多的virtual base classes
+
 ##### 2.1.4、“带有一个Virtual Base class“的Class
 
-##### 总结
++ **virtual base class的实现法在不同的编译器之间有极大的差异**
+
+##### 2.1.5、总结
+
++ C++新手一般有两个常见的误解：
+  + 1、任何class如果没有定义default constructor，就会被合成一个来。
+  + 2、编译器合成出来的default constructor会明确设定"class内每一个data member的默认值"
 
 #### 2.2、Copy Constructor的建构操作
 
++ 有3种情况，会以一个object的内容作为另一个class object的初值
+  + 1、对一个object做明确的初始化操作
+  + 2、当object被当作参数交给某个函数时
+  + 3、当函数传回一个class object时
+
 ##### 2.2.1、Default Memberwise Initialization
+
++ 一个class object可以从两种方式复制得到，一种是初始化（copy constructor），另一种是被指定（assignment，copy assignment operator）
 
 ##### 2.2.2、Bitwise Copy Semantics（位逐次拷贝）
 
 ##### 2.2.3、不要Bitwise Copy Semantics!
 
++ 什么时候一个class不展现出"bitwise copy semantics"，4种情况
+  + 1、当class内含一个
+  + 2、、
+  + 3、当class声明了一个或多个virtual functions时
+  + 4、当class派生自一个继承串链，其中有一个或多个virtual base classes时
+
 ##### 2.2.4、重新设定的指针Virtual Table
+
++ 编译期间的两处程序扩张操作
+  + 增加一个virtual function table（vtbl），内含每一个有作用的virtual function的地址
+  + 将一个指向virtual function table的指针（vptr），安插在每一个class object内
 
 ##### 2.2.5、处理Virtual Base Class Subobject
 
@@ -123,6 +158,10 @@
 ##### 2.3.7、摘要
 
 #### 2.4、成员们的初始化队伍（Member Initialization List）
+
++ class members的初值
+  + 要不是经由member initialization list
+  + 就是在constructor函数本身之内
 
 + 必须使用Member initialization list：
   + 1、当初始化一个reference member时
@@ -147,33 +186,54 @@ class A : public Y, public Z{};
   + 2、编译器对于特殊情况所提供的优化处理
   + 3、Alignment的限制
 
-
++ **每一个class object因此必须有足够的大小以容纳它所有的nonstatic data members**
 
 #### 3.1、Data Member的绑定
 
++ **请始终把"nested type声明"放在class的起始处**
+
 #### 3.2、Data Member的布局
+
++ Nonstatic data members在class object中的排列顺序将和其被声明的顺序一样
++ members的排列只需符合“较晚出现的members在class object中有较高的地址”
 
 #### 3.3、Data Member的存取
 
-##### Static Data Members
+##### 3.3.1、Static Data Members
 
-##### Nonstatic Data Members
++ **视为global变量**
++ 编译器的解决方法是暗中对每一个static data member编码（**name-mangling**）
+
+##### 3.3.2、Nonstatic Data Members
+
++ 表面上看到的对于x,y,z的直接存取，**事实上是经由一个"implicit class object"（由this指针表达）完成**
++ 每一个nonstatic data member的偏移量（offset）在编译时期即可获知
 
 #### 3.4、“继承”与Data Member
 
-##### 只要继承不要多态
++ 大部分编译器，base class members总是先出现，**但属于virtual base class的除外**
 
-##### 加上多态
+##### 3.4.1、只要继承不要多态
 
-##### 多重继承
++ 具体继承不会增加空间或存取时间上的额外负担
 
-##### 虚拟继承
+##### 3.4.2、加上多态
+
+##### 3.4.3、多重继承
+
+##### 3.4.4、虚拟继承
+
++ *我之前对这个不了解，印象中代码没这么写过啊*
+
+`class Vertex: public virtual Point2d{};`
 
 #### 3.5、对象成员的效率
 
++ 测试聚合（aggregation）、封装（）以及继承（）所引发的额外负荷的程度
+
 #### 3.6、指向Data Members的指针
 
-##### “指向Members的指针”的效率问题
+##### 3.6.1、“指向Members的指针”的效率问题
 
 ### chap4、Function语意学
 
@@ -256,21 +316,35 @@ class A : public Y, public Z{};
 
 #### 5.1、无继承情况下的对象构造
 
-5.1.1、抽象数据类型（）
+##### 5.1.1、抽象数据类型（）
 
-5.1.2、为继承做准备
++ Explicit initialization list带来三项缺点：
+  + 1、只有当class members都是public时，此法才奏效
+  + 2、
+  + 3、由于编译器并没有自动施行之，所以初始化行为的失败可能会比较高一些
 
-5.2、继承体系下的对象构造
+##### 5.1.2、为继承做准备
+
+#### 5.2、继承体系下的对象构造
+
++ 编译器所做的扩充操作
+  + 1、
+  + 2、如果有一个
+  + 3、
+  + 4、
+  + 5、
 
 ##### 5.2.1、虚拟继承（Virtual Inheritance）
 
 ##### 5.2.2、初始化语意学（The Semantics of the vptr Initialization）
 
-5.3、对象复制语意学（）
+#### 5.3、对象复制语意学（）
 
-5.4、对象的功能（）
+#### 5.4、对象的功能（）
 
-5.5、解构语意学（Semantics of Destruction）
++ 测试POD，ADT，单一继承，多重继承，虚拟继承
+
+#### 5.5、解构语意学（Semantics of Destruction）
 
 ### chap6、执行期语意学
 
@@ -284,15 +358,19 @@ class A : public Y, public Z{};
 
 6.1.4、Default Constructors和数组
 
-6.2、new和delete运算符
+#### 6.2、new和delete运算符
+
++ `int *pi = new int(5);`是由两步骤组成：
+  + 1、通过适当的new运算符函数实体，配置所需的内存，`int *pi = __new(sizeof(int));`
+  + 2、给配置得来的对象设立初值：`*pi=5;`
 
 6.2.1、针对数组的new语意
 
 6.2.2、Placement Operator new的语意
 
-6.3、临时性对象
+#### 6.3、临时性对象
 
-6.3.1、临时性对象的迷思
+##### 6.3.1、临时性对象的迷思
 
 ### chap7、站在对象模型的类端
 
