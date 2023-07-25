@@ -40,12 +40,16 @@ nav:
     - daily: '01daily.md'
     - C++: 
         - 《Effective C++》: '20C++/effectiveC++.md'
+        - 《深度探索C++对象模型》: '20C++/深度探索C++对象模型.md'
         - 《Effective STL》: '21STL/EffectiveSTL.md'
         - 《C++泛型STL原理和应用》: '21STL/C++泛型STL原理和应用.md'
+        - 《STL源码剖析》: '21STL/STL源码剖析.md'
         - 《深入应用C++11》: '22C++modern/深入应用C++11.md'
     - 基础知识:
         - 《操作系统导论》: '408/操作系统导论.md'
         - 《大话设计模式》: '408/大话设计模式.md'
+        - 《数据结构与算法分析_C++4th》: '408/数据结构与算法分析_C++4th.md'
+        - 《算法4th》: '408/算法(4th).md'
     - 网络编程:
         - 《TCP/IP网络编程》: '10network/TCPIP网络编程.md'
         - 《Linux高性能服务器编程》: '10network/Linux高性能服务器编程.md'
@@ -75,6 +79,7 @@ nav:
         - 《Linux命令行与shell脚本编程大全(3rd)》: '15tool/Linux命令行与shell脚本编程大全(3rd).md' 
         - 《python程序设计（3rd）》: '15tool/python程序设计（3rd）.md' 
     - 刷题:
+        - 《剑指offer2nd》: '91leetcode/剑指offer.md'
         - 《剑指offer专项突破》: '91leetcode/剑指offer专项突破.md'
     - 网课:
         - 《Linux高并发网络编程开发》: '90lecture/01Linux高并发网络编程开发.md'
