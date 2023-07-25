@@ -100,35 +100,35 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#part319-25">Part3、关联容器（19-25）</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#19">19、</a>
+    <li class="toctree-l3"><a class="reference internal" href="#19equalityequivalence">19、理解相等（equality）和等价（equivalence）的区别</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#20">20、</a>
+    <li class="toctree-l3"><a class="reference internal" href="#20">20、为包含指针的关联容器指定比较类型</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#21">21、</a>
+    <li class="toctree-l3"><a class="reference internal" href="#21false">21、总是让比较函数在等值情况下返回false</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#22">22、</a>
+    <li class="toctree-l3"><a class="reference internal" href="#22setmultiset">22、切勿直接修改set或multiset中的键</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#23">23、</a>
+    <li class="toctree-l3"><a class="reference internal" href="#23vector">23、考虑用排序的vector替代关联容器</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#24">24、</a>
+    <li class="toctree-l3"><a class="reference internal" href="#24mapoperatormapinsert">24、当效率至关重要时，请在map::operator[]与map::insert之间谨慎做出选择</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#25">25、</a>
+    <li class="toctree-l3"><a class="reference internal" href="#25">25、熟悉非标准的散列容器</a>
     </li>
         </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#part426-29">Part4、迭代器（26-29）</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#26">26、</a>
+    <li class="toctree-l3"><a class="reference internal" href="#26iteratorconst_iteratorreverse_iteratorconst_reverse_iterator">26、iterator优先于const_iterator、reverse_iterator及const_reverse_iterator</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#27">27、</a>
+    <li class="toctree-l3"><a class="reference internal" href="#27distanceadvanceconst_iteratoriterator">27、使用distance和advance将容器的const_iterator转换成iterator</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#28">28、</a>
+    <li class="toctree-l3"><a class="reference internal" href="#28reverse_iteratorbaseiterator">28、正确理解由reverse_iterator的base()成员函数所产生的iterator的用法</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#29">29、</a>
+    <li class="toctree-l3"><a class="reference internal" href="#29istreambuf_iterator">29、对于逐个字符的输入请考虑使用istreambuf_iterator</a>
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#part5">Part5、算法</a>
+    <li class="toctree-l2"><a class="reference internal" href="#part530-37">Part5、算法（30-37）</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#30">30、确保目标区间足够大</a>
     </li>
@@ -136,9 +136,55 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#32removeerase">32、如果确实需要删除元素，则需要在remove这一类算法之后调用erase</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#33remove">33、对包含指针的容器使用remove这一类算法时要特别小心</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#34">34、了解哪些算法要求使用排序的区间作为参数</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#35mismatchlexicographical_compare">35、通过mismatch或lexicographical_compare实现简单的忽略大小写的字符串比较</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#36copy_if">36、理解copy_if算法的正确实现</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#37accumulatefor_each">37、使用accumulate或者for_each进行区间统计</a>
+    </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#_1">备注</a>
+    <li class="toctree-l2"><a class="reference internal" href="#part638-42">Part6、函数子、函数子类、函数及其他（38-42）</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#38">38、遵循按值传递的原则来设计函数子类</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#39">39、确保判别式是“纯函数”</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#40">40、若一个类是函数子，则应使它可配接</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#41ptr_funmem_funmem_fun_ref">41、理解ptr_fun、mem_fun和mem_fun_ref的来由</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#42lesstoperator">42、确保less&lt;T&gt;与operator&lt;具有相同的语义</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#part7stl43-50">Part7、在程序中使用STL（43-50）</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#43">43、算法调用优先于手写的循环</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#44">44、容器的成员函数优先于同名的算法</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#45countfindbinary_searchlower_boundupper_boundequal_range">45、正确区分count、find、binary_search、lower_bound、upper_bound和equal_range</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#46stl">46、考虑使用函数对象而不是函数作为STL算法的参数</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#47write-only">47、避免产生“直写型”（write-only）的代码</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#48include">48、总是包含（#include）正确的头文件</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#49stl">49、学会分析与STL相关的编译器诊断信息</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#50stlweb">50、熟悉与STL相关的Web站点</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_1">参考书目</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_2">备注</a>
     </li>
     </ul>
                   </li>
@@ -371,8 +417,9 @@ string().swap(s1);//清除s并把它的容量变为最小</code></pre>
 <h3 id="part319-25">Part3、关联容器（19-25）<a class="headerlink" href="#part319-25" title="Permanent link">&para;</a></h3>
 <ul>
 <li>有哪些特性：（自动排序，不允许有重复数据）</li>
+<li><em>有序列容器比，关联容器，一般是key,value关联起来组成的，个人看的一些理解，用来记忆一下，lionel，没找到官方的</em></li>
 </ul>
-<h4 id="19">19、<a class="headerlink" href="#19" title="Permanent link">&para;</a></h4>
+<h4 id="19equalityequivalence">19、理解相等（equality）和等价（equivalence）的区别<a class="headerlink" href="#19equalityequivalence" title="Permanent link">&para;</a></h4>
 <ul>
 <li>find的相等是<code>operator==</code>，std::insert是<strong>等价</strong>，以<code>operator&lt;</code>为基础</li>
 </ul>
@@ -382,45 +429,45 @@ string().swap(s1);//清除s并把它的容量变为最小</code></pre>
 <ul>
 <li><em>没有完全看懂啊，lionel</em></li>
 </ul>
-<h4 id="20">20、<a class="headerlink" href="#20" title="Permanent link">&para;</a></h4>
+<h4 id="20">20、为包含指针的关联容器指定比较类型<a class="headerlink" href="#20" title="Permanent link">&para;</a></h4>
 <ul>
 <li><code>set&lt;string *&gt; ssp;</code>是<code>set&lt;string *, less&lt;string*&gt;&gt; ssp;</code>，最精确的说，是<code>set&lt;string *, less&lt;string*&gt;, allocator&lt;string*&gt;&gt; ssp;</code>的缩写。
     + <strong>自己编写比较函数子类</strong></li>
 </ul>
-<h4 id="21">21、<a class="headerlink" href="#21" title="Permanent link">&para;</a></h4>
-<h4 id="22">22、<a class="headerlink" href="#22" title="Permanent link">&para;</a></h4>
+<h4 id="21false">21、总是让比较函数在等值情况下返回false<a class="headerlink" href="#21false" title="Permanent link">&para;</a></h4>
+<h4 id="22setmultiset">22、切勿直接修改set或multiset中的键<a class="headerlink" href="#22setmultiset" title="Permanent link">&para;</a></h4>
 <ul>
 <li>set和multiset时，Key的值是<code>const</code>的</li>
 </ul>
-<h4 id="23">23、<a class="headerlink" href="#23" title="Permanent link">&para;</a></h4>
+<h4 id="23vector">23、考虑用排序的vector替代关联容器<a class="headerlink" href="#23vector" title="Permanent link">&para;</a></h4>
 <ul>
 <li>如果只是单纯想查找用<strong>hash</strong>，<strong>关联容器是平衡二叉树</strong></li>
 </ul>
-<h4 id="24">24、<a class="headerlink" href="#24" title="Permanent link">&para;</a></h4>
+<h4 id="24mapoperatormapinsert">24、当效率至关重要时，请在map::operator[]与map::insert之间谨慎做出选择<a class="headerlink" href="#24mapoperatormapinsert" title="Permanent link">&para;</a></h4>
 <ul>
 <li>map中的<code>operator[]</code>有问题啊</li>
 </ul>
-<h4 id="25">25、<a class="headerlink" href="#25" title="Permanent link">&para;</a></h4>
+<h4 id="25">25、熟悉非标准的散列容器<a class="headerlink" href="#25" title="Permanent link">&para;</a></h4>
 <ul>
 <li>hash_set（标准库，没有啊）</li>
 </ul>
 <h3 id="part426-29">Part4、迭代器（26-29）<a class="headerlink" href="#part426-29" title="Permanent link">&para;</a></h3>
 <p>0、
 + 为啥需要4种迭代器？iterator、const_iterator、reverse_iterator、const_reverse_iterator，<em>是不是废弃掉啦？</em></p>
-<h4 id="26">26、<a class="headerlink" href="#26" title="Permanent link">&para;</a></h4>
+<h4 id="26iteratorconst_iteratorreverse_iteratorconst_reverse_iterator">26、iterator优先于const_iterator、reverse_iterator及const_reverse_iterator<a class="headerlink" href="#26iteratorconst_iteratorreverse_iteratorconst_reverse_iterator" title="Permanent link">&para;</a></h4>
 <ul>
 <li>iterator优先使用</li>
 </ul>
-<h4 id="27">27、<a class="headerlink" href="#27" title="Permanent link">&para;</a></h4>
+<h4 id="27distanceadvanceconst_iteratoriterator">27、使用distance和advance将容器的const_iterator转换成iterator<a class="headerlink" href="#27distanceadvanceconst_iteratoriterator" title="Permanent link">&para;</a></h4>
 <ul>
 <li>把const_iterator转换成iterator，<em>为啥不要用const呢？</em></li>
 </ul>
-<h4 id="28">28、<a class="headerlink" href="#28" title="Permanent link">&para;</a></h4>
-<h4 id="29">29、<a class="headerlink" href="#29" title="Permanent link">&para;</a></h4>
+<h4 id="28reverse_iteratorbaseiterator">28、正确理解由reverse_iterator的base()成员函数所产生的iterator的用法<a class="headerlink" href="#28reverse_iteratorbaseiterator" title="Permanent link">&para;</a></h4>
+<h4 id="29istreambuf_iterator">29、对于逐个字符的输入请考虑使用istreambuf_iterator<a class="headerlink" href="#29istreambuf_iterator" title="Permanent link">&para;</a></h4>
 <ul>
 <li><code>istream_iterator</code>使用<code>operator&gt;&gt;</code>函数来完成实际的读操作，而默认情况下<code>operator&gt;&gt;</code>函数会跳过空白字符。</li>
 </ul>
-<h3 id="part5">Part5、算法<a class="headerlink" href="#part5" title="Permanent link">&para;</a></h3>
+<h3 id="part530-37">Part5、算法（30-37）<a class="headerlink" href="#part530-37" title="Permanent link">&para;</a></h3>
 <h4 id="30">30、确保目标区间足够大<a class="headerlink" href="#30" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>STL容器会自动扩充存储空间以容纳这些对象</strong>，但并不一定总是能正确管理，<em>如果user触发得不对，lionel</em></li>
@@ -437,7 +484,50 @@ string().swap(s1);//清除s并把它的容量变为最小</code></pre>
 <li><em>各种不同排序有其适合的场合，要注意，lionel</em></li>
 </ul>
 <h4 id="32removeerase">32、如果确实需要删除元素，则需要在remove这一类算法之后调用erase<a class="headerlink" href="#32removeerase" title="Permanent link">&para;</a></h4>
-<h3 id="_1">备注<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<h4 id="33remove">33、对包含指针的容器使用remove这一类算法时要特别小心<a class="headerlink" href="#33remove" title="Permanent link">&para;</a></h4>
+<h4 id="34">34、了解哪些算法要求使用排序的区间作为参数<a class="headerlink" href="#34" title="Permanent link">&para;</a></h4>
+<h4 id="35mismatchlexicographical_compare">35、通过mismatch或lexicographical_compare实现简单的忽略大小写的字符串比较<a class="headerlink" href="#35mismatchlexicographical_compare" title="Permanent link">&para;</a></h4>
+<h4 id="36copy_if">36、理解copy_if算法的正确实现<a class="headerlink" href="#36copy_if" title="Permanent link">&para;</a></h4>
+<h4 id="37accumulatefor_each">37、使用accumulate或者for_each进行区间统计<a class="headerlink" href="#37accumulatefor_each" title="Permanent link">&para;</a></h4>
+<h3 id="part638-42">Part6、函数子、函数子类、函数及其他（38-42）<a class="headerlink" href="#part638-42" title="Permanent link">&para;</a></h3>
+<h4 id="38">38、遵循按值传递的原则来设计函数子类<a class="headerlink" href="#38" title="Permanent link">&para;</a></h4>
+<h4 id="39">39、确保判别式是“纯函数”<a class="headerlink" href="#39" title="Permanent link">&para;</a></h4>
+<h4 id="40">40、若一个类是函数子，则应使它可配接<a class="headerlink" href="#40" title="Permanent link">&para;</a></h4>
+<h4 id="41ptr_funmem_funmem_fun_ref">41、理解ptr_fun、mem_fun和mem_fun_ref的来由<a class="headerlink" href="#41ptr_funmem_funmem_fun_ref" title="Permanent link">&para;</a></h4>
+<ul>
+<li><em>不太会啊</em>，43用到了mem_fun_ref</li>
+</ul>
+<h4 id="42lesstoperator">42、确保<code>less&lt;T&gt;</code>与operator&lt;具有相同的语义<a class="headerlink" href="#42lesstoperator" title="Permanent link">&para;</a></h4>
+<h3 id="part7stl43-50">Part7、在程序中使用STL（43-50）<a class="headerlink" href="#part7stl43-50" title="Permanent link">&para;</a></h3>
+<h4 id="43">43、算法调用优先于手写的循环<a class="headerlink" href="#43" title="Permanent link">&para;</a></h4>
+<ul>
+<li>自己手写for循环，与调用<code>for_each()</code>算法</li>
+</ul>
+<ul>
+<li>调用算法通常是更好的选择，它往往优先于任何一个手写循环，理由有3个：<ul>
+<li>效率</li>
+<li>正确性</li>
+<li>可维护性</li>
+</ul>
+</li>
+<li>STL有70个算法名称，<strong>知道（或查找到）每个算法的所做的事情</strong>，<em>现在是不是更多啦，在哪找？cppreference，lionel</em></li>
+</ul>
+<h4 id="44">44、容器的成员函数优先于同名的算法<a class="headerlink" href="#44" title="Permanent link">&para;</a></h4>
+<ul>
+<li>原因有2个：【算法和成员函数虽然有同样的名称，但它们所做的事情往往不完全相同】<ul>
+<li>一，成员函数往往速度更快</li>
+<li>二，成员函数通常与容器（特别是关联容器）结合得更加紧密</li>
+</ul>
+</li>
+</ul>
+<h4 id="45countfindbinary_searchlower_boundupper_boundequal_range">45、正确区分count、find、binary_search、lower_bound、upper_bound和equal_range<a class="headerlink" href="#45countfindbinary_searchlower_boundupper_boundequal_range" title="Permanent link">&para;</a></h4>
+<h4 id="46stl">46、考虑使用函数对象而不是函数作为STL算法的参数<a class="headerlink" href="#46stl" title="Permanent link">&para;</a></h4>
+<h4 id="47write-only">47、避免产生“直写型”（write-only）的代码<a class="headerlink" href="#47write-only" title="Permanent link">&para;</a></h4>
+<h4 id="48include">48、总是包含（#include）正确的头文件<a class="headerlink" href="#48include" title="Permanent link">&para;</a></h4>
+<h4 id="49stl">49、学会分析与STL相关的编译器诊断信息<a class="headerlink" href="#49stl" title="Permanent link">&para;</a></h4>
+<h4 id="50stlweb">50、熟悉与STL相关的Web站点<a class="headerlink" href="#50stlweb" title="Permanent link">&para;</a></h4>
+<h3 id="_1">参考书目<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<h3 id="_2">备注<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <ul>
 <li>前置知识《CPP Primer》5th的chap9顺序容器。</li>
 <li>2021-11-25花了50min整理形成了第1版。</li>

@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>深度探索C++对象模型 - lionel的技术笔记</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "\u6df1\u5ea6\u63a2\u7d22C++\u5bf9\u8c61\u6a21\u578b";
+        var mkdocs_page_input_path = "20C++\\\u6df1\u5ea6\u63a2\u7d22C++\u5bf9\u8c61\u6a21\u578b.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> lionel的技术笔记
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">简介</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../01daily/">daily</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">C++</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../effectiveC%2B%2B/">《Effective C++》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/EffectiveSTL/">《Effective STL》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/C%2B%2B%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/">《C++泛型STL原理和应用》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../22C%2B%2Bmodern/%E6%B7%B1%E5%85%A5%E5%BA%94%E7%94%A8C%2B%2B11/">《深入应用C++11》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">基础知识</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA/">《操作系统导论》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E5%A4%A7%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">《大话设计模式》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网络编程</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/TCPIP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">《TCP/IP网络编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/">《Linux高性能服务器编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/TCPIP%E8%AF%A6%E8%A7%A3%E5%8D%B71/">《TCPIP详解卷1》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/Linux%E5%86%85%E6%A0%B8%E7%BD%91%E7%BB%9C%E6%A0%88%E6%BA%90%E4%BB%A3%E7%A0%81%E6%83%85%E6%99%AF%E5%88%86%E6%9E%90/">《Linux内核网络栈源代码情景分析》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C/">《深入理解Linux网络》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">文件系统</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/Linux%E5%86%85%E6%A0%B8%E6%8E%A2%E7%A7%98/">《Linux内核探秘》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《文件系统技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">《存储技术原理分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">存储</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../12storage/ceph%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《ceph设计原理与实现》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">视频</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/FFmpeg%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/">《FFmpeg入门到精通》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/WebRTC%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/">《WebRTC权威指南》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/WebRTC%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AE%9E%E6%97%B6%E4%BA%92%E5%8A%A8%E6%8A%80%E6%9C%AF/">《WebRTC音视频实时互动技术》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/%E6%96%B0%E4%B8%80%E4%BB%A3%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9%E7%A0%81%E6%A0%87%E5%87%86-H.264_AVC/">《新一代视频压缩码标准-H.264_AVC》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">内核</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/Linux%E5%86%85%E6%A0%B8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《Linux内核设计与实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5Linux%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%E5%86%85%E6%A0%B8%E6%9C%BA%E5%88%B6/">《深入Linux设备驱动程序内核机制》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">《深入理解Linux虚拟内存管理》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《深入理解Linux网络技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/Linux%E5%86%85%E6%A0%B8%E6%BA%90%E4%BB%A3%E7%A0%81%E5%89%96%E6%9E%90-tcpip%E5%AE%9E%E7%8E%B0/">《Linux内核源代码剖析-TCP/IP实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E5%86%85%E6%A0%B8/">《深入理解Linux内核》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">工具</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/Wireshark%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98/">《Wireshark网络分析实战》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/Linux%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8Eshell%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B%E5%A4%A7%E5%85%A8%283rd%29/">《Linux命令行与shell脚本编程大全(3rd)》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/python%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%883rd%EF%BC%89/">《python程序设计（3rd）》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">刷题</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/">《剑指offer专项突破》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网课</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/01Linux%E9%AB%98%E5%B9%B6%E5%8F%91%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/">《Linux高并发网络编程开发》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/%E4%BE%AF%E6%8D%B7/%E4%BE%AF%E6%8D%B7C%2B%2B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%8660%E8%AE%B2/">《侯捷C++内存管理60讲》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/11NJU%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">《NJU算法设计与分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">英语专</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../60English/00794%E7%BB%BC%E5%90%88%E8%8B%B1%E8%AF%AD%E4%B8%80%E4%B8%8A/">《综合英语(一)上》</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">lionel的技术笔记</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>深度探索C++对象模型</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="c">《深度探索C++对象模型》<a class="headerlink" href="#c" title="Permanent link">&para;</a></h2>
+<h3 id="chap1">chap1、关于对象<a class="headerlink" href="#chap1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>类和结构体的定义</li>
+<li>为什么<strong>一个ADT或class hierarchy的数据封装</strong>比<strong>在C程序中程序性地使用全局数据</strong>好？</li>
+</ul>
+<h4 id="10layout-costs-for-adding-encapsulation">1.0、加上封装后的布局成本（Layout Costs for Adding Encapsulation）<a class="headerlink" href="#10layout-costs-for-adding-encapsulation" title="Permanent link">&para;</a></h4>
+<ul>
+<li>其实没有啥成本（<strong>数据成员直接在class object中</strong>【跟C一样】，<strong>成员函数只是在声明中，不在class object中</strong>）</li>
+</ul>
+<ul>
+<li><strong>C++在布局以及存取时间上主要的额外负担是由<code>virtual</code>引起</strong>，包括：<ul>
+<li>virtual function机制：<strong>执行期绑定</strong></li>
+<li>virtual base class：<strong>多次出现在继承体系中的base class，有一个单一而被 共享的实体</strong></li>
+<li>以外，还有一些多重继承下的额外负担</li>
+</ul>
+</li>
+</ul>
+<h4 id="11cthe-c-object-model">1.1、C++对象模式（The C++ Object Model）<a class="headerlink" href="#11cthe-c-object-model" title="Permanent link">&para;</a></h4>
+<ul>
+<li>C++中有两种类数据成员【class data members】：static和nonstatic</li>
+<li>三种类成员函数【class member functions】：static，nonstatic和virtual。</li>
+<li>代码中的<code>class Point{};</code>定义</li>
+<li><strong>如何模型出各种data members和function members呢？</strong></li>
+</ul>
+<h5 id="111a-simple-object-model">1.1.1、简单对象模型（A Simple Object Model）<a class="headerlink" href="#111a-simple-object-model" title="Permanent link">&para;</a></h5>
+<ul>
+<li>大小：<strong>指针大小，乘以class中所声明的members数目</strong>。  【lionel，这不像是本节的内容】</li>
+<li><strong>并没有应用到实际产品上</strong>，思路是，<strong>members本身并不放在object之中，只有“指向member的指针”才放在object内</strong>（每个声明的都会有个指针位置，根据图1.1表述，是这个意思）</li>
+</ul>
+<h5 id="112">1.1.2、表格驱动对象模型<a class="headerlink" href="#112" title="Permanent link">&para;</a></h5>
+<ul>
+<li>member抽取出来，放在data member table和member function table之中，<strong>class object本身则内含指向这个两个表格的指针</strong></li>
+</ul>
+<ul>
+<li><strong>没有真正使用</strong>，但<strong>member function table</strong>这个理念用了</li>
+</ul>
+<h5 id="113c">1.1.3、C++对象模型<a class="headerlink" href="#113c" title="Permanent link">&para;</a></h5>
+<ul>
+<li>Nonstatic data members被配置于每一个class object之内，static data members则被放在所有class object之外。static和nonstatic function members也被放在所有class object之外。<strong>virtual functions则以两个步骤支持之</strong>：<ul>
+<li>每一个class产生出一堆指向virtual functions的指针，放在表格之中，称为<strong>vtbl</strong>（virtual table）</li>
+<li>每一个class object都添加了一个指针，指向相关的virtual table。通常每个指针称为<strong>vptr</strong></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><em>lionel，没太看呢</em></li>
+</ul>
+<h6 id="1131adding-inheritance">1.1.3.1、加上继承（Adding Inheritance）<a class="headerlink" href="#1131adding-inheritance" title="Permanent link">&para;</a></h6>
+<h5 id="114how-the-object-model-effects-programs">1.1.4、对象模型如何影响程序（How the Object Model Effects Programs）<a class="headerlink" href="#114how-the-object-model-effects-programs" title="Permanent link">&para;</a></h5>
+<ul>
+<li><em>本节内容没有看呢，lionel</em></li>
+</ul>
+<h4 id="12a-keyword-distinction">1.2、关键词所带来的差异（A Keyword Distinction）<a class="headerlink" href="#12a-keyword-distinction" title="Permanent link">&para;</a></h4>
+<h5 id="121">1.2.1、关键词的困扰<a class="headerlink" href="#121" title="Permanent link">&para;</a></h5>
+<h5 id="122structthe-politically-correct-struct">1.2.2、策略性正确的struct（The Politically Correct Struct）<a class="headerlink" href="#122structthe-politically-correct-struct" title="Permanent link">&para;</a></h5>
+<ul>
+<li><em>这2节内容，都没怎么看呢，lionel</em></li>
+</ul>
+<h4 id="13an-object-distinction">1.3、对象的差异（An Object Distinction）<a class="headerlink" href="#13an-object-distinction" title="Permanent link">&para;</a></h4>
+<ul>
+<li>C++程序设计模型直接支持三种程序设计典范：<ul>
+<li>程序模型（procedural model）</li>
+<li>抽象数据类型模型（abstract data type model，ADT）</li>
+<li>面向对象模型（object-oriented model）</li>
+</ul>
+</li>
+<li>C++以下列方法支持多态：<ul>
+<li>经由一组隐含的转化操作</li>
+<li>经由virtual function机制</li>
+<li>经由<code>dynamic_cast</code>和<code>typeid</code>运算符</li>
+</ul>
+</li>
+<li>需要多少内存才能表现一个class object？一般而言要有：<ul>
+<li>其nonstatic data members的总和大小</li>
+<li>加上任何由于alignment（）的需求而填补（padding）上去的空间。</li>
+<li>加上为了支持virtual而由内部产生的任何额外负担（overhead）</li>
+</ul>
+</li>
+</ul>
+<h5 id="131the-type-of-a-pointer">1.3.1、指针的类型（The Type of a Pointer）<a class="headerlink" href="#131the-type-of-a-pointer" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>转型（cast）其实是一种编译器指令</strong>。大部分情况下它并不改变一个指针所含的真正地址，它只影响“被指出之内存的大小和其内容”的解释方式。</li>
+</ul>
+<h5 id="132adding-polymorphism">1.3.2、加上多态之后（Adding Polymorphism）<a class="headerlink" href="#132adding-polymorphism" title="Permanent link">&para;</a></h5>
+<ul>
+<li>C++也支持具体的ADT程序风格，称为object-based（OB），一个OB设计可能比一个对等的OD设计速度更快而且空间更紧凑。<strong>OB设计比较没有弹性</strong>。<ul>
+<li>速度快：所有的函数引发操作都在编译时期解析完成，对象建构起来时不需要设置virtual机制</li>
+<li>空间紧凑：因为每一个class object不需要负担传统上为了支持virtual机制而需要的额外负荷</li>
+</ul>
+</li>
+</ul>
+<h3 id="chap02">chap02、构造函数语义学<a class="headerlink" href="#chap02" title="Permanent link">&para;</a></h3>
+<h4 id="21default-constructor">2.1、Default Constructor的建构操作<a class="headerlink" href="#21default-constructor" title="Permanent link">&para;</a></h4>
+<ul>
+<li>在需要的时候？创建<ul>
+<li>是程序的需要</li>
+<li>还是编译器的需要</li>
+</ul>
+</li>
+<li>nontrivial default constructor四种情况（就是2.1.1-2.1.4）</li>
+</ul>
+<h5 id="211default-constructormember-class-object">2.1.1、“带有Default Constructor“的Member Class Object<a class="headerlink" href="#211default-constructormember-class-object" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>被合成的default constructor只满足编译器的需要，而不是程序的需要</strong>。</li>
+<li>C++语言要求以"<strong>member objects在class中的声明次序</strong>"来调用各个constructors。</li>
+</ul>
+<h5 id="212default-constructorbase-class">2.1.2、“带有Default Constructor“的Base Class<a class="headerlink" href="#212default-constructorbase-class" title="Permanent link">&para;</a></h5>
+<h5 id="213virtual-functionclass">2.1.3、“带有一个Virtual Function“的Class<a class="headerlink" href="#213virtual-functionclass" title="Permanent link">&para;</a></h5>
+<ul>
+<li>需要合成出default constructor的两种场景：<ul>
+<li>class声明（或继承）一个virtual function</li>
+<li>class派生自一个继承串链，其中有一个或更多的virtual base classes</li>
+</ul>
+</li>
+</ul>
+<h5 id="214virtual-base-classclass">2.1.4、“带有一个Virtual Base class“的Class<a class="headerlink" href="#214virtual-base-classclass" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>virtual base class的实现法在不同的编译器之间有极大的差异</strong></li>
+</ul>
+<h5 id="215">2.1.5、总结<a class="headerlink" href="#215" title="Permanent link">&para;</a></h5>
+<ul>
+<li>C++新手一般有两个常见的误解：<ul>
+<li>1、任何class如果没有定义default constructor，就会被合成一个来。</li>
+<li>2、编译器合成出来的default constructor会明确设定"class内每一个data member的默认值"</li>
+</ul>
+</li>
+</ul>
+<h4 id="22copy-constructor">2.2、Copy Constructor的建构操作<a class="headerlink" href="#22copy-constructor" title="Permanent link">&para;</a></h4>
+<ul>
+<li>有3种情况，会以一个object的内容作为另一个class object的初值<ul>
+<li>1、对一个object做明确的初始化操作</li>
+<li>2、当object被当作参数交给某个函数时</li>
+<li>3、当函数传回一个class object时</li>
+</ul>
+</li>
+</ul>
+<h5 id="221default-memberwise-initialization">2.2.1、Default Memberwise Initialization<a class="headerlink" href="#221default-memberwise-initialization" title="Permanent link">&para;</a></h5>
+<ul>
+<li>一个class object可以从两种方式复制得到，一种是初始化（copy constructor），另一种是被指定（assignment，copy assignment operator）</li>
+</ul>
+<h5 id="222bitwise-copy-semantics">2.2.2、Bitwise Copy Semantics（位逐次拷贝）<a class="headerlink" href="#222bitwise-copy-semantics" title="Permanent link">&para;</a></h5>
+<h5 id="223bitwise-copy-semantics">2.2.3、不要Bitwise Copy Semantics!<a class="headerlink" href="#223bitwise-copy-semantics" title="Permanent link">&para;</a></h5>
+<ul>
+<li>什么时候一个class不展现出"bitwise copy semantics"，4种情况<ul>
+<li>1、当class内含一个</li>
+<li>2、、</li>
+<li>3、当class声明了一个或多个virtual functions时</li>
+<li>4、当class派生自一个继承串链，其中有一个或多个virtual base classes时</li>
+</ul>
+</li>
+</ul>
+<h5 id="224virtual-table">2.2.4、重新设定的指针Virtual Table<a class="headerlink" href="#224virtual-table" title="Permanent link">&para;</a></h5>
+<ul>
+<li>编译期间的两处程序扩张操作<ul>
+<li>增加一个virtual function table（vtbl），内含每一个有作用的virtual function的地址</li>
+<li>将一个指向virtual function table的指针（vptr），安插在每一个class object内</li>
+</ul>
+</li>
+</ul>
+<h5 id="225virtual-base-class-subobject">2.2.5、处理Virtual Base Class Subobject<a class="headerlink" href="#225virtual-base-class-subobject" title="Permanent link">&para;</a></h5>
+<h4 id="23program-transformation-semantics">2.3、程序转换语意学（Program Transformation Semantics）<a class="headerlink" href="#23program-transformation-semantics" title="Permanent link">&para;</a></h4>
+<h5 id="231">2.3.1、明确的初始化操作（）<a class="headerlink" href="#231" title="Permanent link">&para;</a></h5>
+<h5 id="232">2.3.2、参数的初始化（）<a class="headerlink" href="#232" title="Permanent link">&para;</a></h5>
+<h5 id="233">2.3.3、返回值的初始化（）<a class="headerlink" href="#233" title="Permanent link">&para;</a></h5>
+<h5 id="234">2.3.4、在使用者层面做优化（）<a class="headerlink" href="#234" title="Permanent link">&para;</a></h5>
+<h5 id="235">2.3.5、在编译器层面做优化（）<a class="headerlink" href="#235" title="Permanent link">&para;</a></h5>
+<h5 id="236copy-constructor">2.3.6、Copy Constructor：要还是不要？<a class="headerlink" href="#236copy-constructor" title="Permanent link">&para;</a></h5>
+<h5 id="237">2.3.7、摘要<a class="headerlink" href="#237" title="Permanent link">&para;</a></h5>
+<h4 id="24member-initialization-list">2.4、成员们的初始化队伍（Member Initialization List）<a class="headerlink" href="#24member-initialization-list" title="Permanent link">&para;</a></h4>
+<ul>
+<li>class members的初值<ul>
+<li>要不是经由member initialization list</li>
+<li>就是在constructor函数本身之内</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>必须使用Member initialization list：<ul>
+<li>1、当初始化一个reference member时</li>
+<li>2、当初始化一个const member时</li>
+<li>3、当调用一个base class的constructor，而它拥有一组参数时</li>
+<li>4、当调用一个member class的construcotr，而它拥有一组参数时</li>
+</ul>
+</li>
+</ul>
+<h3 id="chap03data">chap03Data语意学<a class="headerlink" href="#chap03data" title="Permanent link">&para;</a></h3>
+<h4 id="0">0、<a class="headerlink" href="#0" title="Permanent link">&para;</a></h4>
+<pre class="highlight"><code class="language-c++">//求下列各个类的size()
+class X {};
+class Y : public virtual X {};
+class Z : public virtual X {};
+class A : public Y, public Z{};</code></pre>
+<ul>
+<li>Y和Z的大小，受到3个因素的影响：<ul>
+<li>1、语言本身所造成的额外负担（overhead）</li>
+<li>2、编译器对于特殊情况所提供的优化处理</li>
+<li>3、Alignment的限制</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>每一个class object因此必须有足够的大小以容纳它所有的nonstatic data members</strong></li>
+</ul>
+<h4 id="31data-member">3.1、Data Member的绑定<a class="headerlink" href="#31data-member" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>请始终把"nested type声明"放在class的起始处</strong></li>
+</ul>
+<h4 id="32data-member">3.2、Data Member的布局<a class="headerlink" href="#32data-member" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Nonstatic data members在class object中的排列顺序将和其被声明的顺序一样</li>
+<li>members的排列只需符合“较晚出现的members在class object中有较高的地址”</li>
+</ul>
+<h4 id="33data-member">3.3、Data Member的存取<a class="headerlink" href="#33data-member" title="Permanent link">&para;</a></h4>
+<h5 id="331static-data-members">3.3.1、Static Data Members<a class="headerlink" href="#331static-data-members" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>视为global变量</strong></li>
+<li>编译器的解决方法是暗中对每一个static data member编码（<strong>name-mangling</strong>）</li>
+</ul>
+<h5 id="332nonstatic-data-members">3.3.2、Nonstatic Data Members<a class="headerlink" href="#332nonstatic-data-members" title="Permanent link">&para;</a></h5>
+<ul>
+<li>表面上看到的对于x,y,z的直接存取，<strong>事实上是经由一个"implicit class object"（由this指针表达）完成</strong></li>
+<li>每一个nonstatic data member的偏移量（offset）在编译时期即可获知</li>
+</ul>
+<h4 id="34data-member">3.4、“继承”与Data Member<a class="headerlink" href="#34data-member" title="Permanent link">&para;</a></h4>
+<ul>
+<li>大部分编译器，base class members总是先出现，<strong>但属于virtual base class的除外</strong></li>
+</ul>
+<h5 id="341">3.4.1、只要继承不要多态<a class="headerlink" href="#341" title="Permanent link">&para;</a></h5>
+<ul>
+<li>具体继承不会增加空间或存取时间上的额外负担</li>
+</ul>
+<h5 id="342">3.4.2、加上多态<a class="headerlink" href="#342" title="Permanent link">&para;</a></h5>
+<h5 id="343">3.4.3、多重继承<a class="headerlink" href="#343" title="Permanent link">&para;</a></h5>
+<h5 id="344">3.4.4、虚拟继承<a class="headerlink" href="#344" title="Permanent link">&para;</a></h5>
+<ul>
+<li><em>我之前对这个不了解，印象中代码没这么写过啊</em></li>
+</ul>
+<p><code>class Vertex: public virtual Point2d{};</code></p>
+<h4 id="35">3.5、对象成员的效率<a class="headerlink" href="#35" title="Permanent link">&para;</a></h4>
+<ul>
+<li>测试聚合（aggregation）、封装（）以及继承（）所引发的额外负荷的程度</li>
+</ul>
+<h4 id="36data-members">3.6、指向Data Members的指针<a class="headerlink" href="#36data-members" title="Permanent link">&para;</a></h4>
+<h5 id="361members">3.6.1、“指向Members的指针”的效率问题<a class="headerlink" href="#361members" title="Permanent link">&para;</a></h5>
+<h3 id="chap4function">chap4、Function语意学<a class="headerlink" href="#chap4function" title="Permanent link">&para;</a></h3>
+<h4 id="41member">4.1、Member的各种调用方式<a class="headerlink" href="#41member" title="Permanent link">&para;</a></h4>
+<ul>
+<li>最开始C++只支持nonstatic member functions</li>
+<li>virtual是20世纪80年代中期加进来的</li>
+<li>static member functions是最后被引入，1987年</li>
+</ul>
+<h5 id="411nonstatic-member-functions">4.1.1、Nonstatic Member Functions<a class="headerlink" href="#411nonstatic-member-functions" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>至少要和一般的member functions有相同的效率</strong></li>
+<li>member function被内化为nonmember的形式，转步步骤：<ul>
+<li>1、改写函数的signature（函数原型）以安插一个额外的参数到member function中，<strong>用以提供一个存取管道</strong>，使class object得以调用该函数，<strong>该额外参数被称为this指针</strong></li>
+<li>2、将每一个“对nonstatic data member的存取操作”改为经由this指针来存取</li>
+<li>3、将member function重新写成一个外部函数，对函数名称进行“mangling”处理，使它在程序中成为独一无二的语汇</li>
+</ul>
+</li>
+</ul>
+<h6 id="4111name-mangling">4.1.1.1、名称的特殊处理（Name Mangling）<a class="headerlink" href="#4111name-mangling" title="Permanent link">&para;</a></h6>
+<h5 id="412virtual-member-functions">4.1.2、Virtual Member Functions（）<a class="headerlink" href="#412virtual-member-functions" title="Permanent link">&para;</a></h5>
+<ul>
+<li>虚成员函数normalize<code>ptr-&gt;normalize()</code>被会内部转化为<code>(*ptr-&gt;vptr[1])(ptr)</code>;<ul>
+<li>vptr是个</li>
+<li>vptr[1]中的1是virtual table slot的索引值，关联到normalize()函数</li>
+<li><strong>第2个ptr表示this指针</strong>（<em>lionel，这个自己不熟</em>）</li>
+</ul>
+</li>
+</ul>
+<h5 id="413static-member-functions">4.1.3、Static Member Functions（）<a class="headerlink" href="#413static-member-functions" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>主要特性是它没有this指针</strong></li>
+</ul>
+<h4 id="42virtual-member-functions">4.2、Virtual Member Functions（虚拟成员函数）<a class="headerlink" href="#42virtual-member-functions" title="Permanent link">&para;</a></h4>
+<ul>
+<li>多态是<strong>“以一个public base class的指针（或reference），寻址出一个derived class object”</strong>的意思</li>
+<li>在实现上，可以在每一个多态的class object身上增加两个members:<ul>
+<li>1、一个字符串或数字，表示class的类型</li>
+<li>2、一个指针，指向某表格，表格中带有程序的virtual functions的执行期地址</li>
+</ul>
+</li>
+<li>问题是，如何找到表格中的地址，也分2步：<ul>
+<li>1、为了找到表格    157（189/358）</li>
+<li>2、为了找到函数地址，每一个virtual function被指派一个表格索引值</li>
+</ul>
+</li>
+</ul>
+<h5 id="421virtual-functions">4.2.1、多重继承下的Virtual Functions<a class="headerlink" href="#421virtual-functions" title="Permanent link">&para;</a></h5>
+<h5 id="422virtual-functions">4.2.2、虚拟继承下的Virtual Functions<a class="headerlink" href="#422virtual-functions" title="Permanent link">&para;</a></h5>
+<h4 id="43">4.3、函数的效能<a class="headerlink" href="#43" title="Permanent link">&para;</a></h4>
+<h4 id="44member-functionsrpointer-to-member-functions">4.4、指向Member Functionsr的指针（Pointer-to-Member Functions）<a class="headerlink" href="#44member-functionsrpointer-to-member-functions" title="Permanent link">&para;</a></h4>
+<ul>
+<li>取一个nonstatic data member的地址，<strong>得到的是该member在class布局中的bytes位置（再加1）</strong>，需要绑定到某个class object的地址上，才能够被存取</li>
+</ul>
+<h5 id="441virtual-member-functions">4.4.1、支持“指向Virtual Member Functions”之指针<a class="headerlink" href="#441virtual-member-functions" title="Permanent link">&para;</a></h5>
+<h5 id="442member-functions">4.4.2、在多重继承之下，指向Member Functions的指针<a class="headerlink" href="#442member-functions" title="Permanent link">&para;</a></h5>
+<h5 id="443member-functions">4.4.3、“指向Member Functions之指针”的效率<a class="headerlink" href="#443member-functions" title="Permanent link">&para;</a></h5>
+<h4 id="45inline-functions">4.5、Inline Functions<a class="headerlink" href="#45inline-functions" title="Permanent link">&para;</a></h4>
+<ul>
+<li>一般而言，处理一个inline函数，有两个阶段：<ul>
+<li>1、分析函数定义，以决定函数的"intrinsic inline ability"（本质的inline能力）</li>
+<li>2、真正的inline函数扩展操作是在调用的那一点上，这会带来参数的求值操作（evaluation）以及临时性对象的管理</li>
+</ul>
+</li>
+</ul>
+<h5 id="451formal-argument">4.5.1、形式参数（Formal Argument）<a class="headerlink" href="#451formal-argument" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>每一个形式参数都会被对应的实际参数取代</strong></li>
+</ul>
+<h5 id="452local-variables">4.5.2、局部变量（Local Variables）<a class="headerlink" href="#452local-variables" title="Permanent link">&para;</a></h5>
+<h3 id="chap5">chap5、构造、解构、拷贝语意学<a class="headerlink" href="#chap5" title="Permanent link">&para;</a></h3>
+<h4 id="50">5.0、<a class="headerlink" href="#50" title="Permanent link">&para;</a></h4>
+<h5 id="501presence-of-a-pure-virtual-function">5.0.1、纯虚拟函数的存在（Presence of a Pure Virtual Function）<a class="headerlink" href="#501presence-of-a-pure-virtual-function" title="Permanent link">&para;</a></h5>
+<p>5.0.2、虚拟规格的存在（）</p>
+<p>5.0.3、虚拟规格中const的存在</p>
+<h5 id="504class">5.0.4、重新考虑class的声明<a class="headerlink" href="#504class" title="Permanent link">&para;</a></h5>
+<h4 id="51">5.1、无继承情况下的对象构造<a class="headerlink" href="#51" title="Permanent link">&para;</a></h4>
+<h5 id="511">5.1.1、抽象数据类型（）<a class="headerlink" href="#511" title="Permanent link">&para;</a></h5>
+<ul>
+<li>Explicit initialization list带来三项缺点：<ul>
+<li>1、只有当class members都是public时，此法才奏效</li>
+<li>2、</li>
+<li>3、由于编译器并没有自动施行之，所以初始化行为的失败可能会比较高一些</li>
+</ul>
+</li>
+</ul>
+<h5 id="512">5.1.2、为继承做准备<a class="headerlink" href="#512" title="Permanent link">&para;</a></h5>
+<h4 id="52">5.2、继承体系下的对象构造<a class="headerlink" href="#52" title="Permanent link">&para;</a></h4>
+<ul>
+<li>编译器所做的扩充操作<ul>
+<li>1、</li>
+<li>2、如果有一个</li>
+<li>3、</li>
+<li>4、</li>
+<li>5、</li>
+</ul>
+</li>
+</ul>
+<h5 id="521virtual-inheritance">5.2.1、虚拟继承（Virtual Inheritance）<a class="headerlink" href="#521virtual-inheritance" title="Permanent link">&para;</a></h5>
+<h5 id="522the-semantics-of-the-vptr-initialization">5.2.2、初始化语意学（The Semantics of the vptr Initialization）<a class="headerlink" href="#522the-semantics-of-the-vptr-initialization" title="Permanent link">&para;</a></h5>
+<h4 id="53">5.3、对象复制语意学（）<a class="headerlink" href="#53" title="Permanent link">&para;</a></h4>
+<h4 id="54">5.4、对象的功能（）<a class="headerlink" href="#54" title="Permanent link">&para;</a></h4>
+<ul>
+<li>测试POD，ADT，单一继承，多重继承，虚拟继承</li>
+</ul>
+<h4 id="55semantics-of-destruction">5.5、解构语意学（Semantics of Destruction）<a class="headerlink" href="#55semantics-of-destruction" title="Permanent link">&para;</a></h4>
+<h3 id="chap6">chap6、执行期语意学<a class="headerlink" href="#chap6" title="Permanent link">&para;</a></h3>
+<p>6.1、对象的构造和解构</p>
+<p>6.1.1、全局对象</p>
+<p>6.1.2、局部静态对象</p>
+<p>6.1.3、对象数据</p>
+<p>6.1.4、Default Constructors和数组</p>
+<h4 id="62newdelete">6.2、new和delete运算符<a class="headerlink" href="#62newdelete" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>int *pi = new int(5);</code>是由两步骤组成：<ul>
+<li>1、通过适当的new运算符函数实体，配置所需的内存，<code>int *pi = __new(sizeof(int));</code></li>
+<li>2、给配置得来的对象设立初值：<code>*pi=5;</code></li>
+</ul>
+</li>
+</ul>
+<p>6.2.1、针对数组的new语意</p>
+<p>6.2.2、Placement Operator new的语意</p>
+<h4 id="63">6.3、临时性对象<a class="headerlink" href="#63" title="Permanent link">&para;</a></h4>
+<h5 id="631">6.3.1、临时性对象的迷思<a class="headerlink" href="#631" title="Permanent link">&para;</a></h5>
+<h3 id="chap7">chap7、站在对象模型的类端<a class="headerlink" href="#chap7" title="Permanent link">&para;</a></h3>
+<p>7.1、Template</p>
+<p>7.2、异常处理（Exception Handing）</p>
+<p>7.3、执行期类型识别（，RTTI）</p>
+<p>7.4、效率有了，弹性呢？</p>
+<p>7.4.1、动态共享函数库</p>
+<p>7.4.2、共享内存</p>
+<h3 id="_1">最后<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<h4 id="_2">履历<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
+<ul>
+<li>20230720开始看这本书，全天大概过了一遍，chap2确实不太好懂，看前言建议<strong>chap1、3、4先看</strong>，先过一遍，把脉络架起来，边思考边琢磨</li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

@@ -187,14 +187,34 @@
     <li class="toctree-l2"><a class="reference internal" href="#chap5">chap5、容器及其应用</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#51-vector">5.1 向量vector</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1vector">1、vector对象的定义及初始化</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#52list">5.2、列表list</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#53deque">5.3、双向队列deque</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#54-stl">5.4 STL关联式容器</a>
+    <li class="toctree-l3"><a class="reference internal" href="#54stl">5.4、STL关联式容器</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1stlpair">1、关联式数据与STL二元组类模板pair</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#2stl">2、STL对关联数据的组织与存储</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#55map">5.5、map容器</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#551map">5.5.1、map容器的定义</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#552map">5.5.2、map的数据插入</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#553map">5.5.3、map容器的其他常用成员方法</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#554multimap">5.5.4、multimap容器</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#56set">5.6、set容器</a>
     </li>
@@ -299,6 +319,14 @@
         </ul>
     </li>
         </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_1">附录</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#aexplicit">A、关于关键字explicit</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_2">勘误</a>
     </li>
     </ul>
                   </li>
@@ -522,17 +550,35 @@
 <h4 id="13">1.3 特化模板和模板具现规则<a class="headerlink" href="#13" title="Permanent link">&para;</a></h4>
 <h5 id="131">1.3.1 特化(特列化)模板<a class="headerlink" href="#131" title="Permanent link">&para;</a></h5>
 <ul>
-<li><strong>特化(特列化)模板</strong>：为有特殊算法要求的数据类型另行编写模板，<code>template&lt;&gt;</code>，1-5.cpp<ul>
+<li>
+<p><strong>特化(特列化)模板</strong>：为有特殊算法要求的数据类型另行编写模板</p>
+<ul>
 <li>通用模板：门票10块</li>
 <li>特化模板：学生和老人半价</li>
 </ul>
 </li>
-<li>函数模板中的特化模板<ul>
+</ul>
+<ul>
+<li>
+<p>1、函数模板中的特化模板</p>
+<ul>
 <li>在实体代码前加以下声明 <code>tmplate&lt;&gt;</code></li>
 </ul>
+<pre class="highlight"><code class="language-cpp">tmplate&lt;&gt; //只是在原来实体代码前写一个模板声明
+char* mymax(char* t1, char* t2) {
+    return (strcmp(t1,t2)&lt;0)?t2:t1;
+}</code></pre>
+<ul>
+<li>1-5.cpp，测试上述mymax函数模板并运行之</li>
+</ul>
 </li>
-<li>类模板的特化和偏特化，1-6.cpp<ul>
+</ul>
+<ul>
+<li>
+<p>2、类模板的特化和偏特化</p>
+<ul>
 <li><strong>偏特化：</strong>只特化参数中的某一个或某几个</li>
+<li>1-6.cpp，含有一个偏特化模板</li>
 <li>偏特化模板的写法 <code>template&lt;typename T2&gt; struct Test&lt;int,T2&gt;{}</code></li>
 <li>全特化模板的写法 <code>template&lt;&gt; struct Test&lt;int,float&gt;{}</code></li>
 </ul>
@@ -816,8 +862,6 @@ int main(){
 <h5 id="323-lambda">3.2.3 Lambda表达式<a class="headerlink" href="#323-lambda" title="Permanent link">&para;</a></h5>
 <ul>
 <li>无名/匿名仿函数</li>
-</ul>
-<ul>
 <li><a href="https://gitee.com/fewolflion/BookNote/blob/master/01lioneloutput/60BookCode/C++%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/chap3STL%E5%8F%8A%E5%85%B6%E4%BD%BF%E7%94%A8%E7%9A%84%E5%85%B6%E4%BB%96C++%E6%8A%80%E6%9C%AF/E3-07.cpp">例3-7 lambda表达式与具有相同功能的仿函数的比较</a>。<strong>Lambda表达式</strong>又叫 <em>无名仿函数（或匿名仿函数）</em><ul>
 <li><code>[](int x){cout &lt;&lt; 2*x &lt;&lt; endl;} // 相当于在声明function类的同时，又定义了定义该对象</code><ul>
 <li><code>[]</code>，仿函数中运算符<code>()</code>的重载函数名，也叫<strong>lambda表达式前导符</strong></li>
@@ -838,6 +882,7 @@ int main(){
 </ul>
 </li>
 <li>例3-11 把lambda表达式应用于STL通用算法的一个程序示例</li>
+<li><em>mutable与exception关键字，同时自己记住各种使用场景，lionel</em></li>
 </ul>
 <h4 id="33">3.3 智能指针<a class="headerlink" href="#33" title="Permanent link">&para;</a></h4>
 <ul>
@@ -926,9 +971,22 @@ int main(){
     return 0;
 }</code></pre>
 <h3 id="chap4stl">chap4、模拟STL三大件<a class="headerlink" href="#chap4stl" title="Permanent link">&para;</a></h3>
+<ul>
+<li>20201019</li>
+</ul>
 <h4 id="41">4.1、容器<a class="headerlink" href="#41" title="Permanent link">&para;</a></h4>
 <h5 id="411vectormyvector">4.1.1、向量vector的仿真MyVector<a class="headerlink" href="#411vectormyvector" title="Permanent link">&para;</a></h5>
+<ul>
+<li>向量是单端开口的容器，其核心的数据存储装置（原始容器）是一个数组，<strong>开口位置在数组尾部</strong></li>
+</ul>
+<ul>
+<li>例4-1.cpp</li>
+</ul>
 <h5 id="412listmylist">4.1.2、列表list的仿真MyList<a class="headerlink" href="#412listmylist" title="Permanent link">&para;</a></h5>
+<ul>
+<li>以链表为数据存储核心的容器，<strong>首尾双端开口容器</strong>，双向链表</li>
+<li>例4-2.cpp</li>
+</ul>
 <h4 id="42">4.2、迭代器<a class="headerlink" href="#42" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>中介装置</strong>把容器与算法分离，这样的<strong>智能指针</strong>就叫<strong>迭代器</strong></li>
@@ -936,7 +994,7 @@ int main(){
 <h5 id="421">4.2.1、使用裸指针作为迭代器<a class="headerlink" href="#421" title="Permanent link">&para;</a></h5>
 <ul>
 <li><strong>以存储空间连续的数组为其存储结构的容器</strong></li>
-<li><a href="https://gitee.com/fewolflion/BookNote/blob/master/01lioneloutput/60BookCode/C++%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/chap04%E6%A8%A1%E6%8B%9FSTL%E4%B8%89%E5%A4%A7%E4%BB%B6/04_03.cpp">例4-3，程序中定义一个<code>MyVector&lt;int&gt;</code>的对象v1，使用裸指针作为对象v1的迭代器并遍历v1</a><ul>
+<li><a href="https://gitee.com/fewolflion/BookNote/blob/master/01lioneloutput/60BookCode/C++%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/chap04%E6%A8%A1%E6%8B%9FSTL%E4%B8%89%E5%A4%A7%E4%BB%B6/04_03.cpp">例4-3.cpp，程序中定义一个<code>MyVector&lt;int&gt;</code>的对象v1，使用裸指针作为对象v1的迭代器并遍历v1</a><ul>
 <li>与4-1的区别</li>
 <li><code>typedef Ty* viter;</code>，以及<code>MyVector&lt;int&gt;::viter iter;</code> <em>这两个的转化过程，要好限理解一下，lionel</em></li>
 </ul>
@@ -945,19 +1003,23 @@ int main(){
 <h5 id="422">4.2.2、迭代器是指针的类封装<a class="headerlink" href="#422" title="Permanent link">&para;</a></h5>
 <ul>
 <li>如果存储空间不连续，就需要<strong>加以改造（重载*，++，==，!=运算符）</strong></li>
-<li>例4-4，为MyList容器设计迭代器MyList_iterator并编写程序进行测试</li>
+<li>例4-4.cpp，为MyList容器设计迭代器MyList_iterator并编写程序进行测试</li>
 </ul>
 <h5 id="423">4.2.3、迭代器的代码隔离作用<a class="headerlink" href="#423" title="Permanent link">&para;</a></h5>
 <ul>
 <li>使用者无需知道</li>
-<li>例4-5，程序，使用上述查找函数find()分别在MyVector和MyList容器查找数据100</li>
+<li>重载*，++，==，!=运算符（操作list）</li>
+<li>例4-5.cpp，程序，使用上述查找函数find()分别在MyVector和MyList容器查找数据100</li>
 </ul>
 <h5 id="424stl">4.2.4、STL迭代器的种类<a class="headerlink" href="#424stl" title="Permanent link">&para;</a></h5>
 <ul>
 <li>0</li>
-<li>1、输入迭代器（输入流，<strong>有以下功能</strong>）</li>
+<li>1、输入迭代器（输入流，<strong>有以下功能</strong>）<ul>
+<li>可复制，取出值，并自动指向下一个，判断是否最后一个，*，++，++(int)，!=，==</li>
+</ul>
+</li>
 <li>2、输出迭代器<ul>
-<li>通过<code>operator*</code>对容器数据元素进行修改</li>
+<li>除了同1外，还通过<code>operator*</code>对容器数据元素进行修改</li>
 </ul>
 </li>
 <li>3、前向迭代器<ul>
@@ -968,7 +1030,10 @@ int main(){
 <li>在前向迭代器的功能上，<strong>允许向后移动</strong>，支持<code>operator--</code>和<code>operator--(int)</code></li>
 </ul>
 </li>
-<li>5、随机存取迭代器</li>
+<li>5、随机存取迭代器<ul>
+<li>双向支持随机</li>
+</ul>
+</li>
 </ul>
 <h5 id="425">4.2.5、迭代器的种类标记<a class="headerlink" href="#425" title="Permanent link">&para;</a></h5>
 <ul>
@@ -978,11 +1043,29 @@ int main(){
 <li>前向</li>
 <li>双向</li>
 <li>随机，<code>struct random_access_iterator_tag:public bidirectional_iterator_tag {};</code></li>
+<li>例4-6.cpp</li>
+<li>例4-7.cpp</li>
 </ul>
 <h5 id="426stl">4.2.6、STL对迭代器的管理<a class="headerlink" href="#426stl" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、迭代器类模板的数据类型表</li>
+<li>2、迭代器的类型总表traits</li>
+<li>例4-8.cpp</li>
+</ul>
 <h4 id="43">4.3、通用算法<a class="headerlink" href="#43" title="Permanent link">&para;</a></h4>
+<ul>
+<li>例4-9.cpp</li>
+<li>例4-10.cpp，使用例4-3中MyVector容器和上面设计的MySort()算法编写一个测试程序</li>
+</ul>
 <h3 id="chap5">chap5、容器及其应用<a class="headerlink" href="#chap5" title="Permanent link">&para;</a></h3>
+<ul>
+<li>20201104</li>
+</ul>
 <h4 id="51-vector">5.1 向量vector<a class="headerlink" href="#51-vector" title="Permanent link">&para;</a></h4>
+<ul>
+<li>占用连续内存，随机访问，下标和<code>at()</code>操作，<strong>尾部开口的设计</strong>，<code>push_back()</code>和<code>pop_back()</code>，重载了<code>operator=</code>，<strong>尾部操作效率最高</strong>（<em>也只有尾部能操作吧</em>）</li>
+</ul>
+<h5 id="1vector">1、vector对象的定义及初始化<a class="headerlink" href="#1vector" title="Permanent link">&para;</a></h5>
 <ul>
 <li>vector常用构造函数<ul>
 <li><code>vector();</code></li>
@@ -1015,30 +1098,282 @@ int main(){
 </ul>
 </li>
 <li>例5-3 编程程序，测试“表5-4：计算向量容器大小的操作”的成员函数，了解其功能</li>
+<li>新特性<ul>
+<li>初始化<code>vector&lt;int&gt; v1{1,2,3};</code>，支持这种写法</li>
+<li>for遍历，引用传递<code>for(auto &amp;i :v1) i*=i;</code> ，平方操作后再返回</li>
+</ul>
+</li>
 <li>例5-4 编写一个在vector上使用C++11新规则的程序。</li>
 <li><a href="http://www.cplusplus.com/reference/vector/">cplusplus-vector</a></li>
 <li><a href="http://www.cnblogs.com/wang7/archive/2012/04/27/2474138.html">C++ vector用法</a>  <em>不过，这个开始看还行，现在来看，差不多都会了，算法部分接触得少。</em></li>
 </ul>
 <h4 id="52list">5.2、列表list<a class="headerlink" href="#52list" title="Permanent link">&para;</a></h4>
+<ul>
+<li>核心是<strong>双向链表</strong>，<strong>头和尾插入和删除</strong>，<code>push_back()</code>还有<code>push_front()</code>，当然对有应的<code>pop_()</code>，<strong>不支持随机操作和<code>at()</code>操作，只能从到尾或从尾到头顺序地操作</strong></li>
+<li>表5-5：使用list构造函数</li>
+<li>表5-6：数据元素插入和删除<ul>
+<li><code>assign()</code></li>
+</ul>
+</li>
+<li>例5-5.cpp，在程序中观察push_front()、push_back()以及assign()函数的功能</li>
+<li>表5-7，可以返回list关键迭代器的函数</li>
+<li>表5-8，可以提供list状态的函数</li>
+</ul>
 <h4 id="53deque">5.3、双向队列deque<a class="headerlink" href="#53deque" title="Permanent link">&para;</a></h4>
-<h4 id="54-stl">5.4 STL关联式容器<a class="headerlink" href="#54-stl" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>双向开口</strong>，尾和头部操作的函数，<code>push_back()</code>还有<code>push_front()</code>，当然对有应的<code>pop_()</code>，<strong>类似于链表</strong>【分多个段，每个段内连续】</li>
+<li>维护了一个<strong>map的指针数组</strong>，来维护段首地址，这样从map访问deque空间就是连续的，<em>lionel，具体的实现，还得看下代码</em></li>
+<li>deque的特点<ul>
+<li>支持随机访问（即支持下标<code>()</code>和<code>at()</code>），但性能没有vector好</li>
+<li>可以在</li>
+<li>两端</li>
+<li>元素存取和迭代器操作会稍微慢一些，因为deque的内部结构会多一个间接过程</li>
+<li>使用内存比vector和list合理</li>
+</ul>
+</li>
+<li>表5-9：deque的常用构造函数</li>
+<li>deque有以下两点与vector不同<ul>
+<li>deque不提供容量操作<code>capacity()</code>和<code>reverse()</code></li>
+<li>deque直接提供函数完成首尾元素的插入和删除</li>
+</ul>
+</li>
+<li>需要注意的是<ul>
+<li>除了<code>at()</code>函数，其它成员函数都不会检查索引或迭代器是否有效</li>
+<li>元素的插入和删除可能会导致内存重新分配</li>
+</ul>
+</li>
+<li>例5-6.cpp，测试deque的成员函数，并理解其特点</li>
+</ul>
+<h4 id="54stl">5.4、STL关联式容器<a class="headerlink" href="#54stl" title="Permanent link">&para;</a></h4>
+<ul>
+<li>带有键值的数据叫做关联式容器</li>
+<li>数据本身并无顺序，那么容器的各数据元素存储单元就必须具有固定的顺序，为<strong>序列式容器</strong>，如果数据本身有序，则容器没有必要一定有序</li>
+<li>原本无固定顺序的数据叫<strong>可序数据</strong>，具有固定顺序的数据叫<strong>已序数据</strong></li>
+</ul>
+<h5 id="1stlpair">1、关联式数据与STL二元组类模板pair<a class="headerlink" href="#1stlpair" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>关联数据</strong>，多个互相有关联的数据组合成的一个数组组，pair没有指定键值、实值</li>
+</ul>
+<ul>
+<li>utility.h中的<code>pair()</code>，<strong>类模板</strong>，称为<strong>二元组</strong><ul>
+<li>也可用<code>make_pair()</code>创建</li>
+</ul>
+</li>
+</ul>
+<pre class="highlight"><code class="language-cpp">pair&lt;string,int&gt; pr2("heaven",7);
+pair&lt;string,int&gt; *prp = new pair&lt;string,int&gt;("yards",0);
+//也可用`make_pair()`创建
+typedef struct pair&lt;int,float&gt; PAIR_IF;
+PAIR_IF pair1 = make_pair(18,3.14f);</code></pre>
+<h5 id="2stl">2、STL对关联数据的组织与存储<a class="headerlink" href="#2stl" title="Permanent link">&para;</a></h5>
+<ul>
+<li>二分查找树，<em>后面没有完全再看看</em></li>
+<li>平衡二叉树<ul>
+<li>AVL树</li>
+<li>红黑树</li>
+</ul>
+</li>
+<li><em>还是需要把DS再看一下，复习下tree的章节，lionel</em></li>
+</ul>
 <h4 id="55map">5.5、map容器<a class="headerlink" href="#55map" title="Permanent link">&para;</a></h4>
+<ul>
+<li>以红黑树形式，<strong>pair形式出现的键-值对，叫做映射（map），set中的数据既是键值也是实值，叫做集合（set）</strong></li>
+</ul>
+<h5 id="551map">5.5.1、map容器的定义<a class="headerlink" href="#551map" title="Permanent link">&para;</a></h5>
+<ul>
+<li><em>还能带分配器，是啥意思，是不是之前的纸质笔记，写得有问题，lionel</em></li>
+</ul>
+<ul>
+<li>例5-7.cpp，使用map的默认构造函数创建一个map对象，然后使用insert()函数向其中插入11个pair数据</li>
+<li>例5-8.cpp</li>
+<li>例5-9.cpp，使用不同的构造函数常见map容器</li>
+</ul>
+<h5 id="552map">5.5.2、map的数据插入<a class="headerlink" href="#552map" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、用insert函数插入pair数据<ul>
+<li>例5-10.cpp</li>
+</ul>
+</li>
+<li>2、insert()方法中指定数据类型的数据如下插入法<ul>
+<li>例5-11.cpp</li>
+<li><strong>当以重复键使用insert()方法插入数据时，只有第一次插入为有效操作，其后的所有都为无效操作，但编译器不报错</strong></li>
+<li>例5-12.cpp，使用insert()的方法返回值判断插入操作的有效性</li>
+</ul>
+</li>
+<li>3、以下标方式使用键值插入数据<ul>
+<li>例5-13.cpp，以下标形式向map对象插入数据</li>
+<li><strong>下标方式可以重复的键值输入数据，后面的输入将覆盖前面的实值</strong></li>
+</ul>
+</li>
+</ul>
+<pre class="highlight"><code class="language-cpp">map&lt;int,string&gt;mapStudent;
+mapStudent[1]="student_one";</code></pre>
+<h5 id="553map">5.5.3、map容器的其他常用成员方法<a class="headerlink" href="#553map" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、size()方法</li>
+<li>2、count()和find()方法<ul>
+<li>例5-14.cpp</li>
+</ul>
+</li>
+<li>3、lower_bound()和upper_bound()方法<ul>
+<li>例5-15.cpp</li>
+</ul>
+</li>
+<li>4、erase()方法<ul>
+<li>例5-16.cpp</li>
+</ul>
+</li>
+</ul>
+<h5 id="554multimap">5.5.4、multimap容器<a class="headerlink" href="#554multimap" title="Permanent link">&para;</a></h5>
+<ul>
+<li>例5-17.cpp，multimap容器应用示例程序</li>
+</ul>
 <h4 id="56set">5.6、set容器<a class="headerlink" href="#56set" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>set用来保存只有键值而没有实值这类数据的容器</strong>，也是红黑树，只不过各节点的数据是单一值而不是pair。</li>
+<li>元素插入时会默认排序，**默认为<code>less&lt;&gt;</code>排序规则</li>
+<li>例5-18.cpp，set容器应用示例程序</li>
+</ul>
 <h4 id="57hashhast">5.7、hash表基础及hast容器<a class="headerlink" href="#57hashhast" title="Permanent link">&para;</a></h4>
 <h5 id="571hash">5.7.1、hash表基础<a class="headerlink" href="#571hash" title="Permanent link">&para;</a></h5>
 <h5 id="572hash">5.7.2、hash容器<a class="headerlink" href="#572hash" title="Permanent link">&para;</a></h5>
+<ul>
+<li>C++11才纳入标准</li>
+</ul>
+<ul>
+<li>例5-19.cpp，unordered_map的应用示例</li>
+</ul>
 <h3 id="chap6">chap6、通用算法<a class="headerlink" href="#chap6" title="Permanent link">&para;</a></h3>
+<ul>
+<li>20201104</li>
+</ul>
+<ul>
+<li>模板技术解决了算法的<strong>类型通用</strong>，迭代器解决了算法的<strong>容器通用</strong></li>
+</ul>
 <h4 id="61">6.1、通用算法的参数<a class="headerlink" href="#61" title="Permanent link">&para;</a></h4>
+<ul>
+<li>STL通过两个措施保证了算法的通用性<ul>
+<li>一是它把算法都设计成<strong>函数模板</strong>，从而依靠类型占位符保证了算法通用于各种参数类型</li>
+<li>二是它用可以屏蔽容器结构与数据差异的<strong>迭代器</strong>来指定算法的操作数，从而保证算法通用于各类容器</li>
+</ul>
+</li>
+<li>STL通用算法的3种参数<ul>
+<li>算法的迭代器参数</li>
+<li>辅助参数</li>
+<li>谓词参数</li>
+</ul>
+</li>
+</ul>
 <h5 id="611">6.1.1、算法的迭代器参数<a class="headerlink" href="#611" title="Permanent link">&para;</a></h5>
+<ul>
+<li>两个迭代器指定一个区间</li>
+<li>1、单区域操作数的迭代器参数<ul>
+<li><code>sort(Vect.begin(),Vect.end());</code></li>
+</ul>
+</li>
+<li>2、双区域操作数的迭代器参数<ul>
+<li><code>result = find_first_of(Vect1.begin(), Vect1.end(),(Vect1.begin()+3),(Vect1.end()-2));</code></li>
+<li>swap_ranger()注意事项</li>
+</ul>
+</li>
+<li>3、迭代器类型对通用算法的限制及容器特有方法<ul>
+<li>将迭代器从强到弱规范出5个种类（等级）的迭代器类型<ul>
+<li>随机迭代器（random access）</li>
+<li>双向迭代器（bidirectional）</li>
+<li>前向迭代器（forward）</li>
+<li>输入迭代器（input）</li>
+<li>输出迭代器（output）</li>
+</ul>
+</li>
+<li><em>本节，没太看懂全部啊，lionel</em></li>
+</ul>
+</li>
+</ul>
 <h5 id="612">6.1.2、辅助参数<a class="headerlink" href="#612" title="Permanent link">&para;</a></h5>
+<ul>
+<li>格式<ul>
+<li><code>alg(__first,__last,__params);</code>，<strong>一般find()就这样</strong>，<code>result = find(Vect.begin(),Vect.end(),num_to_find);</code></li>
+</ul>
+</li>
+</ul>
 <h5 id="613">6.1.3、谓词参数<a class="headerlink" href="#613" title="Permanent link">&para;</a></h5>
+<ul>
+<li>STL算法可以<strong>函数、函数对象、lambda表达式</strong>作为参数，目的是，<strong>为了向算法传递用户自己的功能代码，从而便于实现通用算法的个性化和多样化</strong></li>
+</ul>
+<ul>
+<li>1、什么是谓词及谓词参数<ul>
+<li><strong>谓词</strong>就是一个功能模块代码</li>
+<li><em>sort，重载预设的谓词，greater()</em></li>
+</ul>
+</li>
+<li>2、谓词的实质是回调函数<ul>
+<li><strong>调用</strong>：用户程序使用系统程序</li>
+<li><strong>回调</strong>：系统程序使用用户程序</li>
+<li><strong>回调函数</strong>：用户提供的为系统程序所调用的程序段</li>
+<li>例6-1.cpp</li>
+</ul>
+</li>
+<li>3、STL对谓词的规范<ul>
+<li>一元、二元谓词<ul>
+<li><code>struct unary_function{}</code></li>
+<li><code>struct binary_function{}</code></li>
+</ul>
+</li>
+<li>例6-2.cpp，按照unary_function格式定义谓词is_negative的程序示例</li>
+<li><em>这里面有个疑问的，lionel</em>，<code>remove_if(Vect.begin(),Vect.end(),is_negative);</code>，<em>为什么后面的，不需要<code>()</code>了</em></li>
+<li>常用的STL预设二元谓词模板<ul>
+<li>less<T></li>
+<li>less_equal<T></li>
+<li>equal<T></li>
+<li>not_equal<T></li>
+<li>greater_equal<T></li>
+<li>greater<T></li>
+<li>not2<B></li>
+</ul>
+</li>
+<li>上面的问题，就是<strong>谓词，与谓词函数的区别</strong>，目前啥区别，暂时不知道<ul>
+<li><em>想到了，本身传的是函数名</em></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h4 id="62">6.2、算法时间复杂度<a class="headerlink" href="#62" title="Permanent link">&para;</a></h4>
 <h4 id="63">6.3、常用通用算法<a class="headerlink" href="#63" title="Permanent link">&para;</a></h4>
 <h5 id="631">6.3.1、查找和搜索算法<a class="headerlink" href="#631" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>不改变容器中数据</strong>，非变异算法</li>
+<li>1、adjacent_find算法<ul>
+<li>6-3.cpp</li>
+</ul>
+</li>
+<li>2、binary_search算法</li>
+<li>3、count和count_if<ul>
+<li><strong>因为参数类型只是占位符，无法重载，后面加_if，表示需要谓词</strong></li>
+<li>例6-5.cpp</li>
+<li>例6-6.cpp，算法count_if()示例</li>
+</ul>
+</li>
+<li>6-11.cpp</li>
+</ul>
 <h5 id="632">6.3.2、变异算法<a class="headerlink" href="#632" title="Permanent link">&para;</a></h5>
+<ul>
+<li>6-12.cpp</li>
+<li>6-26.cpp</li>
+</ul>
 <h5 id="633">6.3.3、排序算法<a class="headerlink" href="#633" title="Permanent link">&para;</a></h5>
+<ul>
+<li>6_27.cpp</li>
+<li>6_37.cpp</li>
+</ul>
 <h5 id="634">6.3.4、算术算法与关系算法<a class="headerlink" href="#634" title="Permanent link">&para;</a></h5>
+<ul>
+<li>6_44.cpp</li>
+</ul>
 <h5 id="635">6.3.5、排列组合与集合算法<a class="headerlink" href="#635" title="Permanent link">&para;</a></h5>
+<ul>
+<li>6_46.cpp</li>
+</ul>
 <h3 id="chap7stl">chap7、适配器模式在STL基础部件上的应用<a class="headerlink" href="#chap7stl" title="Permanent link">&para;</a></h3>
 <ul>
 <li>20201031</li>
@@ -1061,26 +1396,85 @@ class B {A *a; g() {a-&gt;f1();a-&gt;f2();}};//模块B借助模块A，叫做B适
 <ul>
 <li>使用默认deque</li>
 <li>使用vector或list</li>
+<li>7-1.cpp：使用STL提供的stack适配器并用默认的deque构成栈</li>
 </ul>
+<pre class="highlight"><code class="language-cpp">deque&lt;int&gt; mydeque(3, 100); //创建具有3个元素 初始值100的队列
+stack&lt;int&gt; Mystack2(mydeque); //创建一个栈用mydeque对其初始化   【这是适配器的精华？】lionel，核心是这个，那原因呢？</code></pre>
+<ul>
+<li>7-2.cpp：使用非默认的容器（list或vector）作为基础容器构造stack并测试它</li>
+</ul>
+<pre class="highlight"><code class="language-cpp">//使用list或vector作为栈的容器
+stack&lt;int, list&lt;int&gt;&gt;a;  //这个用法，不太会呢？lionel，一般只放一个int或啥的
+stack&lt;int, vector&lt;int&gt;&gt;b;</code></pre>
 <h5 id="722queue">7.2.2、queue适配器<a class="headerlink" href="#722queue" title="Permanent link">&para;</a></h5>
 <ul>
 <li><strong>双向</strong>，使用<strong>双端开口</strong>的list或deque作为核心，默认deque</li>
+<li>7-3.cpp：对STL提供的queue适配器进行测试<ul>
+<li><code>queue&lt;int&gt; b;</code><strong>表示其使用的是默认的基本容器</strong></li>
+</ul>
+</li>
 </ul>
 <h5 id="723priority_queue">7.2.3、priority_queue适配器<a class="headerlink" href="#723priority_queue" title="Permanent link">&para;</a></h5>
+<ul>
+<li><em>本节，未读</em></li>
+<li>7-4.cpp：编写一个堆排序程序</li>
+<li>7-5.cpp：测试priority_queue的构造函数</li>
+<li>7-6.cpp：调用了优先权队列其他成员方法的程序示例</li>
+</ul>
 <h4 id="73">7.3、迭代器适配器<a class="headerlink" href="#73" title="Permanent link">&para;</a></h4>
 <ul>
-<li>适配的对象是<strong>附属容器的迭代器</strong></li>
+<li>迭代器适配器，在<strong>其类中封装了一个容器对象适配的对象</strong>，但被适配的对象不是容器，而是<strong>附属容器的那个迭代器</strong></li>
 </ul>
 <h5 id="731">7.3.1、插入迭代器<a class="headerlink" href="#731" title="Permanent link">&para;</a></h5>
 <ul>
 <li>反向插入，back_insert</li>
-<li>前向插入，front_insert</li>
+</ul>
+<ul>
+<li>
+<p>1、insert_iterator</p>
+<ul>
+<li>插入迭代器，<strong>其实隐含了一个容器</strong></li>
+</ul>
+<pre class="highlight"><code class="language-cpp">insert_iterator{
+    _Container&amp; __x, typename __Container::iterator __i):Container(&amp;__x),iter(__i) ()
+}</code></pre>
+<ul>
+<li>7-7.cpp：vector容器Vect，把3之后的数据插入到list容器Lst中的数据</li>
+</ul>
+</li>
+</ul>
+<pre class="highlight"><code class="language-cpp">vector&lt;int&gt; Vect{ 1,2,3,4,5,6,7,8,9,10 };  //lionel,初始化的方式
+//定义插入迭代器insert_it并使其指向被插入容器的待插入位置
+insert_iterator&lt;vector&lt;int&gt;&gt;  insert_it(Vect, Vect.begin() + 3);
+//将源数据对象中的数据插入迭代器指示的位置
+copy(Lst.begin(), Lst.end(), insert_it);</code></pre>
+<ul>
+<li>2、front_insert_iterator和back_insert_iterator<ul>
+<li><strong>默认的插入迭代器</strong>，插入位置为目标的头部或尾部</li>
+<li><strong>只有当容器提供push_front操作时，才能使用front_inserter</strong></li>
+<li>7-8.cpp：使用front_insert_iterator和back_insert_iterator迭代器实现数据的插入</li>
+</ul>
+</li>
 </ul>
 <h5 id="732">7.3.2、反向迭代器<a class="headerlink" href="#732" title="Permanent link">&para;</a></h5>
 <ul>
 <li>reverse_iterator</li>
+<li>定义的格式，<code>vector&lt;int&gt;::reverse_iterator rpos(Vect.end());</code></li>
+<li>7-9.cpp：观察正向和反向迭代器之间的关系</li>
+<li>7-10.cpp：使用了rbegin()和rend()操作的反向迭代器应用程序示例</li>
 </ul>
 <h5 id="733io">7.3.3、IO流迭代器<a class="headerlink" href="#733io" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、输出流迭代器适配器ostream_iterator<ul>
+<li>7-11.cpp</li>
+</ul>
+</li>
+<li>2、输入流迭代器适配器istream_iterator<ul>
+<li>7-12.cpp</li>
+<li>7-13.cpp，从标准设备中输入一些内容，然后用这些数据对一个向量容器进行初始化，然后显示初始化结果</li>
+</ul>
+</li>
+</ul>
 <ul>
 <li>输入流，instream</li>
 <li>输出流，ostream</li>
@@ -1089,7 +1483,43 @@ class B {A *a; g() {a-&gt;f1();a-&gt;f2();}};//模块B借助模块A，叫做B适
 </ul>
 <h4 id="74">7.4、函数对象适配器<a class="headerlink" href="#74" title="Permanent link">&para;</a></h4>
 <h5 id="741">7.4.1、函数对象的适配<a class="headerlink" href="#741" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>函数对象的适配器仍然是一个函数对象</strong></li>
+</ul>
+<ul>
+<li>7-14.cpp，在算法remove_if中验证一元函数对象greater_l的正确性</li>
+<li>7-15.cpp，在算法remove_if中验证第二参数绑定适配器binder2nd的正确性</li>
+</ul>
 <h5 id="742">7.4.2、函数对象配接器<a class="headerlink" href="#742" title="Permanent link">&para;</a></h5>
+<ul>
+<li>例7-16.cpp，在算法remove_if中验证配接器bind2nd的功能</li>
+<li>1、简单配接器<ul>
+<li>表7-4，简单配接器</li>
+<li>例7-17.cpp，在算法remove_if中验证配接器bind2nd的功能</li>
+<li>例7-18.cpp，在算法sort中验证配接器not2的功能</li>
+</ul>
+</li>
+<li>2、对成员函数进行配接的函数配接器<ul>
+<li>表7-5，对成员函数进行配接的函数配接器<ul>
+<li><code>mem_fun_ref(op)</code>，调用op，op是某对象的一个const成员函数</li>
+</ul>
+</li>
+<li>例7-19，验证配接器mem_fun_ref(op)和mem_fun(op)的功能<ul>
+<li><code>for_each(coll.begin(),coll.end(),mem_fun_ref(&amp;testCls::print));</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>3、针对一般函数（非成员函数）而设计的函数配接器<ul>
+<li>表7-6，针对一般函数（非成员函数）而设计的函数配接器</li>
+<li>例7-20，验证配接器mem_fun_ref(op)和mem_fun(op)的功能</li>
+</ul>
+</li>
+<li>4、用户自定义函数对象配接器<ul>
+<li>例7-21，定义一个用户函数对象并在transform算法中利用配接器将其作为谓词使用</li>
+</ul>
+</li>
+</ul>
 <h3 id="chap8stl">chap8、STL容器内存空间分配器<a class="headerlink" href="#chap8stl" title="Permanent link">&para;</a></h3>
 <ul>
 <li>20201031</li>
@@ -1097,21 +1527,64 @@ class B {A *a; g() {a-&gt;f1();a-&gt;f2();}};//模块B借助模块A，叫做B适
 <h4 id="81">8.1、内存空间配置器及其设计基础<a class="headerlink" href="#81" title="Permanent link">&para;</a></h4>
 <h5 id="811">8.1.1、什么是内存空间配置器<a class="headerlink" href="#811" title="Permanent link">&para;</a></h5>
 <ul>
+<li>内存的静态分配，动态分配</li>
+</ul>
+<ul>
 <li>封装了动态请求内存空间的代码，以函数的形式向容器提供了内存空间的请求与释放，不用new本身，而用<code>operator new()</code>和<code>spacement new()</code></li>
 </ul>
 <h5 id="812">8.1.2、内存空间配置器设计基础<a class="headerlink" href="#812" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、容器内存空间的结构及配置器设计思路<ul>
+<li>连续的数组，vector</li>
+<li>非连续的链表，list</li>
+<li>多个连续空间组成的链表模式，deque</li>
+</ul>
+</li>
+<li>2、内存空间配置器设计技术<ul>
+<li>例8-1.cpp</li>
+</ul>
+</li>
+</ul>
 <h4 id="82stl">8.2、STL空间配置器接口<a class="headerlink" href="#82stl" title="Permanent link">&para;</a></h4>
 <ul>
 <li>处于容器与OS内存管理系统之间</li>
 </ul>
 <h5 id="821stl">8.2.1、STL空间配置器接口及最简单的空间配置器<a class="headerlink" href="#821stl" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、STL空间配置器接口内容<ul>
+<li><strong>接口</strong>：就一个程序部件提供给用户的那些函数</li>
+</ul>
+</li>
+<li>2、</li>
+<li>3、内部不同数据类型数据的空间配置器</li>
+</ul>
 <h5 id="822stl">8.2.2、典型STL容器空间的配置<a class="headerlink" href="#822stl" title="Permanent link">&para;</a></h5>
+<ul>
+<li>例8-2.cpp，使用向量容器对上述容器内存空间配置器进行测试，在测试中编写必要的测试代码以显示配置器的工作过程</li>
+<li>例8-3.cpp，修改8-2.cpp，请使用list容器来测试上述内存空间配置器</li>
+</ul>
 <h4 id="83">8.3、内存池的概念及方法<a class="headerlink" href="#83" title="Permanent link">&para;</a></h4>
 <ul>
-<li>防止内存碎片、用内存块组成内存池（形成链表）</li>
+<li><strong>内存池</strong>就是应用程序从系统那里批发来的内存空间。防止内存碎片、用内存块组成内存池（形成链表）</li>
 </ul>
 <h5 id="831">8.3.1、内存池的规划<a class="headerlink" href="#831" title="Permanent link">&para;</a></h5>
 <h5 id="832">8.3.2、内存池的设计<a class="headerlink" href="#832" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、MemoryBlock的设计</li>
+<li>2、MemoryPool的设计<ul>
+<li>例8-5.cpp</li>
+</ul>
+</li>
+</ul>
+<h3 id="_1">附录<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<h4 id="aexplicit">A、关于关键字explicit<a class="headerlink" href="#aexplicit" title="Permanent link">&para;</a></h4>
+<ul>
+<li>类的单参数构造函数能实现一个隐式转换，<strong>加上explicit，就禁止转换</strong>，<code>explicit Test(int x){a = x;}</code>，本来是支持<code>Test a=10;//现在就不行</code>，只能使用<code>Test a1(10);</code></li>
+</ul>
+<h3 id="_2">勘误<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>264页，代码中有2处<code>cout &lt;&lt; a.front() &lt;&lt; " " &lt;&lt; a.back() &lt;&lt; endl;</code>，第2行的输出应该改成<code>cout &lt;&lt; b.front() &lt;&lt; " " &lt;&lt; b.back() &lt;&lt; endl;</code></li>
+</ul>
               
             </div>
           </div><footer>

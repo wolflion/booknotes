@@ -54,11 +54,11 @@
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#part1c1-4">Part1、自己习惯C++（1-4）</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#1c">1、视C++为一个语言联邦</a>
+    <li class="toctree-l3"><a class="reference internal" href="#1cview-c-as-a-federation-of-languages">1、视C++为一个语言联邦，View C++ as a federation of languages</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#2constenuminlinedefine">2、尽量以const,enum,inline替换#define</a>
+    <li class="toctree-l3"><a class="reference internal" href="#2constenuminlinedefineperfer-consts-enumsand-inlines-to-define">2、尽量以const,enum,inline替换#define，Perfer consts, enums,and inlines to #define</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#3const">3、尽可能使用const</a>
+    <li class="toctree-l3"><a class="reference internal" href="#3constuse-const-whenever-possible">3、尽可能使用const，Use const whenever possible</a>
         <ul>
     <li class="toctree-l4"><a class="reference internal" href="#31const">3.1、const成员函数</a>
     </li>
@@ -66,17 +66,17 @@
     </li>
         </ul>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#4">4、确定对象被使用前已被初始化</a>
+    <li class="toctree-l3"><a class="reference internal" href="#4make-sure-that-objects-are-initialized-before-theyre-used">4、确定对象被使用前已被初始化，Make sure that objects are initialized before they're used</a>
     </li>
         </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#part25-12">Part2、构造、析构、赋值（5-12）</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#5know-what-functions-c-silently-writes-and-calls">5、Know what functions C++ silently writes and calls</a>
+    <li class="toctree-l3"><a class="reference internal" href="#5cknow-what-functions-c-silently-writes-and-calls">5、了解C++默默编写并调用哪些函数，Know what functions C++ silently writes and calls</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#6explicitly-disallow-the-use-of-compiler-generated-functions-you-do-not-want">6、Explicitly disallow the use of compiler-generated functions you do not want</a>
+    <li class="toctree-l3"><a class="reference internal" href="#6explicitly-disallow-the-use-of-compiler-generated-functions-you-do-not-want">6、若不想使用编译器自动生成的函数，就该明确拒绝，Explicitly disallow the use of compiler-generated functions you do not want</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#7declare-destructions-virtual-in-polymorphic-base-classes">7、Declare destructions virtual in polymorphic base classes</a>
+    <li class="toctree-l3"><a class="reference internal" href="#7virtualdeclare-destructions-virtual-in-polymorphic-base-classes">7、为多态基类声明virtual析构函数，Declare destructions virtual in polymorphic base classes</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#8prevent-exceptions-from-leaving-destructors">8、Prevent exceptions from leaving destructors</a>
     </li>
@@ -92,9 +92,15 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#part313-17">Part3、资源管理（13-17）</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#16">16、</a>
+    <li class="toctree-l3"><a class="reference internal" href="#13">13、以对象管理资源</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#17">17、</a>
+    <li class="toctree-l3"><a class="reference internal" href="#14copying">14、在资源管理类中小心copying行为</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#15">15、在资源管理类中提供对原始资源的访问</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#16newdelete">16、成对使用new和delete时要采用相同形式</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#17newed">17、以独立语句将newed对象置入智能指针</a>
     </li>
         </ul>
     </li>
@@ -108,7 +114,7 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#21reference">21、必须返回对象时，别妄想返回其reference</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#22private">22、成员变量声明为private</a>
+    <li class="toctree-l3"><a class="reference internal" href="#22private">22、将成员变量声明为private</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#23non-membernon-friendmember">23、宁以non-member,non-friend替换member函数</a>
     </li>
@@ -118,7 +124,7 @@
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#part526-31">Part5、实现（26-31）</a>
+    <li class="toctree-l2"><a class="reference internal" href="#part5implementation26-31">Part5、实现Implementation（26-31）</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#26">26、尽可能延后变量定义式的出现时间</a>
     </li>
@@ -134,39 +140,57 @@
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#part632-40">Part6、继承与面向对象设计（32-40）</a>
+    <li class="toctree-l2"><a class="reference internal" href="#part6inheritance-and-object-oriented-design32-40">Part6、继承与面向对象设计Inheritance and Object-Oriented Design（32-40）</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#32">32、</a>
+    <li class="toctree-l3"><a class="reference internal" href="#32publicis-a-make-sure-public-inheritance-models-is-a">32、确定你的public继承塑模出is-a关系 Make sure public inheritance models "is-a."</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#33">33、</a>
+    <li class="toctree-l3"><a class="reference internal" href="#33">33、避免遮掩继承而来的名称</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#34">34、</a>
+    <li class="toctree-l3"><a class="reference internal" href="#34">34、区分接口继承和实现继承</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#35">35、</a>
+    <li class="toctree-l3"><a class="reference internal" href="#35virtual">35、考虑virtual函数以外的其他选择</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#36">36、</a>
+    <li class="toctree-l3"><a class="reference internal" href="#36non-virtual">36、绝不重新定义继承而来的non-virtual函数</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#37">37、</a>
+    <li class="toctree-l3"><a class="reference internal" href="#37">37、绝不重新定义继承而来的缺省参数值</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#38">38、</a>
+    <li class="toctree-l3"><a class="reference internal" href="#38has-a">38、通过复合塑模出has-a或“根据某物实现出”</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#39">39、</a>
+    <li class="toctree-l3"><a class="reference internal" href="#39private">39、明智而审慎地使用private继承</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#40">40、</a>
+    <li class="toctree-l3"><a class="reference internal" href="#40">40、明智而审慎地使用多重继承</a>
     </li>
         </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#part741-48">Part7、模板与泛型编程（41-48）</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#41">41、了解隐式接口和编译期多态</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#42typename">42、了解typename的双重意义</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#43">43、学习处理模板化基类内的名称</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#44templates">44、将与参数无关的代码抽象templates</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#45">45、运用成员函数模板接受所有兼容类型</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#46">46、需要类型转换时请为模板定义非成员函数</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#47traits-classes">47、请使用traits classes表现类型信息</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#48template">48、认识template元编程</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#part8newdelete49-52">Part8、定制new和delete（49-52）</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#49">49、</a>
+    <li class="toctree-l3"><a class="reference internal" href="#49new-handler">49、了解new-handler的行为</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#50">50、</a>
+    <li class="toctree-l3"><a class="reference internal" href="#50newdelete">50、了解new和delete的合理替换时机</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#51">51、</a>
+    <li class="toctree-l3"><a class="reference internal" href="#51newdelete">51、编写new和delete时需固守常规</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#52">52、</a>
+    <li class="toctree-l3"><a class="reference internal" href="#52placement-newplacement-delete">52、写了placement new也要写placement delete</a>
     </li>
         </ul>
     </li>
@@ -174,9 +198,9 @@
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#53">53、不要轻忽编译器的警告</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#54tr1">54、熟悉TR1在内的标准程序库</a>
+    <li class="toctree-l3"><a class="reference internal" href="#54tr1">54、让自己熟悉包括TR1在内的标准程序库</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#55boost">55、熟悉boost</a>
+    <li class="toctree-l3"><a class="reference internal" href="#55boost">55、让自己熟悉boost</a>
     </li>
         </ul>
     </li>
@@ -306,10 +330,7 @@
 <ul>
 <li>Accustoming Yourself to C++</li>
 </ul>
-<h4 id="1c">1、视C++为一个语言联邦<a class="headerlink" href="#1c" title="Permanent link">&para;</a></h4>
-<ul>
-<li>View C++ as a federation of languages</li>
-</ul>
+<h4 id="1cview-c-as-a-federation-of-languages">1、视C++为一个语言联邦，View C++ as a federation of languages<a class="headerlink" href="#1cview-c-as-a-federation-of-languages" title="Permanent link">&para;</a></h4>
 <ul>
 <li>结论：<ul>
 <li>C++高效编程守则视状况而变化，取决于你使用C++的哪一部分</li>
@@ -324,10 +345,7 @@
 </li>
 <li><em>不知道C++11，C++20的特性会不会再加大这个区分</em></li>
 </ul>
-<h4 id="2constenuminlinedefine">2、尽量以const,enum,inline替换#define<a class="headerlink" href="#2constenuminlinedefine" title="Permanent link">&para;</a></h4>
-<ul>
-<li>Perfer consts, enums,and inlines to #define</li>
-</ul>
+<h4 id="2constenuminlinedefineperfer-consts-enumsand-inlines-to-define">2、尽量以const,enum,inline替换#define，Perfer consts, enums,and inlines to #define<a class="headerlink" href="#2constenuminlinedefineperfer-consts-enumsand-inlines-to-define" title="Permanent link">&para;</a></h4>
 <ul>
 <li>结论：<ul>
 <li>对于单纯常量，最好以const对象或enums替换#defines</li>
@@ -339,10 +357,7 @@
 </ul>
 </li>
 </ul>
-<h4 id="3const">3、尽可能使用const<a class="headerlink" href="#3const" title="Permanent link">&para;</a></h4>
-<ul>
-<li>Use const whenever possible</li>
-</ul>
+<h4 id="3constuse-const-whenever-possible">3、尽可能使用const，Use const whenever possible<a class="headerlink" href="#3constuse-const-whenever-possible" title="Permanent link">&para;</a></h4>
 <ul>
 <li>结论：<ul>
 <li>将某些东西声明为const，可帮助编译器侦测出错误用法。const可被施加于任何作用域内的对象、函数参数、函数返回类型、成员函数本体。</li>
@@ -376,10 +391,7 @@
 <li><code>void add(int x, int y) const</code><strong>const在末尾</strong></li>
 </ul>
 <h5 id="32constnon-const">3.2、const和non-const成员函数中避免重复<a class="headerlink" href="#32constnon-const" title="Permanent link">&para;</a></h5>
-<h4 id="4">4、确定对象被使用前已被初始化<a class="headerlink" href="#4" title="Permanent link">&para;</a></h4>
-<ul>
-<li>Make sure that objects are initialized before they're used</li>
-</ul>
+<h4 id="4make-sure-that-objects-are-initialized-before-theyre-used">4、确定对象被使用前已被初始化，Make sure that objects are initialized before they're used<a class="headerlink" href="#4make-sure-that-objects-are-initialized-before-theyre-used" title="Permanent link">&para;</a></h4>
 <ul>
 <li>结论：<ul>
 <li>为内置型对象进行手工初始化，因为C++不保证初始化它们</li>
@@ -411,15 +423,15 @@
 <ul>
 <li>几乎你写的每一个class都会有一或多个构造函数、一个析构函数、一个copy assignment操作符。</li>
 </ul>
-<h4 id="5know-what-functions-c-silently-writes-and-calls">5、Know what functions C++ silently writes and calls<a class="headerlink" href="#5know-what-functions-c-silently-writes-and-calls" title="Permanent link">&para;</a></h4>
+<h4 id="5cknow-what-functions-c-silently-writes-and-calls">5、了解C++默默编写并调用哪些函数，Know what functions C++ silently writes and calls<a class="headerlink" href="#5cknow-what-functions-c-silently-writes-and-calls" title="Permanent link">&para;</a></h4>
 <ul>
 <li>**编译器可以暗自为class创建default构造函数、copy构造函数、copy assignment操作符，以及析构函数。</li>
 </ul>
-<h4 id="6explicitly-disallow-the-use-of-compiler-generated-functions-you-do-not-want">6、Explicitly disallow the use of compiler-generated functions you do not want<a class="headerlink" href="#6explicitly-disallow-the-use-of-compiler-generated-functions-you-do-not-want" title="Permanent link">&para;</a></h4>
+<h4 id="6explicitly-disallow-the-use-of-compiler-generated-functions-you-do-not-want">6、若不想使用编译器自动生成的函数，就该明确拒绝，Explicitly disallow the use of compiler-generated functions you do not want<a class="headerlink" href="#6explicitly-disallow-the-use-of-compiler-generated-functions-you-do-not-want" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>为了驳回编译器自动（暗自）提供的机能，可将相应的成员函数声明为private并且不予实现</strong>。使用像Uncopyable这样的base class也是一种方法。</li>
 </ul>
-<h4 id="7declare-destructions-virtual-in-polymorphic-base-classes">7、Declare destructions virtual in polymorphic base classes<a class="headerlink" href="#7declare-destructions-virtual-in-polymorphic-base-classes" title="Permanent link">&para;</a></h4>
+<h4 id="7virtualdeclare-destructions-virtual-in-polymorphic-base-classes">7、为多态基类声明virtual析构函数，Declare destructions virtual in polymorphic base classes<a class="headerlink" href="#7virtualdeclare-destructions-virtual-in-polymorphic-base-classes" title="Permanent link">&para;</a></h4>
 <ul>
 <li><em>虚析构函数，声明的价值在哪？</em></li>
 <li>polymorphic（带多态性质的）base classes 应该声明一个virtual析构函数。如果class带有任何virtual函数，它就应该拥有一个virtual析构函数。</li>
@@ -453,14 +465,46 @@
 <li>不要尝试以某个copying函数实现另一个copying函数。应该将共同机能放进第三个函数中，并由两个copying函数共同调用。</li>
 </ul>
 <h3 id="part313-17">Part3、资源管理（13-17）<a class="headerlink" href="#part313-17" title="Permanent link">&para;</a></h3>
-<h4 id="16">16、<a class="headerlink" href="#16" title="Permanent link">&para;</a></h4>
+<h4 id="13">13、以对象管理资源<a class="headerlink" href="#13" title="Permanent link">&para;</a></h4>
+<ul>
+<li>结论：<ul>
+<li>为防止资源泄漏，请使用RAII对象。它们在构造函数中获得资源并在析构函数中释放资源</li>
+<li>两个常被使用的RAII classes分别是tr1::shared_ptr和auto_ptr。【<strong>后一个废弃了</strong>】前者通常是较佳选择，因为其copy行为比较直观。若选择auto_ptr，复制动作会使它（被复制物）指向null</li>
+</ul>
+</li>
+</ul>
+<h4 id="14copying">14、在资源管理类中小心copying行为<a class="headerlink" href="#14copying" title="Permanent link">&para;</a></h4>
+<ul>
+<li>结论：<ul>
+<li>复制RAII对象必须一并复制它所管理的资源，所以资源的copying行为决定RAII对象的copying行为。</li>
+<li>普遍而常见的RAII class copying行为是：抑制copying、施行引用计数法（reference counting）。不过其他行为也都可以被实现。</li>
+</ul>
+</li>
+</ul>
+<h4 id="15">15、在资源管理类中提供对原始资源的访问<a class="headerlink" href="#15" title="Permanent link">&para;</a></h4>
+<ul>
+<li>结论：<ul>
+<li>APIs往往要求访问原始资源（raw resources），所以每一个RAII class应该提供一个“取得其所管理之资源”的办法</li>
+<li>对原始资源的访问可能经由显式转换或隐式转换。一般而言显式转换比较安全，但隐式转换对客户比较方便。</li>
+</ul>
+</li>
+</ul>
+<h4 id="16newdelete">16、成对使用new和delete时要采用相同形式<a class="headerlink" href="#16newdelete" title="Permanent link">&para;</a></h4>
 <ul>
 <li>new和delete配对</li>
+<li>结论<ul>
+<li>如果你在new表达式中使用[]，必须在相应的delete表达式中也使用[]。如果你在new表达式中不使用[]，一定不要在相应的delete表达式中使用[]</li>
 </ul>
-<h4 id="17">17、<a class="headerlink" href="#17" title="Permanent link">&para;</a></h4>
+</li>
+</ul>
+<h4 id="17newed">17、以独立语句将newed对象置入智能指针<a class="headerlink" href="#17newed" title="Permanent link">&para;</a></h4>
 <ul>
 <li>newed对象</li>
 <li><code>std::tr1::shared_ptr&lt;Widget&gt; pw(new Widget); //在单独语句内以智能指针存储newed所得对象</code></li>
+<li>结论<ul>
+<li>以独立语句将newed对象存储于（置入）智能指针内。如果不这样做，一旦异常被抛出，有可能导致难以觉察的资源泄漏</li>
+</ul>
+</li>
 </ul>
 <h3 id="part418-25">Part4、设计与声明（18-25）<a class="headerlink" href="#part418-25" title="Permanent link">&para;</a></h3>
 <h4 id="18">18、让接口容易被正确使用，不易被误用<a class="headerlink" href="#18" title="Permanent link">&para;</a></h4>
@@ -512,7 +556,7 @@
 </ul>
 </li>
 </ul>
-<h4 id="22private">22、成员变量声明为private<a class="headerlink" href="#22private" title="Permanent link">&para;</a></h4>
+<h4 id="22private">22、将成员变量声明为private<a class="headerlink" href="#22private" title="Permanent link">&para;</a></h4>
 <ul>
 <li>结论：<ul>
 <li>切记将成员变量声明为private。这可赋予客户访问数据的一致性、可细微划分访问控制、允诺约束条件获得保证，并提供class作者以充分的实现弹性。</li>
@@ -561,7 +605,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="part526-31">Part5、实现（26-31）<a class="headerlink" href="#part526-31" title="Permanent link">&para;</a></h3>
+<h3 id="part5implementation26-31">Part5、实现Implementation（26-31）<a class="headerlink" href="#part5implementation26-31" title="Permanent link">&para;</a></h3>
 <h4 id="26">26、尽可能延后变量定义式的出现时间<a class="headerlink" href="#26" title="Permanent link">&para;</a></h4>
 <ul>
 <li>结论：<ul>
@@ -675,22 +719,22 @@
 <li>“声明的依存性”替换“定义的依存性”，<strong>现实中让头文件尽可能自我满足，万一做不到，让它与其它文件内的声明式（而非定义式）相依</strong>。</li>
 <li><em>Handle classes与Interface classes区别？</em></li>
 </ul>
-<h3 id="part632-40">Part6、继承与面向对象设计（32-40）<a class="headerlink" href="#part632-40" title="Permanent link">&para;</a></h3>
-<h4 id="32">32、<a class="headerlink" href="#32" title="Permanent link">&para;</a></h4>
+<h3 id="part6inheritance-and-object-oriented-design32-40">Part6、继承与面向对象设计Inheritance and Object-Oriented Design（32-40）<a class="headerlink" href="#part6inheritance-and-object-oriented-design32-40" title="Permanent link">&para;</a></h3>
+<h4 id="32publicis-a-make-sure-public-inheritance-models-is-a">32、确定你的public继承塑模出is-a关系 Make sure public inheritance models "is-a."<a class="headerlink" href="#32publicis-a-make-sure-public-inheritance-models-is-a" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Liskov Substitution Principle</li>
 <li>public继承是"is a"，<em>private继承是啥？</em></li>
 </ul>
-<h4 id="33">33、<a class="headerlink" href="#33" title="Permanent link">&para;</a></h4>
+<h4 id="33">33、避免遮掩继承而来的名称<a class="headerlink" href="#33" title="Permanent link">&para;</a></h4>
 <ul>
 <li>using声明式，<strong>inline转交函数（forwarding function）</strong></li>
 </ul>
-<h4 id="34">34、<a class="headerlink" href="#34" title="Permanent link">&para;</a></h4>
+<h4 id="34">34、区分接口继承和实现继承<a class="headerlink" href="#34" title="Permanent link">&para;</a></h4>
 <ul>
 <li>声明一个pure virtual函数的目的是为了让derived classes只继承函数接口。</li>
 <li>声明简朴的（非纯）inpure virtual函数的目的，是让derived classes继承该函数的接口和缺省实现</li>
 </ul>
-<h4 id="35">35、<a class="headerlink" href="#35" title="Permanent link">&para;</a></h4>
+<h4 id="35virtual">35、考虑virtual函数以外的其他选择<a class="headerlink" href="#35virtual" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Template Method模式</li>
 <li>Strategy模式</li>
@@ -700,46 +744,107 @@
     + 以tr1::function成员变量替换virtual函数
     + 将继承体系内的virtual函数替换为另一个继承体系内的virtual函数</li>
 </ul>
-<h4 id="36">36、<a class="headerlink" href="#36" title="Permanent link">&para;</a></h4>
+<h4 id="36non-virtual">36、绝不重新定义继承而来的non-virtual函数<a class="headerlink" href="#36non-virtual" title="Permanent link">&para;</a></h4>
 <ul>
 <li><em>写个代码来看下差异，lionel</em> 【重新定义继承来的non-virtual】</li>
 </ul>
-<h4 id="37">37、<a class="headerlink" href="#37" title="Permanent link">&para;</a></h4>
+<h4 id="37">37、绝不重新定义继承而来的缺省参数值<a class="headerlink" href="#37" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>缺省参数是静态绑定</strong>，virtual是动态绑定</li>
 </ul>
-<h4 id="38">38、<a class="headerlink" href="#38" title="Permanent link">&para;</a></h4>
+<h4 id="38has-a">38、通过复合塑模出has-a或“根据某物实现出”<a class="headerlink" href="#38has-a" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>复合是has-a</strong></li>
 </ul>
-<h4 id="39">39、<a class="headerlink" href="#39" title="Permanent link">&para;</a></h4>
+<h4 id="39private">39、明智而审慎地使用private继承<a class="headerlink" href="#39private" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>private继承，编译器不会自动将一个derived class对象 转换为一个 base class对象</strong>。</li>
 </ul>
-<h4 id="40">40、<a class="headerlink" href="#40" title="Permanent link">&para;</a></h4>
+<h4 id="40">40、明智而审慎地使用多重继承<a class="headerlink" href="#40" title="Permanent link">&para;</a></h4>
 <ul>
 <li>多重继承会导致歧义</li>
 </ul>
 <h3 id="part741-48">Part7、模板与泛型编程（41-48）<a class="headerlink" href="#part741-48" title="Permanent link">&para;</a></h3>
+<h4 id="41">41、了解隐式接口和编译期多态<a class="headerlink" href="#41" title="Permanent link">&para;</a></h4>
+<ul>
+<li>结论<ul>
+<li>classes和templates都支持接口（interfaces）和多态（polymorphism）</li>
+<li>对于classes而言接口是显式的（explicit），以函数签名为中心。多态则是通过virtual函数发生于运行期</li>
+<li>对templates参数而言，接口是隐式的（implicit），奠基于有效表达式。多态则是通过template具现化和函数重载解析（function overloading resolution）发生于编译期</li>
+</ul>
+</li>
+</ul>
+<h4 id="42typename">42、了解typename的双重意义<a class="headerlink" href="#42typename" title="Permanent link">&para;</a></h4>
+<ul>
+<li>结论<ul>
+<li>声明template参数时，前缀关键字class和typename可互换</li>
+<li>请使用关键字typename标识嵌套从属类型名称；但不得在base class lists（基类列）或member initialization list（成员初值列）内以它作为base class修饰符</li>
+</ul>
+</li>
+</ul>
+<h4 id="43">43、学习处理模板化基类内的名称<a class="headerlink" href="#43" title="Permanent link">&para;</a></h4>
+<ul>
+<li>结论<ul>
+<li>可在derived class templates内通过"this-&gt;"指涉base class templates内的成员名称，或藉由一个明白写出的"base class资格修饰符"完成</li>
+</ul>
+</li>
+</ul>
+<h4 id="44templates">44、将与参数无关的代码抽象templates<a class="headerlink" href="#44templates" title="Permanent link">&para;</a></h4>
+<ul>
+<li>结论<ul>
+<li>Templates生成多个classes和多个函数，所以任何template代码都不该与某个造成膨胀的template参数产生相依关系</li>
+<li>因非类型模板参数（non-type template parameters）而造成的代码膨胀，往往可消除，做法是以函数参数或class成员变量替换template参数</li>
+<li>因类型参数（type parameters）而造成的代码膨胀，往往可降低，做法是让带有完全相同二进制表述（binary representations）的具现类型（instantiation types）共享实现码</li>
+</ul>
+</li>
+</ul>
+<h4 id="45">45、运用成员函数模板接受所有兼容类型<a class="headerlink" href="#45" title="Permanent link">&para;</a></h4>
+<ul>
+<li>结论<ul>
+<li>请使用member function tmeplates（成员函数模板）生成“可接受所有兼容类型”的函数</li>
+<li>如果你声明member templates用于“泛化copy构造”或“泛化assignment操作”，你还是需要声明正常的copy构造函数和copy assignment操作符</li>
+</ul>
+</li>
+</ul>
+<h4 id="46">46、需要类型转换时请为模板定义非成员函数<a class="headerlink" href="#46" title="Permanent link">&para;</a></h4>
+<ul>
+<li>结论<ul>
+<li>当我们编写一个class template，而它所提供之“与此template相关的”函数支持“所有参数之隐式类型转换”时，请将那些函数定义为“class template内部的friend函数”</li>
+</ul>
+</li>
+</ul>
+<h4 id="47traits-classes">47、请使用traits classes表现类型信息<a class="headerlink" href="#47traits-classes" title="Permanent link">&para;</a></h4>
+<ul>
+<li>结论<ul>
+<li>Traits classes使得“类型相关信息”在编译期可用。它们以templates和"templates特化"完成实现</li>
+<li>整合重载技术（overloading）后，traits classes有可能在编译期对类型执行if...else测试</li>
+</ul>
+</li>
+</ul>
+<h4 id="48template">48、认识template元编程<a class="headerlink" href="#48template" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Template metaprogramming（TMP，模板元编程）可将工作由运行期移往编译期，因而得以实现早期错误侦测和更高的执行效率</li>
+<li>TMP可被用来生成“基于政策选择组合”（based on combinations of policy choices）的客户定制代码，也可用来避免生成对某些特殊类型并不适合的代码</li>
+</ul>
 <h3 id="part8newdelete49-52">Part8、定制new和delete（49-52）<a class="headerlink" href="#part8newdelete49-52" title="Permanent link">&para;</a></h3>
 <p>0、</p>
 <ul>
 <li>---定制new和delete--  【new失败了】</li>
 </ul>
-<h4 id="49">49、<a class="headerlink" href="#49" title="Permanent link">&para;</a></h4>
+<h4 id="49new-handler">49、了解new-handler的行为<a class="headerlink" href="#49new-handler" title="Permanent link">&para;</a></h4>
 <ul>
 <li><code>operator new</code>分配失败了，会<strong>调用<code>new-handler</code>函数</strong>，设计一个良好的new-handler函数</li>
 <li><code>new(std::nothrow) Widget</code>发生了两件事
     + 1、nothrow版的operator new被调用，用以分配足够内存给Widget对象。</li>
 <li>使用nothrow new只能保证operator new不抛掷异常，不保证像“new (std::nothrow) Widget”这样的表达式绝不导致异常。</li>
 </ul>
-<h4 id="50">50、<a class="headerlink" href="#50" title="Permanent link">&para;</a></h4>
+<h4 id="50newdelete">50、了解new和delete的合理替换时机<a class="headerlink" href="#50newdelete" title="Permanent link">&para;</a></h4>
 <ul>
 <li>自己实现一个<code>operator new</code>，看看哪个开源比较强？</li>
 <li><em>什么场景下，需要自己实现一个operator new？</em></li>
 </ul>
-<h4 id="51">51、<a class="headerlink" href="#51" title="Permanent link">&para;</a></h4>
-<h4 id="52">52、<a class="headerlink" href="#52" title="Permanent link">&para;</a></h4>
+<h4 id="51newdelete">51、编写new和delete时需固守常规<a class="headerlink" href="#51newdelete" title="Permanent link">&para;</a></h4>
+<h4 id="52placement-newplacement-delete">52、写了placement new也要写placement delete<a class="headerlink" href="#52placement-newplacement-delete" title="Permanent link">&para;</a></h4>
 <ul>
 <li><code>Widget *pw = new Widget;</code>有2个函数被调用：
     + 用以分配内存的operator new
@@ -756,7 +861,7 @@
 </ul>
 </li>
 </ul>
-<h4 id="54tr1">54、熟悉TR1在内的标准程序库<a class="headerlink" href="#54tr1" title="Permanent link">&para;</a></h4>
+<h4 id="54tr1">54、让自己熟悉包括TR1在内的标准程序库<a class="headerlink" href="#54tr1" title="Permanent link">&para;</a></h4>
 <ul>
 <li>结论：<ul>
 <li>C++标准程序库的主要机能由STL、iostream、locals组成。并包含C99标准程序库</li>
@@ -788,7 +893,7 @@
 </ul>
 </li>
 </ul>
-<h4 id="55boost">55、熟悉boost<a class="headerlink" href="#55boost" title="Permanent link">&para;</a></h4>
+<h4 id="55boost">55、让自己熟悉boost<a class="headerlink" href="#55boost" title="Permanent link">&para;</a></h4>
 <ul>
 <li>结论：<ul>
 <li>Boost提供许多TR1组件实现品，以及其它许多程序库</li>

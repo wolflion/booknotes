@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>剑指offer - lionel的技术笔记</title>
+    <title>STL源码剖析 - lionel的技术笔记</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "\u5251\u6307offer";
-        var mkdocs_page_input_path = "91leetcode\\\u5251\u6307offer.md";
+        var mkdocs_page_name = "STL\u6e90\u7801\u5256\u6790";
+        var mkdocs_page_input_path = "21STL\\STL\u6e90\u7801\u5256\u6790.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -52,9 +52,9 @@
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../20C%2B%2B/effectiveC%2B%2B/">《Effective C++》</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/EffectiveSTL/">《Effective STL》</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../EffectiveSTL/">《Effective STL》</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/C%2B%2B%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/">《C++泛型STL原理和应用》</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../C%2B%2B%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/">《C++泛型STL原理和应用》</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../22C%2B%2Bmodern/%E6%B7%B1%E5%85%A5%E5%BA%94%E7%94%A8C%2B%2B11/">《深入应用C++11》</a>
                   </li>
@@ -130,7 +130,7 @@
               </ul>
               <p class="caption"><span class="caption-text">刷题</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/">《剑指offer专项突破》</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/">《剑指offer专项突破》</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">网课</span></p>
@@ -161,7 +161,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-      <li>剑指offer</li>
+      <li>STL源码剖析</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -170,193 +170,141 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h2 id="offer">《剑指offer》<a class="headerlink" href="#offer" title="Permanent link">&para;</a></h2>
+                <h2 id="stl">《STL源码剖析》<a class="headerlink" href="#stl" title="Permanent link">&para;</a></h2>
+<h3 id="chap1stl">chap1、STL概论与版本简介<a class="headerlink" href="#chap1stl" title="Permanent link">&para;</a></h3>
+<h4 id="19c">1.9、可能令你困惑的C++语法<a class="headerlink" href="#19c" title="Permanent link">&para;</a></h4>
+<h5 id="191stl_configh">1.9.1、stl_config.h中的各种组态<a class="headerlink" href="#191stl_configh" title="Permanent link">&para;</a></h5>
+<h5 id="192">1.9.2、临时对象的产生与运用<a class="headerlink" href="#192" title="Permanent link">&para;</a></h5>
+<h5 id="193class">1.9.3、静态常量整数成员在class内部直接初始化<a class="headerlink" href="#193class" title="Permanent link">&para;</a></h5>
+<h5 id="194incrementdecrementdereference">1.9.4、increment/decrement/dereference操作符<a class="headerlink" href="#194incrementdecrementdereference" title="Permanent link">&para;</a></h5>
+<h5 id="195">1.9.5、前闭后开区间表示法<code>[)</code><a class="headerlink" href="#195" title="Permanent link">&para;</a></h5>
+<h5 id="196function-calloperator">1.9.6、function call操作符<code>operator()</code><a class="headerlink" href="#196function-calloperator" title="Permanent link">&para;</a></h5>
+<h3 id="chap2allocator">chap2、空间配置器（allocator）<a class="headerlink" href="#chap2allocator" title="Permanent link">&para;</a></h3>
 <ul>
-<li>全书共81道，计划从0725开始刷，leetcode上需要31天</li>
+<li>隐藏在容器背后，<em>这个可以听一下，侯捷在b站的视频（关于内存的使用）</em></li>
 </ul>
+<h4 id="21">2.1、容器配置器的标准接口<a class="headerlink" href="#21" title="Permanent link">&para;</a></h4>
 <ul>
-<li>https://leetcode.cn/study-plan/lcof/</li>
-<li>刷题分为3步:（这样才能确定下问题出在哪一步）<ul>
-<li>1、读懂题目</li>
-<li>2、分析，推导，<strong>逻辑上这题怎么解</strong></li>
-<li>3、把思路转化为代码</li>
+<li>allactor的各种使用</li>
+</ul>
+<h5 id="211jjallocator">2.1.1、设计一个简单的空间配置器，JJ::allocator<a class="headerlink" href="#211jjallocator" title="Permanent link">&para;</a></h5>
+<ul>
+<li>P44，2jjalloc.h</li>
+<li>P46，2jjalloc.cpp</li>
+</ul>
+<h4 id="22sub-allocationsgi">2.2、具备次配能力（sub-allocation）的SGI空间配置器<a class="headerlink" href="#22sub-allocationsgi" title="Permanent link">&para;</a></h4>
+<h5 id="221sgistdallocator">2.2.1、SGI标准的空间配置器，std::allocator<a class="headerlink" href="#221sgistdallocator" title="Permanent link">&para;</a></h5>
+<h5 id="229free-lists">2.2.9、重新充填free lists<a class="headerlink" href="#229free-lists" title="Permanent link">&para;</a></h5>
+<h5 id="2210memory-pool">2.2.10、内存池（memory pool）<a class="headerlink" href="#2210memory-pool" title="Permanent link">&para;</a></h5>
+<h4 id="23">2.3、内存基本处理工具<a class="headerlink" href="#23" title="Permanent link">&para;</a></h4>
+<h5 id="231uninitialzed_copy">2.3.1、uninitialzed_copy<a class="headerlink" href="#231uninitialzed_copy" title="Permanent link">&para;</a></h5>
+<h5 id="231uninitialzed_fill">2.3.1、uninitialzed_fill<a class="headerlink" href="#231uninitialzed_fill" title="Permanent link">&para;</a></h5>
+<h5 id="231uninitialzed_fill_n">2.3.1、uninitialzed_fill_n<a class="headerlink" href="#231uninitialzed_fill_n" title="Permanent link">&para;</a></h5>
+<h3 id="chap3iteratortraits">chap3、迭代器（iterator）概念与traits编程技法<a class="headerlink" href="#chap3iteratortraits" title="Permanent link">&para;</a></h3>
+<p>3.1、迭代器设计思维-STL关键所在</p>
+<p>3.2、迭代器（iterator）是一种smart pointer</p>
+<p>3.3、迭代器相应型别（associated types）</p>
+<p>3.4、Traits编程技法-STL源代码门钥</p>
+<p>3.5、std::iterator的保证</p>
+<p>3.6、iterator源代码完整重列</p>
+<p>3.7、</p>
+<h3 id="chap4sequence-containers">chap4、序列式容器（sequence containers）<a class="headerlink" href="#chap4sequence-containers" title="Permanent link">&para;</a></h3>
+<h4 id="41">4.1、容器的概观与分类<a class="headerlink" href="#41" title="Permanent link">&para;</a></h4>
+<h3 id="chap5">chap5、关联式容器<a class="headerlink" href="#chap5" title="Permanent link">&para;</a></h3>
+<h3 id="chap6algorithms">chap6、算法（algorithms）<a class="headerlink" href="#chap6algorithms" title="Permanent link">&para;</a></h3>
+<p>6.1、算法概观</p>
+<p>6.2、算法的泛化过程</p>
+<p>6.3、数值算法<stl_numeric.h></p>
+<p>6.7、其它算法</p>
+<h3 id="chap7functors-function-objects">chap7、仿函数（functors，另名  函数对象 function objects）<a class="headerlink" href="#chap7functors-function-objects" title="Permanent link">&para;</a></h3>
+<h4 id="71functor">7.1、仿函数（functor）概观<a class="headerlink" href="#71functor" title="Permanent link">&para;</a></h4>
+<ul>
+<li>开始叫仿函数，后来规范叫<strong>函数对象</strong>（一种具有函数特质的对象）</li>
+<li>函数指针不能满足STL对抽象性的要求，无法和STL其它组件搭配，产生更灵活的变化</li>
+</ul>
+<pre class="highlight"><code class="language-cpp">//lionel，这两个场景的差异性，第1种，我确实还有点懵的
+greater&lt;int&gt; ig;
+cout&lt;&lt;boolalpha&lt;&lt;ig(4,6);//false  【ig调用其operator()，并赋予两个参数4，6】
+cout&lt;&lt;greater&lt;int&gt;()(6,4);//true  【greater&lt;int&gt;()产生了一个无名（临时）对象，(6,4)是指定两个参数】</code></pre>
+<ul>
+<li>以操作数分<ul>
+<li>一元仿函数</li>
+<li>二元仿函数</li>
 </ul>
 </li>
-<li>20230725-发现自己的一个问题，<strong>没有耐心一步步的往下推下去</strong>，哪怕是简单的排序算法，<strong>要先想着怎么去暴力</strong>，也就是<strong>要先做出来，然后再优化</strong>，自己第一步都不好好整，这是个问题，<em>要逐步fixed掉这个问题</em><ul>
-<li><strong>如何才算刷透《剑指offer》</strong>-这个我还没有答案</li>
-<li>遇到瓶颈或疑问时，要问问<strong>《剑指offer》怎么刷</strong></li>
-</ul>
-</li>
-<li>重要的参考：<ul>
-<li><a href="https://blog.csdn.net/weixin_43954951/article/details/125821879">《剑指offer》所有题目解法思路与出现频率汇总</a>，<em>在这个里面找思路，便于自己记一下</em></li>
-</ul>
-</li>
-</ul>
-<h3 id="_1">一、栈与队列<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
-<ul>
-<li>d1：9，30</li>
-<li>d：59I、59II</li>
-<li>0531开始刷了，只做了2道开头，0725开始</li>
-</ul>
-<h4 id="092">09、用2个栈实现队列<a class="headerlink" href="#092" title="Permanent link">&para;</a></h4>
-<ul>
-<li>我不太有思路</li>
-<li>思路：<ul>
-<li>插入的时候，在stack1插即可</li>
-<li>删除的时候，得用到stack2，如果stack2为空，得把stack1入到stack2里，然后再再删，如果stack1也为空，就是异常</li>
-</ul>
-</li>
-</ul>
-<h5 id="_2">代码<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h5>
-<pre class="highlight"><code class="language-cpp">class CQueue {
-public:
-    CQueue() {
-
-    }
-
-    void appendTail(int value) {
-
-    }
-
-    int deleteHead() {
-
-    }
-};
-
-/**
- * Your CQueue object will be instantiated and called as such:
- * CQueue* obj = new CQueue();
- * obj-&gt;appendTail(value);
- * int param_2 = obj-&gt;deleteHead();
- */</code></pre>
-<h4 id="30min">30、包含min函数的栈<a class="headerlink" href="#30min" title="Permanent link">&para;</a></h4>
-<ul>
-<li>知道要有个最小值</li>
-<li>思路：<ul>
-<li>辅助栈，存最小值（为啥需要m_min、m_data栈？）</li>
-</ul>
-</li>
-</ul>
-<h5 id="code">Code<a class="headerlink" href="#code" title="Permanent link">&para;</a></h5>
-<pre class="highlight"><code class="language-cpp">class MinStack {
-public:
-    /** initialize your data structure here. */
-    MinStack() {
-
-    }
-
-    void push(int x) {
-
-    }
-
-    void pop() {
-
-    }
-
-    int top() {
-
-    }
-
-    int min() {
-
-    }
-};
-
-/**
- * Your MinStack object will be instantiated and called as such:
- * MinStack* obj = new MinStack();
- * obj-&gt;push(x);
- * obj-&gt;pop();
- * int param_3 = obj-&gt;top();
- * int param_4 = obj-&gt;min();
- */</code></pre>
-<h4 id="59">59、<a class="headerlink" href="#59" title="Permanent link">&para;</a></h4>
-<h3 id="_3">二、链表<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<ul>
-<li>d2：6，24，35</li>
-<li></li>
-</ul>
-<h4 id="6">6、从尾到头打印链接<a class="headerlink" href="#6" title="Permanent link">&para;</a></h4>
-<h4 id="24">24、反转链表<a class="headerlink" href="#24" title="Permanent link">&para;</a></h4>
-<h4 id="35m">35（M）、复杂链表的复制<a class="headerlink" href="#35m" title="Permanent link">&para;</a></h4>
-<h3 id="_4">三、字符串<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<ul>
-<li>d3：5，58II</li>
-<li>d：20，67</li>
-</ul>
-<h4 id="5">5、替换空格<a class="headerlink" href="#5" title="Permanent link">&para;</a></h4>
-<h4 id="58ii">58II、左旋转字符串<a class="headerlink" href="#58ii" title="Permanent link">&para;</a></h4>
-<h4 id="20m">20（M）、<a class="headerlink" href="#20m" title="Permanent link">&para;</a></h4>
-<h4 id="67m">67（M）、<a class="headerlink" href="#67m" title="Permanent link">&para;</a></h4>
-<h3 id="_5">四、查找<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
-<ul>
-<li>d4：3，53I，53II</li>
-<li>d5：4，11，50</li>
-</ul>
-<h4 id="3">3、数组中重复的数字<a class="headerlink" href="#3" title="Permanent link">&para;</a></h4>
-<h4 id="53i">53I、在排序数组中查找数字<a class="headerlink" href="#53i" title="Permanent link">&para;</a></h4>
-<h4 id="53ii0n-1">53II、0~n-1中缺失的数字<a class="headerlink" href="#53ii0n-1" title="Permanent link">&para;</a></h4>
-<h4 id="4m">4（M）、二维数组中的查找<a class="headerlink" href="#4m" title="Permanent link">&para;</a></h4>
-<h4 id="11">11、旋转数组的最小数字<a class="headerlink" href="#11" title="Permanent link">&para;</a></h4>
-<h4 id="50">50、第一个只出现一次的字符<a class="headerlink" href="#50" title="Permanent link">&para;</a></h4>
-<h3 id="_6">五、二叉树<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
-<ul>
-<li>d6：32I，32II，32III</li>
-</ul>
-<h4 id="32im">32I（M）、从上到下打印二叉树<a class="headerlink" href="#32im" title="Permanent link">&para;</a></h4>
-<p>32II</p>
-<p>32III（M）、</p>
-<h3 id="_7">六、搜索与回溯算法<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
-<ul>
-<li>d7：26，27，28</li>
-<li>d14：12，13</li>
-<li>d15：34，36，54</li>
-</ul>
-<p>26（M）、树的子结构</p>
-<p>27、二叉树的镜像</p>
-<p>28、对称的二叉树</p>
-<h3 id="_8">七、动态规划<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
-<ul>
-<li>d8：10I，10II，63</li>
-<li>d9：42、47</li>
-<li>d10：46，48</li>
-</ul>
-<p>42、连续子数组的最大和</p>
-<p>47、礼物的最大价值</p>
-<p>46、把数字翻译成字符串</p>
-<p>48、最长不含重复字符的字符串</p>
-<h3 id="_9">八、双指针<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
-<ul>
-<li>d11：18，22</li>
-<li>d12：25，52</li>
-<li>d13：21，57，58I</li>
-</ul>
-<h4 id="18">18、删除链表的节点<a class="headerlink" href="#18" title="Permanent link">&para;</a></h4>
-<h4 id="22k">22、链表中倒数第k个节点<a class="headerlink" href="#22k" title="Permanent link">&para;</a></h4>
-<p>25、</p>
-<p>52、</p>
-<p>21、</p>
-<p>57、</p>
-<p>58I、</p>
-<h3 id="_10">最后<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
-<h4 id="_11">自己心得<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h4>
-<ul>
-<li>如果写不出来，就干2件事<ul>
-<li>1、用更抽象的语言去写，比如C++的string或一些算法，<strong>自己有思路就行</strong></li>
-<li>2、如果思路都没有，就先<strong>举例和分解</strong>，先做对几种场景，或者用暴力的方法先解出后，再<strong>想办法去优化</strong>（因为分解后，就能慢慢找到具体优化哪一步了），<strong>针对具体的地方优化</strong></li>
+<li>以功能分<ul>
+<li>算术运算（Arithmetic）</li>
+<li>关系运算（Rational）</li>
+<li>逻辑运算（Logical）</li>
 </ul>
 </li>
 </ul>
-<h4 id="ref">ref（这些都不一定用得上）<a class="headerlink" href="#ref" title="Permanent link">&para;</a></h4>
+<h4 id="72adaptable">7.2、可配接（adaptable）的关键<a class="headerlink" href="#72adaptable" title="Permanent link">&para;</a></h4>
+<h5 id="721unary_function">7.2.1、unary_function<a class="headerlink" href="#721unary_function" title="Permanent link">&para;</a></h5>
 <ul>
-<li><a href="https://zhuanlan.zhihu.com/p/56200260">面试必刷-《剑指offer》刷题小结</a></li>
+<li>一元必须继承它</li>
 </ul>
+<h5 id="722binary_function">7.2.2、binary_function<a class="headerlink" href="#722binary_function" title="Permanent link">&para;</a></h5>
 <ul>
-<li>https://www.algomooc.com/ ， https://github.com/MisterBooo， 都是 吴师兄学算法</li>
-<li><a href="https://doc.yonyoucloud.com/doc/wiki/project/for-offer/index.html">《剑指offer》学习心得</a>，人家的笔记，不过是用java写的，<strong>胜在人家有ut</strong></li>
-<li>https://github.com/Wang-Jun-Chao/coding-interviews  也是java的，解题可以去看他的csdn，blog</li>
-<li><a href="https://www.zhihu.com/question/271458173">剑指offer leetcode怎么刷</a>  这是zhihu上的答案，自己有疑问时可以查查看</li>
+<li>二元必须继承它</li>
 </ul>
+<h4 id="73arithmetic">7.3、算术类（Arithmetic）仿函数<a class="headerlink" href="#73arithmetic" title="Permanent link">&para;</a></h4>
+<ul>
+<li>内建的“算术类仿函数”</li>
+<li>P419，7functor-arithmetic.cpp</li>
+<li>证同元素（identity element）</li>
+</ul>
+<h4 id="74rational">7.4、关系运算类（Rational）仿函数<a class="headerlink" href="#74rational" title="Permanent link">&para;</a></h4>
+<ul>
+<li>内建的“关系运算类仿函数”</li>
+<li>P421，7functor-rational.cpp</li>
+</ul>
+<h4 id="75logical">7.5、逻辑运算类（Logical）仿函数<a class="headerlink" href="#75logical" title="Permanent link">&para;</a></h4>
+<ul>
+<li>内建的“逻辑运算类仿函数”</li>
+<li>P421，7functor-logical.cpp</li>
+</ul>
+<h4 id="76identityselectproject">7.6、证同（identity）、选择（select）、投射（project）<a class="headerlink" href="#76identityselectproject" title="Permanent link">&para;</a></h4>
+<ul>
+<li><em>这一节没太懂啥意思，lionel</em></li>
+</ul>
+<h3 id="chap8adapters">chap8、配接器（adapters）<a class="headerlink" href="#chap8adapters" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Adapter定义：<strong>将一个class的接口转换为另一个class的接口，使原本因接口不兼容而不能合作的classes，可以一起运作</strong>。</li>
+</ul>
+<h4 id="81">8.1、配接器之概观与分类<a class="headerlink" href="#81" title="Permanent link">&para;</a></h4>
+<h5 id="811container-adapters">8.1.1、应用于容器，container adapters<a class="headerlink" href="#811container-adapters" title="Permanent link">&para;</a></h5>
+<ul>
+<li>queue和stack，是配接器，修饰deque</li>
+</ul>
+<h5 id="812iterator-adapters">8.1.2、应用于迭代器，iterator adapters<a class="headerlink" href="#812iterator-adapters" title="Permanent link">&para;</a></h5>
+<ul>
+<li><em>没怎么看会，lionel，</em></li>
+</ul>
+<h5 id="813functor-adapters">8.1.3、应用于仿函数，functor adapters<a class="headerlink" href="#813functor-adapters" title="Permanent link">&para;</a></h5>
+<ul>
+<li><em>稍微看了一下，没有贯穿会</em></li>
+<li>P431，8functor-adapter.cpp</li>
+</ul>
+<h4 id="82container-adapters">8.2、container adapters<a class="headerlink" href="#82container-adapters" title="Permanent link">&para;</a></h4>
+<h5 id="821stack">8.2.1、stack<a class="headerlink" href="#821stack" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>class Sequence = deque&lt;T&gt;</code></li>
+</ul>
+<h5 id="822queue">8.2.2、queue<a class="headerlink" href="#822queue" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>class Sequence = deque&lt;T&gt;</code></li>
+</ul>
+<h4 id="83iterator-adapters">8.3、iterator adapters<a class="headerlink" href="#83iterator-adapters" title="Permanent link">&para;</a></h4>
+<h5 id="831insert-iterators">8.3.1、insert iterators<a class="headerlink" href="#831insert-iterators" title="Permanent link">&para;</a></h5>
+<h5 id="832reverse-iterators">8.3.2、reverse iterators<a class="headerlink" href="#832reverse-iterators" title="Permanent link">&para;</a></h5>
+<h5 id="833stream-iterators">8.3.3、stream iterators<a class="headerlink" href="#833stream-iterators" title="Permanent link">&para;</a></h5>
+<h4 id="84functor-adapters">8.4、functor adapters<a class="headerlink" href="#84functor-adapters" title="Permanent link">&para;</a></h4>
+<h5 id="841not1not2">8.4.1、对返回值进行逻辑否定：not1，not2<a class="headerlink" href="#841not1not2" title="Permanent link">&para;</a></h5>
+<h5 id="842bind1stbind2nd">8.4.2、对参数进行绑定：bind1st，bind2nd<a class="headerlink" href="#842bind1stbind2nd" title="Permanent link">&para;</a></h5>
+<h5 id="843compose1compose2">8.4.3、用于函数合成：compose1，compose2<a class="headerlink" href="#843compose1compose2" title="Permanent link">&para;</a></h5>
+<h5 id="844ptr_fun">8.4.4、用于函数指针：ptr_fun<a class="headerlink" href="#844ptr_fun" title="Permanent link">&para;</a></h5>
+<h5 id="845mem_funmem_fun_ref">8.4.5、用于成员函数指针：mem_fun，mem_fun_ref<a class="headerlink" href="#845mem_funmem_fun_ref" title="Permanent link">&para;</a></h5>
               
             </div>
           </div><footer>
