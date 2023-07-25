@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>STL源码剖析 - lionel的技术笔记</title>
+    <title>《STL源码剖析》 - lionel的技术笔记</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "STL\u6e90\u7801\u5256\u6790";
+        var mkdocs_page_name = "\u300aSTL\u6e90\u7801\u5256\u6790\u300b";
         var mkdocs_page_input_path = "21STL\\STL\u6e90\u7801\u5256\u6790.md";
         var mkdocs_page_url = null;
       </script>
@@ -49,12 +49,148 @@
                 </li>
               </ul>
               <p class="caption"><span class="caption-text">C++</span></p>
-              <ul>
+              <ul class="current">
                   <li class="toctree-l1"><a class="reference internal" href="../../20C%2B%2B/effectiveC%2B%2B/">《Effective C++》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../20C%2B%2B/%E6%B7%B1%E5%BA%A6%E6%8E%A2%E7%B4%A2C%2B%2B%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B/">《深度探索C++对象模型》</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../EffectiveSTL/">《Effective STL》</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../C%2B%2B%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/">《C++泛型STL原理和应用》</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">《STL源码剖析》</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#chap1stl">chap1、STL概论与版本简介</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#19c">1.9、可能令你困惑的C++语法</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#191stl_configh">1.9.1、stl_config.h中的各种组态</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#192">1.9.2、临时对象的产生与运用</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#193class">1.9.3、静态常量整数成员在class内部直接初始化</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#194incrementdecrementdereference">1.9.4、increment/decrement/dereference操作符</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#195">1.9.5、前闭后开区间表示法[)</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#196function-calloperator">1.9.6、function call操作符operator()</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap2allocator">chap2、空间配置器（allocator）</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#21">2.1、容器配置器的标准接口</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#211jjallocator">2.1.1、设计一个简单的空间配置器，JJ::allocator</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#22sub-allocationsgi">2.2、具备次配能力（sub-allocation）的SGI空间配置器</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#221sgistdallocator">2.2.1、SGI标准的空间配置器，std::allocator</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#229free-lists">2.2.9、重新充填free lists</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#2210memory-pool">2.2.10、内存池（memory pool）</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#23">2.3、内存基本处理工具</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#231uninitialzed_copy">2.3.1、uninitialzed_copy</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#231uninitialzed_fill">2.3.1、uninitialzed_fill</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#231uninitialzed_fill_n">2.3.1、uninitialzed_fill_n</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap3iteratortraits">chap3、迭代器（iterator）概念与traits编程技法</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap4sequence-containers">chap4、序列式容器（sequence containers）</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#41">4.1、容器的概观与分类</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap5">chap5、关联式容器</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap6algorithms">chap6、算法（algorithms）</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap7functors-function-objects">chap7、仿函数（functors，另名  函数对象 function objects）</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#71functor">7.1、仿函数（functor）概观</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#72adaptable">7.2、可配接（adaptable）的关键</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#721unary_function">7.2.1、unary_function</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#722binary_function">7.2.2、binary_function</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#73arithmetic">7.3、算术类（Arithmetic）仿函数</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#74rational">7.4、关系运算类（Rational）仿函数</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#75logical">7.5、逻辑运算类（Logical）仿函数</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#76identityselectproject">7.6、证同（identity）、选择（select）、投射（project）</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap8adapters">chap8、配接器（adapters）</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#81">8.1、配接器之概观与分类</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#811container-adapters">8.1.1、应用于容器，container adapters</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#812iterator-adapters">8.1.2、应用于迭代器，iterator adapters</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#813functor-adapters">8.1.3、应用于仿函数，functor adapters</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#82container-adapters">8.2、container adapters</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#821stack">8.2.1、stack</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#822queue">8.2.2、queue</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#83iterator-adapters">8.3、iterator adapters</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#831insert-iterators">8.3.1、insert iterators</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#832reverse-iterators">8.3.2、reverse iterators</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#833stream-iterators">8.3.3、stream iterators</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#84functor-adapters">8.4、functor adapters</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#841not1not2">8.4.1、对返回值进行逻辑否定：not1，not2</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#842bind1stbind2nd">8.4.2、对参数进行绑定：bind1st，bind2nd</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#843compose1compose2">8.4.3、用于函数合成：compose1，compose2</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#844ptr_fun">8.4.4、用于函数指针：ptr_fun</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#845mem_funmem_fun_ref">8.4.5、用于成员函数指针：mem_fun，mem_fun_ref</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    </ul>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../22C%2B%2Bmodern/%E6%B7%B1%E5%85%A5%E5%BA%94%E7%94%A8C%2B%2B11/">《深入应用C++11》</a>
                   </li>
@@ -64,6 +200,10 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA/">《操作系统导论》</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../408/%E5%A4%A7%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">《大话设计模式》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90_C%2B%2B4th/">《数据结构与算法分析_C++4th》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E7%AE%97%E6%B3%95%284th%29/">《算法4th》</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">网络编程</span></p>
@@ -130,6 +270,8 @@
               </ul>
               <p class="caption"><span class="caption-text">刷题</span></p>
               <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer/">《剑指offer2nd》</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/">《剑指offer专项突破》</a>
                   </li>
               </ul>
@@ -161,7 +303,8 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-      <li>STL源码剖析</li>
+          <li>C++ &raquo;</li>
+      <li>《STL源码剖析》</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -308,6 +451,10 @@ cout&lt;&lt;greater&lt;int&gt;()(6,4);//true  【greater&lt;int&gt;()产生了�
               
             </div>
           </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../C%2B%2B%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/" class="btn btn-neutral float-left" title="《C++泛型STL原理和应用》"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../22C%2B%2Bmodern/%E6%B7%B1%E5%85%A5%E5%BA%94%E7%94%A8C%2B%2B11/" class="btn btn-neutral float-right" title="《深入应用C++11》">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
 
   <hr/>
 
@@ -329,6 +476,10 @@ cout&lt;&lt;greater&lt;int&gt;()(6,4);//true  【greater&lt;int&gt;()产生了�
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
+      <span><a href="../C%2B%2B%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../22C%2B%2Bmodern/%E6%B7%B1%E5%85%A5%E5%BA%94%E7%94%A8C%2B%2B11/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>深度探索C++对象模型 - lionel的技术笔记</title>
+    <title>《深度探索C++对象模型》 - lionel的技术笔记</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "\u6df1\u5ea6\u63a2\u7d22C++\u5bf9\u8c61\u6a21\u578b";
+        var mkdocs_page_name = "\u300a\u6df1\u5ea6\u63a2\u7d22C++\u5bf9\u8c61\u6a21\u578b\u300b";
         var mkdocs_page_input_path = "20C++\\\u6df1\u5ea6\u63a2\u7d22C++\u5bf9\u8c61\u6a21\u578b.md";
         var mkdocs_page_url = null;
       </script>
@@ -49,12 +49,238 @@
                 </li>
               </ul>
               <p class="caption"><span class="caption-text">C++</span></p>
-              <ul>
+              <ul class="current">
                   <li class="toctree-l1"><a class="reference internal" href="../effectiveC%2B%2B/">《Effective C++》</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">《深度探索C++对象模型》</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#chap1">chap1、关于对象</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#10layout-costs-for-adding-encapsulation">1.0、加上封装后的布局成本（Layout Costs for Adding Encapsulation）</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#11cthe-c-object-model">1.1、C++对象模式（The C++ Object Model）</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#111a-simple-object-model">1.1.1、简单对象模型（A Simple Object Model）</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#112">1.1.2、表格驱动对象模型</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#113c">1.1.3、C++对象模型</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#114how-the-object-model-effects-programs">1.1.4、对象模型如何影响程序（How the Object Model Effects Programs）</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#12a-keyword-distinction">1.2、关键词所带来的差异（A Keyword Distinction）</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#121">1.2.1、关键词的困扰</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#122structthe-politically-correct-struct">1.2.2、策略性正确的struct（The Politically Correct Struct）</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#13an-object-distinction">1.3、对象的差异（An Object Distinction）</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#131the-type-of-a-pointer">1.3.1、指针的类型（The Type of a Pointer）</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#132adding-polymorphism">1.3.2、加上多态之后（Adding Polymorphism）</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap02">chap02、构造函数语义学</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#21default-constructor">2.1、Default Constructor的建构操作</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#211default-constructormember-class-object">2.1.1、“带有Default Constructor“的Member Class Object</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#212default-constructorbase-class">2.1.2、“带有Default Constructor“的Base Class</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#213virtual-functionclass">2.1.3、“带有一个Virtual Function“的Class</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#214virtual-base-classclass">2.1.4、“带有一个Virtual Base class“的Class</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#215">2.1.5、总结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#22copy-constructor">2.2、Copy Constructor的建构操作</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#221default-memberwise-initialization">2.2.1、Default Memberwise Initialization</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#222bitwise-copy-semantics">2.2.2、Bitwise Copy Semantics（位逐次拷贝）</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#223bitwise-copy-semantics">2.2.3、不要Bitwise Copy Semantics!</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#224virtual-table">2.2.4、重新设定的指针Virtual Table</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#225virtual-base-class-subobject">2.2.5、处理Virtual Base Class Subobject</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#23program-transformation-semantics">2.3、程序转换语意学（Program Transformation Semantics）</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#231">2.3.1、明确的初始化操作（）</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#232">2.3.2、参数的初始化（）</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#233">2.3.3、返回值的初始化（）</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#234">2.3.4、在使用者层面做优化（）</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#235">2.3.5、在编译器层面做优化（）</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#236copy-constructor">2.3.6、Copy Constructor：要还是不要？</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#237">2.3.7、摘要</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#24member-initialization-list">2.4、成员们的初始化队伍（Member Initialization List）</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap03data">chap03Data语意学</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#0">0、</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#31data-member">3.1、Data Member的绑定</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#32data-member">3.2、Data Member的布局</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#33data-member">3.3、Data Member的存取</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#331static-data-members">3.3.1、Static Data Members</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#332nonstatic-data-members">3.3.2、Nonstatic Data Members</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#34data-member">3.4、“继承”与Data Member</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#341">3.4.1、只要继承不要多态</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#342">3.4.2、加上多态</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#343">3.4.3、多重继承</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#344">3.4.4、虚拟继承</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#35">3.5、对象成员的效率</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#36data-members">3.6、指向Data Members的指针</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#361members">3.6.1、“指向Members的指针”的效率问题</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap4function">chap4、Function语意学</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#41member">4.1、Member的各种调用方式</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#411nonstatic-member-functions">4.1.1、Nonstatic Member Functions</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#412virtual-member-functions">4.1.2、Virtual Member Functions（）</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#413static-member-functions">4.1.3、Static Member Functions（）</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#42virtual-member-functions">4.2、Virtual Member Functions（虚拟成员函数）</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#421virtual-functions">4.2.1、多重继承下的Virtual Functions</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#422virtual-functions">4.2.2、虚拟继承下的Virtual Functions</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#43">4.3、函数的效能</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#44member-functionsrpointer-to-member-functions">4.4、指向Member Functionsr的指针（Pointer-to-Member Functions）</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#441virtual-member-functions">4.4.1、支持“指向Virtual Member Functions”之指针</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#442member-functions">4.4.2、在多重继承之下，指向Member Functions的指针</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#443member-functions">4.4.3、“指向Member Functions之指针”的效率</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#45inline-functions">4.5、Inline Functions</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#451formal-argument">4.5.1、形式参数（Formal Argument）</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#452local-variables">4.5.2、局部变量（Local Variables）</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap5">chap5、构造、解构、拷贝语意学</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#50">5.0、</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#501presence-of-a-pure-virtual-function">5.0.1、纯虚拟函数的存在（Presence of a Pure Virtual Function）</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#504class">5.0.4、重新考虑class的声明</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#51">5.1、无继承情况下的对象构造</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#511">5.1.1、抽象数据类型（）</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#512">5.1.2、为继承做准备</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#52">5.2、继承体系下的对象构造</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#521virtual-inheritance">5.2.1、虚拟继承（Virtual Inheritance）</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#522the-semantics-of-the-vptr-initialization">5.2.2、初始化语意学（The Semantics of the vptr Initialization）</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#53">5.3、对象复制语意学（）</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#54">5.4、对象的功能（）</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#55semantics-of-destruction">5.5、解构语意学（Semantics of Destruction）</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap6">chap6、执行期语意学</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#62newdelete">6.2、new和delete运算符</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#63">6.3、临时性对象</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#631">6.3.1、临时性对象的迷思</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap7">chap7、站在对象模型的类端</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_1">最后</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#_2">履历</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../21STL/EffectiveSTL/">《Effective STL》</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../21STL/C%2B%2B%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/">《C++泛型STL原理和应用》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/">《STL源码剖析》</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../22C%2B%2Bmodern/%E6%B7%B1%E5%85%A5%E5%BA%94%E7%94%A8C%2B%2B11/">《深入应用C++11》</a>
                   </li>
@@ -64,6 +290,10 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA/">《操作系统导论》</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../408/%E5%A4%A7%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">《大话设计模式》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90_C%2B%2B4th/">《数据结构与算法分析_C++4th》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E7%AE%97%E6%B3%95%284th%29/">《算法4th》</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">网络编程</span></p>
@@ -130,6 +360,8 @@
               </ul>
               <p class="caption"><span class="caption-text">刷题</span></p>
               <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer/">《剑指offer2nd》</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/">《剑指offer专项突破》</a>
                   </li>
               </ul>
@@ -161,7 +393,8 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-      <li>深度探索C++对象模型</li>
+          <li>C++ &raquo;</li>
+      <li>《深度探索C++对象模型》</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -552,6 +785,10 @@ class A : public Y, public Z{};</code></pre>
               
             </div>
           </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../effectiveC%2B%2B/" class="btn btn-neutral float-left" title="《Effective C++》"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../21STL/EffectiveSTL/" class="btn btn-neutral float-right" title="《Effective STL》">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
 
   <hr/>
 
@@ -573,6 +810,10 @@ class A : public Y, public Z{};</code></pre>
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
+      <span><a href="../effectiveC%2B%2B/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../21STL/EffectiveSTL/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
