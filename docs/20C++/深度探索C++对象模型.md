@@ -1,5 +1,10 @@
 ## 《深度探索C++对象模型》
 
+### 摘要笔记
+
++ chap2、构造函数
+  + 4种构造、拷贝函数、初始化
+
 ### chap1、关于对象
 
 + 类和结构体的定义
@@ -143,17 +148,56 @@
 
 #### 2.3、程序转换语意学（Program Transformation Semantics）
 
-##### 2.3.1、明确的初始化操作（）
+```c++
+#include "X.h"
+X foo(){
+    X xx;
+    //...
+    return xx;
+}
+```
 
-##### 2.3.2、参数的初始化（）
++ 可能会有2个假设
+  + 1、每次foo()被调用，就传回xx的值    【**要视class X如何定义而定**】
+  + 2、如果 class X定义了一个copy constructor，那么当foo()被调用时，保证该copy constructor也会被调用  【**也取决于定义，但最主要的是看你的C++编译器所提供的 进取性优化程度（degree of aggressive optimization）而定**】
 
-##### 2.3.3、返回值的初始化（）
+##### 2.3.1、明确的初始化操作（Explicit Initialization）
 
-##### 2.3.4、在使用者层面做优化（）
++ 必要的程序转换有两个阶段
+  + 1、重写每一个定义，其中的初始化操作会被剥夺（**严谨的定义是指 占用内存**）
+  + 2、class的copy constructor调用操作会被安插进去
 
-##### 2.3.5、在编译器层面做优化（）
+```c++
+X x0;
+void foo_bar(){
+    X x1(x0);    //第一阶段X x1;这种，定义被重写
+    X x2 = x0;   //第二阶段x1.X::X(x0); 会表现出X::X(const X& xx);类似copy constructor的调用
+    X x3 = X(x0);
+}
+```
+
+
+
+##### 2.3.2、参数的初始化（Argument Initialization）
+
++ 暂时性object
++ *另一种实现方法？*
+
+##### 2.3.3、返回值的初始化（Return Value Initialization）
+
++ bar()的返回值如何从局部对象xx中拷贝过来？双阶段转化
+  + 1、首先加一个额外参数，类型是class object的reference。用来放置被“copy constructed”而得的返回值
+  + 2、在return指令之前安插一个copy constructor调用操作，以便将欲传回之object的内容当做上述新增参数的初值
+
+##### 2.3.4、在使用者层面做优化（Optimization at the User Level）
+
+##### 2.3.5、在编译器层面做优化（Optimization at the Compiler Level）
+
++ **NRV优化**（Named Return Value）
 
 ##### 2.3.6、Copy Constructor：要还是不要？
+
++ **C++设计者不应该提供一个explicit copy constructor**，因为编译器自动为你实施了最好的行为
 
 ##### 2.3.7、摘要
 
@@ -372,11 +416,45 @@ class A : public Y, public Z{};
 
 ##### 6.3.1、临时性对象的迷思
 
-### chap7、站在对象模型的类端
+### chap7、站在对象模型的尖端
 
-7.1、Template
+#### 7.1、Template
 
-7.2、异常处理（Exception Handing）
++ 有关template的三个主要讨论方向
+  + 1、template的声明
+  + 2、如何“具现（instantiates）"出class object以及inline nonmember，以及member template functions，这些是“每一个编译单位都会拥有一份实体”的东西
+  + 3、如何“具现（instantiates）"出nonmember以及member template functions，以及static template class members，这些都是“每一个可执行文件中只需要一份实体”的东西。这也就是一般而言template所带来的问题
+
+##### 7.1.1、Template的“具现”行为
+
+##### 7.1.2、Template的错误报告
+
+##### 7.1.3、Template中的名称决议方式
+
+##### 7.1.4、Member Function的具现行为（Member Function Instantiation）
+
++ 编译器设计者必须回答的三个主要问题
+  + 1、编译器如何找出函数的定义？
+  + 2、编译器如何能够只具现出程序用到的member functions?
+  + 3、编译器如何阻止member definitions在多个.o文件中都被具现呢？
+
+#### 7.2、异常处理（Exception Handing）
+
+##### 7.2.1、Exception Handling快速检阅
+
++ 三个主要的词汇组件构成：
+  + 1、一个throw子句
+  + 2、一个或多个catch子句
+  + 3、一个try区段
+
+##### 7.2.2、对Exception Handling的支持
+
++ 当一个exception发生时，编译系统必须完成以下事情：
+  + 1、检验发生throw操作的函数
+  + 2、决定throw操作是否发生在try区段中
+  + 3、若是，编译系统必须把exception type拿来和每一个catch子句比较
+  + 4、如果比较吻合，流程控制应该交到catch子句手中
+  + 5、如果throw的发生并不在try区段中，或没有一个catch子句吻合，那么系统必须（a）摧毁所有active local objects，（b）从堆栈中将当前的函数"unwind"掉，（c）进行到程序堆栈中的下一个函数中去，然后重复上述步骤2-5
 
 7.3、执行期类型识别（，RTTI）
 
