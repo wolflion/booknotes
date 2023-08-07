@@ -54,6 +54,8 @@
                   </li>
                   <li class="toctree-l1 current"><a class="reference internal current" href="./">《深度探索C++对象模型》</a>
     <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#_1">摘要笔记</a>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="#chap1">chap1、关于对象</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#10layout-costs-for-adding-encapsulation">1.0、加上封装后的布局成本（Layout Costs for Adding Encapsulation）</a>
@@ -120,15 +122,15 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#23program-transformation-semantics">2.3、程序转换语意学（Program Transformation Semantics）</a>
         <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#231">2.3.1、明确的初始化操作（）</a>
+    <li class="toctree-l4"><a class="reference internal" href="#231explicit-initialization">2.3.1、明确的初始化操作（Explicit Initialization）</a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#232">2.3.2、参数的初始化（）</a>
+    <li class="toctree-l4"><a class="reference internal" href="#232argument-initialization">2.3.2、参数的初始化（Argument Initialization）</a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#233">2.3.3、返回值的初始化（）</a>
+    <li class="toctree-l4"><a class="reference internal" href="#233return-value-initialization">2.3.3、返回值的初始化（Return Value Initialization）</a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#234">2.3.4、在使用者层面做优化（）</a>
+    <li class="toctree-l4"><a class="reference internal" href="#234optimization-at-the-user-level">2.3.4、在使用者层面做优化（Optimization at the User Level）</a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#235">2.3.5、在编译器层面做优化（）</a>
+    <li class="toctree-l4"><a class="reference internal" href="#235optimization-at-the-compiler-level">2.3.5、在编译器层面做优化（Optimization at the Compiler Level）</a>
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#236copy-constructor">2.3.6、Copy Constructor：要还是不要？</a>
     </li>
@@ -266,11 +268,33 @@
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#chap7">chap7、站在对象模型的类端</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#_1">最后</a>
+    <li class="toctree-l2"><a class="reference internal" href="#chap7">chap7、站在对象模型的尖端</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#_2">履历</a>
+    <li class="toctree-l3"><a class="reference internal" href="#71template">7.1、Template</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#711template">7.1.1、Template的“具现”行为</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#712template">7.1.2、Template的错误报告</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#713template">7.1.3、Template中的名称决议方式</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#714member-functionmember-function-instantiation">7.1.4、Member Function的具现行为（Member Function Instantiation）</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#72exception-handing">7.2、异常处理（Exception Handing）</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#721exception-handling">7.2.1、Exception Handling快速检阅</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#722exception-handling">7.2.2、对Exception Handling的支持</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_2">最后</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#_3">履历</a>
     </li>
         </ul>
     </li>
@@ -404,6 +428,13 @@
             <div class="section" itemprop="articleBody">
               
                 <h2 id="c">《深度探索C++对象模型》<a class="headerlink" href="#c" title="Permanent link">&para;</a></h2>
+<h3 id="_1">摘要笔记<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>chap2、构造函数<ul>
+<li>4种构造、拷贝函数、初始化</li>
+</ul>
+</li>
+</ul>
 <h3 id="chap1">chap1、关于对象<a class="headerlink" href="#chap1" title="Permanent link">&para;</a></h3>
 <ul>
 <li>类和结构体的定义</li>
@@ -565,12 +596,55 @@
 </ul>
 <h5 id="225virtual-base-class-subobject">2.2.5、处理Virtual Base Class Subobject<a class="headerlink" href="#225virtual-base-class-subobject" title="Permanent link">&para;</a></h5>
 <h4 id="23program-transformation-semantics">2.3、程序转换语意学（Program Transformation Semantics）<a class="headerlink" href="#23program-transformation-semantics" title="Permanent link">&para;</a></h4>
-<h5 id="231">2.3.1、明确的初始化操作（）<a class="headerlink" href="#231" title="Permanent link">&para;</a></h5>
-<h5 id="232">2.3.2、参数的初始化（）<a class="headerlink" href="#232" title="Permanent link">&para;</a></h5>
-<h5 id="233">2.3.3、返回值的初始化（）<a class="headerlink" href="#233" title="Permanent link">&para;</a></h5>
-<h5 id="234">2.3.4、在使用者层面做优化（）<a class="headerlink" href="#234" title="Permanent link">&para;</a></h5>
-<h5 id="235">2.3.5、在编译器层面做优化（）<a class="headerlink" href="#235" title="Permanent link">&para;</a></h5>
+<pre class="highlight"><code class="language-c++">#include "X.h"
+X foo(){
+    X xx;
+    //...
+    return xx;
+}</code></pre>
+<ul>
+<li>可能会有2个假设<ul>
+<li>1、每次foo()被调用，就传回xx的值    【<strong>要视class X如何定义而定</strong>】</li>
+<li>2、如果 class X定义了一个copy constructor，那么当foo()被调用时，保证该copy constructor也会被调用  【<strong>也取决于定义，但最主要的是看你的C++编译器所提供的 进取性优化程度（degree of aggressive optimization）而定</strong>】</li>
+</ul>
+</li>
+</ul>
+<h5 id="231explicit-initialization">2.3.1、明确的初始化操作（Explicit Initialization）<a class="headerlink" href="#231explicit-initialization" title="Permanent link">&para;</a></h5>
+<ul>
+<li>必要的程序转换有两个阶段<ul>
+<li>1、重写每一个定义，其中的初始化操作会被剥夺（<strong>严谨的定义是指 占用内存</strong>）</li>
+<li>2、class的copy constructor调用操作会被安插进去</li>
+</ul>
+</li>
+</ul>
+<pre class="highlight"><code class="language-c++">X x0;
+void foo_bar(){
+    X x1(x0);    //第一阶段X x1;这种，定义被重写
+    X x2 = x0;   //第二阶段x1.X::X(x0); 会表现出X::X(const X&amp; xx);类似copy constructor的调用
+    X x3 = X(x0);
+}</code></pre>
+<h5 id="232argument-initialization">2.3.2、参数的初始化（Argument Initialization）<a class="headerlink" href="#232argument-initialization" title="Permanent link">&para;</a></h5>
+<ul>
+<li>暂时性object</li>
+<li><em>另一种实现方法？</em></li>
+</ul>
+<h5 id="233return-value-initialization">2.3.3、返回值的初始化（Return Value Initialization）<a class="headerlink" href="#233return-value-initialization" title="Permanent link">&para;</a></h5>
+<ul>
+<li>bar()的返回值如何从局部对象xx中拷贝过来？双阶段转化<ul>
+<li>1、首先加一个额外参数，类型是class object的reference。用来放置被“copy constructed”而得的返回值</li>
+<li>2、在return指令之前安插一个copy constructor调用操作，以便将欲传回之object的内容当做上述新增参数的初值</li>
+</ul>
+</li>
+</ul>
+<h5 id="234optimization-at-the-user-level">2.3.4、在使用者层面做优化（Optimization at the User Level）<a class="headerlink" href="#234optimization-at-the-user-level" title="Permanent link">&para;</a></h5>
+<h5 id="235optimization-at-the-compiler-level">2.3.5、在编译器层面做优化（Optimization at the Compiler Level）<a class="headerlink" href="#235optimization-at-the-compiler-level" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>NRV优化</strong>（Named Return Value）</li>
+</ul>
 <h5 id="236copy-constructor">2.3.6、Copy Constructor：要还是不要？<a class="headerlink" href="#236copy-constructor" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>C++设计者不应该提供一个explicit copy constructor</strong>，因为编译器自动为你实施了最好的行为</li>
+</ul>
 <h5 id="237">2.3.7、摘要<a class="headerlink" href="#237" title="Permanent link">&para;</a></h5>
 <h4 id="24member-initialization-list">2.4、成员们的初始化队伍（Member Initialization List）<a class="headerlink" href="#24member-initialization-list" title="Permanent link">&para;</a></h4>
 <ul>
@@ -770,15 +844,55 @@ class A : public Y, public Z{};</code></pre>
 <p>6.2.2、Placement Operator new的语意</p>
 <h4 id="63">6.3、临时性对象<a class="headerlink" href="#63" title="Permanent link">&para;</a></h4>
 <h5 id="631">6.3.1、临时性对象的迷思<a class="headerlink" href="#631" title="Permanent link">&para;</a></h5>
-<h3 id="chap7">chap7、站在对象模型的类端<a class="headerlink" href="#chap7" title="Permanent link">&para;</a></h3>
-<p>7.1、Template</p>
-<p>7.2、异常处理（Exception Handing）</p>
+<h3 id="chap7">chap7、站在对象模型的尖端<a class="headerlink" href="#chap7" title="Permanent link">&para;</a></h3>
+<h4 id="71template">7.1、Template<a class="headerlink" href="#71template" title="Permanent link">&para;</a></h4>
+<ul>
+<li>有关template的三个主要讨论方向<ul>
+<li>1、template的声明</li>
+<li>2、如何“具现（instantiates）"出class object以及inline nonmember，以及member template functions，这些是“每一个编译单位都会拥有一份实体”的东西</li>
+<li>3、如何“具现（instantiates）"出nonmember以及member template functions，以及static template class members，这些都是“每一个可执行文件中只需要一份实体”的东西。这也就是一般而言template所带来的问题</li>
+</ul>
+</li>
+</ul>
+<h5 id="711template">7.1.1、Template的“具现”行为<a class="headerlink" href="#711template" title="Permanent link">&para;</a></h5>
+<h5 id="712template">7.1.2、Template的错误报告<a class="headerlink" href="#712template" title="Permanent link">&para;</a></h5>
+<h5 id="713template">7.1.3、Template中的名称决议方式<a class="headerlink" href="#713template" title="Permanent link">&para;</a></h5>
+<h5 id="714member-functionmember-function-instantiation">7.1.4、Member Function的具现行为（Member Function Instantiation）<a class="headerlink" href="#714member-functionmember-function-instantiation" title="Permanent link">&para;</a></h5>
+<ul>
+<li>编译器设计者必须回答的三个主要问题<ul>
+<li>1、编译器如何找出函数的定义？</li>
+<li>2、编译器如何能够只具现出程序用到的member functions?</li>
+<li>3、编译器如何阻止member definitions在多个.o文件中都被具现呢？</li>
+</ul>
+</li>
+</ul>
+<h4 id="72exception-handing">7.2、异常处理（Exception Handing）<a class="headerlink" href="#72exception-handing" title="Permanent link">&para;</a></h4>
+<h5 id="721exception-handling">7.2.1、Exception Handling快速检阅<a class="headerlink" href="#721exception-handling" title="Permanent link">&para;</a></h5>
+<ul>
+<li>三个主要的词汇组件构成：<ul>
+<li>1、一个throw子句</li>
+<li>2、一个或多个catch子句</li>
+<li>3、一个try区段</li>
+</ul>
+</li>
+</ul>
+<h5 id="722exception-handling">7.2.2、对Exception Handling的支持<a class="headerlink" href="#722exception-handling" title="Permanent link">&para;</a></h5>
+<ul>
+<li>当一个exception发生时，编译系统必须完成以下事情：<ul>
+<li>1、检验发生throw操作的函数</li>
+<li>2、决定throw操作是否发生在try区段中</li>
+<li>3、若是，编译系统必须把exception type拿来和每一个catch子句比较</li>
+<li>4、如果比较吻合，流程控制应该交到catch子句手中</li>
+<li>5、如果throw的发生并不在try区段中，或没有一个catch子句吻合，那么系统必须（a）摧毁所有active local objects，（b）从堆栈中将当前的函数"unwind"掉，（c）进行到程序堆栈中的下一个函数中去，然后重复上述步骤2-5</li>
+</ul>
+</li>
+</ul>
 <p>7.3、执行期类型识别（，RTTI）</p>
 <p>7.4、效率有了，弹性呢？</p>
 <p>7.4.1、动态共享函数库</p>
 <p>7.4.2、共享内存</p>
-<h3 id="_1">最后<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
-<h4 id="_2">履历<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
+<h3 id="_2">最后<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<h4 id="_3">履历<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
 <ul>
 <li>20230720开始看这本书，全天大概过了一遍，chap2确实不太好懂，看前言建议<strong>chap1、3、4先看</strong>，先过一遍，把脉络架起来，边思考边琢磨</li>
 </ul>
