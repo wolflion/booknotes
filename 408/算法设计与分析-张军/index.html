@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>算法设计与分析 张军 - lionel的技术笔记</title>
+    <title>《算法设计与分析-张军》 - lionel的技术笔记</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "\u7b97\u6cd5\u8bbe\u8ba1\u4e0e\u5206\u6790 \u5f20\u519b";
+        var mkdocs_page_name = "\u300a\u7b97\u6cd5\u8bbe\u8ba1\u4e0e\u5206\u6790-\u5f20\u519b\u300b";
         var mkdocs_page_input_path = "408\\\u7b97\u6cd5\u8bbe\u8ba1\u4e0e\u5206\u6790-\u5f20\u519b.md";
         var mkdocs_page_url = null;
       </script>
@@ -64,7 +64,7 @@
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">基础知识</span></p>
-              <ul>
+              <ul class="current">
                   <li class="toctree-l1"><a class="reference internal" href="../%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA/">《操作系统导论》</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../%E5%A4%A7%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">《大话设计模式》</a>
@@ -72,6 +72,134 @@
                   <li class="toctree-l1"><a class="reference internal" href="../%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90_C%2B%2B4th/">《数据结构与算法分析_C++4th》</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../%E7%AE%97%E6%B3%95%284th%29/">《算法4th》</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">《算法设计与分析-张军》</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#chap1">chap1、绪论</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#12">1.2、算法设计与分析的重要问题类型</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#124">1.2.4、组合问题</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#13">1.3、算法复杂性分析基础</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#15">1.5、习题</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap2">chap2、基本数据结构</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#21">2.1、数据结构的概念</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#22">2.2、线性结构</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#224">2.2.4、串</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#23">2.3、树形结构</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#231">2.3.1、树的定义与性质</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#232">2.3.2、二叉树</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#233">2.3.3、多叉树</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#24">2.4、图状结构</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#241">2.4.1、图的定义</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#242">2.4.2、图的存储结构</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#243">2.4.3、图的遍历</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#25setmap">2.5、集合与字典（set与map）感觉叫这个比较好</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#251set">2.5.1、集合（Set）</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#252dictory">2.5.2、字典（dictory）</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#26">2.6、本章小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap3">chap3、蛮力</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#32">3.2、排序问题</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#33">3.3、查找问题</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#34">3.4、组合问题</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#35">3.5、几何问题</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap4">chap4、分治</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#42">4.2、排序问题</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#43">4.3、查找问题</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#44">4.4、组合问题</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#45">4.5、几何问题</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_2">《趣学算法》一书中的题</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap5">chap5、贪心</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#52">5.2、图问题</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#523">5.2.3、哈夫曼树</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#53">5.3、组合问题</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#531">5.3.1、背包问题</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#532">5.3.2、活动安排问题</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#533">5.3.3、多机调度问题</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap6">chap6、动态规划</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap7">chap7、回溯</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#73">7.3、组合问题中的回溯算法</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#73101">7.3.1、0/1背包问题</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#732">7.3.2、八皇后问题</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#chap5_1">《趣学算法》chap5中的题</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#55n">5.5、N皇后问题</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../%E5%A4%A9%E8%A1%8C-%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《天行-算法设计与实现》</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">网络编程</span></p>
@@ -171,7 +299,8 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-      <li>算法设计与分析 张军</li>
+          <li>基础知识 &raquo;</li>
+      <li>《算法设计与分析-张军》</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -430,6 +559,10 @@ N_QUEENS()
               
             </div>
           </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../%E7%AE%97%E6%B3%95%284th%29/" class="btn btn-neutral float-left" title="《算法4th》"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../%E5%A4%A9%E8%A1%8C-%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/" class="btn btn-neutral float-right" title="《天行-算法设计与实现》">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
 
   <hr/>
 
@@ -451,6 +584,10 @@ N_QUEENS()
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
+      <span><a href="../%E7%AE%97%E6%B3%95%284th%29/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../%E5%A4%A9%E8%A1%8C-%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
