@@ -78,49 +78,49 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#7virtualdeclare-destructions-virtual-in-polymorphic-base-classes">7、为多态基类声明virtual析构函数，Declare destructions virtual in polymorphic base classes</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#8prevent-exceptions-from-leaving-destructors">8、Prevent exceptions from leaving destructors</a>
+    <li class="toctree-l3"><a class="reference internal" href="#8prevent-exceptions-from-leaving-destructors">8、别让异常逃离析构函数，Prevent exceptions from leaving destructors</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#9never-call-virtual-functions-during-construction-or-destruction">9、Never call virtual functions during construction or destruction</a>
+    <li class="toctree-l3"><a class="reference internal" href="#9virtualnever-call-virtual-functions-during-construction-or-destruction">9、绝不在构造和析构过程中调用virtual函数，Never call virtual functions during construction or destruction</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#10have-assignment-operators-return-a-reference-to-this">10、Have assignment operators return a reference to *this</a>
+    <li class="toctree-l3"><a class="reference internal" href="#10operatorreference-thishave-assignment-operators-return-a-reference-to-this">10、令operator=返回一个reference this，Have assignment operators return a reference to this</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#11handle-assignment-to-self-in-operator">11、Handle assignment to self in operator=</a>
+    <li class="toctree-l3"><a class="reference internal" href="#11operatorhandle-assignment-to-self-in-operator">11、在operator=中处理“自我赋值”，Handle assignment to self in operator=</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#12copy-all-parts-of-an-object">12、Copy all parts of an object</a>
+    <li class="toctree-l3"><a class="reference internal" href="#12copy-all-parts-of-an-object">12、复制对象时勿忘其每一个成分，Copy all parts of an object</a>
     </li>
         </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#part313-17">Part3、资源管理（13-17）</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#13">13、以对象管理资源</a>
+    <li class="toctree-l3"><a class="reference internal" href="#13use-objects-to-manage-resources">13、以对象管理资源，Use objects to manage resources</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#14copying">14、在资源管理类中小心copying行为</a>
+    <li class="toctree-l3"><a class="reference internal" href="#14copyingthink-carefully-about-copying-behavior-in-resource-managing-classes">14、在资源管理类中小心copying行为，Think carefully about copying behavior in resource-managing classes</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#15">15、在资源管理类中提供对原始资源的访问</a>
+    <li class="toctree-l3"><a class="reference internal" href="#15provide-access-to-raw-resources-in-resouce-manaing-classes">15、在资源管理类中提供对原始资源的访问，Provide access to raw resources in resouce-manaing classes</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#16newdelete">16、成对使用new和delete时要采用相同形式</a>
+    <li class="toctree-l3"><a class="reference internal" href="#16newdeleteuse-the-same-form-in-corresponding-uses-of-new-and-delete">16、成对使用new和delete时要采用相同形式，Use the same form in corresponding uses of new and delete</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#17newed">17、以独立语句将newed对象置入智能指针</a>
+    <li class="toctree-l3"><a class="reference internal" href="#17newedstore-newed-objects-in-smart-pointers-in-standalone-statements">17、以独立语句将newed对象置入智能指针，Store newed objects in smart pointers in standalone statements</a>
     </li>
         </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#part418-25">Part4、设计与声明（18-25）</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#18">18、让接口容易被正确使用，不易被误用</a>
+    <li class="toctree-l3"><a class="reference internal" href="#18make-interfaces-easy-to-use-correctly-and-hard-to-use-incorrectly">18、让接口容易被正确使用，不易被误用，Make interfaces easy to use correctly and hard to use incorrectly</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#19classtype">19、设计class犹如设计type</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#20pass-by-reference-to-constpass-by-value">20、宁以pass-by-reference-to-const替换pass-by-value</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#21reference">21、必须返回对象时，别妄想返回其reference</a>
+    <li class="toctree-l3"><a class="reference internal" href="#21referencedont-try-to-return-a-reference-when-you-must-return-an-object">21、必须返回对象时，别妄想返回其reference，Don't try to return a reference when you must return an object</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#22private">22、将成员变量声明为private</a>
+    <li class="toctree-l3"><a class="reference internal" href="#22privatedeclare-data-members-private">22、将成员变量声明为private，Declare data members private</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#23non-membernon-friendmember">23、宁以non-member,non-friend替换member函数</a>
+    <li class="toctree-l3"><a class="reference internal" href="#23non-membernon-friendmemberperfer-non-member-non-friend-functions-to-member-functions">23、宁以non-member,non-friend替换member函数，Perfer non-member non-friend functions to member functions</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#24non-member">24、若所有参数皆需类型转换，请为此采用non-member函数</a>
+    <li class="toctree-l3"><a class="reference internal" href="#24non-memberdeclare-non-member-functions-when-type-conversions-should-apply-to-all-parameters">24、若所有参数皆需类型转换，请为此采用non-member函数，Declare non-member functions when type conversions should apply to all parameters</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#25swap">25、考虑写出一个不抛异常的swap函数</a>
+    <li class="toctree-l3"><a class="reference internal" href="#25swapconsider-support-for-a-non-throwing-swap">25、考虑写出一个不抛异常的swap函数，Consider support for a non-throwing swap</a>
     </li>
         </ul>
     </li>
@@ -435,47 +435,70 @@
 </ul>
 <h4 id="5cknow-what-functions-c-silently-writes-and-calls">5、了解C++默默编写并调用哪些函数，Know what functions C++ silently writes and calls<a class="headerlink" href="#5cknow-what-functions-c-silently-writes-and-calls" title="Permanent link">&para;</a></h4>
 <ul>
-<li>**编译器可以暗自为class创建default构造函数、copy构造函数、copy assignment操作符，以及析构函数。</li>
+<li>结论<ul>
+<li>编译器可以暗自为class创建default构造函数、copy构造函数、copy assignment操作符，以及析构函数。</li>
+</ul>
+</li>
 </ul>
 <h4 id="6explicitly-disallow-the-use-of-compiler-generated-functions-you-do-not-want">6、若不想使用编译器自动生成的函数，就该明确拒绝，Explicitly disallow the use of compiler-generated functions you do not want<a class="headerlink" href="#6explicitly-disallow-the-use-of-compiler-generated-functions-you-do-not-want" title="Permanent link">&para;</a></h4>
 <ul>
+<li>结论<ul>
 <li><strong>为了驳回编译器自动（暗自）提供的机能，可将相应的成员函数声明为private并且不予实现</strong>。使用像Uncopyable这样的base class也是一种方法。</li>
+</ul>
+</li>
 </ul>
 <h4 id="7virtualdeclare-destructions-virtual-in-polymorphic-base-classes">7、为多态基类声明virtual析构函数，Declare destructions virtual in polymorphic base classes<a class="headerlink" href="#7virtualdeclare-destructions-virtual-in-polymorphic-base-classes" title="Permanent link">&para;</a></h4>
 <ul>
-<li><em>虚析构函数，声明的价值在哪？</em></li>
+<li>结论：<ul>
 <li>polymorphic（带多态性质的）base classes 应该声明一个virtual析构函数。如果class带有任何virtual函数，它就应该拥有一个virtual析构函数。</li>
 <li>Classes的设计目的如果不是作为base classes使用，或不是为了具备多态性（polymorphically），就不该声明virtual析构函数。</li>
 </ul>
-<h4 id="8prevent-exceptions-from-leaving-destructors">8、Prevent exceptions from leaving destructors<a class="headerlink" href="#8prevent-exceptions-from-leaving-destructors" title="Permanent link">&para;</a></h4>
+</li>
+</ul>
+<h4 id="8prevent-exceptions-from-leaving-destructors">8、别让异常逃离析构函数，Prevent exceptions from leaving destructors<a class="headerlink" href="#8prevent-exceptions-from-leaving-destructors" title="Permanent link">&para;</a></h4>
 <ul>
+<li>结论：<ul>
 <li>析构函数绝对不要吐出异常。如果一个被析构函数调用的函数可能抛出异常，析构函数应该捕捉任何异常，然后吞下它们（不传播）或结束程序。</li>
 <li>如果客户需要对某个操作函数运行期间抛出的异常做出反应，那么class应该提供一个普通函数（而非在析构函数中）执行该操作。</li>
 </ul>
-<h4 id="9never-call-virtual-functions-during-construction-or-destruction">9、Never call virtual functions during construction or destruction<a class="headerlink" href="#9never-call-virtual-functions-during-construction-or-destruction" title="Permanent link">&para;</a></h4>
+</li>
+</ul>
+<h4 id="9virtualnever-call-virtual-functions-during-construction-or-destruction">9、绝不在构造和析构过程中调用virtual函数，Never call virtual functions during construction or destruction<a class="headerlink" href="#9virtualnever-call-virtual-functions-during-construction-or-destruction" title="Permanent link">&para;</a></h4>
 <ul>
-<li><strong>在derived class对象的base class构造期间，对象的类型是base class而不是derived class</strong>。</li>
+<li>结论：<ul>
 <li>在构造和析构期间不要调用virtual函数，因为这类调用从不下降至derived class（比起当前执行构造函数和析构函数的那层）。</li>
 </ul>
-<h4 id="10have-assignment-operators-return-a-reference-to-this">10、Have assignment operators return a reference to *this<a class="headerlink" href="#10have-assignment-operators-return-a-reference-to-this" title="Permanent link">&para;</a></h4>
+</li>
+<li><strong>在derived class对象的base class构造期间，对象的类型是base class而不是derived class</strong>。</li>
+</ul>
+<h4 id="10operatorreference-thishave-assignment-operators-return-a-reference-to-this">10、令operator=返回一个reference <em>this，Have assignment operators return a reference to </em>this<a class="headerlink" href="#10operatorreference-thishave-assignment-operators-return-a-reference-to-this" title="Permanent link">&para;</a></h4>
 <ul>
-<li><em><code>this</code></em></li>
+<li>结论：<ul>
 <li>令赋值（assignment）操作符返回一个reference to *this。</li>
 </ul>
-<h4 id="11handle-assignment-to-self-in-operator">11、Handle assignment to self in operator=<a class="headerlink" href="#11handle-assignment-to-self-in-operator" title="Permanent link">&para;</a></h4>
+</li>
+<li><em><code>this</code></em></li>
+</ul>
+<h4 id="11operatorhandle-assignment-to-self-in-operator">11、在operator=中处理“自我赋值”，Handle assignment to self in operator=<a class="headerlink" href="#11operatorhandle-assignment-to-self-in-operator" title="Permanent link">&para;</a></h4>
 <ul>
-<li><code>operator=</code></li>
+<li>结论：<ul>
 <li>确保当对象自我赋值时<code>operator=</code>有良好行为。其中技术包括比较“来源对象”和“目标对象”的地址、精心周到的语句顺序、以及copy-and-swap。</li>
 <li>确定任何函数如果操作一个以上的对象，而其中多个对象是同一个对象时，其行为仍然正确。</li>
 </ul>
-<h4 id="12copy-all-parts-of-an-object">12、Copy all parts of an object<a class="headerlink" href="#12copy-all-parts-of-an-object" title="Permanent link">&para;</a></h4>
+</li>
+<li><code>operator=</code></li>
+</ul>
+<h4 id="12copy-all-parts-of-an-object">12、复制对象时勿忘其每一个成分，Copy all parts of an object<a class="headerlink" href="#12copy-all-parts-of-an-object" title="Permanent link">&para;</a></h4>
 <ul>
-<li>copy函数分为<strong>copy构造函数、copy assignment操作符</strong></li>
+<li>结论：<ul>
 <li>Copying函数应该确保复制“对象内的所有成员变量”及“所有base class成分”。</li>
 <li>不要尝试以某个copying函数实现另一个copying函数。应该将共同机能放进第三个函数中，并由两个copying函数共同调用。</li>
 </ul>
+</li>
+<li>copy函数分为<strong>copy构造函数、copy assignment操作符</strong></li>
+</ul>
 <h3 id="part313-17">Part3、资源管理（13-17）<a class="headerlink" href="#part313-17" title="Permanent link">&para;</a></h3>
-<h4 id="13">13、以对象管理资源<a class="headerlink" href="#13" title="Permanent link">&para;</a></h4>
+<h4 id="13use-objects-to-manage-resources">13、以对象管理资源，Use objects to manage resources<a class="headerlink" href="#13use-objects-to-manage-resources" title="Permanent link">&para;</a></h4>
 <ul>
 <li>结论：<ul>
 <li>为防止资源泄漏，请使用RAII对象。它们在构造函数中获得资源并在析构函数中释放资源</li>
@@ -483,7 +506,7 @@
 </ul>
 </li>
 </ul>
-<h4 id="14copying">14、在资源管理类中小心copying行为<a class="headerlink" href="#14copying" title="Permanent link">&para;</a></h4>
+<h4 id="14copyingthink-carefully-about-copying-behavior-in-resource-managing-classes">14、在资源管理类中小心copying行为，Think carefully about copying behavior in resource-managing classes<a class="headerlink" href="#14copyingthink-carefully-about-copying-behavior-in-resource-managing-classes" title="Permanent link">&para;</a></h4>
 <ul>
 <li>结论：<ul>
 <li>复制RAII对象必须一并复制它所管理的资源，所以资源的copying行为决定RAII对象的copying行为。</li>
@@ -491,7 +514,7 @@
 </ul>
 </li>
 </ul>
-<h4 id="15">15、在资源管理类中提供对原始资源的访问<a class="headerlink" href="#15" title="Permanent link">&para;</a></h4>
+<h4 id="15provide-access-to-raw-resources-in-resouce-manaing-classes">15、在资源管理类中提供对原始资源的访问，Provide access to raw resources in resouce-manaing classes<a class="headerlink" href="#15provide-access-to-raw-resources-in-resouce-manaing-classes" title="Permanent link">&para;</a></h4>
 <ul>
 <li>结论：<ul>
 <li>APIs往往要求访问原始资源（raw resources），所以每一个RAII class应该提供一个“取得其所管理之资源”的办法</li>
@@ -499,25 +522,25 @@
 </ul>
 </li>
 </ul>
-<h4 id="16newdelete">16、成对使用new和delete时要采用相同形式<a class="headerlink" href="#16newdelete" title="Permanent link">&para;</a></h4>
+<h4 id="16newdeleteuse-the-same-form-in-corresponding-uses-of-new-and-delete">16、成对使用new和delete时要采用相同形式，Use the same form in corresponding uses of new and delete<a class="headerlink" href="#16newdeleteuse-the-same-form-in-corresponding-uses-of-new-and-delete" title="Permanent link">&para;</a></h4>
 <ul>
-<li>new和delete配对</li>
 <li>结论<ul>
 <li>如果你在new表达式中使用[]，必须在相应的delete表达式中也使用[]。如果你在new表达式中不使用[]，一定不要在相应的delete表达式中使用[]</li>
 </ul>
 </li>
+<li>new和delete配对</li>
 </ul>
-<h4 id="17newed">17、以独立语句将newed对象置入智能指针<a class="headerlink" href="#17newed" title="Permanent link">&para;</a></h4>
+<h4 id="17newedstore-newed-objects-in-smart-pointers-in-standalone-statements">17、以独立语句将newed对象置入智能指针，Store newed objects in smart pointers in standalone statements<a class="headerlink" href="#17newedstore-newed-objects-in-smart-pointers-in-standalone-statements" title="Permanent link">&para;</a></h4>
 <ul>
-<li>newed对象</li>
-<li><code>std::tr1::shared_ptr&lt;Widget&gt; pw(new Widget); //在单独语句内以智能指针存储newed所得对象</code></li>
 <li>结论<ul>
 <li>以独立语句将newed对象存储于（置入）智能指针内。如果不这样做，一旦异常被抛出，有可能导致难以觉察的资源泄漏</li>
 </ul>
 </li>
+<li>newed对象</li>
+<li><code>std::tr1::shared_ptr&lt;Widget&gt; pw(new Widget); //在单独语句内以智能指针存储newed所得对象</code></li>
 </ul>
 <h3 id="part418-25">Part4、设计与声明（18-25）<a class="headerlink" href="#part418-25" title="Permanent link">&para;</a></h3>
-<h4 id="18">18、让接口容易被正确使用，不易被误用<a class="headerlink" href="#18" title="Permanent link">&para;</a></h4>
+<h4 id="18make-interfaces-easy-to-use-correctly-and-hard-to-use-incorrectly">18、让接口容易被正确使用，不易被误用，Make interfaces easy to use correctly and hard to use incorrectly<a class="headerlink" href="#18make-interfaces-easy-to-use-correctly-and-hard-to-use-incorrectly" title="Permanent link">&para;</a></h4>
 <ul>
 <li>结论：<ul>
 <li>好的接口很容易被正确使用，不容易被误用。你应该在你的所有接口中努力达成这些性质</li>
@@ -526,8 +549,43 @@
 <li>tr1::shared_ptr支持定制型删除器（custom deleter）。这可防范DLL问题，可被用来自动解除互斥锁（mutexs）等等</li>
 </ul>
 </li>
-<li>0<ul>
-<li>必须考虑客户可能做出什么样的错误</li>
+</ul>
+<ul>
+<li>
+<p>首先<strong>必须考虑客户可能做出什么样的错误</strong></p>
+<ul>
+<li>
+<p><code>class Date {public: Date(int month, int day, int year)};</code>，可能会有2个错误：</p>
+<ul>
+<li>1、错误的次序传递参数，把月和日搞混了</li>
+<li>2、传递一个无效值，13月，40日</li>
+</ul>
+<pre class="highlight"><code class="language-cpp">struct Day{};
+struct Month{};
+struct Year{};
+class Date{};
+//会不会是过度设计？</code></pre>
+</li>
+</ul>
+<ul>
+<li>用enums表现月份，<strong>enums不具备我们希望拥有的安全性</strong></li>
+</ul>
+<ul>
+<li>如果以<strong>函数替换对象，表达某个特定月份</strong>，忘记了non-local static对象的初始化次序有可能出问题，<em>这个我没太懂，lionel</em></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>其次，<strong>限制类型内什么事可做，什么事不能做</strong>，常见的就是加上const</li>
+</ul>
+<ul>
+<li>除非有好的理由，否则应该尽量令你的types的行为与内置的types一致，避免无端与内置类型不兼容，<strong>真正的理由是为了提供行为一致的接口</strong>。</li>
+</ul>
+<ul>
+<li><em>里面提及的item13，我目前还不太懂啥意思</em></li>
+</ul>
+<ul>
+<li><em>lionel，这一段，不是本item的啊</em><ul>
 <li>C++中的<code>explicit</code>关键字只能用于修饰只有一个参数的类构造函数, 它的作用是表明该构造函数是显示的, 而非隐式的, 跟它相对应的另一个关键字是implicit, 意思是隐藏的,类构造函数默认情况下即声明为implicit(隐式).<ul>
 <li><strong>explicit关键字的作用就是防止类构造函数的隐式自动转换.</strong></li>
 </ul>
@@ -542,7 +600,16 @@
 </ul>
 </li>
 <li>设计新type的checklist<ul>
-<li>新type的对象应该如何被创建和销毁？</li>
+<li>1、新type的对象应该如何被创建和销毁？</li>
+<li>2、对象的初始化和对象的赋值该有什么样的差别？</li>
+<li>3、新type的对象如果被passed by value，意味着什么？</li>
+<li>4、你的新type需要配合某个继承图系（inheritance graph）吗？</li>
+<li>5、你的新type需要什么样的转换？</li>
+<li>6、什么样的操作符和函数对此新type而言是合理的？</li>
+<li>7、什么样的标准函数应该驳回？</li>
+<li>8、谁该取用新type的成员？</li>
+<li>9、什么是新type的“未声明接口”（undeclared interface）</li>
+<li>10、你的新type有多么一般化？</li>
 </ul>
 </li>
 </ul>
@@ -553,47 +620,136 @@
 <li>以上规则并不适用于内置类型，以及STL的迭代器和函数对象。对它们而言，pass-by-value往往比较适当</li>
 </ul>
 </li>
-<li>0<ul>
 <li>以by-value方式传递一个Student对象，总体成本是“六次构造函数和六次析构函数”</li>
-<li><strong>references往往以指针实现出来，因为pass-by-reference通常意味真正传递的是指针</strong></li>
+</ul>
+<pre class="highlight"><code class="language-cpp">class Person{};
+class Student:public Person{};
+
+bool validateStudent(Student s);//by value
+Student plato; //柏拉图
+bool platoIsOK = validateStudent(s); //函数调用</code></pre>
+<ul>
+<li>以by reference方式传递参数也可以避免slicing（对象切割）问题</li>
+</ul>
+<pre class="highlight"><code class="language-cpp">class Window{string name() const;  virtual void display() const;};
+class WindowWithScrollBars:public Window{ virtual void display() const;};
+void printNameAndDisplay(Window w){  //不正确！参数可能被切割
+    cout&lt;&lt;w.name;
+    w.display();
+}</code></pre>
+<ul>
+<li>如果窥视C++编译器的底层，<strong>references往往以指针实现出来，因为pass-by-reference通常意味真正传递的是指针</strong><ul>
+<li><strong>内置类型、STL的迭代器和函数对象，最好passed by value</strong>，理论上<strong>小型types都可以</strong>【但现在小，不代表将来也小，所以谨慎使用】</li>
 </ul>
 </li>
 </ul>
-<h4 id="21reference">21、必须返回对象时，别妄想返回其reference<a class="headerlink" href="#21reference" title="Permanent link">&para;</a></h4>
+<h4 id="21referencedont-try-to-return-a-reference-when-you-must-return-an-object">21、必须返回对象时，别妄想返回其reference，Don't try to return a reference when you must return an object<a class="headerlink" href="#21referencedont-try-to-return-a-reference-when-you-must-return-an-object" title="Permanent link">&para;</a></h4>
 <ul>
 <li>结论：<ul>
 <li>绝不要返回pointer或reference指向一个local stack对象，或返回reference指向一个heap-allocated对象，或返回pointer或reference指向一个local static对象而有可能同时需要多个这样的对象。item4已经为“在单线程环境中合理返回reference指向一个local static对象”提供了一份设计实例。</li>
 </ul>
 </li>
+<li>0</li>
 </ul>
-<h4 id="22private">22、将成员变量声明为private<a class="headerlink" href="#22private" title="Permanent link">&para;</a></h4>
+<pre class="highlight"><code class="language-cpp">class Rational{
+    public: Rational(int numerator=0, int denominator=1);
+private: 
+    int n,d; //n是分子（numerator），m是分母
+    friend const Rational operator*(const Rational &amp;lhs, const Rational &amp;rhs);
+}</code></pre>
+<ul>
+<li>函数创建新对象的途径有二：<strong>stack空间或heap空间</strong><ul>
+<li>local的就是stack空间创建的</li>
+</ul>
+</li>
+</ul>
+<pre class="highlight"><code class="language-cpp">const Rational&amp; operator*(const Rational &amp;lhs, const Rational &amp;rhs){
+    Rational result(lhs.n * rhs.n, lhs.d * rhs.d); //警告，糟糕的代码
+    return result;
+}
+
+const Rational&amp; operator*(const Rational &amp;lhs, const Rational &amp;rhs){
+    Rational *result = new Result(lhs.n * rhs.n, lhs.d * rhs.d); //警告，更糟的写法
+    return *result;
+}</code></pre>
+<ul>
+<li><strong>一个“必须返回新对象”的函数的正确写法：</strong>就让那个函数返回一个新对象呗</li>
+</ul>
+<pre class="highlight"><code class="language-cpp">inline const Rational operator*(const Rational &amp;lhs, const Rational &amp;rhs){
+    return Rational(lhs.n * rhs.n, lhs.d * rhs.d); //需要承受Operation*返回值的构造成本和析构成本
+}</code></pre>
+<h4 id="22privatedeclare-data-members-private">22、将成员变量声明为private，Declare data members private<a class="headerlink" href="#22privatedeclare-data-members-private" title="Permanent link">&para;</a></h4>
 <ul>
 <li>结论：<ul>
 <li>切记将成员变量声明为private。这可赋予客户访问数据的一致性、可细微划分访问控制、允诺约束条件获得保证，并提供class作者以充分的实现弹性。</li>
 <li>protected并不比public更具封装性。</li>
 </ul>
 </li>
+<li><em>lionel，第一个想说明啥</em>，如果写乱了，相当于为每个成员变量提供了getter和setter方法</li>
+<li><strong>封装性</strong><ul>
+<li>如果把原先成员变量的public取消了，<strong>所有使用它的客户代码都会被破坏</strong></li>
+<li>如果把原先成员变量的protected取消了，<strong>所有使用它的derived classees都会被破坏</strong></li>
 </ul>
-<h4 id="23non-membernon-friendmember">23、宁以non-member,non-friend替换member函数<a class="headerlink" href="#23non-membernon-friendmember" title="Permanent link">&para;</a></h4>
+</li>
+</ul>
+<h4 id="23non-membernon-friendmemberperfer-non-member-non-friend-functions-to-member-functions">23、宁以non-member,non-friend替换member函数，Perfer non-member non-friend functions to member functions<a class="headerlink" href="#23non-membernon-friendmemberperfer-non-member-non-friend-functions-to-member-functions" title="Permanent link">&para;</a></h4>
 <ul>
 <li>结论：<ul>
 <li>宁可拿non-member、non-friend函数替换member函数。这样做可以增加封装性、包裹弹性（packaging flexibility）和机能扩充性</li>
 </ul>
 </li>
-<li>0<ul>
+<li>问题1：是member函数clearEverything 还是 non-member函数clearBrowser？ <strong>clearBrowser好，让WebBrowser类有较大的封装性</strong></li>
+</ul>
+<pre class="highlight"><code class="language-cpp">class WebBrowser{
+public:
+    void clearCache();
+    void clearHistory();
+    void removeCookies();
+    void clearEverything(); //调用上面3个
+}
+
+void clearBrowser(WebBrowser &amp;wb){
+    wb.clearCache();
+    wb.clearHistory();
+    wb.removeCookies();
+}</code></pre>
+<ul>
+<li>有2点需要注意的是：<ul>
+<li>1、这个论述只适用于non-member non-friend函数</li>
+<li>2、只因在意封装性而让函数“成为class的non-member”，并不意味它“不可以是另一个class的member”</li>
+</ul>
+</li>
+<li><em>lionel，这面2页就暂时没看了</em></li>
+</ul>
+<ul>
+<li>
+<ul>
 <li>namespace和classes不同，前者可跨越多个源码文件而后者不能</li>
 <li>将所有便利函数放在多个头文件内但隶属同一个命名空间，意味客户可以轻松扩展这一组便利函数。</li>
 </ul>
 </li>
 </ul>
-<h4 id="24non-member">24、若所有参数皆需类型转换，请为此采用non-member函数<a class="headerlink" href="#24non-member" title="Permanent link">&para;</a></h4>
+<h4 id="24non-memberdeclare-non-member-functions-when-type-conversions-should-apply-to-all-parameters">24、若所有参数皆需类型转换，请为此采用non-member函数，Declare non-member functions when type conversions should apply to all parameters<a class="headerlink" href="#24non-memberdeclare-non-member-functions-when-type-conversions-should-apply-to-all-parameters" title="Permanent link">&para;</a></h4>
 <ul>
 <li>结论：<ul>
 <li><strong>本条款内含真理，但却不是全部的真理。</strong></li>
 <li>如果你需要为某个函数的所有参数（包括被this指针所指的那个隐喻参数）进行类型转换，那么这个函数必须是个non-member</li>
 </ul>
 </li>
-<li>0<ul>
+<li>0</li>
+</ul>
+<pre class="highlight"><code class="language-cpp">class Rational{
+public:
+    Rational(int numerator = 0, int denominator = 1); //构造函数刻意不为explicit; 允许int-to-Rational隐式转换
+    int numerator() const;
+    int denominator() const; //分子(numerator)和分母（denominator）的访问函数（accessors）
+
+    //后续加上，将operator*写成Rational成员函数的写法
+    const Rational operator*(const Rational&amp; rhs) const;
+}</code></pre>
+<ul>
+<li>
+<ul>
 <li>令classes支持隐式类型转换通常是个糟糕的主意</li>
 <li>让<code>operator*</code>成为一个non-member函数</li>
 <li>无论何时如果你可以避免friend函数就该避免，因为就像真实世界一样，<strong>朋友带来的麻烦往往多过其价值</strong>。</li>
@@ -601,7 +757,7 @@
 </li>
 <li>类型转换，采用non-member函数</li>
 </ul>
-<h4 id="25swap">25、考虑写出一个不抛异常的swap函数<a class="headerlink" href="#25swap" title="Permanent link">&para;</a></h4>
+<h4 id="25swapconsider-support-for-a-non-throwing-swap">25、考虑写出一个不抛异常的swap函数，Consider support for a non-throwing swap<a class="headerlink" href="#25swapconsider-support-for-a-non-throwing-swap" title="Permanent link">&para;</a></h4>
 <ul>
 <li>结论：<ul>
 <li>当std::swap对你的类型效率不高时，提供一个swap成员函数，并确定这个函数不抛出异常</li>
@@ -610,10 +766,26 @@
 <li>为“用户定义类型”进行std templates全特化是好的，但千万不要尝试在std内加入某些对std而言全新的东西</li>
 </ul>
 </li>
-<li>0<ul>
-<li><strong>pimpl手法</strong>（pointer to implementation）</li>
+<li>"以指针指向一个对象，内含真正数据"那种类型。这种设计的常见表现形式是所谓<strong>pimpl手法</strong>（pointer to implementation）</li>
 </ul>
-</li>
+<pre class="highlight"><code class="language-cpp">class WidgetImp{//针对Widget数据而设计的class;细节不重要
+private:
+    int a,b,c;
+    vector&lt;double&gt;v; //可能有许多数据，意味复制时间很长
+}
+
+class Widget{  //这个class使用pimpl手法
+public:
+    Widget(const Widget&amp; rhs);
+    Widget&amp; operator=(const Widget&amp; rhs){  //复制Widget时，令它复制其WidgetImpl对象
+        *pImpl = *(rhs.pImpl);
+    }
+private:
+    WidgetImpl* pImpl;   //指针，所指对象内含Widget数据
+}</code></pre>
+<ul>
+<li><em>后面没怎么看呢，lionel</em></li>
+<li></li>
 </ul>
 <h3 id="part5implementation26-31">Part5、实现Implementation（26-31）<a class="headerlink" href="#part5implementation26-31" title="Permanent link">&para;</a></h3>
 <h4 id="26">26、尽可能延后变量定义式的出现时间<a class="headerlink" href="#26" title="Permanent link">&para;</a></h4>
@@ -917,6 +1089,9 @@
 <li>Part8部分，可以听下b站候捷内存管理的视频，<code>placement new</code></li>
 </ul>
 <p>https://github.com/wolflion/Coding-Reading/blob/master/99%E6%A0%B8%E5%BF%83%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B9%A6/EffectiveC%2B%2B/EffectiveC%2B%2B%EF%BC%88%E8%87%AA%E5%B7%B1%E6%95%B4%E7%90%86%EF%BC%89.md</p>
+<ul>
+<li>2023-08-13的那一周，把Part4的8个item看了一下书，花了2个cubi，读懂70%了吧，<strong>后面复习，复习后，再来看看这部分</strong></li>
+</ul>
 <h3 id="_3">参考<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <ul>
 <li><a href="https://www.cnblogs.com/deepllz/p/9171908.html">Effective C++ 条款总结</a></li>

@@ -99,47 +99,269 @@
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#chap2">chap2、</a>
+    <li class="toctree-l2"><a class="reference internal" href="#chap2">chap2、算法分析</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#23">2.3、要分析的问题</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#chap4">chap4、线性表、栈和队列</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#41">4.1、线性表</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#42adt">4.2、字典ADT</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#44">4.4、队列</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#46">4.6、习题</a>
+    <li class="toctree-l3"><a class="reference internal" href="#24">2.4、运行时间计算</a>
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#chap5">chap5、二叉树</a>
+    <li class="toctree-l2"><a class="reference internal" href="#chap3">chap3、线性表、栈和队列</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#51">5.1、定义及主要特性</a>
-        <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#511">5.1.1、满二叉树定理</a>
+    <li class="toctree-l3"><a class="reference internal" href="#31adt">3.1、抽象数据类型（ADT）</a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#512">5.1.2、二叉树的抽象数据类型</a>
+    <li class="toctree-l3"><a class="reference internal" href="#32adt">3.2、线性表ADT</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#321">3.2.1、表的简单数组实现</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#322">3.2.2、简单链表</a>
     </li>
         </ul>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#52">5.2、遍历二叉树</a>
+    <li class="toctree-l3"><a class="reference internal" href="#33stlvectorlist">3.3、STL中的vector和list</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#331">3.3.1、迭代器</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#53">5.3、二叉树的实现</a>
+    <li class="toctree-l4"><a class="reference internal" href="#332erase">3.3.2、例子：对表使用erase</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#333const_iterators">3.3.3、const_iterators</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#34vector">3.4、vector的实现</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#35list">3.5、list的实现</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#36adt">3.6、栈ADT</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#361">3.6.1、栈模型</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#362">3.6.2、栈的实现</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#363">3.6.3、应用</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#37adt">3.7、队列ADT</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#371">3.7.1、队列模型</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#372">3.7.2、队列的数组实现</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#373">3.7.3、队列的应用</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_2">小结</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_3">练习</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap4">chap4、树</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#41">4.1、预备知识</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#411">4.1.1、树的实现</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#412">4.1.2、树的遍历及应用</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#42">4.2、二叉树</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#421">4.2.1、实现</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#422-">4.2.2、一个例子--表达式树</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#43adt-">4.3、查找树ADT-二叉查找树</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#431contains">4.3.1、contains</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#432findminfindmax">4.3.2、findMin和findMax</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#433insert">4.3.3、insert</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#434remove">4.3.4、remove</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#435">4.3.5、析构函数和拷贝构造函数</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#436">4.3.6、平均情况分析</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#44avl">4.4、AVL树（平衡树）</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#441">4.4.1、单旋转</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#442">4.4.2、双旋转</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#45">4.5、伸展树</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#451">4.5.1、一个简单的想法（不能直接使用）</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#46">4.6、树的遍历</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#47b">4.7、B树</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#48setmap">4.8、标准库中的容器set和map</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#481set">4.8.1、集合容器set</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_4">小结</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_5">练习</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#0">0、</a>
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#chap7">chap7、排序</a>
+    <li class="toctree-l2"><a class="reference internal" href="#chap6-209524">chap6、优先队列（堆）-209/524</a>
         <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#61">6.1、模型</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#62">6.2、一些简单的实现</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#63">6.3、二叉堆</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#631">6.3.1、结构性质</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#632">6.3.2、堆序性质</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#633">6.3.3、基本的堆操作</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#634">6.3.4、其它的堆操作</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#64">6.4、优先队列的应用</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#641">6.4.1、选择问题</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#642">6.4.2、事件模拟</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#65d">6.5、d堆</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#69">6.9、标准库中的优先队列</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_6">小结</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_7">练习</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap7-245524">chap7、排序  245/524</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#71">7.1、预备知识</a>
+    </li>
     <li class="toctree-l3"><a class="reference internal" href="#72">7.2、插入排序</a>
         <ul>
     <li class="toctree-l4"><a class="reference internal" href="#721">7.2.1、算法</a>
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#722stl">7.2.2、插入排序的STL实现</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#723">7.2.3、插入排序的分析</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#73">7.3、一些简单排序算法的下界</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#74">7.4、希尔排序</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#741">7.4.1、希尔排序的最坏情形分析</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#75">7.5、堆排序</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#751">7.5.1、堆排序的分析</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#76">7.6、归并排序</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#761">7.6.1、归并排序的分析</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#77">7.7、快速排序</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#771">7.7.1、选取枢纽元</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#772">7.7.2、分割策略</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#773">7.7.3、小数组</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#774">7.7.4、实际的快速排序例程</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#775">7.7.5、快速排序的分析</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#776">7.7.6、选择问题的线性期望时间算法</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#78">7.8、排序算法的一般下界</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#781">7.8.1、决策树</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#79">7.9、选择问题的决策树下界</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#710">7.10、对手下界</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#711">7.11、线性时间排序：桶式排序和基数排序</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#712">7.12、外部排序</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap9">chap9、图论算法</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap10">chap10、算法设计技巧</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#101greedy-algorithm">10.1、贪婪算法（greedy algorithm）</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1011">10.1.1、一个简单的调度问题</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1012">10.1.2、哈夫曼编码</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1013">10.1.3、近似装箱问题</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#102">10.2、分治算法</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1023">10.2.3、选择问题</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1024">10.2.4、一些算术问题的理论改进</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#103">10.3、动态规划</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1031">10.3.1、用表代表递归</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#104">10.4、随机化算法</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#105">10.5、回溯算法</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1051turnpike-reconstruction-problem">10.5.1、收费公路重建问题（turnpike reconstruction problem）</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1052">10.5.2、博弈</a>
     </li>
         </ul>
     </li>
@@ -263,8 +485,6 @@
 </ul>
 <ul>
 <li>我自己有一本纸质的，C语言描述2nd，<em>2者结合着看</em></li>
-<li>Part1、预备知识（1-3）</li>
-<li>Part2、基本数据结构（4-6）</li>
 </ul>
 <h3 id="chap1">chap1、程序设计：综述<a class="headerlink" href="#chap1" title="Permanent link">&para;</a></h3>
 <h4 id="11">1.1、本书讨论的内容<a class="headerlink" href="#11" title="Permanent link">&para;</a></h4>
@@ -312,7 +532,10 @@
 <p>1.7.2、operator[]</p>
 <p>1.7.3、五大函数</p>
 <h4 id="_1">小结<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h4>
-<h3 id="chap2">chap2、<a class="headerlink" href="#chap2" title="Permanent link">&para;</a></h3>
+<h3 id="chap2">chap2、算法分析<a class="headerlink" href="#chap2" title="Permanent link">&para;</a></h3>
+<p>2.1、数学基础</p>
+<p>2.2、模型</p>
+<p>2.3、要分析的问题</p>
 <h4 id="23">2.3、要分析的问题<a class="headerlink" href="#23" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>最大子序列和问题</strong>（leetcode42、可以用动态规划实现）<ul>
@@ -320,33 +543,187 @@
 </ul>
 </li>
 </ul>
-<h4 id="chap4">chap4、线性表、栈和队列<a class="headerlink" href="#chap4" title="Permanent link">&para;</a></h4>
-<h4 id="41">4.1、线性表<a class="headerlink" href="#41" title="Permanent link">&para;</a></h4>
-<h4 id="42adt">4.2、字典ADT<a class="headerlink" href="#42adt" title="Permanent link">&para;</a></h4>
-<h4 id="44">4.4、队列<a class="headerlink" href="#44" title="Permanent link">&para;</a></h4>
-<h4 id="46">4.6、习题<a class="headerlink" href="#46" title="Permanent link">&para;</a></h4>
-<h3 id="chap5">chap5、二叉树<a class="headerlink" href="#chap5" title="Permanent link">&para;</a></h3>
-<h4 id="51">5.1、定义及主要特性<a class="headerlink" href="#51" title="Permanent link">&para;</a></h4>
-<h5 id="511">5.1.1、满二叉树定理<a class="headerlink" href="#511" title="Permanent link">&para;</a></h5>
-<h5 id="512">5.1.2、二叉树的抽象数据类型<a class="headerlink" href="#512" title="Permanent link">&para;</a></h5>
-<h4 id="52">5.2、遍历二叉树<a class="headerlink" href="#52" title="Permanent link">&para;</a></h4>
+<h4 id="24">2.4、运行时间计算<a class="headerlink" href="#24" title="Permanent link">&para;</a></h4>
+<h3 id="chap3">chap3、线性表、栈和队列<a class="headerlink" href="#chap3" title="Permanent link">&para;</a></h3>
+<h4 id="31adt">3.1、抽象数据类型（ADT）<a class="headerlink" href="#31adt" title="Permanent link">&para;</a></h4>
+<h4 id="32adt">3.2、线性表ADT<a class="headerlink" href="#32adt" title="Permanent link">&para;</a></h4>
+<h5 id="321">3.2.1、表的简单数组实现<a class="headerlink" href="#321" title="Permanent link">&para;</a></h5>
+<h5 id="322">3.2.2、简单链表<a class="headerlink" href="#322" title="Permanent link">&para;</a></h5>
+<h4 id="33stlvectorlist">3.3、STL中的vector和list<a class="headerlink" href="#33stlvectorlist" title="Permanent link">&para;</a></h4>
+<h5 id="331">3.3.1、迭代器<a class="headerlink" href="#331" title="Permanent link">&para;</a></h5>
+<h5 id="332erase">3.3.2、例子：对表使用erase<a class="headerlink" href="#332erase" title="Permanent link">&para;</a></h5>
+<h5 id="333const_iterators">3.3.3、const_iterators<a class="headerlink" href="#333const_iterators" title="Permanent link">&para;</a></h5>
+<h4 id="34vector">3.4、vector的实现<a class="headerlink" href="#34vector" title="Permanent link">&para;</a></h4>
+<h4 id="35list">3.5、list的实现<a class="headerlink" href="#35list" title="Permanent link">&para;</a></h4>
+<h4 id="36adt">3.6、栈ADT<a class="headerlink" href="#36adt" title="Permanent link">&para;</a></h4>
+<h5 id="361">3.6.1、栈模型<a class="headerlink" href="#361" title="Permanent link">&para;</a></h5>
+<h5 id="362">3.6.2、栈的实现<a class="headerlink" href="#362" title="Permanent link">&para;</a></h5>
+<h5 id="363">3.6.3、应用<a class="headerlink" href="#363" title="Permanent link">&para;</a></h5>
+<h4 id="37adt">3.7、队列ADT<a class="headerlink" href="#37adt" title="Permanent link">&para;</a></h4>
+<h5 id="371">3.7.1、队列模型<a class="headerlink" href="#371" title="Permanent link">&para;</a></h5>
+<h5 id="372">3.7.2、队列的数组实现<a class="headerlink" href="#372" title="Permanent link">&para;</a></h5>
+<h5 id="373">3.7.3、队列的应用<a class="headerlink" href="#373" title="Permanent link">&para;</a></h5>
+<h4 id="_2">小结<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
+<h4 id="_3">练习<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
+<h3 id="chap4">chap4、树<a class="headerlink" href="#chap4" title="Permanent link">&para;</a></h3>
+<h4 id="41">4.1、预备知识<a class="headerlink" href="#41" title="Permanent link">&para;</a></h4>
+<h5 id="411">4.1.1、树的实现<a class="headerlink" href="#411" title="Permanent link">&para;</a></h5>
+<h5 id="412">4.1.2、树的遍历及应用<a class="headerlink" href="#412" title="Permanent link">&para;</a></h5>
+<h4 id="42">4.2、二叉树<a class="headerlink" href="#42" title="Permanent link">&para;</a></h4>
+<h5 id="421">4.2.1、实现<a class="headerlink" href="#421" title="Permanent link">&para;</a></h5>
+<h5 id="422-">4.2.2、一个例子--表达式树<a class="headerlink" href="#422-" title="Permanent link">&para;</a></h5>
 <ul>
 <li>例5.4、编写一个函数，计算一棵二叉树的结点数。【<em>感觉要用递归啊，直到子节点时+1</em>】</li>
 </ul>
-<h4 id="53">5.3、二叉树的实现<a class="headerlink" href="#53" title="Permanent link">&para;</a></h4>
-<p>5.4、二叉查找树</p>
-<p>5.5、堆与优先队列</p>
-<p>5.6、Huffman编码树</p>
-<p>5.7、深入学习导读</p>
-<p>5.8、习题</p>
-<p>5.9、项目设计</p>
+<h4 id="43adt-">4.3、查找树ADT-二叉查找树<a class="headerlink" href="#43adt-" title="Permanent link">&para;</a></h4>
+<h5 id="431contains">4.3.1、contains<a class="headerlink" href="#431contains" title="Permanent link">&para;</a></h5>
+<h5 id="432findminfindmax">4.3.2、findMin和findMax<a class="headerlink" href="#432findminfindmax" title="Permanent link">&para;</a></h5>
+<h5 id="433insert">4.3.3、insert<a class="headerlink" href="#433insert" title="Permanent link">&para;</a></h5>
+<h5 id="434remove">4.3.4、remove<a class="headerlink" href="#434remove" title="Permanent link">&para;</a></h5>
+<h5 id="435">4.3.5、析构函数和拷贝构造函数<a class="headerlink" href="#435" title="Permanent link">&para;</a></h5>
+<h5 id="436">4.3.6、平均情况分析<a class="headerlink" href="#436" title="Permanent link">&para;</a></h5>
+<h4 id="44avl">4.4、AVL树（平衡树）<a class="headerlink" href="#44avl" title="Permanent link">&para;</a></h4>
+<h5 id="441">4.4.1、单旋转<a class="headerlink" href="#441" title="Permanent link">&para;</a></h5>
+<h5 id="442">4.4.2、双旋转<a class="headerlink" href="#442" title="Permanent link">&para;</a></h5>
+<h4 id="45">4.5、伸展树<a class="headerlink" href="#45" title="Permanent link">&para;</a></h4>
+<h5 id="451">4.5.1、一个简单的想法（不能直接使用）<a class="headerlink" href="#451" title="Permanent link">&para;</a></h5>
+<p>4.5.2、展开</p>
+<h4 id="46">4.6、树的遍历<a class="headerlink" href="#46" title="Permanent link">&para;</a></h4>
+<h4 id="47b">4.7、B树<a class="headerlink" href="#47b" title="Permanent link">&para;</a></h4>
+<h4 id="48setmap">4.8、标准库中的容器set和map<a class="headerlink" href="#48setmap" title="Permanent link">&para;</a></h4>
+<h5 id="481set">4.8.1、集合容器set<a class="headerlink" href="#481set" title="Permanent link">&para;</a></h5>
+<p>4.8.2、映射容器map</p>
+<p>4.8.3、set和map的实现</p>
+<p>4.8.4、使用多个map的示例</p>
+<h4 id="_4">小结<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
+<h4 id="_5">练习<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
 <h4 id="0">0、<a class="headerlink" href="#0" title="Permanent link">&para;</a></h4>
 <ul>
 <li>二叉树-&gt;满二叉树-&gt;二叉排序树（搜索树）【左边小于根，右边大于根】-&gt;平衡二叉树（AVL树）【左右子树的高度差1】-&gt;红黑树【根是黑的，子节点是黑的，红色结点有2个黑的，不能有连续2个红的】</li>
 <li>leetcode上的题（114，116，226）</li>
 </ul>
-<h3 id="chap7">chap7、排序<a class="headerlink" href="#chap7" title="Permanent link">&para;</a></h3>
+<p>chap5、散列</p>
+<h3 id="chap6-209524">chap6、优先队列（堆）-209/524<a class="headerlink" href="#chap6-209524" title="Permanent link">&para;</a></h3>
+<ul>
+<li>打印机按队列放任务并不一定是最好方案，<strong>特别重要的任务</strong>希望插个队，没办法做到</li>
+</ul>
+<h4 id="61">6.1、模型<a class="headerlink" href="#61" title="Permanent link">&para;</a></h4>
+<ul>
+<li>insert()，相当于入队</li>
+<li>deleteMin()，相当于出队</li>
+</ul>
+<h4 id="62">6.2、一些简单的实现<a class="headerlink" href="#62" title="Permanent link">&para;</a></h4>
+<ul>
+<li>方法1：表头O(1)插入，O(n)遍历找到最小者</li>
+<li>方法2：让链表保持排序状态，插入就需要O(n)</li>
+<li>方法3：<strong>使用二叉查找树</strong>，两者时间都是O(n logn)</li>
+</ul>
+<h4 id="63">6.3、二叉堆<a class="headerlink" href="#63" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Q1：<em>这是个啥呢？利用AVL树？还是自己创的呢？</em> 【6.3.1解释了】</li>
+</ul>
+<ul>
+<li>二叉堆，简称为<strong>堆</strong>，有2个性质<ul>
+<li>结构性</li>
+<li>堆序性</li>
+</ul>
+</li>
+</ul>
+<h5 id="631">6.3.1、结构性质<a class="headerlink" href="#631" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>堆</strong>是一棵被完全填满的二叉树（完全二叉树）<strong>因为它的规律性，就可以使用队列，而不需要使用链</strong><ul>
+<li>对于位一位置i上的元素<ul>
+<li>左孩子在2i上</li>
+<li>右孩子在2i+1上</li>
+<li>父亲在i/2取整上</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>唯一的问题</strong>，最大堆的大小需要事先估计，（可以重新调整堆）</li>
+</ul>
+<h5 id="632">6.3.2、堆序性质<a class="headerlink" href="#632" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>最小单元应该在根上</strong>，任意子树也是堆，性质就是<strong>每一个节点X，X的父亲中的关键字小于（或等于）X中的关键字</strong>。</li>
+</ul>
+<h5 id="633">6.3.3、基本的堆操作<a class="headerlink" href="#633" title="Permanent link">&para;</a></h5>
+<ul>
+<li>insert插入<ul>
+<li>在下一个可用位置<strong>创建一个空穴（hole）</strong>，不破坏堆的性质，直接插入即可</li>
+<li>破坏了，就要找合适的位置，<strong>与根的方向冒一步【叫上滤（percolate up）】</strong>（就是与根节点交换），直到找到位置</li>
+<li><em>lionel，思路是懂了，但代码怎么写，不清楚</em></li>
+</ul>
+</li>
+<li>deleteMin（删除最小元）<ul>
+<li>找到比较简单，<strong>删除就比较难</strong>，创建一个空穴（hole）与子结点交换，满足性质即可</li>
+<li><strong>附加题</strong>，堆中存在偶数个元素时，将遇到一个节点只有一个儿子的情况。<em>后面没太看，也就没懂，lionel</em></li>
+</ul>
+</li>
+</ul>
+<h5 id="634">6.3.4、其它的堆操作<a class="headerlink" href="#634" title="Permanent link">&para;</a></h5>
+<ul>
+<li>0<ul>
+<li>上面实现的都只是<strong>最小堆</strong></li>
+</ul>
+</li>
+<li>decreaseKey（降低关键字的值）</li>
+<li>increaseKey（增加关键字的值）</li>
+<li>remove（删除）</li>
+<li>buildHeap（构建堆）</li>
+<li>定理6.1、</li>
+</ul>
+<h4 id="64">6.4、优先队列的应用<a class="headerlink" href="#64" title="Permanent link">&para;</a></h4>
+<h5 id="641">6.4.1、选择问题<a class="headerlink" href="#641" title="Permanent link">&para;</a></h5>
+<h5 id="642">6.4.2、事件模拟<a class="headerlink" href="#642" title="Permanent link">&para;</a></h5>
+<h4 id="65d">6.5、d堆<a class="headerlink" href="#65d" title="Permanent link">&para;</a></h4>
+<ul>
+<li>d=2的时候是<strong>二叉堆</strong>，以此类推</li>
+<li>堆的合并比较难</li>
+</ul>
+<p>6.6、左式堆</p>
+<ul>
+<li><strong>区别</strong>，左式堆不是理想平衡（perfectly balanced），实际上是趋向于<strong>非常不平衡</strong></li>
+</ul>
+<p>6.6.1、左式堆的性质</p>
+<ul>
+<li>定理6.2</li>
+</ul>
+<p>6.6.2、左式堆操作</p>
+<ul>
+<li>合并</li>
+</ul>
+<p>6.7、斜堆</p>
+<p>6.8、二项队列</p>
+<p>6.8.1、二项队列构建</p>
+<p>6.8.2、二项队列操作</p>
+<p>6.8.3、二项队列的实现</p>
+<h4 id="69">6.9、标准库中的优先队列<a class="headerlink" href="#69" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>priority_queue</code>类模板，头文件是<code>queue.h</code>，<strong>STL实现的是，最大堆（max-heap）而不是最小堆（min-heap）</strong><ul>
+<li>push</li>
+<li>top</li>
+<li>pop</li>
+<li>empty</li>
+<li>clear</li>
+</ul>
+</li>
+</ul>
+<h4 id="_6">小结<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
+<h4 id="_7">练习<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h4>
+<h3 id="chap7-245524">chap7、排序  245/524<a class="headerlink" href="#chap7-245524" title="Permanent link">&para;</a></h3>
+<ul>
+<li>存在O(n平方)的排序，比如插入</li>
+<li>希尔也是O(n平方)，<em>缩小增量</em></li>
+<li>稍微复杂的O(n logn)的排序算法</li>
+</ul>
+<h4 id="71">7.1、预备知识<a class="headerlink" href="#71" title="Permanent link">&para;</a></h4>
+<ul>
+<li>基于比较的排序</li>
+</ul>
 <h4 id="72">7.2、插入排序<a class="headerlink" href="#72" title="Permanent link">&para;</a></h4>
+<ul>
+<li><em>自己心得</em>，第几趟就是前面第几次已经排好序了，具体实现呢，<strong>就是把新的值，插入到前面排好序的合适位置</strong></li>
+</ul>
 <h5 id="721">7.2.1、算法<a class="headerlink" href="#721" title="Permanent link">&para;</a></h5>
 <ul>
 <li><em>个人思考，其实是两层</em><ul>
@@ -354,7 +731,15 @@
 <li>内层 是把第i轮前面的都要保证有序</li>
 </ul>
 </li>
-<li>以34，8，64，51，32，21取例，看外层的话，需要移动位置数是多少，<em>代码实现上与C差不多</em></li>
+<li>以34，8，64，51，32，21取例，看外层的话，需要移动位置数是多少，<em>代码实现上与C差不多</em><ul>
+<li><strong>自己要画一个图，来推衍一下排序的过程</strong> 【<em>说明我没有真懂，lionel</em>】<strong>核心是，第几趟，第几个位置的前面都是排好序的</strong>【也就是把新来的元素，插入到前面已经排好序的里面去，lionel】</li>
+<li>第1趟后：8，34，64，51，32，21，【<em>8和34是排序的</em>，移动1次】</li>
+<li>第2趟后：8，34，64，51，32，21，【<em>8，34，64是排序的</em>，移动0次】</li>
+<li>第3趟后：8，34，51，64，32，21，【<em>以此类推</em>，移动1次】</li>
+<li>第4趟后：8，32，34，51，64，21，【<em>以此类推</em>，移动3次】</li>
+<li>第5趟后：</li>
+</ul>
+</li>
 </ul>
 <pre class="highlight"><code class="language-c++">template&lt;typename Compareble&gt;
 void insertionSort(vector&lt;Comparable&gt; &amp;a){
@@ -368,6 +753,115 @@ void insertionSort(vector&lt;Comparable&gt; &amp;a){
     }
 }</code></pre>
 <h5 id="722stl">7.2.2、插入排序的STL实现<a class="headerlink" href="#722stl" title="Permanent link">&para;</a></h5>
+<h5 id="723">7.2.3、插入排序的分析<a class="headerlink" href="#723" title="Permanent link">&para;</a></h5>
+<h4 id="73">7.3、一些简单排序算法的下界<a class="headerlink" href="#73" title="Permanent link">&para;</a></h4>
+<ul>
+<li>逆序数</li>
+<li>定理7.1、**N个互异元素的数组的平均逆序数是N(N-1)/4</li>
+<li>定理7.2、</li>
+</ul>
+<h4 id="74">7.4、希尔排序<a class="headerlink" href="#74" title="Permanent link">&para;</a></h4>
+<h5 id="741">7.4.1、希尔排序的最坏情形分析<a class="headerlink" href="#741" title="Permanent link">&para;</a></h5>
+<ul>
+<li>定理7.3、</li>
+<li>定理7.4、</li>
+</ul>
+<h4 id="75">7.5、堆排序<a class="headerlink" href="#75" title="Permanent link">&para;</a></h4>
+<ul>
+<li><em>lionel，我不太明白，作者想表达啥</em></li>
+</ul>
+<h5 id="751">7.5.1、堆排序的分析<a class="headerlink" href="#751" title="Permanent link">&para;</a></h5>
+<h4 id="76">7.6、归并排序<a class="headerlink" href="#76" title="Permanent link">&para;</a></h4>
+<h5 id="761">7.6.1、归并排序的分析<a class="headerlink" href="#761" title="Permanent link">&para;</a></h5>
+<h4 id="77">7.7、快速排序<a class="headerlink" href="#77" title="Permanent link">&para;</a></h4>
+<h5 id="771">7.7.1、选取枢纽元<a class="headerlink" href="#771" title="Permanent link">&para;</a></h5>
+<ul>
+<li>一种错误的方法</li>
+<li>一种安全的做法</li>
+<li>三数中值分割法</li>
+</ul>
+<h5 id="772">7.7.2、分割策略<a class="headerlink" href="#772" title="Permanent link">&para;</a></h5>
+<h5 id="773">7.7.3、小数组<a class="headerlink" href="#773" title="Permanent link">&para;</a></h5>
+<h5 id="774">7.7.4、实际的快速排序例程<a class="headerlink" href="#774" title="Permanent link">&para;</a></h5>
+<h5 id="775">7.7.5、快速排序的分析<a class="headerlink" href="#775" title="Permanent link">&para;</a></h5>
+<ul>
+<li>最坏情形的分析</li>
+<li>最好情形的分析</li>
+<li>平均情形的分析</li>
+</ul>
+<h5 id="776">7.7.6、选择问题的线性期望时间算法<a class="headerlink" href="#776" title="Permanent link">&para;</a></h5>
+<h4 id="78">7.8、排序算法的一般下界<a class="headerlink" href="#78" title="Permanent link">&para;</a></h4>
+<h5 id="781">7.8.1、决策树<a class="headerlink" href="#781" title="Permanent link">&para;</a></h5>
+<ul>
+<li>引理7.1、</li>
+<li>引理7.2、</li>
+<li>定理7.6、</li>
+<li>定理7.7、</li>
+</ul>
+<h4 id="79">7.9、选择问题的决策树下界<a class="headerlink" href="#79" title="Permanent link">&para;</a></h4>
+<h4 id="710">7.10、对手下界<a class="headerlink" href="#710" title="Permanent link">&para;</a></h4>
+<h4 id="711">7.11、线性时间排序：桶式排序和基数排序<a class="headerlink" href="#711" title="Permanent link">&para;</a></h4>
+<h4 id="712">7.12、外部排序<a class="headerlink" href="#712" title="Permanent link">&para;</a></h4>
+<p>chap8、不相交集类</p>
+<h3 id="chap9">chap9、图论算法<a class="headerlink" href="#chap9" title="Permanent link">&para;</a></h3>
+<h3 id="chap10">chap10、算法设计技巧<a class="headerlink" href="#chap10" title="Permanent link">&para;</a></h3>
+<h4 id="101greedy-algorithm">10.1、贪婪算法（greedy algorithm）<a class="headerlink" href="#101greedy-algorithm" title="Permanent link">&para;</a></h4>
+<ul>
+<li>3个应用：Dijkstra、Prim、Kruskal</li>
+<li>贪婪算法<strong>分阶段地工作</strong>，在每个阶段，可以认为所作决定是好的，而不考虑将来的后果，<strong>局部的最优</strong></li>
+<li>一些例子<ul>
+<li>货币找零钱</li>
+<li>交通问题</li>
+</ul>
+</li>
+<li>本节的应用例子<ul>
+<li>简单的调度问题</li>
+<li>处理文件压缩</li>
+<li>贪婪近似算法</li>
+</ul>
+</li>
+</ul>
+<h5 id="1011">10.1.1、一个简单的调度问题<a class="headerlink" href="#1011" title="Permanent link">&para;</a></h5>
+<h5 id="1012">10.1.2、哈夫曼编码<a class="headerlink" href="#1012" title="Permanent link">&para;</a></h5>
+<h5 id="1013">10.1.3、近似装箱问题<a class="headerlink" href="#1013" title="Permanent link">&para;</a></h5>
+<h4 id="102">10.2、分治算法<a class="headerlink" href="#102" title="Permanent link">&para;</a></h4>
+<ul>
+<li>分治算法（divide and conquer）两部分组成：<ul>
+<li>分（divide）：递归解决较小的问题</li>
+<li>治（conquer）：然后，从子问题的解构建原问题的解</li>
+</ul>
+</li>
+</ul>
+<p>10.2.1、分治算法的运行时间</p>
+<p>10.2.2、最近点问题</p>
+<h5 id="1023">10.2.3、选择问题<a class="headerlink" href="#1023" title="Permanent link">&para;</a></h5>
+<h5 id="1024">10.2.4、一些算术问题的理论改进<a class="headerlink" href="#1024" title="Permanent link">&para;</a></h5>
+<h4 id="103">10.3、动态规划<a class="headerlink" href="#103" title="Permanent link">&para;</a></h4>
+<ul>
+<li>把子问题的答案系统地记录在一个表内</li>
+</ul>
+<h5 id="1031">10.3.1、用表代表递归<a class="headerlink" href="#1031" title="Permanent link">&para;</a></h5>
+<p>10.3.2、矩阵乘法的顺序安排</p>
+<p>10.3.3、最优二叉查找树</p>
+<p>10.3.4、所有点对最短路径</p>
+<h4 id="104">10.4、随机化算法<a class="headerlink" href="#104" title="Permanent link">&para;</a></h4>
+<p>10.4.1、随机数发生器</p>
+<p>10.4.2、跳跃表</p>
+<p>10.4.3、素性测试</p>
+<h4 id="105">10.5、回溯算法<a class="headerlink" href="#105" title="Permanent link">&para;</a></h4>
+<ul>
+<li>本质是个穷举，但可以删除明显不合适的。</li>
+<li><strong>在一步内删除一大组可能性的做法</strong>叫裁剪（pruning）</li>
+<li>举了2个例子<ul>
+<li>计算几何中的问题</li>
+<li>国际象棋和西洋跳棋的对弈，如何选取行棋的步骤</li>
+</ul>
+</li>
+</ul>
+<h5 id="1051turnpike-reconstruction-problem">10.5.1、收费公路重建问题（turnpike reconstruction problem）<a class="headerlink" href="#1051turnpike-reconstruction-problem" title="Permanent link">&para;</a></h5>
+<h5 id="1052">10.5.2、博弈<a class="headerlink" href="#1052" title="Permanent link">&para;</a></h5>
+<p>chap11、摊还分析</p>
+<p>chap12、高级数据结构及其实现</p>
               
             </div>
           </div><footer>

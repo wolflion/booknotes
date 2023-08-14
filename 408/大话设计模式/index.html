@@ -430,6 +430,12 @@
         </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#chap25">chap25、中介者</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#252">25.2、中介者模式</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#254">25.4、中介者模式优缺点</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#chap26">chap26、享元</a>
         <ul>
@@ -443,6 +449,8 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#chap28">chap28、访问者</a>
         <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#284">28.4、用了模式的实现</a>
+    </li>
     <li class="toctree-l3"><a class="reference internal" href="#285">28.5、访问者模式</a>
     </li>
         </ul>
@@ -579,6 +587,7 @@
 <li>chap13(builder，初步成功)</li>
 <li>chap17（Adapter，初步成功）</li>
 <li>chap24（Chain of Responsibilty，全章逻辑没啥问题，代码自己还没完全敲完，思路没问题了）</li>
+<li>chap25（Mediator，初步成功），但没运行过，我对这部分内容，还缺少了解</li>
 </ul>
 </li>
 </ul>
@@ -1469,6 +1478,20 @@
 </ul>
 <h4 id="246">24.6、加薪成功<a class="headerlink" href="#246" title="Permanent link">&para;</a></h4>
 <h3 id="chap25">chap25、中介者<a class="headerlink" href="#chap25" title="Permanent link">&para;</a></h3>
+<p>25.1、世界需要和平</p>
+<ul>
+<li>提到了之前讲过的<strong>迪米特法则</strong></li>
+</ul>
+<h4 id="252">25.2、中介者模式<a class="headerlink" href="#252" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Mediator</strong>，用一个中介对象来封装一系列的对象交互。中介者使各对象不需要显式地相互引用，从而使其耦合松散，而且可以独立地改变它们之间的交互。</li>
+</ul>
+<p>25.3、安理会做中介</p>
+<h4 id="254">25.4、中介者模式优缺点<a class="headerlink" href="#254" title="Permanent link">&para;</a></h4>
+<ul>
+<li>当系统出现了“多对多”交互复杂的对象群时，不要急于使用中介者模式，而要先反思你的系统在设计上是不是合理？</li>
+<li>中介者模式一般应用于<strong>一组对象以定义良好但是复杂的方式进行通信的场合</strong></li>
+</ul>
 <h3 id="chap26">chap26、享元<a class="headerlink" href="#chap26" title="Permanent link">&para;</a></h3>
 <p>26.1、项目多也没傻做</p>
 <h4 id="262">26.2、享元模式<a class="headerlink" href="#262" title="Permanent link">&para;</a></h4>
@@ -1478,19 +1501,65 @@
 <h4 id="264">26.4、内部状态与外部状态<a class="headerlink" href="#264" title="Permanent link">&para;</a></h4>
 <h3 id="chap27">chap27、解释器<a class="headerlink" href="#chap27" title="Permanent link">&para;</a></h3>
 <h3 id="chap28">chap28、访问者<a class="headerlink" href="#chap28" title="Permanent link">&para;</a></h3>
+<p>28.1、男人和女人！</p>
+<p>28.2、最简单的编程实现</p>
+<p>28.3、简单的面向对象实现</p>
+<h4 id="284">28.4、用了模式的实现<a class="headerlink" href="#284" title="Permanent link">&para;</a></h4>
+<ul>
+<li><em>lionel，核心还是这里面的代码，但架构懂了，但有个代码没写出来，不知道是不是利用了语言的特性</em></li>
+</ul>
 <h4 id="285">28.5、访问者模式<a class="headerlink" href="#285" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Visitor</strong>，表示一个作用于某对象结构中的各元素的操作。它使你可以在不改变各元素的类的前提下定义作用于这些元素的新操作。</li>
+<li>访问者模式的目的：<strong>要把处理从数据结构分离出来</strong></li>
+<li>缺点是，<strong>增加新的数据结构变得困难了</strong></li>
 </ul>
+<p>28.6、访问者模式基本代码</p>
+<p>28.7、比上不足，比下有余</p>
 <h3 id="chap29">chap29、模式总结<a class="headerlink" href="#chap29" title="Permanent link">&para;</a></h3>
+<p>29.1、演讲任务</p>
+<p>29.2、报名参赛</p>
+<p>29.3、超模大赛开幕式</p>
+<p>29.4、创建型模式比赛</p>
+<p>29.5、结构型模式比赛</p>
+<ul>
+<li>6适配器</li>
+<li>7桥接</li>
+<li>8组合</li>
+<li>9装饰</li>
+<li>10外观</li>
+<li>11享元</li>
+<li>12代理</li>
+</ul>
+<p>29.6、行为型模式一组比赛</p>
+<ul>
+<li>13观察者</li>
+<li>16状态</li>
+<li>17职责链</li>
+</ul>
+<p>29.7、行为型模式二组比赛</p>
+<ul>
+<li>18解释器</li>
+<li>21策略</li>
+<li>22备忘录</li>
+<li>23迭代器</li>
+</ul>
+<p>29.8、决赛</p>
+<p>29.9、梦醒时分</p>
+<p>29.10、没有结束的结尾</p>
 <h3 id="_2">学习过程<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <ul>
+<li>总体觉得第一轮，有了新的感觉，算一轮结束的时间点<ul>
 <li>0531，看了2章，建造者模式builder（13）、观察者模式observer（14）</li>
 <li>0601，看了3章，抽象工厂模式（15），状态模式（16），适配器模式（17），<em>抽象工厂模式，没太看懂</em>，0605看了chap01、02的2章</li>
 <li>0710，看了3章，适配器（17，<em>之前看过了</em>），迭代器（20），职责链（24）</li>
 <li>202303月，大概看一下，全书的前15章左右，<em>感觉还是忘光了</em></li>
 <li>20230717，<strong>感觉核心还是有意识的多琢磨，多问，多去想</strong>，目标是第一阶段，<strong>2023年7月底，书中前14章结束掉</strong>（2023年8月，看剩下的）</li>
 <li>时间曲线：我看自己的纸质笔记上，2022年4月手抄了一些，<strong>没有真正理解</strong></li>
+<li>2023年8月，差不多算把这本书的第一轮，给整掉了（准确时间是0813，但还想着再清理一下，毕竟有些章节的代码没有写完）</li>
+</ul>
+</li>
+<li>第二轮时间（<em>目前还没有时间线</em>）</li>
 </ul>
 <h4 id="ref">ref<a class="headerlink" href="#ref" title="Permanent link">&para;</a></h4>
 <ul>

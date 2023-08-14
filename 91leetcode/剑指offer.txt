@@ -1,0 +1,213 @@
+### 一、栈与队列
+
++ d1：9，30
++ d27：59I、59II
++ 0531开始刷了，只做了2道开头，0725开始
+
+#### 09、[用2个栈实现队列](https://leetcode.cn/problems/yong-liang-ge-zhan-shi-xian-dui-lie-lcof/)
+
++ 我不太有思路
++ 思路：
+  + 插入的时候，在stack1插即可
+  + 删除的时候，得用到stack2，如果stack2为空，得把stack1入到stack2里，然后再再删，如果stack1也为空，就是异常
+
+##### 代码
+
+```cpp
+class CQueue {
+public:
+    CQueue() {
+
+    }
+    
+    void appendTail(int value) {
+
+    }
+    
+    int deleteHead() {
+
+    }
+};
+
+/**
+ * Your CQueue object will be instantiated and called as such:
+ * CQueue* obj = new CQueue();
+ * obj->appendTail(value);
+ * int param_2 = obj->deleteHead();
+ */
+```
+
+
+
+#### 30、包含min函数的栈
+
++ 知道要有个最小值
++ 思路：
+  + 辅助栈，存最小值（为啥需要m_min、m_data栈？）
+
+##### Code
+
+```cpp
+class MinStack {
+public:
+    /** initialize your data structure here. */
+    MinStack() {
+
+    }
+    
+    void push(int x) {
+
+    }
+    
+    void pop() {
+
+    }
+    
+    int top() {
+
+    }
+    
+    int min() {
+
+    }
+};
+
+/**
+ * Your MinStack object will be instantiated and called as such:
+ * MinStack* obj = new MinStack();
+ * obj->push(x);
+ * obj->pop();
+ * int param_3 = obj->top();
+ * int param_4 = obj->min();
+ */
+```
+
+#### 59、
+
+### 二、链表
+
++ d2：6，24，35
++ d11：18，22（双指针）
++ d12：25，52（双指针）
+
+#### 6、从尾到头打印链接
+
+#### 24、反转链表
+
+#### 35（M）、复杂链表的复制
+
+18、
+
+22、
+
+25、
+
+52、
+
+### 三、字符串
+
++ d3：5，58II
++ d：20，67
+
+#### 5、替换空格
+
+#### 58II、左旋转字符串
+
+#### 20（M）、
+
+#### 67（M）、
+
+### 四、查找
+
++ d4：3，53I，53II
++ d5：4，11，50
+
+#### 3、数组中重复的数字
+
+#### 53I、在排序数组中查找数字
+
+#### 53II、0~n-1中缺失的数字
+
+#### 4（M）、二维数组中的查找
+
+#### 11、旋转数组的最小数字
+
+#### 50、第一个只出现一次的字符
+
+### 五、搜索与回溯算法
+
++ d6：32I，32II，32III
+
++ d7：26，27，28
++ d14：12，13
++ d15：34，36，54
++ d18：55I，55II
++ d19：64，68I，68II
++ d28：37、38（搜索与回溯算法）
+
+#### 32I（M）、从上到下打印二叉树
+
+32II
+
+32III（M）、
+
+26（M）、树的子结构
+
+27、二叉树的镜像
+
+28、对称的二叉树
+
+### 六、动态规划
+
++ d8：10I，10II，63
++ d9：42、47
++ d10：46，48
+
+42、连续子数组的最大和
+
+47、礼物的最大价值
+
+46、把数字翻译成字符串
+
+48、最长不含重复字符的字符串
+
+### 七、双指针
+
++ d13：21，57，58I
+
+21、
+
+57、
+
+58I、
+
+### 八、排序
+
++ d16：45，61
++ d17：40，41
+
+61、
+
+40、
+
+41、
+
+### 九、分治算法
+
++ d20：7，16，33
+
+### 十、位运算
+
++ d21：15，65
++ d22：56I，56II
+
+### 十一、数学
+
++ d23：39,66
++ d24：14I，57II，62
+
+### 十二、模拟
+
++ d25：29、顺时针打印矩阵
+  + 自己思路：题能看懂，思路还不一定完全可行，*代码更是写不来*
++ d25：31

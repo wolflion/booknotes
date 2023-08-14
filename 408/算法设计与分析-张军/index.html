@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>算法设计与分析 张军 - lionel的技术笔记</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "\u7b97\u6cd5\u8bbe\u8ba1\u4e0e\u5206\u6790 \u5f20\u519b";
+        var mkdocs_page_input_path = "408\\\u7b97\u6cd5\u8bbe\u8ba1\u4e0e\u5206\u6790-\u5f20\u519b.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> lionel的技术笔记
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">简介</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../01daily/">daily</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">C++</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../20C%2B%2B/effectiveC%2B%2B/">《Effective C++》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../20C%2B%2B/%E6%B7%B1%E5%BA%A6%E6%8E%A2%E7%B4%A2C%2B%2B%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B/">《深度探索C++对象模型》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/EffectiveSTL/">《Effective STL》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/C%2B%2B%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/">《C++泛型STL原理和应用》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/">《STL源码剖析》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../22C%2B%2Bmodern/%E6%B7%B1%E5%85%A5%E5%BA%94%E7%94%A8C%2B%2B11/">《深入应用C++11》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">基础知识</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA/">《操作系统导论》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../%E5%A4%A7%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">《大话设计模式》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90_C%2B%2B4th/">《数据结构与算法分析_C++4th》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../%E7%AE%97%E6%B3%95%284th%29/">《算法4th》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网络编程</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/TCPIP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">《TCP/IP网络编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/">《Linux高性能服务器编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/TCPIP%E8%AF%A6%E8%A7%A3%E5%8D%B71/">《TCPIP详解卷1》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/Linux%E5%86%85%E6%A0%B8%E7%BD%91%E7%BB%9C%E6%A0%88%E6%BA%90%E4%BB%A3%E7%A0%81%E6%83%85%E6%99%AF%E5%88%86%E6%9E%90/">《Linux内核网络栈源代码情景分析》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C/">《深入理解Linux网络》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">文件系统</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/Linux%E5%86%85%E6%A0%B8%E6%8E%A2%E7%A7%98/">《Linux内核探秘》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《文件系统技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">《存储技术原理分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">存储</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../12storage/ceph%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《ceph设计原理与实现》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">视频</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/FFmpeg%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/">《FFmpeg入门到精通》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/WebRTC%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/">《WebRTC权威指南》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/WebRTC%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AE%9E%E6%97%B6%E4%BA%92%E5%8A%A8%E6%8A%80%E6%9C%AF/">《WebRTC音视频实时互动技术》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/%E6%96%B0%E4%B8%80%E4%BB%A3%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9%E7%A0%81%E6%A0%87%E5%87%86-H.264_AVC/">《新一代视频压缩码标准-H.264_AVC》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">内核</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/Linux%E5%86%85%E6%A0%B8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《Linux内核设计与实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5Linux%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%E5%86%85%E6%A0%B8%E6%9C%BA%E5%88%B6/">《深入Linux设备驱动程序内核机制》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">《深入理解Linux虚拟内存管理》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《深入理解Linux网络技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/Linux%E5%86%85%E6%A0%B8%E6%BA%90%E4%BB%A3%E7%A0%81%E5%89%96%E6%9E%90-tcpip%E5%AE%9E%E7%8E%B0/">《Linux内核源代码剖析-TCP/IP实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E5%86%85%E6%A0%B8/">《深入理解Linux内核》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">工具</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/Wireshark%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98/">《Wireshark网络分析实战》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/Linux%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8Eshell%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B%E5%A4%A7%E5%85%A8%283rd%29/">《Linux命令行与shell脚本编程大全(3rd)》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/python%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%883rd%EF%BC%89/">《python程序设计（3rd）》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">刷题</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer/">《剑指offer2nd》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/">《剑指offer专项突破》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网课</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/01Linux%E9%AB%98%E5%B9%B6%E5%8F%91%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/">《Linux高并发网络编程开发》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/%E4%BE%AF%E6%8D%B7/%E4%BE%AF%E6%8D%B7C%2B%2B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%8660%E8%AE%B2/">《侯捷C++内存管理60讲》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/11NJU%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">《NJU算法设计与分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">英语专</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../60English/00794%E7%BB%BC%E5%90%88%E8%8B%B1%E8%AF%AD%E4%B8%80%E4%B8%8A/">《综合英语(一)上》</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">lionel的技术笔记</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>算法设计与分析 张军</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="_1">《算法设计与分析》<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<ul>
+<li>作者<strong>张军</strong>，因为叫这本书的比较多，这本书也许不出名，但正好自己有，就努力就把它全书读懂吧</li>
+<li>配合《趣学算法》一起看</li>
+<li>2023-08-10左右意识到自己比较大的问题，<strong>如何用代码去定义这些ADT，比如图的存储，这涉及到一些遍历的算法，虽然有思路，但还是要依靠具体的ADT去存东西的</strong>，争取在2023年突破掉（不管是有意识去记，还是慢慢去理解，争取消化掉）</li>
+<li>各种疑问<ul>
+<li>Q1，疑问在于，这些伪代码怎么去对应真实的代码的if或者各种判断</li>
+<li>Q2，有些场景自己能做出填空或计算题，比如<strong>哈夫曼树</strong>，但代码肯定是写不出来的的，以及<strong>Dijkstra、Prim、Kruskal</strong></li>
+</ul>
+</li>
+<li>各种整理<ul>
+<li>绪论：<strong>组合问题</strong>怎么定义？</li>
+<li>贪心：用在 <strong>图</strong>（最短距离）和<strong>组合</strong>（背包问题）</li>
+</ul>
+</li>
+</ul>
+<h3 id="chap1">chap1、绪论<a class="headerlink" href="#chap1" title="Permanent link">&para;</a></h3>
+<p>1.1、算法的基本概念</p>
+<h4 id="12">1.2、算法设计与分析的重要问题类型<a class="headerlink" href="#12" title="Permanent link">&para;</a></h4>
+<p>1.2.1、排序问题</p>
+<p>1.2.2、查找问题</p>
+<p>1.2.3、图问题</p>
+<h5 id="124">1.2.4、组合问题<a class="headerlink" href="#124" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>Combinatorial Problem</strong>，从离散的空间中寻找到一个对象，使之能够满足特定的标准。<ul>
+<li>旅行商问题（Travelling Sales Problem）</li>
+<li>车辆路由问题 （Vehicle Routing Problem）</li>
+</ul>
+</li>
+</ul>
+<p>1.2.5、数值问题</p>
+<p>1.2.6、几何问题</p>
+<h4 id="13">1.3、算法复杂性分析基础<a class="headerlink" href="#13" title="Permanent link">&para;</a></h4>
+<p>1.3.1、算法复杂性分析的原理</p>
+<p>1.3.2、渐近符号</p>
+<h4 id="15">1.5、习题<a class="headerlink" href="#15" title="Permanent link">&para;</a></h4>
+<h3 id="chap2">chap2、基本数据结构<a class="headerlink" href="#chap2" title="Permanent link">&para;</a></h3>
+<h4 id="21">2.1、数据结构的概念<a class="headerlink" href="#21" title="Permanent link">&para;</a></h4>
+<h4 id="22">2.2、线性结构<a class="headerlink" href="#22" title="Permanent link">&para;</a></h4>
+<p>2.2.1、线性表</p>
+<p>2.2.2、栈</p>
+<p>2.2.3、队列</p>
+<h5 id="224">2.2.4、串<a class="headerlink" href="#224" title="Permanent link">&para;</a></h5>
+<ul>
+<li><em>kmp，后面学一下，lionel</em></li>
+</ul>
+<h4 id="23">2.3、树形结构<a class="headerlink" href="#23" title="Permanent link">&para;</a></h4>
+<h5 id="231">2.3.1、树的定义与性质<a class="headerlink" href="#231" title="Permanent link">&para;</a></h5>
+<ul>
+<li>树的性质<ul>
+<li>1、</li>
+</ul>
+</li>
+</ul>
+<h5 id="232">2.3.2、二叉树<a class="headerlink" href="#232" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、定义和性质<ul>
+<li>满二叉树</li>
+<li>完全二叉树</li>
+<li>二叉排序树</li>
+<li>平衡二叉树</li>
+<li>二叉树的基本性质（<em>这个要记一下，其它书上也都有，应该都是一样的，lionel</em>）<ul>
+<li>1、第i层上最多有2的(i-1)次方个结点</li>
+<li>2、如果高度为h，至多有2的h次方，再-1个结点</li>
+<li>3、</li>
+<li>4、完全二叉树有n个节点，高度h=log2n取最少，再加1</li>
+<li>5、</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>2、存储结构<ul>
+<li>顺序存储</li>
+<li>链式存储</li>
+</ul>
+</li>
+<li>3、二叉树的遍历<ul>
+<li>先序</li>
+<li>中序</li>
+<li>后序</li>
+</ul>
+</li>
+</ul>
+<h5 id="233">2.3.3、多叉树<a class="headerlink" href="#233" title="Permanent link">&para;</a></h5>
+<h4 id="24">2.4、图状结构<a class="headerlink" href="#24" title="Permanent link">&para;</a></h4>
+<ul>
+<li>图的遍历，<em>这个我自己的笔记，单独写过</em></li>
+</ul>
+<h5 id="241">2.4.1、图的定义<a class="headerlink" href="#241" title="Permanent link">&para;</a></h5>
+<h5 id="242">2.4.2、图的存储结构<a class="headerlink" href="#242" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、矩阵存储</li>
+<li>2、邻接表</li>
+<li>3、带权图</li>
+</ul>
+<h5 id="243">2.4.3、图的遍历<a class="headerlink" href="#243" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、BFS</li>
+<li>2、DFS  （<em>有了递归了，可以不栈去存</em>）<ul>
+<li><a href="https://blog.csdn.net/usualheart/article/details/108103136">深度优先搜索两种实现方法java模板 递归和栈以及使用栈的潜在问题</a></li>
+</ul>
+</li>
+</ul>
+<pre class="highlight"><code class="language-cpp">DFS(G,s)
+    1 visit(s)
+    2 visited[s] &lt;- TRUE
+    3 for each v 属于 adj[s]
+        do if visited[v] == FALSE
+            then DFS(G,v)</code></pre>
+<h4 id="25setmap">2.5、集合与字典（set与map）<em>感觉叫这个比较好</em><a class="headerlink" href="#25setmap" title="Permanent link">&para;</a></h4>
+<ul>
+<li>之前看了一下人家的面试题，map和set有啥区别？【<em>虽然STL的读书笔记里有写，但2者的区别，自己还没有完全搞得特别明白</em>】</li>
+</ul>
+<h5 id="251set">2.5.1、集合（Set）<a class="headerlink" href="#251set" title="Permanent link">&para;</a></h5>
+<ul>
+<li>集合的3大特性<ul>
+<li>确定性</li>
+<li>无序性</li>
+<li>互异性</li>
+</ul>
+</li>
+<li>集合的三种基本运算</li>
+</ul>
+<h5 id="252dictory">2.5.2、字典（dictory）<a class="headerlink" href="#252dictory" title="Permanent link">&para;</a></h5>
+<ul>
+<li>集合的特殊形式，<strong>每个元素，由Key和Value组合，这个组合称为</strong>【关联association】，难怪叫<em>关联容器</em></li>
+<li>字典的<strong>散列存储</strong>（hash）</li>
+</ul>
+<h4 id="26">2.6、本章小结<a class="headerlink" href="#26" title="Permanent link">&para;</a></h4>
+<p>2.7、习题</p>
+<h3 id="chap3">chap3、蛮力<a class="headerlink" href="#chap3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Q1：<strong>图、数值</strong>一般不用蛮力？</li>
+</ul>
+<p>3.1、算法设计思想</p>
+<h4 id="32">3.2、排序问题<a class="headerlink" href="#32" title="Permanent link">&para;</a></h4>
+<h4 id="33">3.3、查找问题<a class="headerlink" href="#33" title="Permanent link">&para;</a></h4>
+<h4 id="34">3.4、组合问题<a class="headerlink" href="#34" title="Permanent link">&para;</a></h4>
+<h4 id="35">3.5、几何问题<a class="headerlink" href="#35" title="Permanent link">&para;</a></h4>
+<p>3.6、本章小结</p>
+<p>3.7、习题</p>
+<h3 id="chap4">chap4、分治<a class="headerlink" href="#chap4" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Q1：<strong>图、数值</strong>一般不用分治？</li>
+</ul>
+<p>4.1、算法设计思想</p>
+<h4 id="42">4.2、排序问题<a class="headerlink" href="#42" title="Permanent link">&para;</a></h4>
+<h4 id="43">4.3、查找问题<a class="headerlink" href="#43" title="Permanent link">&para;</a></h4>
+<h4 id="44">4.4、组合问题<a class="headerlink" href="#44" title="Permanent link">&para;</a></h4>
+<h4 id="45">4.5、几何问题<a class="headerlink" href="#45" title="Permanent link">&para;</a></h4>
+<p>4.6、本章小结</p>
+<p>4.7、习题</p>
+<h4 id="_2">《趣学算法》一书中的题<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
+<h3 id="chap5">chap5、贪心<a class="headerlink" href="#chap5" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>排序、查找、数值、几何</strong>不用贪心</li>
+</ul>
+<p>5.1、算法设计思想</p>
+<p>5.1.1、贪心算法的设计思想</p>
+<p>5.1.2、贪心算法的求解过程</p>
+<h4 id="52">5.2、图问题<a class="headerlink" href="#52" title="Permanent link">&para;</a></h4>
+<h5 id="523">5.2.3、哈夫曼树<a class="headerlink" href="#523" title="Permanent link">&para;</a></h5>
+<ul>
+<li><em>lionel，这个逻辑我会，但代码写不出来</em></li>
+</ul>
+<h4 id="53">5.3、组合问题<a class="headerlink" href="#53" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Q1，我不是很能理解，把背包规为<strong>组合问题</strong>，难道是<em>离散空间里的最优解？ lionel</em></li>
+</ul>
+<h5 id="531">5.3.1、背包问题<a class="headerlink" href="#531" title="Permanent link">&para;</a></h5>
+<ul>
+<li>0-1背包，<strong>物品不可拆分</strong></li>
+<li>部分背包，<strong>可以只装入部分</strong></li>
+<li>伪代码（<em>部分背包了</em>）</li>
+</ul>
+<pre class="highlight"><code class="language-cpp">KNAPSACK-GREEDY(w,A,n)  //w是最大承重量，A是n个物品有序序列【weight和in（有多少重量放入背包）2个属性】，n个物品
+    1 i&lt;-w  //lionel，不懂为啥要赋值给i  【看完懂了，主要是每次要减去一些放入的，然后才是剩下的，第一次是 最大的】
+    2 for j &lt;- 1 to n
+        do if i = 0   //表示最大承重为0
+            break;
+           else if A[j].weight &lt;= i  //当前的重量小于最大承重
+               then A[j].in &lt;- A[j].weight
+               else
+                   A[j].in &lt;- i
+                i &lt;- i-A[j].in //表示每次还剩多少【最大承重量】</code></pre>
+<ul>
+<li><em>最终可能不是最优解</em>，但把问题简化为<strong>线性的问一下，每个物品，存，存不存2种判断</strong></li>
+</ul>
+<h5 id="532">5.3.2、活动安排问题<a class="headerlink" href="#532" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>每次选结束时间最早的</strong></li>
+<li>伪代码</li>
+</ul>
+<pre class="highlight"><code class="language-cpp">ACTIVITY-ASSIGN-GREEDY(m, s, f, n)  //n是活动数目，s是start,f是finish，m是编号
+    A &lt;- {m[1]},pre &lt;- 1   //lionel，不太懂，直接给把编号1放入到集合里，还预设了一个变量pre？
+    for i &lt;- 2 to n
+        do if(s[i]&gt;=f[pre]) //只要是开始时间  大于 当前的结束时间，就属于处理逻辑，【其它场景，直接抛弃，不处理了？lionel】
+            then A &lt;- A U {m[i]}  //把当前这个i放入到集合里
+                 pre &lt;- i //更新pre变量
+    return A</code></pre>
+<ul>
+<li>other</li>
+</ul>
+<h5 id="533">5.3.3、多机调度问题<a class="headerlink" href="#533" title="Permanent link">&para;</a></h5>
+<ul>
+<li>问题描述：n个作业（job）要分配到m台机器（Machine）上，每个作业的时间（Time）</li>
+<li><em>这个自己还没看，其实应该不难，这个要想一下？</em></li>
+</ul>
+<p>5.4、本章小结</p>
+<p>5.5、习题</p>
+<h3 id="chap6">chap6、动态规划<a class="headerlink" href="#chap6" title="Permanent link">&para;</a></h3>
+<h3 id="chap7">chap7、回溯<a class="headerlink" href="#chap7" title="Permanent link">&para;</a></h3>
+<h4 id="73">7.3、组合问题中的回溯算法<a class="headerlink" href="#73" title="Permanent link">&para;</a></h4>
+<h5 id="73101">7.3.1、0/1背包问题<a class="headerlink" href="#73101" title="Permanent link">&para;</a></h5>
+<h5 id="732">7.3.2、八皇后问题<a class="headerlink" href="#732" title="Permanent link">&para;</a></h5>
+<ul>
+<li>看《趣学算法》里的代码实现比较简单，<em>但那个数组的定义，没太搞明白，把2维的压缩了一下</em></li>
+<li>伪代码<ul>
+<li><em>还是没太看懂，想结合，代码再看一下呢</em></li>
+</ul>
+</li>
+</ul>
+<pre class="highlight"><code class="language-cpp">//判断是不是
+CONSTRAIN(v,k)        // v表示个数组，具体表示啥？k表示啥？第几层？几层又是怎么划分的呢？
+    for i &lt;- 1 to k-1
+        do if(v[i]==v[k] or abs(v[i]-v[k])==abs(i-k))
+            then return FALSE
+    return TRUE  //思路是，只要不是false，最终都是true
+
+N_QUEENS()
+    INITIVAL(v)
+    l &lt;- 0
+    while l &gt;= 0
+        do for every node n[i] in the l th layer
+            do v[l] &lt;- n[i]
+                if CONSTRAIN(v,l)
+                    then if v is complete solution
+                        then SAVE_SOLUTION(v)
+                        else
+                            l &lt;- l+1
+                    else
+                        l &lt;- l-1</code></pre>
+<p>7.3.3、图着色问题</p>
+<p>7.4、本章小结</p>
+<p>7.5、习题</p>
+<h4 id="chap5_1">《趣学算法》chap5中的题<a class="headerlink" href="#chap5_1" title="Permanent link">&para;</a></h4>
+<h5 id="55n">5.5、N皇后问题<a class="headerlink" href="#55n" title="Permanent link">&para;</a></h5>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
