@@ -1,5 +1,7 @@
 ## 《Effective C++》
 
++ Part06的知识，对于OO确实了解得不多，读了有点吃力（2023-08-15）
+
 ### Part1、自己习惯C++（1-4）
 
 + Accustoming Yourself to C++
@@ -474,33 +476,131 @@ private:
 
 ### Part6、继承与面向对象设计Inheritance and Object-Oriented Design（32-40）
 
-#### 32、确定你的public继承塑模出is-a关系 Make sure public inheritance models "is-a."
++ 继承可以是单一继承或多重继承
+  + 每一个继承连接（link）可以是public，protected或private，也可以是virtual或non-virtual
+  + 成员函数的各个选项：virtual? non-virtual? pure virtual?
++ 缺省参数值与virtual函数有什么交互影响？
++ 继承如何影响C++的名称查找规则？设计选项有哪些？如果class的行为需要改变，virtual函数是最佳选择吗？
 
-+ Liskov Substitution Principle
-+ public继承是"is a"，*private继承是啥？*
-#### 33、避免遮掩继承而来的名称
-+ using声明式，**inline转交函数（forwarding function）**
-#### 34、区分接口继承和实现继承
+#### 32、确定你的public继承塑模出is-a关系，Make sure public inheritance models "is-a."
+
++ 结论：
+  + public继承意味"is a"。适用于base classes身上的每一件事情一定也适用于derived classes身上，因为每一个derived class对象也都是一个base class对象。
++ **public inheritance（公开继承）意味“is-a”（是一种）的关系**。
+  + 子类的对象，同时也是父类的对象（public继承的话）**即，父类更一般化** 【Liskov Substitution Principle】
+  + [C++入门到精通：面向对象程序设计中的继承与派生！](https://zhuanlan.zhihu.com/p/344504759)，*lionel，是因为public继承后，父类有操作的各种权限？*
++ **public继承主张，能够施行于base class对象身上的每件事情（注意，是每件事情），也可以施行于derived class对象身上**。
++ 类之间的关系
+  + is-a
+  + has-a（有一个）
+  + is-implemented-in-terms-of（根据某物实现出）
+
++ *private继承是啥？*
++ *本节的问题在于，我没有搞懂，为什么会是这么一种状况？*
+#### 33、避免遮掩继承而来的名称，Avoid hiding inherited names
+
++ 结论：
+  + derived classes内的名称会遮掩base classes内的名称。在public继承下从来没有人希望如此
+  + 为了让被遮掩的名称再见天日，可以使用using声明式或**inline转交函数（forwarding function）**
++ **内层作用域会遮掩外围作用域的名称**（name-hiding rule），**遮掩名称**
+
+```cpp
+class Base01{
+public:
+    virtual void mf1() = 0;
+    virtual void mf2();
+    void mf3();
+private:
+    int x;
+};
+
+class Derived01:public Base01{
+public:
+    virtual void mf1();
+    void mf4();
+}
+
+//03的情况
+class Base03{
+public:
+    virtual void mf1() = 0;
+    virtual void mf1(int);
+    virtual void mf2();
+    void mf3();
+    void mf3(double);
+private:
+    int x;
+};
+
+class Derived03:public Base03{
+public:
+    using Base03::mf1;
+    using Base03::mf3; //让Base03 class内名为mf1和mf3的所有东西在Derived作用域内都可见
+    virtual void mf1();
+    void mf3();
+    void mf4();
+}
+```
+
++ *lionel，这个其实没有完全整理*
+
+#### 34、区分接口继承和实现继承，Differentiate between inheritance of interface and inheritance of implementation
+
++ 结论：
+  + 接口继承与实现继承不同。在public继承之下，derived classes总是继承base class的接口
+  + pure virtual函数只具体指定接口继承
+  + 简朴的（非纯）inpure virtual函数具体指定接口继承及缺省实现继承
+  + non-virtual函数具体指定接口继承以及强制性实现继承
+
+
+
 + 声明一个pure virtual函数的目的是为了让derived classes只继承函数接口。
 + 声明简朴的（非纯）inpure virtual函数的目的，是让derived classes继承该函数的接口和缺省实现
 #### 35、考虑virtual函数以外的其他选择
-+ Template Method模式
+
++ 结论：
+  + virtual函数的替代方案包括NVI手法及Straategy设计模式的多种形式。NVI手法自身是一个特殊形式的Template Method设计模式
+  + 将机能从成员函数移到class外部函数，带来的一个缺点是，非成员函数无法访问classr non-public成员
+  + tr1::function对象的行为就像一般函数指针。这样的对象可接纳“与给定之目标签名式（target signature）兼容”的所有可调用物（callable entities）
+
+
+
++ 
 + Strategy模式
 + 摘要，有以下几个替换
 	+ 使用non-virtual interface手法
 	+ 将virtual函数替换为“函数指针成员变量”
 	+ 以tr1::function成员变量替换virtual函数
 	+ 将继承体系内的virtual函数替换为另一个继承体系内的virtual函数
-#### 36、绝不重新定义继承而来的non-virtual函数
+#### 36、绝不重新定义继承而来的non-virtual函数，Never redefine an inherited non-virtual function
+
++ 结论
+  + 绝对不要重新定义继承来的non-virtual
+
 + *写个代码来看下差异，lionel* 【重新定义继承来的non-virtual】
-#### 37、绝不重新定义继承而来的缺省参数值
-+ **缺省参数是静态绑定**，virtual是动态绑定
-#### 38、通过复合塑模出has-a或“根据某物实现出”
-+ **复合是has-a**
-#### 39、明智而审慎地使用private继承
-+ **private继承，编译器不会自动将一个derived class对象 转换为一个 base class对象**。
-#### 40、明智而审慎地使用多重继承
-+ 多重继承会导致歧义
+#### 37、绝不重新定义继承而来的缺省参数值，Never redefine a function's inherited default parameter value
+
++ 结论：
+  + 绝对不要重新定义一个继承而来的缺省参数值，因为**缺省参数值都是静态绑定**，而virtual函数--你唯一应该覆写的东西--却是动态绑定
+
+#### 38、通过复合塑模出has-a或“根据某物实现出”，Model "has-a"or" is-implemented-in-terms-of" through composition
+
++ 结论：
+  + 复合（composition）的意义和public继承完全不同
+  + 在应用域（application domain），复合意味has-a（有一个）。在实现域（implementation domain），复合意味 is-implemented-in-terms-of（根据某物实现出）
+
+#### 39、明智而审慎地使用private继承，Use private inheritance judiciously
+
++ 结论：
+  + Private继承意味is-implemented-in-terms of（根据实物实现出）。它通常比复合（composition）的级别低。但是当derived classs需要访问protected base class的成员，或需要重新定义继承而来的virtual函数时，这么设计是合理的。
+  + 和复合（composition）不同，private继承可以造成empty base最优化。这对致力于“对象尺寸最小化”的程序库开发者而言，可能很重要
+
+#### 40、明智而审慎地使用多重继承，Use multiple inheritance judiciously
+
++ 结论：
+  + 多重继承比单一继承复杂。它可能导致新的歧义性，以及对virtual继承的需要
+  + virtual继承会增加大小、速度、初始化（及赋值）复杂度等等成本。如果virtual base classes不带任何数据，将是最具实用价值的情况
+  + 多重继承的确有正当用途。其中一个情节涉及“public继承某个Interface class”和“private继承某个协助实现的class”的两相组合
 
 ### Part7、模板与泛型编程（41-48）
 
