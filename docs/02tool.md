@@ -1,5 +1,9 @@
 ## 内容
 
+### 代码相关
+
++ 阅读linux内核，lxr
+
 ### chrome插件
 
 + uBlock Origin，至少可以屏蔽某度的热搜
