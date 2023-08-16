@@ -81,7 +81,7 @@ nav:
         - 《Linux命令行与shell脚本编程大全(3rd)》: '15tool/Linux命令行与shell脚本编程大全(3rd).md' 
         - 《python程序设计（3rd）》: '15tool/python程序设计（3rd）.md' 
     - 刷题:
-        - 《剑指offer2nd》: '91leetcode/剑指offer.md'
+        - 《剑指offer2nd》: '91leetcode/剑指offer2nd.md'
         - 《剑指offer专项突破》: '91leetcode/剑指offer专项突破.md'
     - 网课:
         - 《Linux高并发网络编程开发》: '90lecture/01Linux高并发网络编程开发.md'
