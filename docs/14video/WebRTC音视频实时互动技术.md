@@ -291,17 +291,79 @@
 
 ### chap10、WebRTC拥塞控制
 
++ WebRTC是通过增加带宽、减少数据量、提高音视频质量、适当增加时延以及更准确的带宽评估等方法来提升音视频服务质量的。
+
 #### 10.1、WebRTC的拥塞控制算法
+
++ GCC（基于发送端的拥塞控制算法Transport-CC，基于接收端的拥塞控制算法Goog-REMB，**后者已淘汰**）、BBR、PCC
++ GCC（google Congestion Control）
++ BBR（Bottleneck Bandwidth and Round-trip propagation time），瓶颈带宽和往返传播时间
++ PCC（Perfromance-oriented Congestion Control）
++ TCC（Transport-wide Congestion Control），传输带宽拥塞控制
++ Goog-REMB（Google Receiver Estimated Maximum Bitrace），google接收端评估的最大码流
++ QUICK（Quick UDP Internet Connection），使用UDP的快速网络连接协议，即HTTP/3
++ SCTP（Stream Control Transmission Protocol），流控传输协议
 
 ##### 10.1.1、Goog-REMB
 
++ 302/476
++ **左侧发送端模块**（Encoder，Pacer，Loss-Based Controller，Delay-Based Controller）
++ 主要是**右边接收端的**
++ RemoteBitrate Estimator
+  + **总负责人**，
+  + 一方面，要与外面的模块打交道，从网络收/发模块获取RTP包的传输信息用于拥塞评估，或将内部评估出的下一时刻的发送码流（大小）输出给网络收/发模块，让其通知发送端进行流控
+  + 另一方面，组织内部的模块
++ Inter Arrival
+  + 将数据包按帧进行分组，然后对相邻的两组数据包进行单向梯度计算
+    + 每组数据包的发送时长，T
+    + 每组数据包的接收时长，t
+    + 两组数据包大小之差，G
++ OverUse Estimator
+  + 利用Inter Arrival模块的计算结果，通过**卡尔曼滤波器**估算出下一时刻发送队列的增长趋势
++ OverUse Detector
+  + 用于检测当前网络的拥塞状态
++ AIMD Rate Controller（**Additive-Increase/Multiplication-Decrease**，慢加快减机制）
+  + 用于计算发送码流大小
+
 ##### 10.1.2、Transport-CC
+
++ 与上面算法的2个区别
+  + 一是将算法从接收端到了发送端，使得评估和控制合为一体，代码的处理更简洁方便
+  + 二是从卡尔曼滤波器找成**TrendLine滤波器**（最小二乘法滤波器、通过斜率增大或减小来判断当前网络的拥塞情况）
++ GoogCcNetworkController
++ SendSideBandwidthEstimation
++ DelayBaseBwe
++ Trendline
 
 ##### 10.1.3、基于丢包的拥塞评估算法原理
 
++ `SendSideBandwidthEstimation::UpdateEstimate`
+  + 丢包低于2%，码率可以增加，一般增加8%
+  + 丢包在2%-10%，码率不变
+  + 丢包在10%，码率要降低（1-0.5*丢包率）乘 当前码率
+
 ##### 10.1.4、WebRTC拥塞控制流程
 
++ 发送端启动时设置一个初始带宽
++ 发送模块将音视频数据发送给远端
++ 远端收到后，定期向发送端反馈RTCP报文
++ 当发送端的接收模块收到RTCP反馈报文后，将数据交由RTCP解析模块进行解析，解析后的数据再交由**拥塞评估模块**（Transport-CC）计算
++ 有了评估带宽，一方面通知编码器，让编码器控制其码流大小，另一方面告之Pacer模块，控制码流的发送速度
++ 两方面的限制，最终发送码流不会超过带宽的估算值
+
 #### 10.2、拥塞控制算法比较
+
++ RMCAT（RTP Media Congestion Avoidance Techniques），
++ NADA（Network Assisted Dynamic Adaptation），思科
++ SCReAM（Self Clocked Rate Adaptation for Multimedia），爱立信
+
+##### 10.2.1、拥塞控制的准确性
+
+##### 10.2.2、与TCP连接并存时的公平性
+
+##### 10.2.3、同种类型连接的公平性
+
+##### 10.2.4、拥塞控制算法在丢包情况下的表现
 
 #### 10.3、小结
 
