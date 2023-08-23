@@ -1,6 +1,11 @@
 ## 《算法4th》
 
 + 书上的chap1基础是java，我尽量想用C++给整一下
++ chap2
+  + 2.1、初级排序（选择【简单选择、堆】、插入【直接插入，shell】、交换【冒泡、快排】），**快排、堆**单独弄一习来讲了
+  + 2.2、归并排序（自顶向下、自底向上，**跟单次的merge实现没关系**，无非是怎么组织`merge-sort()`而已）
+  + 2.3、快排
+  + 2.4、堆（优先队列）
 
 ### chap1、基础
 
@@ -168,10 +173,38 @@ void InsertSort(vector<int> nums){
 + 使数组中任意间隔为h的元素都是有序的，**插入排序中移动元素的距离由1改为h即可**
 + 问题：**如何选择递增子序列？**
 
+```java
+public static void sort(Comparable[] a){
+    //将a[]按升序排列
+    int N = a.length;
+    int h = 1;
+    while(h<N/3) h=3*h+1;//这是啥意思？lionel
+    while(h>=1){
+        //将数组变为h有序
+        for(int i=h;i<N;i++){
+            for(int j=i;j>=h &&less(a[j],a[j-h]);j-=h){
+                exch(a,j,j-h);
+            }
+        }
+        h=h/3;  //lionel，为啥要除以3？
+    }
+}
+```
+
+
+
 ##### 答疑&练习&提高题
+
++ 为什么有这么多排序算法？
++ 2.1.2、在选择排序中，一个元素最多可能会被交换多少次？平均可能会被交换多少次？
 
 + 2.1.19、希尔排序的最坏情况
 + 2.1.20、希尔排序的最好情况
++ 2.1.35、**不均匀的概率分布**。编写一个测试用例，使用非均匀分布的概率来生成随机排列的数据，包括：，评估并验证这些输入数据对本节讨论的算法的性能的影响
+  + 高斯分布
+  + 泊松分布
+  + 几何分布
+  + 离散分布
 
 #### 2.2、归并排序
 
@@ -182,6 +215,28 @@ void InsertSort(vector<int> nums){
 
 + 创建一个数组，将原数组从小到大放入。
 
+```java
+public static void merge(Compable[] a, int lo, int mid, int high){
+    //将a[lo...mid]和a[mid+1...hi]归并
+    int i=lo,j=mid+1;
+    for(int k=lo;k<=hi;k++)
+        aux[k]=a[k];//临时弄了个数组
+    
+    for(int k=lo;k<=hi;k++){ //lionel，没太懂啥意思
+        if(i>mid)
+            a[k]=aux[j++];
+        else if(j>hi)
+            a[k]=aux[i++];
+        else if(less(aux[j],aux[i]))
+            a[k]=aux[j++];
+        else
+            a[k]=aux[i++];
+    }
+}
+```
+
+
+
 ##### 2.2.2、自顶向下的归并排序
 
 + *没理解*
@@ -189,6 +244,23 @@ void InsertSort(vector<int> nums){
 ##### 2.2.3、自底向上的归并排序
 
 + *没理解*
+
+```java
+public class MergeBu{
+    private static Comparable[]  aux;//归并所需的辅助数组
+    
+    public static void sort(Comparable[] a){
+        //进行lgN次两两归并
+        int N=a.length;
+        aux=new Comparable[N];
+        for(int sz=1;sz<N;sz=sz+sz)  //sz:子数组大小
+            for(int lo=0;lo<N-sz;lo+=sz+sz) //lo:子数组索引
+                merge(a,lo,lo+sz-1,Math.min(lo+sz+sz-1,N-1));
+    }
+}
+```
+
+
 
 ##### 2.2.4、排序算法的复杂度
 
