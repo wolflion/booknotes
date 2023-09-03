@@ -94,6 +94,8 @@
     <li class="toctree-l3"><a class="reference internal" href="#21">2.1、数据结构的概念</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#22">2.2、线性结构</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#221">2.2.1、线性表</a>
         <ul>
     <li class="toctree-l4"><a class="reference internal" href="#224">2.2.4、串</a>
     </li>
@@ -134,8 +136,18 @@
     <li class="toctree-l2"><a class="reference internal" href="#chap3">chap3、蛮力</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#32">3.2、排序问题</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#321">3.2.1、选择排序</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#322">3.2.2、冒泡（交换）</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#33">3.3、查找问题</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#331">3.3.1、顺序查找</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#34">3.4、组合问题</a>
     </li>
@@ -146,14 +158,30 @@
     <li class="toctree-l2"><a class="reference internal" href="#chap4">chap4、分治</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#42">4.2、排序问题</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#421">4.2.1、归并排序</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#422">4.2.2、快速排序</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#43">4.3、查找问题</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#431">4.3.1、折半查找</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#44">4.4、组合问题</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#45">4.5、几何问题</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#_2">《趣学算法》一书中的题</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#_3">本节讲过的题</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#_4">本节没有讲的</a>
+    </li>
+        </ul>
     </li>
         </ul>
     </li>
@@ -161,6 +189,10 @@
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#52">5.2、图问题</a>
         <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#521dijkstra">5.2.1、单源最短路径问题：Dijkstra算法</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#522primkruskal">5.2.2、最小生成树问题：prim算法和Kruskal算法</a>
+    </li>
     <li class="toctree-l4"><a class="reference internal" href="#523">5.2.3、哈夫曼树</a>
     </li>
         </ul>
@@ -175,9 +207,33 @@
     </li>
         </ul>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_5">《趣学算法》一书中的题</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#_6">本节讲过的题</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#_7">本节没讲过的</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#ref">ref</a>
+    </li>
         </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#chap6">chap6、动态规划</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#_8">其它书籍</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#63">6.3、图问题中的动态规划算法</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#64">6.4、组合问题中的动态规划算法</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#64101">6.4.1、0/1背包问题</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#642">6.4.2、最长公共子序列问题</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#chap7">chap7、回溯</a>
         <ul>
@@ -191,7 +247,7 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#chap5_1">《趣学算法》chap5中的题</a>
         <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#55n">5.5、N皇后问题</a>
+    <li class="toctree-l4"><a class="reference internal" href="#_9">本节讲过的题</a>
     </li>
         </ul>
     </li>
@@ -266,7 +322,7 @@
               </ul>
               <p class="caption"><span class="caption-text">刷题</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer/">《剑指offer2nd》</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer2nd/">《剑指offer2nd》</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/">《剑指offer专项突破》</a>
                   </li>
@@ -320,8 +376,19 @@
 </ul>
 </li>
 <li>各种整理<ul>
-<li>绪论：<strong>组合问题</strong>怎么定义？</li>
-<li>贪心：用在 <strong>图</strong>（最短距离）和<strong>组合</strong>（背包问题）</li>
+<li>一、绪论：<strong>组合问题</strong>怎么定义？</li>
+<li>四、分治：排序（归并、快排），查找（二分、），组合（）<ul>
+<li><em>感觉分治还是需要稍微理解下的，就是什么时候用分治</em>，感觉题型还是蛮多变的，<em>分治，是不是就必须要递归？</em></li>
+</ul>
+</li>
+<li>五、贪心：用在 <strong>图</strong>（最短距离）和<strong>组合</strong>（背包问题）<ul>
+<li>整理感觉比较简单（尤其在<strong>组合</strong>），<strong>图方面的</strong>，需要再强化学习一下</li>
+</ul>
+</li>
+<li>六、动规：用在<strong>查找</strong>，<strong>图</strong>，<strong>组合</strong>（背包、最长公共子序列）<ul>
+<li>最长公共子序列，这个我应该OK了，<em>尝试刷些题目看看</em></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -348,7 +415,47 @@
 <h3 id="chap2">chap2、基本数据结构<a class="headerlink" href="#chap2" title="Permanent link">&para;</a></h3>
 <h4 id="21">2.1、数据结构的概念<a class="headerlink" href="#21" title="Permanent link">&para;</a></h4>
 <h4 id="22">2.2、线性结构<a class="headerlink" href="#22" title="Permanent link">&para;</a></h4>
-<p>2.2.1、线性表</p>
+<h4 id="221">2.2.1、线性表<a class="headerlink" href="#221" title="Permanent link">&para;</a></h4>
+<ul>
+<li>2020-11-05就写过笔记，<strong>有哪些常用的ADT方法</strong> 【知道思路后再写代码（集合的并、删除重复元素）】</li>
+<li>顺序存储【<strong>静态分配、动态分配</strong>】<ul>
+<li>顺序线性表逆置</li>
+<li>找最大最小值和位置</li>
+</ul>
+</li>
+</ul>
+<pre class="highlight"><code class="language-cpp">#define ListSize 100
+typedef int DataType;
+typedef struct {
+    DataType data[ListSize]; //分配的大小  【等价于 DataType *elem;】
+    int length; //实际存储个数
+}SeqList;</code></pre>
+<ul>
+<li>链式存储（单链表）<ul>
+<li><strong>先整节点</strong></li>
+</ul>
+</li>
+</ul>
+<pre class="highlight"><code class="language-cpp">//节点,包含{元素和指针}
+typedef struct node{
+    DataType data;
+    struct node *next;
+}ListNode;
+
+typedef ListNode* LinkList;//是不是就指向头节点了？</code></pre>
+<ul>
+<li>双向链表<ul>
+<li><strong>节点的差别</strong>，多了一个指针</li>
+</ul>
+</li>
+</ul>
+<pre class="highlight"><code class="language-cpp">//节点,包含{元素和指针}
+typedef struct dlnode{
+    DataType data;
+    struct dlnode *next,*prior;
+}DLNode;
+
+typedef DLNode* DoubleLinkList;//lionel，是不是这样？</code></pre>
 <p>2.2.2、栈</p>
 <p>2.2.3、队列</p>
 <h5 id="224">2.2.4、串<a class="headerlink" href="#224" title="Permanent link">&para;</a></h5>
@@ -400,8 +507,31 @@
 <h5 id="241">2.4.1、图的定义<a class="headerlink" href="#241" title="Permanent link">&para;</a></h5>
 <h5 id="242">2.4.2、图的存储结构<a class="headerlink" href="#242" title="Permanent link">&para;</a></h5>
 <ul>
-<li>1、矩阵存储</li>
-<li>2、邻接表</li>
+<li>2022-08-09写过笔记，<em>因为也消化了，只是后面没用，也许就忘记了</em></li>
+</ul>
+<ul>
+<li>1、矩阵存储<ul>
+<li>描述<ul>
+<li>2维数组，是边就写1，或者写<strong>权值</strong></li>
+<li>行是：v0，v1，v2，v3，v4</li>
+<li>列是：v0，v1，v2，v3，v4</li>
+<li>v0到v0，肯定就0，v0到v1是不是有边，<strong>有边就1，或者权值</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>2、邻接表（也就是<strong>链接存储</strong>）<ul>
+<li>描述<ul>
+<li>v0连了谁，就指向谁，一直到结束</li>
+<li>v1连了谁</li>
+<li>v2连了谁</li>
+<li>v3连了谁</li>
+<li>v4连了谁</li>
+</ul>
+</li>
+<li>如果有向图，<strong>出边</strong>（邻接表），<strong>入边</strong>（逆邻接表）</li>
+</ul>
+</li>
 <li>3、带权图</li>
 </ul>
 <h5 id="243">2.4.3、图的遍历<a class="headerlink" href="#243" title="Permanent link">&para;</a></h5>
@@ -445,9 +575,57 @@
 </ul>
 <p>3.1、算法设计思想</p>
 <h4 id="32">3.2、排序问题<a class="headerlink" href="#32" title="Permanent link">&para;</a></h4>
+<h5 id="321">3.2.1、选择排序<a class="headerlink" href="#321" title="Permanent link">&para;</a></h5>
+<ul>
+<li>思想：从第一个元素开始扫描，找到最小的，与第一个位置的元素交换</li>
+<li>过程：84，53，68，96，32，38，16进行选择排序<ul>
+<li>第一趟：找到最小的16，与第一个位置交换，即16，53，68，96，32，38，84</li>
+<li>第二躺：<strong>在剩下的里面</strong>，找到最小的32，与剩下的第一个位置交换，16，32，68，96，53，38，84</li>
+<li>以此类推</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>伪代码，<em>并没有完全理解，lionel</em></li>
+</ul>
+<pre class="highlight"><code class="language-cpp">SELECTION-SORT(A)
+    for i&lt;-0 to n-2   //不太懂的是这个，为啥只到n-2次，lionel
+        do min = i
+            for j&lt;- i+1 to n-1   //lionel，这个表示遍历完剩下的，找到最小的下标，先记下来，最后统一交换【为了减少交换次数】
+                do if A[j] &lt; A[min]
+                    then min &lt;- j
+            SWAP(A[i],A[min])</code></pre>
+<h5 id="322">3.2.2、冒泡（交换）<a class="headerlink" href="#322" title="Permanent link">&para;</a></h5>
+<ul>
+<li>思想：从第一个元素开始，不断比较相邻的两个元素</li>
+<li>过程：84，53，68，96，32，38，16进行冒泡排序</li>
+<li>伪代码</li>
+</ul>
+<pre class="highlight"><code class="language-cpp">SELECTION-SORT(A)
+    for i&lt;-0 to n-2
+        do for j&lt;-0 to n-2-i  //lionel，这个不太理解
+            do if A[j+1] &lt; A[j]
+                then SWAP(A[j+1],A[j])</code></pre>
 <h4 id="33">3.3、查找问题<a class="headerlink" href="#33" title="Permanent link">&para;</a></h4>
+<h5 id="331">3.3.1、顺序查找<a class="headerlink" href="#331" title="Permanent link">&para;</a></h5>
+<ul>
+<li>思想：</li>
+<li>过程：</li>
+<li>伪代码：</li>
+</ul>
+<pre class="highlight"><code class="language-cpp">SEQUENTIAL-SEARCH(A)
+    for i&lt;-0 to n-1
+        do if A[i]=T
+            then return i
+    return -1</code></pre>
+<p>3.3.2、串匹配</p>
 <h4 id="34">3.4、组合问题<a class="headerlink" href="#34" title="Permanent link">&para;</a></h4>
+<p>3.4.1、旅行商问题</p>
+<p>3.4.2、背包问题</p>
+<p>3.4.3、任务分配问题</p>
 <h4 id="35">3.5、几何问题<a class="headerlink" href="#35" title="Permanent link">&para;</a></h4>
+<p>3.5.1、最近点对问题</p>
+<p>3.5.2、凸包问题</p>
 <p>3.6、本章小结</p>
 <p>3.7、习题</p>
 <h3 id="chap4">chap4、分治<a class="headerlink" href="#chap4" title="Permanent link">&para;</a></h3>
@@ -456,12 +634,87 @@
 </ul>
 <p>4.1、算法设计思想</p>
 <h4 id="42">4.2、排序问题<a class="headerlink" href="#42" title="Permanent link">&para;</a></h4>
+<h5 id="421">4.2.1、归并排序<a class="headerlink" href="#421" title="Permanent link">&para;</a></h5>
+<ul>
+<li>思想</li>
+<li>举例：对5，3，7，2，4，8，6，1进行归并排序，写出其主要操作过程</li>
+</ul>
+<ul>
+<li>伪代码</li>
+</ul>
+<pre class="highlight"><code class="language-cpp">//封装为2个函数</code></pre>
+<h5 id="422">4.2.2、快速排序<a class="headerlink" href="#422" title="Permanent link">&para;</a></h5>
+<ul>
+<li>思想</li>
+<li>举例：对5，3，7，2，4，8，6，1进行快速排序，写出其主要操作过程</li>
+</ul>
+<ul>
+<li>伪代码</li>
+</ul>
+<pre class="highlight"><code class="language-cpp">//先高层，再低层，即封装成1个函数，partition()，再递归
+
+QUICK-SORT(A,l,r)
+    if l&lt;r
+        then s &lt;- PARTITION(A,l,r)
+        QUICK-SORT(A,l,s-1)
+        QUICK-SORT(A,s-1,r)
+
+//再求这个
+PARTITION(A,l,r)
+i&lt;-l+1
+j&lt;-r
+k&lt;-A[l]  //取第一个为基准
+while i&lt;j
+    do while i&lt;r and A[i]&lt;k  //lionel，也好理解，左边的全部小于k时，把i++
+        do i&lt;-i+1
+       while A[j]&gt;k //右边的全大于k的时候，j++
+        do j&lt;-j-1
+       if i&lt;j         //lionel,这个不太理解了，这个if是啥意思？【遇到了第1个大于或小于它的就交换，不然后面的永远执行不下去了】
+        then SWAP(A[i],A[j])
+SWAP(A[l],A[j])//lionel，这个地方是交换基准值
+return j</code></pre>
 <h4 id="43">4.3、查找问题<a class="headerlink" href="#43" title="Permanent link">&para;</a></h4>
+<h5 id="431">4.3.1、折半查找<a class="headerlink" href="#431" title="Permanent link">&para;</a></h5>
+<ul>
+<li>伪代码</li>
+</ul>
+<pre class="highlight"><code class="language-cpp">BINARY-SEARCH(A,T)
+l&lt;-0
+r&lt;-n-1
+    while l&lt;=r  //lionel,这是核心，我一般会忘记用while
+        do m &lt;- (l+r)/2
+            if T = A[m]
+                then return m
+            else if T &lt; A[m]
+                then r&lt;-m-1   //在数组位置m的左边
+            else l&lt;-m+1   //在数组位置m的右边
+return -1</code></pre>
+<p>4.3.2、二叉树遍历算法</p>
 <h4 id="44">4.4、组合问题<a class="headerlink" href="#44" title="Permanent link">&para;</a></h4>
+<p>4.4.1、最大子段和问题</p>
+<p>4.4.2、棋盘覆盖问题</p>
 <h4 id="45">4.5、几何问题<a class="headerlink" href="#45" title="Permanent link">&para;</a></h4>
+<p>4.5.1、最近点对问题</p>
+<p>4.5.2、凸包问题</p>
 <p>4.6、本章小结</p>
 <p>4.7、习题</p>
 <h4 id="_2">《趣学算法》一书中的题<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
+<h5 id="_3">本节讲过的题<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h5>
+<ul>
+<li>3.2、二分搜索（查找）<ul>
+<li><em>有个递归的写法，自己不太会呢</em></li>
+</ul>
+</li>
+<li>3.3、合并排序</li>
+<li>3.4、快速排序<ul>
+<li><em>partitaion()的实现方法有区别？</em></li>
+</ul>
+</li>
+</ul>
+<h5 id="_4">本节没有讲的<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h5>
+<ul>
+<li>3.5、大整数数乘法</li>
+</ul>
 <h3 id="chap5">chap5、贪心<a class="headerlink" href="#chap5" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>排序、查找、数值、几何</strong>不用贪心</li>
@@ -470,6 +723,29 @@
 <p>5.1.1、贪心算法的设计思想</p>
 <p>5.1.2、贪心算法的求解过程</p>
 <h4 id="52">5.2、图问题<a class="headerlink" href="#52" title="Permanent link">&para;</a></h4>
+<h5 id="521dijkstra">5.2.1、单源最短路径问题：Dijkstra算法<a class="headerlink" href="#521dijkstra" title="Permanent link">&para;</a></h5>
+<ul>
+<li>伪代码</li>
+</ul>
+<pre class="highlight"><code class="language-cpp">DIJKSTRA(n,v,V,weight){
+S&lt;-{v}  //v是顶点集，S是结果集
+for i &lt;- 1 to n
+    do D[i] &lt;- weight[v][i]  //D是各顶点
+        P[i] &lt;- v
+for i &lt;- 1 to n-1
+    do FIND(V-S,j)
+        if D[j] =无穷大 then break
+        S &lt;- S 并 {j}
+        for all k 属于 V-S
+            do if D[k]&gt;D[j]+weight[j][k]
+                then D[k]&lt;-D[j]+weight[j][k]
+                    P[k] &lt;- j
+}</code></pre>
+<h5 id="522primkruskal">5.2.2、最小生成树问题：prim算法和Kruskal算法<a class="headerlink" href="#522primkruskal" title="Permanent link">&para;</a></h5>
+<ul>
+<li>prim算法，O(n平方)</li>
+<li>Kruskal算法，O(mlogm)</li>
+</ul>
 <h5 id="523">5.2.3、哈夫曼树<a class="headerlink" href="#523" title="Permanent link">&para;</a></h5>
 <ul>
 <li><em>lionel，这个逻辑我会，但代码写不出来</em></li>
@@ -519,7 +795,65 @@
 </ul>
 <p>5.4、本章小结</p>
 <p>5.5、习题</p>
+<h4 id="_5">《趣学算法》一书中的题<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
+<h5 id="_6">本节讲过的题<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h5>
+<ul>
+<li>2.3、背包问题</li>
+<li>2.4、会议安排</li>
+<li>2.5、最短路径</li>
+<li>2.6、哈夫曼编码</li>
+<li>2.7、最小生成树</li>
+</ul>
+<h5 id="_7">本节没讲过的<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h5>
+<ul>
+<li>2.2、最优装载问题<ul>
+<li>感觉是跟<strong>背包问题</strong>一样</li>
+</ul>
+</li>
+</ul>
+<h4 id="ref">ref<a class="headerlink" href="#ref" title="Permanent link">&para;</a></h4>
+<ul>
+<li><a href="https://www.cnblogs.com/Pinging/p/7927499.html">算法复习周------“贪心问题之‘最优装载与背包问题’”</a></li>
+</ul>
 <h3 id="chap6">chap6、动态规划<a class="headerlink" href="#chap6" title="Permanent link">&para;</a></h3>
+<h4 id="_8">其它书籍<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h4>
+<ul>
+<li>2022-08-26，看了《算法图解》chap6的内容（背包、最长公共子串），<em>当时并没有完全理解</em>【要想一下 背包 问题，感觉那个二维图，我还是没真的懂】</li>
+</ul>
+<p>6.1、算法设计思想</p>
+<p>6.2、查找问题中的动态规划算法</p>
+<h4 id="63">6.3、图问题中的动态规划算法<a class="headerlink" href="#63" title="Permanent link">&para;</a></h4>
+<p>6.3.1、多段图的最短路径问题</p>
+<p>6.3.2、多源最短路径问题：Floyd算法</p>
+<h4 id="64">6.4、组合问题中的动态规划算法<a class="headerlink" href="#64" title="Permanent link">&para;</a></h4>
+<h5 id="64101">6.4.1、0/1背包问题<a class="headerlink" href="#64101" title="Permanent link">&para;</a></h5>
+<h5 id="642">6.4.2、最长公共子序列问题<a class="headerlink" href="#642" title="Permanent link">&para;</a></h5>
+<ul>
+<li>最长公共子序列（Longest Common Subsequence）LCS</li>
+<li>我的思路：<ul>
+<li>两层for循环，二维数组L[i,j]分别代表a串，b串的长度组成的数组，初始化为0</li>
+<li>如果相等就好说，<code>L[i,j]的值=L[i-1,j-1]的值+1</code>，即可</li>
+<li>要是不相等，就取<strong>左边或上面的那个最大值</strong><code>L[i,j] = max(L[i-1,j],L[i,j-1])</code>，<em>当时看了没懂啥意思，回来总结时懂了</em></li>
+</ul>
+</li>
+<li>伪代码</li>
+</ul>
+<pre class="highlight"><code class="language-cpp">LCS(L,a,b,n,m)
+    for i &lt;- 0 to n
+        do L[i,0] &lt;- 0
+    for j &lt;- 0 to m
+        do L[0,j] &lt;- 0   //为什么不直接2层for循环给 n*m 的
+
+    //这时开始2层for循环了
+    for i &lt;- 1 to m 
+        do for j &lt;- 1 to n
+            do if a[i] = b[j]
+                then L[i,j] = L[i-1,j-1] + 1
+               else
+                L[i,j] = max(L[i-1,j],L[i,j-1]) 
+    return L[n,m] //lionel，这个return到底在哪？   其实无所谓，返回的是数组里面的最后一个值</code></pre>
+<p>6.5、本章小结</p>
+<p>6.6、习题</p>
 <h3 id="chap7">chap7、回溯<a class="headerlink" href="#chap7" title="Permanent link">&para;</a></h3>
 <h4 id="73">7.3、组合问题中的回溯算法<a class="headerlink" href="#73" title="Permanent link">&para;</a></h4>
 <h5 id="73101">7.3.1、0/1背包问题<a class="headerlink" href="#73101" title="Permanent link">&para;</a></h5>
@@ -555,7 +889,10 @@ N_QUEENS()
 <p>7.4、本章小结</p>
 <p>7.5、习题</p>
 <h4 id="chap5_1">《趣学算法》chap5中的题<a class="headerlink" href="#chap5_1" title="Permanent link">&para;</a></h4>
-<h5 id="55n">5.5、N皇后问题<a class="headerlink" href="#55n" title="Permanent link">&para;</a></h5>
+<h5 id="_9">本节讲过的题<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h5>
+<ul>
+<li>5.5、N皇后问题</li>
+</ul>
               
             </div>
           </div><footer>

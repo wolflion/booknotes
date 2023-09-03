@@ -62,103 +62,217 @@
                   </li>
                   <li class="toctree-l1 current"><a class="reference internal current" href="./">《深入应用C++11》</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#part1c11">Part1、C++11改进我们的程序</a>
+    <li class="toctree-l2"><a class="reference internal" href="#chap1c11">chap1、C++11让程序更简洁、更现代</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#chap1c11">chap1、C++11让程序更简洁、更现代</a>
+    <li class="toctree-l3"><a class="reference internal" href="#11">1.1、类型推导</a>
         <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#11">1.1、类型推导</a>
+    <li class="toctree-l4"><a class="reference internal" href="#111auto">1.1.1、auto类型推导</a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#12">1.2、模块的细节改进</a>
+    <li class="toctree-l4"><a class="reference internal" href="#112decltype">1.1.2、decltype关键字</a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#13initializer-list">1.3、列表初始表（initializer list）</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#14for">1.4、基于范围的for循环</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#15stdfunctionbind">1.5、std::function和bind绑定器</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#16lambda">1.6、lambda表达式</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#17tupe">1.7、tupe元组</a>
+    <li class="toctree-l4"><a class="reference internal" href="#113-autodecltype">1.1.3、返回类型后置语法--auto和decltype的结合使用</a>
     </li>
         </ul>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#chap2c11">chap2、使用C++11改进程序性能</a>
+    <li class="toctree-l3"><a class="reference internal" href="#12">1.2、模块的细节改进</a>
         <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#21">2.1、右值引用</a>
+    <li class="toctree-l4"><a class="reference internal" href="#121">1.2.1、模板的右尖括号</a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#22move">2.2、move语义</a>
+    <li class="toctree-l4"><a class="reference internal" href="#122">1.2.2、模板的别名</a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#23forward">2.3、forward和完美转发</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#24emplace_back">2.4、emplace_back减少内存拷贝和移动</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#25unordered-container">2.5、unordered container无序容器</a>
+    <li class="toctree-l4"><a class="reference internal" href="#123">1.2.3、函数模板的默认模板参数</a>
     </li>
         </ul>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#chap3c11">chap3、使用C++11消除重复，提高代码质量</a>
+    <li class="toctree-l3"><a class="reference internal" href="#13initializer-list">1.3、列表初始表（initializer list）</a>
         <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#31type_traits-">3.1、type_traits-类型萃取</a>
+    <li class="toctree-l4"><a class="reference internal" href="#131">1.3.1、统一的初始化</a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#32">3.2、可变参数模板</a>
+    <li class="toctree-l4"><a class="reference internal" href="#132">1.3.2、列表初始化的使用细节</a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#33type_traits">3.3、可变参数模板和type_traits的结合应用</a>
+    <li class="toctree-l4"><a class="reference internal" href="#133">1.3.3、初始化列表</a>
     </li>
         </ul>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#chap4c11">chap4、C++11解决内存泄漏问题</a>
+    <li class="toctree-l3"><a class="reference internal" href="#14for">1.4、基于范围的for循环</a>
         <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#41shared_ptr">4.1、shared_ptr共享的智能指针</a>
+    <li class="toctree-l4"><a class="reference internal" href="#141for">1.4.1、for循环的新用法</a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#42unique_ptr">4.2、unique_ptr共享的智能指针</a>
+    <li class="toctree-l4"><a class="reference internal" href="#142for">1.4.2、基于范围的for循环使用细节</a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#43weak_ptr">4.3、weak_ptr弱引用的智能指针</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#44">4.4、通过智能指针管理第三方库分配的内存</a>
+    <li class="toctree-l4"><a class="reference internal" href="#143for">1.4.3、让基于范围的for循环支持自定义类型</a>
     </li>
         </ul>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#chap5c11">chap5、使用C++11让多线程开发变得简单</a>
+    <li class="toctree-l3"><a class="reference internal" href="#15stdfunctionbind">1.5、std::function和bind绑定器</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#16lambda">1.6、lambda表达式</a>
         <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#51">5.1、线程</a>
+    <li class="toctree-l4"><a class="reference internal" href="#161lambda">1.6.1、lambda表达式的概念和基本用法</a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#52">5.2、互斥量</a>
+    <li class="toctree-l4"><a class="reference internal" href="#162">1.6.2、声明式的编程风格，简洁的代码</a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#53">5.3、条件变量</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#54">5.4、原子变量</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#55call_onceonce_flag">5.5、call_once/once_flag的使用</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#56">5.6、异步操作</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#57async">5.7、线程异步操作函数async</a>
+    <li class="toctree-l4"><a class="reference internal" href="#163">1.6.3、在需要的时间和地点实现闭包，使程序更灵活</a>
     </li>
         </ul>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#chap6c11">chap6、使用C++11中便利的工具</a>
-        <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#61chrono">6.1、处理日期和时间的chrono库</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#62">6.2、数值类型和字符串的相互转换</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#63">6.3、宽窄字符转换</a>
+    <li class="toctree-l3"><a class="reference internal" href="#17tupe">1.7、tupe元组</a>
     </li>
         </ul>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#chap7c11">chap7、C++11的其他特性</a>
+    <li class="toctree-l2"><a class="reference internal" href="#chap2c11">chap2、使用C++11改进程序性能</a>
         <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#71">7.1、委托构造函数和继承构造函数</a>
+    <li class="toctree-l3"><a class="reference internal" href="#21">2.1、右值引用</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#211">2.1.1、&amp;&amp;的特性</a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#72">7.2、原始的字面量</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#73finaloverride">7.3、final和override关键字</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#74">7.4、内存对齐</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#75c11">7.5、C++11新增的便利算法</a>
+    <li class="toctree-l4"><a class="reference internal" href="#212">2.1.2、右值引用优化性能，避免深拷贝</a>
     </li>
         </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#22move">2.2、move语义</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#23forward">2.3、forward和完美转发</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#24emplace_back">2.4、emplace_back减少内存拷贝和移动</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#25unordered-container">2.5、unordered container无序容器</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#26">2.6、总结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap3c11">chap3、使用C++11消除重复，提高代码质量</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#31type_traits-">3.1、type_traits-类型萃取</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#311type_traits">3.1.1、基本的type_traits</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#312type_traits">3.1.2、根据条件选择的type_traits</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#313traits">3.1.3、获取可调用对象返回类型的traits</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#314traits">3.14、根据条件禁用或启用某种或某些类型的traits</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#32">3.2、可变参数模板</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#321">3.2.1、可变参数模板函数</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#322">3.2.2、可变参数模板类</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#323">3.2.3、可变参数模板消除重复代码</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#33type_traits">3.3、可变参数模板和type_traits的结合应用</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#331optional">3.3.1、optional的实现</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#332lazy">3.3.2、惰性求值类lazy的实现</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#333dll">3.3.3、dll帮助类</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#334lambda">3.3.4、lambda链式调用</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#335any">3.3.5、any类的实现</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#336function_traits">3.3.6、function_traits</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#337variant">3.3.7、variant的实现</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#338scopeguard">3.3.8、ScopeGuard</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap4c11">chap4、C++11解决内存泄漏问题</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#41shared_ptr">4.1、shared_ptr共享的智能指针</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#42unique_ptr">4.2、unique_ptr共享的智能指针</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#43weak_ptr">4.3、weak_ptr弱引用的智能指针</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#44">4.4、通过智能指针管理第三方库分配的内存</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap5c11">chap5、使用C++11让多线程开发变得简单</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#51">5.1、线程</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#511">5.1.1、线程的创建</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#512">5.1.2、线程的基本用法</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#52">5.2、互斥量</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#521mutex">5.2.1、独占互斥量mutex</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#522recursive_mutex">5.2.2、递归互斥量recursive_mutex</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#523timed_mutexrecursive_timed_mutex">5.2.3、带超时的互斥量timed_mutex和recursive_timed_mutex</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#53">5.3、条件变量</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#54">5.4、原子变量</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#55call_onceonce_flag">5.5、call_once/once_flag的使用</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#56">5.6、异步操作</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#561future">5.6.1、获取线程函数返回值的类future</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#562promise">5.6.2、协助线程赋值的类promise</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#563package_task">5.6.3、可调用对象的包装类package_task</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#564promisefuturepackage_task">5.6.4、promise、future、package_task三者之间的关系</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#57async">5.7、线程异步操作函数async</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap6c11">chap6、使用C++11中便利的工具</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#61chrono">6.1、处理日期和时间的chrono库</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#614timer">6.1.4、计时器timer</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#62">6.2、数值类型和字符串的相互转换</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#63">6.3、宽窄字符转换</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap7c11">chap7、C++11的其他特性</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#71">7.1、委托构造函数和继承构造函数</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#711">7.1.1、委托构造函数</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#712">7.1.2、继承构造函数</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#72">7.2、原始的字面量</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#73finaloverride">7.3、final和override关键字</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#74">7.4、内存对齐</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#75c11">7.5、C++11新增的便利算法</a>
     </li>
         </ul>
     </li>
@@ -244,7 +358,7 @@
               </ul>
               <p class="caption"><span class="caption-text">刷题</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer/">《剑指offer2nd》</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer2nd/">《剑指offer2nd》</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/">《剑指offer专项突破》</a>
                   </li>
@@ -290,12 +404,17 @@
                 <h2 id="c11">《深入应用C++11》<a class="headerlink" href="#c11" title="Permanent link">&para;</a></h2>
 <ul>
 <li>从2019年左右就开始看了，没有真正完全看掉啊，都是整个半拉子工程</li>
+<li>Part1、C++11改进我们的程序（1-7章）<ul>
+<li>chap3、类型萃取和可变参数模板，<em>确实，目前不太熟呢</em></li>
+<li>chap5、多线程，我也确实投了，<em>但总觉得没有入门</em>，光记住api没用啊</li>
 </ul>
-<h3 id="part1c11">Part1、C++11改进我们的程序<a class="headerlink" href="#part1c11" title="Permanent link">&para;</a></h3>
-<h4 id="chap1c11">chap1、C++11让程序更简洁、更现代<a class="headerlink" href="#chap1c11" title="Permanent link">&para;</a></h4>
-<h5 id="11">1.1、类型推导<a class="headerlink" href="#11" title="Permanent link">&para;</a></h5>
+</li>
+<li>Part2、（8-16章）</li>
+</ul>
+<h3 id="chap1c11">chap1、C++11让程序更简洁、更现代<a class="headerlink" href="#chap1c11" title="Permanent link">&para;</a></h3>
+<h4 id="11">1.1、类型推导<a class="headerlink" href="#11" title="Permanent link">&para;</a></h4>
+<h5 id="111auto">1.1.1、auto类型推导<a class="headerlink" href="#111auto" title="Permanent link">&para;</a></h5>
 <ul>
-<li>1.1.1、auto类型推导<ul>
 <li>与函数模板参数的自动推导有相似之外，<strong>但auto不能用于函数参数的</strong></li>
 <li>两条规则：<ul>
 <li>不声明为指针或引用时，auto的推导结果和初始化表达式抛弃引用和cv限定符后类型一致</li>
@@ -304,8 +423,6 @@
 </li>
 <li>auto的限制</li>
 <li>什么时候用auto</li>
-</ul>
-</li>
 </ul>
 <pre class="highlight"><code class="language-cpp">auto x = 5; // int，**这里const被丢弃了**
 auto pi = new auto(1); // int*，这里的auto(1)，被推导为new int(1)
@@ -324,14 +441,12 @@ auto f = e; //f被推导为int
 //**auto与引用（指针）结合时，auto的推导将保留表达式的const属性
 const auto&amp; g = x; //g类的类型是const it&amp;， auto 为int
 auto&amp; h = g; //h类型为int&amp;，*这里写的是const int&amp;*</code></pre>
+<h5 id="112decltype">1.1.2、decltype关键字<a class="headerlink" href="#112decltype" title="Permanent link">&para;</a></h5>
 <ul>
-<li>1.1.2、decltype关键字<ul>
 <li><code>decltype(exp)</code>推导规则<ul>
 <li>1、exp是标识符、类访问表达式，和exp类型一致</li>
 <li>2、exp是函数调用，与返回值的类型一致</li>
 <li>3、其他情况，exp是个左值，是<strong>exp类型的左值引用</strong>，否则，与exp类型一致</li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
@@ -345,59 +460,54 @@ decltype(i) j = y; //j-&gt;const int&amp;
 const decltype(z) *p= &amp;z;//*p-&gt;const int *
 decltype(z) *pi = &amp;z; //*pi-&gt;int
 decltype(pi)*pp = &amp;pi;//*pp-&gt;int*, pp-&gt;int**</code></pre>
+<h5 id="113-autodecltype">1.1.3、返回类型后置语法--auto和decltype的结合使用<a class="headerlink" href="#113-autodecltype" title="Permanent link">&para;</a></h5>
+<h4 id="12">1.2、模块的细节改进<a class="headerlink" href="#12" title="Permanent link">&para;</a></h4>
+<h5 id="121">1.2.1、模板的右尖括号<a class="headerlink" href="#121" title="Permanent link">&para;</a></h5>
 <ul>
-<li>1.1.3、返回类型后置语法--auto和decltype的结合使用</li>
-</ul>
-<h5 id="12">1.2、模块的细节改进<a class="headerlink" href="#12" title="Permanent link">&para;</a></h5>
-<ul>
-<li>1.2.1、模板的右尖括号<ul>
 <li><code>Foo&lt;A&lt;int&gt;&gt;::type xx;//编译出错</code>，C++98/03会把<code>&gt;&gt;</code>解析成<strong>右移操作符</strong></li>
 </ul>
-</li>
-<li>1.2.2、模板的别名<ul>
+<h5 id="122">1.2.2、模板的别名<a class="headerlink" href="#122" title="Permanent link">&para;</a></h5>
+<ul>
 <li><code>typedef</code>无法重定义模板，<strong>使用了<code>using</code></strong>。</li>
 </ul>
-</li>
-<li>1.2.3、函数模板的默认模板参数<ul>
+<h5 id="123">1.2.3、函数模板的默认模板参数<a class="headerlink" href="#123" title="Permanent link">&para;</a></h5>
+<ul>
 <li>C++98/03不支持<code>template &lt;typename T = int&gt;  void func(){cout&lt;&lt;"hello";}</code></li>
 </ul>
-</li>
-</ul>
-<h5 id="13initializer-list">1.3、列表初始表（initializer list）<a class="headerlink" href="#13initializer-list" title="Permanent link">&para;</a></h5>
+<h4 id="13initializer-list">1.3、列表初始表（initializer list）<a class="headerlink" href="#13initializer-list" title="Permanent link">&para;</a></h4>
 <ul>
-<li>0<ul>
-<li></li>
+<li>0</li>
 </ul>
-</li>
-<li>1.3.1、统一的初始化<ul>
+<ul>
+<li>
+<h5 id="131">1.3.1、统一的初始化<a class="headerlink" href="#131" title="Permanent link">&para;</a></h5>
+<ul>
 <li>C++1.0（98/03）里，普通数组和POD类类型，用的是列表初始化，即<code>{}</code>，<code>int a[2] ={1,2};</code></li>
 <li><strong>C++11中，可以直接在变量名后面直接跟上初始化列表，来进行对象的初始化</strong>。</li>
 <li><code>std::initializer_list&lt;int&gt;</code>作为函数参数类型，可以接收任意长度的初始化列表</li>
 </ul>
-</li>
-<li>1.3.2、列表初始化的使用细节</li>
-<li>1.3.3、初始化列表<ul>
+<h5 id="132">1.3.2、列表初始化的使用细节<a class="headerlink" href="#132" title="Permanent link">&para;</a></h5>
+<h5 id="133">1.3.3、初始化列表<a class="headerlink" href="#133" title="Permanent link">&para;</a></h5>
+<ul>
 <li>任意长度的初始化列表</li>
 <li>防止类型收窄</li>
 </ul>
 </li>
 </ul>
-<h5 id="14for">1.4、基于范围的for循环<a class="headerlink" href="#14for" title="Permanent link">&para;</a></h5>
+<h4 id="14for">1.4、基于范围的for循环<a class="headerlink" href="#14for" title="Permanent link">&para;</a></h4>
+<h5 id="141for">1.4.1、for循环的新用法<a class="headerlink" href="#141for" title="Permanent link">&para;</a></h5>
 <ul>
-<li>1.4.1、for循环的新用法<ul>
 <li><code>vector&lt;int&gt;arr; for(char n: arr){}</code></li>
 </ul>
-</li>
-<li>1.4.2、基于范围的for循环使用细节<ul>
+<h5 id="142for">1.4.2、基于范围的for循环使用细节<a class="headerlink" href="#142for" title="Permanent link">&para;</a></h5>
+<ul>
 <li><em>在容器中，相对于普通的for那种</em>，所以叫<strong>基于范围的</strong></li>
 </ul>
-</li>
-<li>1.4.3、让基于范围的for循环支持自定义类型<ul>
+<h5 id="143for">1.4.3、让基于范围的for循环支持自定义类型<a class="headerlink" href="#143for" title="Permanent link">&para;</a></h5>
+<ul>
 <li><em>这个点要搞一下，lionel，我遇到过这类问题</em></li>
 </ul>
-</li>
-</ul>
-<h5 id="15stdfunctionbind">1.5、std::function和bind绑定器<a class="headerlink" href="#15stdfunctionbind" title="Permanent link">&para;</a></h5>
+<h4 id="15stdfunctionbind">1.5、std::function和bind绑定器<a class="headerlink" href="#15stdfunctionbind" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>可调用对象（Callable Objects）</strong><ul>
 <li>函数指针</li>
@@ -413,28 +523,26 @@ decltype(pi)*pp = &amp;pi;//*pp-&gt;int*, pp-&gt;int**</code></pre>
 </li>
 <li>std::bind，将可调用对象与其参数一起进行绑定</li>
 </ul>
-<h5 id="16lambda">1.6、lambda表达式<a class="headerlink" href="#16lambda" title="Permanent link">&para;</a></h5>
+<h4 id="16lambda">1.6、lambda表达式<a class="headerlink" href="#16lambda" title="Permanent link">&para;</a></h4>
 <ul>
-<li>0<ul>
+<li>0</li>
+</ul>
+<ul>
 <li><strong>函数式编程</strong></li>
 </ul>
-</li>
-</ul>
+<h5 id="161lambda">1.6.1、lambda表达式的概念和基本用法<a class="headerlink" href="#161lambda" title="Permanent link">&para;</a></h5>
 <ul>
-<li>1.6.1、lambda表达式的概念和基本用法<ul>
 <li><code>[captue](params) opt-&gt;ret(body);</code></li>
 <li><strong><code>mutable</code>的lambda表达式</strong>，相当于取消operator()的const。</li>
 <li><strong>lambda表达式的operator()默认是const的</strong></li>
 </ul>
-</li>
-<li>1.6.2、声明式的编程风格，简洁的代码</li>
-<li>1.6.3、在需要的时间和地点实现闭包，使程序更灵活<ul>
+<h5 id="162">1.6.2、声明式的编程风格，简洁的代码<a class="headerlink" href="#162" title="Permanent link">&para;</a></h5>
+<h5 id="163">1.6.3、在需要的时间和地点实现闭包，使程序更灵活<a class="headerlink" href="#163" title="Permanent link">&para;</a></h5>
+<ul>
 <li><em>std_bind的例子没熟悉，lambda的反而熟悉了</em></li>
 <li>一般情况下可以直接用lambda来代替function（函数）。</li>
 </ul>
-</li>
-</ul>
-<h5 id="17tupe">1.7、tupe元组<a class="headerlink" href="#17tupe" title="Permanent link">&para;</a></h5>
+<h4 id="17tupe">1.7、tupe元组<a class="headerlink" href="#17tupe" title="Permanent link">&para;</a></h4>
 <ul>
 <li>固定大小的不同类型值的集合，<strong>泛化的<code>std::pair</code></strong>，可以当结构体使用</li>
 <li><code>tuple&lt;const char*, int&gt; tp = make_tuple(sendPack, nSendSize);   struct{char*p; int len;};//tuple等价于这个结构体</code></li>
@@ -445,8 +553,8 @@ decltype(pi)*pp = &amp;pi;//*pp-&gt;int*, pp-&gt;int**</code></pre>
 <li>tuple_cat连接多个tuple</li>
 <li><strong>如果用tuple来替代3个以上字段的结构体就不太合适了</strong>。</li>
 </ul>
-<h4 id="chap2c11">chap2、使用C++11改进程序性能<a class="headerlink" href="#chap2c11" title="Permanent link">&para;</a></h4>
-<h5 id="21">2.1、右值引用<a class="headerlink" href="#21" title="Permanent link">&para;</a></h5>
+<h3 id="chap2c11">chap2、使用C++11改进程序性能<a class="headerlink" href="#chap2c11" title="Permanent link">&para;</a></h3>
+<h4 id="21">2.1、右值引用<a class="headerlink" href="#21" title="Permanent link">&para;</a></h4>
 <ul>
 <li>0：<strong>看能不能对表达式取地址</strong><ul>
 <li>左值：表达式结束后依然存在的持久对象</li>
@@ -457,51 +565,74 @@ decltype(pi)*pp = &amp;pi;//*pp-&gt;int*, pp-&gt;int**</code></pre>
 </li>
 </ul>
 </li>
-<li>2.1.1、&amp;&amp;的特性<ul>
+</ul>
+<h5 id="211">2.1.1、&amp;&amp;的特性<a class="headerlink" href="#211" title="Permanent link">&para;</a></h5>
+<ul>
 <li>右值不具名，只能通过引用的方式找到它</li>
 <li>&amp;&amp;的总结<ul>
 <li>1、左值和右值是独立于它们的类型的，右值引用类型可能是左值也可能是右值</li>
 </ul>
 </li>
 </ul>
-</li>
-<li>2.1.2、右值引用优化性能，避免深拷贝</li>
-</ul>
-<h5 id="22move">2.2、move语义<a class="headerlink" href="#22move" title="Permanent link">&para;</a></h5>
+<h5 id="212">2.1.2、右值引用优化性能，避免深拷贝<a class="headerlink" href="#212" title="Permanent link">&para;</a></h5>
+<h4 id="22move">2.2、move语义<a class="headerlink" href="#22move" title="Permanent link">&para;</a></h4>
 <ul>
 <li>std::move方法将左值转换为右值，<strong>只有转移，没有内存拷贝</strong>，将一个左值强制转换为一个右值引用，可以通过右值引用使用该值</li>
 <li>强制转换为右值的目的是<strong>为了方便实现移动构造</strong>。</li>
 </ul>
-<h5 id="23forward">2.3、forward和完美转发<a class="headerlink" href="#23forward" title="Permanent link">&para;</a></h5>
+<h4 id="23forward">2.3、forward和完美转发<a class="headerlink" href="#23forward" title="Permanent link">&para;</a></h4>
 <ul>
 <li>一个右值引用参数作为函数的形参，在函数内部再转发该参数的时候，它已经变成一个左值了，并不是它原来的类型了。<strong>完美转发，指在函数模板中，完全按照模板的参数类型（即保持参数的左值、右值特征），将参数传递给函数模板中调用的另外一个函数</strong></li>
 </ul>
-<h5 id="24emplace_back">2.4、emplace_back减少内存拷贝和移动<a class="headerlink" href="#24emplace_back" title="Permanent link">&para;</a></h5>
+<h4 id="24emplace_back">2.4、emplace_back减少内存拷贝和移动<a class="headerlink" href="#24emplace_back" title="Permanent link">&para;</a></h4>
 <ul>
 <li>比<code>push_back</code>，能就地通过参数构造对象，不需要拷贝或者移动内存。<strong>没有构造函数的，会报错</strong></li>
 </ul>
-<h5 id="25unordered-container">2.5、unordered container无序容器<a class="headerlink" href="#25unordered-container" title="Permanent link">&para;</a></h5>
+<h4 id="25unordered-container">2.5、unordered container无序容器<a class="headerlink" href="#25unordered-container" title="Permanent link">&para;</a></h4>
 <ul>
 <li>map和set内部是<strong>红黑树</strong>，插入时自动排序</li>
 <li>无序容器的内部是<strong>散列表</strong>，无序容器的key需要提供hash_value函数</li>
 </ul>
-<h4 id="chap3c11">chap3、使用C++11消除重复，提高代码质量<a class="headerlink" href="#chap3c11" title="Permanent link">&para;</a></h4>
-<h5 id="31type_traits-">3.1、type_traits-类型萃取<a class="headerlink" href="#31type_traits-" title="Permanent link">&para;</a></h5>
+<h4 id="26">2.6、总结<a class="headerlink" href="#26" title="Permanent link">&para;</a></h4>
+<h3 id="chap3c11">chap3、使用C++11消除重复，提高代码质量<a class="headerlink" href="#chap3c11" title="Permanent link">&para;</a></h3>
+<h4 id="31type_traits-">3.1、type_traits-类型萃取<a class="headerlink" href="#31type_traits-" title="Permanent link">&para;</a></h4>
 <ul>
-<li>3.1.1、基本的type_traits<ul>
+<li>type_traits提供了丰富的编译期计算、查询、判断、转换和选择的帮助类，在很多场合中会使用到这些特性。</li>
+<li>可以消除冗长的switch-case或者if-else语句，<strong>type_traits的类型判断功能，在编译期就可以检查出是否是正确的类型</strong></li>
+</ul>
+<h5 id="311type_traits">3.1.1、基本的type_traits<a class="headerlink" href="#311type_traits" title="Permanent link">&para;</a></h5>
+<ul>
 <li>1、简单的type_traits<ul>
 <li><strong>类中定义编译期常量</strong>，通过<code>GetLeftSize::value</code>来获取，C++11无须自定义static const int或enum类型，用<code>std::integral_constant</code>派生</li>
 <li><code>integral_constant</code>类有一个常量成员变量value</li>
+<li><em>lionel，这个用写个例子代码，光用文字肯定自己没有读懂</em></li>
 </ul>
 </li>
-<li>2、类型判断的type_traits</li>
+</ul>
+<pre class="highlight"><code class="language-cpp">//type_trait-integral_constant的实现
+template&lt;class T, T v&gt;
+struct integral_constant{
+    static const T value = v;
+    typedef T value_type;
+    typedef integral_constant&lt;T,v&gt; type;
+    operator value_type() {return value;}
+};
+
+typdef integral_constant&lt;bool, true&gt; true_type;
+typdef integral_constant&lt;bool, false&gt; false_type;</code></pre>
+<ul>
+<li>2、类型判断的type_traits<ul>
+<li><strong>都派生于std::integral_constant</strong>，用<code>std::is_xxx::value</code>是否为true来判断模板类型是否为目标类型</li>
+</ul>
+</li>
 <li>3、判断两个类型之间的关系traits<ul>
 <li>is_same</li>
 <li>is_base_of：判断继承</li>
 <li>is_convertible</li>
 </ul>
 </li>
-<li>4、类型的转换traits</li>
+<li>4、类型的转换traits<ul>
+<li>代码清单3-1.cpp，移除和添加引用的示例</li>
 </ul>
 </li>
 </ul>
@@ -523,87 +654,72 @@ struct integral_constant{
     typedef integral_constant&lt;T,v&gt;type;
     operator value_type(){return value;}
 };</code></pre>
+<h5 id="312type_traits">3.1.2、根据条件选择的type_traits<a class="headerlink" href="#312type_traits" title="Permanent link">&para;</a></h5>
 <ul>
-<li>3.1.2、根据条件选择的type_traits<ul>
 <li><code>template&lt;bool B, class T, class F&gt; struct conditional</code>原型</li>
 <li><code>typde std::conditional&lt;false,int,float&gt;::type B;</code>//因为是false，所以类型是float </li>
 </ul>
-</li>
-<li>3.1.3、获取可调用对象返回类型的traits<ul>
+<h5 id="313traits">3.1.3、获取可调用对象返回类型的traits<a class="headerlink" href="#313traits" title="Permanent link">&para;</a></h5>
+<ul>
 <li><code>std::declval</code>能获取任何类型的临时值</li>
 <li><code>std::result_of&lt;A(int)&gt;::type</code></li>
+<li>代码清单3-2，<code>std::result_of</code>的基本用法</li>
 </ul>
-</li>
-<li>3.14、根据条件禁用或启用某种或某些类型的traits<ul>
+<h5 id="314traits">3.14、根据条件禁用或启用某种或某些类型的traits<a class="headerlink" href="#314traits" title="Permanent link">&para;</a></h5>
+<ul>
 <li><code>std::enable_if</code></li>
 </ul>
-</li>
-</ul>
-<h5 id="32">3.2、可变参数模板<a class="headerlink" href="#32" title="Permanent link">&para;</a></h5>
+<h4 id="32">3.2、可变参数模板<a class="headerlink" href="#32" title="Permanent link">&para;</a></h4>
 <ul>
-<li>
-<p>0：<strong>省略号</strong><code>...</code>的作用</p>
-<ul>
-<li></li>
+<li><strong>省略号</strong><code>...</code>的作用有2个<ul>
+<li>1、声明一个参数包，这个参数包中可以包含0到任意个模板参数</li>
+<li>2、在模板定义的右边，可以将参数包展开成一个一个独立的参数</li>
 </ul>
 </li>
 </ul>
-<ul>
-<li>
-<p>3.2.1、可变参数模板函数</p>
+<h5 id="321">3.2.1、可变参数模板函数<a class="headerlink" href="#321" title="Permanent link">&para;</a></h5>
 <pre class="highlight"><code class="language-cpp">// 要注意 ...的位置，lionel，这个自己项目中写得少
 template&lt;class...T&gt;
 void f(T... args){
     cout&lt;&lt;sizeof...(args)&lt;&lt;endl;
 }</code></pre>
-<ul>
-<li>1、递归函数方式展开参数包</li>
-<li>2、逗号表达式和初始始化列表方式展开参数包</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>
-<p>3.2.2、可变参数模板类</p>
+<p>+ 1、递归函数方式展开参数包
+  + 2、逗号表达式和初始始化列表方式展开参数包</p>
+<h5 id="322">3.2.2、可变参数模板类<a class="headerlink" href="#322" title="Permanent link">&para;</a></h5>
 <ul>
 <li>1、模板递归和特化方式展开参数包</li>
 <li>2、继承方式展开包</li>
 </ul>
-</li>
-</ul>
-<ul>
-<li>
-<p>3.2.3、可变参数模板消除重复代码</p>
+<h5 id="323">3.2.3、可变参数模板消除重复代码<a class="headerlink" href="#323" title="Permanent link">&para;</a></h5>
 <ul>
 <li><em>在chap8中的代码有体现</em></li>
+<li>代码清单3-3，C++98/03实现的打印函数</li>
+<li>代码清单3-4，创建对象的工厂函数</li>
 </ul>
-</li>
-</ul>
-<h5 id="33type_traits">3.3、可变参数模板和type_traits的结合应用<a class="headerlink" href="#33type_traits" title="Permanent link">&para;</a></h5>
+<h4 id="33type_traits">3.3、可变参数模板和type_traits的结合应用<a class="headerlink" href="#33type_traits" title="Permanent link">&para;</a></h4>
+<h5 id="331optional">3.3.1、optional的实现<a class="headerlink" href="#331optional" title="Permanent link">&para;</a></h5>
 <ul>
-<li>3.3.1、optional的实现<ul>
 <li>C++14出现，<strong>解决函数返回无效值的问题</strong>，<code>optional&lt;int&gt;op; if(op) cout&lt;&lt;*op&lt;&lt;endl;</code></li>
+<li>代码清单3-5.cpp，Optional的实现部分代码</li>
 </ul>
-</li>
-<li>3.3.2、惰性求值类lazy的实现</li>
-<li>3.3.3、dll帮助类</li>
-<li>3.3.4、lambda链式调用</li>
-<li>3.3.5、any类的实现</li>
-<li>3.3.6、function_traits<ul>
+<h5 id="332lazy">3.3.2、惰性求值类lazy的实现<a class="headerlink" href="#332lazy" title="Permanent link">&para;</a></h5>
+<h5 id="333dll">3.3.3、dll帮助类<a class="headerlink" href="#333dll" title="Permanent link">&para;</a></h5>
+<h5 id="334lambda">3.3.4、lambda链式调用<a class="headerlink" href="#334lambda" title="Permanent link">&para;</a></h5>
+<h5 id="335any">3.3.5、any类的实现<a class="headerlink" href="#335any" title="Permanent link">&para;</a></h5>
+<h5 id="336function_traits">3.3.6、function_traits<a class="headerlink" href="#336function_traits" title="Permanent link">&para;</a></h5>
+<ul>
 <li>1、实现function_traits的关键技术</li>
 <li>2、function_traits的实现</li>
 </ul>
-</li>
-<li>3.3.7、variant的实现</li>
-<li>3.3.8、ScopeGuard</li>
-</ul>
-<h4 id="chap4c11">chap4、C++11解决内存泄漏问题<a class="headerlink" href="#chap4c11" title="Permanent link">&para;</a></h4>
+<h5 id="337variant">3.3.7、variant的实现<a class="headerlink" href="#337variant" title="Permanent link">&para;</a></h5>
+<h5 id="338scopeguard">3.3.8、ScopeGuard<a class="headerlink" href="#338scopeguard" title="Permanent link">&para;</a></h5>
+<h3 id="chap4c11">chap4、C++11解决内存泄漏问题<a class="headerlink" href="#chap4c11" title="Permanent link">&para;</a></h3>
 <ul>
 <li>头文件<code>#include &lt;memory&gt;</code></li>
 <li>3种智能指针<code>shared_ptr，unique_ptr，weak_ptr</code></li>
 <li>智能指针可以自动删除分配的内存，使用<strong>引用计数</strong>的原理</li>
 </ul>
-<h5 id="41shared_ptr">4.1、shared_ptr共享的智能指针<a class="headerlink" href="#41shared_ptr" title="Permanent link">&para;</a></h5>
+<h4 id="41shared_ptr">4.1、shared_ptr共享的智能指针<a class="headerlink" href="#41shared_ptr" title="Permanent link">&para;</a></h4>
 <ul>
 <li>基本用法<ul>
 <li>初始化：</li>
@@ -643,39 +759,39 @@ void chap04::chap0401shared_ptr() {
 </ul>
 </li>
 </ul>
-<h5 id="42unique_ptr">4.2、unique_ptr共享的智能指针<a class="headerlink" href="#42unique_ptr" title="Permanent link">&para;</a></h5>
-<h5 id="43weak_ptr">4.3、weak_ptr弱引用的智能指针<a class="headerlink" href="#43weak_ptr" title="Permanent link">&para;</a></h5>
-<h5 id="44">4.4、通过智能指针管理第三方库分配的内存<a class="headerlink" href="#44" title="Permanent link">&para;</a></h5>
-<h4 id="chap5c11">chap5、使用C++11让多线程开发变得简单<a class="headerlink" href="#chap5c11" title="Permanent link">&para;</a></h4>
-<h5 id="51">5.1、线程<a class="headerlink" href="#51" title="Permanent link">&para;</a></h5>
+<h4 id="42unique_ptr">4.2、unique_ptr共享的智能指针<a class="headerlink" href="#42unique_ptr" title="Permanent link">&para;</a></h4>
+<h4 id="43weak_ptr">4.3、weak_ptr弱引用的智能指针<a class="headerlink" href="#43weak_ptr" title="Permanent link">&para;</a></h4>
+<h4 id="44">4.4、通过智能指针管理第三方库分配的内存<a class="headerlink" href="#44" title="Permanent link">&para;</a></h4>
+<h3 id="chap5c11">chap5、使用C++11让多线程开发变得简单<a class="headerlink" href="#chap5c11" title="Permanent link">&para;</a></h3>
+<h4 id="51">5.1、线程<a class="headerlink" href="#51" title="Permanent link">&para;</a></h4>
+<h5 id="511">5.1.1、线程的创建<a class="headerlink" href="#511" title="Permanent link">&para;</a></h5>
 <ul>
-<li>5.1.1、线程的创建<ul>
 <li><code>std::thread</code>，只需要提供<strong>线程函数</strong>或者<strong>函数对象</strong>，还可以<strong>指定参数</strong></li>
 <li>detach之后就无法再和线程发生联系了</li>
 <li>线程不能复制，但可以移动</li>
 <li>线程对象，可以用<code>std::bind</code>和lambda表达式来创建</li>
 <li>线程对象的生命周期</li>
 </ul>
-</li>
-<li>5.1.2、线程的基本用法<ul>
+<h5 id="512">5.1.2、线程的基本用法<a class="headerlink" href="#512" title="Permanent link">&para;</a></h5>
+<ul>
 <li>获取当前线程的ID，获取CPU核心数量，<code>t.get_id()</code>和<code>thread::hardware_concurrency()</code></li>
 <li>线程休眠<code>sleep()</code></li>
 </ul>
-</li>
-</ul>
-<h5 id="52">5.2、互斥量<a class="headerlink" href="#52" title="Permanent link">&para;</a></h5>
+<h4 id="52">5.2、互斥量<a class="headerlink" href="#52" title="Permanent link">&para;</a></h4>
 <ul>
 <li>0<ul>
 <li>一种同步原语，<strong>线程同步</strong>的手段，用来保护多线程同时访问的共享数据</li>
 <li>有如下4种语义</li>
 </ul>
 </li>
-<li>5.2.1、独占互斥量<code>mutex</code><ul>
+</ul>
+<h5 id="521mutex">5.2.1、独占互斥量<code>mutex</code><a class="headerlink" href="#521mutex" title="Permanent link">&para;</a></h5>
+<ul>
 <li>lock()、unlock()、try_unlock()</li>
 <li><strong>尽量使用lock_guard，里面用到了RAII技术</strong>，<code>std::lock_guard&lt;std::mutex&gt; locker(g_lock);//出作用域后自动解锁</code></li>
 </ul>
-</li>
-<li>5.2.2、递归互斥量<code>recursive_mutex</code><ul>
+<h5 id="522recursive_mutex">5.2.2、递归互斥量<code>recursive_mutex</code><a class="headerlink" href="#522recursive_mutex" title="Permanent link">&para;</a></h5>
+<ul>
 <li>同一个进程多次获得互斥量</li>
 <li><strong>尽量不要用递归锁</strong><ul>
 <li>1、导致多线程同步引起的晦涩问题（<strong>可以尝试简化其互斥处理</strong>）</li>
@@ -684,14 +800,12 @@ void chap04::chap0401shared_ptr() {
 </ul>
 </li>
 </ul>
-</li>
-<li>5.2.3、带超时的互斥量<code>timed_mutex</code>和<code>recursive_timed_mutex</code><ul>
+<h5 id="523timed_mutexrecursive_timed_mutex">5.2.3、带超时的互斥量<code>timed_mutex</code>和<code>recursive_timed_mutex</code><a class="headerlink" href="#523timed_mutexrecursive_timed_mutex" title="Permanent link">&para;</a></h5>
+<ul>
 <li>用在不知道获取锁需要多久的场景</li>
 <li>try_lock_for()和try_lock_until()</li>
 </ul>
-</li>
-</ul>
-<h5 id="53">5.3、条件变量<a class="headerlink" href="#53" title="Permanent link">&para;</a></h5>
+<h4 id="53">5.3、条件变量<a class="headerlink" href="#53" title="Permanent link">&para;</a></h4>
 <ul>
 <li>阻塞一个或多个线程，<strong>直到收到另外一个线程发出的通知或者超时，才会唤醒当前阻塞的线程</strong>。</li>
 <li><strong>需要与互斥量配合使用</strong></li>
@@ -705,12 +819,12 @@ void chap04::chap0401shared_ptr() {
 </li>
 <li><strong>可以用条件变量来实现一个同步队列</strong>（code，<em>这个代码重点看下</em>）</li>
 </ul>
-<h5 id="54">5.4、原子变量<a class="headerlink" href="#54" title="Permanent link">&para;</a></h5>
+<h4 id="54">5.4、原子变量<a class="headerlink" href="#54" title="Permanent link">&para;</a></h4>
 <ul>
 <li>使用原子变量<code>std::atomic&lt;T&gt;</code>，就不需要使用互斥量来保护该变量了</li>
 <li>计时器实现的差异（code上）</li>
 </ul>
-<h5 id="55call_onceonce_flag">5.5、call_once/once_flag的使用<a class="headerlink" href="#55call_onceonce_flag" title="Permanent link">&para;</a></h5>
+<h4 id="55call_onceonce_flag">5.5、call_once/once_flag的使用<a class="headerlink" href="#55call_onceonce_flag" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>使用call_once来保证函数在多线程环境中只被调用一次</strong>，需要once_flag作为入参</li>
 </ul>
@@ -727,7 +841,7 @@ int main {thread t1(do_once); thread t2(do_once); t1.join(); t2.join();}
 <ul>
 <li></li>
 </ul>
-<h5 id="56">5.6、异步操作<a class="headerlink" href="#56" title="Permanent link">&para;</a></h5>
+<h4 id="56">5.6、异步操作<a class="headerlink" href="#56" title="Permanent link">&para;</a></h4>
 <ul>
 <li>0<ul>
 <li>future作为异步结果的传输通道，可以很方便地获取线程函数的返回值</li>
@@ -736,36 +850,30 @@ int main {thread t1(do_once); thread t2(do_once); t1.join(); t2.join();}
 </ul>
 </li>
 </ul>
-<ul>
-<li>5.6.1、获取线程函数返回值的类future</li>
-<li>5.6.2、协助线程赋值的类promise</li>
-<li>5.6.3、可调用对象的包装类package_task</li>
-<li>5.6.4、promise、future、package_task三者之间的关系</li>
-</ul>
-<h5 id="57async">5.7、线程异步操作函数async<a class="headerlink" href="#57async" title="Permanent link">&para;</a></h5>
+<h5 id="561future">5.6.1、获取线程函数返回值的类future<a class="headerlink" href="#561future" title="Permanent link">&para;</a></h5>
+<h5 id="562promise">5.6.2、协助线程赋值的类promise<a class="headerlink" href="#562promise" title="Permanent link">&para;</a></h5>
+<h5 id="563package_task">5.6.3、可调用对象的包装类package_task<a class="headerlink" href="#563package_task" title="Permanent link">&para;</a></h5>
+<h5 id="564promisefuturepackage_task">5.6.4、promise、future、package_task三者之间的关系<a class="headerlink" href="#564promisefuturepackage_task" title="Permanent link">&para;</a></h5>
+<h4 id="57async">5.7、线程异步操作函数async<a class="headerlink" href="#57async" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>更高层次的异步操作</strong>，不用关注线程创建的内部细节</li>
 </ul>
-<h4 id="chap6c11">chap6、使用C++11中便利的工具<a class="headerlink" href="#chap6c11" title="Permanent link">&para;</a></h4>
-<h5 id="61chrono">6.1、处理日期和时间的chrono库<a class="headerlink" href="#61chrono" title="Permanent link">&para;</a></h5>
-<ul>
-<li>6.1.4、计时器timer</li>
-</ul>
-<h5 id="62">6.2、数值类型和字符串的相互转换<a class="headerlink" href="#62" title="Permanent link">&para;</a></h5>
+<h3 id="chap6c11">chap6、使用C++11中便利的工具<a class="headerlink" href="#chap6c11" title="Permanent link">&para;</a></h3>
+<h4 id="61chrono">6.1、处理日期和时间的chrono库<a class="headerlink" href="#61chrono" title="Permanent link">&para;</a></h4>
+<h5 id="614timer">6.1.4、计时器timer<a class="headerlink" href="#614timer" title="Permanent link">&para;</a></h5>
+<h4 id="62">6.2、数值类型和字符串的相互转换<a class="headerlink" href="#62" title="Permanent link">&para;</a></h4>
 <ul>
 <li><code>to_string(int value)</code></li>
 <li>字符串转整型和浮点<code>atoi,atol,atoll,atof</code></li>
 </ul>
-<h5 id="63">6.3、宽窄字符转换<a class="headerlink" href="#63" title="Permanent link">&para;</a></h5>
+<h4 id="63">6.3、宽窄字符转换<a class="headerlink" href="#63" title="Permanent link">&para;</a></h4>
 <ul>
 <li><code>std::wstring str=L"中国人";</code></li>
 <li><strong>codecvt库中的<code>std::wstring_convert</code></strong></li>
 </ul>
-<h4 id="chap7c11">chap7、C++11的其他特性<a class="headerlink" href="#chap7c11" title="Permanent link">&para;</a></h4>
-<h5 id="71">7.1、委托构造函数和继承构造函数<a class="headerlink" href="#71" title="Permanent link">&para;</a></h5>
-<ul>
-<li>
-<p>7.1.1、委托构造函数</p>
+<h3 id="chap7c11">chap7、C++11的其他特性<a class="headerlink" href="#chap7c11" title="Permanent link">&para;</a></h3>
+<h4 id="71">7.1、委托构造函数和继承构造函数<a class="headerlink" href="#71" title="Permanent link">&para;</a></h4>
+<h5 id="711">7.1.1、委托构造函数<a class="headerlink" href="#711" title="Permanent link">&para;</a></h5>
 <ul>
 <li><strong>委托构造函数</strong>：允许在同一个类中一个构造函数可以调用另外一个构造函数，从而可以在初始化时简化变量的初始化。<ul>
 <li><strong>使用了代理构造函数就不能用类成员初始化了</strong></li>
@@ -794,11 +902,7 @@ public:
 int main(){
     class_c c1{1,3,2}; //递归委托了两个构造函数完成成员变量的初始化
 }</code></pre>
-</li>
-</ul>
-<ul>
-<li>
-<p>7.1.2、继承构造函数</p>
+<h5 id="712">7.1.2、继承构造函数<a class="headerlink" href="#712" title="Permanent link">&para;</a></h5>
 <ul>
 <li>可以让派生类直接使用基类的构造函数，而无须自己再写构造函数</li>
 </ul>
@@ -812,12 +916,10 @@ int main(){
   Derived d(i);//直接使用基类构造函数来构造派生类对象
   Derived d1(i,j);
 }</code></pre>
-</li>
-</ul>
-<h5 id="72">7.2、原始的字面量<a class="headerlink" href="#72" title="Permanent link">&para;</a></h5>
-<h5 id="73finaloverride">7.3、final和override关键字<a class="headerlink" href="#73finaloverride" title="Permanent link">&para;</a></h5>
-<h5 id="74">7.4、内存对齐<a class="headerlink" href="#74" title="Permanent link">&para;</a></h5>
-<h5 id="75c11">7.5、C++11新增的便利算法<a class="headerlink" href="#75c11" title="Permanent link">&para;</a></h5>
+<h4 id="72">7.2、原始的字面量<a class="headerlink" href="#72" title="Permanent link">&para;</a></h4>
+<h4 id="73finaloverride">7.3、final和override关键字<a class="headerlink" href="#73finaloverride" title="Permanent link">&para;</a></h4>
+<h4 id="74">7.4、内存对齐<a class="headerlink" href="#74" title="Permanent link">&para;</a></h4>
+<h4 id="75c11">7.5、C++11新增的便利算法<a class="headerlink" href="#75c11" title="Permanent link">&para;</a></h4>
 <ul>
 <li>0、<a href="http://en.cppreference.com/w/cpp/algorithm">c++11算法</a></li>
 <li>1、all_of、any_of和none_of算法</li>
@@ -956,11 +1058,11 @@ int main(){
 </ul>
 <h3 id="117">11.7、总结<a class="headerlink" href="#117" title="Permanent link">&para;</a></h3>
 <h2 id="chap12c11">chap12、使用C++11开发一个对象的消息总线库<a class="headerlink" href="#chap12c11" title="Permanent link">&para;</a></h2>
-<h3 id="121">12.1、消息总线介绍<a class="headerlink" href="#121" title="Permanent link">&para;</a></h3>
+<h3 id="121_1">12.1、消息总线介绍<a class="headerlink" href="#121_1" title="Permanent link">&para;</a></h3>
 <ul>
 <li>基于消息总线技术可以有效地解决这些问题，<strong>对象间只通过消息联系，而不是通过直接依赖或者关联</strong>。</li>
 </ul>
-<h3 id="122">12.2、消息总线关键技术<a class="headerlink" href="#122" title="Permanent link">&para;</a></h3>
+<h3 id="122_1">12.2、消息总线关键技术<a class="headerlink" href="#122_1" title="Permanent link">&para;</a></h3>
 <ul>
 <li>消息总线的实现需要解决三个问题：<ul>
 <li>（1）通用的消息定义：让所有的对象都能接受</li>
@@ -980,7 +1082,7 @@ int main(){
 </ul>
 <h4 id="1223">12.2.3、消息分发<a class="headerlink" href="#1223" title="Permanent link">&para;</a></h4>
 <h4 id="1224">12.2.4、消息总线的设计思想<a class="headerlink" href="#1224" title="Permanent link">&para;</a></h4>
-<h3 id="123">12.3、完整的消息总线<a class="headerlink" href="#123" title="Permanent link">&para;</a></h3>
+<h3 id="123_1">12.3、完整的消息总线<a class="headerlink" href="#123_1" title="Permanent link">&para;</a></h3>
 <ul>
 <li>完整的消息总线需要用到function_traits、NonCopyable和Any，还会用到可变参数模板、右值引用和完美转发等特性。</li>
 <li><code>1203完整的function_traits.cpp</code></li>

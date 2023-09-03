@@ -142,23 +142,23 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#part6inheritance-and-object-oriented-design32-40">Part6、继承与面向对象设计Inheritance and Object-Oriented Design（32-40）</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#32publicis-a-make-sure-public-inheritance-models-is-a">32、确定你的public继承塑模出is-a关系 Make sure public inheritance models "is-a."</a>
+    <li class="toctree-l3"><a class="reference internal" href="#32publicis-amake-sure-public-inheritance-models-is-a">32、确定你的public继承塑模出is-a关系，Make sure public inheritance models "is-a."</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#33">33、避免遮掩继承而来的名称</a>
+    <li class="toctree-l3"><a class="reference internal" href="#33avoid-hiding-inherited-names">33、避免遮掩继承而来的名称，Avoid hiding inherited names</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#34">34、区分接口继承和实现继承</a>
+    <li class="toctree-l3"><a class="reference internal" href="#34differentiate-between-inheritance-of-interface-and-inheritance-of-implementation">34、区分接口继承和实现继承，Differentiate between inheritance of interface and inheritance of implementation</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#35virtual">35、考虑virtual函数以外的其他选择</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#36non-virtual">36、绝不重新定义继承而来的non-virtual函数</a>
+    <li class="toctree-l3"><a class="reference internal" href="#36non-virtualnever-redefine-an-inherited-non-virtual-function">36、绝不重新定义继承而来的non-virtual函数，Never redefine an inherited non-virtual function</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#37">37、绝不重新定义继承而来的缺省参数值</a>
+    <li class="toctree-l3"><a class="reference internal" href="#37never-redefine-a-functions-inherited-default-parameter-value">37、绝不重新定义继承而来的缺省参数值，Never redefine a function's inherited default parameter value</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#38has-a">38、通过复合塑模出has-a或“根据某物实现出”</a>
+    <li class="toctree-l3"><a class="reference internal" href="#38has-amodel-has-aor-is-implemented-in-terms-of-through-composition">38、通过复合塑模出has-a或“根据某物实现出”，Model "has-a"or" is-implemented-in-terms-of" through composition</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#39private">39、明智而审慎地使用private继承</a>
+    <li class="toctree-l3"><a class="reference internal" href="#39privateuse-private-inheritance-judiciously">39、明智而审慎地使用private继承，Use private inheritance judiciously</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#40">40、明智而审慎地使用多重继承</a>
+    <li class="toctree-l3"><a class="reference internal" href="#40use-multiple-inheritance-judiciously">40、明智而审慎地使用多重继承，Use multiple inheritance judiciously</a>
     </li>
         </ul>
     </li>
@@ -296,7 +296,7 @@
               </ul>
               <p class="caption"><span class="caption-text">刷题</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer/">《剑指offer2nd》</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer2nd/">《剑指offer2nd》</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/">《剑指offer专项突破》</a>
                   </li>
@@ -340,6 +340,9 @@
             <div class="section" itemprop="articleBody">
               
                 <h2 id="effective-c">《Effective C++》<a class="headerlink" href="#effective-c" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Part06的知识，对于OO确实了解得不多，读了有点吃力（2023-08-15）</li>
+</ul>
 <h3 id="part1c1-4">Part1、自己习惯C++（1-4）<a class="headerlink" href="#part1c1-4" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Accustoming Yourself to C++</li>
@@ -906,23 +909,109 @@ private:
 <li><em>Handle classes与Interface classes区别？</em></li>
 </ul>
 <h3 id="part6inheritance-and-object-oriented-design32-40">Part6、继承与面向对象设计Inheritance and Object-Oriented Design（32-40）<a class="headerlink" href="#part6inheritance-and-object-oriented-design32-40" title="Permanent link">&para;</a></h3>
-<h4 id="32publicis-a-make-sure-public-inheritance-models-is-a">32、确定你的public继承塑模出is-a关系 Make sure public inheritance models "is-a."<a class="headerlink" href="#32publicis-a-make-sure-public-inheritance-models-is-a" title="Permanent link">&para;</a></h4>
 <ul>
-<li>Liskov Substitution Principle</li>
-<li>public继承是"is a"，<em>private继承是啥？</em></li>
+<li>继承可以是单一继承或多重继承<ul>
+<li>每一个继承连接（link）可以是public，protected或private，也可以是virtual或non-virtual</li>
+<li>成员函数的各个选项：virtual? non-virtual? pure virtual?</li>
 </ul>
-<h4 id="33">33、避免遮掩继承而来的名称<a class="headerlink" href="#33" title="Permanent link">&para;</a></h4>
+</li>
+<li>缺省参数值与virtual函数有什么交互影响？</li>
+<li>继承如何影响C++的名称查找规则？设计选项有哪些？如果class的行为需要改变，virtual函数是最佳选择吗？</li>
+</ul>
+<h4 id="32publicis-amake-sure-public-inheritance-models-is-a">32、确定你的public继承塑模出is-a关系，Make sure public inheritance models "is-a."<a class="headerlink" href="#32publicis-amake-sure-public-inheritance-models-is-a" title="Permanent link">&para;</a></h4>
 <ul>
-<li>using声明式，<strong>inline转交函数（forwarding function）</strong></li>
+<li>结论：<ul>
+<li>public继承意味"is a"。适用于base classes身上的每一件事情一定也适用于derived classes身上，因为每一个derived class对象也都是一个base class对象。</li>
 </ul>
-<h4 id="34">34、区分接口继承和实现继承<a class="headerlink" href="#34" title="Permanent link">&para;</a></h4>
+</li>
+<li><strong>public inheritance（公开继承）意味“is-a”（是一种）的关系</strong>。<ul>
+<li>子类的对象，同时也是父类的对象（public继承的话）<strong>即，父类更一般化</strong> 【Liskov Substitution Principle】</li>
+<li><a href="https://zhuanlan.zhihu.com/p/344504759">C++入门到精通：面向对象程序设计中的继承与派生！</a>，<em>lionel，是因为public继承后，父类有操作的各种权限？</em></li>
+</ul>
+</li>
+<li><strong>public继承主张，能够施行于base class对象身上的每件事情（注意，是每件事情），也可以施行于derived class对象身上</strong>。</li>
+<li>类之间的关系<ul>
+<li>is-a</li>
+<li>has-a（有一个）</li>
+<li>is-implemented-in-terms-of（根据某物实现出）</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><em>private继承是啥？</em></li>
+<li><em>本节的问题在于，我没有搞懂，为什么会是这么一种状况？</em></li>
+</ul>
+<h4 id="33avoid-hiding-inherited-names">33、避免遮掩继承而来的名称，Avoid hiding inherited names<a class="headerlink" href="#33avoid-hiding-inherited-names" title="Permanent link">&para;</a></h4>
+<ul>
+<li>结论：<ul>
+<li>derived classes内的名称会遮掩base classes内的名称。在public继承下从来没有人希望如此</li>
+<li>为了让被遮掩的名称再见天日，可以使用using声明式或<strong>inline转交函数（forwarding function）</strong></li>
+</ul>
+</li>
+<li><strong>内层作用域会遮掩外围作用域的名称</strong>（name-hiding rule），<strong>遮掩名称</strong></li>
+</ul>
+<pre class="highlight"><code class="language-cpp">class Base01{
+public:
+    virtual void mf1() = 0;
+    virtual void mf2();
+    void mf3();
+private:
+    int x;
+};
+
+class Derived01:public Base01{
+public:
+    virtual void mf1();
+    void mf4();
+}
+
+//03的情况
+class Base03{
+public:
+    virtual void mf1() = 0;
+    virtual void mf1(int);
+    virtual void mf2();
+    void mf3();
+    void mf3(double);
+private:
+    int x;
+};
+
+class Derived03:public Base03{
+public:
+    using Base03::mf1;
+    using Base03::mf3; //让Base03 class内名为mf1和mf3的所有东西在Derived作用域内都可见
+    virtual void mf1();
+    void mf3();
+    void mf4();
+}</code></pre>
+<ul>
+<li><em>lionel，这个其实没有完全整理</em></li>
+</ul>
+<h4 id="34differentiate-between-inheritance-of-interface-and-inheritance-of-implementation">34、区分接口继承和实现继承，Differentiate between inheritance of interface and inheritance of implementation<a class="headerlink" href="#34differentiate-between-inheritance-of-interface-and-inheritance-of-implementation" title="Permanent link">&para;</a></h4>
+<ul>
+<li>结论：<ul>
+<li>接口继承与实现继承不同。在public继承之下，derived classes总是继承base class的接口</li>
+<li>pure virtual函数只具体指定接口继承</li>
+<li>简朴的（非纯）inpure virtual函数具体指定接口继承及缺省实现继承</li>
+<li>non-virtual函数具体指定接口继承以及强制性实现继承</li>
+</ul>
+</li>
+</ul>
 <ul>
 <li>声明一个pure virtual函数的目的是为了让derived classes只继承函数接口。</li>
 <li>声明简朴的（非纯）inpure virtual函数的目的，是让derived classes继承该函数的接口和缺省实现</li>
 </ul>
 <h4 id="35virtual">35、考虑virtual函数以外的其他选择<a class="headerlink" href="#35virtual" title="Permanent link">&para;</a></h4>
 <ul>
-<li>Template Method模式</li>
+<li>结论：<ul>
+<li>virtual函数的替代方案包括NVI手法及Straategy设计模式的多种形式。NVI手法自身是一个特殊形式的Template Method设计模式</li>
+<li>将机能从成员函数移到class外部函数，带来的一个缺点是，非成员函数无法访问classr non-public成员</li>
+<li>tr1::function对象的行为就像一般函数指针。这样的对象可接纳“与给定之目标签名式（target signature）兼容”的所有可调用物（callable entities）</li>
+</ul>
+</li>
+</ul>
+<ul>
 <li>Strategy模式</li>
 <li>摘要，有以下几个替换
     + 使用non-virtual interface手法
@@ -930,25 +1019,47 @@ private:
     + 以tr1::function成员变量替换virtual函数
     + 将继承体系内的virtual函数替换为另一个继承体系内的virtual函数</li>
 </ul>
-<h4 id="36non-virtual">36、绝不重新定义继承而来的non-virtual函数<a class="headerlink" href="#36non-virtual" title="Permanent link">&para;</a></h4>
+<h4 id="36non-virtualnever-redefine-an-inherited-non-virtual-function">36、绝不重新定义继承而来的non-virtual函数，Never redefine an inherited non-virtual function<a class="headerlink" href="#36non-virtualnever-redefine-an-inherited-non-virtual-function" title="Permanent link">&para;</a></h4>
+<ul>
+<li>结论<ul>
+<li>绝对不要重新定义继承来的non-virtual</li>
+</ul>
+</li>
+</ul>
 <ul>
 <li><em>写个代码来看下差异，lionel</em> 【重新定义继承来的non-virtual】</li>
 </ul>
-<h4 id="37">37、绝不重新定义继承而来的缺省参数值<a class="headerlink" href="#37" title="Permanent link">&para;</a></h4>
+<h4 id="37never-redefine-a-functions-inherited-default-parameter-value">37、绝不重新定义继承而来的缺省参数值，Never redefine a function's inherited default parameter value<a class="headerlink" href="#37never-redefine-a-functions-inherited-default-parameter-value" title="Permanent link">&para;</a></h4>
 <ul>
-<li><strong>缺省参数是静态绑定</strong>，virtual是动态绑定</li>
+<li>结论：<ul>
+<li>绝对不要重新定义一个继承而来的缺省参数值，因为<strong>缺省参数值都是静态绑定</strong>，而virtual函数--你唯一应该覆写的东西--却是动态绑定</li>
 </ul>
-<h4 id="38has-a">38、通过复合塑模出has-a或“根据某物实现出”<a class="headerlink" href="#38has-a" title="Permanent link">&para;</a></h4>
-<ul>
-<li><strong>复合是has-a</strong></li>
+</li>
 </ul>
-<h4 id="39private">39、明智而审慎地使用private继承<a class="headerlink" href="#39private" title="Permanent link">&para;</a></h4>
+<h4 id="38has-amodel-has-aor-is-implemented-in-terms-of-through-composition">38、通过复合塑模出has-a或“根据某物实现出”，Model "has-a"or" is-implemented-in-terms-of" through composition<a class="headerlink" href="#38has-amodel-has-aor-is-implemented-in-terms-of-through-composition" title="Permanent link">&para;</a></h4>
 <ul>
-<li><strong>private继承，编译器不会自动将一个derived class对象 转换为一个 base class对象</strong>。</li>
+<li>结论：<ul>
+<li>复合（composition）的意义和public继承完全不同</li>
+<li>在应用域（application domain），复合意味has-a（有一个）。在实现域（implementation domain），复合意味 is-implemented-in-terms-of（根据某物实现出）</li>
 </ul>
-<h4 id="40">40、明智而审慎地使用多重继承<a class="headerlink" href="#40" title="Permanent link">&para;</a></h4>
+</li>
+</ul>
+<h4 id="39privateuse-private-inheritance-judiciously">39、明智而审慎地使用private继承，Use private inheritance judiciously<a class="headerlink" href="#39privateuse-private-inheritance-judiciously" title="Permanent link">&para;</a></h4>
 <ul>
-<li>多重继承会导致歧义</li>
+<li>结论：<ul>
+<li>Private继承意味is-implemented-in-terms of（根据实物实现出）。它通常比复合（composition）的级别低。但是当derived classs需要访问protected base class的成员，或需要重新定义继承而来的virtual函数时，这么设计是合理的。</li>
+<li>和复合（composition）不同，private继承可以造成empty base最优化。这对致力于“对象尺寸最小化”的程序库开发者而言，可能很重要</li>
+</ul>
+</li>
+</ul>
+<h4 id="40use-multiple-inheritance-judiciously">40、明智而审慎地使用多重继承，Use multiple inheritance judiciously<a class="headerlink" href="#40use-multiple-inheritance-judiciously" title="Permanent link">&para;</a></h4>
+<ul>
+<li>结论：<ul>
+<li>多重继承比单一继承复杂。它可能导致新的歧义性，以及对virtual继承的需要</li>
+<li>virtual继承会增加大小、速度、初始化（及赋值）复杂度等等成本。如果virtual base classes不带任何数据，将是最具实用价值的情况</li>
+<li>多重继承的确有正当用途。其中一个情节涉及“public继承某个Interface class”和“private继承某个协助实现的class”的两相组合</li>
+</ul>
+</li>
 </ul>
 <h3 id="part741-48">Part7、模板与泛型编程（41-48）<a class="headerlink" href="#part741-48" title="Permanent link">&para;</a></h3>
 <h4 id="41">41、了解隐式接口和编译期多态<a class="headerlink" href="#41" title="Permanent link">&para;</a></h4>
@@ -1009,15 +1120,31 @@ private:
 </ul>
 <h4 id="48template">48、认识template元编程<a class="headerlink" href="#48template" title="Permanent link">&para;</a></h4>
 <ul>
+<li>结论<ul>
 <li>Template metaprogramming（TMP，模板元编程）可将工作由运行期移往编译期，因而得以实现早期错误侦测和更高的执行效率</li>
 <li>TMP可被用来生成“基于政策选择组合”（based on combinations of policy choices）的客户定制代码，也可用来避免生成对某些特殊类型并不适合的代码</li>
+</ul>
+</li>
 </ul>
 <h3 id="part8newdelete49-52">Part8、定制new和delete（49-52）<a class="headerlink" href="#part8newdelete49-52" title="Permanent link">&para;</a></h3>
 <p>0、</p>
 <ul>
 <li>---定制new和delete--  【new失败了】</li>
+<li><a href="https://www.zhihu.com/question/57196407">c++ new和delete的用法。？</a></li>
+<li>一般是会用<code>int *a = new int(5);delete a;  int *b=new int[5]; delete b;</code>，详解<a href="https://www.cnblogs.com/wanqieddy/p/4372033.html">c++中new和delete的使用方法</a><ul>
+<li>但new和delete的重载，怎么使用</li>
+<li>placement的new和delete，这2个知识点，自己并不太熟悉呢</li>
+</ul>
+</li>
 </ul>
 <h4 id="49new-handler">49、了解new-handler的行为<a class="headerlink" href="#49new-handler" title="Permanent link">&para;</a></h4>
+<ul>
+<li>结论<ul>
+<li>set_new_handler允许客户指定一个函数，在内存分配无法获得满足时被调用。</li>
+<li>Nothrow new是一个颇为局限的工具，因为它只适用于内存分配；后继的构造函数调用还是可能抛出异常</li>
+</ul>
+</li>
+</ul>
 <ul>
 <li><code>operator new</code>分配失败了，会<strong>调用<code>new-handler</code>函数</strong>，设计一个良好的new-handler函数</li>
 <li><code>new(std::nothrow) Widget</code>发生了两件事
@@ -1026,11 +1153,31 @@ private:
 </ul>
 <h4 id="50newdelete">50、了解new和delete的合理替换时机<a class="headerlink" href="#50newdelete" title="Permanent link">&para;</a></h4>
 <ul>
+<li>结论<ul>
+<li>有许多理由需要写个自定的new和delete，包括改善效能、对hep运用错误进行调试、收集heap使用信息</li>
+</ul>
+</li>
+</ul>
+<ul>
 <li>自己实现一个<code>operator new</code>，看看哪个开源比较强？</li>
 <li><em>什么场景下，需要自己实现一个operator new？</em></li>
 </ul>
 <h4 id="51newdelete">51、编写new和delete时需固守常规<a class="headerlink" href="#51newdelete" title="Permanent link">&para;</a></h4>
+<ul>
+<li>结论<ul>
+<li>operator new应该内含一个无穷循环，并在其中尝试分配内存，如果它无法满足内存需求，就该调用new-handler。它也应该有能力处理0 bytes申请。Class专属版本则还应该处理“比正确大小更大的（错误）申请”。</li>
+<li>operator delete应该在收到null指针时不做任何事。Class专属版本则还应该处理“比正确大小更大的（错误）申请”。</li>
+</ul>
+</li>
+</ul>
 <h4 id="52placement-newplacement-delete">52、写了placement new也要写placement delete<a class="headerlink" href="#52placement-newplacement-delete" title="Permanent link">&para;</a></h4>
+<ul>
+<li>结论<ul>
+<li>当你写一个<code>palcement operator new</code>，请确定也写出了对应的<code>placement operator delete</code>。如果没有这样做，你的程序可能会发生隐微而时断时续的内存泄漏</li>
+<li>当你声明<code>placement new</code>和<code>placement delete</code>，请确定不要无意识（非故意）地遮掩了它们的正常版本</li>
+</ul>
+</li>
+</ul>
 <ul>
 <li><code>Widget *pw = new Widget;</code>有2个函数被调用：
     + 用以分配内存的operator new
@@ -1043,7 +1190,8 @@ private:
 <h4 id="53">53、不要轻忽编译器的警告<a class="headerlink" href="#53" title="Permanent link">&para;</a></h4>
 <ul>
 <li>结论：<ul>
-<li></li>
+<li>严肃对待编译器发出的警告信息。努力在你的编译器的最高（最严苛）警告级别下争取“无任务警告”的荣誉。</li>
+<li>不要过度依赖编译器的报警能力，因为不同的编译器对待事情的态度并不相同。一旦移植到另一个编译器上，你原本倚赖的警告信息有可能消失</li>
 </ul>
 </li>
 </ul>
@@ -1051,7 +1199,8 @@ private:
 <ul>
 <li>结论：<ul>
 <li>C++标准程序库的主要机能由STL、iostream、locals组成。并包含C99标准程序库</li>
-<li>TR1添加了</li>
+<li>TR1添加了智能指针（shared_ptr）、一般化函数指针（function）、hash-based容器、正则表达式（regular expressions）以及另外10个组件的支持</li>
+<li>TR1自身只是一份规范。为获得TR1提供的好处，你需要一份实物。一个好的实物来源是boost。</li>
 </ul>
 </li>
 <li>C++98的标准库</li>
@@ -1082,6 +1231,7 @@ private:
 <h4 id="55boost">55、让自己熟悉boost<a class="headerlink" href="#55boost" title="Permanent link">&para;</a></h4>
 <ul>
 <li>结论：<ul>
+<li>Boost是一个社群，也是一个网站。致力于免费、源码开放、同僚复审的C++程序库开发。Boost在C++标准化过程中扮演深具影响力的角色</li>
 <li>Boost提供许多TR1组件实现品，以及其它许多程序库</li>
 </ul>
 </li>

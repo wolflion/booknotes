@@ -107,13 +107,13 @@
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#chap3">chap3、线性表、栈和队列</a>
+    <li class="toctree-l2"><a class="reference internal" href="#chap3-77254">chap3、线性表、栈和队列  77/254</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#31adt">3.1、抽象数据类型（ADT）</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#32adt">3.2、线性表ADT</a>
         <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#321">3.2.1、表的简单数组实现</a>
+    <li class="toctree-l4"><a class="reference internal" href="#321">3.2.1、线性表的简单数组实现</a>
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#322">3.2.2、简单链表</a>
     </li>
@@ -159,7 +159,7 @@
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#chap4">chap4、树</a>
+    <li class="toctree-l2"><a class="reference internal" href="#chap4-113524">chap4、树   113/524</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#41">4.1、预备知识</a>
         <ul>
@@ -205,6 +205,8 @@
         <ul>
     <li class="toctree-l4"><a class="reference internal" href="#451">4.5.1、一个简单的想法（不能直接使用）</a>
     </li>
+    <li class="toctree-l4"><a class="reference internal" href="#452splaying">4.5.2、展开（splaying）</a>
+    </li>
         </ul>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#46">4.6、树的遍历</a>
@@ -214,6 +216,12 @@
     <li class="toctree-l3"><a class="reference internal" href="#48setmap">4.8、标准库中的容器set和map</a>
         <ul>
     <li class="toctree-l4"><a class="reference internal" href="#481set">4.8.1、集合容器set</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#482map">4.8.2、映射容器map</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#483setmap">4.8.3、set和map的实现</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#484map">4.8.4、使用多个map的示例</a>
     </li>
         </ul>
     </li>
@@ -440,7 +448,7 @@
               </ul>
               <p class="caption"><span class="caption-text">刷题</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer/">《剑指offer2nd》</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer2nd/">《剑指offer2nd》</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/">《剑指offer专项突破》</a>
                   </li>
@@ -548,34 +556,97 @@
 </li>
 </ul>
 <h4 id="24">2.4、运行时间计算<a class="headerlink" href="#24" title="Permanent link">&para;</a></h4>
-<h3 id="chap3">chap3、线性表、栈和队列<a class="headerlink" href="#chap3" title="Permanent link">&para;</a></h3>
+<h3 id="chap3-77254">chap3、线性表、栈和队列  77/254<a class="headerlink" href="#chap3-77254" title="Permanent link">&para;</a></h3>
 <h4 id="31adt">3.1、抽象数据类型（ADT）<a class="headerlink" href="#31adt" title="Permanent link">&para;</a></h4>
+<ul>
+<li>ADT是<strong>带有一组操作的一些对象的集合</strong></li>
+</ul>
 <h4 id="32adt">3.2、线性表ADT<a class="headerlink" href="#32adt" title="Permanent link">&para;</a></h4>
-<h5 id="321">3.2.1、表的简单数组实现<a class="headerlink" href="#321" title="Permanent link">&para;</a></h5>
+<ul>
+<li>有哪些操作？</li>
+</ul>
+<h5 id="321">3.2.1、线性表的简单数组实现<a class="headerlink" href="#321" title="Permanent link">&para;</a></h5>
+<ul>
+<li>vector</li>
+</ul>
 <h5 id="322">3.2.2、简单链表<a class="headerlink" href="#322" title="Permanent link">&para;</a></h5>
+<ul>
+<li>linked list</li>
+<li>doubly linked list</li>
+</ul>
 <h4 id="33stlvectorlist">3.3、STL中的vector和list<a class="headerlink" href="#33stlvectorlist" title="Permanent link">&para;</a></h4>
 <h5 id="331">3.3.1、迭代器<a class="headerlink" href="#331" title="Permanent link">&para;</a></h5>
+<ul>
+<li>获取迭代器</li>
+<li>迭代器方法</li>
+<li>需要迭代器的容器操作</li>
+</ul>
 <h5 id="332erase">3.3.2、例子：对表使用erase<a class="headerlink" href="#332erase" title="Permanent link">&para;</a></h5>
 <h5 id="333const_iterators">3.3.3、const_iterators<a class="headerlink" href="#333const_iterators" title="Permanent link">&para;</a></h5>
 <h4 id="34vector">3.4、vector的实现<a class="headerlink" href="#34vector" title="Permanent link">&para;</a></h4>
 <h4 id="35list">3.5、list的实现<a class="headerlink" href="#35list" title="Permanent link">&para;</a></h4>
 <h4 id="36adt">3.6、栈ADT<a class="headerlink" href="#36adt" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>只能在一端操作</strong>，只能在表的末端，就<strong>栈顶</strong>（top）</li>
+</ul>
 <h5 id="361">3.6.1、栈模型<a class="headerlink" href="#361" title="Permanent link">&para;</a></h5>
 <h5 id="362">3.6.2、栈的实现<a class="headerlink" href="#362" title="Permanent link">&para;</a></h5>
+<ul>
+<li>栈的链表实现</li>
+<li>栈的数组实现</li>
+</ul>
 <h5 id="363">3.6.3、应用<a class="headerlink" href="#363" title="Permanent link">&para;</a></h5>
+<ul>
+<li>平衡符号</li>
+<li>后缀表达式</li>
+<li>中缀到后缀的转换</li>
+<li>函数调用</li>
+</ul>
 <h4 id="37adt">3.7、队列ADT<a class="headerlink" href="#37adt" title="Permanent link">&para;</a></h4>
+<ul>
+<li>插入在一端，删除在另一端</li>
+</ul>
 <h5 id="371">3.7.1、队列模型<a class="headerlink" href="#371" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>表的末端（队尾、rear）插入，叫入队；删除它们在（队头，front），叫出队</strong></li>
+</ul>
 <h5 id="372">3.7.2、队列的数组实现<a class="headerlink" href="#372" title="Permanent link">&para;</a></h5>
 <h5 id="373">3.7.3、队列的应用<a class="headerlink" href="#373" title="Permanent link">&para;</a></h5>
 <h4 id="_2">小结<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
 <h4 id="_3">练习<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
-<h3 id="chap4">chap4、树<a class="headerlink" href="#chap4" title="Permanent link">&para;</a></h3>
+<h3 id="chap4-113524">chap4、树   113/524<a class="headerlink" href="#chap4-113524" title="Permanent link">&para;</a></h3>
+<ul>
+<li>二叉查找树的运行时间是O(logN)，set和map实现的基础</li>
+</ul>
 <h4 id="41">4.1、预备知识<a class="headerlink" href="#41" title="Permanent link">&para;</a></h4>
 <h5 id="411">4.1.1、树的实现<a class="headerlink" href="#411" title="Permanent link">&para;</a></h5>
+<ul>
+<li>树节点的声明</li>
+</ul>
+<pre class="highlight"><code class="language-cpp">struct TreeNode{
+    Object element;
+    TreeNode *firstChild;  //第一个孩子
+    TreeNode *nextSibling;  //下一个兄弟
+};</code></pre>
 <h5 id="412">4.1.2、树的遍历及应用<a class="headerlink" href="#412" title="Permanent link">&para;</a></h5>
+<ul>
+<li>先序</li>
+<li>后序</li>
+</ul>
 <h4 id="42">4.2、二叉树<a class="headerlink" href="#42" title="Permanent link">&para;</a></h4>
 <h5 id="421">4.2.1、实现<a class="headerlink" href="#421" title="Permanent link">&para;</a></h5>
+<ul>
+<li>二叉树节点类</li>
+</ul>
+<pre class="highlight"><code class="language-cpp">struct BinaryNode{
+    Object element;   //节点上的数据
+    BinaryNode *left;  //左儿子
+    BinaryNode *right; //右儿子
+};</code></pre>
 <h5 id="422-">4.2.2、一个例子--表达式树<a class="headerlink" href="#422-" title="Permanent link">&para;</a></h5>
+<ul>
+<li>构造一棵表达式树</li>
+</ul>
 <ul>
 <li>例5.4、编写一个函数，计算一棵二叉树的结点数。【<em>感觉要用递归啊，直到子节点时+1</em>】</li>
 </ul>
@@ -587,19 +658,34 @@
 <h5 id="435">4.3.5、析构函数和拷贝构造函数<a class="headerlink" href="#435" title="Permanent link">&para;</a></h5>
 <h5 id="436">4.3.6、平均情况分析<a class="headerlink" href="#436" title="Permanent link">&para;</a></h5>
 <h4 id="44avl">4.4、AVL树（平衡树）<a class="headerlink" href="#44avl" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Adelson-Velskii和Landis，<strong>带有平衡条件</strong><ul>
+<li>每个节点的左子树和右子树的高度最多差1的二叉查找树</li>
+</ul>
+</li>
+</ul>
 <h5 id="441">4.4.1、单旋转<a class="headerlink" href="#441" title="Permanent link">&para;</a></h5>
 <h5 id="442">4.4.2、双旋转<a class="headerlink" href="#442" title="Permanent link">&para;</a></h5>
 <h4 id="45">4.5、伸展树<a class="headerlink" href="#45" title="Permanent link">&para;</a></h4>
 <h5 id="451">4.5.1、一个简单的想法（不能直接使用）<a class="headerlink" href="#451" title="Permanent link">&para;</a></h5>
-<p>4.5.2、展开</p>
+<h5 id="452splaying">4.5.2、展开（splaying）<a class="headerlink" href="#452splaying" title="Permanent link">&para;</a></h5>
 <h4 id="46">4.6、树的遍历<a class="headerlink" href="#46" title="Permanent link">&para;</a></h4>
+<ul>
+<li>中序</li>
+<li>后序</li>
+<li>先序</li>
+<li>层序</li>
+</ul>
 <h4 id="47b">4.7、B树<a class="headerlink" href="#47b" title="Permanent link">&para;</a></h4>
 <h4 id="48setmap">4.8、标准库中的容器set和map<a class="headerlink" href="#48setmap" title="Permanent link">&para;</a></h4>
 <h5 id="481set">4.8.1、集合容器set<a class="headerlink" href="#481set" title="Permanent link">&para;</a></h5>
-<p>4.8.2、映射容器map</p>
-<p>4.8.3、set和map的实现</p>
-<p>4.8.4、使用多个map的示例</p>
+<h5 id="482map">4.8.2、映射容器map<a class="headerlink" href="#482map" title="Permanent link">&para;</a></h5>
+<h5 id="483setmap">4.8.3、set和map的实现<a class="headerlink" href="#483setmap" title="Permanent link">&para;</a></h5>
+<h5 id="484map">4.8.4、使用多个map的示例<a class="headerlink" href="#484map" title="Permanent link">&para;</a></h5>
 <h4 id="_4">小结<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
+<ul>
+<li>表达式树是更一般结构即所谓的<strong>分析树（parse tree）</strong>的一个小例子</li>
+</ul>
 <h4 id="_5">练习<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
 <h4 id="0">0、<a class="headerlink" href="#0" title="Permanent link">&para;</a></h4>
 <ul>
