@@ -563,9 +563,6 @@ public:
   + 将机能从成员函数移到class外部函数，带来的一个缺点是，非成员函数无法访问classr non-public成员
   + tr1::function对象的行为就像一般函数指针。这样的对象可接纳“与给定之目标签名式（target signature）兼容”的所有可调用物（callable entities）
 
-
-
-+ 
 + Strategy模式
 + 摘要，有以下几个替换
 	+ 使用non-virtual interface手法
@@ -648,16 +645,25 @@ public:
 
 #### 48、认识template元编程
 
-+ Template metaprogramming（TMP，模板元编程）可将工作由运行期移往编译期，因而得以实现早期错误侦测和更高的执行效率
-+ TMP可被用来生成“基于政策选择组合”（based on combinations of policy choices）的客户定制代码，也可用来避免生成对某些特殊类型并不适合的代码
++ 结论
+  + Template metaprogramming（TMP，模板元编程）可将工作由运行期移往编译期，因而得以实现早期错误侦测和更高的执行效率
+  + TMP可被用来生成“基于政策选择组合”（based on combinations of policy choices）的客户定制代码，也可用来避免生成对某些特殊类型并不适合的代码
 
 ### Part8、定制new和delete（49-52）
 
 0、
 
 + ---定制new和delete--  【new失败了】
++ [c++ new和delete的用法。？](https://www.zhihu.com/question/57196407)
++ 一般是会用`int *a = new int(5);delete a;  int *b=new int[5]; delete b;`，详解[c++中new和delete的使用方法](https://www.cnblogs.com/wanqieddy/p/4372033.html)
+  + 但new和delete的重载，怎么使用
+  + placement的new和delete，这2个知识点，自己并不太熟悉呢
 
 #### 49、了解new-handler的行为
+
++ 结论
+  + set_new_handler允许客户指定一个函数，在内存分配无法获得满足时被调用。
+  + Nothrow new是一个颇为局限的工具，因为它只适用于内存分配；后继的构造函数调用还是可能抛出异常
 
 + `operator new`分配失败了，会**调用`new-handler`函数**，设计一个良好的new-handler函数
 + `new(std::nothrow) Widget`发生了两件事
@@ -665,12 +671,25 @@ public:
 + 使用nothrow new只能保证operator new不抛掷异常，不保证像“new (std::nothrow) Widget”这样的表达式绝不导致异常。
 
 #### 50、了解new和delete的合理替换时机
+
++ 结论
+  + 有许多理由需要写个自定的new和delete，包括改善效能、对hep运用错误进行调试、收集heap使用信息
+
 + 自己实现一个`operator new`，看看哪个开源比较强？
 + *什么场景下，需要自己实现一个operator new？*
 
 #### 51、编写new和delete时需固守常规
 
++ 结论
+  + operator new应该内含一个无穷循环，并在其中尝试分配内存，如果它无法满足内存需求，就该调用new-handler。它也应该有能力处理0 bytes申请。Class专属版本则还应该处理“比正确大小更大的（错误）申请”。
+  + operator delete应该在收到null指针时不做任何事。Class专属版本则还应该处理“比正确大小更大的（错误）申请”。
+
 #### 52、写了placement new也要写placement delete
+
++ 结论
+  + 当你写一个`palcement operator new`，请确定也写出了对应的`placement operator delete`。如果没有这样做，你的程序可能会发生隐微而时断时续的内存泄漏
+  + 当你声明`placement new`和`placement delete`，请确定不要无意识（非故意）地遮掩了它们的正常版本
+
 + `Widget *pw = new Widget;`有2个函数被调用：
 	+ 用以分配内存的operator new
 	+ Widget的default构造函数
@@ -683,13 +702,15 @@ public:
 #### 53、不要轻忽编译器的警告
 
 + 结论：
-  + 
+  + 严肃对待编译器发出的警告信息。努力在你的编译器的最高（最严苛）警告级别下争取“无任务警告”的荣誉。
+  + 不要过度依赖编译器的报警能力，因为不同的编译器对待事情的态度并不相同。一旦移植到另一个编译器上，你原本倚赖的警告信息有可能消失
 
 #### 54、让自己熟悉包括TR1在内的标准程序库
 
 + 结论：
   + C++标准程序库的主要机能由STL、iostream、locals组成。并包含C99标准程序库
-  + TR1添加了
+  + TR1添加了智能指针（shared_ptr）、一般化函数指针（function）、hash-based容器、正则表达式（regular expressions）以及另外10个组件的支持
+  + TR1自身只是一份规范。为获得TR1提供的好处，你需要一份实物。一个好的实物来源是boost。
 + C++98的标准库
 + TR1中的14个新组件
   + 智能指针：**非环形（acyclic）数据结构**
@@ -712,6 +733,7 @@ public:
 #### 55、让自己熟悉boost
 
 + 结论：
+  + Boost是一个社群，也是一个网站。致力于免费、源码开放、同僚复审的C++程序库开发。Boost在C++标准化过程中扮演深具影响力的角色
   + Boost提供许多TR1组件实现品，以及其它许多程序库
 
 ## 收获
