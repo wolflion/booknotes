@@ -48,6 +48,18 @@
                 <li class="toctree-l1"><a class="reference internal" href="../../01daily/">daily</a>
                 </li>
               </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../02ds/">ds</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../03cpp/">cpp</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../21tool/">cpp</a>
+                </li>
+              </ul>
               <p class="caption"><span class="caption-text">C++</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../20C%2B%2B/effectiveC%2B%2B/">《Effective C++》</a>
@@ -237,7 +249,27 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#chap7">chap7、回溯</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#73">7.3、组合问题中的回溯算法</a>
+    <li class="toctree-l3"><a class="reference internal" href="#71">7.1、算法设计思想</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#711">7.1.1、问题的解空间与解空间树</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#712">7.1.2、解空间树的动态搜索</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#713">7.1.3、回溯算法的求解过程</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#714">7.1.4、回溯算法的时间性能</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#72">7.2、图问题</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#721">7.2.1、深度优先搜索</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#722tsp">7.2.2、TSP问题</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#73">7.3、组合问题</a>
         <ul>
     <li class="toctree-l4"><a class="reference internal" href="#73101">7.3.1、0/1背包问题</a>
     </li>
@@ -389,6 +421,19 @@
 <li>最长公共子序列，这个我应该OK了，<em>尝试刷些题目看看</em></li>
 </ul>
 </li>
+<li>七、回溯：用在<strong>图、组合</strong><ul>
+<li><strong>重点在于递归</strong>（当然也有迭代的），基础是DFS</li>
+</ul>
+</li>
+<li>八、分支限界：用在<strong>图、组合</strong><ul>
+<li>感觉场景与（chap7、回溯）差不多，只不过它的基础是BFS</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>各种入门<ul>
+<li>动规入门，<strong>爬楼梯</strong></li>
+<li>回溯入门，<strong>全排列</strong></li>
 </ul>
 </li>
 </ul>
@@ -816,6 +861,13 @@ for i &lt;- 1 to n-1
 <li><a href="https://www.cnblogs.com/Pinging/p/7927499.html">算法复习周------“贪心问题之‘最优装载与背包问题’”</a></li>
 </ul>
 <h3 id="chap6">chap6、动态规划<a class="headerlink" href="#chap6" title="Permanent link">&para;</a></h3>
+<ul>
+<li>20230904忽然开窍了一下<ul>
+<li>先举例知道了<code>f(1)，f(2)，f(3)...</code>之后，要找到<strong><code>f(n)与f(n-1)</code>之间的关系</strong>，这是对于一维的</li>
+<li>对于二维的，就要找到<code>c[i,j=max{c[i,j-1],c[i-1,j]}</code>这样的关系</li>
+</ul>
+</li>
+</ul>
 <h4 id="_8">其它书籍<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h4>
 <ul>
 <li>2022-08-26，看了《算法图解》chap6的内容（背包、最长公共子串），<em>当时并没有完全理解</em>【要想一下 背包 问题，感觉那个二维图，我还是没真的懂】</li>
@@ -855,7 +907,34 @@ for i &lt;- 1 to n-1
 <p>6.5、本章小结</p>
 <p>6.6、习题</p>
 <h3 id="chap7">chap7、回溯<a class="headerlink" href="#chap7" title="Permanent link">&para;</a></h3>
-<h4 id="73">7.3、组合问题中的回溯算法<a class="headerlink" href="#73" title="Permanent link">&para;</a></h4>
+<ul>
+<li>可以把<strong>全排列</strong>作为回溯入门的例子</li>
+</ul>
+<h4 id="71">7.1、算法设计思想<a class="headerlink" href="#71" title="Permanent link">&para;</a></h4>
+<h5 id="711">7.1.1、问题的解空间与解空间树<a class="headerlink" href="#711" title="Permanent link">&para;</a></h5>
+<h5 id="712">7.1.2、解空间树的动态搜索<a class="headerlink" href="#712" title="Permanent link">&para;</a></h5>
+<h5 id="713">7.1.3、回溯算法的求解过程<a class="headerlink" href="#713" title="Permanent link">&para;</a></h5>
+<ul>
+<li>迭代回溯算法</li>
+<li>递归回溯算法<ul>
+<li><strong>重点是递归</strong></li>
+</ul>
+</li>
+</ul>
+<pre class="highlight"><code class="language-cpp">RECURSION_BACKTRACK(v,l) //v,l分别表示结果和层数
+if v is a complete solution
+    then UPDATE_SOLUTION(v)
+        UPDATE_BOUND()
+    else
+    for every node n(i) in the lth layer  //在l层
+        do v[l] &lt;- n(i)
+            if CONSTRAIN(v,l) and BOUND()
+                THEN RECURSION_BACKTRACK(v,l+1)</code></pre>
+<h5 id="714">7.1.4、回溯算法的时间性能<a class="headerlink" href="#714" title="Permanent link">&para;</a></h5>
+<h4 id="72">7.2、图问题<a class="headerlink" href="#72" title="Permanent link">&para;</a></h4>
+<h5 id="721">7.2.1、深度优先搜索<a class="headerlink" href="#721" title="Permanent link">&para;</a></h5>
+<h5 id="722tsp">7.2.2、TSP问题<a class="headerlink" href="#722tsp" title="Permanent link">&para;</a></h5>
+<h4 id="73">7.3、组合问题<a class="headerlink" href="#73" title="Permanent link">&para;</a></h4>
 <h5 id="73101">7.3.1、0/1背包问题<a class="headerlink" href="#73101" title="Permanent link">&para;</a></h5>
 <h5 id="732">7.3.2、八皇后问题<a class="headerlink" href="#732" title="Permanent link">&para;</a></h5>
 <ul>

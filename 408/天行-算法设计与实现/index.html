@@ -48,6 +48,18 @@
                 <li class="toctree-l1"><a class="reference internal" href="../../01daily/">daily</a>
                 </li>
               </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../02ds/">ds</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../03cpp/">cpp</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../21tool/">cpp</a>
+                </li>
+              </ul>
               <p class="caption"><span class="caption-text">C++</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../20C%2B%2B/effectiveC%2B%2B/">《Effective C++》</a>
@@ -151,6 +163,8 @@
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#41">4.1、概述</a>
         <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#410">4.1.0、常用技巧</a>
+    </li>
     <li class="toctree-l4"><a class="reference internal" href="#411">4.1.1、几大运算</a>
     </li>
         </ul>
@@ -161,9 +175,19 @@
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#_6">最后</a>
+    <li class="toctree-l2"><a class="reference internal" href="#_6">五、迭代&amp;递归</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#_7">履历</a>
+    <li class="toctree-l3"><a class="reference internal" href="#51">5.1、概述</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#52">5.2、迭代</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#53">5.3、递归</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_7">最后</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#_8">履历</a>
     </li>
         </ul>
     </li>
@@ -280,6 +304,7 @@
                 <h2 id="_1">《天行整理的算法设计与实现》<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
 <li>刷这个之前，还是要把DS给学好</li>
+<li>搞清楚<strong>迭代</strong>与<strong>递归</strong></li>
 </ul>
 <h3 id="_2">一、双指针思想<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <h4 id="11">1.1、概述<a class="headerlink" href="#11" title="Permanent link">&para;</a></h4>
@@ -497,6 +522,19 @@
 </ul>
 <h3 id="_5">四、进制与位<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <h4 id="41">4.1、概述<a class="headerlink" href="#41" title="Permanent link">&para;</a></h4>
+<ul>
+<li>按位与，全1时为1，<code>&amp;</code></li>
+<li>按位或，有1时为1，<code>|</code></li>
+<li>按位<strong>异或</strong>，两位二进制不同为1，<strong>相同为0</strong>，<code>^</code>，<strong>没有进位的加</strong></li>
+<li>按位<strong>取反</strong></li>
+<li>左移，<code>n&lt;&lt;1</code>，相当于<code>2*n</code>，低位以0补充</li>
+<li>右移，<code>n&gt;&gt;1</code>，相当于<code>n/2.0</code>，高位以0补充，<em>疑问，lionel，符号位怎么办？</em></li>
+</ul>
+<h5 id="410">4.1.0、常用技巧<a class="headerlink" href="#410" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>(n&gt;&gt;k)&amp;1</code>，<strong>n的二进制，第k位是0还1</strong>，如果值为1，则第k位是1.</li>
+<li><code>(n&amp;1)==1</code>，<strong>判断奇偶</strong>，</li>
+</ul>
 <h5 id="411">4.1.1、几大运算<a class="headerlink" href="#411" title="Permanent link">&para;</a></h5>
 <ul>
 <li>或<ul>
@@ -518,9 +556,17 @@
 <h4 id="ref_3">ref<a class="headerlink" href="#ref_3" title="Permanent link">&para;</a></h4>
 <ul>
 <li>这部分知识2022-01-06整理过，<strong>本质还是没有掌握几大位运算</strong>，同时再跟一些场景关联与理解起来才行</li>
+<li><a href="https://blog.csdn.net/m0_64183293/article/details/122519405">c++之位运算（详解，初学者绝对能看懂）</a></li>
 </ul>
-<h3 id="_6">最后<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
-<h4 id="_7">履历<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h4>
+<h3 id="_6">五、迭代&amp;递归<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<ul>
+<li>感觉<strong>递归</strong>是其它的基础，比如<strong>分治</strong>也会用到递归，<strong>回溯</strong>也会用到递归</li>
+</ul>
+<h4 id="51">5.1、概述<a class="headerlink" href="#51" title="Permanent link">&para;</a></h4>
+<h4 id="52">5.2、迭代<a class="headerlink" href="#52" title="Permanent link">&para;</a></h4>
+<h4 id="53">5.3、递归<a class="headerlink" href="#53" title="Permanent link">&para;</a></h4>
+<h3 id="_7">最后<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<h4 id="_8">履历<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h4>
 <ul>
 <li>2023年1月28号的时候，分文件整理了bfs、dfs、双指针、滑动窗口、位运算，但<strong>没有放在一页好，也没有复习，也没有整理得彻底</strong>，2023年8月10号的时候，<strong>把前4个，重新整理到一页上，这样便于多复习</strong></li>
 </ul>

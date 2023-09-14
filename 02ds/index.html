@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>daily - lionel的技术笔记</title>
+    <title>ds - lionel的技术笔记</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "daily";
-        var mkdocs_page_input_path = "01daily.md";
+        var mkdocs_page_name = "ds";
+        var mkdocs_page_input_path = "02ds.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -44,20 +44,24 @@
                 <li class="toctree-l1"><a class="reference internal" href="..">简介</a>
                 </li>
               </ul>
-              <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="./">daily</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#_1">经典题</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#2023q3">2023Q3</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#2023q2">2023Q2</a>
-    </li>
-    </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../01daily/">daily</a>
                 </li>
               </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../02ds/">ds</a>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">ds</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#chap2">chap2、线性表</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#21">2.1、构建时分头插，尾插</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap3">chap3、栈和队列</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#ds_header">ds_header</a>
+    </li>
+    </ul>
                 </li>
               </ul>
               <ul>
@@ -195,7 +199,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-      <li>daily</li>
+      <li>ds</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -204,31 +208,179 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <ul>
-<li><a href="https://gitee.com/fewolflion/BookNote/tree/master/01lioneloutput/51daily">daily</a></li>
-</ul>
-<h2 id="2023">2023年<a class="headerlink" href="#2023" title="Permanent link">&para;</a></h2>
-<h3 id="_1">经典题<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+                <h2 id="ds">ds相关<a class="headerlink" href="#ds" title="Permanent link">&para;</a></h2>
+<h3 id="chap2">chap2、线性表<a class="headerlink" href="#chap2" title="Permanent link">&para;</a></h3>
+<h4 id="21">2.1、构建时分头插，尾插<a class="headerlink" href="#21" title="Permanent link">&para;</a></h4>
 <ul>
-<li>全排列（作为<strong>回溯</strong>）</li>
-<li>爬楼梯（作为<strong>动态规划</strong>）</li>
+<li><strong>头插</strong>，在链表的头部结点后面插入，<strong>简单，但是逆序</strong></li>
+<li><strong>尾插</strong>，在链表的尾部结点后面插入，<strong>有点复杂，但顺序与插入时一致，需要定义一个<code>rear</code>变量，每次去重新指向最后一个，没有时，就指向head</strong></li>
 </ul>
-<h3 id="2023q3">2023Q3<a class="headerlink" href="#2023q3" title="Permanent link">&para;</a></h3>
+<h3 id="chap3">chap3、栈和队列<a class="headerlink" href="#chap3" title="Permanent link">&para;</a></h3>
+<h3 id="ds_header">ds_header<a class="headerlink" href="#ds_header" title="Permanent link">&para;</a></h3>
 <ul>
-<li></li>
+<li>ADT的重点，还是在于<strong>自己知道，怎么去图形化表述</strong>，对着图把代码过一遍，然后自己只要记住题是怎么样的，<strong>代码也就能写出来了</strong></li>
+<li>链表的节点/链表，<strong>定义为同义词</strong>，自己不要被绕进去，分不清楚，<code>typdef struct _node {}Node; Node listHead;</code></li>
+<li>那么链表插入、删除这些有循环双链表怎么整，<strong>具体顺序</strong><ul>
+<li>1、先处理自己要操作的（p结点之前或之后插入s，<strong>当前要处理是s，把s的数据，各种字段整清楚</strong>）</li>
+<li>2、处理前驱（就是s的前驱，各个字段理顺）</li>
+<li>3、处理后继（如果有的话）</li>
 </ul>
-<h3 id="2023q2">2023Q2<a class="headerlink" href="#2023q2" title="Permanent link">&para;</a></h3>
-<ul>
-<li><a href="https://gitee.com/fewolflion/BookNote/blob/master/01lioneloutput/51daily/01%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/20230402%E5%90%8C%E6%AD%A5%EF%BC%8C%E4%BA%92%E6%96%A5%EF%BC%8CPV%E6%93%8D%E4%BD%9C.md">20230402同步，互斥，PV操作</a>，<em>互联网</em></li>
-<li><a href="https://gitee.com/fewolflion/BookNote/blob/master/01lioneloutput/51daily/03%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/20230410%E5%BC%80%E5%A7%8B%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B.md">20230410开始网络编程</a>，原型《TCP/IP网络编程》的Part01</li>
-<li><a href="https://gitee.com/fewolflion/BookNote/blob/master/01lioneloutput/51daily/02%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/12C++%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/00new%E5%92%8Cdelete/20230413new-delete%E4%BD%BF%E7%94%A8.md">20230413new-delete用法</a>，<em>互联网</em></li>
+</li>
+<li>栈的top怎么理解，<strong>下一个可插入元素的位置</strong>，就是顶部元素的上一个指针，getop的话就得<code>st-&gt;top-1</code></li>
 </ul>
+<pre class="highlight"><code class="language-cpp">//chap2、线性表
+#define MaxSize 100  //在线性表里写的是50，栈和队列（章节里是100）
+typedef char ElemType;
+typedef struct {
+    ElemType elem[MaxSize];
+    int length;
+}SqList;
+
+// 单链表、循环单链表
+typedef struct LNode{
+    ElemType data;
+    struct LNode* next;
+}LinkList;
+
+// 双链表、循环双链表
+typedef struct DNode {
+    ElemType data;
+    struct DNode* prior;
+    struct DNode* next;
+}DLinkList;
+//可以另起一行写成 Node listhead（节点定义一个头结点），不建议在后面直接写成*linklit，然后另起一行写linklist list;这时list是个野指针，节点内存分配，不是头结点
+
+//疑问：循环单、双链表与 单、双链表的区别在哪？【最终无非就是最后一个不是NULL，而是L？】
+
+//chap3、栈和队列
+//如果需要，定义栈和队列这样的ADT时，完全可以再增加一个int index，用来增加索引
+//这里的top怎么理解？【一般记成，下一个可插入元素的位置】
+typedef struct {
+    ElemType elem[MaxSize];
+    int top;
+}SqStack;
+
+typedef struct linknode{
+    ElemType data;
+    struct linknode* next;
+}LiStack;
+//疑问，链栈的空栈 怎么表示？
+
+typedef struct {
+    ElemType elem[MaxSize];
+    int front, rear;
+}SqQueue;
+
+// 链队列  【就有队头，队尾，然后 数据类型也是 队列的节点，即 把某个节点当作 队头，队尾】
+
+typedef struct qnode {
+    ElemType data;
+    struct qnode* next;
+}QNode;  //这只是队列的节点
+
+typedef struct {
+    QNode* front;
+    QNode* rear;
+}LiQueue;
+
+//chap4、串，我没写
+
+//chap5、数组和稀疏矩阵
+
+//chap6、递归
+
+//chap7、树  【对于链队列而言，是有front和rear的，对于树就没有，所以树的节点，也能最终链接成森林】
+// 这里的树，更多的是指向二叉树
+// 无非就是数据、左孩子、右孩子
+typedef struct node {
+    ElemType data;
+    struct node* lchild;
+    struct node* rchild;
+}BTNode;
+
+//树的存储形式有多种，可以自己写下
+
+//线索二叉树
+typedef struct node {
+    ElemType data;
+    int ltag, rtag;
+    struct node* lchild;
+    struct node* rchild;
+}TBTNode;
+
+// 哈夫曼树
+#define N 50      // 叶子结点数
+#define M 2*N-1   // 树中结点总数
+typedef struct {
+    char data[5]; //结点值
+    int weight;//权重
+    int parent;
+    int lchild;
+    int rchild;
+}HTNode; //HauffmanTree
+
+typedef struct {
+    char cd[N];//存放哈夫曼树
+    int start;
+}HCode;
+
+//chap8、广义表
+
+// chap9、图
+typedef int InfoType;
+#define MAXV 100  //最大顶点个数
+//邻接矩阵  【首先想一下，邻接矩阵怎么存，矩阵里面存的是顶点与顶点的边，二维数组，但顶点怎么表示呢，顶点数目和边的数目呢】
+typedef struct {
+    int no;
+    InfoType info;
+}VertexType;  //顶点类型
+
+typedef struct {
+    int edges[MAXV][MAXV];
+    int vexnum, arcnum;
+    VertexType vexs[MAXV];
+}MGraph;
+
+//定义邻接表  【表头结点、边的结点】
+typedef struct ANode {
+    int adjvex;
+    struct ANode* nextarc;
+    InfoType info;
+}ArcNode;
+
+typedef int Vertex;
+typedef struct Vnode {
+    Vertex data;
+    ArcNode* firstarc;
+}VNode;
+
+typedef VNode AdjList[MAXV];
+typedef struct {
+    AdjList adjlist;
+    int n, e;
+}ALGraph;
+
+
+//chap10、查找
+//相当于一个ADT，而不是仅仅是从数组里查找
+#define MAXL 100
+typedef int KeyType;
+typedef char InfoType[10];
+typedef struct {
+    KeyType key;
+    InfoType data;
+}NodeType;
+
+//chap11、内排列
+
+//chap12、外排列
+</code></pre>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href=".." class="btn btn-neutral float-left" title="简介"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../02ds/" class="btn btn-neutral float-right" title="ds">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../01daily/" class="btn btn-neutral float-left" title="daily"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../03cpp/" class="btn btn-neutral float-right" title="cpp">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -251,10 +403,10 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href=".." style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../01daily/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../02ds/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../03cpp/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
