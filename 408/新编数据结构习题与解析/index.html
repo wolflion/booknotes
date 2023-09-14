@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>新编数据结构习题与解析 - lionel的技术笔记</title>
+    <title>《新编数据结构习题与解析》 - lionel的技术笔记</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "\u65b0\u7f16\u6570\u636e\u7ed3\u6784\u4e60\u9898\u4e0e\u89e3\u6790";
+        var mkdocs_page_name = "\u300a\u65b0\u7f16\u6570\u636e\u7ed3\u6784\u4e60\u9898\u4e0e\u89e3\u6790\u300b";
         var mkdocs_page_input_path = "408\\\u65b0\u7f16\u6570\u636e\u7ed3\u6784\u4e60\u9898\u4e0e\u89e3\u6790.md";
         var mkdocs_page_url = null;
       </script>
@@ -57,7 +57,7 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../21tool/">cpp</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../21tool/">tool</a>
                 </li>
               </ul>
               <p class="caption"><span class="caption-text">C++</span></p>
@@ -76,7 +76,7 @@
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">基础知识</span></p>
-              <ul>
+              <ul class="current">
                   <li class="toctree-l1"><a class="reference internal" href="../%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA/">《操作系统导论》</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../%E5%A4%A7%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">《大话设计模式》</a>
@@ -90,6 +90,160 @@
                   <li class="toctree-l1"><a class="reference internal" href="../%E5%A4%A9%E8%A1%8C-%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《天行-算法设计与实现》</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%95%99%E7%A8%8B-%E6%9D%8E%E6%98%A5%E8%91%86/">《数据结构教程》</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">《新编数据结构习题与解析》</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#chap2">chap2、线性表</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#21">2.1、线性表的基本概念</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#22">2.2、顺序表的算法</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#23">2.3、单链表的算法</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#24">2.4、双链表的算法</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#25">2.5、循环链表的算法</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap3">chap3、栈和递归</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#31">3.1、栈的基本概念</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#311">3.1.1、知识点</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#32">3.2、顺序栈的算法</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#321">3.2.1、知识点</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#33">3.3、链栈的算法</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#331">3.3.1、知识点</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#34">3.4、递归</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#351">3.5.1、知识点</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#352">3.5.2、习题</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap4">chap4、队列</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#41">4.1、队列的基本概念</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#411">4.1.1、知识点</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#42">4.2、顺序队列的算法</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#421">4.2.1、知识点</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#43">4.3、链队的算法</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#431">4.3.1、知识点</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#432">4.3.2、</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap9">chap9、图</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#91">9.1、图的基本概念</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#911">9.1.1、知识点</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#92">9.2、图的遍历</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#921">9.2.1、知识点</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#93">9.3、最小生成树</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#931">9.3.1、知识点</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#94">9.4、最短路径</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#941">9.4.1、知识点</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#95aov">9.5、AOV网和拓扑排序</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#96aoe">9.6、AOE网与关键路径</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#961">9.6.1、知识点</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap11">chap11、内排序</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#111">11.1、插入（直接插入、希尔）</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1111">11.1.1、知识点</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1112">11.1.2、习题</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#112-">11.2、选择（简单选择、堆-优先队列）</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1121">11.2.1、知识点</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1122">11.2.2、习题</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#113">11.3、交换（冒泡、快速）</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1131">11.3.1、知识点</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1132">11.3.2、习题</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#114">11.4、归并</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1141">11.4.1、知识点</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1142">11.4.2、习题</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#115">11.5、基数</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1151">11.5.1、知识点</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1152">11.5.2、习题</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1122_1">11.2.2、习题</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    </ul>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">网络编程</span></p>
@@ -189,7 +343,8 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-      <li>新编数据结构习题与解析</li>
+          <li>基础知识 &raquo;</li>
+      <li>《新编数据结构习题与解析》</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -861,6 +1016,10 @@ void Merge(SqList R[], int low, int mid, int high){
               
             </div>
           </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%95%99%E7%A8%8B-%E6%9D%8E%E6%98%A5%E8%91%86/" class="btn btn-neutral float-left" title="《数据结构教程》"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../10network/TCPIP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="btn btn-neutral float-right" title="《TCP/IP网络编程》">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
 
   <hr/>
 
@@ -882,6 +1041,10 @@ void Merge(SqList R[], int low, int mid, int high){
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
+      <span><a href="../%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%95%99%E7%A8%8B-%E6%9D%8E%E6%98%A5%E8%91%86/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../10network/TCPIP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
