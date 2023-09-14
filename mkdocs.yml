@@ -38,6 +38,9 @@ markdown_extensions:
 nav:
     - 简介: 'index.md'
     - daily: '01daily.md'
+    - ds: '02ds.md'
+    - cpp: '03cpp.md'
+    - cpp: '21tool.md'
     - C++: 
         - 《Effective C++》: '20C++/effectiveC++.md'
         - 《深度探索C++对象模型》: '20C++/深度探索C++对象模型.md'
