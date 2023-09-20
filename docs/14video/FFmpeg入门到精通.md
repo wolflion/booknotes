@@ -30,17 +30,38 @@
 
 #### 2.2、ffprobe高级参数
 
++ 用于**查看多媒体文件的信息**，`ffprobe --help`
++ `ffprobe -show_packets input.flv`，**show_packets**查看的多媒体数据包信息使用PACKET标签括起来
++ `-show_data`
++ `-show_format`，分析多媒体的封装格式
++ `-show_frames`，查看第一帧的信息
++ `-show_streams`，查看多媒体文件中的流信息，*lionel，这里面的流，怎么理解？*
++ 可以把文件格式转换成**json，csv以及其它**，只需要`ffprobe -of json或csv`
++ **select_stream**，只看音频（a）、视频（v）、字幕（s），`ffprobe -show_frames -select_streams v -of xml input.mp4`
+
 #### 2.3、ffplay常用命令
+
++ 需要SDL-1.2，才能有效生成ffplay。*lionel，我不知道这么理解，正不正确*
 
 ##### 2.3.1、ffplay常用参数
 
 + `ffplay --help`
++ `ffplay -ss 30 -t 10 inpu.mp4`，从视频的第30秒开始，播放10秒
++ `ffplay -window_title "播放测试" rtmp://up.v.test.com/live/stream`，播放器的窗口显示标题是“播放测试”，但打开网络直播流
 
 ##### 2.3.2、ffplay高级参数
 
++ 用time，查看命令运行时长
+
 ##### 2.3.3、ffplay的数据可视化分析应用
 
++ `ffplay -vismv pf output.mp4`，查看B帧预测与P帧预测信息，希望将信息在窗口中显示出来
+
 #### 2.4、小结
+
++ ffmpeg主要用于音视频编解码
++ ffprobe主要用于音视频内容分析
++ ffplay主要用于音视频播放、可视化分析
 
 ### chap3、FFmpeg转封装（83/300）
 
@@ -48,8 +69,20 @@
 
 ##### 3.1.1、MP4格式标准介绍
 
-+ 1、
-
++ 0、了解MP4前要知道的几个概念
+  + MP4文件由许多个Box与FullBox组成
+  + 每个Box由Header和Data两部分组成
+  + FullBox是Box的扩展，其在Box结构的基础上，在Header中增加8位version标志和24位的flags标志
+  + Header包含了整个Box的长度的大小（size）和类型（type），size为0时，代表这个Box是文件的最后一个Box。
+  + Data为Box的实际数据，可以是纯数据，也可以是更多的子Box
+  + 当一个Box中的Data是一系列的子Box时，这个Box又可以称为Container Box
+  + **MP4常用参考标准排列方式**
+    + 一到六级？
++ 1、moov容器
+  + 定义了一个MP4文件中的数据信息，类型是moov，是一个容器Atom，至少包含以下的一种
+    + mvhd标签
+    + cmov标签
+    + rmra标签
 + 13、解析edts容器
 
 ##### 3.1.2、MP4分析工具
