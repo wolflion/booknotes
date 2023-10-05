@@ -9,6 +9,10 @@
   + **运算符重载是基础**，衍生了仿函数，lambda表达式，智能指针
 + chap4、模拟STL三大件
   + 容器、迭代器、算法
++ chap5、
+  + 遗留：P145，P150，还有本章节中的代码没有输入，hash相关的要再想一想；multi_set在刷题中的用处
++ chap6、
+  + P178
 
 ### chap1、C++泛型技术基础--模板
 
@@ -525,34 +529,44 @@ int main(){
 ### chap5、容器及其应用
 
 + 20201104
++ 负责数据的存储和管理，按照数据元素的组织方式分为
+  + 序列容器：向量vector，列表list，双向队列deque
+  + 关联容器：set，map
 
 ####  5.1 向量vector
 
-+ 占用连续内存，随机访问，下标和`at()`操作，**尾部开口的设计**，`push_back()`和`pop_back()`，重载了`operator=`，**尾部操作效率最高**（*也只有尾部能操作吧*）
++ 占用连续内存，随机访问，下标和`at()`操作，**尾部开口的设计**，尾部操作方法为`push_back()`和`pop_back()`，重载了`operator=`，**尾部操作效率最高**（*也只有尾部能操作吧*）
 
 ##### 1、vector对象的定义及初始化
 
 + vector常用构造函数
   + `vector();`
-  + `vector(vector&& _Right);`
-  + `vector(size_type Count);`
-  + `vector(size_type _Count, const Type& val);`
+  + `vector(vector&& _Right);`//使用向量初始化
+  + `vector(size_type Count); //只有数量的话，初值为0？lionel`
+  + `vector(size_type _Count, const Type& val);//设定大小并初始化值`
   + `template<class InputIterator> vector(InputIterator _First,InputIterator _Last); // 以迭代器_First和_Last之间的元素初始化该向量`
 + 例5-1 测试vector中的构造函数
-+ 读向量容器元素的操作
+  + `vector<int> v2(5,2);//长度为5，初始值为2的int型向量`
++ 表5-2，读向量容器元素的操作
   + `reference front();  const_reference front() const;` 返回第一个元素
   + `reference back();  const_reference back() const;` 返回最后一个元素
-+ 各种用于改变向量容器中数据的成员函数
++ 表5-3，各种用于改变向量容器中数据的成员函数
+  + `[]`
+  + `at()`
   + `clear()`
   + `erase(position)`
-  + `insert()`
+  + `erase(begin,end)`
+  + `insert(position,elem)`
+  + `insert(position,n,elem)`
   + `push_back(elem)`
   + `pop_back()`
   + `resize(num)`
   + `resize(num,elem)`
-+ 例5-2 编写一个程序
++ 例5-2 编写一个程序，在程序中使用一个可以存放整型（int）数据的vector对象，并在其尾部逐次压入103、765、208、435数据，然后做如下工作：（1）分别使用函数at()以及下标法在显示器上显示向量内容（2）
 + 表5-4：计算向量容器大小的操作
+  + `capacity()`，在当前存储空间下，容器vecCont可容纳元素的数目
   + `bool empty() const;`
+  + `size()`，容器当前所存储元素的数目（向量长度）
   + `size_type max_size() const;`
 + 例5-3 编程程序，测试“表5-4：计算向量容器大小的操作”的成员函数，了解其功能
 + 新特性
@@ -564,25 +578,49 @@ int main(){
 
 ####  5.2、列表list
 
-+ 核心是**双向链表**，**头和尾插入和删除**，`push_back()`还有`push_front()`，当然对有应的`pop_()`，**不支持随机操作和`at()`操作，只能从到尾或从尾到头顺序地操作**
++ 核心是**双向链表**，**头和尾插入和删除**，`push_back()`还有`push_front()`，当然对有应的`pop_front()`和`pop_back()`，**不支持随机操作和`at()`操作，只能从到尾或从尾到头顺序地操作**
 + 表5-5：使用list构造函数
+  + `list()`
+  + `list(size_type n)`  //包含n个元素的列表
+  + `list(const list& x)`
+  + 可以用迭代器的下标
 + 表5-6：数据元素插入和删除
   + `assign()`
+    + vector和list都支持这个用法，**对容器整体赋值**
+  + `push_back()`
+  + `remove_if()`
+  + `remove()`
+  + `unique()` ，删除相邻重复元素
 + 例5-5.cpp，在程序中观察push_front()、push_back()以及assign()函数的功能
 + 表5-7，可以返回list关键迭代器的函数
+  + `begin()`
+  + `end()`
+  + `rbegin()`
+  + `rend()`
 + 表5-8，可以提供list状态的函数
+  + `empty()`
+  + `max_size()`
+  + `size()`
+  + `resize()`
+  + `reverse`，list自己有成员元素 反转的
+  + `sort`
+  + `merge`
+  + `swap`
 
 #### 5.3、双向队列deque
 
-+ **双向开口**，尾和头部操作的函数，`push_back()`还有`push_front()`，当然对有应的`pop_()`，**类似于链表**【分多个段，每个段内连续】
-+ 维护了一个**map的指针数组**，来维护段首地址，这样从map访问deque空间就是连续的，*lionel，具体的实现，还得看下代码*
++ **双向开口**，尾部和头部都可以操作的函数，`push_back()`还有`push_front()`，当然对有应的`pop_back()`和`pop_front()`，**类似于链表**【分多个段，每个段内连续】
++ 维护了一个**map的指针数组**，来维护段首地址，这样从map访问deque空间就是连续的，*lionel，具体的实现，还得看下代码*，P145
 + deque的特点
   + 支持随机访问（即支持下标`()`和`at()`），但性能没有vector好
-  + 可以在
-  + 两端
+  + 可以在内部进行插入和删除操作，但性能不及list
+  + 两端能够快速插入和删除元素，vector只能尾部
   + 元素存取和迭代器操作会稍微慢一些，因为deque的内部结构会多一个间接过程
   + 使用内存比vector和list合理
 + 表5-9：deque的常用构造函数
+  + `deque()`
+  + `deque(size_type n)`
+  + `deque(const deque& x)`
 + deque有以下两点与vector不同
   + deque不提供容量操作`capacity()`和`reverse()`
   + deque直接提供函数完成首尾元素的插入和删除
@@ -593,7 +631,8 @@ int main(){
 
 #### 5.4、STL关联式容器
 
-+ 带有键值的数据叫做关联式容器
++ 关联式容器主要用于存储**具有固有顺序的已序容器**，这种容器能按照数据的固有顺序对数据进行管理。典型的是**映射**。带有键值的数据叫做关联式容器
+  + **键值、实值**相等，就是set
 + 数据本身并无顺序，那么容器的各数据元素存储单元就必须具有固定的顺序，为**序列式容器**，如果数据本身有序，则容器没有必要一定有序
 + 原本无固定顺序的数据叫**可序数据**，具有固定顺序的数据叫**已序数据**
 
@@ -614,7 +653,7 @@ PAIR_IF pair1 = make_pair(18,3.14f);
 
 
 
-##### 2、STL对关联数据的组织与存储
+##### 2、STL对关联数据的组织与存储   ，P150
 
 + 二分查找树，*后面没有完全再看看*
 + 平衡二叉树
@@ -625,11 +664,12 @@ PAIR_IF pair1 = make_pair(18,3.14f);
 #### 5.5、map容器
 
 + 以红黑树形式，**pair形式出现的键-值对，叫做映射（map），set中的数据既是键值也是实值，叫做集合（set）**
++ 以**数据的键值**排序
 
 ##### 5.5.1、map容器的定义
 
 + *还能带分配器，是啥意思，是不是之前的纸质笔记，写得有问题，lionel*
-
++ 空间分配器，这个后面看到了再来看
 + 例5-7.cpp，使用map的默认构造函数创建一个map对象，然后使用insert()函数向其中插入11个pair数据
 + 例5-8.cpp
 + 例5-9.cpp，使用不同的构造函数常见map容器
@@ -657,13 +697,16 @@ mapStudent[1]="student_one";
 + 2、count()和find()方法
   + 例5-14.cpp
 + 3、lower_bound()和upper_bound()方法
+  + 返回键值空间的上界和下界，*有啥用？lionel*
   + 例5-15.cpp
 + 4、erase()方法
+  + 有3种重载形式
   + 例5-16.cpp
 
 ##### 5.5.4、multimap容器
 
 + 例5-17.cpp，multimap容器应用示例程序
+  + *应用中，这个不太会用啊*
 
 #### 5.6、set容器
 
@@ -675,17 +718,30 @@ mapStudent[1]="student_one";
 
 ##### 5.7.1、hash表基础
 
++ 提出的背景：
+  + 有{1,7,9,10,23}5个元素，如果**以存储数据单元的地址查找数据**就需要23个空间，但现在用了一个**函数关系**代替之前的**1比1**的关系
+
++ 散列表的链表法中有如下几个常用术语
+  + 节点：链表中的节点，主要内容就是**用户数据**
+  + 桶子（bucket）：数组元素，
+  + 负载系数
+
 ##### 5.7.2、hash容器
 
 + C++11才纳入标准
-
++ 表5-10，C++11标准库的四种散列表
+  + unordered_set
+  + unordered_multiset
+  + unordered_map
+  + unordered_multimap
 + 例5-19.cpp，unordered_map的应用示例
+  + `unordered_map<string, int, StrHash, StrCompare> StrMap;` //相当于后2个是指定的，lionel，要看一下unordered_map的原型，后面2个都是定义的类
 
 ### chap6、通用算法
 
 + 20201104
-
-+ 模板技术解决了算法的**类型通用**，迭代器解决了算法的**容器通用**
++ STL以函数模板形式向用户提供了大量通用算法
++ 通用算法是**迭代器技术与函数模板技术**相结合的产物，模板技术解决了算法的**类型通用**，迭代器解决了算法的**容器通用**
 
 #### 6.1、通用算法的参数
 
@@ -706,20 +762,26 @@ mapStudent[1]="student_one";
   + `result = find_first_of(Vect1.begin(), Vect1.end(),(Vect1.begin()+3),(Vect1.end()-2));`
   + swap_ranger()注意事项
 + 3、迭代器类型对通用算法的限制及容器特有方法
+  + **迭代器**是裸指针的类封装，从而屏蔽了裸指针的一些基础功能而使之成为可以操作不同数据的安全指针。
+  + 容器的种类繁多从而导致了迭代器的种类繁多
   + 将迭代器从强到弱规范出5个种类（等级）的迭代器类型
-    + 随机迭代器（random access）
+    + 随机迭代器（random access），**具有裸指针的全部功能**
     + 双向迭代器（bidirectional）
     + 前向迭代器（forward）
     + 输入迭代器（input）
     + 输出迭代器（output）
-  + *本节，没太看懂全部啊，lionel*
+  + *本节，没太看懂全部啊，lionel*  P178
 
 ##### 6.1.2、辅助参数
+
++ **常量参数**，用来指定运算时所需要的系统、偏移量、极限值等。
 
 + 格式
   + `alg(__first,__last,__params);`，**一般find()就这样**，`result = find(Vect.begin(),Vect.end(),num_to_find);`
 
 ##### 6.1.3、谓词参数
+
++ P180
 
 + STL算法可以**函数、函数对象、lambda表达式**作为参数，目的是，**为了向算法传递用户自己的功能代码，从而便于实现通用算法的个性化和多样化**
 
@@ -730,21 +792,25 @@ mapStudent[1]="student_one";
   + **调用**：用户程序使用系统程序
   + **回调**：系统程序使用用户程序
   + **回调函数**：用户提供的为系统程序所调用的程序段
-  + 例6-1.cpp
+  + 例6-1.cpp，在程序中创建一个向量对象并将其初始化，然后调用通用算法for_each，分别用lambda表达式、函数和函数对象作为谓词在计算机屏幕上显示向量内容
+    + `for_each(Vect.begin(), Vect.end(), print)`，这个print是个函数，这里用函数名
+    + `for_each(Vect.begin(), Vect.end(), printd());`这个printd是个类，重载了()，**成为仿函数，即 函数对象**
 + 3、STL对谓词的规范
   + 一元、二元谓词
     + `struct unary_function{}`
     + `struct binary_function{}`
   + 例6-2.cpp，按照unary_function格式定义谓词is_negative的程序示例
-  + *这里面有个疑问的，lionel*，`remove_if(Vect.begin(),Vect.end(),is_negative);`，*为什么后面的，不需要`()`了*
+    + `struct is_negative : public unary_function<int,bool>{}`，用处在于继承了一元、二元谓词
+    + `remove_if(Vect.begin(),Vect.end(),is_negative());`
   + 常用的STL预设二元谓词模板
-    + less<T>
-    + less_equal<T>
-    + equal<T>
-    + not_equal<T>
-    + greater_equal<T>
-    + greater<T>
-    + not2<B>
+    + `less<T>`
+    + `less_equal<T>`
+    + `equal<T>`
+    + `not_equal<T>`
+    + `greater_equal<T>`
+    + `greater<T>`
+    + `not2<B>`
+    + *lionel，以上的用法，我就不太确定*
   + 上面的问题，就是**谓词，与谓词函数的区别**，目前啥区别，暂时不知道
     + *想到了，本身传的是函数名*
 
@@ -860,13 +926,19 @@ stack<int, vector<int>>b;
 + **双向**，使用**双端开口**的list或deque作为核心，默认deque
 + 7-3.cpp：对STL提供的queue适配器进行测试
   + `queue<int> b;`**表示其使用的是默认的基本容器**
+  + 但示例代码中用的是`queue<int,list<int>>a;，使用list作为底层结构的单向队列`
 
 ##### 7.2.3、priority_queue适配器
 
-+ *本节，未读*
-+ 7-4.cpp：编写一个堆排序程序
-+ 7-5.cpp：测试priority_queue的构造函数
-+ 7-6.cpp：调用了优先权队列其他成员方法的程序示例
++ *本节，未读*，P266
++ 1、数组与完全二叉树
++ 2、堆与堆排序
++ 3、堆的创建
++ 4、堆排序
+  + 7-4.cpp：编写一个堆排序程序
++ 5、priority_queue及其常用方法
+  + 7-5.cpp：测试priority_queue的构造函数
+  + 7-6.cpp：调用了优先权队列其他成员方法的程序示例
 
 #### 7.3、迭代器适配器
 
@@ -933,6 +1005,10 @@ copy(Lst.begin(), Lst.end(), insert_it);
 
 #### 7.4、函数对象适配器
 
++ 函数对象的优点
+  + 1、函数对象可以具有自己有数据，像一个独立的小程序，用起来比函数要方便灵活得多
+  + 2、函数对象具有类型，所以把它作为通用算法的谓词参数时便于算法的承载
+
 ##### 7.4.1、函数对象的适配
 
 + **函数对象的适配器仍然是一个函数对象**
@@ -943,17 +1019,27 @@ copy(Lst.begin(), Lst.end(), insert_it);
 ##### 7.4.2、函数对象配接器
 
 + 例7-16.cpp，在算法remove_if中验证配接器bind2nd的功能
+  + **函数对象配接器**，提供了一些能替用户完成定义和调用这些适配器的辅助函数
+  + bind2nd本质就是调用了`binder2nd()`，要了解一下这个原型
+  + [cpp-bind2nd](https://cplusplus.com/reference/functional/bind2nd/?kw=bind2nd)
 + 1、简单配接器
   + 表7-4，简单配接器
+    + `bind1st(op,value)`
+    + `bind2nd(op,value)`
+    + `not1(op)`
+    + `not2(op)`
   + 例7-17.cpp，在算法remove_if中验证配接器bind2nd的功能
+    + `remove_if(Vect.begin(),Vect.end(),bind2nd(greater<int>(),100));`//移出向量中所有大于100的元素
   + 例7-18.cpp，在算法sort中验证配接器not2的功能
 + 2、对成员函数进行配接的函数配接器
   + 表7-5，对成员函数进行配接的函数配接器
     + `mem_fun_ref(op)`，调用op，op是某对象的一个const成员函数
+    + `mem_fun(op)`
   + 例7-19，验证配接器mem_fun_ref(op)和mem_fun(op)的功能
     + `for_each(coll.begin(),coll.end(),mem_fun_ref(&testCls::print));`
 + 3、针对一般函数（非成员函数）而设计的函数配接器
   + 表7-6，针对一般函数（非成员函数）而设计的函数配接器
+    + `ptr_fun(op)`，等同调用了函数op(param)
   + 例7-20，验证配接器mem_fun_ref(op)和mem_fun(op)的功能
 + 4、用户自定义函数对象配接器
   + 例7-21，定义一个用户函数对象并在transform算法中利用配接器将其作为谓词使用
