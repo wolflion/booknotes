@@ -123,7 +123,7 @@
               </ul>
               <p class="caption"><span class="caption-text">视频</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../../14video/FFmpeg%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/">《FFmpeg入门到精通》</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/FFmpeg%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/">《FFmpeg入门到精通》</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../14video/WebRTC%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/">《WebRTC权威指南》</a>
                   </li>
@@ -169,6 +169,8 @@
     <li class="toctree-l4"><a class="reference internal" href="#23">2、3种错误处理的方法</a>
     </li>
         </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#45">4.5、</a>
     </li>
         </ul>
     </li>
@@ -290,6 +292,7 @@
 <li><a href="https://blog.csdn.net/weixin_43954951/article/details/125821879">《剑指offer》所有题目解法思路与出现频率汇总</a>，<em>在这个里面找思路，便于自己记一下</em></li>
 </ul>
 </li>
+<li>2023-10月份开始有意识的再重看每道题，看看之前不会的题目是不是现在能看懂作者的思路了。</li>
 </ul>
 <h3 id="_1">书上一些思想<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
 <h4 id="33">3.3、代码的完整性<a class="headerlink" href="#33" title="Permanent link">&para;</a></h4>
@@ -308,6 +311,10 @@
 </ul>
 </li>
 <li>三、异常</li>
+</ul>
+<h4 id="45">4.5、<a class="headerlink" href="#45" title="Permanent link">&para;</a></h4>
+<ul>
+<li>遇到难题，3个思路，<strong>画图、举例、分解</strong></li>
 </ul>
 <h3 id="w10725-0729212">W1（0725-0729，21道+2）<a class="headerlink" href="#w10725-0729212" title="Permanent link">&para;</a></h3>
 <h4 id="w114">W1.1、栈与队列（4）<a class="headerlink" href="#w114" title="Permanent link">&para;</a></h4>
@@ -418,6 +425,7 @@
 <li>d6：32I（M）、不分行从上到下打印二叉树<ul>
 <li>作者思路：先找到根，<strong>再用队列去存节点</strong>，然后再从左找1个（有左右节点，再放到队列后面），这样保证顺序性，<strong>自己画个图</strong>走一下流程（8，6，10，5，7，9，11）这样的顺序是不是ok，<strong>用deque</strong></li>
 <li><strong>进阶</strong>，广度优先遍历二叉树，不是太明白</li>
+<li>2023-10-07：<em>就是BFS</em>，取一个节点先放入队列，然后<code>while(队不空)</code>，就输出值，左不空就入队，右不空再入队。</li>
 </ul>
 </li>
 <li>d6：32II、分行从上到下打印二叉树<ul>
@@ -443,6 +451,7 @@
 </li>
 <li>d14：12、矩阵中的路径<ul>
 <li>自己想法，最开始用暴力，然后<strong>根据矩阵找规律</strong></li>
+<li>2023-10-07，标准的回溯思路，就是<strong>递归的参数怎么设计，怎么改变上、下、左、下的计算</strong>，但它这个地方用了2层for循环，<em>lionel，是不是必须？</em>，还是需要明白<code>row*cols+col</code>的计算</li>
 </ul>
 </li>
 <li>d14：13、机器人的运动范围<ul>
@@ -452,6 +461,7 @@
 </li>
 <li>d15：34、二叉树中和为某一值的路径<ul>
 <li>自己思路：用栈+递归，如果大于某值，就退出到根节点，往右去【但要自己写好，也不容易】</li>
+<li>2023-10-07：看了一下，回溯的思路，<strong>先加值，入队，判断是不是符合条件，再看左、右子树，递归，再减值，出队</strong>，<em>lionel，核心是递归函数的各个参数</em></li>
 </ul>
 </li>
 <li>d15：36、二叉搜索树与双向链表</li>
@@ -482,8 +492,9 @@
 <li>d19：68I、树中两个节点的最低公共祖先  【二叉搜索树是可以找到的/普通的树，有没有指向根节点？】</li>
 <li>d19：68II、</li>
 <li>d28：37、序列化二叉树</li>
-<li>d28：38、字符串的排列（abc）的组合<ul>
-<li>作者思路：第一步，固定第1位，其它的进行组合，第二步，拿第1个与后面的逐个交换 <strong>这个要学习一下</strong></li>
+<li>d28：38、字符串的排列（abc）的排列<ul>
+<li>作者思路：第一步，固定第1位，其它的进行组合，第二步，拿第1个与后面的逐个交换 <strong>这个要学习一下</strong>，<em>2023-10-07，lionel，但这个代码的思路，我没太看懂</em></li>
+<li><strong>组合</strong>是另一种思路了</li>
 </ul>
 </li>
 </ul>
@@ -504,7 +515,14 @@
 </ul>
 </li>
 <li>d9：42、连续子数组的最大和<ul>
+<li>输入：[1,-2,3,10,-4,7,2,-5]，输出：[3,10,-4,7,2]</li>
 <li>自己思路：（蛮力），动态规划（遇到小于0，就等于当下这个值，然后每次求max）【f(i)=f(i-1)+data[i]】</li>
+<li>什么是<strong>连续子数组</strong></li>
+<li>手抄的一些思路：<ul>
+<li>递归的方式</li>
+<li>分析动态规划，<em>lionel，这种题，动态规划怎么做</em></li>
+</ul>
+</li>
 </ul>
 </li>
 <li>d9：47、礼物的最大价值<ul>
@@ -559,8 +577,14 @@
 </ul>
 </li>
 <li>d17：40、最小的k个数<ul>
+<li>输入：[4,5,1,6,2,7,3,8]里最小的4个数是，输出：[1,2,3,4]</li>
 <li>自己思路：先排序，求倒数第k个</li>
 <li><strong>学到的思路</strong>，先构造k个数的数组，逐一去跟k个数组比较，直到</li>
+<li>还有别的思路：<ul>
+<li>Partition()排序</li>
+<li>红黑树</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>d17：41、数据流中的中位数<ul>
@@ -613,13 +637,31 @@
 </ul>
 <h4 id="w438">W4.3、数学（8）<a class="headerlink" href="#w438" title="Permanent link">&para;</a></h4>
 <ul>
-<li>d23：39、</li>
+<li>d23：39、数组中次数超过一半的数字<ul>
+<li>输入：[1,2,3,2,2,2,5,4,2]，输出：2 <em>次数超出了5次</em></li>
+<li>自己想法：我现在肯定想用map来做<ul>
+<li>当时的想法是排序，然后再遍历计一下count</li>
+</ul>
+</li>
+<li>看到的思路：<ul>
+<li>基于Partition，在某个数左边</li>
+</ul>
+</li>
+</ul>
+</li>
 <li>d23：66、</li>
 <li>d24：14I、</li>
 <li>d24：57II、</li>
 <li>d24：62、</li>
 <li>d31：14II、</li>
-<li>d31：43、1~n整数中1出现的次数</li>
+<li>d31：43、1~n整数中1出现的次数<ul>
+<li>自己思路：我好像没啥思路</li>
+<li>手抄的<ul>
+<li>分析规律，去掉最高位的进行递归，<em>lionel，其实我没太想好</em></li>
+</ul>
+</li>
+</ul>
+</li>
 <li>d31：44、</li>
 </ul>
 <h4 id="w442">W4.4、模拟（2）<a class="headerlink" href="#w442" title="Permanent link">&para;</a></h4>
@@ -633,7 +675,7 @@
 <h3 id="_2">最后<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <h4 id="_3">过程<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
 <ul>
-<li>2022年4月，大概把第1版过了一遍题目，代码也基本只是抄，<strong>没有真正的弄懂</strong></li>
+<li>2022年3月-4月，大概把第1版过了一遍题目，代码也基本只是抄，<strong>没有真正的弄懂</strong></li>
 </ul>
 <h4 id="_4">自己心得<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
 <ul>

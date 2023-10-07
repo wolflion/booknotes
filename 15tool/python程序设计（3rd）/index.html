@@ -123,7 +123,7 @@
               </ul>
               <p class="caption"><span class="caption-text">视频</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../../14video/FFmpeg%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/">《FFmpeg入门到精通》</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/FFmpeg%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/">《FFmpeg入门到精通》</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../14video/WebRTC%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/">《WebRTC权威指南》</a>
                   </li>
@@ -346,6 +346,42 @@
     <li class="toctree-l2"><a class="reference internal" href="#chap10">chap10、定义类</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#chap11">chap11、数据集合</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#111">11.1、示例问题：简单统计</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#112">11.2、应用列表</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1121">11.2.1、列表和数组</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1122">11.2.2、列表操作</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1123">11.2.3、用列表进行统计</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#113">11.3、记录的列表</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#114">11.4、用列表和类设计</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#115python">11.5、案例分析：Python计算器</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#116">11.6、案例研究：更好的炮弹动画</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#117">11.7、无顺序集合</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1171">11.7.1、字典基础</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1172">11.7.2、字典操作</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1173">11.7.3、示例程序：词频</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#118">11.8、小结</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#119">11.9、练习</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#chap12">chap12、面向对象设计</a>
     </li>
@@ -648,6 +684,78 @@ while i &lt;= 10:
 <h5 id="952">9.5.2、设计的艺术<a class="headerlink" href="#952" title="Permanent link">&para;</a></h5>
 <h3 id="chap10">chap10、定义类<a class="headerlink" href="#chap10" title="Permanent link">&para;</a></h3>
 <h3 id="chap11">chap11、数据集合<a class="headerlink" href="#chap11" title="Permanent link">&para;</a></h3>
+<ul>
+<li>学习目标<ul>
+<li>使用列表（数组）来表示相关数据的集合</li>
+<li>操作Python列表的函数和方法</li>
+<li>Python字典存储无顺序集合</li>
+</ul>
+</li>
+</ul>
+<h4 id="111">11.1、示例问题：简单统计<a class="headerlink" href="#111" title="Permanent link">&para;</a></h4>
+<h4 id="112">11.2、应用列表<a class="headerlink" href="#112" title="Permanent link">&para;</a></h4>
+<ul>
+<li>将整个值的集合放到一个对象中，<code>list (range(10))</code>，<em>不懂啥意思，lionel</em></li>
+</ul>
+<h5 id="1121">11.2.1、列表和数组<a class="headerlink" href="#1121" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>列表是有序的数据项序列</strong></li>
+<li><strong>列表是动态的</strong>，可以根据需要增长和缩小，<strong>异质的</strong>，单个列表中混合任意数据类型</li>
+</ul>
+<h5 id="1122">11.2.2、列表操作<a class="headerlink" href="#1122" title="Permanent link">&para;</a></h5>
+<ul>
+<li>操作<ul>
+<li><code>+</code>，连接</li>
+<li><code>*</code>，重复</li>
+<li><code>[]</code>，索引</li>
+<li><code>[:]</code>，切片，<em>lionel，不是很熟</em></li>
+<li><code>for &lt;var&gt; in &lt;seq&gt;:</code>，迭代</li>
+<li><code>&lt;expr&gt; in &lt;seq&gt;</code>，成员检查（返回布尔值）</li>
+</ul>
+</li>
+<li>方法<ul>
+<li>.append(x)，添加x到列表末尾</li>
+<li>.sort()</li>
+<li>.reverse()，</li>
+<li>.index(x)，x第一次出现的索引</li>
+<li>.insert(i,x)</li>
+<li>.count(x)</li>
+<li>.remove(x)</li>
+<li>.pop(i)，删除列表中第i个元素并返回它的值</li>
+</ul>
+</li>
+<li><strong>列表的原则</strong><ul>
+<li>列表是存储为单个对象的一系列数据项</li>
+</ul>
+</li>
+</ul>
+<h5 id="1123">11.2.3、用列表进行统计<a class="headerlink" href="#1123" title="Permanent link">&para;</a></h5>
+<h4 id="113">11.3、记录的列表<a class="headerlink" href="#113" title="Permanent link">&para;</a></h4>
+<h4 id="114">11.4、用列表和类设计<a class="headerlink" href="#114" title="Permanent link">&para;</a></h4>
+<h4 id="115python">11.5、案例分析：Python计算器<a class="headerlink" href="#115python" title="Permanent link">&para;</a></h4>
+<h4 id="116">11.6、案例研究：更好的炮弹动画<a class="headerlink" href="#116" title="Permanent link">&para;</a></h4>
+<h4 id="117">11.7、无顺序集合<a class="headerlink" href="#117" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Python为集合提供了几种内置的数据类型</strong>，除列表外</li>
+</ul>
+<h5 id="1171">11.7.1、字典基础<a class="headerlink" href="#1171" title="Permanent link">&para;</a></h5>
+<ul>
+<li>Python的字典是<strong>映射</strong><ul>
+<li><code>passwd = ["quido":"superprogrammer"]</code></li>
+<li><code>&lt;dictionary&gt;[&lt;key&gt;]</code></li>
+</ul>
+</li>
+</ul>
+<h5 id="1172">11.7.2、字典操作<a class="headerlink" href="#1172" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>&lt;key&gt; in &lt;dict&gt;</code></li>
+<li><code>&lt;dict&gt;.keys()</code>，返回键的序列</li>
+<li><code>&lt;dict&gt;.values()</code></li>
+<li><code>&lt;dict&gt;.itmes()</code>，返回一个元组（key,value）的序列，表示键值对</li>
+</ul>
+<h5 id="1173">11.7.3、示例程序：词频<a class="headerlink" href="#1173" title="Permanent link">&para;</a></h5>
+<h4 id="118">11.8、小结<a class="headerlink" href="#118" title="Permanent link">&para;</a></h4>
+<h4 id="119">11.9、练习<a class="headerlink" href="#119" title="Permanent link">&para;</a></h4>
 <h3 id="chap12">chap12、面向对象设计<a class="headerlink" href="#chap12" title="Permanent link">&para;</a></h3>
 <h3 id="chap13">chap13、算法设计与递归<a class="headerlink" href="#chap13" title="Permanent link">&para;</a></h3>
               

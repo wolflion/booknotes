@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>《FFmpeg入门到精通》 - lionel的技术笔记</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "\u300aFFmpeg\u5165\u95e8\u5230\u7cbe\u901a\u300b";
+        var mkdocs_page_input_path = "14video\\FFmpeg\u4ece\u5165\u95e8\u5230\u7cbe\u901a.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> lionel的技术笔记
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">简介</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../01daily/">daily</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../02ds/">ds</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../03cpp/">cpp</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../21tool/">tool</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">C++</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../20C%2B%2B/effectiveC%2B%2B/">《Effective C++》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../20C%2B%2B/%E6%B7%B1%E5%BA%A6%E6%8E%A2%E7%B4%A2C%2B%2B%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B/">《深度探索C++对象模型》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/EffectiveSTL/">《Effective STL》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/C%2B%2B%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/">《C++泛型STL原理和应用》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/">《STL源码剖析》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../22C%2B%2Bmodern/%E6%B7%B1%E5%85%A5%E5%BA%94%E7%94%A8C%2B%2B11/">《深入应用C++11》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">基础知识</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA/">《操作系统导论》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E5%A4%A7%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">《大话设计模式》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90_C%2B%2B4th/">《数据结构与算法分析_C++4th》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E7%AE%97%E6%B3%95%284th%29/">《算法4th》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90-%E5%BC%A0%E5%86%9B/">《算法设计与分析-张军》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E5%A4%A9%E8%A1%8C-%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《天行-算法设计与实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%95%99%E7%A8%8B-%E6%9D%8E%E6%98%A5%E8%91%86/">《数据结构教程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%96%B0%E7%BC%96%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%A0%E9%A2%98%E4%B8%8E%E8%A7%A3%E6%9E%90/">《新编数据结构习题与解析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网络编程</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/TCPIP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">《TCP/IP网络编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/">《Linux高性能服务器编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/TCPIP%E8%AF%A6%E8%A7%A3%E5%8D%B71/">《TCPIP详解卷1》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/Linux%E5%86%85%E6%A0%B8%E7%BD%91%E7%BB%9C%E6%A0%88%E6%BA%90%E4%BB%A3%E7%A0%81%E6%83%85%E6%99%AF%E5%88%86%E6%9E%90/">《Linux内核网络栈源代码情景分析》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C/">《深入理解Linux网络》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">文件系统</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/Linux%E5%86%85%E6%A0%B8%E6%8E%A2%E7%A7%98/">《Linux内核探秘》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《文件系统技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">《存储技术原理分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">存储</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../12storage/ceph%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《ceph设计原理与实现》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">视频</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">《FFmpeg入门到精通》</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#chap1ffmpeg">chap1、FFmpeg简介</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#11ffmpeg">1.1、FFmpeg的定义</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#12ffmpeg">1.2、FFmpeg的历史</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#13ffmpeg">1.3、FFmpeg的基本组成</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#14ffmpegffmpeg">1.4、FFmpeg的编解码工具ffmpeg</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#15ffmpegffplay">1.5、FFmpeg的播放器ffplay</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#16ffmpegffprobe">1.6、FFmpeg的多媒体分析器ffprobe</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#17ffmpeg">1.7、FFmpeg编译</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#171ffmpegwin">1.7.1、FFmpeg之Win平台编译</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#172linux">1.7.2、Linux</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#173os-x">1.7.3、OS X</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#18ffmpeg">1.8、FFmpeg编码支持与定制</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#181ffmpeg">1.8.1、FFmpeg的编码器支持</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#182ffmpeg">1.8.2、FFmpeg的解码器支持</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#183ffmpeg">1.8.3、FFmpeg的封装支持</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#184ffmpeg">1.8.4、FFmpeg的解封装支持</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#185ffmpeg">1.8.5、FFmpeg的通信协议支持</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#19">1.9、小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap2ffmpeg52300">chap2、FFmpeg工具使用基础(52/300)</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#21ffmpeg">2.1、ffmpeg常用命令</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#211ffmpeg">2.1.1、ffmpeg的封装格式</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#212ffmpeg">2.1.2、ffmpeg的转码参数</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#213ffmpeg">2.1.3、ffmpeg的基本转码原理</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#22ffprobe">2.2、ffprobe高级参数</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#23ffplay">2.3、ffplay常用命令</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#231ffplay">2.3.1、ffplay常用参数</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#232ffplay">2.3.2、ffplay高级参数</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#233ffplay">2.3.3、ffplay的数据可视化分析应用</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#24">2.4、小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap3ffmpeg83300">chap3、FFmpeg转封装（83/300）</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#31mp4">3.1、音视频文件转MP4格式</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#311mp4">3.1.1、MP4格式标准介绍</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#312mp4">3.1.2、MP4分析工具</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#313mp4ffmpegdemuxer">3.1.3、MP4在FFmpeg中的Demuxer</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#314mp4ffmpegmuxer">3.1.4、MP4在FFmpeg中的Muxer</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#32flv">3.2、视频文件转FLV</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#321flv">3.2.1、FLV格式标准介绍</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#322ffmpegflv">3.2.2、FFmpeg转FLV参数</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#323ffmpegflv">3.2.3、FFmpeg文件转FLV举例</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#324ffmpegflv">3.2.4、FFmpeg生成带关键索引的FLV</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#325flv">3.2.5、FLV文件格式分析工具</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#33m3u8">3.3、视频文件转M3U8</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#331m3u8">3.3.1、M3U8格式标准介绍</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#332ffmpeghls">3.3.2、FFmpeg转HLS参数</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#333ffmpeghls">3.3.3、FFmpeg转HLS举例</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#34">3.4、视频文件切片</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#341ffmpegsegment">3.4.1、FFmpeg切片segment参数</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#342ffmpegsegment">3.4.2、FFmpeg切片segment举例</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#343ffmpegsst">3.4.3、FFmpeg使用ss和t参数进行切片</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#35">3.5、音视频文件音视频流抽取</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#351ffmpegaac">3.5.1、FFmpeg抽取音频文件中的AAC音频流</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#352ffmpegh264">3.5.2、FFmpeg抽取音视频文件中的H.264视频流</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#353ffmpegh265">3.5.3、FFmpeg抽取音视频文件中的H.265数据</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#36">3.6、系统资源使用情况</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#37">3.7、小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap4ffmpeg">chap4、FFmpeg转码</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#41ffmpegh264h265">4.1、FFmpeg软编码H.264与H.265</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#411x264">4.1.1、x264编码参数简介</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#412h264">4.1.2、H.264编码举例</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#42ffmpeg">4.2、FFmpeg硬编解码</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#421nvidia-gpu">4.2.1、Nvidia GPU硬编解码</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#422intel-qsv">4.2.2、Intel QSV</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#423">4.2.3、树莓派</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#424os-x">4.2.4、OS X系统</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#43ffmpegmp3">4.3、FFmpeg输出MP3</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#431mp3">4.3.1、MP3编码参数介绍</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#432mp3">4.3.2、MP3的编码质量设置</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#433abr">4.3.3、平均码率编码参数ABR</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#44ffmpegaac">4.4、FFmpeg输出AAC</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#441ffmpegaac">4.4.1、FFmpeg中的AAC编码器使用</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#442fdk-aacaaccodec">4.4.2、FDK AAC第三方的AAC编解码Codec库</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#443aac">4.4.3、高质量AAC设置</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#444aac">4.4.4、AAC音频质量对比</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#45">4.5、系统资源使用情况</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#46">4.6、小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap5ffmpeg">chap5、FFmpeg流媒体</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#51ffmpegrtmp">5.1、FFmpeg发布和录制RTMP流</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#511rtmp">5.1.1、RTMP参数说明</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#512rtmp">5.1.2、RTMP参数举例</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#52ffmpegrtsp">5.2、FFmpeg录制RTSP流</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#521rtsp">5.2.1、RTSP参数说明</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#522rtsp">5.2.2、RTSP参数使用举例</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#53ffmpeghttp">5.3、FFmpeg录制HTTP流</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#531">5.3.1、</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#532http">5.3.2、HTTP参数使用举例</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#533http">5.3.3、HTTP拉流录制</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#534httpflv">5.3.4、拉取HTTP中的流录制FLV</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#54ffmpegudptcp">5.4、FFmpeg录制和发布UDP/TCP流</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#541tcpudp">5.4.1、TCP和UDP参数说明</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#542tcp">5.4.2、TCP参数举例</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#543tcpudp">5.4.3、TCP/UDP使用小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#55ffmpeg">5.5、FFmpeg推多路流</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#56ffmpeghds">5.6、FFmpeg生成HDS流</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#561hds">5.6.1、HDS参数说明</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#562hds">5.6.2、HDS使用举例</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#57ffmpegdash">5.7、FFmpeg生成DASH流</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#571dash">5.7.1、DASH参数说明</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#572dash">5.7.2、DASH参数使用举例</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#58">5.8、小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap6ffmpeg">chap6、FFmpeg滤镜使用</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#61ffmpegfilter">6.1、FFmpeg滤镜filter描述格式</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#62ffmpeg">6.2、FFmpeg为视频加水印</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#621">6.2.1、文字水印</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#63ffmpeg">6.3、FFmpeg生成画中画</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#64ffmpeg">6.4、FFmpeg视频多宫格处理</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#65ffmpeg">6.5、FFmpeg音频流滤镜操作</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#66ffmpeg">6.6、FFmpeg音频音量探测</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#661">6.6.1、音频音量获得</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#662">6.6.2、绘制音频波形</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#67ffmpeg">6.7、FFmpeg为视频加字幕</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#671ass">6.7.1、ASS字幕流写入视频流</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#68ffmpeg">6.8、FFmpeg视频抠图合并</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#69ffmpeg-3d">6.9、FFmpeg 3D视频处理</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#610ffmpeg">6.10、FFmpeg定时视频截图</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#611ffmpeg">6.11、FFmpeg生成测试元数据</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#612ffmpeg">6.12、FFmpeg对音视频倍速处理</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#6122setpts">6.12.2、setpts视频倍速处理</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#613">6.13、小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap7ffmpeg">chap7、FFmpeg采集设备</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#71ffmpeglinux">7.1、FFmpeg中的Linux设备操作</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#711linux">7.1.1、Linux下查看设备列表</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#72ffmpegos-x">7.2、FFmpeg中OS X设备操作</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#73ffmpegwindows">7.3、FFmpeg中Windows设备操作</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#733ffmpeggdigrab">7.3.3、FFmpeg使用gdigrab采集窗口</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#74">7.4、小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap8ffmpeglibavformat254300">chap8、FFmpeg接口libavformat的使用（254/300）</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#81">8.1、音视频流封装</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#82">8.2、音视频文件解封装</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#83">8.3、音视频文件转封装</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#84">8.4、视频截取</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#85avio">8.5、avio内存数据操作</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#86">8.6、小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap9ffmpeglibavcodec267300">chap9、FFmpeg接口libavcodec的使用（267/300）</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#91ffmpeg">9.1、FFmpeg旧接口的使用</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#92ffmpeg">9.2、FFmpeg新接口的使用</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#921ffmpeg">9.2.1、FFmpeg新接口音频编码</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#924ffmpeg">9.2.4、FFmpeg新接口视频解码</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#93">9.3、小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap10ffmpeglibavfilter284300">chap10、FFmpeg接口libavfilter的使用（284/300）</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#101filtergraphfilter">10.1、filtergraph和filter简述</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#104logo">10.4、使用滤镜加LOGO操作</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#105">10.5、小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_1">最后</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../WebRTC%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/">《WebRTC权威指南》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../WebRTC%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AE%9E%E6%97%B6%E4%BA%92%E5%8A%A8%E6%8A%80%E6%9C%AF/">《WebRTC音视频实时互动技术》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../%E6%96%B0%E4%B8%80%E4%BB%A3%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9%E7%A0%81%E6%A0%87%E5%87%86-H.264_AVC/">《新一代视频压缩码标准-H.264_AVC》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">内核</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/Linux%E5%86%85%E6%A0%B8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《Linux内核设计与实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5Linux%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%E5%86%85%E6%A0%B8%E6%9C%BA%E5%88%B6/">《深入Linux设备驱动程序内核机制》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">《深入理解Linux虚拟内存管理》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《深入理解Linux网络技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/Linux%E5%86%85%E6%A0%B8%E6%BA%90%E4%BB%A3%E7%A0%81%E5%89%96%E6%9E%90-tcpip%E5%AE%9E%E7%8E%B0/">《Linux内核源代码剖析-TCP/IP实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E5%86%85%E6%A0%B8/">《深入理解Linux内核》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">工具</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/Wireshark%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98/">《Wireshark网络分析实战》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/Linux%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8Eshell%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B%E5%A4%A7%E5%85%A8%283rd%29/">《Linux命令行与shell脚本编程大全(3rd)》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/python%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%883rd%EF%BC%89/">《python程序设计（3rd）》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">刷题</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer2nd/">《剑指offer2nd》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/">《剑指offer专项突破》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网课</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/01Linux%E9%AB%98%E5%B9%B6%E5%8F%91%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/">《Linux高并发网络编程开发》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/%E4%BE%AF%E6%8D%B7/%E4%BE%AF%E6%8D%B7C%2B%2B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%8660%E8%AE%B2/">《侯捷C++内存管理60讲》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/11NJU%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">《NJU算法设计与分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">英语专</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../60English/00794%E7%BB%BC%E5%90%88%E8%8B%B1%E8%AF%AD%E4%B8%80%E4%B8%8A/">《综合英语(一)上》</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">lionel的技术笔记</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+          <li>视频 &raquo;</li>
+      <li>《FFmpeg入门到精通》</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="ffmpeg">《FFmpeg入门到精通》<a class="headerlink" href="#ffmpeg" title="Permanent link">&para;</a></h2>
+<ul>
+<li>第1部分:FFmpeg的命令行使用篇（1-7）</li>
+<li>第2部分:FFmpeg的API使用篇（8-10）</li>
+</ul>
+<h3 id="chap1ffmpeg">chap1、FFmpeg简介<a class="headerlink" href="#chap1ffmpeg" title="Permanent link">&para;</a></h3>
+<h4 id="11ffmpeg">1.1、FFmpeg的定义<a class="headerlink" href="#11ffmpeg" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>FF</strong>表示（Fast Forward），<strong>mpeg</strong>（Moving Picture Experts Group，动态图像专家组）</li>
+</ul>
+<h4 id="12ffmpeg">1.2、FFmpeg的历史<a class="headerlink" href="#12ffmpeg" title="Permanent link">&para;</a></h4>
+<ul>
+<li>法国Fabrice Bellard，2000年初版，找到了<strong>Michael Niedermayer</strong>维护</li>
+</ul>
+<h4 id="13ffmpeg">1.3、FFmpeg的基本组成<a class="headerlink" href="#13ffmpeg" title="Permanent link">&para;</a></h4>
+<ul>
+<li>封装模块AVFormat<ul>
+<li>MP4，FLV，KV，TS的文件的封装和解封装</li>
+<li>RTMP，RTSP，MMS，HLS的网络协议的封装</li>
+</ul>
+</li>
+<li>编解码模块AVCodec<ul>
+<li>MPEG4，AAC，MJPEG，H.264（AVC）使用x264解码器，H.265（HEVC）使用x265解码器，MP3（mp3lame）编码，libmp3lame编码器</li>
+</ul>
+</li>
+<li>滤镜模块AVFilter<ul>
+<li>crop滤镜</li>
+<li>vflip滤镜</li>
+<li><em>lionel，这部分不熟，要好好再看一下</em></li>
+</ul>
+</li>
+</ul>
+<h4 id="14ffmpegffmpeg">1.4、FFmpeg的编解码工具ffmpeg<a class="headerlink" href="#14ffmpegffmpeg" title="Permanent link">&para;</a></h4>
+<ul>
+<li>主要工作流程4步<ul>
+<li>解封装（Demuxing）</li>
+<li>解码（Decoding）</li>
+<li>编码（Encoding）</li>
+<li>封装（Muxing）</li>
+</ul>
+</li>
+<li>共有6个步骤：（<em>就是多了前后的输入、输出</em>）<ul>
+<li>读取输入源</li>
+<li>进行音视频的解封装</li>
+<li>解码每一帧音视频数据</li>
+<li>编码每一帧音视频数据</li>
+<li>进行音视频的重新封装</li>
+<li>输出到目标</li>
+</ul>
+</li>
+</ul>
+<h4 id="15ffmpegffplay">1.5、FFmpeg的播放器ffplay<a class="headerlink" href="#15ffmpegffplay" title="Permanent link">&para;</a></h4>
+<ul>
+<li>使用FFmpeg的avformat与avcodec</li>
+<li><strong>想要使用ffplay，就需要有SDL来进行ffplay的基础支撑</strong></li>
+</ul>
+<h4 id="16ffmpegffprobe">1.6、FFmpeg的多媒体分析器ffprobe<a class="headerlink" href="#16ffmpegffprobe" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>./ffprobe -show_streams output.mp4</code></li>
+</ul>
+<h4 id="17ffmpeg">1.7、FFmpeg编译<a class="headerlink" href="#17ffmpeg" title="Permanent link">&para;</a></h4>
+<h5 id="171ffmpegwin">1.7.1、FFmpeg之Win平台编译<a class="headerlink" href="#171ffmpegwin" title="Permanent link">&para;</a></h5>
+<ul>
+<li>使用MinGW-64（Minimalist GNU for Windows），再配合MSYS（Minimal SYStem）</li>
+</ul>
+<h5 id="172linux">1.7.2、Linux<a class="headerlink" href="#172linux" title="Permanent link">&para;</a></h5>
+<h5 id="173os-x">1.7.3、OS X<a class="headerlink" href="#173os-x" title="Permanent link">&para;</a></h5>
+<h4 id="18ffmpeg">1.8、FFmpeg编码支持与定制<a class="headerlink" href="#18ffmpeg" title="Permanent link">&para;</a></h4>
+<ul>
+<li><em>lionel，没看</em></li>
+</ul>
+<h5 id="181ffmpeg">1.8.1、FFmpeg的编码器支持<a class="headerlink" href="#181ffmpeg" title="Permanent link">&para;</a></h5>
+<h5 id="182ffmpeg">1.8.2、FFmpeg的解码器支持<a class="headerlink" href="#182ffmpeg" title="Permanent link">&para;</a></h5>
+<h5 id="183ffmpeg">1.8.3、FFmpeg的封装支持<a class="headerlink" href="#183ffmpeg" title="Permanent link">&para;</a></h5>
+<h5 id="184ffmpeg">1.8.4、FFmpeg的解封装支持<a class="headerlink" href="#184ffmpeg" title="Permanent link">&para;</a></h5>
+<h5 id="185ffmpeg">1.8.5、FFmpeg的通信协议支持<a class="headerlink" href="#185ffmpeg" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>./configure --list-protocols</code></li>
+</ul>
+<h4 id="19">1.9、小结<a class="headerlink" href="#19" title="Permanent link">&para;</a></h4>
+<h3 id="chap2ffmpeg52300">chap2、FFmpeg工具使用基础(52/300)<a class="headerlink" href="#chap2ffmpeg52300" title="Permanent link">&para;</a></h3>
+<ul>
+<li>FFmpeg中常用的工具主要是ffmpeg、ffprobe、ffplay，它们分别用作多媒体的编解码工具、内容分析工具、播放器</li>
+</ul>
+<h4 id="21ffmpeg">2.1、ffmpeg常用命令<a class="headerlink" href="#21ffmpeg" title="Permanent link">&para;</a></h4>
+<ul>
+<li><em>lionel，这部分内容可以</em></li>
+</ul>
+<h5 id="211ffmpeg">2.1.1、ffmpeg的封装格式<a class="headerlink" href="#211ffmpeg" title="Permanent link">&para;</a></h5>
+<ul>
+<li>AVFormat模块中，libavformat库</li>
+<li><code>ffmpeg --help full</code>找到<code>AVFormatContext</code>参数</li>
+</ul>
+<h5 id="212ffmpeg">2.1.2、ffmpeg的转码参数<a class="headerlink" href="#212ffmpeg" title="Permanent link">&para;</a></h5>
+<ul>
+<li>AVCodec模块，libavcodec</li>
+<li><code>ffmpeg --help full</code>找到<code>AVCodecContext</code>参数</li>
+</ul>
+<h5 id="213ffmpeg">2.1.3、ffmpeg的基本转码原理<a class="headerlink" href="#213ffmpeg" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>./ffmpeg -i  input.rmvb -vcodec mpeg4 -b:v 200k -r 15 -an ouput.mp4</code><ul>
+<li>码率变成200k</li>
+<li>帧率变成15</li>
+<li>不包含音频（<code>-an参数</code>）</li>
+</ul>
+</li>
+</ul>
+<h4 id="22ffprobe">2.2、ffprobe高级参数<a class="headerlink" href="#22ffprobe" title="Permanent link">&para;</a></h4>
+<ul>
+<li>用于<strong>查看多媒体文件的信息</strong>，<code>ffprobe --help</code></li>
+<li><code>ffprobe -show_packets input.flv</code>，<strong>show_packets</strong>查看的多媒体数据包信息使用PACKET标签括起来</li>
+<li><code>-show_data</code></li>
+<li><code>-show_format</code>，分析多媒体的封装格式</li>
+<li><code>-show_frames</code>，查看第一帧的信息</li>
+<li><code>-show_streams</code>，查看多媒体文件中的流信息，<em>lionel，这里面的流，怎么理解？</em></li>
+<li>可以把文件格式转换成<strong>json，csv以及其它</strong>，只需要<code>ffprobe -of json或csv</code></li>
+<li><strong>select_stream</strong>，只看音频（a）、视频（v）、字幕（s），<code>ffprobe -show_frames -select_streams v -of xml input.mp4</code></li>
+</ul>
+<h4 id="23ffplay">2.3、ffplay常用命令<a class="headerlink" href="#23ffplay" title="Permanent link">&para;</a></h4>
+<ul>
+<li>需要SDL-1.2，才能有效生成ffplay。<em>lionel，我不知道这么理解，正不正确</em></li>
+</ul>
+<h5 id="231ffplay">2.3.1、ffplay常用参数<a class="headerlink" href="#231ffplay" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>ffplay --help</code></li>
+<li><code>ffplay -ss 30 -t 10 inpu.mp4</code>，从视频的第30秒开始，播放10秒</li>
+<li><code>ffplay -window_title "播放测试" rtmp://up.v.test.com/live/stream</code>，播放器的窗口显示标题是“播放测试”，但打开网络直播流</li>
+</ul>
+<h5 id="232ffplay">2.3.2、ffplay高级参数<a class="headerlink" href="#232ffplay" title="Permanent link">&para;</a></h5>
+<ul>
+<li>用time，查看命令运行时长</li>
+</ul>
+<h5 id="233ffplay">2.3.3、ffplay的数据可视化分析应用<a class="headerlink" href="#233ffplay" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>ffplay -vismv pf output.mp4</code>，查看B帧预测与P帧预测信息，希望将信息在窗口中显示出来</li>
+</ul>
+<h4 id="24">2.4、小结<a class="headerlink" href="#24" title="Permanent link">&para;</a></h4>
+<ul>
+<li>ffmpeg主要用于音视频编解码</li>
+<li>ffprobe主要用于音视频内容分析</li>
+<li>ffplay主要用于音视频播放、可视化分析</li>
+</ul>
+<h3 id="chap3ffmpeg83300">chap3、FFmpeg转封装（83/300）<a class="headerlink" href="#chap3ffmpeg83300" title="Permanent link">&para;</a></h3>
+<h4 id="31mp4">3.1、音视频文件转MP4格式<a class="headerlink" href="#31mp4" title="Permanent link">&para;</a></h4>
+<h5 id="311mp4">3.1.1、MP4格式标准介绍<a class="headerlink" href="#311mp4" title="Permanent link">&para;</a></h5>
+<ul>
+<li>0、了解MP4前要知道的几个概念<ul>
+<li>MP4文件由许多个Box与FullBox组成</li>
+<li>每个Box由Header和Data两部分组成</li>
+<li>FullBox是Box的扩展，其在Box结构的基础上，在Header中增加8位version标志和24位的flags标志</li>
+<li>Header包含了整个Box的长度的大小（size）和类型（type），size为0时，代表这个Box是文件的最后一个Box。</li>
+<li>Data为Box的实际数据，可以是纯数据，也可以是更多的子Box</li>
+<li>当一个Box中的Data是一系列的子Box时，这个Box又可以称为Container Box</li>
+<li><strong>MP4常用参考标准排列方式</strong><ul>
+<li>一到六级？</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>1、moov容器<ul>
+<li>定义了一个MP4文件中的数据信息，类型是moov，是一个容器Atom，至少包含以下的一种<ul>
+<li>mvhd标签</li>
+<li>cmov标签</li>
+<li>rmra标签</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>2、</li>
+<li>3、</li>
+<li>4、</li>
+<li>5、</li>
+<li>6、</li>
+<li>7、解析hdlr容器<ul>
+<li>描述了媒体流的播放过程</li>
+</ul>
+</li>
+<li>8、解析minf容器<ul>
+<li>包含了很多重要的子容器，<strong>容器中的信息将作为音视频数据的映射存在</strong><ul>
+<li>视频信息头</li>
+<li>音频信息头</li>
+<li>数据信息</li>
+<li>采样表</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>9、解析vmhd容器</li>
+<li>10、解析smbd容器</li>
+<li>11、解析dinf容器</li>
+<li>12、解析stbl容器<ul>
+<li><strong>采样参数列表的容器（Sample Table Atom）</strong>，包含转化媒体时间到实际的sample的信息。包含下列子容器<ul>
+<li>采样描述容器（Sample Description Atom），stsd</li>
+<li>采样时间容器（Time To Sample Atom），stts</li>
+<li></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>13、解析edts容器<ul>
+<li>定义了<strong>创建Movice媒体文件中一个track的一部分媒体</strong>，所有的edts数据都在一个表里，包括每一部分的时间偏移量和长度。</li>
+</ul>
+</li>
+<li><em>lionel，作者分析的官方文档在哪？</em></li>
+</ul>
+<h5 id="312mp4">3.1.2、MP4分析工具<a class="headerlink" href="#312mp4" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、Elecard StreamEye</li>
+<li>2、mp4box</li>
+<li>3、mp4info</li>
+</ul>
+<h5 id="313mp4ffmpegdemuxer">3.1.3、MP4在FFmpeg中的Demuxer<a class="headerlink" href="#313mp4ffmpegdemuxer" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>ffmpeg -h demuxer=mp4</code>，查看MP4文件的Demuxer信息</li>
+</ul>
+<h5 id="314mp4ffmpegmuxer">3.1.4、MP4在FFmpeg中的Muxer<a class="headerlink" href="#314mp4ffmpegmuxer" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、faststart参数使用案例<ul>
+<li><code>./ffmpeg -i input.flv -c copy -f mp4 -movflags faststart output.mp4</code>与<code>./ffmpeg -i input.flv -c copy -f mp4 output.mp4</code>区别，就是少了<code>-movflags faststart</code>。<strong>将moov移动到mdat前面</strong></li>
+</ul>
+</li>
+<li>2、dash参数使用案例<ul>
+<li><code>./ffmpeg -i input.flv -c copy -f mp4 -movflags dash output.mp4</code></li>
+</ul>
+</li>
+<li>3、isml参数使用案例<ul>
+<li><code>./ffmpeg -re -i input.flv -c copy -movflags imsl+frag_keyframe -f ismv Stream</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="32flv">3.2、视频文件转FLV<a class="headerlink" href="#32flv" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Adobe发布的，<strong>均以FLVTAG的形式存在</strong></li>
+</ul>
+<h5 id="321flv">3.2.1、FLV格式标准介绍<a class="headerlink" href="#321flv" title="Permanent link">&para;</a></h5>
+<ul>
+<li>0<ul>
+<li>分2部分：一部分是FLV文件头，另一部分是FLV文件内容</li>
+</ul>
+</li>
+<li>1、FLV文件头解析<ul>
+<li><em>lionel，应该也有手册</em></li>
+</ul>
+</li>
+<li>2、FLV文件内容格式解析</li>
+<li>3、FLVTAG格式解析</li>
+<li>4、VideoTag数据解析</li>
+<li>5、AudioTage数据解析</li>
+<li>6、ScriptData格式解析</li>
+</ul>
+<h5 id="322ffmpegflv">3.2.2、FFmpeg转FLV参数<a class="headerlink" href="#322ffmpegflv" title="Permanent link">&para;</a></h5>
+<h5 id="323ffmpegflv">3.2.3、FFmpeg文件转FLV举例<a class="headerlink" href="#323ffmpegflv" title="Permanent link">&para;</a></h5>
+<h5 id="324ffmpegflv">3.2.4、FFmpeg生成带关键索引的FLV<a class="headerlink" href="#324ffmpegflv" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>ffmpeg -i input.mp4 -c copy -f flv -flvflags add_keyframe_index output.flv</code></li>
+</ul>
+<h5 id="325flv">3.2.5、FLV文件格式分析工具<a class="headerlink" href="#325flv" title="Permanent link">&para;</a></h5>
+<ul>
+<li>flvparse</li>
+<li>FlvAnalyzer</li>
+<li><code>ffprobe -v trace -i output.flv</code></li>
+</ul>
+<h4 id="33m3u8">3.3、视频文件转M3U8<a class="headerlink" href="#33m3u8" title="Permanent link">&para;</a></h4>
+<ul>
+<li>常见的流媒体格式，<strong>以文件列表的形式存在</strong></li>
+</ul>
+<h5 id="331m3u8">3.3.1、M3U8格式标准介绍<a class="headerlink" href="#331m3u8" title="Permanent link">&para;</a></h5>
+<ul>
+<li>EXTM3U<ul>
+<li><strong>必须包含的标签，并且必须在文件的第一行</strong></li>
+</ul>
+</li>
+<li>EXT-X-VERSION</li>
+</ul>
+<h5 id="332ffmpeghls">3.3.2、FFmpeg转HLS参数<a class="headerlink" href="#332ffmpeghls" title="Permanent link">&para;</a></h5>
+<h5 id="333ffmpeghls">3.3.3、FFmpeg转HLS举例<a class="headerlink" href="#333ffmpeghls" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>./ffmpeg -re -i input.mp4 -c copy -f hls -bsf:v h264_mp4toannexb output.m3u8</code></li>
+<li>1、start_number参数</li>
+<li>2、hls_time参数</li>
+<li>3、</li>
+<li>4、</li>
+<li>5、</li>
+<li>6、</li>
+<li>7、</li>
+<li>8、</li>
+<li>9、</li>
+</ul>
+<h4 id="34">3.4、视频文件切片<a class="headerlink" href="#34" title="Permanent link">&para;</a></h4>
+<ul>
+<li>与HLS基本类似，但HLS切片在标准中只支持TS格式的切片</li>
+</ul>
+<h5 id="341ffmpegsegment">3.4.1、FFmpeg切片segment参数<a class="headerlink" href="#341ffmpegsegment" title="Permanent link">&para;</a></h5>
+<h5 id="342ffmpegsegment">3.4.2、FFmpeg切片segment举例<a class="headerlink" href="#342ffmpegsegment" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、segment_format指定切片文件的格式</li>
+<li>2、</li>
+<li>3、</li>
+<li>4、segment_format按照时间点剪切</li>
+</ul>
+<h5 id="343ffmpegsst">3.4.3、FFmpeg使用ss和t参数进行切片<a class="headerlink" href="#343ffmpegsst" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、</li>
+<li>2、</li>
+<li>3、</li>
+</ul>
+<h4 id="35">3.5、音视频文件音视频流抽取<a class="headerlink" href="#35" title="Permanent link">&para;</a></h4>
+<h5 id="351ffmpegaac">3.5.1、FFmpeg抽取音频文件中的AAC音频流<a class="headerlink" href="#351ffmpegaac" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>ffmpeg -i input.mp4 -vn -acodec copy output.aac</code></li>
+</ul>
+<h5 id="352ffmpegh264">3.5.2、FFmpeg抽取音视频文件中的H.264视频流<a class="headerlink" href="#352ffmpegh264" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>./ffmpeg -i input.mp4 -vcodec copy -an output.h264</code></li>
+</ul>
+<h5 id="353ffmpegh265">3.5.3、FFmpeg抽取音视频文件中的H.265数据<a class="headerlink" href="#353ffmpegh265" title="Permanent link">&para;</a></h5>
+<h4 id="36">3.6、系统资源使用情况<a class="headerlink" href="#36" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>./ffmpeg -re -i input.mp4 -c copy -f mpegts output.ts</code></li>
+</ul>
+<h4 id="37">3.7、小结<a class="headerlink" href="#37" title="Permanent link">&para;</a></h4>
+<ul>
+<li>音视频文件转MP4，FLV，HLS以及视频文件切片处理等相关知识</li>
+<li>分析了常用的MP4，FLV，HLS的标准格式并给出相应的FFmpeg应用举例</li>
+</ul>
+<h3 id="chap4ffmpeg">chap4、FFmpeg转码<a class="headerlink" href="#chap4ffmpeg" title="Permanent link">&para;</a></h3>
+<h4 id="41ffmpegh264h265">4.1、FFmpeg软编码H.264与H.265<a class="headerlink" href="#41ffmpegh264h265" title="Permanent link">&para;</a></h4>
+<ul>
+<li>FFmpeg本身并不支持H.264，而是通过第三方模块，如X264和OpenH264</li>
+<li><code>ffmpeg -h encoder=libx264</code>查看支持的像素格式，yuv420p，yuvj420p</li>
+</ul>
+<h5 id="411x264">4.1.1、x264编码参数简介<a class="headerlink" href="#411x264" title="Permanent link">&para;</a></h5>
+<ul>
+<li><em>lionel，不知道怎么记</em></li>
+</ul>
+<h5 id="412h264">4.1.2、H.264编码举例<a class="headerlink" href="#412h264" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、编码器预译参数设置preset</li>
+<li>2、</li>
+<li>3、</li>
+<li>4、</li>
+<li>5、</li>
+<li>6、</li>
+</ul>
+<h4 id="42ffmpeg">4.2、FFmpeg硬编解码<a class="headerlink" href="#42ffmpeg" title="Permanent link">&para;</a></h4>
+<h5 id="421nvidia-gpu">4.2.1、Nvidia GPU硬编解码<a class="headerlink" href="#421nvidia-gpu" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、Nvidia硬编码参数<ul>
+<li><code>ffmpeg -h encoder=h264_nvenc</code></li>
+</ul>
+</li>
+<li>2、举例</li>
+</ul>
+<h5 id="422intel-qsv">4.2.2、Intel QSV<a class="headerlink" href="#422intel-qsv" title="Permanent link">&para;</a></h5>
+<ul>
+<li>0</li>
+<li>1、Intel QSV H.264参数说明</li>
+<li>2、举例</li>
+<li>3、Intel QSV H.265参数说明</li>
+<li>4、举例</li>
+</ul>
+<h5 id="423">4.2.3、树莓派<a class="headerlink" href="#423" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、h264_omx参数说明</li>
+<li>2、举例</li>
+</ul>
+<h5 id="424os-x">4.2.4、OS X系统<a class="headerlink" href="#424os-x" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、OS X硬编解码参数</li>
+<li>2、示例</li>
+</ul>
+<h4 id="43ffmpegmp3">4.3、FFmpeg输出MP3<a class="headerlink" href="#43ffmpegmp3" title="Permanent link">&para;</a></h4>
+<h5 id="431mp3">4.3.1、MP3编码参数介绍<a class="headerlink" href="#431mp3" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>ffmpeg -h encoder=libmp3lame</code></li>
+</ul>
+<h5 id="432mp3">4.3.2、MP3的编码质量设置<a class="headerlink" href="#432mp3" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>./ffmpeg -i INPUT -acodec libmp3lame OUTPUT.mp3</code></li>
+</ul>
+<h5 id="433abr">4.3.3、平均码率编码参数ABR<a class="headerlink" href="#433abr" title="Permanent link">&para;</a></h5>
+<h4 id="44ffmpegaac">4.4、FFmpeg输出AAC<a class="headerlink" href="#44ffmpegaac" title="Permanent link">&para;</a></h4>
+<ul>
+<li>aac：ffmpeg本身的AAC编码实现</li>
+<li>libfaac：第三方的</li>
+<li>libfdk_aac：第三方的</li>
+</ul>
+<h5 id="441ffmpegaac">4.4.1、FFmpeg中的AAC编码器使用<a class="headerlink" href="#441ffmpegaac" title="Permanent link">&para;</a></h5>
+<h5 id="442fdk-aacaaccodec">4.4.2、FDK AAC第三方的AAC编解码Codec库<a class="headerlink" href="#442fdk-aacaaccodec" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、</li>
+<li>2、</li>
+</ul>
+<h5 id="443aac">4.4.3、高质量AAC设置<a class="headerlink" href="#443aac" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、HE-AAC音频编码设置<ul>
+<li><code>./ffmpeg -i input.wav -c:a libfdk_aac -profile:a aac_he -b:a 64k output.m4a</code></li>
+</ul>
+</li>
+<li>2、</li>
+</ul>
+<h5 id="444aac">4.4.4、AAC音频质量对比<a class="headerlink" href="#444aac" title="Permanent link">&para;</a></h5>
+<h4 id="45">4.5、系统资源使用情况<a class="headerlink" href="#45" title="Permanent link">&para;</a></h4>
+<ul>
+<li>执行完<code>ffmpeg</code>相关命令后，用<code>top</code>看下</li>
+</ul>
+<h4 id="46">4.6、小结<a class="headerlink" href="#46" title="Permanent link">&para;</a></h4>
+<ul>
+<li>转码需要占用大量的计算资源，所以需要优化</li>
+</ul>
+<h3 id="chap5ffmpeg">chap5、FFmpeg流媒体<a class="headerlink" href="#chap5ffmpeg" title="Permanent link">&para;</a></h3>
+<h4 id="51ffmpegrtmp">5.1、FFmpeg发布和录制RTMP流<a class="headerlink" href="#51ffmpegrtmp" title="Permanent link">&para;</a></h4>
+<h5 id="511rtmp">5.1.1、RTMP参数说明<a class="headerlink" href="#511rtmp" title="Permanent link">&para;</a></h5>
+<ul>
+<li>rtmp_app，参数，<em>怎么拉出来的？</em></li>
+<li><strong>通过wireshark抓包来分析的</strong></li>
+</ul>
+<h5 id="512rtmp">5.1.2、RTMP参数举例<a class="headerlink" href="#512rtmp" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、<ul>
+<li><code>ffmpeg -rtmp_app live -i rtmp://publish.chinaffmpeg.com -c copy -f flv out.flv</code> 推流，<em>录制推流不行</em></li>
+<li><code>ffmpeg -re input.mp4 -c copy -f flv -rtmp_app live rtmp://publish.chinaffmpeg.com</code> 发布流</li>
+</ul>
+</li>
+<li>2、rtmp_playpath参数</li>
+<li>3、</li>
+</ul>
+<h4 id="52ffmpegrtsp">5.2、FFmpeg录制RTSP流<a class="headerlink" href="#52ffmpegrtsp" title="Permanent link">&para;</a></h4>
+<ul>
+<li><em>基本不太用了</em>，互联网转向了RTMP，</li>
+</ul>
+<h5 id="521rtsp">5.2.1、RTSP参数说明<a class="headerlink" href="#521rtsp" title="Permanent link">&para;</a></h5>
+<h5 id="522rtsp">5.2.2、RTSP参数使用举例<a class="headerlink" href="#522rtsp" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、<ul>
+<li><code>./ffmpeg -rtsp_transport tcp -i rtsp://47.90.47.25/test.ts -c copy -f mp4 output.mp4</code></li>
+</ul>
+</li>
+<li>2、</li>
+</ul>
+<h4 id="53ffmpeghttp">5.3、FFmpeg录制HTTP流<a class="headerlink" href="#53ffmpeghttp" title="Permanent link">&para;</a></h4>
+<h5 id="531">5.3.1、<a class="headerlink" href="#531" title="Permanent link">&para;</a></h5>
+<h5 id="532http">5.3.2、HTTP参数使用举例<a class="headerlink" href="#532http" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、seekable参数举例<ul>
+<li><code>ffmpeg -ss 300 -seekable 0 -i http://bbs.chinaffmpeg.com/test.ts -c copy output.mp4</code></li>
+</ul>
+</li>
+<li>2、headers参数举例</li>
+<li>3、</li>
+</ul>
+<h5 id="533http">5.3.3、HTTP拉流录制<a class="headerlink" href="#533http" title="Permanent link">&para;</a></h5>
+<h5 id="534httpflv">5.3.4、拉取HTTP中的流录制FLV<a class="headerlink" href="#534httpflv" title="Permanent link">&para;</a></h5>
+<h4 id="54ffmpegudptcp">5.4、FFmpeg录制和发布UDP/TCP流<a class="headerlink" href="#54ffmpegudptcp" title="Permanent link">&para;</a></h4>
+<h5 id="541tcpudp">5.4.1、TCP和UDP参数说明<a class="headerlink" href="#541tcpudp" title="Permanent link">&para;</a></h5>
+<h5 id="542tcp">5.4.2、TCP参数举例<a class="headerlink" href="#542tcp" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、TCP监听接收流<ul>
+<li><code>./ffmpeg -listen 1 -f flv -i tcp://127.0.0.1:1234/live/stream -c copy -f flv output.flv</code></li>
+</ul>
+</li>
+<li>2、TCP请求发布流</li>
+<li>3、</li>
+<li>4、TCP拉流超时参数timeout</li>
+<li>5、</li>
+<li>6、</li>
+</ul>
+<h5 id="543tcpudp">5.4.3、TCP/UDP使用小结<a class="headerlink" href="#543tcpudp" title="Permanent link">&para;</a></h5>
+<h4 id="55ffmpeg">5.5、FFmpeg推多路流<a class="headerlink" href="#55ffmpeg" title="Permanent link">&para;</a></h4>
+<p>5.5.1、管道方式输出多路流</p>
+<p>5.5.2、tee封装格式输出多路流</p>
+<p>5.5.3、tee协议输出多路流</p>
+<h4 id="56ffmpeghds">5.6、FFmpeg生成HDS流<a class="headerlink" href="#56ffmpeghds" title="Permanent link">&para;</a></h4>
+<h5 id="561hds">5.6.1、HDS参数说明<a class="headerlink" href="#561hds" title="Permanent link">&para;</a></h5>
+<h5 id="562hds">5.6.2、HDS使用举例<a class="headerlink" href="#562hds" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、window_size参数控制文件列表大小<ul>
+<li><code>./ffmpeg -i input -c copy -f hds -window_size 4 output</code></li>
+</ul>
+</li>
+<li>2、</li>
+<li>3、其它参数</li>
+</ul>
+<h4 id="57ffmpegdash">5.7、FFmpeg生成DASH流<a class="headerlink" href="#57ffmpegdash" title="Permanent link">&para;</a></h4>
+<h5 id="571dash">5.7.1、DASH参数说明<a class="headerlink" href="#571dash" title="Permanent link">&para;</a></h5>
+<h5 id="572dash">5.7.2、DASH参数使用举例<a class="headerlink" href="#572dash" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、window_size与extra_window_size参数举例</li>
+<li>2、single_file参数举例</li>
+</ul>
+<h4 id="58">5.8、小结<a class="headerlink" href="#58" title="Permanent link">&para;</a></h4>
+<ul>
+<li>对流媒体的支持，主要是RTMP，RTSP，TCP，UDP，HLS，HDS，DASH</li>
+</ul>
+<h3 id="chap6ffmpeg">chap6、FFmpeg滤镜使用<a class="headerlink" href="#chap6ffmpeg" title="Permanent link">&para;</a></h3>
+<h4 id="61ffmpegfilter">6.1、FFmpeg滤镜filter描述格式<a class="headerlink" href="#61ffmpegfilter" title="Permanent link">&para;</a></h4>
+<p>6.1.1、FFmpeg滤镜Filter的参数排列方式</p>
+<p>6.1.2、FFmpeg滤镜Filter时间 内置变量</p>
+<h4 id="62ffmpeg">6.2、FFmpeg为视频加水印<a class="headerlink" href="#62ffmpeg" title="Permanent link">&para;</a></h4>
+<h5 id="621">6.2.1、文字水印<a class="headerlink" href="#621" title="Permanent link">&para;</a></h5>
+<p>6.2.2、图片水印</p>
+<h4 id="63ffmpeg">6.3、FFmpeg生成画中画<a class="headerlink" href="#63ffmpeg" title="Permanent link">&para;</a></h4>
+<h4 id="64ffmpeg">6.4、FFmpeg视频多宫格处理<a class="headerlink" href="#64ffmpeg" title="Permanent link">&para;</a></h4>
+<h4 id="65ffmpeg">6.5、FFmpeg音频流滤镜操作<a class="headerlink" href="#65ffmpeg" title="Permanent link">&para;</a></h4>
+<p>6.5.1、双声道合并单声道</p>
+<p>6.5.2、双声道提取</p>
+<p>6.5.3、双声道转双音频流</p>
+<p>6.5.4、单声道转双声道</p>
+<p>6.5.5、</p>
+<p>6.5.6、</p>
+<h4 id="66ffmpeg">6.6、FFmpeg音频音量探测<a class="headerlink" href="#66ffmpeg" title="Permanent link">&para;</a></h4>
+<h5 id="661">6.6.1、音频音量获得<a class="headerlink" href="#661" title="Permanent link">&para;</a></h5>
+<h5 id="662">6.6.2、绘制音频波形<a class="headerlink" href="#662" title="Permanent link">&para;</a></h5>
+<h4 id="67ffmpeg">6.7、FFmpeg为视频加字幕<a class="headerlink" href="#67ffmpeg" title="Permanent link">&para;</a></h4>
+<h5 id="671ass">6.7.1、ASS字幕流写入视频流<a class="headerlink" href="#671ass" title="Permanent link">&para;</a></h5>
+<p>6.7.2、ASS字幕流写入封装容器</p>
+<h4 id="68ffmpeg">6.8、FFmpeg视频抠图合并<a class="headerlink" href="#68ffmpeg" title="Permanent link">&para;</a></h4>
+<h4 id="69ffmpeg-3d">6.9、FFmpeg 3D视频处理<a class="headerlink" href="#69ffmpeg-3d" title="Permanent link">&para;</a></h4>
+<p>6.9.1、stereo3d处理3D视频</p>
+<p>6.9.2、3D图像转换举例</p>
+<h4 id="610ffmpeg">6.10、FFmpeg定时视频截图<a class="headerlink" href="#610ffmpeg" title="Permanent link">&para;</a></h4>
+<p>6.10.1、vframe参数截取一张图片</p>
+<p>6.10.2、fps滤镜定时获得图片</p>
+<h4 id="611ffmpeg">6.11、FFmpeg生成测试元数据<a class="headerlink" href="#611ffmpeg" title="Permanent link">&para;</a></h4>
+<p>6.11.1、FFmpeg生成音频测试流</p>
+<p>6.11.2、</p>
+<h4 id="612ffmpeg">6.12、FFmpeg对音视频倍速处理<a class="headerlink" href="#612ffmpeg" title="Permanent link">&para;</a></h4>
+<p>6.12.1、atempo音频倍速处理</p>
+<ul>
+<li>半速处理</li>
+<li>2倍速处理</li>
+</ul>
+<h5 id="6122setpts">6.12.2、setpts视频倍速处理<a class="headerlink" href="#6122setpts" title="Permanent link">&para;</a></h5>
+<ul>
+<li>半速处理</li>
+<li>2倍速处理</li>
+</ul>
+<h4 id="613">6.13、小结<a class="headerlink" href="#613" title="Permanent link">&para;</a></h4>
+<ul>
+<li>滤镜处理avfilter</li>
+</ul>
+<h3 id="chap7ffmpeg">chap7、FFmpeg采集设备<a class="headerlink" href="#chap7ffmpeg" title="Permanent link">&para;</a></h3>
+<h4 id="71ffmpeglinux">7.1、FFmpeg中的Linux设备操作<a class="headerlink" href="#71ffmpeglinux" title="Permanent link">&para;</a></h4>
+<h5 id="711linux">7.1.1、Linux下查看设备列表<a class="headerlink" href="#711linux" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>ffmpeg -hide_banner -devices</code>，<em>这倒是能输出，但怎么对应的呢</em></li>
+</ul>
+<p>7.1.2、</p>
+<p>7.1.3、</p>
+<p>7.1.4、</p>
+<p>7.1.5、</p>
+<p>7.1.6、</p>
+<p>7.1.7、</p>
+<h4 id="72ffmpegos-x">7.2、FFmpeg中OS X设备操作<a class="headerlink" href="#72ffmpegos-x" title="Permanent link">&para;</a></h4>
+<p>7.2.1、</p>
+<p>7.2.2、</p>
+<h4 id="73ffmpegwindows">7.3、FFmpeg中Windows设备操作<a class="headerlink" href="#73ffmpegwindows" title="Permanent link">&para;</a></h4>
+<p>7.3.1、</p>
+<p>7.3.2、</p>
+<h5 id="733ffmpeggdigrab">7.3.3、FFmpeg使用gdigrab采集窗口<a class="headerlink" href="#733ffmpeggdigrab" title="Permanent link">&para;</a></h5>
+<ul>
+<li>（1）使用gdigrab采集整个桌面<ul>
+<li><code>./ffmpeg.exe -f gdigrab -framerate 6 -i desktop out.mp4</code></li>
+</ul>
+</li>
+<li>（2）使用gdigrab采集某个窗口</li>
+<li>（3）使用gdigrab录制带偏移量的视频</li>
+</ul>
+<h4 id="74">7.4、小结<a class="headerlink" href="#74" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Linux，OS X和Win上的设备采集方式，内容涉及到fbdev，v412，x11grab，avfoundataion，dshow，vfwcap，gdigrab</li>
+</ul>
+<h3 id="chap8ffmpeglibavformat254300">chap8、FFmpeg接口libavformat的使用（254/300）<a class="headerlink" href="#chap8ffmpeglibavformat254300" title="Permanent link">&para;</a></h3>
+<h4 id="81">8.1、音视频流封装<a class="headerlink" href="#81" title="Permanent link">&para;</a></h4>
+<ul>
+<li>流程如图<ul>
+<li>（1）API注册，<code>av_register_all</code></li>
+<li>（2）申请AVFormatContext，<code>avformat_alloc_output_context2</code></li>
+<li>（3）</li>
+<li>（4）</li>
+<li>（5）</li>
+<li>（6）写容器尾信息</li>
+</ul>
+</li>
+</ul>
+<h4 id="82">8.2、音视频文件解封装<a class="headerlink" href="#82" title="Permanent link">&para;</a></h4>
+<ul>
+<li>流程如图<ul>
+<li>（1）API注册，<code>av_register_all</code></li>
+<li>（2）</li>
+<li>（3）</li>
+<li>（4）</li>
+<li>（5）</li>
+</ul>
+</li>
+</ul>
+<h4 id="83">8.3、音视频文件转封装<a class="headerlink" href="#83" title="Permanent link">&para;</a></h4>
+<ul>
+<li>流程如图：<ul>
+<li>（1）API注册，<code>av_register_all</code></li>
+<li>（2）申请AVFormatContext，<code>avformat_alloc_output_context2</code></li>
+<li>（3）</li>
+<li>（4）</li>
+<li>（5）</li>
+<li>（6）</li>
+<li>（7）</li>
+<li>（8）</li>
+<li>（9）</li>
+<li>（10）</li>
+</ul>
+</li>
+</ul>
+<h4 id="84">8.4、视频截取<a class="headerlink" href="#84" title="Permanent link">&para;</a></h4>
+<ul>
+<li>流程如图</li>
+</ul>
+<h4 id="85avio">8.5、avio内存数据操作<a class="headerlink" href="#85avio" title="Permanent link">&para;</a></h4>
+<ul>
+<li>流程如图：<ul>
+<li>（1）API注册，<code>av_register_all</code></li>
+<li>（2）</li>
+<li>（3）申请AVFormatContext，<code>avformat_alloc_context</code></li>
+<li>（4）</li>
+<li>（5）</li>
+<li>（6）</li>
+<li>（7）读取帧，<code>av_read_frame</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="86">8.6、小结<a class="headerlink" href="#86" title="Permanent link">&para;</a></h4>
+<ul>
+<li>使用API对文件进行了封装（Mux）和解封装（Demux），总结了使用API的具体流程，介绍了<strong>avio相关的知识点</strong>，avio在自定义数据源方面特别有用。</li>
+</ul>
+<h3 id="chap9ffmpeglibavcodec267300">chap9、FFmpeg接口libavcodec的使用（267/300）<a class="headerlink" href="#chap9ffmpeglibavcodec267300" title="Permanent link">&para;</a></h3>
+<h4 id="91ffmpeg">9.1、FFmpeg旧接口的使用<a class="headerlink" href="#91ffmpeg" title="Permanent link">&para;</a></h4>
+<p>9.1.1、</p>
+<p>9.1.2、</p>
+<p>9.1.3、</p>
+<p>9.1.4、</p>
+<h4 id="92ffmpeg">9.2、FFmpeg新接口的使用<a class="headerlink" href="#92ffmpeg" title="Permanent link">&para;</a></h4>
+<h5 id="921ffmpeg">9.2.1、FFmpeg新接口音频编码<a class="headerlink" href="#921ffmpeg" title="Permanent link">&para;</a></h5>
+<p>9.2.2、</p>
+<p>9.2.3、</p>
+<h5 id="924ffmpeg">9.2.4、FFmpeg新接口视频解码<a class="headerlink" href="#924ffmpeg" title="Permanent link">&para;</a></h5>
+<ul>
+<li>图9-8，视频解码API调用流程</li>
+</ul>
+<h4 id="93">9.3、小结<a class="headerlink" href="#93" title="Permanent link">&para;</a></h4>
+<h3 id="chap10ffmpeglibavfilter284300">chap10、FFmpeg接口libavfilter的使用（284/300）<a class="headerlink" href="#chap10ffmpeglibavfilter284300" title="Permanent link">&para;</a></h3>
+<h4 id="101filtergraphfilter">10.1、filtergraph和filter简述<a class="headerlink" href="#101filtergraphfilter" title="Permanent link">&para;</a></h4>
+<p>10.2、FFmpeg中预留的滤镜</p>
+<p>10.2.1、音频滤镜</p>
+<p>10.2.2、视频滤镜</p>
+<p>10.3、avfilter流程图</p>
+<ul>
+<li>图10-1</li>
+</ul>
+<h4 id="104logo">10.4、使用滤镜加LOGO操作<a class="headerlink" href="#104logo" title="Permanent link">&para;</a></h4>
+<ul>
+<li>操作步骤<ul>
+<li>（1）API注册，<code>av_register_all</code></li>
+<li>（2）</li>
+<li>（3）</li>
+<li>（4）</li>
+<li>（5）</li>
+<li>（6）</li>
+<li>（7）</li>
+<li>（8）</li>
+</ul>
+</li>
+<li>参考代码，ffmpeg.org/doxygen/trunk/filtering_vedio_8c-example.html</li>
+</ul>
+<h4 id="105">10.5、小结<a class="headerlink" href="#105" title="Permanent link">&para;</a></h4>
+<h3 id="_1">最后<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../12storage/ceph%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/" class="btn btn-neutral float-left" title="《ceph设计原理与实现》"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../WebRTC%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/" class="btn btn-neutral float-right" title="《WebRTC权威指南》">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../../12storage/ceph%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../WebRTC%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

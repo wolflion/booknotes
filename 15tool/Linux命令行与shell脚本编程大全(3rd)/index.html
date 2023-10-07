@@ -123,7 +123,7 @@
               </ul>
               <p class="caption"><span class="caption-text">视频</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../../14video/FFmpeg%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/">《FFmpeg入门到精通》</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/FFmpeg%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/">《FFmpeg入门到精通》</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../14video/WebRTC%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/">《WebRTC权威指南》</a>
                   </li>
@@ -172,6 +172,12 @@
         </ul>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#115">11.5、重定向输入和输出</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1151">11.5.1、输出重定向</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1152">11.5.2、输入重定向</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#116">11.6、管道</a>
         <ul>
@@ -180,8 +186,22 @@
         </ul>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#117">11.7、执行数学运算</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1171expr">11.7.1、expr命令</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1172">11.7.2、使用方括号$[]</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1173">11.7.3、浮点解决方案</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#118">11.8、退出脚本</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1181">11.8.1、查出退出状态码</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1182exit">11.8.2、exit命令</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#119">11.9、小结</a>
     </li>
@@ -229,13 +249,47 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#132cfor">13.2、C语言风格的for命令</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#133while">13.3、while命令</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#134until">13.4、until命令</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#137">13.7、控制循环</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1371break">13.7.1、break</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1372continue">13.7.2、continue</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#138">13.8、处理循环的输出</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#139">13.9、实例</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1391">13.9.1、查找可执行文件</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1392">13.9.2、创建多个用户账户</a>
+    </li>
+        </ul>
+    </li>
         </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#chap14">chap14、处理用户输入</a>
         <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#141">14.1、命令行参数</a>
+    </li>
     <li class="toctree-l3"><a class="reference internal" href="#142">14.2、特殊参数变量</a>
         <ul>
     <li class="toctree-l4"><a class="reference internal" href="#1421">14.2.1、参数统计</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1422">14.2.2、抓取所有的数据</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#143">14.3、移动变量</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#146">14.6、获得用户输入</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1464">14.6.4、从文件中读取</a>
     </li>
         </ul>
     </li>
@@ -243,7 +297,51 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#chap15">chap15、呈现数据</a>
         <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#151">15.1、理解输入和输出</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1511">15.1.1、标准文件描述符</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1512">15.1.2、重定向错误</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#152">15.2、在脚本中重定向输出</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1521">15.2.1、临时重定向</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1522">15.2.2、永久重定向</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#153">15.3、在脚本中重定向输入</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#154">15.4、创建自己的重定向</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1541">15.4.1、创建输出文件描述符</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1542">15.4.2、重定向文件描述符</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1543">15.4.3、创建输入文件描述符</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1544">15.4.4、创建读写文件描述符</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1545">15.4.5、关闭文件描述符</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#155">15.5、列出打开的文件描述符</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#156">15.6、阻止命令输出</a>
+    </li>
     <li class="toctree-l3"><a class="reference internal" href="#157">15.7、创建临时文件</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1571">15.7.1、创建本地临时文件</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1572tmp">15.7.2、在/tmp目录创建临时文件</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1573">15.7.3、创建临时目录</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#158">15.8、记录消息</a>
     </li>
@@ -308,8 +406,22 @@
     <li class="toctree-l2"><a class="reference internal" href="#chap17">chap17、创建函数</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#171">17.1、基本的脚本函数</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#17112">17.1.1、创建函数，2种形式</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1712">17.1.2、使用函数</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#172">17.2、返回值</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1721">17.2.1、默认退出状态码</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1722return">17.2.2、使用return命令</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1723">17.2.3、使用函数输出</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#173">17.3、在函数中使用变量</a>
         <ul>
@@ -332,6 +444,12 @@
     <li class="toctree-l3"><a class="reference internal" href="#176">17.6、创建库</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#177">17.7、在命令行上使用函数</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1771">17.7.1、在命令行上创建函数</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1772bashrc">17.7.2、在.bashrc文件中定义函数</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#178">17.8、实例</a>
     </li>
@@ -342,6 +460,12 @@
     <li class="toctree-l2"><a class="reference internal" href="#chap19sedgawk">chap19、初始sed和gawk</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#chap20">chap20、正则表达式</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap21sed">chap21、sed进阶</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap22gawk">chap22、gawk进阶</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap23shell">chap23、使用其它shell</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#_1">最后</a>
         <ul>
@@ -411,7 +535,7 @@
 <h3 id="chap11">chap11、构建基本脚本<a class="headerlink" href="#chap11" title="Permanent link">&para;</a></h3>
 <h4 id="111">11.1、使用多个命令<a class="headerlink" href="#111" title="Permanent link">&para;</a></h4>
 <ul>
-<li>用<code>;</code>分隔</li>
+<li>用<code>;</code>分隔，<code>date;who</code></li>
 <li>最大命令行字符数不能超过255</li>
 </ul>
 <h4 id="112shell">11.2、创建shell脚本文件<a class="headerlink" href="#112shell" title="Permanent link">&para;</a></h4>
@@ -424,12 +548,14 @@
 </li>
 <li>shell脚本的执行权限<ul>
 <li>umask的值</li>
+<li>umask值决定了源文件的默认权限设置，<em>022是啥意思？lionel</em></li>
 </ul>
 </li>
 </ul>
 <h4 id="113">11.3、显示消息<a class="headerlink" href="#113" title="Permanent link">&para;</a></h4>
 <ul>
 <li><code>echo</code>中的单引号或双引号的问题</li>
+<li><code>echo -n</code>参数，<em>文本串+输出在同一行？lionel</em></li>
 </ul>
 <h4 id="114">11.4、使用变量<a class="headerlink" href="#114" title="Permanent link">&para;</a></h4>
 <h5 id="1141">11.4.1、环境变量<a class="headerlink" href="#1141" title="Permanent link">&para;</a></h5>
@@ -437,12 +563,14 @@
 <li><code>set</code>命令</li>
 <li>环境变量前面加美元符号<code>$</code><ul>
 <li><code>echo "The cost of the item is \$15"</code>会认为是要输入$，没有<code>\</code>，会被认为是<code>$1</code>+5这样的，可以通过<code>${15}</code>的方式来表达</li>
+<li><code>\$</code>才显示$本身</li>
 </ul>
 </li>
 </ul>
 <h5 id="1142">11.4.2、用户变量<a class="headerlink" href="#1142" title="Permanent link">&para;</a></h5>
 <ul>
-<li><strong>区分大小写，不能出现空格</strong></li>
+<li><strong>区分大小写，不能出现空格</strong>，长度不超过20</li>
+<li><code>=</code>两边不能有空格</li>
 <li>引用一个变量值时需要使用美元符，而引用变量来对其进行赋值时则不要使用美元符</li>
 </ul>
 <h5 id="1143">11.4.3、命令替换<a class="headerlink" href="#1143" title="Permanent link">&para;</a></h5>
@@ -454,33 +582,41 @@
 </li>
 </ul>
 <h4 id="115">11.5、重定向输入和输出<a class="headerlink" href="#115" title="Permanent link">&para;</a></h4>
-<ul>
-<li>输出重定向</li>
-<li>输入重定向</li>
-</ul>
+<h5 id="1151">11.5.1、输出重定向<a class="headerlink" href="#1151" title="Permanent link">&para;</a></h5>
+<h5 id="1152">11.5.2、输入重定向<a class="headerlink" href="#1152" title="Permanent link">&para;</a></h5>
 <h4 id="116">11.6、管道<a class="headerlink" href="#116" title="Permanent link">&para;</a></h4>
 <h5 id="1161expr">11.6.1、expr命令<a class="headerlink" href="#1161expr" title="Permanent link">&para;</a></h5>
 <h4 id="117">11.7、执行数学运算<a class="headerlink" href="#117" title="Permanent link">&para;</a></h4>
+<h5 id="1171expr">11.7.1、expr命令<a class="headerlink" href="#1171expr" title="Permanent link">&para;</a></h5>
 <ul>
-<li>expr命令<ul>
 <li><code>expr 1+5</code>，<code>expr 5 \*2</code>（*要用反斜杠）</li>
 </ul>
-</li>
-<li>使用方括号<code>$[]</code><ul>
+<h5 id="1172">11.7.2、使用方括号<code>$[]</code><a class="headerlink" href="#1172" title="Permanent link">&para;</a></h5>
+<ul>
 <li><code>var1=$[1+5]</code></li>
 </ul>
-</li>
-<li>浮点解决方案<ul>
+<h5 id="1173">11.7.3、浮点解决方案<a class="headerlink" href="#1173" title="Permanent link">&para;</a></h5>
+<ul>
 <li><code>bc</code>的基本用法 </li>
 </ul>
-</li>
-</ul>
 <h4 id="118">11.8、退出脚本<a class="headerlink" href="#118" title="Permanent link">&para;</a></h4>
+<h5 id="1181">11.8.1、查出退出状态码<a class="headerlink" href="#1181" title="Permanent link">&para;</a></h5>
 <ul>
-<li>查出退出状态码</li>
-<li>exit命令</li>
+<li><code>$?</code></li>
+</ul>
+<h5 id="1182exit">11.8.2、exit命令<a class="headerlink" href="#1182exit" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>exit 5</code>，表示<code>$?</code>就是5</li>
 </ul>
 <h4 id="119">11.9、小结<a class="headerlink" href="#119" title="Permanent link">&para;</a></h4>
+<ul>
+<li>lionel，都是其它地方总结的<ul>
+<li><code>#/## 变量名</code>：第一个字符/最后一个字符左侧</li>
+<li><code>%/%% 变量名</code>：第一个字符/最后一个字符右侧</li>
+<li><code>bash .sh文件</code>执行</li>
+</ul>
+</li>
+</ul>
 <h3 id="chap12">chap12、使用结构化命令<a class="headerlink" href="#chap12" title="Permanent link">&para;</a></h3>
 <h4 id="121if-then">12.1、使用if-then语句<a class="headerlink" href="#121if-then" title="Permanent link">&para;</a></h4>
 <pre class="highlight"><code class="language-shell">#!/bin/bash
@@ -499,33 +635,154 @@ fi</code></pre>
 <h4 id="124test">12.4、test命令<a class="headerlink" href="#124test" title="Permanent link">&para;</a></h4>
 <ul>
 <li>判断三类条件</li>
+<li>方括号定义测试条件，空格</li>
 </ul>
 <h5 id="1241">12.4.1、数组比较<a class="headerlink" href="#1241" title="Permanent link">&para;</a></h5>
+<ul>
+<li>eq</li>
+<li>gt</li>
+</ul>
 <h5 id="1242">12.4.2、字符串比较<a class="headerlink" href="#1242" title="Permanent link">&para;</a></h5>
+<ul>
+<li>长度非0  <code>-n str1</code></li>
+<li>长度为0  <code>-z str1</code></li>
+</ul>
 <h5 id="1243">12.4.3、文件比较<a class="headerlink" href="#1243" title="Permanent link">&para;</a></h5>
 <h4 id="125">12.5、复合条件测试<a class="headerlink" href="#125" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>[ cond1 ] &amp;&amp; [ cond2 ]</code>，还有<code>||</code>，<strong>两个空格不能忘</strong></li>
+</ul>
 <h4 id="126if-then">12.6、if-then的高级特征<a class="headerlink" href="#126if-then" title="Permanent link">&para;</a></h4>
 <h5 id="1261">12.6.1、使用双括号<a class="headerlink" href="#1261" title="Permanent link">&para;</a></h5>
+<ul>
+<li>使用高级的数学表达式 <code>(( expression ))</code></li>
+</ul>
 <h5 id="1262">12.6.2、使用双方括号<a class="headerlink" href="#1262" title="Permanent link">&para;</a></h5>
+<ul>
+<li>字符串比较的高级特性，模式匹配 <code>[[ ]]</code></li>
+</ul>
 <h4 id="127case">12.7、case命令<a class="headerlink" href="#127case" title="Permanent link">&para;</a></h4>
+<pre class="highlight"><code class="language-shell">case var in
+par1 | par2) cmd;;
+par3 | par4)  cmd;;
+*) default cmd;;
+esac</code></pre>
 <h4 id="128">12.8、小结<a class="headerlink" href="#128" title="Permanent link">&para;</a></h4>
 <h3 id="chap13">chap13、更多的结构化命令<a class="headerlink" href="#chap13" title="Permanent link">&para;</a></h3>
 <h4 id="131for">13.1、for命令<a class="headerlink" href="#131for" title="Permanent link">&para;</a></h4>
+<pre class="highlight"><code class="language-shell">for var in list
+do 
+    cmd
+done</code></pre>
 <h4 id="132cfor">13.2、C语言风格的for命令<a class="headerlink" href="#132cfor" title="Permanent link">&para;</a></h4>
-<p>13.3、while命令</p>
-<p>13.4、until命令</p>
+<h4 id="133while">13.3、while命令<a class="headerlink" href="#133while" title="Permanent link">&para;</a></h4>
+<pre class="highlight"><code class="language-shell">while test cmd
+do
+    cmd
+done</code></pre>
+<h4 id="134until">13.4、until命令<a class="headerlink" href="#134until" title="Permanent link">&para;</a></h4>
+<ul>
+<li>与while相反</li>
+</ul>
 <p>13.5、嵌套循环</p>
 <p>13.6、循环处理文件数据</p>
-<p>13.7、控制循环</p>
-<p>13.8、处理循环的输出</p>
-<p>13.9、实例</p>
+<h4 id="137">13.7、控制循环<a class="headerlink" href="#137" title="Permanent link">&para;</a></h4>
+<h5 id="1371break">13.7.1、break<a class="headerlink" href="#1371break" title="Permanent link">&para;</a></h5>
+<h5 id="1372continue">13.7.2、continue<a class="headerlink" href="#1372continue" title="Permanent link">&para;</a></h5>
+<h4 id="138">13.8、处理循环的输出<a class="headerlink" href="#138" title="Permanent link">&para;</a></h4>
+<h4 id="139">13.9、实例<a class="headerlink" href="#139" title="Permanent link">&para;</a></h4>
+<h5 id="1391">13.9.1、查找可执行文件<a class="headerlink" href="#1391" title="Permanent link">&para;</a></h5>
+<h5 id="1392">13.9.2、创建多个用户账户<a class="headerlink" href="#1392" title="Permanent link">&para;</a></h5>
 <p>13.10、小结</p>
 <h3 id="chap14">chap14、处理用户输入<a class="headerlink" href="#chap14" title="Permanent link">&para;</a></h3>
+<h4 id="141">14.1、命令行参数<a class="headerlink" href="#141" title="Permanent link">&para;</a></h4>
+<p>14.1.1、读取参数</p>
+<ul>
+<li>位置参数<ul>
+<li>$0，程序名</li>
+<li>$1，第1个参数</li>
+</ul>
+</li>
+</ul>
+<p>14.1.2、读取脚本名</p>
+<ul>
+<li><code>$0</code></li>
+</ul>
+<p>14.1.3、测试参数</p>
+<ul>
+<li><code>if[ -n "$1"]</code></li>
+</ul>
 <h4 id="142">14.2、特殊参数变量<a class="headerlink" href="#142" title="Permanent link">&para;</a></h4>
 <h5 id="1421">14.2.1、参数统计<a class="headerlink" href="#1421" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>$#</code></li>
+<li><code>$[#]</code>不能在花括号内使用美元符</li>
+<li><code>${!#}</code>无参数时，返回脚本名</li>
+</ul>
+<h5 id="1422">14.2.2、抓取所有的数据<a class="headerlink" href="#1422" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>$*</code>，所有参数当作一个单词保存</li>
+<li><code>$@</code>，单独处理每一个参数</li>
+</ul>
+<h4 id="143">14.3、移动变量<a class="headerlink" href="#143" title="Permanent link">&para;</a></h4>
+<ul>
+<li>shift命令，<code>shift 2</code>一次移动2个位置</li>
+</ul>
+<p>14.4、处理选项</p>
+<p>14.4.1、查找选项</p>
+<ul>
+<li><code>--</code>双破折线，表明选项列表结束</li>
+</ul>
+<p>14.5、将选项标准化</p>
+<h4 id="146">14.6、获得用户输入<a class="headerlink" href="#146" title="Permanent link">&para;</a></h4>
+<p>14.6.1、基本的读取</p>
+<ul>
+<li>read，<code>read -p</code>指定提示符</li>
+</ul>
+<p>14.6.2、超时</p>
+<ul>
+<li><code>read -t</code></li>
+</ul>
+<p>14.6.3、隐藏方式读取</p>
+<ul>
+<li><code>read -s</code>，隐藏密码</li>
+</ul>
+<h5 id="1464">14.6.4、从文件中读取<a class="headerlink" href="#1464" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>cat test | while read line</code></li>
+</ul>
 <h3 id="chap15">chap15、呈现数据<a class="headerlink" href="#chap15" title="Permanent link">&para;</a></h3>
+<h4 id="151">15.1、理解输入和输出<a class="headerlink" href="#151" title="Permanent link">&para;</a></h4>
+<h5 id="1511">15.1.1、标准文件描述符<a class="headerlink" href="#1511" title="Permanent link">&para;</a></h5>
+<h5 id="1512">15.1.2、重定向错误<a class="headerlink" href="#1512" title="Permanent link">&para;</a></h5>
+<h4 id="152">15.2、在脚本中重定向输出<a class="headerlink" href="#152" title="Permanent link">&para;</a></h4>
+<h5 id="1521">15.2.1、临时重定向<a class="headerlink" href="#1521" title="Permanent link">&para;</a></h5>
+<h5 id="1522">15.2.2、永久重定向<a class="headerlink" href="#1522" title="Permanent link">&para;</a></h5>
+<h4 id="153">15.3、在脚本中重定向输入<a class="headerlink" href="#153" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>exec 0&lt; testfile</code></li>
+</ul>
+<h4 id="154">15.4、创建自己的重定向<a class="headerlink" href="#154" title="Permanent link">&para;</a></h4>
+<h5 id="1541">15.4.1、创建输出文件描述符<a class="headerlink" href="#1541" title="Permanent link">&para;</a></h5>
+<h5 id="1542">15.4.2、重定向文件描述符<a class="headerlink" href="#1542" title="Permanent link">&para;</a></h5>
+<h5 id="1543">15.4.3、创建输入文件描述符<a class="headerlink" href="#1543" title="Permanent link">&para;</a></h5>
+<h5 id="1544">15.4.4、创建读写文件描述符<a class="headerlink" href="#1544" title="Permanent link">&para;</a></h5>
+<h5 id="1545">15.4.5、关闭文件描述符<a class="headerlink" href="#1545" title="Permanent link">&para;</a></h5>
+<h4 id="155">15.5、列出打开的文件描述符<a class="headerlink" href="#155" title="Permanent link">&para;</a></h4>
+<h4 id="156">15.6、阻止命令输出<a class="headerlink" href="#156" title="Permanent link">&para;</a></h4>
 <h4 id="157">15.7、创建临时文件<a class="headerlink" href="#157" title="Permanent link">&para;</a></h4>
+<h5 id="1571">15.7.1、创建本地临时文件<a class="headerlink" href="#1571" title="Permanent link">&para;</a></h5>
+<h5 id="1572tmp">15.7.2、在/tmp目录创建临时文件<a class="headerlink" href="#1572tmp" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>mktemp -t</code>选项</li>
+</ul>
+<h5 id="1573">15.7.3、创建临时目录<a class="headerlink" href="#1573" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>-d</code>选项</li>
+</ul>
 <h4 id="158">15.8、记录消息<a class="headerlink" href="#158" title="Permanent link">&para;</a></h4>
+<p>15.9、实例</p>
+<p>15.10、小结</p>
 <h3 id="chap16">chap16、控制脚本<a class="headerlink" href="#chap16" title="Permanent link">&para;</a></h3>
 <ul>
 <li>也就是运行，除了<strong>实时模式</strong>，还有其它方式<ul>
@@ -558,7 +815,7 @@ fi</code></pre>
 </ul>
 <h5 id="1613">16.1.3、捕获信号<a class="headerlink" href="#1613" title="Permanent link">&para;</a></h5>
 <ul>
-<li><code>trap</code><ul>
+<li><code>trap</code>命令<ul>
 <li><code>trap "echo 'Sorry! I have trapped Ctrl-C'"  SIGINT</code>，<strong>用一组空格分开的待捕获的信号</strong></li>
 </ul>
 </li>
@@ -572,7 +829,7 @@ fi</code></pre>
 <ul>
 <li>在后台模式中，进程运行时不会和终端会话上的STDIN，STDOUT以及STDERR关联</li>
 </ul>
-<h5 id="1621">16.2.1、后台运行脚本（&amp;）<a class="headerlink" href="#1621" title="Permanent link">&para;</a></h5>
+<h5 id="1621">16.2.1、后台运行脚本（<code>&amp;</code>）<a class="headerlink" href="#1621" title="Permanent link">&para;</a></h5>
 <h5 id="1622">16.2.2、运行多个后台脚本<a class="headerlink" href="#1622" title="Permanent link">&para;</a></h5>
 <ul>
 <li>只能逐个运行</li>
@@ -589,7 +846,11 @@ fi</code></pre>
 </ul>
 <h5 id="1641">16.4.1、查看作业<a class="headerlink" href="#1641" title="Permanent link">&para;</a></h5>
 <ul>
-<li>jobs命令</li>
+<li>jobs命令，<ul>
+<li><code>jobs -l</code>查看进程号</li>
+<li><code>$$</code>分配给脚本的PID</li>
+</ul>
+</li>
 </ul>
 <h5 id="1642">16.4.2、重启停止的作业<a class="headerlink" href="#1642" title="Permanent link">&para;</a></h5>
 <ul>
@@ -601,19 +862,32 @@ fi</code></pre>
 </ul>
 <h5 id="1651nice">16.5.1、nice命令<a class="headerlink" href="#1651nice" title="Permanent link">&para;</a></h5>
 <ul>
-<li><code>nice -n 10</code>，<strong>只能降低，不能提高</strong></li>
+<li><code>nice -n 10 ./test4.sh &gt; test4.out &amp;</code>，<strong>只能降低，不能提高</strong></li>
 </ul>
 <h5 id="1652renice">16.5.2、renice命令<a class="headerlink" href="#1652renice" title="Permanent link">&para;</a></h5>
 <ul>
-<li>renice命令的限制</li>
+<li>renice命令的限制<ul>
+<li><code>renice -n 10 -p 5055</code>，改变系统上已经运行的</li>
+</ul>
+</li>
 </ul>
 <h4 id="166">16.6、定时运行作业<a class="headerlink" href="#166" title="Permanent link">&para;</a></h4>
 <h5 id="1661at">16.6.1、用at命令来计划执行作业<a class="headerlink" href="#1661at" title="Permanent link">&para;</a></h5>
+<ul>
+<li>4、删除作业<ul>
+<li><code>atrm</code>是删除，<code>atq</code>查看哪些作业在作业队列中等待</li>
+</ul>
+</li>
+</ul>
 <h5 id="1662">16.6.2、安排需要定期执行的脚本<a class="headerlink" href="#1662" title="Permanent link">&para;</a></h5>
 <ul>
-<li>cron时间表</li>
-<li>构建cron时间表</li>
-<li>浏览cron目录<ul>
+<li>1、cron时间表</li>
+<li>2、构建cron时间表<ul>
+<li><code>crontab -l</code></li>
+<li><strong>添加条目</strong>用<code>-e</code>选项，即<code>crontab -e</code></li>
+</ul>
+</li>
+<li>3、浏览cron目录<ul>
 <li><code>ls /etc/cron.*ly</code></li>
 </ul>
 </li>
@@ -622,33 +896,31 @@ fi</code></pre>
 <h4 id="167">16.7、小结<a class="headerlink" href="#167" title="Permanent link">&para;</a></h4>
 <h3 id="chap17">chap17、创建函数<a class="headerlink" href="#chap17" title="Permanent link">&para;</a></h3>
 <h4 id="171">17.1、基本的脚本函数<a class="headerlink" href="#171" title="Permanent link">&para;</a></h4>
+<h5 id="17112">17.1.1、创建函数，2种形式<a class="headerlink" href="#17112" title="Permanent link">&para;</a></h5>
 <ul>
-<li>17.1.1、创建函数，2种形式</li>
+<li>一种是函数名前面加<code>function</code></li>
+<li>另一种是函数名后面加<code>()</code></li>
 </ul>
-<pre class="highlight"><code class="language-shell">function name {commands} #关键字function
-name() {commands} #关键的()</code></pre>
-<ul>
-<li>17.1.2、使用函数</li>
-</ul>
+<pre class="highlight"><code class="language-shell">function name {commands}   #关键字function
+name() {commands}    #关键的()</code></pre>
+<h5 id="1712">17.1.2、使用函数<a class="headerlink" href="#1712" title="Permanent link">&para;</a></h5>
 <h4 id="172">17.2、返回值<a class="headerlink" href="#172" title="Permanent link">&para;</a></h4>
+<h5 id="1721">17.2.1、默认退出状态码<a class="headerlink" href="#1721" title="Permanent link">&para;</a></h5>
 <ul>
-<li>17.2.1、默认退出状态码<ul>
-<li><strong>函数中最后一条命令返回的退出状态码，可以用<code>$?</code>来确定</strong></li>
+<li>函数中最后一条命令返回的退出状态码，可以用<code>$?</code>来确定</li>
 </ul>
-</li>
-<li>17.2.2、使用return命令<ul>
-<li><strong>退出状态码，必须是0-255</strong></li>
+<h5 id="1722return">17.2.2、使用return命令<a class="headerlink" href="#1722return" title="Permanent link">&para;</a></h5>
+<ul>
+<li>退出状态码，必须是0-255</li>
 </ul>
-</li>
-<li>17.2.3、使用函数输出<ul>
-<li><code>result = $(dbl)     #dbl是函数</code></li>
-</ul>
-</li>
+<h5 id="1723">17.2.3、使用函数输出<a class="headerlink" href="#1723" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>result = $(dbl)   #dbl是函数</code></li>
 </ul>
 <h4 id="173">17.3、在函数中使用变量<a class="headerlink" href="#173" title="Permanent link">&para;</a></h4>
 <h5 id="1731">17.3.1、向函数传递参数<a class="headerlink" href="#1731" title="Permanent link">&para;</a></h5>
 <ul>
-<li><code>$#</code>判断传给函数的参数数目</li>
+<li><code>$#</code> 判断传给函数的参数数目</li>
 </ul>
 <h5 id="1732">17.3.2、在函数中处理变量<a class="headerlink" href="#1732" title="Permanent link">&para;</a></h5>
 <ul>
@@ -671,14 +943,22 @@ name() {commands} #关键的()</code></pre>
 </ul>
 <h4 id="176">17.6、创建库<a class="headerlink" href="#176" title="Permanent link">&para;</a></h4>
 <h4 id="177">17.7、在命令行上使用函数<a class="headerlink" href="#177" title="Permanent link">&para;</a></h4>
+<h5 id="1771">17.7.1、在命令行上创建函数<a class="headerlink" href="#1771" title="Permanent link">&para;</a></h5>
+<h5 id="1772bashrc">17.7.2、在<code>.bashrc</code>文件中定义函数<a class="headerlink" href="#1772bashrc" title="Permanent link">&para;</a></h5>
 <h4 id="178">17.8、实例<a class="headerlink" href="#178" title="Permanent link">&para;</a></h4>
+<ul>
+<li>shtool库</li>
+</ul>
 <h4 id="179">17.9、小结<a class="headerlink" href="#179" title="Permanent link">&para;</a></h4>
 <h3 id="chap19sedgawk">chap19、初始sed和gawk<a class="headerlink" href="#chap19sedgawk" title="Permanent link">&para;</a></h3>
 <h3 id="chap20">chap20、正则表达式<a class="headerlink" href="#chap20" title="Permanent link">&para;</a></h3>
+<h3 id="chap21sed">chap21、sed进阶<a class="headerlink" href="#chap21sed" title="Permanent link">&para;</a></h3>
+<h3 id="chap22gawk">chap22、gawk进阶<a class="headerlink" href="#chap22gawk" title="Permanent link">&para;</a></h3>
+<h3 id="chap23shell">chap23、使用其它shell<a class="headerlink" href="#chap23shell" title="Permanent link">&para;</a></h3>
 <h3 id="_1">最后<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
 <h4 id="_2">履历<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
 <ul>
-<li>20220319写了点纸上的笔记</li>
+<li>20220319写了点纸上的笔记，2021年1月底和2月初也看了点Part2和Part3方面的知识</li>
 </ul>
               
             </div>
