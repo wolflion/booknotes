@@ -222,11 +222,30 @@ else:
 
 7.5.1、策略1：比较每个值和所有其他值
 
-7.5.2、策略2：判断树
+##### 7.5.2、策略2：判断树
 
-7.5.3、策略3：顺序处理
+##### 7.5.3、策略3：顺序处理
 
-7.5.4、策略4：使用Python
+```python
+maxval = x1
+if x2 > maxval:
+    maxval= x2
+if x3 > maxval:
+    maxval = x3
+#这样，判断x4的话，也只要接着后面写就行
+```
+
+
+
+##### 7.5.4、策略4：使用Python
+
+```python
+def main():
+    x1,x2,x3=eval(input("Please enter three values: "))
+    print("The largest value is", max(x1,x2,x3))
+```
+
+
 
 7.5.5、策略5：一些经验
 
