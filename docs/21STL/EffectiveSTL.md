@@ -193,43 +193,94 @@ string().swap(s1);//清除s并把它的容量变为最小
 #### 41、理解ptr_fun、mem_fun和mem_fun_ref的来由
 
 + *不太会啊*，43用到了mem_fun_ref
++ 用法
+  + 语法1`for_each(vw.begin(),vw.end(),test);`
+    + 改成`for_each(vw.begin(),vw.end(),ptr_fun(test));` **加不加ptr_fun()无所谓**，2者都能通过编译
+  + 语法2`for_each(vw.begin(),vw.end(),&Widget::test);`，不能通过编译
+    + `for_each(vw.begin(),vw.end(),mem_fun(&Widget::test));`，修改后可以
++ 存在的意义，**调整（语法#2或语法#3）成员函数，使之能够通过语法#1被调用**
 
 #### 42、确保`less<T>`与operator<具有相同的语义
+
++ 特化`less<Widget>`
 
 ### Part7、在程序中使用STL（43-50）
 
 #### 43、算法调用优先于手写的循环
 
 + 自己手写for循环，与调用`for_each()`算法
-
+  + `for_each(lw.begin(),lw.end(),mem_fun_ref(&Widget::redraw));` *mem_fun_ref见41*
+  + 这个只计算了一次`lw.end()`，如果使用`for()循环`，*就多少次？*
 + 调用算法通常是更好的选择，它往往优先于任何一个手写循环，理由有3个：
   + 效率
   + 正确性
+    + 写在这样`transform(data,dat+numDoubles,inserter(d,d.begin()),bind2nd(plus<double>)(),41));`，作用是*将data中的元素复制到d的前部，每个元素加上41
   + 可维护性
 + STL有70个算法名称，**知道（或查找到）每个算法的所做的事情**，*现在是不是更多啦，在哪找？cppreference，lionel*
++ *追加讲了一个例子，lionel*
 
 #### 44、容器的成员函数优先于同名的算法
 
 + 原因有2个：【算法和成员函数虽然有同样的名称，但它们所做的事情往往不完全相同】
   + 一，成员函数往往速度更快
   + 二，成员函数通常与容器（特别是关联容器）结合得更加紧密
++ 例子，`set<int>`中包含了100W个整数值，查找某值
+  + `set<int>::iterator i = s.find(727);`，大约40次（最坏），20次（平均）
+  + `set<int>::iterator i = find(s.begin(),s.end(),727);`  100W次（最坏），50W次（平均）
 
 #### 45、正确区分count、find、binary_search、lower_bound、upper_bound和equal_range
 
++ 在使用具体的查找策略时，由**迭代器指定区间是否排序**
+  + 排序，binary_search、
+  + 未排序，count，count_if，find及find_if
++ *lionel，后面2个算法，我都没用过啊*
+
 #### 46、考虑使用函数对象而不是函数作为STL算法的参数
+
++ **函数对象**，就是伪装成函数的对象
++ *lionel，这就想解决一下，自己在调用自定义排序的具体最佳实践*
++ 函数对象优先于函数的理由
+  + 1、
+  + 2、
+  + 3、有助于避免一些微妙的、语言本身的缺陷
 
 #### 47、避免产生“直写型”（write-only）的代码
 
++ *lionel*
++ 解决问题的思路
+  + 通过以reverse_iterator作为参数调用find或者find_if，找到容器中最后一个其值不小于y的元素
+  + 使用erase或者erase-remove习惯用法删除区间中符合条件的元素
+
 #### 48、总是包含（#include）正确的头文件
+
++ 头文件内容
+  + 1、几乎所有的标准STL容器都被声明在与之同名的头文件中
+  + 2、除了以下4个，声明中`<numeric>`中，其它的都声明在`<algorithm>`
+    + accumulate
+    + inner_product
+    + adjacent_difference
+    + partial_sm
+  + 3、特殊类型的迭代器，包括istream_iterator和istreambuf_iterator，被声明在`<iterator>`中
+  + 4、标准的函数子（`less<T>`）和函数子配接器（`not1, bind2nd`）被声明在头文件`<functional>`中
 
 #### 49、学会分析与STL相关的编译器诊断信息
 
++ string不是一个类，它是一个typedef
++ 还有一些其它技巧
+  + vector和string的迭代器通常就是指针，所以当错误地使用了iterator时，编译器的诊断信息中可能会引用到指针类型
+
 #### 50、熟悉与STL相关的Web站点
+
++ SGI STL，www.sgi.com/tech/stl
++ STLport，www.stlport.org
++ Boost，www.boost.org
 
 ### 参考书目
 
 ### 备注
 
 + 前置知识《CPP Primer》5th的chap9顺序容器。
-+ 2021-11-25花了50min整理形成了第1版。
++ time
+  + 2021-11-25花了50min整理形成了第1版
+  + 2023-10-22（9，102个月刷了一些题）整理了一下Part7，之前不太明白的地方，现在由于用到了，还是蛮有感触的
 
