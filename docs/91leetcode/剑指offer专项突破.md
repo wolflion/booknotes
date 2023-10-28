@@ -3,6 +3,8 @@
 + [滑动窗口详解](https://zhuanlan.zhihu.com/p/422908736)
   + https://leetcode.cn/circle/article/9gcJBk/
 + chap8树，chap9堆，chap10前缀树、不熟悉（前2个还算看过，第3个根本不太了解）
++ https://github.com/doocs/leetcode/blob/main/lcof2/README.md
++ https://leetcode.cn/studyplan/coding-interviews-special/
 
 ### 0
 
