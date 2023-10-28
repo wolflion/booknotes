@@ -88,6 +88,8 @@ nav:
     - 刷题:
         - 《剑指offer2nd》: '91leetcode/剑指offer2nd.md'
         - 《剑指offer专项突破》: '91leetcode/剑指offer专项突破.md'
+        - OD基础题: '96output/OD基础题.md'
+        - OD进阶题: '96output/OD进阶题.md'
     - 网课:
         - 《Linux高并发网络编程开发》: '90lecture/01Linux高并发网络编程开发.md'
         - 《侯捷C++内存管理60讲》: '90lecture/侯捷/侯捷C++内存管理60讲.md'
