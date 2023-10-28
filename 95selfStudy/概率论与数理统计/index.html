@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>概率论与数理统计 - lionel的技术笔记</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "\u6982\u7387\u8bba\u4e0e\u6570\u7406\u7edf\u8ba1";
+        var mkdocs_page_input_path = "95selfStudy\\\u6982\u7387\u8bba\u4e0e\u6570\u7406\u7edf\u8ba1.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> lionel的技术笔记
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">简介</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../01daily/">daily</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../02ds/">ds</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../03cpp/">cpp</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../21tool/">tool</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">C++</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../20C%2B%2B/effectiveC%2B%2B/">《Effective C++》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../20C%2B%2B/%E6%B7%B1%E5%BA%A6%E6%8E%A2%E7%B4%A2C%2B%2B%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B/">《深度探索C++对象模型》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/EffectiveSTL/">《Effective STL》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/C%2B%2B%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/">《C++泛型STL原理和应用》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/">《STL源码剖析》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../22C%2B%2Bmodern/%E6%B7%B1%E5%85%A5%E5%BA%94%E7%94%A8C%2B%2B11/">《深入应用C++11》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">基础知识</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA/">《操作系统导论》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E5%A4%A7%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">《大话设计模式》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90_C%2B%2B4th/">《数据结构与算法分析_C++4th》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E7%AE%97%E6%B3%95%284th%29/">《算法4th》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90-%E5%BC%A0%E5%86%9B/">《算法设计与分析-张军》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E5%A4%A9%E8%A1%8C-%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《天行-算法设计与实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%95%99%E7%A8%8B-%E6%9D%8E%E6%98%A5%E8%91%86/">《数据结构教程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%96%B0%E7%BC%96%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%A0%E9%A2%98%E4%B8%8E%E8%A7%A3%E6%9E%90/">《新编数据结构习题与解析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网络编程</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/TCPIP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">《TCP/IP网络编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/">《Linux高性能服务器编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/TCPIP%E8%AF%A6%E8%A7%A3%E5%8D%B71/">《TCPIP详解卷1》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/Linux%E5%86%85%E6%A0%B8%E7%BD%91%E7%BB%9C%E6%A0%88%E6%BA%90%E4%BB%A3%E7%A0%81%E6%83%85%E6%99%AF%E5%88%86%E6%9E%90/">《Linux内核网络栈源代码情景分析》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C/">《深入理解Linux网络》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">文件系统</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/Linux%E5%86%85%E6%A0%B8%E6%8E%A2%E7%A7%98/">《Linux内核探秘》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《文件系统技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">《存储技术原理分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">存储</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../12storage/ceph%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《ceph设计原理与实现》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">视频</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/FFmpeg%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/">《FFmpeg入门到精通》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/WebRTC%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/">《WebRTC权威指南》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/WebRTC%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AE%9E%E6%97%B6%E4%BA%92%E5%8A%A8%E6%8A%80%E6%9C%AF/">《WebRTC音视频实时互动技术》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/%E6%96%B0%E4%B8%80%E4%BB%A3%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9%E7%A0%81%E6%A0%87%E5%87%86-H.264_AVC/">《新一代视频压缩码标准-H.264_AVC》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">内核</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/Linux%E5%86%85%E6%A0%B8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《Linux内核设计与实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5Linux%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%E5%86%85%E6%A0%B8%E6%9C%BA%E5%88%B6/">《深入Linux设备驱动程序内核机制》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">《深入理解Linux虚拟内存管理》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《深入理解Linux网络技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/Linux%E5%86%85%E6%A0%B8%E6%BA%90%E4%BB%A3%E7%A0%81%E5%89%96%E6%9E%90-tcpip%E5%AE%9E%E7%8E%B0/">《Linux内核源代码剖析-TCP/IP实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E5%86%85%E6%A0%B8/">《深入理解Linux内核》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">工具</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/Wireshark%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98/">《Wireshark网络分析实战》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/Linux%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8Eshell%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B%E5%A4%A7%E5%85%A8%283rd%29/">《Linux命令行与shell脚本编程大全(3rd)》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/python%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%883rd%EF%BC%89/">《python程序设计（3rd）》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">刷题</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer2nd/">《剑指offer2nd》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/">《剑指offer专项突破》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../96output/OD%E5%9F%BA%E7%A1%80%E9%A2%98/">OD基础题</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../96output/OD%E8%BF%9B%E9%98%B6%E9%A2%98/">OD进阶题</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网课</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/01Linux%E9%AB%98%E5%B9%B6%E5%8F%91%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/">《Linux高并发网络编程开发》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/%E4%BE%AF%E6%8D%B7/%E4%BE%AF%E6%8D%B7C%2B%2B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%8660%E8%AE%B2/">《侯捷C++内存管理60讲》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/11NJU%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">《NJU算法设计与分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">英语专</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../60English/00794%E7%BB%BC%E5%90%88%E8%8B%B1%E8%AF%AD%E4%B8%80%E4%B8%8A/">《综合英语(一)上》</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">lionel的技术笔记</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>概率论与数理统计</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="_1">《概率论与数理统计》<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<ul>
+<li>全书也就8章，目前的想法是1个月搞定1章<ul>
+<li>概率论（1-5）</li>
+<li>数组统计（6-8）</li>
+</ul>
+</li>
+<li>chap1重点（计划23年5月）<ul>
+<li>1.1节中的<em>文字描述，以及一些 运算律</em></li>
+<li>1.2节中的，排列、组合的复习，概率的几个性质</li>
+<li>1.3节中的条件概率、以及乘法公式、全概率公式</li>
+<li>1.4节中的事件独立性，<em>这想做啥题？</em></li>
+</ul>
+</li>
+<li>chap2重点（没有计划，在23年5月过了一遍）</li>
+<li>chap6-8（0709稍微看了一下，完全没感觉，计划<strong>7月好好复习一下1-5</strong>）</li>
+</ul>
+<h3 id="chap1">chap1、随机事件与概率<a class="headerlink" href="#chap1" title="Permanent link">&para;</a></h3>
+<h4 id="11">1.1、随机事件<a class="headerlink" href="#11" title="Permanent link">&para;</a></h4>
+<h5 id="111">1.1.1、随机现象<a class="headerlink" href="#111" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>确定性现象</strong>：某个条件下，一定会发生</li>
+<li><strong>随机现象</strong>：一定条件下，可能出现A结果，也可能出现B结果，预先无法断言，<strong>在大量的重复试验或观察的基础之上，人们发现随机现象的结果呈现出某种规律性</strong></li>
+</ul>
+<h5 id="112">1.1.2、随机试验和样本空间<a class="headerlink" href="#112" title="Permanent link">&para;</a></h5>
+<ul>
+<li>随机试验满足三个特点:<ul>
+<li>可重复性</li>
+<li>一次试验结果的随机性</li>
+<li>全部试验结果的可知性</li>
+</ul>
+</li>
+</ul>
+<h5 id="113">1.1.3、随机事件的概念<a class="headerlink" href="#113" title="Permanent link">&para;</a></h5>
+<ul>
+<li>随机事件</li>
+<li><strong>基本事件</strong></li>
+<li><strong>必然事件</strong></li>
+</ul>
+<h5 id="114">1.1.4、随机事件的关系与运算<a class="headerlink" href="#114" title="Permanent link">&para;</a></h5>
+<ul>
+<li>事件的包含与相等：<strong>A发生必然导致B发生</strong></li>
+<li>和事件（并）：<strong>A，B中至少有一个发生</strong></li>
+<li>积事件（交）：<strong>A，B同时发生</strong></li>
+<li>差事件：<strong>A发生而B不发生</strong></li>
+<li>互不相容：<strong>事件A与事件B不能同时发生</strong></li>
+<li>对立事件：<strong>A不发生的事件</strong>，<ul>
+<li>事件A与事件B至少有一个发生，且A与B互不相容，则称<strong>A与B互为对立事件</strong></li>
+</ul>
+</li>
+<li>事件的运算律:<ul>
+<li>交换律</li>
+<li>结合律</li>
+<li>分配律</li>
+<li>对偶律，<em>这个不太明白，lionel</em></li>
+</ul>
+</li>
+</ul>
+<h4 id="12">1.2、概率<a class="headerlink" href="#12" title="Permanent link">&para;</a></h4>
+<h5 id="121">1.2.1、频率与概率<a class="headerlink" href="#121" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>频率</strong>：事件A发生的事数/n次试验</li>
+<li><strong>概率</strong>：频率的稳定值</li>
+</ul>
+<h5 id="122">1.2.2、古典概型<a class="headerlink" href="#122" title="Permanent link">&para;</a></h5>
+<ul>
+<li>古典概型的特点:<ul>
+<li>1、基本事件的总数是有限的</li>
+<li>2、每个基本事件发生的可能性相同</li>
+</ul>
+</li>
+<li><strong>要用到排列、组合相关的知识</strong></li>
+</ul>
+<h5 id="123">1.2.3、概率的定义与性质<a class="headerlink" href="#123" title="Permanent link">&para;</a></h5>
+<ul>
+<li>定义1:P(A)为<strong>事件A的概率</strong></li>
+<li>性质:<ul>
+<li>1、</li>
+<li>2、任意事件A，B有<code>P(A交B)=P(A)+P(B)-P(AB)</code></li>
+<li>3、<code>P(B-A)=P(B)-P(AB)</code></li>
+<li>4、</li>
+</ul>
+</li>
+</ul>
+<h4 id="13">1.3、条件概率<a class="headerlink" href="#13" title="Permanent link">&para;</a></h4>
+<h5 id="131">1.3.1、条件概率与乘法公式<a class="headerlink" href="#131" title="Permanent link">&para;</a></h5>
+<ul>
+<li>定义1：P(A|B)=<code>P(AB)/P(B)</code>，为<strong>在事件B发生条件下事件A发生的条件概率</strong></li>
+<li><strong>乘法公式</strong>，以及推广:</li>
+</ul>
+<h5 id="132bayes">1.3.2、全概率公式与贝叶斯（Bayes）公式<a class="headerlink" href="#132bayes" title="Permanent link">&para;</a></h5>
+<ul>
+<li>定义2：样本空间的划分。</li>
+<li><strong>全概率公式</strong>：<em>lionel，不会</em></li>
+<li><strong>贝叶斯（Bayes）公式</strong></li>
+</ul>
+<h4 id="14">1.4、事件的独立性<a class="headerlink" href="#14" title="Permanent link">&para;</a></h4>
+<h5 id="141">1.4.1、事件的独立性<a class="headerlink" href="#141" title="Permanent link">&para;</a></h5>
+<ul>
+<li>定义1、若<code>P(AB)=P(A)P(B)</code>，则A与B<strong>相互独立</strong>，简称A，B独立</li>
+<li>性质1、设P(A)&gt;0，则A与B相互独立的充分必要条件是<code>P(B)=P(B|A)</code></li>
+<li>性质2、</li>
+<li>定义2、<strong>A，B，C相互独立</strong></li>
+<li>定义3、<strong>A，B，C两两独立</strong></li>
+<li>定义4、<strong>A1，A2，...，An相互独立</strong></li>
+</ul>
+<h5 id="142nbernoulli">1.4.2、n重贝努利（Bernoulli）试验<a class="headerlink" href="#142nbernoulli" title="Permanent link">&para;</a></h5>
+<ul>
+<li>试验只有两个结果，而且已知P(A)，将试验结果独立重复进行n次，称为<strong>n重贝努利（Bernoulli）试验</strong>，即<strong>贝努利（Bernoulli）模型</strong></li>
+<li>定理1：<strong>事件A恰好发生k次的概率</strong><ul>
+<li><strong>二项概率公式</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="chap2">chap2、随机变量及其概率分布<a class="headerlink" href="#chap2" title="Permanent link">&para;</a></h3>
+<h4 id="21">2.1、离散型随机变量<a class="headerlink" href="#21" title="Permanent link">&para;</a></h4>
+<h5 id="211">2.1.1、随机变量的概念<a class="headerlink" href="#211" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>随机试验结果与实数的对应关系</strong></li>
+</ul>
+<ul>
+<li>定义1</li>
+</ul>
+<h5 id="212">2.1.2、离散型随机变量及其分布律<a class="headerlink" href="#212" title="Permanent link">&para;</a></h5>
+<ul>
+<li>定义2：若随机变量X只取有限多个或可列无限多个值，称X为<strong>离散型随机变量</strong></li>
+<li>定义3：<strong>分布律（分布列，概率分布）</strong>，<em>每一个值的概率，lionel</em></li>
+<li>分布律的性质:<ul>
+<li>(1)每一个大于0，(2)总和=1</li>
+</ul>
+</li>
+</ul>
+<h5 id="2130-1">2.1.3、0-1分布与二项分布<a class="headerlink" href="#2130-1" title="Permanent link">&para;</a></h5>
+<ul>
+<li>定义4：若随机变量X只取两个可能值：0，1，且<code>P{X=1}=p,P{X=0}=q</code>，p大于0小于1，q=1-p，则称X服从<strong>0-1分布</strong><ul>
+<li>在n重贝努利试中</li>
+</ul>
+</li>
+<li>定义5：<strong>二项分布</strong><ul>
+<li>二项式的k+1项</li>
+</ul>
+</li>
+<li>二项分布的泊松逼近，<strong>泊松（Poisson）定理</strong></li>
+</ul>
+<h5 id="214">2.1.4、泊松分布<a class="headerlink" href="#214" title="Permanent link">&para;</a></h5>
+<ul>
+<li>定义6：<strong>泊松分布</strong><ul>
+<li><span class="arithmatex">\(P(X=k)={e^{-t}t^k}/k!\)</span><ul>
+<li>e是常数</li>
+<li>k是次数</li>
+<li>t入参数，表所期望发生事件的次数</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="22">2.2、随机变量的分布函数<a class="headerlink" href="#22" title="Permanent link">&para;</a></h4>
+<h5 id="221">2.2.1、分布函数的概念<a class="headerlink" href="#221" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>非离散型，我们就无法用分布律来表示</strong></li>
+</ul>
+<ul>
+<li>定义1：若X为随机变量，称函数<code>F(x)=P{X&lt;=x},x属于(负无穷，正无穷)</code>为X的<strong>分布函数</strong></li>
+</ul>
+<h5 id="222">2.2.2、分布函数的性质<a class="headerlink" href="#222" title="Permanent link">&para;</a></h5>
+<ul>
+<li>分布函数的性质:<ul>
+<li>1、</li>
+<li>2、</li>
+<li>3、</li>
+<li>4、</li>
+</ul>
+</li>
+<li>由X的分布函数F(x)，可以求出下列重要事件的概率:<ul>
+<li>1、</li>
+<li>2、</li>
+<li>3、</li>
+</ul>
+</li>
+</ul>
+<h4 id="23">2.3、连续型随机变量及其概率密度<a class="headerlink" href="#23" title="Permanent link">&para;</a></h4>
+<ul>
+<li><em>自己理解</em><ul>
+<li><strong>概率密度函数</strong>，是原函数的导数</li>
+</ul>
+</li>
+</ul>
+<h5 id="231">2.3.1、连续型随机变量及其概率密度<a class="headerlink" href="#231" title="Permanent link">&para;</a></h5>
+<ul>
+<li>定义1：</li>
+<li>概率密度的性质：<ul>
+<li>1、f(x)大于等于0</li>
+<li>2、</li>
+<li>3、</li>
+<li>4、</li>
+</ul>
+</li>
+</ul>
+<h5 id="232">2.3.2、均匀分布与指数分布<a class="headerlink" href="#232" title="Permanent link">&para;</a></h5>
+<ul>
+<li>定义2：<strong>均匀分布</strong><ul>
+<li>均匀分布的<strong>均匀性</strong>是指随机变量X落在区间[a,b]内长度相等的子区间上的概率都是相等的</li>
+</ul>
+</li>
+<li>定义3：<strong>指数分布</strong></li>
+</ul>
+<h5 id="233">2.3.3、正态分布<a class="headerlink" href="#233" title="Permanent link">&para;</a></h5>
+<ul>
+<li>定义4：<strong>正态分布</strong></li>
+<li>正态分布函数的性质:<ul>
+<li>1、</li>
+<li>2、</li>
+</ul>
+</li>
+<li>定义5：<strong>上侧 阿尔法 分位数</strong></li>
+</ul>
+<h4 id="24">2.4、随机变量函数的概率分布<a class="headerlink" href="#24" title="Permanent link">&para;</a></h4>
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/570063449">概率论2.9-随机变量函数的分布</a><ul>
+<li>随机变量X，是<strong>自变量</strong>，因变量<span class="arithmatex">\(f(x)\)</span>，也就是函数</li>
+<li>知道Y的概率分布，求X的概率分布</li>
+<li><em>相当于有了Y，要求X，但有可能存在以下的函数关系<span class="arithmatex">\(Y=X^2\)</span></em></li>
+</ul>
+</li>
+</ul>
+<h5 id="241">2.4.1、离散型随机变量函数的概率分布<a class="headerlink" href="#241" title="Permanent link">&para;</a></h5>
+<h5 id="242">2.4.2、连续型随机变量函数的概率分布<a class="headerlink" href="#242" title="Permanent link">&para;</a></h5>
+<ul>
+<li>定理1：</li>
+<li>两个重要的结论</li>
+<li><strong>柯西（Cauchy）分布</strong></li>
+<li><strong>对数正态分布</strong></li>
+</ul>
+<h3 id="chap3">chap3、多维随机变量及其概率分布<a class="headerlink" href="#chap3" title="Permanent link">&para;</a></h3>
+<h4 id="31">3.1、多维随机变量的概念<a class="headerlink" href="#31" title="Permanent link">&para;</a></h4>
+<h5 id="311">3.1.1、二维随机变量及其分布函数<a class="headerlink" href="#311" title="Permanent link">&para;</a></h5>
+<ul>
+<li>定义1</li>
+<li>定义2<ul>
+<li><strong>联合分布函数</strong>，<em>关于（X,Y）的</em></li>
+<li><strong>边缘分布函数</strong>，<em>关于X，Y的</em></li>
+</ul>
+</li>
+</ul>
+<h5 id="312">3.1.2、二维离散型随机变量的分布律和边缘分布律<a class="headerlink" href="#312" title="Permanent link">&para;</a></h5>
+<ul>
+<li>定义3</li>
+<li>定义4</li>
+</ul>
+<h5 id="313">3.1.3、二维离散型随机变量的概率密度和边缘概率密度<a class="headerlink" href="#313" title="Permanent link">&para;</a></h5>
+<ul>
+<li>定义5</li>
+<li>定义6</li>
+<li>定义7</li>
+<li>定义8</li>
+</ul>
+<h4 id="32">3.2、随机变量的独立性<a class="headerlink" href="#32" title="Permanent link">&para;</a></h4>
+<h5 id="321">3.2.1、两个随机变量的独立性<a class="headerlink" href="#321" title="Permanent link">&para;</a></h5>
+<h5 id="322">3.2.2、二维离散型随机变量的独立性<a class="headerlink" href="#322" title="Permanent link">&para;</a></h5>
+<h5 id="323">3.2.3、二维连续型随机变量的独立性<a class="headerlink" href="#323" title="Permanent link">&para;</a></h5>
+<h5 id="324n">3.2.4、n维随机变量<a class="headerlink" href="#324n" title="Permanent link">&para;</a></h5>
+<h4 id="33">3.3、两个随机变量的函数的分布<a class="headerlink" href="#33" title="Permanent link">&para;</a></h4>
+<h5 id="331">3.3.1、离散型随机变量的函数的分布<a class="headerlink" href="#331" title="Permanent link">&para;</a></h5>
+<h5 id="332">3.3.2、两个独立连续型随机变量之和的概率分布<a class="headerlink" href="#332" title="Permanent link">&para;</a></h5>
+<h3 id="chap4">chap4、随机变量的数字特征<a class="headerlink" href="#chap4" title="Permanent link">&para;</a></h3>
+<h5 id="41">4.1、随机变量的期望<a class="headerlink" href="#41" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>期望</strong>反映了<strong>随机变量取值的集中位置</strong></li>
+</ul>
+<h5 id="411">4.1.1、离散型随机变量的期望<a class="headerlink" href="#411" title="Permanent link">&para;</a></h5>
+<h5 id="412">4.1.2、连续型随机变量的期望<a class="headerlink" href="#412" title="Permanent link">&para;</a></h5>
+<h5 id="413">4.1.3、二维随机变量的期望<a class="headerlink" href="#413" title="Permanent link">&para;</a></h5>
+<h5 id="414">4.1.4、期望的性质<a class="headerlink" href="#414" title="Permanent link">&para;</a></h5>
+<h5 id="42">4.2、方差<a class="headerlink" href="#42" title="Permanent link">&para;</a></h5>
+<h5 id="421">4.2.1、方差的概念<a class="headerlink" href="#421" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>方差</strong>反映了<strong>随机变量偏离其中心-期望的平均偏离程度</strong></li>
+<li>定义1<ul>
+<li>D(X)=E(X-E(X))的平方</li>
+</ul>
+</li>
+</ul>
+<h5 id="422">4.2.2、常见随机变量的方差<a class="headerlink" href="#422" title="Permanent link">&para;</a></h5>
+<h5 id="423">4.2.3、方差的性质<a class="headerlink" href="#423" title="Permanent link">&para;</a></h5>
+<h5 id="43">4.3、协方差与相关系数<a class="headerlink" href="#43" title="Permanent link">&para;</a></h5>
+<h5 id="431">4.3.1、协方差<a class="headerlink" href="#431" title="Permanent link">&para;</a></h5>
+<ul>
+<li>X与Y之间，Cov(X,Y)=E[(X-E(X)) (Y-E(Y))]</li>
+</ul>
+<h5 id="432">4.3.2、相关系数<a class="headerlink" href="#432" title="Permanent link">&para;</a></h5>
+<ul>
+<li>表示<strong>两个随机变量间线性联系密切程度的度量</strong></li>
+</ul>
+<h5 id="433">4.3.3、矩<a class="headerlink" href="#433" title="Permanent link">&para;</a></h5>
+<ul>
+<li><em>这个不太懂，lionel</em></li>
+</ul>
+<h3 id="chap5">chap5、大数定律及中心极限定理<a class="headerlink" href="#chap5" title="Permanent link">&para;</a></h3>
+<h4 id="51">5.1、切比雪夫不等式<a class="headerlink" href="#51" title="Permanent link">&para;</a></h4>
+<ul>
+<li><em>没懂，lionel</em></li>
+</ul>
+<h4 id="52">5.2、大数定律<a class="headerlink" href="#52" title="Permanent link">&para;</a></h4>
+<h5 id="521">5.2.1、贝努利大数定律<a class="headerlink" href="#521" title="Permanent link">&para;</a></h5>
+<h5 id="522">5.2.2、独立同分布随机变量序列的切比雪夫大数定律<a class="headerlink" href="#522" title="Permanent link">&para;</a></h5>
+<h4 id="53">5.3、中心极限定理<a class="headerlink" href="#53" title="Permanent link">&para;</a></h4>
+<h5 id="531">5.3.1、独立同分布序列的中心极限定理<a class="headerlink" href="#531" title="Permanent link">&para;</a></h5>
+<h5 id="532demoivre-laplace">5.3.2、棣莫费（DeMoivre）-拉普拉斯（Laplace）中心极限定理<a class="headerlink" href="#532demoivre-laplace" title="Permanent link">&para;</a></h5>
+<h3 id="_2">最后<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<h4 id="_3">参考的<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
+<h5 id="2023-10-22">2023-10-22那一周整理的<a class="headerlink" href="#2023-10-22" title="Permanent link">&para;</a></h5>
+<ul>
+<li>cnblogs.com，marsggbo，说人话理解伯努利分布，二项分布，指数分布</li>
+<li>youtube，机器学习数学基础，念心学院Greedy AI</li>
+<li>《机器学习数学基础》齐伟，github.com/qiwsir/ML</li>
+<li>留德华叫兽，从入门到高阶，读懂机器学习需要哪些数学知识</li>
+<li>csdn，hustqb，从二项分布推导泊松分布</li>
+<li>各种分布<ul>
+<li>0-1分布（黑白）</li>
+<li>二项分布（伯努利）多次</li>
+<li>几何分布（首中即停）</li>
+<li>超几何分布</li>
+<li>泊松分布（单位时间内，随机机事件发生次数）</li>
+<li>均匀分布（任一区间与区间长度成正比）</li>
+<li>指数分布（描述某个事件发生的时间间隔）<em>等公交车，超过15min的概率</em><ul>
+<li><em>lionel，公式怎么记</em></li>
+</ul>
+</li>
+<li>正态分布（也叫高斯分布）<ul>
+<li><em>lionel，公式怎么记</em></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

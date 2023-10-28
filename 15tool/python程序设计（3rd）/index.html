@@ -250,6 +250,14 @@
     <li class="toctree-l3"><a class="reference internal" href="#74">7.4、异常处理</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#75">7.5、设计研究：三者最大</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#7522">7.5.2、策略2：判断树</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#7533">7.5.3、策略3：顺序处理</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#7544python">7.5.4、策略4：使用Python</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#76">7.6、小结</a>
     </li>
@@ -395,6 +403,10 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer2nd/">《剑指offer2nd》</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/">《剑指offer专项突破》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../96output/OD%E5%9F%BA%E7%A1%80%E9%A2%98/">OD基础题</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../96output/OD%E8%BF%9B%E9%98%B6%E9%A2%98/">OD进阶题</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">网课</span></p>
@@ -606,9 +618,18 @@ else:
 </ul>
 <h4 id="75">7.5、设计研究：三者最大<a class="headerlink" href="#75" title="Permanent link">&para;</a></h4>
 <p>7.5.1、策略1：比较每个值和所有其他值</p>
-<p>7.5.2、策略2：判断树</p>
-<p>7.5.3、策略3：顺序处理</p>
-<p>7.5.4、策略4：使用Python</p>
+<h5 id="7522">7.5.2、策略2：判断树<a class="headerlink" href="#7522" title="Permanent link">&para;</a></h5>
+<h5 id="7533">7.5.3、策略3：顺序处理<a class="headerlink" href="#7533" title="Permanent link">&para;</a></h5>
+<pre class="highlight"><code class="language-python">maxval = x1
+if x2 &gt; maxval:
+    maxval= x2
+if x3 &gt; maxval:
+    maxval = x3
+#这样，判断x4的话，也只要接着后面写就行</code></pre>
+<h5 id="7544python">7.5.4、策略4：使用Python<a class="headerlink" href="#7544python" title="Permanent link">&para;</a></h5>
+<pre class="highlight"><code class="language-python">def main():
+    x1,x2,x3=eval(input("Please enter three values: "))
+    print("The largest value is", max(x1,x2,x3))</code></pre>
 <p>7.5.5、策略5：一些经验</p>
 <h4 id="76">7.6、小结<a class="headerlink" href="#76" title="Permanent link">&para;</a></h4>
 <h3 id="chap8">chap8、循环结构和布尔值<a class="headerlink" href="#chap8" title="Permanent link">&para;</a></h3>

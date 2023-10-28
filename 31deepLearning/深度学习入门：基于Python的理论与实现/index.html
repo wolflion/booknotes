@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>深度学习入门：基于Python的理论与实现 - lionel的技术笔记</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "\u6df1\u5ea6\u5b66\u4e60\u5165\u95e8\uff1a\u57fa\u4e8ePython\u7684\u7406\u8bba\u4e0e\u5b9e\u73b0";
+        var mkdocs_page_input_path = "31deepLearning\\\u6df1\u5ea6\u5b66\u4e60\u5165\u95e8\uff1a\u57fa\u4e8ePython\u7684\u7406\u8bba\u4e0e\u5b9e\u73b0.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> lionel的技术笔记
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">简介</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../01daily/">daily</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../02ds/">ds</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../03cpp/">cpp</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../21tool/">tool</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">C++</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../20C%2B%2B/effectiveC%2B%2B/">《Effective C++》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../20C%2B%2B/%E6%B7%B1%E5%BA%A6%E6%8E%A2%E7%B4%A2C%2B%2B%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B/">《深度探索C++对象模型》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/EffectiveSTL/">《Effective STL》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/C%2B%2B%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/">《C++泛型STL原理和应用》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/">《STL源码剖析》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../22C%2B%2Bmodern/%E6%B7%B1%E5%85%A5%E5%BA%94%E7%94%A8C%2B%2B11/">《深入应用C++11》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">基础知识</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA/">《操作系统导论》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E5%A4%A7%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">《大话设计模式》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90_C%2B%2B4th/">《数据结构与算法分析_C++4th》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E7%AE%97%E6%B3%95%284th%29/">《算法4th》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90-%E5%BC%A0%E5%86%9B/">《算法设计与分析-张军》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E5%A4%A9%E8%A1%8C-%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《天行-算法设计与实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%95%99%E7%A8%8B-%E6%9D%8E%E6%98%A5%E8%91%86/">《数据结构教程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%96%B0%E7%BC%96%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%A0%E9%A2%98%E4%B8%8E%E8%A7%A3%E6%9E%90/">《新编数据结构习题与解析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网络编程</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/TCPIP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">《TCP/IP网络编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/">《Linux高性能服务器编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/TCPIP%E8%AF%A6%E8%A7%A3%E5%8D%B71/">《TCPIP详解卷1》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/Linux%E5%86%85%E6%A0%B8%E7%BD%91%E7%BB%9C%E6%A0%88%E6%BA%90%E4%BB%A3%E7%A0%81%E6%83%85%E6%99%AF%E5%88%86%E6%9E%90/">《Linux内核网络栈源代码情景分析》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C/">《深入理解Linux网络》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">文件系统</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/Linux%E5%86%85%E6%A0%B8%E6%8E%A2%E7%A7%98/">《Linux内核探秘》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《文件系统技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">《存储技术原理分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">存储</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../12storage/ceph%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《ceph设计原理与实现》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">视频</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/FFmpeg%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/">《FFmpeg入门到精通》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/WebRTC%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/">《WebRTC权威指南》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/WebRTC%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AE%9E%E6%97%B6%E4%BA%92%E5%8A%A8%E6%8A%80%E6%9C%AF/">《WebRTC音视频实时互动技术》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/%E6%96%B0%E4%B8%80%E4%BB%A3%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9%E7%A0%81%E6%A0%87%E5%87%86-H.264_AVC/">《新一代视频压缩码标准-H.264_AVC》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">内核</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/Linux%E5%86%85%E6%A0%B8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《Linux内核设计与实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5Linux%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%E5%86%85%E6%A0%B8%E6%9C%BA%E5%88%B6/">《深入Linux设备驱动程序内核机制》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">《深入理解Linux虚拟内存管理》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《深入理解Linux网络技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/Linux%E5%86%85%E6%A0%B8%E6%BA%90%E4%BB%A3%E7%A0%81%E5%89%96%E6%9E%90-tcpip%E5%AE%9E%E7%8E%B0/">《Linux内核源代码剖析-TCP/IP实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E5%86%85%E6%A0%B8/">《深入理解Linux内核》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">工具</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/Wireshark%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98/">《Wireshark网络分析实战》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/Linux%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8Eshell%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B%E5%A4%A7%E5%85%A8%283rd%29/">《Linux命令行与shell脚本编程大全(3rd)》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/python%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%883rd%EF%BC%89/">《python程序设计（3rd）》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">刷题</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer2nd/">《剑指offer2nd》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/">《剑指offer专项突破》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../96output/OD%E5%9F%BA%E7%A1%80%E9%A2%98/">OD基础题</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../96output/OD%E8%BF%9B%E9%98%B6%E9%A2%98/">OD进阶题</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网课</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/01Linux%E9%AB%98%E5%B9%B6%E5%8F%91%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/">《Linux高并发网络编程开发》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/%E4%BE%AF%E6%8D%B7/%E4%BE%AF%E6%8D%B7C%2B%2B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%8660%E8%AE%B2/">《侯捷C++内存管理60讲》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/11NJU%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">《NJU算法设计与分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">英语专</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../60English/00794%E7%BB%BC%E5%90%88%E8%8B%B1%E8%AF%AD%E4%B8%80%E4%B8%8A/">《综合英语(一)上》</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">lionel的技术笔记</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>深度学习入门：基于Python的理论与实现</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="python">深度学习入门：基于Python的理论与实现<a class="headerlink" href="#python" title="Permanent link">&para;</a></h2>
+<h3 id="chap1python">chap1、Python入门<a class="headerlink" href="#chap1python" title="Permanent link">&para;</a></h3>
+<h4 id="15numpy">1.5、NumPy<a class="headerlink" href="#15numpy" title="Permanent link">&para;</a></h4>
+<h5 id="153">1.5.3、<a class="headerlink" href="#153" title="Permanent link">&para;</a></h5>
+<h5 id="155">1.5.5、广播<a class="headerlink" href="#155" title="Permanent link">&para;</a></h5>
+<ul>
+<li>形状不同的数组之间也可以进行运算。</li>
+</ul>
+<h5 id="156">1.5.6、访问元素<a class="headerlink" href="#156" title="Permanent link">&para;</a></h5>
+<h4 id="16matplotlib">1.6、Matplotlib<a class="headerlink" href="#16matplotlib" title="Permanent link">&para;</a></h4>
+<h5 id="163">1.6.3、显示图像<a class="headerlink" href="#163" title="Permanent link">&para;</a></h5>
+<h3 id="chap2perceptron">chap2、感知机（perceptron）<a class="headerlink" href="#chap2perceptron" title="Permanent link">&para;</a></h3>
+<ul>
+<li>1957年，Frank Rosenblatt</li>
+<li>严格来说，本章中的感知机，应该叫<strong>人工神经元</strong></li>
+</ul>
+<h4 id="21">2.1、感知机是什么<a class="headerlink" href="#21" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>感知机</strong>接收多个输入信号，输出一个信号。<ul>
+<li><strong>信号</strong>，只有2种取值（0和1）</li>
+<li>图中的圆圈叫<strong>神经元</strong></li>
+<li>只有总和超过某个界限值时，才会输出1，也叫<strong>神经元被激活</strong></li>
+<li>每个输入信号，对应一个<strong>权重</strong>（weight）</li>
+</ul>
+</li>
+</ul>
+<h4 id="22">2.2、简单逻辑电路<a class="headerlink" href="#22" title="Permanent link">&para;</a></h4>
+<h5 id="221and-gate">2.2.1、与门（and gate）<a class="headerlink" href="#221and-gate" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>and</code>，and运算</li>
+</ul>
+<h5 id="222">2.2.2、与非门和或门<a class="headerlink" href="#222" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>NAND gate</code>，Not AND</li>
+<li><strong>真值表</strong></li>
+</ul>
+<h4 id="23">2.3、感知机的实现<a class="headerlink" href="#23" title="Permanent link">&para;</a></h4>
+<h5 id="231">2.3.1、简单的实现<a class="headerlink" href="#231" title="Permanent link">&para;</a></h5>
+<h5 id="232">2.3.2、导入权重和偏置<a class="headerlink" href="#232" title="Permanent link">&para;</a></h5>
+<h5 id="233">2.3.3、使用权重和偏置的实现<a class="headerlink" href="#233" title="Permanent link">&para;</a></h5>
+<h4 id="24">2.4、感知机的局限性<a class="headerlink" href="#24" title="Permanent link">&para;</a></h4>
+<h5 id="241">2.4.1、异或门<a class="headerlink" href="#241" title="Permanent link">&para;</a></h5>
+<ul>
+<li><em>为啥无法实现，自己要看一下，lionel</em></li>
+</ul>
+<h5 id="242">2.4.2、线性和非线性<a class="headerlink" href="#242" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>感知机的局限性就在于它只能表示由一条直线分割的空间。</strong></li>
+<li><strong>非线性空间</strong>：由曲线分割的空间</li>
+<li><strong>线性空间</strong>：由直线分割而成的空间</li>
+</ul>
+<h4 id="25">2.5、多层感知机<a class="headerlink" href="#25" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>感知机的绝妙之处在于它可以“叠加层”</strong>（通过叠加层来表示异或门）</li>
+</ul>
+<h5 id="251">2.5.1、已有门电路的组合<a class="headerlink" href="#251" title="Permanent link">&para;</a></h5>
+<ul>
+<li>组合前面做好的与门、与非门、或门进行配置。</li>
+</ul>
+<h5 id="252">2.5.2、异或门的实现<a class="headerlink" href="#252" title="Permanent link">&para;</a></h5>
+<ul>
+<li>图2-13，用感知机表示异或门</li>
+</ul>
+<h4 id="26">2.6、从与非门到计算机<a class="headerlink" href="#26" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>多层感知机</strong>可以实现比之前见到的电路更复杂的电路。</li>
+</ul>
+<h4 id="27">2.7、小结<a class="headerlink" href="#27" title="Permanent link">&para;</a></h4>
+<ul>
+<li>感知机是神经网络的基础</li>
+</ul>
+<h3 id="chap3">chap3、神经网络<a class="headerlink" href="#chap3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>感知机中，<strong>设定权重的工作</strong>（是由人工进行的），即确定合适的、能符合预期的输入与输出的权重。</li>
+<li>神经网络（能解决这个问题），<strong>可以自动季从数据中学习到合适的权重参数</strong>。</li>
+</ul>
+<h4 id="31">3.1、从感知机到神经网络<a class="headerlink" href="#31" title="Permanent link">&para;</a></h4>
+<h5 id="311">3.1.1、神经网络的例子<a class="headerlink" href="#311" title="Permanent link">&para;</a></h5>
+<ul>
+<li>输入层、中间层、输出层<ul>
+<li>中间层，有时也叫<strong>隐藏层</strong>，（隐藏层的神经元肉眼看不到）</li>
+</ul>
+</li>
+<li>几层的描述<ul>
+<li>有的是把<strong>实质上拥有权重的层数</strong></li>
+</ul>
+</li>
+</ul>
+<h5 id="312">3.1.2、复习感知机<a class="headerlink" href="#312" title="Permanent link">&para;</a></h5>
+<h5 id="313">3.1.3、激活函数登场<a class="headerlink" href="#313" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>激活函数</strong>：<code>h(x)</code>将输入信号的总和转换为输出信号</li>
+<li><span class="arithmatex">\(a=b+w_1x_1+w_2x_2\)</span>，然后<span class="arithmatex">\(y=h(a)\)</span>，</li>
+<li><strong>神经元</strong>和<strong>节点</strong>等价</li>
+<li><strong>激活函数</strong>是连接感知机和神经网络的桥梁<ul>
+<li>朴素感知机，指单层网络，指的是激活函数使用了<strong>阶跃函数</strong>的模型</li>
+<li>多层感知机，使用<span class="arithmatex">\(sigmoid()\)</span>等平滑的激活函数的多层网络</li>
+</ul>
+</li>
+</ul>
+<h4 id="32">3.2、激活函数<a class="headerlink" href="#32" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>阶跃函数</strong>：激活函数以阈值为界，一旦输入超过阈值，就切换输出。</li>
+</ul>
+<h5 id="321sigmoid">3.2.1、sigmoid函数<a class="headerlink" href="#321sigmoid" title="Permanent link">&para;</a></h5>
+<ul>
+<li><span class="arithmatex">\(h(x)=1/(1+e^{-x})\)</span>，e是纳皮尔常数2.7182...</li>
+</ul>
+<h5 id="322">3.2.2、阶跃函数的实现<a class="headerlink" href="#322" title="Permanent link">&para;</a></h5>
+<h5 id="323">3.2.3、阶跃函数的图形<a class="headerlink" href="#323" title="Permanent link">&para;</a></h5>
+<p>3.2.4、sigmoid函数的实现</p>
+<h5 id="325sigmoid">3.2.5、sigmoid函数和阶跃函数的比较<a class="headerlink" href="#325sigmoid" title="Permanent link">&para;</a></h5>
+<ul>
+<li>平滑性上<ul>
+<li>sigmoid函数是一条平滑的曲线，输出随着输入发生连续性的变化</li>
+<li>阶跃函数以0为界，输出发生急剧性的变化</li>
+</ul>
+</li>
+</ul>
+<p>3.2.6、非线性函数</p>
+<ul>
+<li><strong>神经网络的激活函数必须使用非线性函数</strong>，因为用线性函数的话，加深神经网络的层数就没有意义</li>
+</ul>
+<h5 id="327relurectified-linear-unit">3.2.7、ReLU函数（Rectified Linear Unit）<a class="headerlink" href="#327relurectified-linear-unit" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>h(x) {x&gt;0时，h(x)=x;  x&lt;=0时，h(x)=0;}</code></li>
+</ul>
+<h4 id="33">3.3、多维数组的运算<a class="headerlink" href="#33" title="Permanent link">&para;</a></h4>
+<h5 id="333">3.3.3、神经网络的内积<a class="headerlink" href="#333" title="Permanent link">&para;</a></h5>
+<h4 id="343">3.4、3层神经网络的实现<a class="headerlink" href="#343" title="Permanent link">&para;</a></h4>
+<ul>
+<li><em>lionel，重点是这个</em></li>
+</ul>
+<h5 id="341">3.4.1、符号确认<a class="headerlink" href="#341" title="Permanent link">&para;</a></h5>
+<p>3.4.2、各层间信号传递的实现</p>
+<p>3.4.3、代码实现小结</p>
+<h4 id="35">3.5、输出层的设计<a class="headerlink" href="#35" title="Permanent link">&para;</a></h4>
+<ul>
+<li>机器学习问题大致分为<strong>回归</strong>和<strong>分类</strong>问题<ul>
+<li>回归：根据某个输入预测一个（连续的）数值问题，<em>lionel，简单说就是输出一个值的问题</em>，恒等函数</li>
+<li>分类：数据属于哪一个类别的问题，softmax函数</li>
+</ul>
+</li>
+</ul>
+<h5 id="351-softmax">3.5.1 恒等函数和softmax函数<a class="headerlink" href="#351-softmax" title="Permanent link">&para;</a></h5>
+<h5 id="352softmax">3.5.2、实现softmax函数时的注意事项<a class="headerlink" href="#352softmax" title="Permanent link">&para;</a></h5>
+<h5 id="353softmax">3.5.3、softmax函数的特征<a class="headerlink" href="#353softmax" title="Permanent link">&para;</a></h5>
+<h5 id="354">3.5.4、输出层的神经元数量<a class="headerlink" href="#354" title="Permanent link">&para;</a></h5>
+<h4 id="36">3.6、手写数字识别<a class="headerlink" href="#36" title="Permanent link">&para;</a></h4>
+<ul>
+<li>使用学习到的参数，<strong>先实现神经网络的“推理处理”</strong>，这个推理处理也称为神经网络的<strong>前向传播</strong>（forward propagation）</li>
+<li>使用神经网解决问题，<ul>
+<li><strong>训练</strong>，使用训练数据（学习数据）进行权重参数的学习</li>
+<li><strong>推理</strong>，使用学习到的参数，对输入数据进行分类</li>
+</ul>
+</li>
+</ul>
+<h5 id="361mnist">3.6.1、MNIST数据集<a class="headerlink" href="#361mnist" title="Permanent link">&para;</a></h5>
+<h5 id="362">3.6.2、神经网络的推理处理<a class="headerlink" href="#362" title="Permanent link">&para;</a></h5>
+<h5 id="363">3.6.3、批处理<a class="headerlink" href="#363" title="Permanent link">&para;</a></h5>
+<p>3.7、小结</p>
+<ul>
+<li>
+<p>本章介绍了神经网络的前向传播。</p>
+<ul>
+<li><a href="https://www.bilibili.com/read/cv15303804/">日拱一卒：深度学习笔记5——神经网络的前向传播</a>，<em>放在下文了，这就比较好的解释了什么叫前向传播</em></li>
+</ul>
+<blockquote>
+<p>在神经网络中，当我们已知每个节点对应的权重与偏置这些系数后，就可以通过输入X，不断向前推进，最终计算出输出Y，这就是神经网络的前向传播。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="chap4">chap4、神经网络的学习<a class="headerlink" href="#chap4" title="Permanent link">&para;</a></h3>
+<ul>
+<li>这里所说的“学习”是指从训练数据中自动获取最优权重参数的过程。</li>
+</ul>
+<h4 id="41">4.1、从数据中学习<a class="headerlink" href="#41" title="Permanent link">&para;</a></h4>
+<ul>
+<li>所谓“从数据中学习”，是指可以由数据自动决定权重参数的值。</li>
+<li><em>lionel，备注这个没看懂</em></li>
+</ul>
+<p>4.1.1 数据驱动</p>
+<ul>
+<li>考虑通过有效利用数据来解决这个问题（识别手写“5”）<ul>
+<li>有3种办法【图4-2】<ul>
+<li>1、人想到的算法</li>
+<li>2、人想到的特征量、机器学习</li>
+<li>3、神经网络（深度学习）</li>
+</ul>
+</li>
+<li>方法1、先从图像中提取特征量，再用机器学习技术学习这些特征量的模式。<ul>
+<li><strong>特征量</strong>：指可以从输入数据（输入图像）中准确地提取本质数据（重要的数据）的转换器。</li>
+<li>图像的特征量通常表示为向量的形式。</li>
+<li>在计算机视觉领域，常用的特征量包括SIFT、SURF和HOG等。</li>
+<li>使用这些特征量将图像数据转换为向量，然后对转换后的向量使用机器学习中的SVM、KNN等分类器进行学习。</li>
+</ul>
+</li>
+<li>方法2、在神经网络中，连图像中包含的重要特征量也都是由机器来学习的</li>
+</ul>
+</li>
+</ul>
+<p>4.1.2 训练数据和测试数据</p>
+<ul>
+<li>为了正确评价模型的<strong>泛化能力</strong>，就必须划分训练数据和测试数据。<ul>
+<li><em>lionel，泛化能力是啥？</em></li>
+</ul>
+</li>
+<li>训练数据也可以称为<strong>监督数据</strong>。</li>
+<li>只对某个数据集过度拟合的状态称为过拟合（over fitting），<em>可以顺利地处理某个数据集，但无法处理其他数据集的情况</em></li>
+</ul>
+<h4 id="42">4.2、损失函数<a class="headerlink" href="#42" title="Permanent link">&para;</a></h4>
+<ul>
+<li>神经网络以某个指标为线索寻找<strong>最优权重参数</strong>。<ul>
+<li>这个指标称为损失函数（loss function）。</li>
+</ul>
+</li>
+</ul>
+<h5 id="421">4.2.1、均方误差<a class="headerlink" href="#421" title="Permanent link">&para;</a></h5>
+<h4 id="43">4.3、数值微分<a class="headerlink" href="#43" title="Permanent link">&para;</a></h4>
+<h5 id="431">4.3.1、导数<a class="headerlink" href="#431" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>导数</strong>，某个瞬间的变化量（瞬时速度）<ul>
+<li>10分钟跑2km，前1分钟奔跑的距离，前1秒钟，前0.1秒</li>
+</ul>
+</li>
+<li><strong>舍入误差</strong>（rounding error），因省略小数的精细部分的数值，而造成最终的计算结果上的误差。</li>
+<li><strong>中心差分</strong>（<strong>前向差分</strong>）</li>
+</ul>
+<h5 id="432">4.3.2、数值微分的例子<a class="headerlink" href="#432" title="Permanent link">&para;</a></h5>
+<h5 id="433">4.3.3、偏导数<a class="headerlink" href="#433" title="Permanent link">&para;</a></h5>
+<h4 id="44">4.4、梯度<a class="headerlink" href="#44" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>由全部变量的偏导数汇总而成的向量</strong>称为<strong>梯度</strong>（gradient）</li>
+</ul>
+<h5 id="441">4.4.1、梯度法<a class="headerlink" href="#441" title="Permanent link">&para;</a></h5>
+<ul>
+<li>最优参数是指损失函数取最小值时的参数。</li>
+<li>寻找最小值的梯度法称为<strong>梯度下降法</strong>（gradient descent method）</li>
+<li>寻找最大值的梯度法称为<strong>梯度上升法</strong>（gradient ascent method）</li>
+</ul>
+<h5 id="442">4.4.2、神经网络的梯度<a class="headerlink" href="#442" title="Permanent link">&para;</a></h5>
+<ul>
+<li>这里的梯度是指<strong>损失函数关于权重参数的梯度</strong>。</li>
+</ul>
+<h4 id="45">4.5、学习算法的实现<a class="headerlink" href="#45" title="Permanent link">&para;</a></h4>
+<ul>
+<li>神经网络学习分为4步：<ul>
+<li>1、mini-batch<ul>
+<li>从训练数据中随机选出一部分数据，这部分数据称为mini-batch。</li>
+<li>我们的目标是减小mini-batch的损失函数的值。</li>
+</ul>
+</li>
+<li>2、计算梯度<ul>
+<li>为了减小mini-batch的损失函数的值，需要求出各个权重参数的梯度。</li>
+<li><strong>梯度</strong>表示损失函数的值减小最多的方向。</li>
+</ul>
+</li>
+<li>3、更新参数<ul>
+<li>将权重参数沿梯度方向进行微小更新。</li>
+</ul>
+</li>
+<li>4、重复1、2、3</li>
+</ul>
+</li>
+</ul>
+<h5 id="4512">4.5.1、2层神经网络的类<a class="headerlink" href="#4512" title="Permanent link">&para;</a></h5>
+<h5 id="452mini-batch">4.5.2、mini-batch的实现<a class="headerlink" href="#452mini-batch" title="Permanent link">&para;</a></h5>
+<p>4.5.3、基于测试数据的评价</p>
+<p>4.6、小结</p>
+<h3 id="chap5">chap5、误差反向传播法<a class="headerlink" href="#chap5" title="Permanent link">&para;</a></h3>
+<ul>
+<li>数值微分虽然简单且易实现，<strong>但计算上比较费时间</strong>，所以引入这个</li>
+<li>正确理解误差反向传播法，有2种方法<ul>
+<li>一种是基于数学式</li>
+<li>另一种是基于<strong>计算图</strong>（computational graph）</li>
+</ul>
+</li>
+</ul>
+<h4 id="51">5.1、计算图<a class="headerlink" href="#51" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>计算图</strong>将计算过程用图形表示出来。</li>
+</ul>
+<h5 id="511">5.1.1、用计算图求解<a class="headerlink" href="#511" title="Permanent link">&para;</a></h5>
+<h5 id="512">5.1.2、局部计算<a class="headerlink" href="#512" title="Permanent link">&para;</a></h5>
+<h5 id="513">5.1.3、为何用计算图解题<a class="headerlink" href="#513" title="Permanent link">&para;</a></h5>
+<ul>
+<li>2个优点：<ul>
+<li>一个是<strong>局部计算</strong></li>
+<li>另一个是<strong>利用计算图，可以将中间的计算结果全部保存起来</strong></li>
+<li><strong>使用计算图最大的原因是，可以通过反向传播高效计算导数</strong></li>
+</ul>
+</li>
+</ul>
+<h4 id="52">5.2、链式法则<a class="headerlink" href="#52" title="Permanent link">&para;</a></h4>
+<h5 id="521">5.2.1、计算图的反向传播<a class="headerlink" href="#521" title="Permanent link">&para;</a></h5>
+<ul>
+<li>沿着与正方向相反的方向，乘上局部导数<ul>
+<li><strong>局部层数</strong>是指向正向传播中<span class="arithmatex">\(y=f(x)\)</span>的导数，也就是y关于x的导数</li>
+</ul>
+</li>
+</ul>
+<p>5.2.2、什么是链式法则</p>
+<p>5.2.3、链式法则和计算图</p>
+<h4 id="53">5.3、反向传播<a class="headerlink" href="#53" title="Permanent link">&para;</a></h4>
+<h5 id="531">5.3.1、加法节点的反向传播<a class="headerlink" href="#531" title="Permanent link">&para;</a></h5>
+<h5 id="532">5.3.2、乘法节点的反向传播<a class="headerlink" href="#532" title="Permanent link">&para;</a></h5>
+<ul>
+<li>求导</li>
+<li>会将上游的值乘以正向传播时的输入信号的“翻转值”后传递给下游。<ul>
+<li><strong>翻转值</strong>是一种翻转关系</li>
+</ul>
+</li>
+</ul>
+<h5 id="533">5.3.3、苹果的例子<a class="headerlink" href="#533" title="Permanent link">&para;</a></h5>
+<p>5.4、简单层的实现</p>
+<h5 id="541">5.4.1、乘法层的实现<a class="headerlink" href="#541" title="Permanent link">&para;</a></h5>
+<h5 id="542">5.4.2、加法层的实现<a class="headerlink" href="#542" title="Permanent link">&para;</a></h5>
+<p>5.5、激活函数层的实现</p>
+<h5 id="551relu">5.5.1、ReLU层<a class="headerlink" href="#551relu" title="Permanent link">&para;</a></h5>
+<p>5.5.2、Sigmoid层</p>
+<p>5.6、Affine/Softmax层的实现</p>
+<p>5.6.1、Affine层</p>
+<p>5.6.2、批版本的Affine层</p>
+<h5 id="563softmax-with-loss">5.6.3、Softmax-with-Loss层<a class="headerlink" href="#563softmax-with-loss" title="Permanent link">&para;</a></h5>
+<h4 id="57">5.7、误差反向传播法的实现<a class="headerlink" href="#57" title="Permanent link">&para;</a></h4>
+<p>5.7.1、神经网络学习的全貌图</p>
+<p>5.7.2、对应误差反向传播法的神经网络的实现</p>
+<p>5.7.3、误差反向传播法的梯度确认</p>
+<h5 id="574">5.7.4、使用误差反向传播法的学习<a class="headerlink" href="#574" title="Permanent link">&para;</a></h5>
+<p>5.8、小结</p>
+<h3 id="chap6">chap6、与学习相关的技巧<a class="headerlink" href="#chap6" title="Permanent link">&para;</a></h3>
+<p>6.1、参数的更新</p>
+<p>6.2、权重的初始值</p>
+<p>6.3、Batch Normalization</p>
+<p>6.4、正则化</p>
+<h5 id="641">6.4.1、过拟合<a class="headerlink" href="#641" title="Permanent link">&para;</a></h5>
+<h5 id="642">6.4.2、权值衰减<a class="headerlink" href="#642" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>通过在学习的过程中对大的权重进行惩罚</strong></li>
+</ul>
+<h5 id="643dropout">6.4.3、Dropout<a class="headerlink" href="#643dropout" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>在学习过程中随机删除神经元的方法</strong></li>
+</ul>
+<p>6.5、超参数的验证</p>
+<p>6.6、小结</p>
+<h3 id="chap7">chap7、卷积神经网络<a class="headerlink" href="#chap7" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Convolutional Neural Network，用于图像识别、语音识别</li>
+</ul>
+<h4 id="71">7.1、整体结构<a class="headerlink" href="#71" title="Permanent link">&para;</a></h4>
+<ul>
+<li>如何组装层以构建CNN</li>
+<li>神经网络中，相邻层的所有神经元之间都有连接，称为<strong>全连接</strong>（fully-connected）</li>
+</ul>
+<p>7.2、卷积层</p>
+<h5 id="721">7.2.1、全连接层存在的问题<a class="headerlink" href="#721" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>数据的形状被“忽视”了</strong>，输入时图像通常是<strong>高、长、通道方向上3维形态</strong>，向全连接层输入时，需要将3维数据拉平为1维数据。</li>
+<li><strong>卷积层可以保持形状不变</strong>，有时将卷积层的输入输出数据称为<strong>特征图</strong>（feature map）</li>
+</ul>
+<h5 id="722">7.2.2、卷积运算<a class="headerlink" href="#722" title="Permanent link">&para;</a></h5>
+<ul>
+<li>相当于图像处理中的<strong>滤波器运算</strong>，有时也用<strong>核</strong></li>
+</ul>
+<p>7.2.3、</p>
+<h5 id="724">7.2.4、步幅<a class="headerlink" href="#724" title="Permanent link">&para;</a></h5>
+<ul>
+<li>应用滤波器的位置间隔称为<strong>步幅</strong>（stride）</li>
+</ul>
+<p>7.2.5、3维数据的卷积运算</p>
+<p>7.2.6、结合方块思考</p>
+<p>7.2.7、批处理</p>
+<h4 id="73">7.3、池化层<a class="headerlink" href="#73" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>池化</strong>是缩小高、长方向上的空间的运算</li>
+<li>池化层特征<ul>
+<li>1、没有要学习的参数</li>
+<li>2、通道数不发生变化</li>
+<li>3、对微小的位置变化具有鲁棒性</li>
+</ul>
+</li>
+</ul>
+<p>7.4、卷积层和池化层的实现</p>
+<p>7.4.1、4维数组</p>
+<p>7.5、CNN的实现</p>
+<p>7.6、CNN的可视化</p>
+<p>7.7、具有代表性的CNN</p>
+<p>7.8、小结</p>
+<h3 id="chap8">chap8、深度学习<a class="headerlink" href="#chap8" title="Permanent link">&para;</a></h3>
+<ul>
+<li>深度学习是<strong>加深了层的深度神经网络</strong></li>
+<li>基于之前介绍的网络，只需通过<strong>叠加层</strong>，就可以创建深度网络</li>
+</ul>
+<h4 id="81">8.1、深度网络<a class="headerlink" href="#81" title="Permanent link">&para;</a></h4>
+<p>8.1.1、向更深的网络出发</p>
+<p>8.1.2、进一步提高识别精度</p>
+<h5 id="813">8.1.3、加深层的动机<a class="headerlink" href="#813" title="Permanent link">&para;</a></h5>
+<ul>
+<li>加深层的好处<ul>
+<li>一、减少网络的参数数量</li>
+<li>二、使学习更加高效</li>
+</ul>
+</li>
+</ul>
+<h4 id="82">8.2、深度学习的小历史<a class="headerlink" href="#82" title="Permanent link">&para;</a></h4>
+<ul>
+<li>2012年ILSVRC，基于深度学习的方法（AlexNet）以压倒性的优势胜出</li>
+</ul>
+<p>8.2.1、ImageNet</p>
+<p>8.2.2、VGG</p>
+<p>8.2.3、GoogleNet</p>
+<p>8.2.4、ResNet</p>
+<p>8.3、深度学习的高速化</p>
+<p>8.4、深度学习的应用案例</p>
+<h4 id="85">8.5、深度学习的未来<a class="headerlink" href="#85" title="Permanent link">&para;</a></h4>
+<p>8.5.1、</p>
+<p>8.5.2、图像的生成</p>
+<p>8.5.3、自动驾驶</p>
+<ul>
+<li>基于CNN的神经网络SegNet</li>
+</ul>
+<p>8.5.4、Deep Q-Network（强化学习）</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

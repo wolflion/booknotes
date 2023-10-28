@@ -296,6 +296,10 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/">《剑指offer专项突破》</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../96output/OD%E5%9F%BA%E7%A1%80%E9%A2%98/">OD基础题</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../96output/OD%E8%BF%9B%E9%98%B6%E9%A2%98/">OD进阶题</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">网课</span></p>
               <ul>
@@ -526,21 +530,42 @@ string().swap(s1);//清除s并把它的容量变为最小</code></pre>
 <h4 id="41ptr_funmem_funmem_fun_ref">41、理解ptr_fun、mem_fun和mem_fun_ref的来由<a class="headerlink" href="#41ptr_funmem_funmem_fun_ref" title="Permanent link">&para;</a></h4>
 <ul>
 <li><em>不太会啊</em>，43用到了mem_fun_ref</li>
+<li>用法<ul>
+<li>语法1<code>for_each(vw.begin(),vw.end(),test);</code><ul>
+<li>改成<code>for_each(vw.begin(),vw.end(),ptr_fun(test));</code> <strong>加不加ptr_fun()无所谓</strong>，2者都能通过编译</li>
+</ul>
+</li>
+<li>语法2<code>for_each(vw.begin(),vw.end(),&amp;Widget::test);</code>，不能通过编译<ul>
+<li><code>for_each(vw.begin(),vw.end(),mem_fun(&amp;Widget::test));</code>，修改后可以</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>存在的意义，<strong>调整（语法#2或语法#3）成员函数，使之能够通过语法#1被调用</strong></li>
 </ul>
 <h4 id="42lesstoperator">42、确保<code>less&lt;T&gt;</code>与operator&lt;具有相同的语义<a class="headerlink" href="#42lesstoperator" title="Permanent link">&para;</a></h4>
+<ul>
+<li>特化<code>less&lt;Widget&gt;</code></li>
+</ul>
 <h3 id="part7stl43-50">Part7、在程序中使用STL（43-50）<a class="headerlink" href="#part7stl43-50" title="Permanent link">&para;</a></h3>
 <h4 id="43">43、算法调用优先于手写的循环<a class="headerlink" href="#43" title="Permanent link">&para;</a></h4>
 <ul>
-<li>自己手写for循环，与调用<code>for_each()</code>算法</li>
+<li>自己手写for循环，与调用<code>for_each()</code>算法<ul>
+<li><code>for_each(lw.begin(),lw.end(),mem_fun_ref(&amp;Widget::redraw));</code> <em>mem_fun_ref见41</em></li>
+<li>这个只计算了一次<code>lw.end()</code>，如果使用<code>for()循环</code>，<em>就多少次？</em></li>
 </ul>
-<ul>
+</li>
 <li>调用算法通常是更好的选择，它往往优先于任何一个手写循环，理由有3个：<ul>
 <li>效率</li>
-<li>正确性</li>
+<li>正确性<ul>
+<li>写在这样<code>transform(data,dat+numDoubles,inserter(d,d.begin()),bind2nd(plus&lt;double&gt;)(),41));</code>，作用是*将data中的元素复制到d的前部，每个元素加上41</li>
+</ul>
+</li>
 <li>可维护性</li>
 </ul>
 </li>
 <li>STL有70个算法名称，<strong>知道（或查找到）每个算法的所做的事情</strong>，<em>现在是不是更多啦，在哪找？cppreference，lionel</em></li>
+<li><em>追加讲了一个例子，lionel</em></li>
 </ul>
 <h4 id="44">44、容器的成员函数优先于同名的算法<a class="headerlink" href="#44" title="Permanent link">&para;</a></h4>
 <ul>
@@ -549,18 +574,80 @@ string().swap(s1);//清除s并把它的容量变为最小</code></pre>
 <li>二，成员函数通常与容器（特别是关联容器）结合得更加紧密</li>
 </ul>
 </li>
+<li>例子，<code>set&lt;int&gt;</code>中包含了100W个整数值，查找某值<ul>
+<li><code>set&lt;int&gt;::iterator i = s.find(727);</code>，大约40次（最坏），20次（平均）</li>
+<li><code>set&lt;int&gt;::iterator i = find(s.begin(),s.end(),727);</code>  100W次（最坏），50W次（平均）</li>
+</ul>
+</li>
 </ul>
 <h4 id="45countfindbinary_searchlower_boundupper_boundequal_range">45、正确区分count、find、binary_search、lower_bound、upper_bound和equal_range<a class="headerlink" href="#45countfindbinary_searchlower_boundupper_boundequal_range" title="Permanent link">&para;</a></h4>
+<ul>
+<li>在使用具体的查找策略时，由<strong>迭代器指定区间是否排序</strong><ul>
+<li>排序，binary_search、</li>
+<li>未排序，count，count_if，find及find_if</li>
+</ul>
+</li>
+<li><em>lionel，后面2个算法，我都没用过啊</em></li>
+</ul>
 <h4 id="46stl">46、考虑使用函数对象而不是函数作为STL算法的参数<a class="headerlink" href="#46stl" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>函数对象</strong>，就是伪装成函数的对象</li>
+<li><em>lionel，这就想解决一下，自己在调用自定义排序的具体最佳实践</em></li>
+<li>函数对象优先于函数的理由<ul>
+<li>1、</li>
+<li>2、</li>
+<li>3、有助于避免一些微妙的、语言本身的缺陷</li>
+</ul>
+</li>
+</ul>
 <h4 id="47write-only">47、避免产生“直写型”（write-only）的代码<a class="headerlink" href="#47write-only" title="Permanent link">&para;</a></h4>
+<ul>
+<li><em>lionel</em></li>
+<li>解决问题的思路<ul>
+<li>通过以reverse_iterator作为参数调用find或者find_if，找到容器中最后一个其值不小于y的元素</li>
+<li>使用erase或者erase-remove习惯用法删除区间中符合条件的元素</li>
+</ul>
+</li>
+</ul>
 <h4 id="48include">48、总是包含（#include）正确的头文件<a class="headerlink" href="#48include" title="Permanent link">&para;</a></h4>
+<ul>
+<li>头文件内容<ul>
+<li>1、几乎所有的标准STL容器都被声明在与之同名的头文件中</li>
+<li>2、除了以下4个，声明中<code>&lt;numeric&gt;</code>中，其它的都声明在<code>&lt;algorithm&gt;</code><ul>
+<li>accumulate</li>
+<li>inner_product</li>
+<li>adjacent_difference</li>
+<li>partial_sm</li>
+</ul>
+</li>
+<li>3、特殊类型的迭代器，包括istream_iterator和istreambuf_iterator，被声明在<code>&lt;iterator&gt;</code>中</li>
+<li>4、标准的函数子（<code>less&lt;T&gt;</code>）和函数子配接器（<code>not1, bind2nd</code>）被声明在头文件<code>&lt;functional&gt;</code>中</li>
+</ul>
+</li>
+</ul>
 <h4 id="49stl">49、学会分析与STL相关的编译器诊断信息<a class="headerlink" href="#49stl" title="Permanent link">&para;</a></h4>
+<ul>
+<li>string不是一个类，它是一个typedef</li>
+<li>还有一些其它技巧<ul>
+<li>vector和string的迭代器通常就是指针，所以当错误地使用了iterator时，编译器的诊断信息中可能会引用到指针类型</li>
+</ul>
+</li>
+</ul>
 <h4 id="50stlweb">50、熟悉与STL相关的Web站点<a class="headerlink" href="#50stlweb" title="Permanent link">&para;</a></h4>
+<ul>
+<li>SGI STL，www.sgi.com/tech/stl</li>
+<li>STLport，www.stlport.org</li>
+<li>Boost，www.boost.org</li>
+</ul>
 <h3 id="_1">参考书目<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
 <h3 id="_2">备注<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <ul>
 <li>前置知识《CPP Primer》5th的chap9顺序容器。</li>
-<li>2021-11-25花了50min整理形成了第1版。</li>
+<li>time<ul>
+<li>2021-11-25花了50min整理形成了第1版</li>
+<li>2023-10-22（9，102个月刷了一些题）整理了一下Part7，之前不太明白的地方，现在由于用到了，还是蛮有感触的</li>
+</ul>
+</li>
 </ul>
               
             </div>

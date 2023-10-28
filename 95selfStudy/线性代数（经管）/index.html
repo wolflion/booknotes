@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>01HW OD基础题92道过程（AC57） - lionel的技术笔记</title>
+    <title>线性代数（经管） - lionel的技术笔记</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "01HW OD\u57fa\u7840\u989892\u9053\u8fc7\u7a0b\uff08AC57\uff09";
-        var mkdocs_page_input_path = "96output\\01HW_OD\u57fa\u7840\u989892\u9053\u8fc7\u7a0b\uff08AC57\uff09.md";
+        var mkdocs_page_name = "\u7ebf\u6027\u4ee3\u6570\uff08\u7ecf\u7ba1\uff09";
+        var mkdocs_page_input_path = "95selfStudy\\\u7ebf\u6027\u4ee3\u6570\uff08\u7ecf\u7ba1\uff09.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -162,6 +162,10 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/">《剑指offer专项突破》</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../96output/OD%E5%9F%BA%E7%A1%80%E9%A2%98/">OD基础题</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../96output/OD%E8%BF%9B%E9%98%B6%E9%A2%98/">OD进阶题</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">网课</span></p>
               <ul>
@@ -191,7 +195,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-      <li>01HW OD基础题92道过程（AC57）</li>
+      <li>线性代数（经管）</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -200,379 +204,118 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <p>省流版就是，我参考https://blog.csdn.net/goldarmour/article/details/129807099?spm=1001.2014.3001.5502这个上面给华为的2023年B的OD题（没有解答），基础题92道，自己2023年9月份刷了57道放到github上了，用C++实现的，一来是分享，二是也是大佬们review看看，https://github.com/wolflion/LeetCode/tree/master/01HWOD_2023yearB_basic</p>
-<h2 id="_1">缘起<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+                <h2 id="_1">《线性代数（经管）》<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h3 id="chap3">chap3、向量空间<a class="headerlink" href="#chap3" title="Permanent link">&para;</a></h3>
+<h4 id="31n">3.1、n维向量概念及其线性运算<a class="headerlink" href="#31n" title="Permanent link">&para;</a></h4>
+<h5 id="311n">3.1.1、n维向量及其线性运算<a class="headerlink" href="#311n" title="Permanent link">&para;</a></h5>
 <ul>
-<li>之前刷过一些leetcode，但那时候还不够系统（当然也是今年开始刷的），网上都有答案，自己遇到不会的，也就直接找题解，也不管懂不懂，先抄了AC为敬，<em>虽然也整了大概150道左右</em>，感觉基础还是不行，<strong>再回来复习DS+算法</strong>（具体过程呢，就是再把DS好好读读），真的去理解一些知识点，<strong>更重要的是做好笔记，不断得去复习笔记</strong>，<strong>遇到核心的题</strong>，坚决搞懂-<em>这个是要打问号的</em></li>
-<li>8月底的时候，Z同事扔过来一个OD链接，我开始也当回事，后来<strong>琢磨过来，以考代练</strong>，因为没有解答答案，自己把这92道AC了，不就是能把自己的问题暴露出来，正好总结一下嘛</li>
-<li>声明：<ul>
-<li>1、我写的代码也不一定全对，用的还是CPP写的</li>
-<li>2、我只是看到某DN网站都是专栏收费，于是想着share一下，也麻烦大佬们review</li>
-<li>3、题是永远刷不完的，<strong>但真正的解答套路，应该还是有的</strong>，无非根据题不断的组合，以及通过题不断的消化，2-8法则嘛，<strong>虽然我现在觉得只掌握那些80%的知识是不对的</strong>，但如果时间有限的情况下，还是允许的</li>
+<li>定义3.1.1、由n个数<span class="arithmatex">\(a_1,a_2,...,a_n\)</span>组成的有序数组<span class="arithmatex">\((a_1,a_2,...,a_n)\)</span>称为一个<strong>n维向量</strong>。<ul>
+<li>数<span class="arithmatex">\(a_i\)</span>称为该向量的<strong>第i个分量</strong></li>
+<li>一个n维列向量就定义为一个<span class="arithmatex">\(n*1\)</span>矩阵</li>
 </ul>
 </li>
+<li>定义3.1.2、<strong>n维零向量</strong></li>
+<li>定义3.1.3、<strong>向量 阿尔法 与 贝塔 相等</strong>，<em>lionel，这两个数字怎么打出来</em></li>
+<li>定义3.1.4（<strong>向量的加法</strong>）、</li>
+<li>定义3.1.5（<strong>数与向量的乘法</strong>）、</li>
+<li><strong>向量的运算满足下列八条运算律</strong>：</li>
 </ul>
-<h2 id="_2">内容<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<h3 id="_3">题目概述<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<h5 id="312">3.1.2、向量的线性组合<a class="headerlink" href="#312" title="Permanent link">&para;</a></h5>
+<h6 id="1">1、向量的线性组合<a class="headerlink" href="#1" title="Permanent link">&para;</a></h6>
 <ul>
-<li>大量的题在（73）<ul>
-<li>滑动窗口、指针、双指针（16）</li>
-<li>自定义排序（13）</li>
-<li>字符串处理（17）</li>
-<li>逻辑分析（27）</li>
-</ul>
-</li>
-<li>少部分题（22）<ul>
-<li>约瑟夫环（5）</li>
-<li>贪心（3）</li>
-<li>递归（1）</li>
-<li>dfs（1）</li>
-<li>二分查找（1）</li>
-<li>数据结构（4）</li>
-<li>数学运算（4）</li>
-<li>位运算（2）</li>
-<li>区间交并集（1）</li>
-<li>两数之和（1）</li>
+<li>定义3.1.6、<ul>
+<li><strong>线性表出（线性表示）</strong></li>
 </ul>
 </li>
 </ul>
-<h3 id="_4">刷题时间&amp;背景<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<h6 id="2">2、向量的线性表出关系的几何解释<a class="headerlink" href="#2" title="Permanent link">&para;</a></h6>
+<h6 id="3">3、线性组合的矩阵表示法<a class="headerlink" href="#3" title="Permanent link">&para;</a></h6>
+<h6 id="4">4、表出系数的求法<a class="headerlink" href="#4" title="Permanent link">&para;</a></h6>
 <ul>
-<li>俺的背景：非科班出身，DS比较烂（至少今年之前，2023年），<strong>目前也正在补</strong>，目前<strong>DS+5大算法</strong>处于<strong>了解</strong>的阶段，正在通过做题强化</li>
-<li>9月1日-9月2日（20道，AC11），第1次想搞，有点兴奋，无顺序开始刷</li>
-<li>9月3日-9月9日（20道，AC8），有些题没刷出来，完全没啥思路了，也就不想刷了</li>
-<li>9月4日-9月16日（20道，AC8），有了些题有了思路，但没有AC掉，自己时间也没整好，进度有点滞后</li>
-<li>9月17日-9月23日（20道，AC20)，周一AC了4道，后面时间没安排好，<strong>周五工作不太忙，有空重新梳理了一下，把题目按topic整理刷了下</strong>，晚上回来刷了2个topic（数据结构【4】、自定义排序【11道】，2道没刷出来，2道没刷）</li>
-<li>9月24日-9月30日（AC10）<ul>
-<li>0929后刷不动了，目前剩下的题，基本都是我不会的了</li>
+<li>利用增广矩阵，<em>我也不太懂，这是啥意思</em>，例5-例7就是这，<em>把自己也代入进去？lionel</em></li>
 </ul>
-</li>
-</ul>
-<h3 id="3">贪心（3）<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<h4 id="32">3.2、线性相关与线性无关<a class="headerlink" href="#32" title="Permanent link">&para;</a></h4>
+<h5 id="321">3.2.1、线性相关性概念<a class="headerlink" href="#321" title="Permanent link">&para;</a></h5>
 <ul>
-<li>核心还是找到<strong>贪心策略</strong></li>
+<li>定义3.2.1、<strong>线性相关</strong>，<em>k乘以向量=0</em></li>
+<li>定义3.2.2、<strong>线性无关</strong>，只有k为0时才满足</li>
 </ul>
+<h5 id="322">3.2.2、求相关系数的方法<a class="headerlink" href="#322" title="Permanent link">&para;</a></h5>
 <ul>
-<li>题目：<ul>
-<li>24、最大股票收益</li>
-<li>29、阿里巴巴找黄金宝箱II</li>
-<li>30、玩牌高手</li>
+<li>两个重要的结论：<ul>
+<li>n个n维列向量   线性无关  等价于 矩阵A=（）的行列式，不为0</li>
 </ul>
 </li>
 </ul>
-<h3 id="62">数据结构（6，剩2）<a class="headerlink" href="#62" title="Permanent link">&para;</a></h3>
+<h5 id="323">3.2.3、线性相关性的若干基本定理<a class="headerlink" href="#323" title="Permanent link">&para;</a></h5>
 <ul>
-<li>基本上是0922统一刷的</li>
+<li>定理3.2.1、<em>不会，lionel</em></li>
+<li>定理3.2.2、</li>
+<li>定理3.2.3、</li>
+<li>定理3.2.4、</li>
 </ul>
+<h4 id="33">3.3、向量组的秩<a class="headerlink" href="#33" title="Permanent link">&para;</a></h4>
+<h5 id="331">3.3.1、向量组的极大线性无关组<a class="headerlink" href="#331" title="Permanent link">&para;</a></h5>
 <ul>
-<li>题目<ul>
-<li>13、<ul>
-<li><em>写得不够健壮</em>，如果是3个，就没法输出了，<em>应该用数组去存一下？</em></li>
+<li>定义3.3.1、</li>
+<li>定义3.3.2、<strong>等价</strong></li>
+<li>定义3.3.3、设T是由若干个（有限或无限多个）n维向量组成的向量组。若存在T的一个部分组（）满足以下条件：（1）线性无关，（2）对于任意一个向量，向量组（）都线性相关。则称（）为T一个<strong>极大线性无关向量组</strong>，简称为<strong>极大无关组</strong></li>
+<li>定理3.3.1、</li>
+<li>定理3.3.2、</li>
 </ul>
-</li>
-<li>33、</li>
-<li>36、</li>
-<li>39、</li>
-<li>43、没刷出来</li>
-<li>57、没刷出来</li>
-</ul>
-</li>
-</ul>
-<h3 id="112">自定义排序（11，剩2）<a class="headerlink" href="#112" title="Permanent link">&para;</a></h3>
+<h5 id="332">3.3.2、向量组的秩<a class="headerlink" href="#332" title="Permanent link">&para;</a></h5>
 <ul>
-<li>时间<ul>
-<li>基本上是0922统一刷的</li>
+<li>定义3.3.4、向量组T的任意一个极大无关组中所含向量的个数r称为T的秩，记为<span class="arithmatex">\(r(T)=r\)</span>，或者秩(T)</li>
+<li>定理3.3.3、</li>
 </ul>
-</li>
-</ul>
+<h5 id="333">3.3.3、向量组的秩及极大无关组的求法<a class="headerlink" href="#333" title="Permanent link">&para;</a></h5>
 <ul>
-<li>题目<ul>
-<li>9、<ul>
-<li><em>看不懂是什么方式排序的</em></li>
+<li>定义3.3.5、</li>
+<li>定理3.3.4、对矩阵施行初等变换，不改变它的行秩和列秩</li>
+<li>定理3.3.5、设A为m*n矩阵，则r(A)=A的行秩=A的列秩<ul>
+<li>推论：设A为<code>m*n</code>矩阵，B为<code>m*k</code>矩阵，则r(A,B)&lt;=r(A)+r(B)</li>
 </ul>
 </li>
-<li>13（重复）、</li>
-<li>28</li>
-<li>32、</li>
-<li>34、</li>
-<li>36（重复）、</li>
-<li>47、<ul>
-<li><em>写得不健壮</em>，有1个case过了</li>
+<li>求向量组的秩的方法</li>
 </ul>
-</li>
-<li>55、</li>
-<li>60、</li>
-<li>74、<ul>
-<li>不一定会做，<em>还没做出来</em></li>
-</ul>
-</li>
-<li>77、</li>
-<li>79、</li>
-<li>86、<em>应该也有遗漏了一点</em>没完成，就是这个人成绩少于3时，怎么把这个剔除出去</li>
-</ul>
-</li>
-</ul>
-<h3 id="173">字符串处理（17，剩3）<a class="headerlink" href="#173" title="Permanent link">&para;</a></h3>
+<h4 id="34">3.4、向量空间<a class="headerlink" href="#34" title="Permanent link">&para;</a></h4>
+<h5 id="341">3.4.1、向量空间的概念<a class="headerlink" href="#341" title="Permanent link">&para;</a></h5>
 <ul>
-<li>时间</li>
-<li>0923的时候，发现有9道没做</li>
-<li>没刷来的<ul>
-<li>21、42、69、87</li>
+<li>定义3.4.1、</li>
+<li>定义3.4.2、</li>
 </ul>
-</li>
-<li>题目<ul>
-<li>3、</li>
-<li>7、</li>
-<li>16、最短足迹<ul>
-<li><em>我可能写得有点复杂了</em></li>
-</ul>
-</li>
-<li>19、</li>
-<li>21、<ul>
-<li><em>刷了没刷出来，核心不知道考察啥？</em></li>
-</ul>
-</li>
-<li>22、</li>
-<li>42、<ul>
-<li>不一定会，用到了KMP了，估计是不会的</li>
-</ul>
-</li>
-<li>44、</li>
-<li>59、<ul>
-<li>https://cloud.tencent.com/developer/article/1684081，<strong>这是经典题，最长公共前缀</strong></li>
-<li>自己不会，要学习下的</li>
-</ul>
-</li>
-<li>66、</li>
-<li>69、不一定会</li>
-<li>73、</li>
-<li>84、</li>
-<li>87、<ul>
-<li><em>没有全部刷出来</em></li>
-</ul>
-</li>
-<li>88、</li>
-<li>90、</li>
-<li>93、没刷出来</li>
-</ul>
-</li>
-</ul>
-<h3 id="164">滑动窗口+单双指针（16，剩4）<a class="headerlink" href="#164" title="Permanent link">&para;</a></h3>
+<h5 id="342">3.4.2、生成子空间<a class="headerlink" href="#342" title="Permanent link">&para;</a></h5>
+<h5 id="343">3.4.3、基与维数以及坐标<a class="headerlink" href="#343" title="Permanent link">&para;</a></h5>
 <ul>
-<li>undo<ul>
-<li>没做出来的，46</li>
-<li>完全不会的，41，51</li>
+<li>定义3.4.3、设V是<span class="arithmatex">\(R^n\)</span>中的一个向量空间。若V中的向量组（）满足：（1）（）线性无关；（2）V中任意一个向量都可由向量组（）线性表出，即存在常数（），使得（），则称<strong>向量组（）</strong>为V的一个基，基中每个（）都称为<strong>基向量</strong>。基中所含向量的个数r称为V的维数，记为dimV=r，并称V为<strong>r维向量空间</strong>。</li>
+<li>定理3.4.1、</li>
 </ul>
-</li>
-</ul>
+<h3 id="chap5">chap5、特征值与特征向量<a class="headerlink" href="#chap5" title="Permanent link">&para;</a></h3>
+<h4 id="51">5.1、特征值与特征向量<a class="headerlink" href="#51" title="Permanent link">&para;</a></h4>
+<h5 id="511">5.1.1、特征值与特征向量的定义<a class="headerlink" href="#511" title="Permanent link">&para;</a></h5>
 <ul>
-<li>题目<ul>
-<li>1、</li>
-<li>4、</li>
-<li>10、</li>
-<li>11、太阳能板最大面积<ul>
-<li>lionel，怎么移呢，【琢磨出来了，哪个短，哪个移。<em>看了题解，写了有点乱，还是自己琢磨出来了，哪个短，移哪个</em></li>
+<li>定义5.1.1、设<span class="arithmatex">\(A=(a_{ij})\)</span>为n阶矩阵。如果存在某个数（）和某个n维非零列向量p满足<span class="arithmatex">\(Ap=数p\)</span>，则称数是A的一个<strong>特征值</strong>，p是A的<strong>属于特征值()的一个特征向量</strong></li>
+<li>定义5.1.2、<strong>特征矩阵</strong></li>
 </ul>
-</li>
-<li>20、<em>这个怎么滑动没想出来</em><ul>
-<li>https://zhuanlan.zhihu.com/p/645553376</li>
-</ul>
-</li>
-<li>35、求最多可派出多少支团队</li>
-<li>40、</li>
-<li>41、<em>这个真不会</em>（题目也没太看懂）</li>
-<li>45</li>
-<li>46、自己没刷出来</li>
-<li>47</li>
-<li>51、<ul>
-<li><strong>这是看题解的</strong></li>
-</ul>
-</li>
-<li>56、</li>
-<li>81、不一定会（刷）</li>
-<li>82、不一定会（刷）</li>
-<li>91、不一定会（刷）</li>
-</ul>
-</li>
-</ul>
-<h3 id="2720">逻辑分析（27，剩20）<a class="headerlink" href="#2720" title="Permanent link">&para;</a></h3>
+<h5 id="512">5.1.2、关于特征值和特征向量的若干结论<a class="headerlink" href="#512" title="Permanent link">&para;</a></h5>
+<h5 id="513">5.1.3、关于求特征值和特征向量的一般方法<a class="headerlink" href="#513" title="Permanent link">&para;</a></h5>
+<h4 id="52">5.2、方阵的相似变换<a class="headerlink" href="#52" title="Permanent link">&para;</a></h4>
 <ul>
-<li>6</li>
-<li>12、-done<ul>
-<li>也是学习后才会的，leetcode605</li>
+<li>定理5.2.5、</li>
 </ul>
-</li>
-<li>14</li>
-<li>17、-done<ul>
-<li>借鉴了一下，还没完全ok</li>
-</ul>
-</li>
-<li>18</li>
-<li>26</li>
-<li>31</li>
-<li>37、-done</li>
-<li>38、</li>
-<li>48</li>
-<li>49、</li>
-<li>52、done</li>
-<li>54、</li>
-<li>61、</li>
-<li>63、done</li>
-<li>67</li>
-<li>68</li>
-<li>70、done</li>
-<li>75</li>
-<li>76done</li>
-<li>78done</li>
-<li>80-done<ul>
-<li><em>没太懂题意</em></li>
-</ul>
-</li>
-<li>83</li>
-<li>85</li>
-<li>89</li>
-<li>92</li>
-<li>94</li>
-</ul>
-<h3 id="11">约瑟夫环（1，剩1）<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
+<h4 id="53">5.3、向量内积和正交矩阵<a class="headerlink" href="#53" title="Permanent link">&para;</a></h4>
+<h5 id="532">5.3.2、正交矩阵<a class="headerlink" href="#532" title="Permanent link">&para;</a></h5>
 <ul>
-<li>5、自己不会</li>
-</ul>
-<h3 id="1">递归（1）<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
-<ul>
-<li>15</li>
-</ul>
-<h3 id="dfs11">DFS（1，剩1）<a class="headerlink" href="#dfs11" title="Permanent link">&para;</a></h3>
-<ul>
-<li>50</li>
-</ul>
-<h3 id="1_1">二分查找（1）<a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h3>
-<ul>
-<li>53</li>
-</ul>
-<h3 id="44">数学计算（4，剩4）<a class="headerlink" href="#44" title="Permanent link">&para;</a></h3>
-<ul>
-<li>23</li>
-<li>64</li>
-<li>65</li>
-<li>71</li>
-</ul>
-<h3 id="21">位运算（2，剩1）<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
-<ul>
-<li>8-done</li>
-<li>72</li>
-</ul>
-<h3 id="1_2">区间交交集（1）<a class="headerlink" href="#1_2" title="Permanent link">&para;</a></h3>
-<ul>
+<li>定义5.3.6、如果n阶矩阵A满足<span class="arithmatex">\(AA^T=E\)</span>，则称A为<strong>正交矩阵</strong><ul>
+<li>正交矩阵的基本性质</li>
+<li>1</li>
 <li>2</li>
-</ul>
-<h3 id="1_3">正则表达式（1）<a class="headerlink" href="#1_3" title="Permanent link">&para;</a></h3>
-<ul>
-<li>58<ul>
-<li>用的是正则，<code>smatch</code>的用法，没搞过</li>
+<li>3</li>
+<li>4</li>
+<li>5</li>
 </ul>
 </li>
-<li>扩展<ul>
-<li>20道，其实也用了正则的替换</li>
-</ul>
-</li>
-</ul>
-<h3 id="11_1">两数之和（1，剩1）<a class="headerlink" href="#11_1" title="Permanent link">&para;</a></h3>
-<ul>
-<li>62、跳房子I</li>
-</ul>
-<h3 id="11_2">单调栈（1，剩1）<a class="headerlink" href="#11_2" title="Permanent link">&para;</a></h3>
-<ul>
-<li>25、找朋友</li>
-</ul>
-<h3 id="4">做过，但没放上去的题（4）<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
-<p>23，81，82、91，这些题做过了</p>
-<h2 id="33">剩下的题目（33）<a class="headerlink" href="#33" title="Permanent link">&para;</a></h2>
-<ul>
-<li>（93、94先不算）</li>
-<li>1、自定义排序：74</li>
-<li>3、字符串处理：21、69、87<ul>
-<li>87应该是有解答的</li>
-</ul>
-</li>
-<li>3、滑动窗口：46，41，51</li>
-<li>15、逻辑分析：6、14、18、26、31、48、49、54、61、67、68、75、85、89、92<ul>
-<li>26、找车位（应该有解）</li>
-<li>48、49、数组矩阵 相关，应该会啊</li>
-<li>18、VLAN的是不是可以用暴力先搞一下？</li>
-<li>6、14分班，是有题解的</li>
-<li>49、矩阵稀疏扫描<ul>
-<li>https://zhuanlan.zhihu.com/p/645613630</li>
-</ul>
-</li>
-<li>48、数组拼接<ul>
-<li>https://zhuanlan.zhihu.com/p/645410908</li>
-</ul>
-</li>
-<li>54、乘坐保密电梯<ul>
-<li>https://zhuanlan.zhihu.com/p/647330843</li>
-</ul>
-</li>
-<li>61、数字反转打印<ul>
-<li>https://zhuanlan.zhihu.com/p/645456245</li>
-</ul>
-</li>
-<li>67、为啥要定义二维数组？</li>
-<li>75、模拟消息队列<ul>
-<li>https://zhuanlan.zhihu.com/p/649677485</li>
-</ul>
-</li>
-<li>68、报文回路<ul>
-<li>其实倒是看了一下，想用multiset，感觉是不是想复杂了，直接用vector<pair\<int,int>>查找啥的是不是也行？</li>
-</ul>
-</li>
-<li>83、字符串序列（done）<ul>
-<li>https://zhuanlan.zhihu.com/p/645391206</li>
-<li><strong>核心还是反向查找</strong></li>
-</ul>
-</li>
-<li>85、变最小的字符串<ul>
-<li>https://blog.csdn.net/qiudechao1/article/details/123563959，有java的</li>
-<li>一次交换后，得到<strong>字典序的最小</strong>【找到最小的，跟最前面的换？】</li>
-</ul>
-</li>
-<li>89德扑<ul>
-<li>https://zhuanlan.zhihu.com/p/645131178，有python</li>
-</ul>
-</li>
-<li>92（未找到解答）</li>
-</ul>
-</li>
-<li>1、约瑟夫环：5</li>
-<li>1、DFS：50<ul>
-<li>这个有点困在格式上了，不知道怎么处理输入，<code>dfs()</code>本身倒是能懂一些了</li>
-</ul>
-</li>
-<li>4、数学计算：23、64、65、71</li>
-<li>1、位运算：72<ul>
-<li>至少有1道是有题解的</li>
-</ul>
-</li>
-<li>1、两数之和<ul>
-<li>62、跳房子I</li>
-</ul>
-</li>
-<li>2、数据结构<ul>
-<li>43、</li>
-<li>57、</li>
-</ul>
-</li>
-<li>1、单调栈</li>
-</ul>
-<h2 id="_5">经典的题<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
-<ul>
-<li>20、</li>
-</ul>
-<h2 id="_6">最后<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
-<ul>
-<li>这算是把今年年初想的一个月初输出一篇技术笔记的目标，又给捡起来了，Q1的时候看的是存储相关，但后来换工作，没做这样，就没继续投了</li>
-<li>中间意识到<strong>整理</strong>的重要性，就把一些经典书给整理成笔记了（当然也不一定读懂），<strong>不断复习DS</strong>，9月份刷题</li>
-<li>至少9、10、11这三个月的主要目标还是刷题</li>
+<li>定义5.3.7、</li>
 </ul>
               
             </div>
