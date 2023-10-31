@@ -257,16 +257,56 @@ if (!res.empty()) {
 //方法2
 string s;
 for(int i=0;i<res.size();i++){
-    s+=to_string(res[i]);
     if(i>0){
         s+=",";
     }
+    s+=to_string(res[i]);  //这才是对的；lionel；这个地方为0的时候，先输出来，后再大于0了，再输入逗号，再输入后面的值
+    //下面是错误示范
+    #if 0
+    s+=to_string(res[i]);
+    if(i>0){
+        s+=",";  //这样第0个的时候，与第1个合在一起了
+    }
+    #endif
 }
 ```
 
 
 
 ### 做题过程中的实践
+
+#### od75模拟消息队列
+
+```cpp
+/*
+输入：
+2 22 1 11 4 44 5 55 3 33
+1 7 2 3
+*/
+
+int od75(){
+    string linep;
+	string linec;
+	//cin >> linep;
+	//cin >> linec;  //问题1：习惯性的用cin了，因为含有空格，就必须要用getline()才能输入整个
+	getline(cin, linep);
+	getline(cin, linec);
+
+	vector<pair<int, int>> produce, consumer;
+	istringstream issp(linep);
+	int num, content;
+	while (issp >> num>>content) {  //问题2：就是之前只知道一个个输，不知道可以2组一起输入到pair里
+		produce.push_back(make_pair(num, content));
+	}
+	istringstream issc(linec);
+	int start, end;
+	while (issc >> start >> end) {
+		consumer.push_back(make_pair(start, end));
+	}
+}
+```
+
+
 
 ### 参考
 
