@@ -275,6 +275,34 @@ for(int i=0;i<res.size();i++){
 
 ### 做题过程中的实践
 
+#### od48数组拼接
+
+```cpp
+void od48() {
+	int len;
+	cin >> len;
+	int arr_count;
+	cin >> arr_count;
+
+	vector<vector<int>> input(arr_count);
+	//while (arr_count--) {
+	for(int i=0;i<arr_count;i++) { //换这种方式的原因呢，正好把第一行push进去，用while的话，有点颠倒
+		string str;
+		//getline(cin, str);//因为上面有了cin>>arr_count，这个地方会形成 空行
+		//while (getline(cin, str)){}  //但最后怎么停，没想好
+		cin >> str;//直接用这种
+		replace(str.begin(), str.end(), ',', ' '); //lionel，这个地方，不要用""，会报错，replace应该是算法
+		istringstream iss(str);
+		string tmp;
+		while (iss >> tmp) {
+			input[i].push_back(stoi(tmp));  //lionel,如果push_back有报错，一般是类型不对导致的
+		}
+	}
+}
+```
+
+
+
 #### od75模拟消息队列
 
 ```cpp
