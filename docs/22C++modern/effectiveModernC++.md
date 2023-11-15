@@ -146,9 +146,14 @@ Color c = white;//这个就有问题
 
 14、
 
-15、
+#### 15、只要有可能使用constexpr，就使用它
 
-16、保证const
++ 要点速记
+  + constexpr对象都具有const属性，并由编译期已知的值完成初始化
+  + constexpr函数在调用时若传入的实参值是编译期已知的，则会产出编译期结果
+  + 比起非constexpr对象或constexpr函数而言，constexpr对象或是constexpr函数可以用在一个作用域更广的语境中
+
+#### 16、保证const成员函数的线程安全性
 
 + 要点速记
   + 保证const成员函数的线程安全性，除非可以确信它们不会用在并发语境中
