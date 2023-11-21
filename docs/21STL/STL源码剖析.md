@@ -47,25 +47,132 @@
 
 ### chap3、迭代器（iterator）概念与traits编程技法
 
-3.1、迭代器设计思维-STL关键所在
++ iterator模式，**提供一种方法，使之能够依次巡访某个聚合物（容器）所含的各个元素，而又无需暴露该聚合物的内部表述方式**。
 
-3.2、迭代器（iterator）是一种smart pointer
+#### 3.1、迭代器设计思维-STL关键所在
 
-3.3、迭代器相应型别（associated types）
++ 以find为例，代码
 
-3.4、Traits编程技法-STL源代码门钥
+#### 3.2、迭代器（iterator）是一种smart pointer
 
-3.5、std::iterator的保证
++ 指针最重要的作用是**内容提领（dereference）和成员访问（member access）**
++ auto_ptr虽然已经废弃，但用法差不多`auto_ptr<string> ps(new string("jjhou"));`
 
-3.6、iterator源代码完整重列
+#### 3.3、迭代器相应型别（associated types）
 
-3.7、
++ 只能获得**型别名称**，不能拿来做变量声明之用
+  + 解决方法，**利用function template的参数推导（argument deducation）机制**
++ 相应型别有5种
+
+#### 3.4、Traits编程技法-STL源代码门钥
+
+##### value_type
+
+##### difference_type
+
+##### reference_type
+
+##### pointer_type
+
+##### iterator_type
+
+#### 3.5、std::iterator的保证
+
+#### 3.6、iterator源代码完整重列
+
+#### 3.7、SGI STL的私房菜:`__type_traits`
 
 ### chap4、序列式容器（sequence containers）
 
 #### 4.1、容器的概观与分类
 
 ### chap5、关联式容器
+
++ multiset和multimap，**底层机制均以RB-tree（红黑树）**
++ *lionel，其它的C++11引入了吗？*
++ *图5-1的那个描述，是啥，我没懂*
++ 关联式容器每笔数据（每个元素）**都有一个键值（key）和一个实值（value）**，按**键值**，以某种特定规则将这个元素放置于适当位置，没有所谓头尾（**只有最大和最小元素**），内部结构是**一个balanced binary tree（平衡二叉树）**，但有许多类型
+  + AVL-tree
+  + RB-tree
+  + AA-tree
+
+#### 5.1、树的导览
+
++ *比较不错的思路，用树状图表示来记录相关术语*，图5-2
+
+##### 5.1.1、二叉搜索树
+
++ 先是二叉树
++ 二叉搜索树
+  + **对数时间**的元素插入与访问
+  + **节点放置规则**，任何节点的键值一定大于其左子树中的每一个节点的键值，并小于其右子树中的每一个节点的键值。
+  + 找最大和最小值是极简单的
+  + 删除操作，*虽然看起来复杂，但是不是可以用递归，lionel*
+  + 插入操作
+
+##### 5.1.2、平衡二叉搜索树
+
++ **平衡**，没有任何一个节点过深（深度过大）
+
+##### 5.1.3、AVL tree（Adelson-Velskii-Landis）
+
+##### 5.1.4、单旋转
+
+##### 5.1.5、双旋转
+
+#### 5.2、RB-tree（红黑树）
+
++ 满足规则
+  + 1、每个节点不是红就是黑
+  + 2、根节点为黑（**根黑**）
+  + 3、如果节点为红，其子节点必须为黑
+  + 4、任一节点至NULL（树尾端）的任何路径，所含之黑节点数必须相同
+
+##### 5.2.1、插入节点
+
+##### 5.2.2、一个由上而下的程序
+
+##### 5.2.3、RB-tree的节点设计
+
+##### 5.2.4、RB-tree的迭代器
+
+##### 5.2.5、RB-tree的数据结构
+
+##### 5.2.6、RB-tree的构造与内存管理
+
+##### 5.2.7、RB-tree的元素操作
+
+#### 5.3、set
+
++ set，所有元素都会根据元素的**键值**自动排序，**set元素的键值就是实值，实值就是键值**，不允许两个元素有相同的键值
++ `set<T>::iterarator`是`const_iterator`
+
+#### 5.4、map
+
++ map，也是排序，**所有元素都是`pair`**
++ 键值不能改，**实值可以修改**
++ insert()函数
++ subscript（下标）操作符
+
+#### 5.5、multiset
+
++ 允许**键值重复**，用的是`insert_equal()`而非`insert_unique()`
+
+#### 5.6、multimap
+
++ 同5.5节
+
+#### 5.7、hashtable
+
+##### 5.7.1、hashtable概述
+
+#### 5.8、hash_set
+
+#### 5.9、hash_map
+
+#### 5.10、hash_multiset
+
+#### 5.11、hash_multimap
 
 ### chap6、算法（algorithms）
 
@@ -177,3 +284,9 @@ cout<<greater<int>()(6,4);//true  【greater<int>()产生了一个无名（临�
 ##### 8.4.4、用于函数指针：ptr_fun
 
 ##### 8.4.5、用于成员函数指针：mem_fun，mem_fun_ref
+
+### 最后
+
+#### 参考
+
++ https://github.com/SilverMaple/STLSourceCodeNote/tree/master
