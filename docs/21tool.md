@@ -29,3 +29,5 @@
   + vim输入后`%d`
   + `cat /dev/null > filename`
   + `echo "" > filename`
++ excel中
+  + 以逗号分隔放在excel各列中，**选一列**，数据->分列（选择逗号）
