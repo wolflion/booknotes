@@ -48,6 +48,7 @@
 ### chap3、迭代器（iterator）概念与traits编程技法
 
 + iterator模式，**提供一种方法，使之能够依次巡访某个聚合物（容器）所含的各个元素，而又无需暴露该聚合物的内部表述方式**。
++ *如何设计迭代器*
 
 #### 3.1、迭代器设计思维-STL关键所在
 
@@ -56,6 +57,7 @@
 #### 3.2、迭代器（iterator）是一种smart pointer
 
 + 指针最重要的作用是**内容提领（dereference）和成员访问（member access）**
+  + **要重载`*`和`->`**
 + auto_ptr虽然已经废弃，但用法差不多`auto_ptr<string> ps(new string("jjhou"));`
 
 #### 3.3、迭代器相应型别（associated types）
@@ -65,6 +67,8 @@
 + 相应型别有5种
 
 #### 3.4、Traits编程技法-STL源代码门钥
+
++ *type_name不是太懂*
 
 ##### value_type
 
