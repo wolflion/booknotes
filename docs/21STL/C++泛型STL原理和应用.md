@@ -502,6 +502,7 @@ int main(){
 #### 4.2、迭代器
 
 + **中介装置**把容器与算法分离，这样的**智能指针**就叫**迭代器**
++ `[begin,end)`，end()，**尾元素的下一个位置**（不存在的元素），比较时用`==`或`!=`，没有<这种，*这行是从其它笔记上摘抄的*
 
 ##### 4.2.1、使用裸指针作为迭代器
 
@@ -583,6 +584,38 @@ int main(){
   + 序列容器：向量vector，列表list，双向队列deque
   + 关联容器：set，map
 
+#### 自己从其它地方看的补充
+
++ deque（double-ended queue）
++ vector
+  + **不能将引用**作为对象
+  + 如果`{}`不能初始化，则转换构造函数初始化
+  + *其实可能指定vetcor的大小，然后用下标`[]`操作的*
+  + 删除的话，用`erase()`或者`pop_back()`，**要注意迭代器失效的问题**
++ stack
+  + 用的是deque实现的，也可以是vector或list
+  + s.emplace()是啥意思？
++ queue
+  + 先进先出，默认deque，vector或list也可
++ priority_queue
+  + 优先级最高的先出，默认deque，vector或list也可
+  + .top()，只返回，不删除
+  + **默认使用<排序，返回最大值>**，最小堆要自己指定一下
++ set
+  + 无序的unorder_set，是*hash组织的？*
+  + set的iterator是只读，const
+  + 有序比较"<="，*这个自己不太会，笔记上代码也写得不清楚了*
++ map
+  + map的iterator，解引用是pair<key,value>，输出是升序的
+  + map支持`[]`操作，**multimap不支持**，同时**map的下标操作，只能用来插入，不能用来查询**
+  + 有序比较"<="
+  + 检查insert的返回值
+  + 无序版本，非内置类型，自定义hash函数
++ multimap存在多结果情况
+  + 先count，再遍历iterator
+  + 使用low_bound和upper_bound
+  + 使用lequal_range
+
 ####  5.1 向量vector
 
 + 占用连续内存，随机访问，下标和`at()`操作，**尾部开口的设计**，尾部操作方法为`push_back()`和`pop_back()`，重载了`operator=`，**尾部操作效率最高**（*也只有尾部能操作吧*）
@@ -656,6 +689,8 @@ int main(){
   + `sort`
   + `merge`
   + `swap`
+    + 成员函数版本是`c1.swap(c2);`
+    + 非成员函数版本是`swap(c1,c2);`
 
 #### 5.3、双向队列deque
 
@@ -761,7 +796,7 @@ mapStudent[1]="student_one";
 #### 5.6、set容器
 
 + **set用来保存只有键值而没有实值这类数据的容器**，也是红黑树，只不过各节点的数据是单一值而不是pair。
-+ 元素插入时会默认排序，**默认为`less<>`排序规则
++ 元素插入时会默认排序，**默认为`less<>`排序规则**
 + 例5-18.cpp，set容器应用示例程序
 
 #### 5.7、hash表基础及hast容器
