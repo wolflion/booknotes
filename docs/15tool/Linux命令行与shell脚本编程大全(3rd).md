@@ -561,19 +561,44 @@ name() {commands}    #关键的()
 ##### 19.2.3、删除行
 
 + **d命令**
++ `sed '/number 1/d' data6.txt`，删除匹配 number 1的行
++ `sed '2,3d' data6.txt`，删除特定区间
 
 ##### 19.2.4、插入和附加文本
 
-+ **i（insert）**，行前增加一个新行
-+ **a（append）**，行后增加一个新行
++ **i（insert）**，**行前**增加一个新行
+
+  + `$ echo "Test Line 2" | sed 'i\Test Line 1'`，在Test Line 2前面一个Test Line 1
+
+  + ```shell
+    $ sed '3i\
+    > This is an inserted line.' data6.txt
+    #将一个新行插入到数据流第三行前
+    ```
+
+  + 
+
++ **a（append）**，**行后**增加一个新行
 
 ##### 19.2.5、修改行
 
 + **c（change）**
 
++ ```shell
+  $ sed '3c\
+  > This is a changed line of text.' data6.txt
+  # 修改第三行中的文本
+  
+  $ sed '/number 3/c\
+  > This is a changed line of text.' data6.txt
+  #匹配到 number 3的那一行
+  ```
+
 ##### 19.2.6、转换命令
 
 + **y（transform）**
++ `[address]y/inchars/outchars/`转换命令会对inchars和outchars值进行一对一的映射。
++ `$ sed 'y/123/789/' data8.txt`是把文本中的1，换成了7，2换成8，3换成9
 
 ##### 19.2.7、回顾打印
 
