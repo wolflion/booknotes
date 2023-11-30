@@ -85,6 +85,7 @@ nav:
         - 《Wireshark网络分析实战》: '15tool/Wireshark网络分析实战.md' 
         - 《Linux命令行与shell脚本编程大全(3rd)》: '15tool/Linux命令行与shell脚本编程大全(3rd).md' 
         - 《python程序设计（3rd）》: '15tool/python程序设计（3rd）.md' 
+        - 《Python编程从入门到实践》: '15tool/python/Python编程从入门到实践.md'
     - 刷题:
         - 《剑指offer2nd》: '91leetcode/剑指offer2nd.md'
         - 《剑指offer专项突破》: '91leetcode/剑指offer专项突破.md'
@@ -96,3 +97,4 @@ nav:
         - 《NJU算法设计与分析》: '90lecture/11NJU算法设计与分析.md'
     - 英语专:
         - 《综合英语(一)上》: '60English/00794综合英语一上.md'
+        - 《概率率与数理统计》: '95selfStudy/概率论与数理统计.md'
