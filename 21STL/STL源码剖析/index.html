@@ -123,6 +123,34 @@
         </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#chap3iteratortraits">chap3、迭代器（iterator）概念与traits编程技法</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#31-stl">3.1、迭代器设计思维-STL关键所在</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#32iteratorsmart-pointer">3.2、迭代器（iterator）是一种smart pointer</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#33associated-types">3.3、迭代器相应型别（associated types）</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#34traits-stl">3.4、Traits编程技法-STL源代码门钥</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#value_type">value_type</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#difference_type">difference_type</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#reference_type">reference_type</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#pointer_type">pointer_type</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#iterator_type">iterator_type</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#35stditerator">3.5、std::iterator的保证</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#36iterator">3.6、iterator源代码完整重列</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#37sgi-stl__type_traits">3.7、SGI STL的私房菜:__type_traits</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#chap4sequence-containers">chap4、序列式容器（sequence containers）</a>
         <ul>
@@ -131,6 +159,62 @@
         </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#chap5">chap5、关联式容器</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#51">5.1、树的导览</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#511">5.1.1、二叉搜索树</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#512">5.1.2、平衡二叉搜索树</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#513avl-treeadelson-velskii-landis">5.1.3、AVL tree（Adelson-Velskii-Landis）</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#514">5.1.4、单旋转</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#515">5.1.5、双旋转</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#52rb-tree">5.2、RB-tree（红黑树）</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#521">5.2.1、插入节点</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#522">5.2.2、一个由上而下的程序</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#523rb-tree">5.2.3、RB-tree的节点设计</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#524rb-tree">5.2.4、RB-tree的迭代器</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#525rb-tree">5.2.5、RB-tree的数据结构</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#526rb-tree">5.2.6、RB-tree的构造与内存管理</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#527rb-tree">5.2.7、RB-tree的元素操作</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#53set">5.3、set</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#54map">5.4、map</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#55multiset">5.5、multiset</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#56multimap">5.6、multimap</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#57hashtable">5.7、hashtable</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#571hashtable">5.7.1、hashtable概述</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#58hash_set">5.8、hash_set</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#59hash_map">5.9、hash_map</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#510hash_multiset">5.10、hash_multiset</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#511hash_multimap">5.11、hash_multimap</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#chap6algorithms">chap6、算法（algorithms）</a>
     </li>
@@ -199,6 +283,12 @@
     <li class="toctree-l4"><a class="reference internal" href="#845mem_funmem_fun_ref">8.4.5、用于成员函数指针：mem_fun，mem_fun_ref</a>
     </li>
         </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_1">最后</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#_2">参考</a>
     </li>
         </ul>
     </li>
@@ -287,6 +377,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../15tool/python%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%883rd%EF%BC%89/">《python程序设计（3rd）》</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/python/Python%E7%BC%96%E7%A8%8B%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E8%B7%B5/">《Python编程从入门到实践》</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">刷题</span></p>
               <ul>
@@ -311,6 +403,8 @@
               <p class="caption"><span class="caption-text">英语专</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../60English/00794%E7%BB%BC%E5%90%88%E8%8B%B1%E8%AF%AD%E4%B8%80%E4%B8%8A/">《综合英语(一)上》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../95selfStudy/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/">《概率率与数理统计》</a>
                   </li>
               </ul>
       </div>
@@ -368,16 +462,122 @@
 <h5 id="231uninitialzed_fill">2.3.1、uninitialzed_fill<a class="headerlink" href="#231uninitialzed_fill" title="Permanent link">&para;</a></h5>
 <h5 id="231uninitialzed_fill_n">2.3.1、uninitialzed_fill_n<a class="headerlink" href="#231uninitialzed_fill_n" title="Permanent link">&para;</a></h5>
 <h3 id="chap3iteratortraits">chap3、迭代器（iterator）概念与traits编程技法<a class="headerlink" href="#chap3iteratortraits" title="Permanent link">&para;</a></h3>
-<p>3.1、迭代器设计思维-STL关键所在</p>
-<p>3.2、迭代器（iterator）是一种smart pointer</p>
-<p>3.3、迭代器相应型别（associated types）</p>
-<p>3.4、Traits编程技法-STL源代码门钥</p>
-<p>3.5、std::iterator的保证</p>
-<p>3.6、iterator源代码完整重列</p>
-<p>3.7、</p>
+<ul>
+<li>iterator模式，<strong>提供一种方法，使之能够依次巡访某个聚合物（容器）所含的各个元素，而又无需暴露该聚合物的内部表述方式</strong>。</li>
+<li><em>如何设计迭代器</em></li>
+</ul>
+<h4 id="31-stl">3.1、迭代器设计思维-STL关键所在<a class="headerlink" href="#31-stl" title="Permanent link">&para;</a></h4>
+<ul>
+<li>以find为例，代码</li>
+</ul>
+<h4 id="32iteratorsmart-pointer">3.2、迭代器（iterator）是一种smart pointer<a class="headerlink" href="#32iteratorsmart-pointer" title="Permanent link">&para;</a></h4>
+<ul>
+<li>指针最重要的作用是<strong>内容提领（dereference）和成员访问（member access）</strong><ul>
+<li><strong>要重载<code>*</code>和<code>-&gt;</code></strong></li>
+</ul>
+</li>
+<li>auto_ptr虽然已经废弃，但用法差不多<code>auto_ptr&lt;string&gt; ps(new string("jjhou"));</code></li>
+</ul>
+<h4 id="33associated-types">3.3、迭代器相应型别（associated types）<a class="headerlink" href="#33associated-types" title="Permanent link">&para;</a></h4>
+<ul>
+<li>只能获得<strong>型别名称</strong>，不能拿来做变量声明之用<ul>
+<li>解决方法，<strong>利用function template的参数推导（argument deducation）机制</strong></li>
+</ul>
+</li>
+<li>相应型别有5种</li>
+</ul>
+<h4 id="34traits-stl">3.4、Traits编程技法-STL源代码门钥<a class="headerlink" href="#34traits-stl" title="Permanent link">&para;</a></h4>
+<ul>
+<li><em>type_name不是太懂</em></li>
+</ul>
+<h5 id="value_type">value_type<a class="headerlink" href="#value_type" title="Permanent link">&para;</a></h5>
+<h5 id="difference_type">difference_type<a class="headerlink" href="#difference_type" title="Permanent link">&para;</a></h5>
+<h5 id="reference_type">reference_type<a class="headerlink" href="#reference_type" title="Permanent link">&para;</a></h5>
+<h5 id="pointer_type">pointer_type<a class="headerlink" href="#pointer_type" title="Permanent link">&para;</a></h5>
+<h5 id="iterator_type">iterator_type<a class="headerlink" href="#iterator_type" title="Permanent link">&para;</a></h5>
+<h4 id="35stditerator">3.5、std::iterator的保证<a class="headerlink" href="#35stditerator" title="Permanent link">&para;</a></h4>
+<h4 id="36iterator">3.6、iterator源代码完整重列<a class="headerlink" href="#36iterator" title="Permanent link">&para;</a></h4>
+<h4 id="37sgi-stl__type_traits">3.7、SGI STL的私房菜:<code>__type_traits</code><a class="headerlink" href="#37sgi-stl__type_traits" title="Permanent link">&para;</a></h4>
 <h3 id="chap4sequence-containers">chap4、序列式容器（sequence containers）<a class="headerlink" href="#chap4sequence-containers" title="Permanent link">&para;</a></h3>
 <h4 id="41">4.1、容器的概观与分类<a class="headerlink" href="#41" title="Permanent link">&para;</a></h4>
 <h3 id="chap5">chap5、关联式容器<a class="headerlink" href="#chap5" title="Permanent link">&para;</a></h3>
+<ul>
+<li>multiset和multimap，<strong>底层机制均以RB-tree（红黑树）</strong></li>
+<li><em>lionel，其它的C++11引入了吗？</em></li>
+<li><em>图5-1的那个描述，是啥，我没懂</em></li>
+<li>关联式容器每笔数据（每个元素）<strong>都有一个键值（key）和一个实值（value）</strong>，按<strong>键值</strong>，以某种特定规则将这个元素放置于适当位置，没有所谓头尾（<strong>只有最大和最小元素</strong>），内部结构是<strong>一个balanced binary tree（平衡二叉树）</strong>，但有许多类型<ul>
+<li>AVL-tree</li>
+<li>RB-tree</li>
+<li>AA-tree</li>
+</ul>
+</li>
+</ul>
+<h4 id="51">5.1、树的导览<a class="headerlink" href="#51" title="Permanent link">&para;</a></h4>
+<ul>
+<li><em>比较不错的思路，用树状图表示来记录相关术语</em>，图5-2</li>
+</ul>
+<h5 id="511">5.1.1、二叉搜索树<a class="headerlink" href="#511" title="Permanent link">&para;</a></h5>
+<ul>
+<li>先是二叉树</li>
+<li>二叉搜索树<ul>
+<li><strong>对数时间</strong>的元素插入与访问</li>
+<li><strong>节点放置规则</strong>，任何节点的键值一定大于其左子树中的每一个节点的键值，并小于其右子树中的每一个节点的键值。</li>
+<li>找最大和最小值是极简单的</li>
+<li>删除操作，<em>虽然看起来复杂，但是不是可以用递归，lionel</em></li>
+<li>插入操作</li>
+</ul>
+</li>
+</ul>
+<h5 id="512">5.1.2、平衡二叉搜索树<a class="headerlink" href="#512" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>平衡</strong>，没有任何一个节点过深（深度过大）</li>
+</ul>
+<h5 id="513avl-treeadelson-velskii-landis">5.1.3、AVL tree（Adelson-Velskii-Landis）<a class="headerlink" href="#513avl-treeadelson-velskii-landis" title="Permanent link">&para;</a></h5>
+<h5 id="514">5.1.4、单旋转<a class="headerlink" href="#514" title="Permanent link">&para;</a></h5>
+<h5 id="515">5.1.5、双旋转<a class="headerlink" href="#515" title="Permanent link">&para;</a></h5>
+<h4 id="52rb-tree">5.2、RB-tree（红黑树）<a class="headerlink" href="#52rb-tree" title="Permanent link">&para;</a></h4>
+<ul>
+<li>满足规则<ul>
+<li>1、每个节点不是红就是黑</li>
+<li>2、根节点为黑（<strong>根黑</strong>）</li>
+<li>3、如果节点为红，其子节点必须为黑</li>
+<li>4、任一节点至NULL（树尾端）的任何路径，所含之黑节点数必须相同</li>
+</ul>
+</li>
+</ul>
+<h5 id="521">5.2.1、插入节点<a class="headerlink" href="#521" title="Permanent link">&para;</a></h5>
+<h5 id="522">5.2.2、一个由上而下的程序<a class="headerlink" href="#522" title="Permanent link">&para;</a></h5>
+<h5 id="523rb-tree">5.2.3、RB-tree的节点设计<a class="headerlink" href="#523rb-tree" title="Permanent link">&para;</a></h5>
+<h5 id="524rb-tree">5.2.4、RB-tree的迭代器<a class="headerlink" href="#524rb-tree" title="Permanent link">&para;</a></h5>
+<h5 id="525rb-tree">5.2.5、RB-tree的数据结构<a class="headerlink" href="#525rb-tree" title="Permanent link">&para;</a></h5>
+<h5 id="526rb-tree">5.2.6、RB-tree的构造与内存管理<a class="headerlink" href="#526rb-tree" title="Permanent link">&para;</a></h5>
+<h5 id="527rb-tree">5.2.7、RB-tree的元素操作<a class="headerlink" href="#527rb-tree" title="Permanent link">&para;</a></h5>
+<h4 id="53set">5.3、set<a class="headerlink" href="#53set" title="Permanent link">&para;</a></h4>
+<ul>
+<li>set，所有元素都会根据元素的<strong>键值</strong>自动排序，<strong>set元素的键值就是实值，实值就是键值</strong>，不允许两个元素有相同的键值</li>
+<li><code>set&lt;T&gt;::iterarator</code>是<code>const_iterator</code></li>
+</ul>
+<h4 id="54map">5.4、map<a class="headerlink" href="#54map" title="Permanent link">&para;</a></h4>
+<ul>
+<li>map，也是排序，<strong>所有元素都是<code>pair</code></strong></li>
+<li>键值不能改，<strong>实值可以修改</strong></li>
+<li>insert()函数</li>
+<li>subscript（下标）操作符</li>
+</ul>
+<h4 id="55multiset">5.5、multiset<a class="headerlink" href="#55multiset" title="Permanent link">&para;</a></h4>
+<ul>
+<li>允许<strong>键值重复</strong>，用的是<code>insert_equal()</code>而非<code>insert_unique()</code></li>
+</ul>
+<h4 id="56multimap">5.6、multimap<a class="headerlink" href="#56multimap" title="Permanent link">&para;</a></h4>
+<ul>
+<li>同5.5节</li>
+</ul>
+<h4 id="57hashtable">5.7、hashtable<a class="headerlink" href="#57hashtable" title="Permanent link">&para;</a></h4>
+<h5 id="571hashtable">5.7.1、hashtable概述<a class="headerlink" href="#571hashtable" title="Permanent link">&para;</a></h5>
+<h4 id="58hash_set">5.8、hash_set<a class="headerlink" href="#58hash_set" title="Permanent link">&para;</a></h4>
+<h4 id="59hash_map">5.9、hash_map<a class="headerlink" href="#59hash_map" title="Permanent link">&para;</a></h4>
+<h4 id="510hash_multiset">5.10、hash_multiset<a class="headerlink" href="#510hash_multiset" title="Permanent link">&para;</a></h4>
+<h4 id="511hash_multimap">5.11、hash_multimap<a class="headerlink" href="#511hash_multimap" title="Permanent link">&para;</a></h4>
 <h3 id="chap6algorithms">chap6、算法（algorithms）<a class="headerlink" href="#chap6algorithms" title="Permanent link">&para;</a></h3>
 <p>6.1、算法概观</p>
 <p>6.2、算法的泛化过程</p>
@@ -472,6 +672,11 @@ cout&lt;&lt;greater&lt;int&gt;()(6,4);//true  【greater&lt;int&gt;()产生了�
 <h5 id="843compose1compose2">8.4.3、用于函数合成：compose1，compose2<a class="headerlink" href="#843compose1compose2" title="Permanent link">&para;</a></h5>
 <h5 id="844ptr_fun">8.4.4、用于函数指针：ptr_fun<a class="headerlink" href="#844ptr_fun" title="Permanent link">&para;</a></h5>
 <h5 id="845mem_funmem_fun_ref">8.4.5、用于成员函数指针：mem_fun，mem_fun_ref<a class="headerlink" href="#845mem_funmem_fun_ref" title="Permanent link">&para;</a></h5>
+<h3 id="_1">最后<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<h4 id="_2">参考<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
+<ul>
+<li>https://github.com/SilverMaple/STLSourceCodeNote/tree/master</li>
+</ul>
               
             </div>
           </div><footer>

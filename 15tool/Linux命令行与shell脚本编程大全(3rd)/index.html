@@ -153,6 +153,88 @@
                   </li>
                   <li class="toctree-l1 current"><a class="reference internal current" href="./">《Linux命令行与shell脚本编程大全(3rd)》</a>
     <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#chap1linux-shell">chap1、初识Linux shell</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap4bash-shell">chap4、更多的bash shell</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#41">4.1、监测程序</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#411">4.1.1、探查进程</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#412">4.1.2、实时监测进程</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#413">4.1.3、结束进程</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#42">4.2、监测磁盘空间</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#421">4.2.1、挂载存储媒体</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#43">4.3、处理数据文件</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#431">4.3.1、排序数据</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#432">4.3.2、搜索数据</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#44">4.4、小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap8">chap8、管理文件系统</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#83">8.3、逻辑卷管理</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap9">chap9、安装软件程序</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#91">9.1、包管理基础</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#92debian">9.2、基于Debian的系统</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#921aptitude">9.2.1、用aptitude管理软件包</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#922aptitude">9.2.2、用aptitude安装软件包</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#93red-hat">9.3、基于Red Hat的系统</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#931">9.3.1、列出已安装包</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#936yum">9.3.6、yum软件仓库</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#94">9.4、从源码安装</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#95">9.5、小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap10">chap10、编辑器</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#101vim">10.1、vim</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1011vim">10.1.1、检查vim软件包</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1012vim">10.1.2、vim基础</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1013">10.1.3、编辑数据</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1014">10.1.4、复制和粘贴</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1015">10.1.5、查找和替换</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="#chap11">chap11、构建基本脚本</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#111">11.1、使用多个命令</a>
@@ -276,6 +358,10 @@
     <li class="toctree-l2"><a class="reference internal" href="#chap14">chap14、处理用户输入</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#141">14.1、命令行参数</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1411">14.1.1、读取参数</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#142">14.2、特殊参数变量</a>
         <ul>
@@ -458,24 +544,36 @@
         </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#chap19sedgawk">chap19、初始sed和gawk</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#chap20">chap20、正则表达式</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#chap21sed">chap21、sed进阶</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#chap22gawk">chap22、gawk进阶</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#chap23shell">chap23、使用其它shell</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#_1">最后</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#_2">履历</a>
+    <li class="toctree-l3"><a class="reference internal" href="#191">19.1、文本处理</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1911sed">19.1.1、sed编辑器</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1912gawk">19.1.2、gawk编辑器</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#192sed">19.2、sed编辑器基础</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1921">19.2.1、更多的替换选项</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1922">19.2.2、使用地址</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1923">19.2.3、删除行</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1924">19.2.4、插入和附加文本</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1925">19.2.5、修改行</a>
+    </li>
+        </ul>
     </li>
         </ul>
     </li>
     </ul>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../python%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%883rd%EF%BC%89/">《python程序设计（3rd）》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../python/Python%E7%BC%96%E7%A8%8B%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E8%B7%B5/">《Python编程从入门到实践》</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">刷题</span></p>
@@ -501,6 +599,8 @@
               <p class="caption"><span class="caption-text">英语专</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../60English/00794%E7%BB%BC%E5%90%88%E8%8B%B1%E8%AF%AD%E4%B8%80%E4%B8%8A/">《综合英语(一)上》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../95selfStudy/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/">《概率率与数理统计》</a>
                   </li>
               </ul>
       </div>
@@ -529,12 +629,164 @@
               
                 <h2 id="linuxshell">Linux命令行与shell脚本编程大全<a class="headerlink" href="#linuxshell" title="Permanent link">&para;</a></h2>
 <ul>
+<li>Part1：Linux命令行（1-10）</li>
 <li>Part2: shell脚本编程基础（11-16）<ul>
+<li><em>我的问题，可能在于，如何用这些（结构化命令）去实现功能</em>，还是要多练习，多看项目中的shell代码<ul>
+<li>变量过程中的，<strong>特殊变量</strong>，<code>$0,$?</code>，这种的记忆</li>
+</ul>
+</li>
 <li>chap15呈现数据</li>
 <li>chap16控制脚本（<code>trap, &amp;, jobs, nice, at, cron</code>）</li>
 </ul>
 </li>
 <li>Part3:高级shell脚本编程（17-23）</li>
+</ul>
+<h3 id="chap1linux-shell">chap1、初识Linux shell<a class="headerlink" href="#chap1linux-shell" title="Permanent link">&para;</a></h3>
+<p>chap2、走进shell</p>
+<p>chap3、基本的bash shell命令</p>
+<h3 id="chap4bash-shell">chap4、更多的bash shell<a class="headerlink" href="#chap4bash-shell" title="Permanent link">&para;</a></h3>
+<h4 id="41">4.1、监测程序<a class="headerlink" href="#41" title="Permanent link">&para;</a></h4>
+<h5 id="411">4.1.1、探查进程<a class="headerlink" href="#411" title="Permanent link">&para;</a></h5>
+<ul>
+<li>ps</li>
+</ul>
+<h5 id="412">4.1.2、实时监测进程<a class="headerlink" href="#412" title="Permanent link">&para;</a></h5>
+<ul>
+<li>top</li>
+</ul>
+<h5 id="413">4.1.3、结束进程<a class="headerlink" href="#413" title="Permanent link">&para;</a></h5>
+<h4 id="42">4.2、监测磁盘空间<a class="headerlink" href="#42" title="Permanent link">&para;</a></h4>
+<h5 id="421">4.2.1、挂载存储媒体<a class="headerlink" href="#421" title="Permanent link">&para;</a></h5>
+<p>4.2.2、使用df命令</p>
+<p>4.2.3、使用du命令</p>
+<h4 id="43">4.3、处理数据文件<a class="headerlink" href="#43" title="Permanent link">&para;</a></h4>
+<h5 id="431">4.3.1、排序数据<a class="headerlink" href="#431" title="Permanent link">&para;</a></h5>
+<ul>
+<li>sort</li>
+</ul>
+<h5 id="432">4.3.2、搜索数据<a class="headerlink" href="#432" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>grep [option] pattern [file]</code></li>
+<li><strong>反向搜索，-v</strong></li>
+<li><strong>显示行号，-n</strong></li>
+<li><strong>有多少行含匹配的模式，-c</strong></li>
+<li><strong>有多个匹配模式，用-e</strong>，<code>grep -e t -e f file1</code></li>
+</ul>
+<p>4.3.3、压缩数据</p>
+<p>4.3.4、归档数据</p>
+<h4 id="44">4.4、小结<a class="headerlink" href="#44" title="Permanent link">&para;</a></h4>
+<p>chap5、理解shell</p>
+<p>chap6、使用Linux环境变量</p>
+<p>chap7、理解Linux文件权限</p>
+<h3 id="chap8">chap8、管理文件系统<a class="headerlink" href="#chap8" title="Permanent link">&para;</a></h3>
+<h4 id="83">8.3、逻辑卷管理<a class="headerlink" href="#83" title="Permanent link">&para;</a></h4>
+<h3 id="chap9">chap9、安装软件程序<a class="headerlink" href="#chap9" title="Permanent link">&para;</a></h3>
+<ul>
+<li>PMS（package management system）</li>
+</ul>
+<h4 id="91">9.1、包管理基础<a class="headerlink" href="#91" title="Permanent link">&para;</a></h4>
+<h4 id="92debian">9.2、基于Debian的系统<a class="headerlink" href="#92debian" title="Permanent link">&para;</a></h4>
+<ul>
+<li>dpkg是基于Debian系PMS工具的核心<ul>
+<li>apt-get</li>
+<li>apt-cache</li>
+<li>aptitude</li>
+</ul>
+</li>
+<li><strong>aptitude</strong>是apt工具和dpkg的前端<ul>
+<li>dpkg是软件包管理系统工具</li>
+<li>aptitude则是完整的软件包管理系统</li>
+</ul>
+</li>
+</ul>
+<h5 id="921aptitude">9.2.1、用aptitude管理软件包<a class="headerlink" href="#921aptitude" title="Permanent link">&para;</a></h5>
+<ul>
+<li><em>但我感觉没人用这啊，都用apt-get啊</em></li>
+</ul>
+<h5 id="922aptitude">9.2.2、用aptitude安装软件包<a class="headerlink" href="#922aptitude" title="Permanent link">&para;</a></h5>
+<h4 id="93red-hat">9.3、基于Red Hat的系统<a class="headerlink" href="#93red-hat" title="Permanent link">&para;</a></h4>
+<ul>
+<li>常见的命令<ul>
+<li>yum，在Red Hat和Fedora中使用</li>
+<li>urpm，在Mandriva中使用</li>
+<li>zypper，在openSUSE中使用</li>
+</ul>
+</li>
+</ul>
+<h5 id="931">9.3.1、列出已安装包<a class="headerlink" href="#931" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>yum list installed</code></li>
+</ul>
+<h5 id="936yum">9.3.6、yum软件仓库<a class="headerlink" href="#936yum" title="Permanent link">&para;</a></h5>
+<h4 id="94">9.4、从源码安装<a class="headerlink" href="#94" title="Permanent link">&para;</a></h4>
+<h4 id="95">9.5、小结<a class="headerlink" href="#95" title="Permanent link">&para;</a></h4>
+<h3 id="chap10">chap10、编辑器<a class="headerlink" href="#chap10" title="Permanent link">&para;</a></h3>
+<ul>
+<li><em>暂时就只看vim这种，其它先不看，lionel</em></li>
+</ul>
+<h4 id="101vim">10.1、vim<a class="headerlink" href="#101vim" title="Permanent link">&para;</a></h4>
+<h5 id="1011vim">10.1.1、检查vim软件包<a class="headerlink" href="#1011vim" title="Permanent link">&para;</a></h5>
+<h5 id="1012vim">10.1.2、vim基础<a class="headerlink" href="#1012vim" title="Permanent link">&para;</a></h5>
+<ul>
+<li>没有指令文件名，<strong>会开辟一段缓冲区</strong>，如果有文件名，就把内容读进缓冲区</li>
+<li>两种操作模式<ul>
+<li>普通模式</li>
+<li>插入模式</li>
+</ul>
+</li>
+<li>移动光标<ul>
+<li>h</li>
+<li>j</li>
+<li>k</li>
+<li>l</li>
+<li>PageDown（Ctrl+F），下翻一屏</li>
+<li>PageUp</li>
+<li>G：移到缓冲区的最后一行</li>
+<li>num G：移到缓冲区的第num行</li>
+<li>gg：移到缓冲区的第一行</li>
+</ul>
+</li>
+<li>保存<ul>
+<li>q</li>
+<li>q!</li>
+<li>w filename</li>
+<li>wq</li>
+</ul>
+</li>
+</ul>
+<h5 id="1013">10.1.3、编辑数据<a class="headerlink" href="#1013" title="Permanent link">&para;</a></h5>
+<ul>
+<li>命令<ul>
+<li>x</li>
+<li>dd</li>
+<li>dw</li>
+<li>d$</li>
+<li>J</li>
+<li>u</li>
+<li>a</li>
+<li>A</li>
+<li>r char</li>
+<li>R text</li>
+</ul>
+</li>
+</ul>
+<h5 id="1014">10.1.4、复制和粘贴<a class="headerlink" href="#1014" title="Permanent link">&para;</a></h5>
+<ul>
+<li>命令<ul>
+<li>y</li>
+<li>p</li>
+</ul>
+</li>
+</ul>
+<h5 id="1015">10.1.5、查找和替换<a class="headerlink" href="#1015" title="Permanent link">&para;</a></h5>
+<ul>
+<li>命令<ul>
+<li><code>:s/old/new/</code></li>
+<li><code>:s/old/new/g</code>，一行命令替换所有old</li>
+<li><code>:n,ms/old/new/g</code>，替换行号n和m之间所有old</li>
+<li></li>
+</ul>
+</li>
 </ul>
 <h3 id="chap11">chap11、构建基本脚本<a class="headerlink" href="#chap11" title="Permanent link">&para;</a></h3>
 <h4 id="111">11.1、使用多个命令<a class="headerlink" href="#111" title="Permanent link">&para;</a></h4>
@@ -622,6 +874,12 @@
 </li>
 </ul>
 <h3 id="chap12">chap12、使用结构化命令<a class="headerlink" href="#chap12" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>有一类命令会根据条件使脚本跳过某些命令</strong>，这样的命令通常称为<strong>结构化命令</strong><ul>
+<li>结构化命令，<strong>允许你改变程序执行的顺序</strong></li>
+</ul>
+</li>
+</ul>
 <h4 id="121if-then">12.1、使用if-then语句<a class="headerlink" href="#121if-then" title="Permanent link">&para;</a></h4>
 <pre class="highlight"><code class="language-shell">#!/bin/bash
 #testing the if statement
@@ -700,11 +958,12 @@ done</code></pre>
 <p>13.10、小结</p>
 <h3 id="chap14">chap14、处理用户输入<a class="headerlink" href="#chap14" title="Permanent link">&para;</a></h3>
 <h4 id="141">14.1、命令行参数<a class="headerlink" href="#141" title="Permanent link">&para;</a></h4>
-<p>14.1.1、读取参数</p>
+<h5 id="1411">14.1.1、读取参数<a class="headerlink" href="#1411" title="Permanent link">&para;</a></h5>
 <ul>
-<li>位置参数<ul>
+<li>位置参数，<strong>属于特殊变量</strong><ul>
 <li>$0，程序名</li>
 <li>$1，第1个参数</li>
+<li>以此类推</li>
 </ul>
 </li>
 </ul>
@@ -955,14 +1214,338 @@ name() {commands}    #关键的()</code></pre>
 </ul>
 <h4 id="179">17.9、小结<a class="headerlink" href="#179" title="Permanent link">&para;</a></h4>
 <h3 id="chap19sedgawk">chap19、初始sed和gawk<a class="headerlink" href="#chap19sedgawk" title="Permanent link">&para;</a></h3>
+<h4 id="191">19.1、文本处理<a class="headerlink" href="#191" title="Permanent link">&para;</a></h4>
+<h5 id="1911sed">19.1.1、sed编辑器<a class="headerlink" href="#1911sed" title="Permanent link">&para;</a></h5>
+<ul>
+<li>stream editor，<strong>用预先提供的一组规则</strong></li>
+<li>sed命令选项<ul>
+<li>-e，将指定的命令添加到已有命令中</li>
+<li>-f file，</li>
+<li>-n，不产生命令输出</li>
+</ul>
+</li>
+<li>1、在命令行定义编辑器命令<ul>
+<li><code>echo "This is a test" | sed '/s/test/big test/'</code>，把test换成big test</li>
+<li><strong>sed编辑器并不会修改文本文件的数据。它只会将修改后的数据发送到STDOUT</strong></li>
+</ul>
+</li>
+<li>2、在命令行使用多个编辑器命令<ul>
+<li>用<code>-e</code>选项</li>
+<li><code>sed -e 's/brown/green/; s/dog/cat/' data1.txt</code></li>
+</ul>
+</li>
+<li>3、从文件中读取编辑器命令<ul>
+<li><code>sed -f script.sed data1.txt</code>，其中<code>script.sed</code>中的内容是<code>s/dog/cat/</code>这样</li>
+</ul>
+</li>
+</ul>
+<h5 id="1912gawk">19.1.2、gawk编辑器<a class="headerlink" href="#1912gawk" title="Permanent link">&para;</a></h5>
+<ul>
+<li>0、</li>
+<li>1、gawk命令格式<ul>
+<li>-F fs</li>
+<li>-f file</li>
+<li>-v var=value</li>
+<li>-mf N</li>
+<li>-mr N</li>
+<li>-W keyword</li>
+</ul>
+</li>
+<li>2、从命令行读取程序脚本<ul>
+<li><strong>脚本用<code>{}</code>来定义</strong></li>
+<li><code>gawk '{print "Hello World!"}'</code>，<strong>定义了一个print命令</strong></li>
+</ul>
+</li>
+<li>3、使用数据字段变量</li>
+<li>4、在程序脚本中使用多个命令<ul>
+<li><code>echo "My name is Rich" | gawk '{$4="Christine"; print $0}'</code></li>
+</ul>
+</li>
+<li>5、从文件中读取程序<ul>
+<li><code>gawk -F: -f script2.gawk /etc/passwd</code></li>
+</ul>
+</li>
+<li>6、在处理数据前运行脚本</li>
+<li>7、在处理数据后运行脚本</li>
+</ul>
+<h4 id="192sed">19.2、sed编辑器基础<a class="headerlink" href="#192sed" title="Permanent link">&para;</a></h4>
+<h5 id="1921">19.2.1、更多的替换选项<a class="headerlink" href="#1921" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>s命令（substitute）替换，代替</strong></li>
+<li>1、替换命令<ul>
+<li><strong>4种替换标记</strong>（数字、g全局，所有，p打印，w file写到文件）</li>
+<li><code>sed 's/test/trial/2' data4.txt</code>，只出现每行中第2次出现的匹配模式</li>
+<li><code>sed 's/test/trial/g' data4.txt</code></li>
+<li><code>sed -n 's/test/trial/p' data4.txt</code></li>
+<li><code>sed 's/test/trial/w test.txt' data4.txt</code></li>
+</ul>
+</li>
+<li>2、替换字符<ul>
+<li><strong>反斜线来转义</strong></li>
+<li><code>sed 's!/bin/bash!/bin/csh!' /etc/passwd</code></li>
+</ul>
+</li>
+</ul>
+<h5 id="1922">19.2.2、使用地址<a class="headerlink" href="#1922" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>行寻址（line addressing）</strong><ul>
+<li>数字形式</li>
+<li>文本模式</li>
+</ul>
+</li>
+<li>1、数字方式的行寻址<ul>
+<li><code>sed '2s/dog/cat/' data1.txt</code>，只修改第2行</li>
+<li><code>sed '2,3s/dog/cat/' data1.txt</code></li>
+<li><code>sed '2,$s/dog/cat/' data1.txt</code></li>
+</ul>
+</li>
+<li>2、使用文本模式过滤器<ul>
+<li><code>sed '/Samantha/s/bash/csh/' /etc/passwd</code>，<em>lionel，相当于去匹配Samantha的这个文本</em></li>
+</ul>
+</li>
+<li>3、命令组合<ul>
+<li><em>lionel，未看</em></li>
+</ul>
+</li>
+</ul>
+<h5 id="1923">19.2.3、删除行<a class="headerlink" href="#1923" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>d命令</strong></li>
+<li><code>sed '/number 1/d' data6.txt</code>，删除匹配 number 1的行</li>
+<li><code>sed '2,3d' data6.txt</code>，删除特定区间</li>
+</ul>
+<h5 id="1924">19.2.4、插入和附加文本<a class="headerlink" href="#1924" title="Permanent link">&para;</a></h5>
+<ul>
+<li>
+<p><strong>i（insert）</strong>，<strong>行前</strong>增加一个新行</p>
+<ul>
+<li><code>$ echo "Test Line 2" | sed 'i\Test Line 1'</code>，在Test Line 2前面一个Test Line 1</li>
+</ul>
+<ul>
+<li>```shell
+  $ sed '3i\<blockquote>
+<p>This is an inserted line.' data6.txt
+  #将一个新行插入到数据流第三行前
+  ```</p>
+</blockquote>
+</li>
+</ul>
+<ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>a（append）</strong>，<strong>行后</strong>增加一个新行</li>
+</ul>
+<h5 id="1925">19.2.5、修改行<a class="headerlink" href="#1925" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>c（change）</strong></li>
+</ul>
+<ul>
+<li>
+<p>```shell
+  $ sed '3c\</p>
+<blockquote>
+<p>This is a changed line of text.' data6.txt
+  # 修改第三行中的文本</p>
+</blockquote>
+<p>$ sed '/number 3/c\</p>
+<blockquote>
+<p>This is a changed line of text.' data6.txt</p>
+</blockquote>
+<h1 id="number-3">匹配到 number 3的那一行<a class="headerlink" href="#number-3" title="Permanent link">&para;</a></h1>
+<p>```</p>
+</li>
+</ul>
+<h5 id="1926">19.2.6、转换命令<a class="headerlink" href="#1926" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>y（transform）</strong></li>
+<li><code>[address]y/inchars/outchars/</code>转换命令会对inchars和outchars值进行一对一的映射。</li>
+<li><code>$ sed 'y/123/789/' data8.txt</code>是把文本中的1，换成了7，2换成8，3换成9</li>
+</ul>
+<h5 id="1927">19.2.7、回顾打印<a class="headerlink" href="#1927" title="Permanent link">&para;</a></h5>
+<ul>
+<li>3个命令（p，=，l（小写l））</li>
+<li>1、打印行<ul>
+<li><code>sed -n '/number 3/p' data6.txt</code></li>
+</ul>
+</li>
+<li>2、打印行号<ul>
+<li><code>sed '=' data1.txt</code></li>
+</ul>
+</li>
+<li>3、列出行<ul>
+<li><code>sed -n 'l' data9.txt</code></li>
+</ul>
+</li>
+</ul>
+<h5 id="1928sed">19.2.8、使用sed处理文件<a class="headerlink" href="#1928sed" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、写入文件<ul>
+<li><code>sed '1,2w test.txt' data6.txt</code>，把前两行打印到一个文本文件中</li>
+</ul>
+</li>
+<li>2、从文件读取数据<ul>
+<li><code>sed '3r data12.txt' data6.txt</code> ，<em>把data12.txt里的文件放到data6.txt的第3行？</em></li>
+</ul>
+</li>
+</ul>
+<h4 id="193">19.3、小结<a class="headerlink" href="#193" title="Permanent link">&para;</a></h4>
 <h3 id="chap20">chap20、正则表达式<a class="headerlink" href="#chap20" title="Permanent link">&para;</a></h3>
+<p>20.1、什么是正则表达式</p>
+<h4 id="202bre">20.2、定义BRE模式<a class="headerlink" href="#202bre" title="Permanent link">&para;</a></h4>
+<p>20.2.1、纯文本</p>
+<h5 id="2022">20.2.2、特殊字符<a class="headerlink" href="#2022" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>.*[]^${}\+?|()</code>，<em>其中的<code>|</code>确实不清楚，但知道是见过的</em></li>
+</ul>
+<h5 id="2023">20.2.3、锚字符<a class="headerlink" href="#2023" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、</li>
+<li>2、锁定在行尾</li>
+<li>3、组合锚点<ul>
+<li><code>^$</code>，中间啥也不加，<strong>过滤了数据流中的空白行</strong></li>
+<li><code>sed '/^$d'</code>，<em>过滤空白行，是这么写的吗？lionel，不确定</em></li>
+</ul>
+</li>
+</ul>
+<p>20.2.4、点号字符</p>
+<p>20.2.5、字符组</p>
+<p>20.2.6、排除型字符组</p>
+<p>20.2.7、区间</p>
+<h5 id="2028">20.2.8、特殊的字符组<a class="headerlink" href="#2028" title="Permanent link">&para;</a></h5>
+<ul>
+<li>POSIX的规范，<em>先不记它</em></li>
+</ul>
+<p>20.2.9、星号</p>
+<h4 id="203">20.3、扩展正则表达式<a class="headerlink" href="#203" title="Permanent link">&para;</a></h4>
+<p>20.3.1、问号</p>
+<p>20.3.2、加号</p>
+<p>20.3.3、使用花括号</p>
+<h5 id="2034">20.3.4、管道符号<a class="headerlink" href="#2034" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>用逻辑OR的方式</strong>指定表式引擎<ul>
+<li><code>echo "The cat is a sleep" | gawk '/cat|dog/{print $0}'</code>，<em>先管一下<code>|</code>，不看gawk的语法，lionel</em></li>
+</ul>
+</li>
+</ul>
+<p>20.3.5、表达式分组</p>
+<p>20.4、正则表达式实战</p>
+<p>20.5、小结</p>
 <h3 id="chap21sed">chap21、sed进阶<a class="headerlink" href="#chap21sed" title="Permanent link">&para;</a></h3>
+<h4 id="211">21.1、多行命令<a class="headerlink" href="#211" title="Permanent link">&para;</a></h4>
+<ul>
+<li>3个特殊命令<ul>
+<li>N，将数据流中的下一行加进来创建一个多行组（multiline group）来处理</li>
+<li>D，删除多行组中的一行</li>
+<li>P，打印多行组中的一行</li>
+</ul>
+</li>
+</ul>
+<h5 id="2111next">21.1.1、next命令<a class="headerlink" href="#2111next" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、</li>
+</ul>
+<h5 id="2112">21.1.2、多行删除命令<a class="headerlink" href="#2112" title="Permanent link">&para;</a></h5>
+<ul>
+<li>19章中的<strong>单行删除命令（d）</strong></li>
+</ul>
+<h5 id="2113">21.1.3、多行打印命令<a class="headerlink" href="#2113" title="Permanent link">&para;</a></h5>
+<h4 id="212">21.2、保持空间<a class="headerlink" href="#212" title="Permanent link">&para;</a></h4>
+<h4 id="213">21.3、排除命令<a class="headerlink" href="#213" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong><code>!</code>用来排序（negate）</strong></li>
+<li><code>sed -n '/header/!p' data2.txt</code>，除了单词header的那行，都打印</li>
+</ul>
+<h4 id="214">21.4、改变流<a class="headerlink" href="#214" title="Permanent link">&para;</a></h4>
+<h5 id="2141">21.4.1、分支<a class="headerlink" href="#2141" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>b</code>命令（branch）</li>
+</ul>
+<h5 id="2142">21.4.2、测试<a class="headerlink" href="#2142" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>t</code>命令（test）</li>
+</ul>
+<h4 id="215">21.5、模式替代<a class="headerlink" href="#215" title="Permanent link">&para;</a></h4>
+<h5 id="2151">21.5.1、&amp;符号<a class="headerlink" href="#2151" title="Permanent link">&para;</a></h5>
+<ul>
+<li>&amp;用来代表替换命令中的<strong>匹配的模式</strong></li>
+<li><code>echo "The cat sleeps in his hat." | sed 's/.at/"&amp;"/g'</code>，先匹配到了cat，"cat"就会出现在替换后的单词里。<em>这个要理解一下</em></li>
+</ul>
+<h5 id="2152">21.5.2、替代单独的单词<a class="headerlink" href="#2152" title="Permanent link">&para;</a></h5>
+<h4 id="216sed">21.6、在脚本中使用sed<a class="headerlink" href="#216sed" title="Permanent link">&para;</a></h4>
+<p>21.6.1、使用包装脚本</p>
+<p>21.6.2、重定向sed的输出</p>
+<p>21.7、创建sed实用工具</p>
+<h5 id="2171">21.7.1、加倍行间距<a class="headerlink" href="#2171" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>sed 'G' data2.txt</code>，插入空白行</li>
+<li><code>sed '$!G' data2.txt</code></li>
+</ul>
+<p>21.7.2、对可能含有空白行的文件加倍行间距</p>
+<p>21.7.3、给文件中的行编号</p>
+<p>21.7.4、打印末尾行</p>
+<h5 id="2175">21.7.5、删除行<a class="headerlink" href="#2175" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、删除连续的空白行<ul>
+<li><code>sed '/./,/^$/!d' data8.txt</code></li>
+</ul>
+</li>
+<li>2、删除开头的空白行<ul>
+<li><code>sed '/./,$!d' data9.txt</code></li>
+</ul>
+</li>
+<li>3、删除结尾的空白行<ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<p>21.7.6、删除HTML标签</p>
+<p>21.8、小结</p>
 <h3 id="chap22gawk">chap22、gawk进阶<a class="headerlink" href="#chap22gawk" title="Permanent link">&para;</a></h3>
+<ul>
+<li>chap19的gawk，从原始数据文件生成格式化报表的基本方法</li>
+</ul>
+<h4 id="221">22.1、使用变量<a class="headerlink" href="#221" title="Permanent link">&para;</a></h4>
+<h5 id="2211">22.1.1、内建变量<a class="headerlink" href="#2211" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、字段和记录分隔符变量<ul>
+<li><strong>数据字量变量，<code>$1</code></strong></li>
+</ul>
+</li>
+<li>2、数据变量</li>
+</ul>
+<h5 id="2212">22.1.2、自定义变量<a class="headerlink" href="#2212" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、在脚本中给变量赋值</li>
+<li>2、在命令行上给变量赋值</li>
+</ul>
+<h4 id="222">22.2、处理数组<a class="headerlink" href="#222" title="Permanent link">&para;</a></h4>
+<h5 id="2221">22.2.1、定义数组变量<a class="headerlink" href="#2221" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>capital["Illinois"] = "Springfield"</code><ul>
+<li>capital是变量名</li>
+<li>Illinois是关联数组的索引值</li>
+<li>Springfield是数据元素值</li>
+</ul>
+</li>
+</ul>
+<h5 id="2222">22.2.2、遍历数组变量<a class="headerlink" href="#2222" title="Permanent link">&para;</a></h5>
+<h5 id="2223">22.2.3、删除数组变量<a class="headerlink" href="#2223" title="Permanent link">&para;</a></h5>
+<p>22.3、使用模式</p>
+<p>22.4、结构化命令</p>
+<p>22.5、格式化打印</p>
+<p>22.6、内建函数</p>
+<p>22.7、自定义函数</p>
+<p>22.8、实例</p>
+<p>22.9、小结</p>
 <h3 id="chap23shell">chap23、使用其它shell<a class="headerlink" href="#chap23shell" title="Permanent link">&para;</a></h3>
 <h3 id="_1">最后<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
 <h4 id="_2">履历<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
 <ul>
 <li>20220319写了点纸上的笔记，2021年1月底和2月初也看了点Part2和Part3方面的知识</li>
+<li>2023-11-21突然用了<code>sed</code>替换了一个文本，感觉像是开窍一样，于是想通过这本书，学下chap19和chap21来系统整一下（主要学了一下chap19，21没来及看呢）</li>
 </ul>
               
             </div>

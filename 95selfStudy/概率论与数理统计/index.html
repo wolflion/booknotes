@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>概率论与数理统计 - lionel的技术笔记</title>
+    <title>《概率率与数理统计》 - lionel的技术笔记</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "\u6982\u7387\u8bba\u4e0e\u6570\u7406\u7edf\u8ba1";
+        var mkdocs_page_name = "\u300a\u6982\u7387\u7387\u4e0e\u6570\u7406\u7edf\u8ba1\u300b";
         var mkdocs_page_input_path = "95selfStudy\\\u6982\u7387\u8bba\u4e0e\u6570\u7406\u7edf\u8ba1.md";
         var mkdocs_page_url = null;
       </script>
@@ -155,6 +155,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../15tool/python%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%883rd%EF%BC%89/">《python程序设计（3rd）》</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/python/Python%E7%BC%96%E7%A8%8B%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E8%B7%B5/">《Python编程从入门到实践》</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">刷题</span></p>
               <ul>
@@ -177,8 +179,236 @@
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">英语专</span></p>
-              <ul>
+              <ul class="current">
                   <li class="toctree-l1"><a class="reference internal" href="../../60English/00794%E7%BB%BC%E5%90%88%E8%8B%B1%E8%AF%AD%E4%B8%80%E4%B8%8A/">《综合英语(一)上》</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">《概率率与数理统计》</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#chap1">chap1、随机事件与概率</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#11">1.1、随机事件</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#111">1.1.1、随机现象</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#112">1.1.2、随机试验和样本空间</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#113">1.1.3、随机事件的概念</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#114">1.1.4、随机事件的关系与运算</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#12">1.2、概率</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#121">1.2.1、频率与概率</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#122">1.2.2、古典概型</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#123">1.2.3、概率的定义与性质</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#13">1.3、条件概率</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#131">1.3.1、条件概率与乘法公式</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#132bayes">1.3.2、全概率公式与贝叶斯（Bayes）公式</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#14">1.4、事件的独立性</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#141">1.4.1、事件的独立性</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#142nbernoulli">1.4.2、n重贝努利（Bernoulli）试验</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap2">chap2、随机变量及其概率分布</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#0">0、自己的思考过程</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#21">2.1、离散型随机变量</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#211">2.1.1、随机变量的概念</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#212">2.1.2、离散型随机变量及其分布律</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#2130-1">2.1.3、0-1分布与二项分布</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#214">2.1.4、泊松分布</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#22">2.2、随机变量的分布函数</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#221">2.2.1、分布函数的概念</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#222">2.2.2、分布函数的性质</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#23">2.3、连续型随机变量及其概率密度</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#231">2.3.1、连续型随机变量及其概率密度</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#232">2.3.2、均匀分布与指数分布</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#233">2.3.3、正态分布</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#24">2.4、随机变量函数的概率分布</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#241">2.4.1、离散型随机变量函数的概率分布</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#242">2.4.2、连续型随机变量函数的概率分布</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap3">chap3、多维随机变量及其概率分布</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#31">3.1、多维随机变量的概念</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#311">3.1.1、二维随机变量及其分布函数</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#312">3.1.2、二维离散型随机变量的分布律和边缘分布律</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#313">3.1.3、二维离散型随机变量的概率密度和边缘概率密度</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#32">3.2、随机变量的独立性</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#321">3.2.1、两个随机变量的独立性</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#322">3.2.2、二维离散型随机变量的独立性</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#323">3.2.3、二维连续型随机变量的独立性</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#324n">3.2.4、n维随机变量</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#33">3.3、两个随机变量的函数的分布</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#331">3.3.1、离散型随机变量的函数的分布</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#332">3.3.2、两个独立连续型随机变量之和的概率分布</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap4">chap4、随机变量的数字特征</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#41mean">4.1、随机变量的期望（mean）</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#411">4.1.1、离散型随机变量的期望</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#412">4.1.2、连续型随机变量的期望</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#413">4.1.3、二维随机变量的期望</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#414">4.1.4、期望的性质</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#42">4.2、方差</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#421">4.2.1、方差的概念</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#4226">4.2.2、常见随机变量的方差（6种）</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#423">4.2.3、方差的性质</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#43">4.3、协方差与相关系数</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#431">4.3.1、协方差</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#432">4.3.2、相关系数</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#433">4.3.3、矩</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap5">chap5、大数定律及中心极限定理</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#51">5.1、切比雪夫不等式</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#52">5.2、大数定律</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#521">5.2.1、贝努利大数定律</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#522">5.2.2、独立同分布随机变量序列的切比雪夫大数定律</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#53">5.3、中心极限定理</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#531">5.3.1、独立同分布序列的中心极限定理</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#532demoivre-laplace">5.3.2、棣莫费（DeMoivre）-拉普拉斯（Laplace）中心极限定理</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap6">chap6、统计量及其抽样分布</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#63">6.3、统计量及其分布</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#634">6.3.4、样本方差与样本标准差</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#635">6.3.5、样本矩及其函数</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#636">6.3.6、极大顺序统计量和极小顺序统计量</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#637">6.3.7、正态总体的抽样分布</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap7">chap7、参数估计</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#73">7.3、参数的区间估计</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#731">7.3.1、置信区间的概念</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#732">7.3.2、单个正态总体参数的置信区间</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap8">chap8、假设检验</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#81">8.1、假设检验的基本思想和概念</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_2">最后</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#_3">履历</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_4">参考的</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#2023-10-22">2023-10-22那一周整理的</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    </ul>
                   </li>
               </ul>
       </div>
@@ -195,7 +425,8 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-      <li>概率论与数理统计</li>
+          <li>英语专 &raquo;</li>
+      <li>《概率率与数理统计》</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -205,6 +436,12 @@
             <div class="section" itemprop="articleBody">
               
                 <h2 id="_1">《概率论与数理统计》<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<ul>
+<li>从考试的角度，<strong>重点还是2-3章</strong>，chap4就考考<strong>公式与性质</strong>（<strong>六大分布的期望与方差</strong>），chap5还没看。<ul>
+<li><strong>还是2.2和2.3节的内容不熟悉</strong>，需要好好背一下，以及记一下</li>
+</ul>
+</li>
+</ul>
 <ul>
 <li>全书也就8章，目前的想法是1个月搞定1章<ul>
 <li>概率论（1-5）</li>
@@ -319,6 +556,16 @@
 </li>
 </ul>
 <h3 id="chap2">chap2、随机变量及其概率分布<a class="headerlink" href="#chap2" title="Permanent link">&para;</a></h3>
+<h4 id="0">0、自己的思考过程<a class="headerlink" href="#0" title="Permanent link">&para;</a></h4>
+<ul>
+<li>2023-11-20学了一下</li>
+</ul>
+<ul>
+<li>2.1、问题不大，搞懂啥是<strong>随机变量</strong>，以及如何从<strong>二项式</strong>到<strong>Poisson定理</strong>，自己找到过链接，还没整上来而已，<strong>把这几个分布记一下</strong></li>
+<li>2.2、什么是<strong>分布函数</strong>，我的理解就是<strong>一个区间</strong>，（为啥引入函数的概念）</li>
+<li>2.3、<strong>概率密度</strong>就相当于是<strong>分布函数</strong>的导数，<em>离散型的应该不存在这种情况</em>，<strong>几大分布</strong>好好学一下</li>
+<li>2.4、概率分布是啥？</li>
+</ul>
 <h4 id="21">2.1、离散型随机变量<a class="headerlink" href="#21" title="Permanent link">&para;</a></h4>
 <h5 id="211">2.1.1、随机变量的概念<a class="headerlink" href="#211" title="Permanent link">&para;</a></h5>
 <ul>
@@ -393,12 +640,12 @@
 </ul>
 <h5 id="231">2.3.1、连续型随机变量及其概率密度<a class="headerlink" href="#231" title="Permanent link">&para;</a></h5>
 <ul>
-<li>定义1：</li>
+<li>定义1：<span class="arithmatex">\(F(X)=\int_{-\infty }^{x}f(t)dt\)</span>，X为<strong>连续型随机变量</strong>，f(x)为X的概率密度函数，简称<strong>概率密度</strong></li>
 <li>概率密度的性质：<ul>
 <li>1、f(x)大于等于0</li>
-<li>2、</li>
+<li>2、<span class="arithmatex">\(\int_{-\infty }^{+\infty}f(x)dx=1\)</span></li>
 <li>3、</li>
-<li>4、</li>
+<li>4、F(x)的导数为f(x)</li>
 </ul>
 </li>
 </ul>
@@ -469,37 +716,105 @@
 <h5 id="331">3.3.1、离散型随机变量的函数的分布<a class="headerlink" href="#331" title="Permanent link">&para;</a></h5>
 <h5 id="332">3.3.2、两个独立连续型随机变量之和的概率分布<a class="headerlink" href="#332" title="Permanent link">&para;</a></h5>
 <h3 id="chap4">chap4、随机变量的数字特征<a class="headerlink" href="#chap4" title="Permanent link">&para;</a></h3>
-<h5 id="41">4.1、随机变量的期望<a class="headerlink" href="#41" title="Permanent link">&para;</a></h5>
+<h4 id="41mean">4.1、随机变量的期望（mean）<a class="headerlink" href="#41mean" title="Permanent link">&para;</a></h4>
 <ul>
-<li><strong>期望</strong>反映了<strong>随机变量取值的集中位置</strong></li>
+<li><strong>期望</strong>反映了<strong>随机变量取值的集中位置</strong>，<em>就是，平均值，lionel</em></li>
 </ul>
 <h5 id="411">4.1.1、离散型随机变量的期望<a class="headerlink" href="#411" title="Permanent link">&para;</a></h5>
+<ul>
+<li>定义1，<strong>绝对收敛</strong>（<em>为啥要收敛，那个分布律，还不太懂</em>）<ul>
+<li><span class="arithmatex">\({x_i}{p_i}\)</span></li>
+</ul>
+</li>
+<li>各种分布的期望<ul>
+<li>两点分布，E(X)=p</li>
+<li>二项分布，E(X)=np</li>
+<li>泊松分布，E(X)=<span class="arithmatex">\(\lambda\)</span>，<a href="https://blog.csdn.net/chumingqian/article/details/123020498">markdown中的希腊字母与图片标注</a></li>
+</ul>
+</li>
+<li>定理1：E(Y)</li>
+</ul>
 <h5 id="412">4.1.2、连续型随机变量的期望<a class="headerlink" href="#412" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>把求和改为积分即可</strong></li>
+</ul>
+<ul>
+<li>定义2：<span class="arithmatex">\(\int_{-\infty}^{+\infty}xf(x)dx\)</span><ul>
+<li>https://zhuanlan.zhihu.com/p/450465546?utm_id=0  （markdwon公式）</li>
+<li>https://blog.csdn.net/m0_46190471/article/details/126130602</li>
+<li>https://blog.csdn.net/weixin_49599247/article/details/121055422</li>
+</ul>
+</li>
+<li>几种常见的分布期望<ul>
+<li>均匀分布，<span class="arithmatex">\(E(X)=\frac{a+b}{2}\)</span>，<strong>分式，fraction</strong>，还有<strong>dfrac</strong>或者<strong>{x+y} \over {x+y}</strong></li>
+<li>指数分布，<span class="arithmatex">\(E(X)={{1} \over {\lambda}}\)</span></li>
+<li>正态分布，</li>
+</ul>
+</li>
+<li>定理2：<span class="arithmatex">\(E(Y)\)</span></li>
+</ul>
 <h5 id="413">4.1.3、二维随机变量的期望<a class="headerlink" href="#413" title="Permanent link">&para;</a></h5>
+<ul>
+<li><em>二重积分？</em></li>
+</ul>
+<ul>
+<li>定理3、</li>
+<li>定理4、</li>
+</ul>
 <h5 id="414">4.1.4、期望的性质<a class="headerlink" href="#414" title="Permanent link">&para;</a></h5>
-<h5 id="42">4.2、方差<a class="headerlink" href="#42" title="Permanent link">&para;</a></h5>
+<ul>
+<li>性质1、常数的期望等于这个常数，<span class="arithmatex">\(E(C)=C\)</span></li>
+<li>性质2、</li>
+<li>性质3、随机变量和的期望等于随机变量期望之和，<span class="arithmatex">\(E(X+Y)=E(X)+E(Y)\)</span></li>
+<li>性质4、两个相互独立的随机变量乘积的期望等于期望的乘积，即若X，Y是相互独立的随机变量，则<span class="arithmatex">\(E(XY)=E(X)E(Y)\)</span></li>
+</ul>
+<h4 id="42">4.2、方差<a class="headerlink" href="#42" title="Permanent link">&para;</a></h4>
 <h5 id="421">4.2.1、方差的概念<a class="headerlink" href="#421" title="Permanent link">&para;</a></h5>
 <ul>
 <li><strong>方差</strong>反映了<strong>随机变量偏离其中心-期望的平均偏离程度</strong></li>
-<li>定义1<ul>
-<li>D(X)=E(X-E(X))的平方</li>
+<li>定义1、<span class="arithmatex">\(D(X)={E(X-E(X))}^2\)</span></li>
+</ul>
+<h5 id="4226">4.2.2、常见随机变量的方差（6种）<a class="headerlink" href="#4226" title="Permanent link">&para;</a></h5>
+<ul>
+<li>0-1分布</li>
+<li>二项分布</li>
+<li>泊松分布</li>
+<li>均匀分布</li>
+<li>指数分布</li>
+<li>正态分布</li>
+<li><strong>P103，表4.1</strong>，比较重要</li>
+</ul>
+<h5 id="423">4.2.3、方差的性质<a class="headerlink" href="#423" title="Permanent link">&para;</a></h5>
+<ul>
+<li>性质1、常数的方差等于0，</li>
+<li>性质2、常数与随机变量乘积的方差等于<strong>这常数的平方与随机变量方差的乘积</strong>，<span class="arithmatex">\(D(CX)=C^2D(X)\)</span></li>
+<li>性质3、两个独立随机变量之和的方差等于他们方差之和，</li>
+</ul>
+<h4 id="43">4.3、协方差与相关系数<a class="headerlink" href="#43" title="Permanent link">&para;</a></h4>
+<h5 id="431">4.3.1、协方差<a class="headerlink" href="#431" title="Permanent link">&para;</a></h5>
+<ul>
+<li>定义1：X与Y之间，<span class="arithmatex">\(Cov(X,Y)=E[(X-E(X)) (Y-E(Y))]\)</span></li>
+</ul>
+<ul>
+<li>协方差性质<ul>
+<li>1、</li>
+<li>2、</li>
+<li>3、</li>
+<li>4、</li>
 </ul>
 </li>
 </ul>
-<h5 id="422">4.2.2、常见随机变量的方差<a class="headerlink" href="#422" title="Permanent link">&para;</a></h5>
-<h5 id="423">4.2.3、方差的性质<a class="headerlink" href="#423" title="Permanent link">&para;</a></h5>
-<h5 id="43">4.3、协方差与相关系数<a class="headerlink" href="#43" title="Permanent link">&para;</a></h5>
-<h5 id="431">4.3.1、协方差<a class="headerlink" href="#431" title="Permanent link">&para;</a></h5>
-<ul>
-<li>X与Y之间，Cov(X,Y)=E[(X-E(X)) (Y-E(Y))]</li>
-</ul>
 <h5 id="432">4.3.2、相关系数<a class="headerlink" href="#432" title="Permanent link">&para;</a></h5>
 <ul>
-<li>表示<strong>两个随机变量间线性联系密切程度的度量</strong></li>
+<li>表示<strong>两个随机变量间线性联系密切程度的度量</strong>，<span class="arithmatex">\({Cov(X,Y) \over {\sqrt(D(X))\sqrt(D(Y))}}\)</span>，<strong>开根是\sqrt</strong></li>
 </ul>
 <h5 id="433">4.3.3、矩<a class="headerlink" href="#433" title="Permanent link">&para;</a></h5>
 <ul>
+<li>定义4、<span class="arithmatex">\(E(X^k)\)</span>存在<ul>
 <li><em>这个不太懂，lionel</em></li>
+</ul>
+</li>
+<li>定义5、<span class="arithmatex">\(E(X^kY^l)\)</span>存在</li>
 </ul>
 <h3 id="chap5">chap5、大数定律及中心极限定理<a class="headerlink" href="#chap5" title="Permanent link">&para;</a></h3>
 <h4 id="51">5.1、切比雪夫不等式<a class="headerlink" href="#51" title="Permanent link">&para;</a></h4>
@@ -512,8 +827,33 @@
 <h4 id="53">5.3、中心极限定理<a class="headerlink" href="#53" title="Permanent link">&para;</a></h4>
 <h5 id="531">5.3.1、独立同分布序列的中心极限定理<a class="headerlink" href="#531" title="Permanent link">&para;</a></h5>
 <h5 id="532demoivre-laplace">5.3.2、棣莫费（DeMoivre）-拉普拉斯（Laplace）中心极限定理<a class="headerlink" href="#532demoivre-laplace" title="Permanent link">&para;</a></h5>
+<h3 id="chap6">chap6、统计量及其抽样分布<a class="headerlink" href="#chap6" title="Permanent link">&para;</a></h3>
+<p>6.1、引言</p>
+<p>6.2、总体与样本</p>
+<h4 id="63">6.3、统计量及其分布<a class="headerlink" href="#63" title="Permanent link">&para;</a></h4>
+<p>6.3.1、</p>
+<p>6.3.2、</p>
+<p>6.3.3、</p>
+<h5 id="634">6.3.4、样本方差与样本标准差<a class="headerlink" href="#634" title="Permanent link">&para;</a></h5>
+<h5 id="635">6.3.5、样本矩及其函数<a class="headerlink" href="#635" title="Permanent link">&para;</a></h5>
+<h5 id="636">6.3.6、极大顺序统计量和极小顺序统计量<a class="headerlink" href="#636" title="Permanent link">&para;</a></h5>
+<h5 id="637">6.3.7、正态总体的抽样分布<a class="headerlink" href="#637" title="Permanent link">&para;</a></h5>
+<h3 id="chap7">chap7、参数估计<a class="headerlink" href="#chap7" title="Permanent link">&para;</a></h3>
+<p>7.1、占估计的几种方法</p>
+<p>7.2、占估计的评价标准</p>
+<h4 id="73">7.3、参数的区间估计<a class="headerlink" href="#73" title="Permanent link">&para;</a></h4>
+<h5 id="731">7.3.1、置信区间的概念<a class="headerlink" href="#731" title="Permanent link">&para;</a></h5>
+<h5 id="732">7.3.2、单个正态总体参数的置信区间<a class="headerlink" href="#732" title="Permanent link">&para;</a></h5>
+<h3 id="chap8">chap8、假设检验<a class="headerlink" href="#chap8" title="Permanent link">&para;</a></h3>
+<h4 id="81">8.1、假设检验的基本思想和概念<a class="headerlink" href="#81" title="Permanent link">&para;</a></h4>
+<p>8.2、</p>
+<p>8.3、</p>
 <h3 id="_2">最后<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
-<h4 id="_3">参考的<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
+<h4 id="_3">履历<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
+<ul>
+<li>2023-11-25把chap4的公式记一下</li>
+</ul>
+<h4 id="_4">参考的<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
 <h5 id="2023-10-22">2023-10-22那一周整理的<a class="headerlink" href="#2023-10-22" title="Permanent link">&para;</a></h5>
 <ul>
 <li>cnblogs.com，marsggbo，说人话理解伯努利分布，二项分布，指数分布</li>
@@ -542,6 +882,9 @@
               
             </div>
           </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../60English/00794%E7%BB%BC%E5%90%88%E8%8B%B1%E8%AF%AD%E4%B8%80%E4%B8%8A/" class="btn btn-neutral float-left" title="《综合英语(一)上》"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
 
   <hr/>
 
@@ -562,6 +905,8 @@
   <div class="rst-versions" role="note" aria-label="Versions">
   <span class="rst-current-version" data-toggle="rst-current-version">
     
+    
+      <span><a href="../../60English/00794%E7%BB%BC%E5%90%88%E8%8B%B1%E8%AF%AD%E4%B8%80%E4%B8%8A/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
   </span>

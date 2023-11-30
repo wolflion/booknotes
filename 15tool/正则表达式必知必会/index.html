@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>正则表达式必知必会 - lionel的技术笔记</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "\u6b63\u5219\u8868\u8fbe\u5f0f\u5fc5\u77e5\u5fc5\u4f1a";
+        var mkdocs_page_input_path = "15tool\\\u6b63\u5219\u8868\u8fbe\u5f0f\u5fc5\u77e5\u5fc5\u4f1a.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> lionel的技术笔记
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">简介</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../01daily/">daily</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../02ds/">ds</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../03cpp/">cpp</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../21tool/">tool</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">C++</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../20C%2B%2B/effectiveC%2B%2B/">《Effective C++》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../20C%2B%2B/%E6%B7%B1%E5%BA%A6%E6%8E%A2%E7%B4%A2C%2B%2B%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B/">《深度探索C++对象模型》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/EffectiveSTL/">《Effective STL》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/C%2B%2B%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/">《C++泛型STL原理和应用》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/">《STL源码剖析》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../22C%2B%2Bmodern/%E6%B7%B1%E5%85%A5%E5%BA%94%E7%94%A8C%2B%2B11/">《深入应用C++11》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">基础知识</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA/">《操作系统导论》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E5%A4%A7%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">《大话设计模式》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90_C%2B%2B4th/">《数据结构与算法分析_C++4th》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E7%AE%97%E6%B3%95%284th%29/">《算法4th》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90-%E5%BC%A0%E5%86%9B/">《算法设计与分析-张军》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E5%A4%A9%E8%A1%8C-%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《天行-算法设计与实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%95%99%E7%A8%8B-%E6%9D%8E%E6%98%A5%E8%91%86/">《数据结构教程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%96%B0%E7%BC%96%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%A0%E9%A2%98%E4%B8%8E%E8%A7%A3%E6%9E%90/">《新编数据结构习题与解析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网络编程</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/TCPIP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">《TCP/IP网络编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/">《Linux高性能服务器编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/TCPIP%E8%AF%A6%E8%A7%A3%E5%8D%B71/">《TCPIP详解卷1》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/Linux%E5%86%85%E6%A0%B8%E7%BD%91%E7%BB%9C%E6%A0%88%E6%BA%90%E4%BB%A3%E7%A0%81%E6%83%85%E6%99%AF%E5%88%86%E6%9E%90/">《Linux内核网络栈源代码情景分析》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C/">《深入理解Linux网络》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">文件系统</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/Linux%E5%86%85%E6%A0%B8%E6%8E%A2%E7%A7%98/">《Linux内核探秘》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《文件系统技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">《存储技术原理分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">存储</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../12storage/ceph%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《ceph设计原理与实现》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">视频</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/FFmpeg%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/">《FFmpeg入门到精通》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/WebRTC%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/">《WebRTC权威指南》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/WebRTC%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AE%9E%E6%97%B6%E4%BA%92%E5%8A%A8%E6%8A%80%E6%9C%AF/">《WebRTC音视频实时互动技术》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/%E6%96%B0%E4%B8%80%E4%BB%A3%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9%E7%A0%81%E6%A0%87%E5%87%86-H.264_AVC/">《新一代视频压缩码标准-H.264_AVC》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">内核</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/Linux%E5%86%85%E6%A0%B8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《Linux内核设计与实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5Linux%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%E5%86%85%E6%A0%B8%E6%9C%BA%E5%88%B6/">《深入Linux设备驱动程序内核机制》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">《深入理解Linux虚拟内存管理》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《深入理解Linux网络技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/Linux%E5%86%85%E6%A0%B8%E6%BA%90%E4%BB%A3%E7%A0%81%E5%89%96%E6%9E%90-tcpip%E5%AE%9E%E7%8E%B0/">《Linux内核源代码剖析-TCP/IP实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E5%86%85%E6%A0%B8/">《深入理解Linux内核》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">工具</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../Wireshark%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98/">《Wireshark网络分析实战》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Linux%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8Eshell%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B%E5%A4%A7%E5%85%A8%283rd%29/">《Linux命令行与shell脚本编程大全(3rd)》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../python%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%883rd%EF%BC%89/">《python程序设计（3rd）》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../python/Python%E7%BC%96%E7%A8%8B%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E8%B7%B5/">《Python编程从入门到实践》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">刷题</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer2nd/">《剑指offer2nd》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/">《剑指offer专项突破》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../96output/OD%E5%9F%BA%E7%A1%80%E9%A2%98/">OD基础题</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../96output/OD%E8%BF%9B%E9%98%B6%E9%A2%98/">OD进阶题</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网课</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/01Linux%E9%AB%98%E5%B9%B6%E5%8F%91%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/">《Linux高并发网络编程开发》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/%E4%BE%AF%E6%8D%B7/%E4%BE%AF%E6%8D%B7C%2B%2B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%8660%E8%AE%B2/">《侯捷C++内存管理60讲》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/11NJU%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">《NJU算法设计与分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">英语专</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../60English/00794%E7%BB%BC%E5%90%88%E8%8B%B1%E8%AF%AD%E4%B8%80%E4%B8%8A/">《综合英语(一)上》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../95selfStudy/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/">《概率率与数理统计》</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">lionel的技术笔记</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>正则表达式必知必会</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="_1">《正则表达式必知必会》<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h3 id="_2">引言<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>在实际过程中<strong>如何用它们去解决问题</strong>（<em>就算不是代码相关，用everything，word或notepad--编辑器，也是可以用正则的</em>），因为之前的书<strong>往往过于偏语法而显得不够实用</strong>（如何定义{，知道+与<em>之间的区别），</em><em>但并没有真正掌握它们的用法</em>*</li>
+<li>《精通正则表达式》Jeffrey Friedl</li>
+<li><strong>本书可以让你尽快学会正则表达式的基本用法</strong>，也有复杂的专题<ul>
+<li>回溯引用（back reference）</li>
+<li>条件性求值（conditional evaluation）</li>
+<li>前后查找（looking around）</li>
+</ul>
+</li>
+<li>每章在10min内可以学完</li>
+</ul>
+<h3 id="chap1">chap1、正则表达式入门<a class="headerlink" href="#chap1" title="Permanent link">&para;</a></h3>
+<p>1.1、正则表达式的用途</p>
+<h4 id="12">1.2、如何使用正则表达式<a class="headerlink" href="#12" title="Permanent link">&para;</a></h4>
+<ul>
+<li>主要是2种情况<strong>搜索、替换</strong></li>
+</ul>
+<h5 id="121">1.2.1、用正则表达式进行搜索<a class="headerlink" href="#121" title="Permanent link">&para;</a></h5>
+<h5 id="122">1.2.2、用正则表达式进行替换<a class="headerlink" href="#122" title="Permanent link">&para;</a></h5>
+<p>1.3、什么是正则表达式</p>
+<p>1.4、使用正则表达式</p>
+<h4 id="15">1.5、在继续学习之前<a class="headerlink" href="#15" title="Permanent link">&para;</a></h4>
+<ul>
+<li>1、在使用正则表达式时，<strong>所有问题都有不止一种解决方案</strong></li>
+<li>2、不同的实现往往会有差异</li>
+<li>3、跟其它语言一样，<strong>实践，实践，再实践</strong></li>
+</ul>
+<h4 id="16">1.6、小结<a class="headerlink" href="#16" title="Permanent link">&para;</a></h4>
+<h3 id="chap2">chap2、匹配单个字符<a class="headerlink" href="#chap2" title="Permanent link">&para;</a></h3>
+<h4 id="21">2.1、匹配纯文本<a class="headerlink" href="#21" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>Ben</code>当正则表达式</li>
+</ul>
+<h5 id="211">2.1.1、有多个匹配结果<a class="headerlink" href="#211" title="Permanent link">&para;</a></h5>
+<ul>
+<li>一般只显示第1个，<strong>可以用<code>g</code>（global）</strong>选项看看</li>
+</ul>
+<h5 id="212">2.1.2、字母的大小写问题<a class="headerlink" href="#212" title="Permanent link">&para;</a></h5>
+<ul>
+<li>作者说javascript可以用<code>i</code>标志</li>
+<li><em>我觉得可以用<code>[Bb]en</code>这种方式，lionel</em></li>
+</ul>
+<h4 id="22">2.2、匹配任意字符<a class="headerlink" href="#22" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>点号（.）</strong>，匹配任何单一字符</li>
+<li>可以使用<code>.a.</code></li>
+</ul>
+<h4 id="23">2.3、匹配特殊字符<a class="headerlink" href="#23" title="Permanent link">&para;</a></h4>
+<ul>
+<li>搜索<code>.</code>本身，就<strong>需要<code>\</code>（反斜杠）转义</strong>一下</li>
+<li><code>\</code>是<strong>元字符（metacharacter）</strong>【字符有特殊含义，而不是字符本身含义】</li>
+</ul>
+<h4 id="24">2.4、小结<a class="headerlink" href="#24" title="Permanent link">&para;</a></h4>
+<h3 id="chap3">chap3、匹配一组字符<a class="headerlink" href="#chap3" title="Permanent link">&para;</a></h3>
+<h4 id="31">3.1、匹配多个字符中的某一个<a class="headerlink" href="#31" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>[ns]a.\.xls</code>，匹配字符n或s，其它跟上文一样</li>
+<li><code>[Nn]a.\.xls</code>，也是匹配里面的大小写</li>
+</ul>
+<h4 id="32">3.2、利用字符集合区间<a class="headerlink" href="#32" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>[ns]a[0-9]\.xls</code>，也可以<code>[ns]a[0123456789]\.xls</code></li>
+<li><code>-</code>表示<strong>连字符</strong></li>
+</ul>
+<h4 id="33">3.3、取非匹配<a class="headerlink" href="#33" title="Permanent link">&para;</a></h4>
+<ul>
+<li>用<strong>元字符<code>^</code></strong>来对一个字符集合进行取非匹配</li>
+<li><code>[ns]a[^0-9]\.xls</code>，匹配<strong>任何不是数字的字符</strong></li>
+</ul>
+<p>3.4、小结</p>
+<h3 id="chap4">chap4、使用元字符<a class="headerlink" href="#chap4" title="Permanent link">&para;</a></h3>
+<h4 id="41">4.1、对特殊字符进行转义<a class="headerlink" href="#41" title="Permanent link">&para;</a></h4>
+<h4 id="42">4.2、匹配空白字符<a class="headerlink" href="#42" title="Permanent link">&para;</a></h4>
+<ul>
+<li>空白元字符<ul>
+<li><code>[\b]</code></li>
+<li><code>\f</code></li>
+<li><code>\n</code></li>
+<li><code>\r</code></li>
+<li><code>\t</code></li>
+<li><code>\v</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="43">4.3、匹配特定的字符类别<a class="headerlink" href="#43" title="Permanent link">&para;</a></h4>
+<h5 id="431d">4.3.1、匹配数字（与非数字）d<a class="headerlink" href="#431d" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>\d</code>，匹配<code>[0-9]</code></li>
+<li><code>\D</code>，匹配<code>[^0-9]</code></li>
+</ul>
+<h5 id="432w">4.3.2、匹配字母和数字（与非字母和数字）w<a class="headerlink" href="#432w" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>\w</code>，<strong>字母数字字符或下划线字符</strong>，<code>[a-zA-Z0-9_]</code></li>
+<li><code>\W</code></li>
+</ul>
+<h5 id="433s">4.3.3、匹配空白字符（与非空白字符）s<a class="headerlink" href="#433s" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>\s</code></li>
+<li><code>\S</code></li>
+</ul>
+<h5 id="434">4.3.4、匹配十六进制或八进制数值<a class="headerlink" href="#434" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、使用十六进制，<code>\x</code></li>
+<li>2、使用八进制，<code>\0</code></li>
+</ul>
+<h4 id="44posix">4.4、使用POSIX字符类<a class="headerlink" href="#44posix" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>[:upper:]</code>，任何一个大写字母</li>
+</ul>
+<p>4.5、小结</p>
+<h3 id="chap5">chap5、重复匹配<a class="headerlink" href="#chap5" title="Permanent link">&para;</a></h3>
+<p>5.1、有多少个匹配</p>
+<ul>
+<li>匹配邮件text@text.txt的写法，<code>\w@\w\.\w</code></li>
+</ul>
+<h5 id="511">5.1.1、匹配一个或多个字符<a class="headerlink" href="#511" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>a+</code>，匹配一个或多个（至少一个；不匹配零个字符的情况）</li>
+<li><code>\w+@\w+\.\w+</code></li>
+<li>再一版本，就是，<code>[\w.]+@[\w.]+\.\w+</code></li>
+</ul>
+<h5 id="512">5.1.2、匹配零个或多个字符<a class="headerlink" href="#512" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>a*</code>，匹配零次或多次</li>
+</ul>
+<h5 id="513">5.1.3、匹配零个或一个字符<a class="headerlink" href="#513" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>?</code>，</li>
+<li>例子，<code>https?://[\w./]+</code>，<em>这里匹配https和http两种情况，这我不太明白，lionel</em></li>
+</ul>
+<h4 id="52">5.2、匹配的重复次数<a class="headerlink" href="#52" title="Permanent link">&para;</a></h4>
+<h5 id="521">5.2.1、为重复匹配次数设定一个精确的值<a class="headerlink" href="#521" title="Permanent link">&para;</a></h5>
+<ul>
+<li>先是引入<strong>元字符{}</strong>，然后用<code>{3}</code>，表示<strong>连续重复出现3次</strong>才算是一个匹配</li>
+<li><code>#[[:xdigit::]]{6}</code>，十六进制的数字，连续出现6次，当然还是#开头</li>
+</ul>
+<h5 id="522">5.2.2、为重复匹配次数设定一个区间<a class="headerlink" href="#522" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>{2,4}</code>，最少重复2次，最多重复4次</li>
+</ul>
+<h5 id="523">5.2.3、匹配“至少重复多少次”<a class="headerlink" href="#523" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>{3,}</code>，最少重复3次，<strong>没有上限</strong></li>
+</ul>
+<h4 id="53">5.3、防止过度匹配<a class="headerlink" href="#53" title="Permanent link">&para;</a></h4>
+<ul>
+<li><em>lionel，这个不太懂</em>，用了<strong>贪婪型、懒惰型</strong>元字符<ul>
+<li>懒惰型，只匹配第一个满足的？<em>lionel</em></li>
+</ul>
+</li>
+<li>贪婪型元字符<ul>
+<li>提的是<code>*</code>，但<code>.*</code>，<em>lionel，因为我遇到过这种</em></li>
+<li><code>+</code></li>
+<li><code>{n,}</code></li>
+</ul>
+</li>
+<li>懒惰型元字符<ul>
+<li><code>*?</code></li>
+<li><code>+?</code></li>
+<li><code>{n,}?</code></li>
+</ul>
+</li>
+<li>本书的2个例子<ul>
+<li><code>&lt;[Bb]&gt;.*&lt;!--[Bb]--&gt;</code></li>
+<li><code>&lt;[Bb]&gt;.*?&lt;!--[Bb]--&gt;</code></li>
+</ul>
+</li>
+</ul>
+<p>5.4、小结</p>
+<h3 id="chap6">chap6、位置匹配<a class="headerlink" href="#chap6" title="Permanent link">&para;</a></h3>
+<p>6.1、边界</p>
+<h4 id="62">6.2、单词边界<a class="headerlink" href="#62" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>\b</code></li>
+<li>用法，<code>\bcat \b</code>，<strong>这里故意匹配cat后面的空格</strong></li>
+</ul>
+<h4 id="63">6.3、字符串边界<a class="headerlink" href="#63" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>^$</code>，<strong>分别表示，开头和结尾</strong></li>
+<li>分行匹配模式</li>
+<li><em>lionel，这节没太看</em></li>
+</ul>
+<p>6.4、小结</p>
+<h3 id="chap7">chap7、使用子表达式<a class="headerlink" href="#chap7" title="Permanent link">&para;</a></h3>
+<h4 id="71">7.1、什么是子表达式<a class="headerlink" href="#71" title="Permanent link">&para;</a></h4>
+<ul>
+<li></li>
+</ul>
+<h4 id="72">7.2、子表达式<a class="headerlink" href="#72" title="Permanent link">&para;</a></h4>
+<ul>
+<li>元字符<code>()</code>，引入的作用是啥呢<strong>当作一个独立元素来使用</strong></li>
+<li>例子<ul>
+<li><code>\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}</code>，能匹配到12.159.46.200这样的</li>
+<li>可以写成<code>(\d{1,3}\.){3}\d{1,3}</code>，表明这个子表达式重复了3次</li>
+</ul>
+</li>
+</ul>
+<h4 id="73">7.3、子表达式的嵌套<a class="headerlink" href="#73" title="Permanent link">&para;</a></h4>
+<p>7.4、小结</p>
+<h3 id="chap8">chap8、回溯引用：前后一致匹配<a class="headerlink" href="#chap8" title="Permanent link">&para;</a></h3>
+<h4 id="81">8.1、回溯引用有什么用<a class="headerlink" href="#81" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>&lt;[hH][1-6]&gt;.*?&lt;!--[hH][1-6]--&gt;</code>，这有个问题是<code>&lt;h1&gt;&lt;/h3&gt;</code>会被匹配上。</li>
+</ul>
+<h4 id="82">8.2、回溯引用匹配<a class="headerlink" href="#82" title="Permanent link">&para;</a></h4>
+<ul>
+<li>回溯引用允许正则表达式<strong>模式引用前面的匹配结果</strong></li>
+</ul>
+<ul>
+<li><code>[ ]+(\w+)[ ]+\1</code><ul>
+<li><em>这个正则的意思，匹配同一个单词连续出现2次</em></li>
+<li><code>[ ]+</code>，匹配一个或多个空格，<strong>中间是有空格的</strong></li>
+<li><strong>最后一个<code>\1</code></strong>，这是一个回溯引用，它引用的<strong>正是前面划分出来的那个子表达式</strong>，表示啥意思呢<strong>模式里的第1个子表达式</strong></li>
+</ul>
+</li>
+</ul>
+<h4 id="83">8.3、回溯引用在替换操作中的应用<a class="headerlink" href="#83" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>替换操作需要用到两个正则表达式：</strong><ul>
+<li>一个用来给出搜索模式</li>
+<li>另一个用来给出匹配文本的替换模式</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>表8-1</li>
+</ul>
+<h4 id="84">8.4、小结<a class="headerlink" href="#84" title="Permanent link">&para;</a></h4>
+<h3 id="chap9">chap9、前后查找<a class="headerlink" href="#chap9" title="Permanent link">&para;</a></h3>
+<ul>
+<li>前后查找，<strong><code>?&lt;=</code>和<code>?=</code>必须在一个子表达里，而且后面要跟匹配的文本</strong></li>
+</ul>
+<h4 id="91">9.1、前后查找<a class="headerlink" href="#91" title="Permanent link">&para;</a></h4>
+<h4 id="92">9.2、向前查找<a class="headerlink" href="#92" title="Permanent link">&para;</a></h4>
+<ul>
+<li>指定了一个必须匹配但<strong>不在结果中返回的模式</strong>，<code>?=</code>开头的子表达式，<strong>需要匹配的文本跟在<code>=</code>后面</strong></li>
+</ul>
+<h4 id="93">9.3、向后查找<a class="headerlink" href="#93" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>查找出现在被匹配文本之前的字符（但不消费它）</strong>，向后查找操作符是<code>?&lt;=</code></li>
+</ul>
+<h4 id="94">9.4、把向前查找和向后查找结合起来<a class="headerlink" href="#94" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>(?&lt;=&lt;[tT][iI][tT][lL][eE]&gt;.*(?=&lt;!--[tT][iI][tT][lL][eE]--&gt;))</code></li>
+</ul>
+<h4 id="95">9.5、对前后查找取非<a class="headerlink" href="#95" title="Permanent link">&para;</a></h4>
+<ul>
+<li>表9-1<ul>
+<li>(?=)，正向前查找</li>
+<li>(?!)，负向前查找</li>
+<li>(?&lt;=)，正向后查找</li>
+<li>(?&lt;!)，负向后查找</li>
+</ul>
+</li>
+</ul>
+<h4 id="96">9.6、小结<a class="headerlink" href="#96" title="Permanent link">&para;</a></h4>
+<h3 id="chap10">chap10、嵌入条件<a class="headerlink" href="#chap10" title="Permanent link">&para;</a></h3>
+<h4 id="101">10.1、为什么要嵌入条件<a class="headerlink" href="#101" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>\(?\d{3}\)?-?\d{3}-\d{4}</code><ul>
+<li><code>\(?</code>，匹配<strong>可选左括号</strong>，因为是个?</li>
+<li><code>\d{3}</code>，重复的3个数字</li>
+<li><code>\)?</code>，<strong>右括号可选</strong></li>
+<li><code>-?</code>，-也是可选</li>
+<li><em>后面的知道，lionel</em></li>
+</ul>
+</li>
+</ul>
+<h4 id="102">10.2、正则表达式里的条件<a class="headerlink" href="#102" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>?</code>，<strong>匹配前一个字符或表达式，如果它存在的话</strong></li>
+<li><code>?=</code>和<code>?&lt;=</code></li>
+</ul>
+<p>10.2.1、回溯引用条件</p>
+<p>10.2.2、前后查找条件</p>
+<p>10.3、小结</p>
+<ul>
+<li><code>(19|20)</code>是啥意思，<em>有可能我抄错了</em></li>
+</ul>
+<h3 id="_3">附录<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<h4 id="a">A、常见<a class="headerlink" href="#a" title="Permanent link">&para;</a></h4>
+<h4 id="b">B、常见问题的正则表达式解决方案<a class="headerlink" href="#b" title="Permanent link">&para;</a></h4>
+<h4 id="c">C、正则表达式测试器<a class="headerlink" href="#c" title="Permanent link">&para;</a></h4>
+<h3 id="_4">最后<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<h4 id="_5">履历<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
+<ul>
+<li>2023-11-22，（是昨天整sed学high了，在看shell书时，决定先把这个小册子给over掉），晚上回来花2个cubi，先给整理一下，已经会的知识，用于<strong>复习</strong>，把难点留着后面看看，<em>7-10还差点意思，需要再看一下，lionel</em></li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

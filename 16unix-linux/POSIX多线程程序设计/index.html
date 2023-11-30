@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>POSIX多线程程序设计 - lionel的技术笔记</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "POSIX\u591a\u7ebf\u7a0b\u7a0b\u5e8f\u8bbe\u8ba1";
+        var mkdocs_page_input_path = "16unix-linux\\POSIX\u591a\u7ebf\u7a0b\u7a0b\u5e8f\u8bbe\u8ba1.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> lionel的技术笔记
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">简介</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../01daily/">daily</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../02ds/">ds</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../03cpp/">cpp</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../21tool/">tool</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">C++</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../20C%2B%2B/effectiveC%2B%2B/">《Effective C++》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../20C%2B%2B/%E6%B7%B1%E5%BA%A6%E6%8E%A2%E7%B4%A2C%2B%2B%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B/">《深度探索C++对象模型》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/EffectiveSTL/">《Effective STL》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/C%2B%2B%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/">《C++泛型STL原理和应用》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/">《STL源码剖析》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../22C%2B%2Bmodern/%E6%B7%B1%E5%85%A5%E5%BA%94%E7%94%A8C%2B%2B11/">《深入应用C++11》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">基础知识</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA/">《操作系统导论》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E5%A4%A7%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">《大话设计模式》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90_C%2B%2B4th/">《数据结构与算法分析_C++4th》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E7%AE%97%E6%B3%95%284th%29/">《算法4th》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90-%E5%BC%A0%E5%86%9B/">《算法设计与分析-张军》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E5%A4%A9%E8%A1%8C-%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《天行-算法设计与实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%95%99%E7%A8%8B-%E6%9D%8E%E6%98%A5%E8%91%86/">《数据结构教程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%96%B0%E7%BC%96%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%A0%E9%A2%98%E4%B8%8E%E8%A7%A3%E6%9E%90/">《新编数据结构习题与解析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网络编程</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/TCPIP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">《TCP/IP网络编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/">《Linux高性能服务器编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/TCPIP%E8%AF%A6%E8%A7%A3%E5%8D%B71/">《TCPIP详解卷1》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/Linux%E5%86%85%E6%A0%B8%E7%BD%91%E7%BB%9C%E6%A0%88%E6%BA%90%E4%BB%A3%E7%A0%81%E6%83%85%E6%99%AF%E5%88%86%E6%9E%90/">《Linux内核网络栈源代码情景分析》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C/">《深入理解Linux网络》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">文件系统</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/Linux%E5%86%85%E6%A0%B8%E6%8E%A2%E7%A7%98/">《Linux内核探秘》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《文件系统技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">《存储技术原理分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">存储</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../12storage/ceph%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《ceph设计原理与实现》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">视频</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/FFmpeg%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/">《FFmpeg入门到精通》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/WebRTC%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/">《WebRTC权威指南》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/WebRTC%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AE%9E%E6%97%B6%E4%BA%92%E5%8A%A8%E6%8A%80%E6%9C%AF/">《WebRTC音视频实时互动技术》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/%E6%96%B0%E4%B8%80%E4%BB%A3%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9%E7%A0%81%E6%A0%87%E5%87%86-H.264_AVC/">《新一代视频压缩码标准-H.264_AVC》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">内核</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/Linux%E5%86%85%E6%A0%B8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《Linux内核设计与实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5Linux%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%E5%86%85%E6%A0%B8%E6%9C%BA%E5%88%B6/">《深入Linux设备驱动程序内核机制》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">《深入理解Linux虚拟内存管理》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《深入理解Linux网络技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/Linux%E5%86%85%E6%A0%B8%E6%BA%90%E4%BB%A3%E7%A0%81%E5%89%96%E6%9E%90-tcpip%E5%AE%9E%E7%8E%B0/">《Linux内核源代码剖析-TCP/IP实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E5%86%85%E6%A0%B8/">《深入理解Linux内核》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">工具</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/Wireshark%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98/">《Wireshark网络分析实战》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/Linux%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8Eshell%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B%E5%A4%A7%E5%85%A8%283rd%29/">《Linux命令行与shell脚本编程大全(3rd)》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/python%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%883rd%EF%BC%89/">《python程序设计（3rd）》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/python/Python%E7%BC%96%E7%A8%8B%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E8%B7%B5/">《Python编程从入门到实践》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">刷题</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer2nd/">《剑指offer2nd》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/">《剑指offer专项突破》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../96output/OD%E5%9F%BA%E7%A1%80%E9%A2%98/">OD基础题</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../96output/OD%E8%BF%9B%E9%98%B6%E9%A2%98/">OD进阶题</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网课</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/01Linux%E9%AB%98%E5%B9%B6%E5%8F%91%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/">《Linux高并发网络编程开发》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/%E4%BE%AF%E6%8D%B7/%E4%BE%AF%E6%8D%B7C%2B%2B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%8660%E8%AE%B2/">《侯捷C++内存管理60讲》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/11NJU%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">《NJU算法设计与分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">英语专</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../60English/00794%E7%BB%BC%E5%90%88%E8%8B%B1%E8%AF%AD%E4%B8%80%E4%B8%8A/">《综合英语(一)上》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../95selfStudy/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/">《概率率与数理统计》</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">lionel的技术笔记</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>POSIX多线程程序设计</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="posix">《POSIX多线程程序设计》<a class="headerlink" href="#posix" title="Permanent link">&para;</a></h2>
+<h3 id="chap1">chap1、概述<a class="headerlink" href="#chap1" title="Permanent link">&para;</a></h3>
+<h4 id="11">1.1、舀水的程序员<a class="headerlink" href="#11" title="Permanent link">&para;</a></h4>
+<ul>
+<li>程序员：能独立活动的实体</li>
+<li>桶和桨：<strong>一次只能由一人拥有的令牌（token）</strong>，也就是<strong>共享数据</strong>或<strong>同步对象</strong></li>
+<li>轻推或喊叫：与同步对象相关的通信机制，<strong>条件变量</strong>，通过信号或广播来指示共享数据的状态变化</li>
+</ul>
+<h4 id="12">1.2、术语定义<a class="headerlink" href="#12" title="Permanent link">&para;</a></h4>
+<h5 id="121">1.2.1、异步<a class="headerlink" href="#121" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>异步（asynchronous）</strong>：表明事情相互独立地发生，除非有强加的依赖性。<ul>
+<li>异步带来的最大复杂性就是：如果你没有同时执行多个活动，那么异步就没有什么优势。</li>
+</ul>
+</li>
+</ul>
+<h5 id="122">1.2.2、并发<a class="headerlink" href="#122" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>并发（concurrency）</strong>：指事情同时发生。</li>
+<li>本书中，并发是指实际上可能串行发生的事情好像同时发生一样。</li>
+<li><strong>并发描述了单处理系统中线程或进程的行为特点</strong>。</li>
+</ul>
+<h5 id="123">1.2.3、单处理器和多处理器<a class="headerlink" href="#123" title="Permanent link">&para;</a></h5>
+<ul>
+<li>单处理器：一台计算机只有一个编程人员可见的执行单元（处理器）。</li>
+<li>多处理器：一台计算机拥有多个处理器，它们共享同一个指令集和相同的物理内存。</li>
+</ul>
+<h5 id="124">1.2.4、并行<a class="headerlink" href="#124" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>并行（parallelism）</strong>：并发序列同时执行。<strong>并行的补充含义是事情在相同的方向上独立进行（没有交错）</strong>。</li>
+</ul>
+<h5 id="125">1.2.5、线程安全和可重入<a class="headerlink" href="#125" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>线程安全</strong>：指代码能够被多个线程调用而不会产生灾难性结果（<strong>使用互斥量、条件变量和线程私有数据，实现线程的安全</strong>）</li>
+<li>不需要保存永久状态的函数，可以通过整个函数调用的串行化来实现线程安全。</li>
+<li><strong>将互斥量和数据流相关联，保护数据而不是代码</strong>。</li>
+<li><strong>可重入的函数应该避免依赖任何静态数据，最好避免依赖线程间任何形式的同步</strong>。</li>
+<li><strong>可重入</strong>，是指“有效的线程安全”？采用比将函数或库转换成一系列区域更加复杂的方式代码成为线程安全的。</li>
+</ul>
+<h5 id="126">1.2.6、并发控制功能<a class="headerlink" href="#126" title="Permanent link">&para;</a></h5>
+<ul>
+<li>任何并发系统都应该具有的基本功能：<ul>
+<li>1、“执行环境”是并发实体的状态</li>
+<li>2、“调度”决定在某个给定时刻该执行哪个环境（或环境组），并在不同的环境中切换。</li>
+<li>3、“同步”为并发执行的环境提供了协调访问共享资源的一种机制</li>
+</ul>
+</li>
+<li>同步机制<ul>
+<li>1、互斥量、条件变量、信号量、事件</li>
+<li>2、消息传递机制（管道、socket、消息队列）</li>
+</ul>
+</li>
+</ul>
+<h4 id="13">1.3、异步编程是直观的......<a class="headerlink" href="#13" title="Permanent link">&para;</a></h4>
+<h5 id="131unix">1.3.1、因为UNIX是异步的<a class="headerlink" href="#131unix" title="Permanent link">&para;</a></h5>
+<ul>
+<li>时间就是同步机制</li>
+<li>UNIX管道和文件可以是同步机制</li>
+<li>线程比进程简单</li>
+</ul>
+<h5 id="132">1.3.2、因为世界是异步的<a class="headerlink" href="#132" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>如果你认为你已经锁住会话互斥量，别人不应该再中断你，此时你就开始真正理解线程编程了，这会帮你更容易地设计更好的线程代码</strong>。</li>
+</ul>
+<h4 id="14">1.4、关于本书的实例<a class="headerlink" href="#14" title="Permanent link">&para;</a></h4>
+<ul>
+<li>代码在www.awl.com/cseng/titles/0-201-63392-2/</li>
+<li><code>CFLAGS=-pthread -std1 -wl</code></li>
+<li>sample.c</li>
+</ul>
+<pre class="highlight"><code class="language-c">#include&lt;pthread.h&gt;
+#include&lt;errors.h&gt;  //这个在1.9中实现了</code></pre>
+<h4 id="15">1.5、异步编程举例<a class="headerlink" href="#15" title="Permanent link">&para;</a></h4>
+<h5 id="151">1.5.1、基本的同步版本<a class="headerlink" href="#151" title="Permanent link">&para;</a></h5>
+<ul>
+<li><a href="https://gitee.com/fewolflion/BookNote/blob/master/01lioneloutput/23multithread/13POSIX%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/chap01%E6%A6%82%E8%BF%B0/chap0105-1alarm.c">chap0105-1alarm.c</a></li>
+</ul>
+<pre class="highlight"><code class="language-c">#include "errors.h"
+
+int main(int argc, char* argv[])
+{
+    int seconds;
+    char line[128];
+    char message[64];
+
+    while(1)
+    {
+        printf("Alarm&gt;");
+        if(fgets(line,sizeof(line),stdin) == NULL) 
+            exit(0);
+        if(strlen(line)&lt;=1)
+            continue;
+
+        if(sscanf(line,"%d %64[^\n]",&amp;seconds,message)&lt;2)
+        {
+            fprintf(stderr,"Bad command\n");
+        }
+        else
+        {
+            sleep(seconds);
+            printf("(%d) %s\n",seconds,message);
+        }
+    }
+}</code></pre>
+<h5 id="152">1.5.2、多进程版本<a class="headerlink" href="#152" title="Permanent link">&para;</a></h5>
+<ul>
+<li><a href="https://gitee.com/fewolflion/BookNote/blob/master/01lioneloutput/23multithread/13POSIX%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/chap01%E6%A6%82%E8%BF%B0/chap0105-2alarm_fork.c">chap0105-2alarm_fork.c</a></li>
+</ul>
+<h5 id="153">1.5.3、多线程版本<a class="headerlink" href="#153" title="Permanent link">&para;</a></h5>
+<ul>
+<li><a href="https://gitee.com/fewolflion/BookNote/blob/master/01lioneloutput/23multithread/13POSIX%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/chap01%E6%A6%82%E8%BF%B0/chap0105-3alarm_thread.c">chap0105-3alarm_thread.c</a></li>
+</ul>
+<h5 id="154">1.5.4、总结<a class="headerlink" href="#154" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>比较闹钟程序的两个异步版本是理解线程编程的很好途径</strong>。</li>
+<li>fork版本中<ul>
+<li>每个闹铃有一个从主进程拷贝的独立地址空间，这意味着可以将闹铃时间和显示文本保存在局部变量中，一旦建立子进程（fork调用返回），父进程就可以改变这些变量而不会影响闹铃子进程。</li>
+</ul>
+</li>
+</ul>
+<h4 id="16">1.6、线程的好处<a class="headerlink" href="#16" title="Permanent link">&para;</a></h4>
+<h5 id="0">0<a class="headerlink" href="#0" title="Permanent link">&para;</a></h5>
+<ul>
+<li>多线程编程模的优点：<ul>
+<li>1、</li>
+<li>2、</li>
+<li>3、一种模块化编程模型，能清晰地表达程序中独立事件间的相互关系</li>
+</ul>
+</li>
+</ul>
+<h5 id="161">1.6.1、并行<a class="headerlink" href="#161" title="Permanent link">&para;</a></h5>
+<ul>
+<li>在多处理器系统中，线程模式可以让一个进程同时执行多个独立运算。</li>
+</ul>
+<h5 id="162">1.6.2、并发<a class="headerlink" href="#162" title="Permanent link">&para;</a></h5>
+<ul>
+<li>线程编程模式允许程序在等待像I/O之类的阻塞操作时继续其他计算，这对于网络服务器和客户端是有用的</li>
+<li>另一种编写异步应用的方法是<strong>将每个活动视为事件</strong>。<strong>事件</strong>由隐藏的后台进程排队，串行分派并被程序处理--通常使用向分派器注册过的回调函数。</li>
+<li><strong>事件机制大大减少了使用信号和异步I/O的复杂度</strong>。</li>
+</ul>
+<h5 id="163">1.6.3、编程模型<a class="headerlink" href="#163" title="Permanent link">&para;</a></h5>
+<h4 id="17">1.7、线程的代价<a class="headerlink" href="#17" title="Permanent link">&para;</a></h4>
+<h5 id="171">1.7.1、计算负荷<a class="headerlink" href="#171" title="Permanent link">&para;</a></h5>
+<ul>
+<li>线程代码中的负荷代价包括由于线程间同步所导致的直接影响</li>
+<li>在几乎任何线程代码中你都需要使用某种同步机制</li>
+</ul>
+<h5 id="172">1.7.2、编程规则<a class="headerlink" href="#172" title="Permanent link">&para;</a></h5>
+<ul>
+<li>你需要明白同步协议和程序中的不变量（invariant），你不得不避免死锁、竞争和优先级倒置。</li>
+<li><strong>一个进程中的所有线程共享地址空间，线程间没有保护界限</strong>。</li>
+</ul>
+<h5 id="173">1.7.3、更难以调试<a class="headerlink" href="#173" title="Permanent link">&para;</a></h5>
+<h4 id="18">1.8、选择线程还是不用线程<a class="headerlink" href="#18" title="Permanent link">&para;</a></h4>
+<ul>
+<li>最适用使用线程的实现以下功能的应用：<ul>
+<li>计算密集型应用：<strong>计算分解到多个线程中实现</strong></li>
+<li>I/O密集型应用：为提高性能，将I/O操作重叠。<strong>很多线程可以同时等待不同的I/O操作</strong>。分布式服务器应用就是很好的实例，它们必须响应多个客户的请求，必须为通过慢速的网络连接主动提供I/O做好准备。</li>
+</ul>
+</li>
+</ul>
+<h4 id="19posix">1.9、POSIX线程概念<a class="headerlink" href="#19posix" title="Permanent link">&para;</a></h4>
+<ul>
+<li><em>互斥量来保护共享数据，条件变量来通信</em></li>
+</ul>
+<h5 id="191">1.9.1、结构概览<a class="headerlink" href="#191" title="Permanent link">&para;</a></h5>
+<ul>
+<li>线程系统的三个基本要素：<strong>执行环境、调度和同步</strong>。</li>
+<li>基本的Pthreads同步模型使用互斥量来保护共享数据、使用条件变量来通信，还可以使用其他的同步机制，如信号量、管道和消息队列。</li>
+<li>互斥量允许线程在访问共享数据时锁定它，以避免其他线程的干扰。</li>
+<li>条件变量允许线程等待共享数据到达某个期望的状态（例如队列非空或者资源可用）</li>
+</ul>
+<h5 id="192">1.9.2、类型和接口<a class="headerlink" href="#192" title="Permanent link">&para;</a></h5>
+<h5 id="193">1.9.3、错误检查<a class="headerlink" href="#193" title="Permanent link">&para;</a></h5>
+<ul>
+<li><a href="https://gitee.com/fewolflion/BookNote/blob/master/01lioneloutput/23multithread/13POSIX%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/chap01%E6%A6%82%E8%BF%B0/chap0109-1thread_error.c">chap0109-1thread_error.c</a></li>
+<li>errors.h<ul>
+<li><code>pthread_getspecific()</code>，<strong>仅返回线程私有数据--共享“Key”值</strong>。</li>
+</ul>
+</li>
+</ul>
+<pre class="highlight"><code class="language-c">#ifndef __errors_h
+#define __errors_h
+
+#include &lt;unistd.h&gt;
+#include &lt;errno.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+#ifdef DEBUG
+#define DPRINTF(arg) printf arg
+#else
+#define DPRINTF(arg)
+#endif
+
+#define err_abort(code,text) do { \
+    fprintf(stderr, "%s at \"%s\":%d; %s\n",\
+    text, __FILE__,__LINE__,strerror(code));\
+    abort();
+}while(0)
+
+#define errno_abort(text) do { \
+    fprintf(stderr, "%s at \"%s\":%d; %s\n",\
+    text, __FILE__,__LINE__,strerror(errno));\
+    abort();
+}while(0)
+
+#endif</code></pre>
+<h3 id="chap2">chap2、线程<a class="headerlink" href="#chap2" title="Permanent link">&para;</a></h3>
+<h4 id="21">2.1、建立和使用线程<a class="headerlink" href="#21" title="Permanent link">&para;</a></h4>
+<ul>
+<li>[chap0201-1lifecycle.c]</li>
+</ul>
+<pre class="highlight"><code class="language-c">#include &lt;pthread.h&gt;
+#include "errors.h"
+
+/*Thread start routine.*/
+void *thread_routine(void *arg)
+{
+    return arg;
+}
+
+int main(int argc, char *argv[])
+{
+    pthread_t thread_id;
+    void *thread_result;
+    int status;
+
+    status = pthread_create(
+    &amp;thread_id,NULL,thread_routine,NULL);
+
+    if(status != 0)
+        err_abort(status,"Create thread");
+
+    status = pthread_join(thread_id,&amp;thread_result); // 以阻塞的方式等待thread指定的线程结束
+    if(status != 0)
+        err_abort(status,"Join thread");
+
+    if(thread_result == NULL)
+        return 0;
+    else
+        return 1;
+}</code></pre>
+<h4 id="22">2.2、线程的生命周期<a class="headerlink" href="#22" title="Permanent link">&para;</a></h4>
+<ul>
+<li>线程状态（<strong>状态转换图，比较重要</strong>）
+    + 就绪keady
+    + 运行kuning
+    + 阻塞blocked
+    + 终止terminated</li>
+</ul>
+<ul>
+<li><strong>线程状态转换</strong></li>
+</ul>
+<h5 id="221">2.2.1、创建线程<a class="headerlink" href="#221" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>pthread_create()</code></li>
+</ul>
+<h5 id="222">2.2.2、线程启动<a class="headerlink" href="#222" title="Permanent link">&para;</a></h5>
+<h5 id="223">2.2.3、运行和阻塞<a class="headerlink" href="#223" title="Permanent link">&para;</a></h5>
+<h5 id="224">2.2.4、终止<a class="headerlink" href="#224" title="Permanent link">&para;</a></h5>
+<h5 id="225">2.2.5、回收<a class="headerlink" href="#225" title="Permanent link">&para;</a></h5>
+<h3 id="chap3">chap3、同步<a class="headerlink" href="#chap3" title="Permanent link">&para;</a></h3>
+<h4 id="31">3.1、不变量、临界区和谓词<a class="headerlink" href="#31" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>不变量（invariant）</strong>：是由程序作出的假设，<strong>特别是有关变量组间关系的假设</strong>，比如，数据之间的关系</li>
+<li><strong>临界区</strong>：影响共享数据的代码段。<strong>临界区总能够对应到一个数据不变量，反之亦然</strong>。</li>
+<li>不可变量可能会被破坏，而且会经常被独立的代码段破坏。窍门是要<strong>确保在”不可预见“的线程访问被破坏的不变量之前将其修复</strong>。</li>
+<li><strong>谓词（Predicate）</strong> 是描述代码所需不变量的状态的语句。在英语中，谓词可以是”队列为空“<ul>
+<li>布尔变量、函数返回值、指针为空</li>
+</ul>
+</li>
+</ul>
+<h4 id="32">3.2、互斥量<a class="headerlink" href="#32" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>同步不仅仅在修改数据时重要，当线程需要读取其他线程写入的数据时，而且数据写入的顺序也有影响时，同样需要同步</strong>。</li>
+</ul>
+<h5 id="321">3.2.1、创建和销毁互斥量<a class="headerlink" href="#321" title="Permanent link">&para;</a></h5>
+<ul>
+<li>chap0302-1mutex_static.c
+<pre class="highlight"><code class="language-c">#include &lt;pthread.h&gt;
+#include "errors.h"
+
+/*
+Declare a structure, with a mutex, statically initialized. This is 
+the same as using pthread_mutex_init, with the default attributes.
+*/
+
+typedef struct my_struct_tag{
+    pthread_mutex_t mutex;  // protects access to value
+    int             value;  // Access protected by mutex
+}my_struct_t;
+
+my_struct_t data = { PTHREAD_MUTEX_INITALIZER, 0 };
+
+int main(int argc, char* argv[])
+{
+    return 0;
+}</code></pre></li>
+</ul>
+<ul>
+<li>chap0302-2mutex_dynamic.c</li>
+</ul>
+<pre class="highlight"><code class="language-c">#include&lt;pthread.c&gt;
+#include"errors.h"
+
+typedef struct my_struct_tag{
+    pthread_mutex_t mutex;
+    int value;
+}my_struct_t;
+
+int main(int argc, char *argv[]){
+    my_struct_t *data;
+    int status;
+    data = malloc(sizeof(my_struct_t));
+    if(data == NULL)
+        errno_abort("Allocate structure");
+    status = pthread_mutex_init(&amp;data-&gt;mutex, NULL);
+    if(status != 0)
+        err_abort(status, "Init mutex");
+    status = pthread_mutex_destroy(&amp;data-&gt;mutex);
+    if(status != 0)
+        err_abort(status, "Destroy mutex");
+    (void)free(data);
+    return status;
+}</code></pre>
+<h5 id="322">3.2.2、加锁和解锁互斥量<a class="headerlink" href="#322" title="Permanent link">&para;</a></h5>
+<ul>
+<li>chap0302-3alarm_mutex.c</li>
+</ul>
+<ul>
+<li>3.2.2.1、非阻塞式互斥量锁  chap0302-4trylock.c</li>
+</ul>
+<h5 id="323">3.2.3、使用互斥量实现原子操作<a class="headerlink" href="#323" title="Permanent link">&para;</a></h5>
+<h5 id="324">3.2.4、调整互斥量满足工作<a class="headerlink" href="#324" title="Permanent link">&para;</a></h5>
+<h5 id="325">3.2.5、使用多个互斥量<a class="headerlink" href="#325" title="Permanent link">&para;</a></h5>
+<ul>
+<li>3.2.5.1、加锁层次 backoff.c</li>
+<li>3.2.5.2、链锁</li>
+</ul>
+<h4 id="33">3.3、条件变量<a class="headerlink" href="#33" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>条件变量是用来通知共享数据状态信息的</strong>。使用条件变量来通知队列已空</li>
+<li><strong>等待条件变量总是返回锁住的互斥量</strong></li>
+<li><strong>条件变量的作用是发信号，而不是互斥</strong></li>
+</ul>
+<h5 id="331">3.3.1、创建和释放条件变量<a class="headerlink" href="#331" title="Permanent link">&para;</a></h5>
+<ul>
+<li>cond_static.c</li>
+</ul>
+<h5 id="332">3.3.2、等待条件变量<a class="headerlink" href="#332" title="Permanent link">&para;</a></h5>
+<ul>
+<li>cond.c</li>
+</ul>
+<h5 id="333">3.3.3、唤醒条件变量等待线程<a class="headerlink" href="#333" title="Permanent link">&para;</a></h5>
+<ul>
+<li>发信号或广播</li>
+</ul>
+<h5 id="334">3.3.4、闹铃实例的最终版本<a class="headerlink" href="#334" title="Permanent link">&para;</a></h5>
+<ul>
+<li>alarm_cond.c</li>
+</ul>
+<h4 id="34">3.4、线程间的内存可视性<a class="headerlink" href="#34" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Pthreads提供了一些有关内存可视性的基本规则
+    + 1、当线程调用pthread_create时，它所能看到的内存值也是它建立的线程能够看到的。
+    + 2、当线程解锁互斥量时看到的内存中的数据，同样也能被后来直接锁住（或通过等待条件变量锁住）相同互斥量的线程看到。
+    + 3、线程终止（或者通过取消操作，或者从启动函数中返回，或者调用pthread_exit）时看到的内存数据，同样能够被连接线程的其他线程（通过调用pthread_join）看到。
+    + 4、线程发信号或广播条件变量时看到的内存数据，同样可以被唤醒的其它线程看到。</li>
+</ul>
+<h3 id="chap4">chap4、使用线程的几种方式<a class="headerlink" href="#chap4" title="Permanent link">&para;</a></h3>
+<ul>
+<li>线程编程模型：
+    + 流水线
+    + 工作组
+    + 客户端/服务器</li>
+</ul>
+<h4 id="41">4.1、流水线<a class="headerlink" href="#41" title="Permanent link">&para;</a></h4>
+<ul>
+<li>图</li>
+<li>pipe.c</li>
+</ul>
+<h4 id="42">4.2、工作组<a class="headerlink" href="#42" title="Permanent link">&para;</a></h4>
+<ul>
+<li>图</li>
+<li>crew.c</li>
+</ul>
+<h4 id="43">4.3、客户端/服务器<a class="headerlink" href="#43" title="Permanent link">&para;</a></h4>
+<ul>
+<li>图</li>
+<li>server.c</li>
+</ul>
+<h3 id="chap5">chap5、线程高级编程<a class="headerlink" href="#chap5" title="Permanent link">&para;</a></h3>
+<h4 id="51">5.1、一次性初始化<a class="headerlink" href="#51" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>使用<code>pthread_once</code>的主要原因是原来不能静态地初始化一个互斥量</strong>。</li>
+<li>once.c</li>
+</ul>
+<h4 id="52">5.2、属性<a class="headerlink" href="#52" title="Permanent link">&para;</a></h4>
+<h5 id="521">5.2.1、互斥量属性<a class="headerlink" href="#521" title="Permanent link">&para;</a></h5>
+<ul>
+<li>mutex_attr.c</li>
+</ul>
+<h5 id="522">5.2.2、条件变量<a class="headerlink" href="#522" title="Permanent link">&para;</a></h5>
+<ul>
+<li>cond_attr.c</li>
+</ul>
+<h5 id="523">5.2.3、线程属性<a class="headerlink" href="#523" title="Permanent link">&para;</a></h5>
+<ul>
+<li>thread_attr.c</li>
+</ul>
+<h4 id="53">5.3、取消<a class="headerlink" href="#53" title="Permanent link">&para;</a></h4>
+<ul>
+<li>取消一个线程就像告诉一个人停止他正在做的工作一样。</li>
+<li><strong>取消允许你告诉一个线程关掉自己</strong>。</li>
+<li>cancel.c</li>
+</ul>
+<h5 id="531">5.3.1、推迟取消<a class="headerlink" href="#531" title="Permanent link">&para;</a></h5>
+<ul>
+<li>cancel_disable.c</li>
+</ul>
+<h5 id="532">5.3.2、异步取消<a class="headerlink" href="#532" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>避免异步的取消</strong>（问题是你能异步取消过程中做事是有限的）</li>
+<li>cancel_async.c</li>
+<li>cancel_cleanup.c</li>
+<li>cancel_subcontract.c</li>
+</ul>
+<h4 id="54">5.4、线程私有数据<a class="headerlink" href="#54" title="Permanent link">&para;</a></h4>
+<ul>
+<li>0
+    + 静态变量（static）、外部变量（extern）或堆变量的值，将是上次任何线程改写的值。
+    + 一个线程真正拥有的唯一私有存储是处理器寄存器</li>
+</ul>
+<h5 id="541">5.4.1、建立线程私有数据<a class="headerlink" href="#541" title="Permanent link">&para;</a></h5>
+<ul>
+<li>tsd_once.c</li>
+</ul>
+<h5 id="542">5.4.2、使用线程私有数据<a class="headerlink" href="#542" title="Permanent link">&para;</a></h5>
+<h5 id="543destructor">5.4.3、使用destructor函数<a class="headerlink" href="#543destructor" title="Permanent link">&para;</a></h5>
+<ul>
+<li>tsd_destructor.c</li>
+</ul>
+<h4 id="55">5.5、实时调度<a class="headerlink" href="#55" title="Permanent link">&para;</a></h4>
+<h5 id="551posix">5.5.1、POSIX实时选项<a class="headerlink" href="#551posix" title="Permanent link">&para;</a></h5>
+<h5 id="552">5.5.2、调度策略和优先级<a class="headerlink" href="#552" title="Permanent link">&para;</a></h5>
+<ul>
+<li>sched_attr.c</li>
+<li>sched_thread.c</li>
+</ul>
+<h5 id="553">5.5.3、竞争范围和分配域<a class="headerlink" href="#553" title="Permanent link">&para;</a></h5>
+<h5 id="554">5.5.4、实时调度的问题<a class="headerlink" href="#554" title="Permanent link">&para;</a></h5>
+<h5 id="555">5.5.5、优先级相关互斥量<a class="headerlink" href="#555" title="Permanent link">&para;</a></h5>
+<ul>
+<li>5.5.5.1、优先级ceiling互斥量</li>
+<li>5.5.5.2、优先级继承互斥量</li>
+</ul>
+<h4 id="56">5.6、线程和核实体<a class="headerlink" href="#56" title="Permanent link">&para;</a></h4>
+<h5 id="561">5.6.1、多对一（用户级）<a class="headerlink" href="#561" title="Permanent link">&para;</a></h5>
+<h5 id="562">5.6.2、一对一（内核级）<a class="headerlink" href="#562" title="Permanent link">&para;</a></h5>
+<h5 id="563">5.6.3、多对少（两级）<a class="headerlink" href="#563" title="Permanent link">&para;</a></h5>
+<h3 id="chap6">chap6、<a class="headerlink" href="#chap6" title="Permanent link">&para;</a></h3>
+<h4 id="61fork">6.1、fork<a class="headerlink" href="#61fork" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>除非你打算很快地exec一个新程序，否则应避免（如果你能的话）在一个多线程的程序中使用fork</strong>。</li>
+</ul>
+<h5 id="611fork">6.1.1、fork处理器<a class="headerlink" href="#611fork" title="Permanent link">&para;</a></h5>
+<ul>
+<li>atfork.c</li>
+</ul>
+<h4 id="62exec">6.2、exec<a class="headerlink" href="#62exec" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>exec函数的功能是消除当前程序的环境并且用一个新程序代替它</strong>。</li>
+</ul>
+<h4 id="63">6.3、进程结束<a class="headerlink" href="#63" title="Permanent link">&para;</a></h4>
+<h4 id="64stdio">6.4、stdio<a class="headerlink" href="#64stdio" title="Permanent link">&para;</a></h4>
+<h5 id="641flockfilefunlockfile">6.4.1、flockfile和funlockfile<a class="headerlink" href="#641flockfilefunlockfile" title="Permanent link">&para;</a></h5>
+<ul>
+<li>flock.c</li>
+</ul>
+<h5 id="642getchar_unlockedputchar_unlocked">6.4.2、getchar_unlocked和putchar_unlocked<a class="headerlink" href="#642getchar_unlockedputchar_unlocked" title="Permanent link">&para;</a></h5>
+<ul>
+<li>putchar.c</li>
+</ul>
+<h4 id="65">6.5、线程安全的函数<a class="headerlink" href="#65" title="Permanent link">&para;</a></h4>
+<h5 id="651id">6.5.1、用户和终端ID<a class="headerlink" href="#651id" title="Permanent link">&para;</a></h5>
+<ul>
+<li>getlogin.c</li>
+</ul>
+<h5 id="652">6.5.2、目录搜索<a class="headerlink" href="#652" title="Permanent link">&para;</a></h5>
+<h5 id="653token">6.5.3、字符串token<a class="headerlink" href="#653token" title="Permanent link">&para;</a></h5>
+<h5 id="654">6.5.4、时间表示<a class="headerlink" href="#654" title="Permanent link">&para;</a></h5>
+<h5 id="655">6.5.5、随机数产生<a class="headerlink" href="#655" title="Permanent link">&para;</a></h5>
+<h5 id="656">6.5.6、组和用户数据库<a class="headerlink" href="#656" title="Permanent link">&para;</a></h5>
+<h4 id="66">6.6、信号<a class="headerlink" href="#66" title="Permanent link">&para;</a></h4>
+<h5 id="661">6.6.1、信号行为<a class="headerlink" href="#661" title="Permanent link">&para;</a></h5>
+<h5 id="662">6.6.2、信号掩码<a class="headerlink" href="#662" title="Permanent link">&para;</a></h5>
+<h5 id="663pthread_kill">6.6.3、pthread_kill<a class="headerlink" href="#663pthread_kill" title="Permanent link">&para;</a></h5>
+<ul>
+<li>susp.c</li>
+</ul>
+<h5 id="664sigwaitsigwaitinfo">6.6.4、sigwait和sigwaitinfo<a class="headerlink" href="#664sigwaitsigwaitinfo" title="Permanent link">&para;</a></h5>
+<ul>
+<li>sigwait.c</li>
+</ul>
+<h5 id="665sigev_thread">6.6.5、SIGEV_THREAD<a class="headerlink" href="#665sigev_thread" title="Permanent link">&para;</a></h5>
+<ul>
+<li>sigv_thread.c</li>
+</ul>
+<h5 id="666">6.6.6、信号灯：与信号捕获函数同步<a class="headerlink" href="#666" title="Permanent link">&para;</a></h5>
+<ul>
+<li>semaphore_singal.c</li>
+</ul>
+<h3 id="chap7real-code">chap7、Real code<a class="headerlink" href="#chap7real-code" title="Permanent link">&para;</a></h3>
+<h4 id="71">7.1、扩展同步<a class="headerlink" href="#71" title="Permanent link">&para;</a></h4>
+<h5 id="711barriers">7.1.1、barriers<a class="headerlink" href="#711barriers" title="Permanent link">&para;</a></h5>
+<ul>
+<li>barrier.h</li>
+<li>barrier.c</li>
+<li>
+<p>barrier_main.c</p>
+<h5 id="712">7.1.2、读写锁<a class="headerlink" href="#712" title="Permanent link">&para;</a></h5>
+<ul>
+<li>rwlock.h</li>
+<li>rwlock.c</li>
+<li>rwlock_main.c</li>
+</ul>
+<h4 id="72">7.2、工作队列管理器<a class="headerlink" href="#72" title="Permanent link">&para;</a></h4>
+<ul>
+<li>workq.h</li>
+<li>workq.c</li>
+<li>workq_main.c</li>
+</ul>
+<h4 id="73">7.3、对现存库的处理<a class="headerlink" href="#73" title="Permanent link">&para;</a></h4>
+<h5 id="731">7.3.1、将函数库修改为线程安全的<a class="headerlink" href="#731" title="Permanent link">&para;</a></h5>
+</li>
+</ul>
+<h5 id="732">7.3.2、合适遗留库<a class="headerlink" href="#732" title="Permanent link">&para;</a></h5>
+<h3 id="chap8">chap8、避免调试的提示<a class="headerlink" href="#chap8" title="Permanent link">&para;</a></h3>
+<h4 id="81">8.1、避免不正确的代码<a class="headerlink" href="#81" title="Permanent link">&para;</a></h4>
+<h5 id="811">8.1.1、避免依赖“线程惯量”<a class="headerlink" href="#811" title="Permanent link">&para;</a></h5>
+<ul>
+<li>
+<p>inertia.c</p>
+<h5 id="812">8.1.2、别将你的赌押在线程竞争上<a class="headerlink" href="#812" title="Permanent link">&para;</a></h5>
+<h5 id="813">8.1.3、合作避免僵局<a class="headerlink" href="#813" title="Permanent link">&para;</a></h5>
+<h5 id="814">8.1.4、小心优先级倒置<a class="headerlink" href="#814" title="Permanent link">&para;</a></h5>
+<h5 id="815">8.1.5、绝不要在谓词之间共享条件变量<a class="headerlink" href="#815" title="Permanent link">&para;</a></h5>
+<h5 id="816">8.1.6、共享堆栈和相应的内存破坏<a class="headerlink" href="#816" title="Permanent link">&para;</a></h5>
+<h4 id="82">8.2、避免性能问题<a class="headerlink" href="#82" title="Permanent link">&para;</a></h4>
+<h5 id="821">8.2.1、了解并发串行化<a class="headerlink" href="#821" title="Permanent link">&para;</a></h5>
+</li>
+</ul>
+<h5 id="822">8.2.2、使用正确数目的互斥量<a class="headerlink" href="#822" title="Permanent link">&para;</a></h5>
+<h5 id="823">8.2.3、绝不要与缓存作对<a class="headerlink" href="#823" title="Permanent link">&para;</a></h5>
+<h3 id="_1">最后<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<h4 id="_2">履历<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
+<ul>
+<li>2021-9-19读了本书的一大部分，并手写了笔记，2023-03月左右又把这本书的笔记给电子化了一下【<em>之前最大的问题，还是在于只是抄写了书的笔记，而没有真正的理解代码和应用场景</em>】</li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
