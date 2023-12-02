@@ -78,12 +78,34 @@
 #### 5、了解C++默默编写并调用哪些函数，Know what functions C++ silently writes and calls
 
 + 结论
+  
   + 编译器可以暗自为class创建default构造函数、copy构造函数、copy assignment操作符，以及析构函数。
+  
++ 代码
+
+  + *一般是默认3元组，后面才是5元组是吧*
+
++ ```cpp
+  class Empty{};
+  //等价于
+  class Empty{
+  public:
+      Empty(){...}  //default构造函数，无参，Empty e1;
+      Empty(const Emtpy& rhs){...}  //copy构造函数，Empty e2(e1);
+      ~Empty(){...}
+      Empty& operator=(const Empty &rhs){...} //copy assignment操作符，e2=e1;
+  };
+  ```
+
++ 
 
 #### 6、若不想使用编译器自动生成的函数，就该明确拒绝，Explicitly disallow the use of compiler-generated functions you do not want
 
 + 结论
   + **为了驳回编译器自动（暗自）提供的机能，可将相应的成员函数声明为private并且不予实现**。使用像Uncopyable这样的base class也是一种方法。
++ 其它
+  + *所有编译器产出的函数都是public*
+  + 问题：HomeForSale单独就可以，为什么还要继承Uncopyable基类化？好处是啥？*估计是怕子类忘记，继承的话，就直接给你整了，lionel*
 
 #### 7、为多态基类声明virtual析构函数，Declare destructions virtual in polymorphic base classes
 
@@ -108,6 +130,15 @@
 + 结论：
   + 令赋值（assignment）操作符返回一个reference to *this。
 + *`this`*
++ 代码
+
+```cpp
+Widget& operator=(const Widget &rhs){... return *this;} //返回类型是引用
+```
+
+
+
++ 在
 
 #### 11、在operator=中处理“自我赋值”，Handle assignment to self in operator=
 
