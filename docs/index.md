@@ -12,6 +12,10 @@ https://lxr.missinglinkelectronics.com/linux+v2.6.24/include/linux/skbuff.h，li
 
 菜鸟教程，https://www.runoob.com/
 
+### 不错的个人blog
+
++ https://lianglianglee.com/  *都是比较有体系的 专栏课程，文字版*7
+
 ## 网络编程
 
 + 《TCP/IP网络编程》
