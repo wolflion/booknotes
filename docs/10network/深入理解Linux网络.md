@@ -40,27 +40,42 @@
 
 ##### 2.2.1、Linux网络收包总览
 
-+ 图2.2
++ 网络分层
++ linux内核中，网络设备驱动在`driver/net/ethernet`，目前下有个intel，表明**intel系列网卡**，协议栈模块位于**kernel和net目录下**
++ 内核和网络设备驱动是**通过中断的方式**来处理的，给CPU的相关引脚触发一个电压变化，中断函数分为**上半部分，下半部分**（上半部分，只进行最简单的工作，**快速处理然后释放CPU**，下半部，慢慢处理），**2.4以后，下半部实现方式是软中断ksoftirqd内核线程**（软中断是通过**给内存中的一个变量赋予二进制值以标记有软中断发生**）
+
++ 图2.2**内核收包路径**
   + 1、
   + 2、网卡把帧DMA到内存
   + 3、硬中断通知CPU
   + 4、
   + 5、
   + 6、
-  + 7、
+  + 7、协议层开始处理网络帧，处理完后的数据data被放到socket的接收队列中
   + 8、内核唤醒用户进程
 
 ##### 2.2.2、Linux启动
 
-+ 创建ksoftirqd内核线程
-  + kernel/softirq.c
-+ 网络子系统初始化
-  + `subsys_initcall()`来初始化各个子系统
-+ 协议栈注册
-+ 网卡驱动初始化
-  + `module_init()`
-+ 启动网卡
-  + `struct net_device_ops`变量
+###### 创建ksoftirqd内核线程
+
++ **线程数量，取决于你机器的核数**
++ 系统初始化的时候在kernel/smpboot.c中调用了**smpboot_register_percpu_thread**，该函数进一步执行**spawn_ksoftirqd**（kernel/softirq.c）来创建出softirqd线程
++ ksoftirqd被创建出来后，它就会进入自己的线程循环函数**ksoftirqd_should_run**和**run_ksoftirqd**了
++ include/linux/interrupt.h中**定义了软中断**（不仅仅只有网络）
+
+###### 网络子系统初始化
+
++ `subsys_initcall()`来初始化各个子系统
+
+###### 协议栈注册
+
+###### 网卡驱动初始化
+
++ `module_init()`
+
+###### 启动网卡
+
++ `struct net_device_ops`变量
 
 ##### 2.2.3、迎接数据的到来
 
