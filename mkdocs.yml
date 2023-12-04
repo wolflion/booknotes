@@ -62,7 +62,10 @@ nav:
         - 《Linux高性能服务器编程》: '10network/Linux高性能服务器编程.md'
         - 《TCPIP详解卷1》: '10network/TCPIP详解卷1.md'
         - 《Linux内核网络栈源代码情景分析》: '10network/Linux内核网络栈源代码情景分析.md'
-        - 《深入理解Linux网络》: '10network/深入理解Linux网络.md'       
+        - 《深入理解Linux网络》: '10network/深入理解Linux网络.md'
+    - 机器&深度学习:
+        - 《机器学习线性代数基础》: '30machineLearning/机器学习线性代数基础.md'
+        - 《深度学习入门：基于Python的理论与实现》: '31deepLearning/深度学习入门：基于Python的理论与实现.md'
     - 文件系统:
         - 《Linux内核探秘》: '11filesystem/Linux内核探秘.md'
         - 《文件系统技术内幕》: '11filesystem/文件系统技术内幕.md'
