@@ -107,6 +107,13 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../10network/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C/">《深入理解Linux网络》</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">机器&深度学习</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../30machineLearning/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%9F%BA%E7%A1%80/">《机器学习线性代数基础》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../31deepLearning/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%85%A5%E9%97%A8%EF%BC%9A%E5%9F%BA%E4%BA%8EPython%E7%9A%84%E7%90%86%E8%AE%BA%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《深度学习入门：基于Python的理论与实现》</a>
+                  </li>
+              </ul>
               <p class="caption"><span class="caption-text">文件系统</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../11filesystem/Linux%E5%86%85%E6%A0%B8%E6%8E%A2%E7%A7%98/">《Linux内核探秘》</a>
@@ -158,6 +165,8 @@
                   <li class="toctree-l1 current"><a class="reference internal current" href="./">《Python编程从入门到实践》</a>
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#0">0、自己写的重点</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#1">1、其它地方看到的补序</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#chap1">chap1、起步</a>
     </li>
@@ -513,6 +522,45 @@
 </ul>
 </li>
 <li>2、可以使用<code>[-1]</code>作为下标，<em>自己要多记一下</em></li>
+</ul>
+<h3 id="1">1、其它地方看到的补序<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<ul>
+<li><em>这是2020年12月听的，听了某个视频，对于当时还是太复杂了，应该是先用起来，然后再算细节</em></li>
+<li>其它<ul>
+<li>对象，所有数据都存储到内存中，<strong>每个内存位置，就是对象</strong>，对象实际是个容器</li>
+<li><strong>对象结构</strong>，<code>(id,type,value)</code>，<strong>对象一旦创建，<code>id()</code>就不会变</strong></li>
+<li>对象与变量<ul>
+<li><code>a=3 b=a</code>，<code>id(a)</code>和<code>id(b)</code>是一样的，指向同一个地址</li>
+</ul>
+</li>
+<li>类型转换，<code>int(),str(),float()</code>，<strong>不是改变对象本身的类型，而是对象的值创建为新对象</strong></li>
+<li>数字，<strong>10进制数字，不能以0开头</strong></li>
+<li>切片，可以设置<strong>步长</strong>（序列中元素个数与切片中元素的个数一致），<em>也不知道是不是抄错了</em>，<code>sta[0:5:1]</code>，<strong>步长不能为0，默认为1，可以是负数</strong></li>
+<li>删除切片，可以用<code>dd stat[0:2]</code>，也可以用<code>stat[0:2]=[]</code>赋空值的方式</li>
+<li><strong>转换list</strong>，用<code>list()</code>，<em>我在处理excel时，用了list()反而处理得不对</em></li>
+</ul>
+</li>
+<li>列表<ul>
+<li><strong>列表的变量变名，一般为复数</strong></li>
+<li>列表的位置，左开右闭，<strong>不含结束位置</strong></li>
+<li><code>len(my_list)</code>，最大索引+1</li>
+<li>除了<code>+</code>，还是<code>*</code><strong>（表示重复指定的次数，<code>*2</code>就是重复2次）</strong></li>
+<li><code>in</code>和<code>not in</code>检查是否在列表中</li>
+<li>是不是还有<code>index()</code></li>
+<li>可变序列（序列中的元素，可以改变）</li>
+</ul>
+</li>
+<li>序列（sequecne）<ul>
+<li><em>也是数据结构吗？</em></li>
+<li>保存一组有序的数据，有唯一的位置</li>
+<li><strong>不可变</strong>（字符串str、元组tuple）</li>
+</ul>
+</li>
+<li>字典，<ul>
+<li>比起列表来说，<strong>查询快</strong></li>
+<li>key是<strong>任意不可变对象</strong>，value可以是任意对象</li>
+</ul>
+</li>
 </ul>
 <h3 id="chap1">chap1、起步<a class="headerlink" href="#chap1" title="Permanent link">&para;</a></h3>
 <h3 id="chap2">chap2、变量和简单数据类型<a class="headerlink" href="#chap2" title="Permanent link">&para;</a></h3>

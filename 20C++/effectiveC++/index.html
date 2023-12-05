@@ -261,6 +261,13 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../10network/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C/">《深入理解Linux网络》</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">机器&深度学习</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../30machineLearning/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%9F%BA%E7%A1%80/">《机器学习线性代数基础》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../31deepLearning/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%85%A5%E9%97%A8%EF%BC%9A%E5%9F%BA%E4%BA%8EPython%E7%9A%84%E7%90%86%E8%AE%BA%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《深度学习入门：基于Python的理论与实现》</a>
+                  </li>
+              </ul>
               <p class="caption"><span class="caption-text">文件系统</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/Linux%E5%86%85%E6%A0%B8%E6%8E%A2%E7%A7%98/">《Linux内核探秘》</a>
@@ -466,15 +473,45 @@
 </ul>
 <h4 id="5cknow-what-functions-c-silently-writes-and-calls">5、了解C++默默编写并调用哪些函数，Know what functions C++ silently writes and calls<a class="headerlink" href="#5cknow-what-functions-c-silently-writes-and-calls" title="Permanent link">&para;</a></h4>
 <ul>
-<li>结论<ul>
+<li>
+<p>结论</p>
+<ul>
 <li>编译器可以暗自为class创建default构造函数、copy构造函数、copy assignment操作符，以及析构函数。</li>
 </ul>
 </li>
+</ul>
+<ul>
+<li>
+<p>代码</p>
+<ul>
+<li><em>一般是默认3元组，后面才是5元组是吧</em></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><code>cpp
+  class Empty{};
+  //等价于
+  class Empty{
+  public:
+      Empty(){...}  //default构造函数，无参，Empty e1;
+      Empty(const Emtpy&amp; rhs){...}  //copy构造函数，Empty e2(e1);
+      ~Empty(){...}
+      Empty&amp; operator=(const Empty &amp;rhs){...} //copy assignment操作符，e2=e1;
+  };</code></li>
+</ul>
+<ul>
+<li></li>
 </ul>
 <h4 id="6explicitly-disallow-the-use-of-compiler-generated-functions-you-do-not-want">6、若不想使用编译器自动生成的函数，就该明确拒绝，Explicitly disallow the use of compiler-generated functions you do not want<a class="headerlink" href="#6explicitly-disallow-the-use-of-compiler-generated-functions-you-do-not-want" title="Permanent link">&para;</a></h4>
 <ul>
 <li>结论<ul>
 <li><strong>为了驳回编译器自动（暗自）提供的机能，可将相应的成员函数声明为private并且不予实现</strong>。使用像Uncopyable这样的base class也是一种方法。</li>
+</ul>
+</li>
+<li>其它<ul>
+<li><em>所有编译器产出的函数都是public</em></li>
+<li>问题：HomeForSale单独就可以，为什么还要继承Uncopyable基类化？好处是啥？<em>估计是怕子类忘记，继承的话，就直接给你整了，lionel</em></li>
 </ul>
 </li>
 </ul>
@@ -509,6 +546,11 @@
 </ul>
 </li>
 <li><em><code>this</code></em></li>
+<li>代码</li>
+</ul>
+<pre class="highlight"><code class="language-cpp">Widget&amp; operator=(const Widget &amp;rhs){... return *this;} //返回类型是引用</code></pre>
+<ul>
+<li>在</li>
 </ul>
 <h4 id="11operatorhandle-assignment-to-self-in-operator">11、在operator=中处理“自我赋值”，Handle assignment to self in operator=<a class="headerlink" href="#11operatorhandle-assignment-to-self-in-operator" title="Permanent link">&para;</a></h4>
 <ul>

@@ -107,6 +107,13 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../10network/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C/">《深入理解Linux网络》</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">机器&深度学习</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../30machineLearning/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%9F%BA%E7%A1%80/">《机器学习线性代数基础》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../31deepLearning/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%85%A5%E9%97%A8%EF%BC%9A%E5%9F%BA%E4%BA%8EPython%E7%9A%84%E7%90%86%E8%AE%BA%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《深度学习入门：基于Python的理论与实现》</a>
+                  </li>
+              </ul>
               <p class="caption"><span class="caption-text">文件系统</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/Linux%E5%86%85%E6%A0%B8%E6%8E%A2%E7%A7%98/">《Linux内核探秘》</a>
@@ -342,7 +349,7 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#chap5">chap5、大数定律及中心极限定理</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#51">5.1、切比雪夫不等式</a>
+    <li class="toctree-l3"><a class="reference internal" href="#51chebyshev">5.1、切比雪夫不等式Chebyshev</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#52">5.2、大数定律</a>
         <ul>
@@ -366,6 +373,10 @@
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#63">6.3、统计量及其分布</a>
         <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#631">6.3.1、统计量与抽样分布</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#633">6.3.3、样本均值及其抽样分布</a>
+    </li>
     <li class="toctree-l4"><a class="reference internal" href="#634">6.3.4、样本方差与样本标准差</a>
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#635">6.3.5、样本矩及其函数</a>
@@ -441,8 +452,6 @@
 <li><strong>还是2.2和2.3节的内容不熟悉</strong>，需要好好背一下，以及记一下</li>
 </ul>
 </li>
-</ul>
-<ul>
 <li>全书也就8章，目前的想法是1个月搞定1章<ul>
 <li>概率论（1-5）</li>
 <li>数组统计（6-8）</li>
@@ -455,7 +464,17 @@
 <li>1.4节中的事件独立性，<em>这想做啥题？</em></li>
 </ul>
 </li>
-<li>chap2重点（没有计划，在23年5月过了一遍）</li>
+<li>chap2重点（没有计划，在23年5月过了一遍），<strong>7个考点，但chap2是基础</strong><ul>
+<li>考点1，离散型的分布律的2个性质，（1）每个<span class="arithmatex">\(P_k\)</span>大于等于0，（2）所有求和等于1</li>
+<li>考点2，0-1分布，<strong>二项分布</strong>（要会变型，比如用<span class="arithmatex">\(1-P\{X\leq 3\}\)</span>），泊松分布</li>
+<li>考点3，分布函数的<strong>4个性质，2个推论</strong></li>
+<li>考点4，连续型的随机变量的<strong>2个性质</strong></li>
+<li>考点5，均匀分布，指数分布，<strong>正态分布</strong>（分布函数化标准正态分布）</li>
+<li>考点6，随机变量函数的概率分布（一般考离散型，连续型考得不多）</li>
+</ul>
+</li>
+<li><em>chap3和chap4，用到了chap2的内容</em></li>
+<li>chap5主要是<strong>3个考点</strong>，先把公式记住</li>
 <li>chap6-8（0709稍微看了一下，完全没感觉，计划<strong>7月好好复习一下1-5</strong>）</li>
 </ul>
 <h3 id="chap1">chap1、随机事件与概率<a class="headerlink" href="#chap1" title="Permanent link">&para;</a></h3>
@@ -570,16 +589,21 @@
 <h5 id="211">2.1.1、随机变量的概念<a class="headerlink" href="#211" title="Permanent link">&para;</a></h5>
 <ul>
 <li><strong>随机试验结果与实数的对应关系</strong></li>
+<li>定义1，<strong>随机变量</strong>，用X，Y，Z表示<ul>
+<li>它的取值随实验的结果而定，而实验结果是随机的，<strong>我们会知道它的取值范围</strong></li>
 </ul>
-<ul>
-<li>定义1</li>
+</li>
+<li><span class="arithmatex">\({X = 6}\)</span>表示“出现6点”，<span class="arithmatex">\(P\{X=6\}=\frac{1}{6}\)</span>，则<span class="arithmatex">\(\{X\geq{4}\}\)</span>表示“出现4点，或5点，或6点”则<span class="arithmatex">\(\{4,5,6\}=\frac{1}{2}\)</span></li>
 </ul>
 <h5 id="212">2.1.2、离散型随机变量及其分布律<a class="headerlink" href="#212" title="Permanent link">&para;</a></h5>
 <ul>
 <li>定义2：若随机变量X只取有限多个或可列无限多个值，称X为<strong>离散型随机变量</strong></li>
-<li>定义3：<strong>分布律（分布列，概率分布）</strong>，<em>每一个值的概率，lionel</em></li>
+<li>定义3：X为离散型随机变量，可能取值为<span class="arithmatex">\(X_1,X_2,...,x_k,...,\)</span>且<span class="arithmatex">\(P\{X=x_k\}=p_k,k=1,2,...,\)</span>,<span class="arithmatex">\(\{p_k\}\)</span>为X的<strong>分布律（分布列，概率分布）</strong></li>
 <li>分布律的性质:<ul>
-<li>(1)每一个大于0，(2)总和=1</li>
+<li>(1)每一个大于0，<span class="arithmatex">\(p_k\geq0,k=1,2,3...\)</span></li>
+<li>(2)总和=1，<span class="arithmatex">\(\sum_{k=1}^{\infty}{P_k}=1\)</span></li>
+<li>https://www.jianshu.com/p/4bf8d083b8ab，Markdown中常见的LaTeX公式</li>
+<li>https://blog.csdn.net/m0_62617719/article/details/121446969，Markdown编辑输出数学公式方法</li>
 </ul>
 </li>
 </ul>
@@ -589,8 +613,17 @@
 <li>在n重贝努利试中</li>
 </ul>
 </li>
-<li>定义5：<strong>二项分布</strong><ul>
+<li>定义5：<strong>二项分布</strong>，<span class="arithmatex">\(X \sim B(n,p)\)</span>，<strong>n表示随机变量X的取值，p是X的分布律</strong><ul>
+<li>用的是<code>\sim</code>表示的</li>
+<li>https://blog.csdn.net/june_young_fan/article/details/85071437</li>
 <li>二项式的k+1项</li>
+<li><strong>考点，要把二项公式记一下</strong></li>
+<li>
+<div class="arithmatex">\[\sum_{k=0}^{n}p_k=\sum_{k=0}^{n}{C_n^kp^kq^{n-k}=(p+q)^n=1}\]</div>
+<ul>
+<li>https://zhuanlan.zhihu.com/p/626610544</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>二项分布的泊松逼近，<strong>泊松（Poisson）定理</strong></li>
@@ -598,10 +631,10 @@
 <h5 id="214">2.1.4、泊松分布<a class="headerlink" href="#214" title="Permanent link">&para;</a></h5>
 <ul>
 <li>定义6：<strong>泊松分布</strong><ul>
-<li><span class="arithmatex">\(P(X=k)={e^{-t}t^k}/k!\)</span><ul>
+<li><span class="arithmatex">\(P(X=k)=\frac{\lambda^k}{k!}{e^{-\lambda}}\)</span><ul>
 <li>e是常数</li>
 <li>k是次数</li>
-<li>t入参数，表所期望发生事件的次数</li>
+<li>lambda，<span class="arithmatex">\(\lambda\)</span>为入参数，表所期望发生事件的次数</li>
 </ul>
 </li>
 </ul>
@@ -611,23 +644,22 @@
 <h5 id="221">2.2.1、分布函数的概念<a class="headerlink" href="#221" title="Permanent link">&para;</a></h5>
 <ul>
 <li><strong>非离散型，我们就无法用分布律来表示</strong></li>
-</ul>
-<ul>
-<li>定义1：若X为随机变量，称函数<code>F(x)=P{X&lt;=x},x属于(负无穷，正无穷)</code>为X的<strong>分布函数</strong></li>
+<li>离散型，<strong>既有分布律也有分布函数</strong>，二者都能完全描述它的统计规律性</li>
+<li><strong>定义1</strong>：若X为随机变量，称函数<span class="arithmatex">\(F(x)=P\{X\leq x\},{x\in {-\infty,+\infty}}\)</span>，为X的<strong>分布函数</strong></li>
 </ul>
 <h5 id="222">2.2.2、分布函数的性质<a class="headerlink" href="#222" title="Permanent link">&para;</a></h5>
 <ul>
 <li>分布函数的性质:<ul>
-<li>1、</li>
-<li>2、</li>
-<li>3、</li>
-<li>4、</li>
+<li>1、<span class="arithmatex">\(0\leq F(x) \leq 1\)</span></li>
+<li>2、<span class="arithmatex">\(F(x)\)</span>是不减函数，对于任意的<span class="arithmatex">\(x_1 &lt; x_2\)</span>，有<span class="arithmatex">\(F(x_1) \leq F(x_2)\)</span></li>
+<li>3、<span class="arithmatex">\(F(-\infty)=0,F(+\infty)=1\)</span>，即<span class="arithmatex">\(\lim_{x \to {-\infty} \quad F(x)=0}\)</span></li>
+<li>4、<span class="arithmatex">\(F(x)\)</span>右连续</li>
 </ul>
 </li>
 <li>由X的分布函数F(x)，可以求出下列重要事件的概率:<ul>
-<li>1、</li>
-<li>2、</li>
-<li>3、</li>
+<li>1、<span class="arithmatex">\(P\{X \leq b\}=F(b)\)</span></li>
+<li>2、<span class="arithmatex">\(P\{a&lt;X\leq b\}=F(b)-F(a)，其中a&lt;b\)</span></li>
+<li>3、<span class="arithmatex">\(P\{X&gt;b\}=1-F(b)\)</span></li>
 </ul>
 </li>
 </ul>
@@ -642,9 +674,9 @@
 <ul>
 <li>定义1：<span class="arithmatex">\(F(X)=\int_{-\infty }^{x}f(t)dt\)</span>，X为<strong>连续型随机变量</strong>，f(x)为X的概率密度函数，简称<strong>概率密度</strong></li>
 <li>概率密度的性质：<ul>
-<li>1、f(x)大于等于0</li>
-<li>2、<span class="arithmatex">\(\int_{-\infty }^{+\infty}f(x)dx=1\)</span></li>
-<li>3、</li>
+<li>1、<span class="arithmatex">\(f(x)\geq 0\)</span></li>
+<li>2、  <span class="arithmatex">\(\int_{-\infty }^{+\infty}f(x)dx=1\)</span></li>
+<li>3、<span class="arithmatex">\(P{a&lt;X\leq b}=F(b)-F(a) = \int_{a}^{b} f(t)dt = 1\)</span></li>
 <li>4、F(x)的导数为f(x)</li>
 </ul>
 </li>
@@ -660,9 +692,20 @@
 <h5 id="233">2.3.3、正态分布<a class="headerlink" href="#233" title="Permanent link">&para;</a></h5>
 <ul>
 <li>定义4：<strong>正态分布</strong></li>
-<li>正态分布函数的性质:<ul>
-<li>1、</li>
-<li>2、</li>
+<li><strong>标准正态分布函数 <span class="arithmatex">\(\Phi(x)\)</span> </strong>的性质:<ul>
+<li>1、<span class="arithmatex">\(\Phi(-x)=1-\Phi(x)\)</span></li>
+<li>2、<span class="arithmatex">\(\Phi(0)=\frac12\)</span>，<em>小写phi和大写Phi还是有区别的，lionel</em></li>
+</ul>
+</li>
+<li>分布函数F(x)与标准正态分布<span class="arithmatex">\(\Phi(x)\)</span>的关系<ul>
+<li>1、<span class="arithmatex">\(F(x)=P\{X \leq x \} = \Phi(\frac{x-\mu}{\sigma})\)</span></li>
+<li>2、<span class="arithmatex">\(P\{a &lt;X \leq b \} = P\{a \Phi(\frac{b-\mu}{\sigma}) - \Phi(\frac{a-\mu}{\sigma})\)</span><ul>
+<li>=<span class="arithmatex">\(P\{a \leq X &lt; b \}\)</span></li>
+<li>=<span class="arithmatex">\(P\{a \leq X \leq b \}\)</span></li>
+<li>=<span class="arithmatex">\(P\{a &lt; X &lt; b \}\)</span></li>
+</ul>
+</li>
+<li>3、<span class="arithmatex">\(P\{X &gt; a \} = P\{X \geq a\}= 1-\Phi(\frac{a-\mu}{\sigma})\)</span></li>
 </ul>
 </li>
 <li>定义5：<strong>上侧 阿尔法 分位数</strong></li>
@@ -679,6 +722,9 @@
 <h5 id="241">2.4.1、离散型随机变量函数的概率分布<a class="headerlink" href="#241" title="Permanent link">&para;</a></h5>
 <h5 id="242">2.4.2、连续型随机变量函数的概率分布<a class="headerlink" href="#242" title="Permanent link">&para;</a></h5>
 <ul>
+<li><em>其实就是反函数、 再加上 反函数求导嘛</em></li>
+</ul>
+<ul>
 <li>定理1：</li>
 <li>两个重要的结论</li>
 <li><strong>柯西（Cauchy）分布</strong></li>
@@ -688,30 +734,57 @@
 <h4 id="31">3.1、多维随机变量的概念<a class="headerlink" href="#31" title="Permanent link">&para;</a></h4>
 <h5 id="311">3.1.1、二维随机变量及其分布函数<a class="headerlink" href="#311" title="Permanent link">&para;</a></h5>
 <ul>
-<li>定义1</li>
+<li>定义1，<strong>n维随机变量</strong>或<strong>n维随机向量</strong></li>
 <li>定义2<ul>
-<li><strong>联合分布函数</strong>，<em>关于（X,Y）的</em></li>
-<li><strong>边缘分布函数</strong>，<em>关于X，Y的</em></li>
+<li><strong>联合分布函数</strong>，$F(x,y)=P{X \leq x, Y\leq y},-\infty&lt;x&lt;+\infty, -\infty &lt; y&lt; +\infty $</li>
+<li><strong>边缘分布函数</strong><ul>
+<li><span class="arithmatex">\(F_X(x)=P\{X\leq x\} = P\{X \leq x, Y &lt; +\infty\} = F(x,+\infty) = \lim_{y\to{+\infty}}F(x,y)\)</span></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>分布函数的性质<ul>
+<li>1、F(x,y)是变量x（或y）的不减函数</li>
+<li>2、<span class="arithmatex">\(0\leq F(x,y) \leq 1\)</span></li>
+<li>3、F(x,y)关于x和关于y均右连续</li>
+<li>4、</li>
 </ul>
 </li>
 </ul>
 <h5 id="312">3.1.2、二维离散型随机变量的分布律和边缘分布律<a class="headerlink" href="#312" title="Permanent link">&para;</a></h5>
 <ul>
-<li>定义3</li>
-<li>定义4</li>
+<li>定义3，<strong>二维离散型随机变量</strong>，<strong>分布律</strong></li>
+<li>（X,Y）的分布律具有2个性质<ul>
+<li>1、<span class="arithmatex">\(P_{ij} \geq 0\)</span></li>
+<li>2、<span class="arithmatex">\(\sum_i\sum_j {p_{ij}=1}\)</span></li>
+</ul>
+</li>
+<li>定义4，<strong>边缘分布律</strong></li>
 </ul>
 <h5 id="313">3.1.3、二维离散型随机变量的概率密度和边缘概率密度<a class="headerlink" href="#313" title="Permanent link">&para;</a></h5>
 <ul>
-<li>定义5</li>
-<li>定义6</li>
-<li>定义7</li>
-<li>定义8</li>
+<li>定义5，<strong>二维连续型随机变量</strong></li>
+<li>概率密度f(x,y)有以下性质<ul>
+<li>1、<span class="arithmatex">\(f(x,y) \geq 0\)</span></li>
+<li>2、二重积分=1，</li>
+</ul>
+</li>
+<li>定义6，<strong>均匀分布</strong></li>
+<li>定义7，<strong>二维正态分布</strong></li>
+<li>定义8，<strong>边缘概率密度</strong>（边缘密度）</li>
 </ul>
 <h4 id="32">3.2、随机变量的独立性<a class="headerlink" href="#32" title="Permanent link">&para;</a></h4>
 <h5 id="321">3.2.1、两个随机变量的独立性<a class="headerlink" href="#321" title="Permanent link">&para;</a></h5>
+<ul>
+<li>定义9，<strong>相互独立</strong>，<span class="arithmatex">\(F(x,y)=F_X(x)F_Y(y)\)</span></li>
+</ul>
 <h5 id="322">3.2.2、二维离散型随机变量的独立性<a class="headerlink" href="#322" title="Permanent link">&para;</a></h5>
 <h5 id="323">3.2.3、二维连续型随机变量的独立性<a class="headerlink" href="#323" title="Permanent link">&para;</a></h5>
 <h5 id="324n">3.2.4、n维随机变量<a class="headerlink" href="#324n" title="Permanent link">&para;</a></h5>
+<ul>
+<li>定义11，</li>
+<li>定义12，</li>
+</ul>
 <h4 id="33">3.3、两个随机变量的函数的分布<a class="headerlink" href="#33" title="Permanent link">&para;</a></h4>
 <h5 id="331">3.3.1、离散型随机变量的函数的分布<a class="headerlink" href="#331" title="Permanent link">&para;</a></h5>
 <h5 id="332">3.3.2、两个独立连续型随机变量之和的概率分布<a class="headerlink" href="#332" title="Permanent link">&para;</a></h5>
@@ -817,23 +890,39 @@
 <li>定义5、<span class="arithmatex">\(E(X^kY^l)\)</span>存在</li>
 </ul>
 <h3 id="chap5">chap5、大数定律及中心极限定理<a class="headerlink" href="#chap5" title="Permanent link">&para;</a></h3>
-<h4 id="51">5.1、切比雪夫不等式<a class="headerlink" href="#51" title="Permanent link">&para;</a></h4>
+<h4 id="51chebyshev">5.1、切比雪夫不等式Chebyshev<a class="headerlink" href="#51chebyshev" title="Permanent link">&para;</a></h4>
 <ul>
 <li><em>没懂，lionel</em></li>
+<li><strong>定理1</strong>，随机变量X的期望E(X)及方差D(X)存在，则对任意小正数<span class="arithmatex">\(\epsilon &gt;0\)</span>，有<span class="arithmatex">\(P\{|X-E(X)| \geq \epsilon\} \leq \frac{D(x)}{\epsilon^2}\)</span>，<strong>小于的话，就是<code>1-</code></strong></li>
 </ul>
 <h4 id="52">5.2、大数定律<a class="headerlink" href="#52" title="Permanent link">&para;</a></h4>
 <h5 id="521">5.2.1、贝努利大数定律<a class="headerlink" href="#521" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>定理1</strong>，<span class="arithmatex">\(\lim_{n \to +\infty } P\{|\frac mn-p|&lt;\epsilon\}=1\)</span>，<strong>小于的话，就是0</strong></li>
+</ul>
 <h5 id="522">5.2.2、独立同分布随机变量序列的切比雪夫大数定律<a class="headerlink" href="#522" title="Permanent link">&para;</a></h5>
 <h4 id="53">5.3、中心极限定理<a class="headerlink" href="#53" title="Permanent link">&para;</a></h4>
 <h5 id="531">5.3.1、独立同分布序列的中心极限定理<a class="headerlink" href="#531" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>定理1</strong>，</li>
+</ul>
 <h5 id="532demoivre-laplace">5.3.2、棣莫费（DeMoivre）-拉普拉斯（Laplace）中心极限定理<a class="headerlink" href="#532demoivre-laplace" title="Permanent link">&para;</a></h5>
 <h3 id="chap6">chap6、统计量及其抽样分布<a class="headerlink" href="#chap6" title="Permanent link">&para;</a></h3>
 <p>6.1、引言</p>
 <p>6.2、总体与样本</p>
 <h4 id="63">6.3、统计量及其分布<a class="headerlink" href="#63" title="Permanent link">&para;</a></h4>
-<p>6.3.1、</p>
-<p>6.3.2、</p>
-<p>6.3.3、</p>
+<h5 id="631">6.3.1、统计量与抽样分布<a class="headerlink" href="#631" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>定义1</strong>，若样本函数<span class="arithmatex">\(T=T_(x_1,...,x_n)\)</span>中<strong>不含有任何未知参数</strong>，（<em>就是不含有希腊字幕的那种</em>）称<strong>T为统计量</strong>，统计量的分布称为<strong>抽样分布</strong></li>
+</ul>
+<p>6.3.2、经验与分布函数</p>
+<h5 id="633">6.3.3、样本均值及其抽样分布<a class="headerlink" href="#633" title="Permanent link">&para;</a></h5>
+<ul>
+<li>定义2，<strong>样本均值</strong>，记作<span class="arithmatex">\(\widetilde x\)</span>  <em>这个符号，也得不对</em><ul>
+<li>https://www.jianshu.com/p/53cc67f6c832  markdown的各种公式，<em>这个不错</em></li>
+</ul>
+</li>
+</ul>
 <h5 id="634">6.3.4、样本方差与样本标准差<a class="headerlink" href="#634" title="Permanent link">&para;</a></h5>
 <h5 id="635">6.3.5、样本矩及其函数<a class="headerlink" href="#635" title="Permanent link">&para;</a></h5>
 <h5 id="636">6.3.6、极大顺序统计量和极小顺序统计量<a class="headerlink" href="#636" title="Permanent link">&para;</a></h5>
@@ -852,6 +941,7 @@
 <h4 id="_3">履历<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
 <ul>
 <li>2023-11-25把chap4的公式记一下</li>
+<li>2023-12-01晚上听了个b站的视频，觉得讲得不错（chap2的总结，chap5的3个考点），准备12月份吧，2倍速听完概率部分</li>
 </ul>
 <h4 id="_4">参考的<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
 <h5 id="2023-10-22">2023-10-22那一周整理的<a class="headerlink" href="#2023-10-22" title="Permanent link">&para;</a></h5>

@@ -107,6 +107,13 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../10network/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C/">《深入理解Linux网络》</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">机器&深度学习</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../30machineLearning/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%9F%BA%E7%A1%80/">《机器学习线性代数基础》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../31deepLearning/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%85%A5%E9%97%A8%EF%BC%9A%E5%9F%BA%E4%BA%8EPython%E7%9A%84%E7%90%86%E8%AE%BA%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《深度学习入门：基于Python的理论与实现》</a>
+                  </li>
+              </ul>
               <p class="caption"><span class="caption-text">文件系统</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/Linux%E5%86%85%E6%A0%B8%E6%8E%A2%E7%A7%98/">《Linux内核探秘》</a>
@@ -185,6 +192,24 @@
     <li class="toctree-l3"><a class="reference internal" href="#w134">W1.3、字符串（4）</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#w1462">W1.4、查找（6+2）</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#d43">d4：3、数组中重复的数字</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#d453i">d4：53I、在排序数组中查找数字</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#d4-53ii0n-1">d4： 53II、0~n-1中缺失的数字</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#53iii">53III、数组中数值和下标相等的元素（这道题，书上有）</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#d54m">d5：4（M）、二维数组中的查找</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#d511">d5：11、旋转数组的最小数字</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#d5-50i">d5： 50I、第一个只出现一次的字符</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#50ii">50II、字符流中第一个只出现一次的字符（这道题，书上有）</a>
+    </li>
+        </ul>
     </li>
         </ul>
     </li>
@@ -405,28 +430,52 @@
 </li>
 </ul>
 <h4 id="w1462">W1.4、查找（6+2）<a class="headerlink" href="#w1462" title="Permanent link">&para;</a></h4>
+<h5 id="d43">d4：3、数组中重复的数字<a class="headerlink" href="#d43" title="Permanent link">&para;</a></h5>
 <ul>
-<li>d4：3、数组中重复的数字</li>
-<li>d4：53I、在排序数组中查找数字<ul>
+<li>题目，{2,3,1,0,2,5,3}<ul>
+<li>最暴力就是逐个遍历，</li>
+<li>优化方法就是<strong>用map去存</strong></li>
+</ul>
+</li>
+</ul>
+<h5 id="d453i">d4：53I、在排序数组中查找数字<a class="headerlink" href="#d453i" title="Permanent link">&para;</a></h5>
+<ul>
+<li>题目，{1,2,3,3,3,3,4,5}，输出，3（出现4次）</li>
 <li>自己思路：<strong>有序就二分</strong>，<em>lionel，如何利用二分</em>，<code>GetFirstK()、GetLastK()</code></li>
 </ul>
-</li>
-<li>d4： 53II、0~n-1中缺失的数字<ul>
+<h5 id="d4-53ii0n-1">d4： 53II、0~n-1中缺失的数字<a class="headerlink" href="#d4-53ii0n-1" title="Permanent link">&para;</a></h5>
+<ul>
 <li><em>lionel，这个没看</em></li>
 </ul>
-</li>
-<li>53III、数组中数值和下标相等的元素（这道题，书上有）</li>
-<li>d5：4（M）、二维数组中的查找</li>
-<li>d5：11、旋转数组的最小数字<ul>
-<li>自己思路，<em>lionel，题目都没懂</em></li>
+<h5 id="53iii">53III、数组中数值和下标相等的元素（这道题，书上有）<a class="headerlink" href="#53iii" title="Permanent link">&para;</a></h5>
+<h5 id="d54m">d5：4（M）、二维数组中的查找<a class="headerlink" href="#d54m" title="Permanent link">&para;</a></h5>
+<ul>
+<li>题目，每行从左到右递增，每列从上到下递增，{{1,2,8,9},{2,4,9,12},{4,7,10,13},{6,8,11,15}}找7</li>
+<li>除了暴力</li>
+<li>可以<strong>利用题干信息</strong>，先找到右上角，是9（9大于7），列减减，（8还是大于7），再减减，2大于7，然后 行加加，4小于7，7等于7，找到了 <ul>
+<li>也可以用<strong>左下角</strong></li>
+<li><em>自己没过右上角，左下角的思路</em></li>
 </ul>
 </li>
-<li>d5： 50I、第一个只出现一次的字符<ul>
+</ul>
+<h5 id="d511">d5：11、旋转数组的最小数字<a class="headerlink" href="#d511" title="Permanent link">&para;</a></h5>
+<ul>
+<li>题目，<strong>不是难懂</strong>，把<strong>旋转</strong>搞明白，{3,4,5,1,2}是{1,2,3,4,5}的旋转数组</li>
+<li>自己思路，逐个暴力</li>
+<li>作者思路，<strong>二分</strong>，left=0，last=len()-1，<em>比较后，用mid去更新left或last？</em></li>
+</ul>
+<h5 id="d5-50i">d5： 50I、第一个只出现一次的字符<a class="headerlink" href="#d5-50i" title="Permanent link">&para;</a></h5>
+<ul>
+<li>题目，{a,b,a,c,c,d,e,f,f}，第一个输出的是b<ul>
+<li>两层for循环，<span class="arithmatex">\(O(n^2)\)</span></li>
+</ul>
+</li>
+</ul>
+<ul>
 <li>自己思路，<strong>用hash</strong>，<em>lionel，但怎么算第1个呢？</em></li>
 </ul>
-</li>
-<li>50II、字符流中第一个只出现一次的字符（这道题，书上有）</li>
-</ul>
+<h6 id="50igoggooglel"><strong>50I进阶的题</strong>，字符流中，"go"的就是g，”google“的话就是l<a class="headerlink" href="#50igoggooglel" title="Permanent link">&para;</a></h6>
+<h5 id="50ii">50II、字符流中第一个只出现一次的字符（这道题，书上有）<a class="headerlink" href="#50ii" title="Permanent link">&para;</a></h5>
 <h3 id="w20730-080518">W2（0730-0805，18道）<a class="headerlink" href="#w20730-080518" title="Permanent link">&para;</a></h3>
 <h4 id="w2118">W2.1、搜索与回溯算法（18）<a class="headerlink" href="#w2118" title="Permanent link">&para;</a></h4>
 <ul>

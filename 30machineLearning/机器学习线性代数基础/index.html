@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>机器学习线性代数基础 - lionel的技术笔记</title>
+    <title>《机器学习线性代数基础》 - lionel的技术笔记</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "\u673a\u5668\u5b66\u4e60\u7ebf\u6027\u4ee3\u6570\u57fa\u7840";
+        var mkdocs_page_name = "\u300a\u673a\u5668\u5b66\u4e60\u7ebf\u6027\u4ee3\u6570\u57fa\u7840\u300b";
         var mkdocs_page_input_path = "30machineLearning\\\u673a\u5668\u5b66\u4e60\u7ebf\u6027\u4ee3\u6570\u57fa\u7840.md";
         var mkdocs_page_url = null;
       </script>
@@ -107,6 +107,127 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../10network/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C/">《深入理解Linux网络》</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">机器&深度学习</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">《机器学习线性代数基础》</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#chap1">chap1、坐标与变换：高楼平地起</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#11">1.1、描述空间的工具：向量</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#111">1.1.1、重温向量</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#112">1.1.2、通常使用列向量</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#113python">1.1.3、使用Python语言表示向量</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#114">1.1.4、简单生成列向量</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#115">1.1.5、向量的加法</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#116">1.1.6、向量的数量乘法</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#117">1.1.7、向量间的乘法：内积和外积</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#118">1.1.8、先数乘后叠加：向量的线性组合</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#12">1.2、基底构建一切，基底决定坐标</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#121">1.2.1、向量的坐标</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#122">1.2.2、向量的坐标依赖于选取的基底</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#124">1.2.4、疑问：任意向量都能作为基底吗？</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#125">1.2.5、构成基底的条件</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#126">1.2.6、张成空间</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#13">1.3、矩阵，让向量流动起来</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#132">1.3.2、特殊形态的矩阵</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#133">1.3.3、向量：可以视作一维矩阵</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#136">1.3.6、矩阵与矩阵的乘法</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#137">1.3.7、矩阵乘以向量：改变向量的空间位置</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#14">1.4、矩阵乘向量的新视角：变换基底</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#147">1.4.7、关于基变换：一些意外情况</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap2">chap2、空间与映射：矩阵的灵魂</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#21">2.1、矩阵：描述空间中的映射</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#212">2.1.2、降维了，“矮胖”矩阵对空间的压缩</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#215">2.1.5、秩：决定映射后的空间形态</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#216python">2.1.6、利用Python语言求解矩阵的秩</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#228">2.2.8、逆矩阵存在的条件</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#23">2.3、向量空间和子空间</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#24">2.4、老树开新花，道破方程组的解</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#241">2.4.1、从空间映射的角度谈方程组</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap3">chap3、近似与拟合：真相最近处</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#31">3.1、投影，寻找距离最近的向量</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#313">3.1.3、利用矩阵描述向一维直线的投影</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#317">3.1.7、回顾本章开篇的两个问题</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#32">3.2、深入剖析最小二乘法的本质</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#321">3.2.1、最小二乘法线性拟合</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#33">3.3、施密特正交化：寻找最佳投影基</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#332">3.3.2、标准正交向量</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap4">chap4、相似与特征：最佳观察角</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap5">chap5、降维与压缩：抓住主成分</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap6">chap6、实践与应用：线代用起来</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap7">chap7、函数与复数域</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../31deepLearning/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%85%A5%E9%97%A8%EF%BC%9A%E5%9F%BA%E4%BA%8EPython%E7%9A%84%E7%90%86%E8%AE%BA%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《深度学习入门：基于Python的理论与实现》</a>
+                  </li>
+              </ul>
               <p class="caption"><span class="caption-text">文件系统</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/Linux%E5%86%85%E6%A0%B8%E6%8E%A2%E7%A7%98/">《Linux内核探秘》</a>
@@ -199,7 +320,8 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-      <li>机器学习线性代数基础</li>
+          <li>机器&深度学习 &raquo;</li>
+      <li>《机器学习线性代数基础》</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -394,6 +516,10 @@
               
             </div>
           </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../10network/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C/" class="btn btn-neutral float-left" title="《深入理解Linux网络》"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../31deepLearning/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%85%A5%E9%97%A8%EF%BC%9A%E5%9F%BA%E4%BA%8EPython%E7%9A%84%E7%90%86%E8%AE%BA%E4%B8%8E%E5%AE%9E%E7%8E%B0/" class="btn btn-neutral float-right" title="《深度学习入门：基于Python的理论与实现》">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
 
   <hr/>
 
@@ -415,6 +541,10 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
+      <span><a href="../../10network/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../31deepLearning/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%85%A5%E9%97%A8%EF%BC%9A%E5%9F%BA%E4%BA%8EPython%E7%9A%84%E7%90%86%E8%AE%BA%E4%B8%8E%E5%AE%9E%E7%8E%B0/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

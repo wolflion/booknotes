@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>深度学习入门：基于Python的理论与实现 - lionel的技术笔记</title>
+    <title>《深度学习入门：基于Python的理论与实现》 - lionel的技术笔记</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "\u6df1\u5ea6\u5b66\u4e60\u5165\u95e8\uff1a\u57fa\u4e8ePython\u7684\u7406\u8bba\u4e0e\u5b9e\u73b0";
+        var mkdocs_page_name = "\u300a\u6df1\u5ea6\u5b66\u4e60\u5165\u95e8\uff1a\u57fa\u4e8ePython\u7684\u7406\u8bba\u4e0e\u5b9e\u73b0\u300b";
         var mkdocs_page_input_path = "31deepLearning\\\u6df1\u5ea6\u5b66\u4e60\u5165\u95e8\uff1a\u57fa\u4e8ePython\u7684\u7406\u8bba\u4e0e\u5b9e\u73b0.md";
         var mkdocs_page_url = null;
       </script>
@@ -107,6 +107,263 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../10network/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C/">《深入理解Linux网络》</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">机器&深度学习</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../../30machineLearning/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%9F%BA%E7%A1%80/">《机器学习线性代数基础》</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">《深度学习入门：基于Python的理论与实现》</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#chap1python">chap1、Python入门</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#15numpy">1.5、NumPy</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#153">1.5.3、</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#155">1.5.5、广播</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#156">1.5.6、访问元素</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#16matplotlib">1.6、Matplotlib</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#163">1.6.3、显示图像</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap2perceptron">chap2、感知机（perceptron）</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#21">2.1、感知机是什么</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#22">2.2、简单逻辑电路</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#221and-gate">2.2.1、与门（and gate）</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#222">2.2.2、与非门和或门</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#23">2.3、感知机的实现</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#231">2.3.1、简单的实现</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#232">2.3.2、导入权重和偏置</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#233">2.3.3、使用权重和偏置的实现</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#24">2.4、感知机的局限性</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#241">2.4.1、异或门</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#242">2.4.2、线性和非线性</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#25">2.5、多层感知机</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#251">2.5.1、已有门电路的组合</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#252">2.5.2、异或门的实现</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#26">2.6、从与非门到计算机</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#27">2.7、小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap3">chap3、神经网络</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#31">3.1、从感知机到神经网络</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#311">3.1.1、神经网络的例子</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#312">3.1.2、复习感知机</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#313">3.1.3、激活函数登场</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#32">3.2、激活函数</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#321sigmoid">3.2.1、sigmoid函数</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#322">3.2.2、阶跃函数的实现</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#323">3.2.3、阶跃函数的图形</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#325sigmoid">3.2.5、sigmoid函数和阶跃函数的比较</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#327relurectified-linear-unit">3.2.7、ReLU函数（Rectified Linear Unit）</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#33">3.3、多维数组的运算</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#333">3.3.3、神经网络的内积</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#343">3.4、3层神经网络的实现</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#341">3.4.1、符号确认</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#35">3.5、输出层的设计</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#351-softmax">3.5.1 恒等函数和softmax函数</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#352softmax">3.5.2、实现softmax函数时的注意事项</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#353softmax">3.5.3、softmax函数的特征</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#354">3.5.4、输出层的神经元数量</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#36">3.6、手写数字识别</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#361mnist">3.6.1、MNIST数据集</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#362">3.6.2、神经网络的推理处理</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#363">3.6.3、批处理</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap4">chap4、神经网络的学习</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#41">4.1、从数据中学习</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#42">4.2、损失函数</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#421">4.2.1、均方误差</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#43">4.3、数值微分</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#431">4.3.1、导数</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#432">4.3.2、数值微分的例子</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#433">4.3.3、偏导数</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#44">4.4、梯度</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#441">4.4.1、梯度法</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#442">4.4.2、神经网络的梯度</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#45">4.5、学习算法的实现</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#4512">4.5.1、2层神经网络的类</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#452mini-batch">4.5.2、mini-batch的实现</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap5">chap5、误差反向传播法</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#51">5.1、计算图</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#511">5.1.1、用计算图求解</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#512">5.1.2、局部计算</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#513">5.1.3、为何用计算图解题</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#52">5.2、链式法则</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#521">5.2.1、计算图的反向传播</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#53">5.3、反向传播</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#531">5.3.1、加法节点的反向传播</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#532">5.3.2、乘法节点的反向传播</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#533">5.3.3、苹果的例子</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#541">5.4.1、乘法层的实现</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#542">5.4.2、加法层的实现</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#551relu">5.5.1、ReLU层</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#563softmax-with-loss">5.6.3、Softmax-with-Loss层</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#57">5.7、误差反向传播法的实现</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#574">5.7.4、使用误差反向传播法的学习</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap6">chap6、与学习相关的技巧</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#641">6.4.1、过拟合</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#642">6.4.2、权值衰减</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#643dropout">6.4.3、Dropout</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap7">chap7、卷积神经网络</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#71">7.1、整体结构</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#721">7.2.1、全连接层存在的问题</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#722">7.2.2、卷积运算</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#724">7.2.4、步幅</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#73">7.3、池化层</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap8">chap8、深度学习</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#81">8.1、深度网络</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#813">8.1.3、加深层的动机</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#82">8.2、深度学习的小历史</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#85">8.5、深度学习的未来</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+              </ul>
               <p class="caption"><span class="caption-text">文件系统</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/Linux%E5%86%85%E6%A0%B8%E6%8E%A2%E7%A7%98/">《Linux内核探秘》</a>
@@ -199,7 +456,8 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-      <li>深度学习入门：基于Python的理论与实现</li>
+          <li>机器&深度学习 &raquo;</li>
+      <li>《深度学习入门：基于Python的理论与实现》</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -634,6 +892,10 @@
               
             </div>
           </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../30machineLearning/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%9F%BA%E7%A1%80/" class="btn btn-neutral float-left" title="《机器学习线性代数基础》"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../11filesystem/Linux%E5%86%85%E6%A0%B8%E6%8E%A2%E7%A7%98/" class="btn btn-neutral float-right" title="《Linux内核探秘》">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
 
   <hr/>
 
@@ -655,6 +917,10 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
+      <span><a href="../../30machineLearning/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%9F%BA%E7%A1%80/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../11filesystem/Linux%E5%86%85%E6%A0%B8%E6%8E%A2%E7%A7%98/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
