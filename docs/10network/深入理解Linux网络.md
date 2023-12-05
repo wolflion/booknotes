@@ -66,21 +66,42 @@
 ###### 网络子系统初始化
 
 + `subsys_initcall()`来初始化各个子系统
++ 为每个CPU都申请一个softnet_data数据结构，这个数据结构里的poll_list用于等待驱动程序将其poll函数注册进来
++ **open_softirq为每一种软中断都注册一个处理函数**。
+  + kernel/softirq.c
 
 ###### 协议栈注册
 
++ 对应的实现函数分别是ip_rcv()，tcp_v4_rcv()和udp_rcv()。
++ **内核是通过注册的方式来实现的**。
++ fs_initcall调用inet_init后开始网络协议栈注册，通过inet_init，将这些函数注册到inet_protos和ptype_base数据结构中。
++ **inet_protos记录着UDP、TCP的处理函数地址，ptype_base存储着ip_rcv()函数的处理地址**
+
 ###### 网卡驱动初始化
 
-+ `module_init()`
++ 每一个驱动程序，会使用`module_init()`向内核注册一个初始化函数，**当驱动程序被加载时，内核会调用这个函数**。
+  + igb网卡的驱动程序代码位于drivers/net/ethernet/intel/igb/igb_main.c中
++ 驱动的pci_register_driver调用完成后，Linux内核就知道了该驱动的相关信息，**比如igb网卡驱动的igb_driver_name和igb_rpobe函数地址，等等**
++ 驱动的probe方法执行的目的**就是让设备处于ready状态**
 
 ###### 启动网卡
 
 + `struct net_device_ops`变量
++ 当启用一个网卡时（ifconfig eth0 up），**net_device_ops变量中定义的ndo_open方法会被调用**。
++ 创建队列
 
 ##### 2.2.3、迎接数据的到来
 
-+ 硬中断处理
-+ ksoftirqd内核线程处理中断
+###### 硬中断处理
+
+###### ksoftirqd内核线程处理中断
+
+###### 网络协议栈处理
+
+###### IP层处理
+
++ 主入口是**ip_rcv**，net/ipv4/ip_input.c，里面的**NF_HOOK()**，其**最后一个参数是ip_rcv_finish()**
+  + *想深入研究netfilter可以从搜索NF_HOOK的这些引用处入手，lionel，作者的建议*
 
 ##### 2.2.4、收包小结
 
@@ -109,6 +130,7 @@
 + socket是如何在内核中表示的。
   + socket.c中的`sock_create()`，又调用af_inet.c中的`inet_create()`
   + net/core/sock.c，*lionel，这个干啥的？一般都是sock结构体啥的啊，*，这里调用了`sock_init_data()`
++ **当软中断上收到数据包时会通过调用sk_data_ready函数指针（实际被设置成了sock_def_readable()）来唤醒在sock上等待的进程**。
 
 #### 3.3、内核和用户进程协作之阻塞方式
 
