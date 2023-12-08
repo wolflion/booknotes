@@ -288,18 +288,23 @@
 ##### 6.2.1、listen系统调用
 
 + net/sock.c中的`listen`
++ **用户态socket_fd只是一个整数而已，内核没有办法直接用**，要先查找socket内核对象`sock = sockfd_lookup_light(fd,&err,&fput_needed);`
++ *入参的backlog是啥意思？*
 + `err = sock->ops->listen(sock, backlog);`
 
 ##### 6.2.2、协议栈listen
 
 + net/ipv4/af_inet.c中的`inet_listen()`
-+ **服务端的全连接队列长度**
++ **服务端的全连接队列长度**，执行listen函数时传入的backlog和net.core.somaxconn之间较小的那个值。
+  + 啥叫*全连接？相对于谁的全？*
 + net/ipv4/inet_connection_sock.c中的`inet_csk_listen_start()`
 
 ##### 6.2.3、接收队列定义
 
 + include/net/inet_connection_sock.h
 + include/net/request_sock.h中的`struct request_sock_queue{};`
++ **全连接队列**，不需要进行复杂的查找工作，accept处理时只要先进先出即可，**以链表的方式管理**
++ **半连接队列**，`listen_opt`，**需要在第三次握手时快速地查找出第一次握手时留存的request_sock对象**，所以需要用**哈希表管理**
 
 ##### 6.2.4、接收队列申请和初始化
 
