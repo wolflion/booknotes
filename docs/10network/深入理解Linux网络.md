@@ -128,8 +128,14 @@
 #### 3.2、socket的直接创建
 
 + socket是如何在内核中表示的。
-  + socket.c中的`sock_create()`，又调用af_inet.c中的`inet_create()`
-  + net/core/sock.c，*lionel，这个干啥的？一般都是sock结构体啥的啊，*，这里调用了`sock_init_data()`
+  
+  + **内核在内部创建了一系列socket相关的内核对象**
+  + net/socket.c中的`sock_create()`，又调用af_inet.c中的`inet_create()`
+    + 中间先是调用`__sock_create()`，然后先分配`sock_alloc()`，调用创建`create()`，**对于AF_INET协议族来说，调用的是`inet_create`**，其它协议族来说，不一定就这个了
+  + inet_create中，**根据类型SOCK_STREAM**查找到对于TCP定义的操作方法实现集合inet_stream_ops和tcp_prot，并把它们分别**设置到socket->ops和sock->sk_prot上**
+  
+  + net/core/sock.c，`sock_init_data()`，**将sock中的sk_data_ready函数指针进行了初始化，设置为默认sock_def_readable**
+  
 + **当软中断上收到数据包时会通过调用sk_data_ready函数指针（实际被设置成了sock_def_readable()）来唤醒在sock上等待的进程**。
 
 #### 3.3、内核和用户进程协作之阻塞方式
@@ -140,24 +146,63 @@
   + 3、数据包抵达网卡
   + 4、网卡把帧DMA到内存
   + 5、硬中断通知CPU
+  + 6、处理完发出软中断
+  + 7、从RingBuffer上摘下数据包
+  + 8、收到socket的接收队列中
   + 9、唤醒等待队列上的进程（ksoftirqd内核线程）
 
 ##### 3.3.1、等待接收消息
 
-+ recv依赖的底层实现，**strace命令跟踪**，clib库函数recv会执行recvfrom系统调用
++ recv依赖的底层实现
+
++ **strace命令跟踪**，clib库函数recv会执行recvfrom系统调用
 + **图3-5，recvfrom系统调用**
+  + 1、系统调用recvfrom
+  + 2、inet_stream_ops
+  + 3、tcp_prot
+  + 4、接收队列里数据为空
+  + 5、修改当前进程状态
+  + 6、主动让出CPU（Linux将调度下一个进程）
++ **recvfrom最后是怎么把自己的进程阻塞掉的**
+  + net/socket.c中的`sock_recvmsg()->__sock_recvmsg()->__sock_recvmsg_nosec()`
+  + net/ipv4/af_inet.c
+  + net/ipv4/tcp.c
+  + net/core/sock.c
++ **sk_wait_data是怎样把当前进程给阻塞掉的**
+  + 1、定义等待队列并关联current，include/linux/wait.h
+  + 2、获取socket等待队列头
+  + 3、插入
+  + 4、修改当前进程状态
+  + 首先在宏
+  + 紧接着，
+  + 接着调用prepare_to_wait来把新定义的等待队列wait插入sock对象的等待队列，kernel/wait.c
+  + 后面当内核收完数据产生就绪事件的时候，就可以查找socket等待队列上的等待项，进而可以找到回调函数和在等待该socket就绪事件的进程了
+  + 最后调用sk_wait_event让出CPU，进程将进入睡眠状态，**这会导致一次进程上下文的开销**，而这个开销是昂贵的，大约需要消耗几个微秒的CPU时间
 
 ##### 3.3.2、软中断模块
 
-+ **图3.9**
-+ net/ipv4/tcp_ipv4.c中的`tcp_v4_rcv()`
++ **负责接收和处理数据包**的软中断
+  + 网络包到网卡后怎么被网卡接收，最后再交由**软中断处理的**
+  + **tcp协议的接收函数`tcp_v4_rcv()`**
+
++ **图3.9**软中断接收数据过程
+  + 1、
+  + 2、
+  + 3、唤醒等待队列上的进程
 + kernel/sched/core.c
++ 软中断（**也就是linux中的ksoftirqd线程**）里收到数据包以后，发现是TCP包就会执行tcp_v4_rcv函数。接着往下，如果是ESTABLISH状态下的数据包，则最终会把数据拆出来放到对应socket的接收队列中，然后调用sk_data_ready来唤醒用户进程。
+  + net/ipv4/tcp_ipv4.c中的`tcp_v4_rcv()`，根据收到的网络包的header里的source和dest信息在本机上查询对应的socket。找到了后，直接进入接收的主体函数`tcp_v4_do_rcv()`，**假设是处理ESTABLISH状态下的包**，就又进入`tcp_rcv_established()`，再通过调用`tcp_queue_rcv()`，完成了将接收到的数据放到socket的接收队列上
+  + net/ipv4/tcp_input.c，里的了`tcp_queue_rcv()`
+  + **调用tcp_queue_rcv接收完成之后，接着调用sk_data_ready来唤醒在socket上等待的用户进程**。
+  + lionel，没写呢
+  + **在socket上等待而被阻塞的进程就被推入可运行队列里了，这又将产生一次进程上下文切换的开销**
 
 ##### 3.3.3、同步阻塞总结
 
 + 同步阻塞方式接收网络包的整个过程分两步：
   + 1、我们自己代码的代码所在的进程，调用`socket()`会进入内核态创建必要的内核对象
   + 2、硬中断、软中断上下文（系统线程ksoftirqd）
++ **进程3.12**，同步阻塞流程汇总
 
 #### 3.4、内核和用户进程协作之epoll
 
