@@ -118,6 +118,67 @@ static struct super_operations sockfs_ops = {
   + `sock_attach_fd()`
 + **socket_file_ops结构体**
 
+### chap3、socket地址设置
+
+#### 3.1、地址设置接口
+
+#### 3.2、地址结构定义
+
+#### 3.3、地址类型
+
+#### 3.4、设置地址和端口
+
+#### 3.5、网络空间总管init_net
+
+### chap4、路由
+
+4.1、路由函数表结构及关系图
+
+4.2、路由函数表的初始化
+
+4.3、通过路由函数表查找路由信息
+
+4.4、路由的设置及相关结构的初始化
+
+4.5、基于输出方向的路由表查找与创建
+
+4.6、基于输入方向的路由表查找与创建
+
+### chap5、通知链
+
++ **内核为了及时响应某些到来的事件，采取了通知链的方式来执行指定函数**
+
+```cpp
+struct notifier_block{
+    //notifier_call函数指针，表示通知链节点要运行的函数
+    int(*notifier_call)(struct notifier_block *, unsigned long, void *);//通知调用的函数
+    struct notifier_block *next;//指向下一个通知节点，从而组成链队
+    int priority;//优先级
+};
+```
+
+
+
+#### 5.1、设备通知链节点的挂入
+
++ 利用`devinet_init()`，调用`register_netdevice_notifier()`将节点结构`ip_netdev_notifier`挂入内核的设备通知链netdev_chain队列中
+
+#### 5.2、地址通知链节点的挂入
+
++ `ip_fib_init()`调用`register_inetaddr_notifier()`通知链节点`fib_inetaddr_notifier`
+
+#### 5.3、通知链的调用和执行
+
++ **内核中有一个专门调用通知链函数`notifier_call_chain()`**
+
+### chap6、netlink链
+
+6.1、netlink的创建
+
+6.2、注册路由的netlink
+
+6.3、通过netlink通信 
+
 ### chap7、监听连接请求
 
 7.1、内核的监听函数
