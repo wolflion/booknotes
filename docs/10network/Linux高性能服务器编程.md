@@ -535,6 +535,15 @@ return true;
 
 ### chap9、I/O复用
 
++ **I/O复用使得程序能同时监听多个文件描述符**
++ 网络程序需要使用I/O复用技术
+  + 客户端程序要同时处理多个socket，**非阻塞connect技术**
+  + 客户端程序要同时处理用户输入和网络连接
+  + TCP服务器要同时处理监听socket和连接socket
+  + 服务器要同时处理TCP请求和UDP请求
+  + 服务器要同时监听多个端口，或者处理多种服务
++ **I/O复用虽然能同时监听多个文件描述符，但它本身是阻塞的**。当多个文件描述符同时就绪时，如果不采取额外的措施，程序就只能按照顺序依次处理其中的每一个文件描述符，**使得服务器程序看起来像是串行工作的**。如果要实现并发，只能使用多进程或多线程
+
 #### 9.1、select系统调用
 
 + select系统调用的用途是：**在一段时间内，监听用户感兴趣的文件描述符上的可读、可写和异常等事件**。
@@ -547,20 +556,50 @@ int select(int nfds, fd_set *readfs, fd_set *writefds, fd_set* exceptfds,
 		  struct timeval* timeout);
 ```
 
++ nfds，指定被监听的文件描述符的总数
++ readfs，writefs，exceptfs，可读，可写，异常事件对应的文件描述符集合
++ **fd_set结构体**，容纳的文件描述符数量由FD_SETSIZE指定，这就限制了select能同时处理的文件描述符的总量
++ timeout，是超时时间
+
 ##### 9.1.2、文件描述符就绪文件
 
 + 下列socket可读
+  + socket内核接收缓存区中的字节数大于或等于其低水位标记SO_RCVLOWAT
+  + socket通信的对方关闭连接
+  + 监听socket上有新的连接请求
+  + socket上有未处理的错误
 + 下列socket可写
+  + socket内核发送缓存中的可用字节数大于或等于其低水位标记SO_SNDLOWAT
+  + socket的写操作被关闭
+  + socket使用非阻塞connect连接成功或失败（超时）之后
+  + socket上有未处理的错误
 + **网络程序中，select能处理的异常情况只有一种：socket上接收到带外数据**。
 
 ##### 9.1.3、处理带外数据（out-of band OOB)
 
++ *带外数据，会让socket的返回值异常状态？*
+
 #### 9.2、poll系统调用
+
++ 与select类似，**指定时间内轮询一定数量的文件描述符**，以测试其中是否有就绪者
 
 ```c
 #include <poll.h>
 int poll(struct pollfd* fds, nfds_t nfds, int timeout);
 ```
+
++ fds是**pollfd结构类型的数组**，指定所有我们感兴趣的文件描述符上发生的可读、可写和异常事件
+
+```c
+struct pollfd{
+    int fd;//文件描述符
+    short events;//注册的事件 【监听的事件】
+    short revents;//实际发生的事件，由内核填充
+};
+```
+
++ nfds，指定被监听事件集合fds的大小
++ timeout，poll的超时值
 
 #### 9.3、epoll系列系统调用
 
@@ -583,6 +622,12 @@ int epoll_create(int size);
 #include<sys/epoll.h>
 int epoll_ctl(int epfd, int op, int fd, struct epoll_event *event);
 ```
+
++ epfd，要操作的文件描述符
++ op，指定操作类型
+  + EPOLL_CTL_ADD，往事件表中注册fd上的事件
+  + EPOLL_CTL_MOD，修改fd上的注册事件
+  + EPOLL_CTL_DEL，删除fd上的注册事件
 
 ##### 9.3.2、epoll_wait函数
 
@@ -657,11 +702,15 @@ chap12、高性能I/O框架库Libevent
 13.5.1、信号量原语
 
 + P（passeren，传递，进入临界区）和V（vrijgeven，释放，退出临界区）
+
 + sys/sem.h
+
   13.5.2、semget系统调用
+
 + **创建信号量集**
   13.5.3、semop系统调用
   13.5.4、semctl系统调用
+  
 + **允许调用者对信号量进行直接控制**
   13.5.5、特殊键值ipc_private
 
@@ -670,11 +719,16 @@ chap12、高性能I/O框架库Libevent
 ##### 0、
 
 + sys/shm.h
-  13.6.1、shmget系统调用
-  13.6.2、shmat和shmdt系统调用
-  13.6.3、shmctl系统调用
-  13.6.4、共享内存的posix方法
-  13.6.5、共享内存实例
+
+13.6.1、shmget系统调用
+
+13.6.2、shmat和shmdt系统调用
+
+13.6.3、shmctl系统调用
+
+13.6.4、共享内存的posix方法
+
+13.6.5、共享内存实例
 
 #### 13.7、消息队列
 
@@ -794,3 +848,46 @@ int sem_wait(sem_t *sem);
 + **每个线程都可以独立地设置信号掩码**。`sigprocmask()`
 
 ### chap15、进程池和线程池
+
+15.1、进程池和线程池概述
+
+#### 15.2、处理多客户
+
++ 监听socket和连接socket是否都由主进程统一管理？
++ **半同步/半反应堆模式**是由主进程统一管理这两种socket的
++ **半同步/半异步**（领导者/追随者）模式，则由主进程管理所有监听socket，而各个子进程分别管理属于自己的连接socket。
+
+#### 15.3、半同步/半异步进程池实现
+
++ 代码清单15-1
+
+15.4、用进程池实现的简单cgi服务器
+
+15.5、半同步/半反应堆线程池实现
+
+15.6、用线程池实现的简单web服务器
+
+### chap16、
+
+### chap17、系统监测工具
+
+#### 17.1、tcpdump
+
++ tcpdump**支持表达式**进一步过滤数据包
+  + 类型
+  + 方向：`tcpdump dst port 13579`
+  + 协议：`tcpdump icmp`
+
+17.2、lsof
+
+17.3、nc
+
+17.4、strace
+
+17.5、netstat
+
+17.6、vmstat
+
+17.7、ifstat
+
+17.8、mpstat
