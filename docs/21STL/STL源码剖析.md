@@ -1,5 +1,13 @@
 ## 《STL源码剖析》
 
+### 0、
+
+#### 搜集的
+
++ [STL源码阅读小记(一)——Allocator](http://www.ninesnow.cn/2021/11/stl%e6%ba%90%e7%a0%81%e9%98%85%e8%af%bb%e5%b0%8f%e8%ae%b0%e4%b8%80-allocator/)  STL源码阅读小记，*可能跟书关系不大*，【提供了[LLVM](https://github.com/llvm/llvm-project)中的[libc++](https://github.com/llvm/llvm-project/tree/main/libcxx)的地址】
++ [STL 源码剖析 –侯捷](https://wangpengcheng.github.io/2019/07/06/cplusplus_annotated_stl_sources_01/)，分了4版，*也有不少我可以参考的笔记（linux，内核，并发，设计模式）*
+  + [shell练习题](https://wangpengcheng.github.io/2023/11/07/shell_practice/)
+
 ### chap1、STL概论与版本简介
 
 #### 1.9、可能令你困惑的C++语法
