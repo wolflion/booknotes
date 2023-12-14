@@ -8,6 +8,11 @@
 + [STL 源码剖析 –侯捷](https://wangpengcheng.github.io/2019/07/06/cplusplus_annotated_stl_sources_01/)，分了4版，*也有不少我可以参考的笔记（linux，内核，并发，设计模式）*
   + [shell练习题](https://wangpengcheng.github.io/2023/11/07/shell_practice/)
 
+#### 设计模式-知识点
+
++ 迭代器
++ 适配器
+
 ### chap1、STL概论与版本简介
 
 #### 1.9、可能令你困惑的C++语法
@@ -57,6 +62,17 @@
 
 + iterator模式，**提供一种方法，使之能够依次巡访某个聚合物（容器）所含的各个元素，而又无需暴露该聚合物的内部表述方式**。
 + *如何设计迭代器*
+  + **行为型**
+  + 不暴露底层数据结构时，遍历所有元素
+  + **C++中，类对象，提供自增和解引用操作**，用于遍历所有元素
+  + [解密C++迭代器模式，轻松提高代码效率！ - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/629378889)
+  + 结构图
+    + 迭代器抽象类Iterator【virtual，Firset()，Next()，IsDone()】
+    + 聚集抽象类Aggregate（*为何要聚合*）【创建迭代器】
+    + 具体迭代器ConcreteIterator，继承Iterator
+    + 具体聚集类ConcreteAggreate【*不懂啥意思*】（实现具体的迭代器吗？）
+    + 客户端代码（ConcreteAggreate去new一个对象，然后用ConcreteaIterator给Iterator）*这个没懂*
++ *具体的算法，如何跟本节关联上？*
 
 #### 3.1、迭代器设计思维-STL关键所在
 
@@ -73,6 +89,8 @@
 + 只能获得**型别名称**，不能拿来做变量声明之用
   + 解决方法，**利用function template的参数推导（argument deducation）机制**
 + 相应型别有5种
+  + *型别，表示的是 类型 吗？*
++ *本节，用了impl机制*（这个机制，我大概是懂的，但用在这是啥意思）
 
 #### 3.4、Traits编程技法-STL源代码门钥
 
@@ -86,9 +104,37 @@
 
 ##### pointer_type
 
-##### iterator_type
+##### 3.4.5、迭代器相应型别之五：iterator_category
+
++ 迭代器的分类（5种）
+  + input Iterator
+  + Output iterator
+  + Forward Iterator
+  + Bidirectional Iterator
+  + Random Access Iterator
+
+###### 以advace()为例
+
+###### 消除“单纯传递调用的函数”
+
+###### 以distance()为例
 
 #### 3.5、std::iterator的保证
+
++ STL提供了一个iterators class，**每个新设计的迭代器，都继承自它**，【后三个，都有默认值】*我要搜下，源码中，怎么用的呢*】
+
+```cpp
+template <class Category, class T, class Distance=ptrdiff_t, class Pointer = T*, class Reference = T&>
+struct iterator{
+    typedef Category iterator_category;
+    typedef T     value_type;
+    typedef Distance  difference_type;
+    typedef Pointer pointer;
+    typedef Reference reference;
+};
+```
+
+
 
 #### 3.6、iterator源代码完整重列
 
@@ -96,7 +142,110 @@
 
 ### chap4、序列式容器（sequence containers）
 
++ stack、queue算**容器适配器**（他们是封装了其它容器）
++ priority_queue，**依赖于heap**
++ slist至少目前还没有标准化
+
 #### 4.1、容器的概观与分类
+
+##### 4.1.1、序列式容器（sequential containers）
+
++ 序列式容器，**元素都可序（ordered）但未必有序（sorted）**，【*简单点说，就是还没有排序sort呢，lionel*】
++ stack、queue是deque的封装，**技术上归类为一种配接器adapter**
+
+#### 4.2、vector
+
+4.2.1、vector概述
+
+4.2.1、vector概述
+
+4.2.1、vector概述
+
+4.2.1、vector概述
+
+4.2.1、vector概述
+
+4.2.1、vector概述
+
+#### 4.3、list
+
+4.3.1、vector概述
+
+4.3.1、vector概述
+
+4.3.1、vector概述
+
+4.3.1、vector概述
+
+4.3.1、vector概述
+
+4.3.1、vector概述
+
+#### 4.4、deque
+
+4.3.1、vector概述
+
+4.3.1、vector概述
+
+4.3.1、vector概述
+
+4.3.1、vector概述
+
+4.3.1、vector概述
+
+4.3.1、vector概述
+
+#### 4.5、stack
+
+4.3.1、vector概述
+
+4.3.1、vector概述
+
+4.3.1、vector概述
+
+4.3.1、vector概述
+
+#### 4.6、queue
+
+4.3.1、vector概述
+
+4.3.1、vector概述
+
+4.3.1、vector概述
+
+4.3.1、vector概述
+
+#### 4.7、heap
+
+4.3.1、vector概述
+
+4.3.1、vector概述
+
+4.3.1、vector概述
+
+4.3.1、vector概述
+
+#### 4.8、priority_queue
+
+4.8.1、priority_queue概述
+
+4.3.1、vector概述
+
+4.3.1、vector概述
+
+4.3.1、vector概述
+
+#### 4.9、slist
+
+4.3.1、vector概述
+
+4.3.1、vector概述
+
+4.3.1、vector概述
+
+4.3.1、vector概述
+
+4.3.1、vector概述
 
 ### chap5、关联式容器
 
@@ -198,6 +347,9 @@
 
 ### chap7、仿函数（functors，另名  函数对象 function objects）
 
++ 官方提供的都是类似于`greater<T>,plus<T>`这种，*但我没懂，怎么描述它*
+  + 它们是个类，然后创建一个类对象，**支持`()`运算符重载**
+
 #### 7.1、仿函数（functor）概观
 
 + 开始叫仿函数，后来规范叫**函数对象**（一种具有函数特质的对象）
@@ -231,12 +383,14 @@ cout<<greater<int>()(6,4);//true  【greater<int>()产生了一个无名（临�
 #### 7.3、算术类（Arithmetic）仿函数
 
 + 内建的“算术类仿函数”
+  + `plus<T>`
 + P419，7functor-arithmetic.cpp
 + 证同元素（identity element）
 
 #### 7.4、关系运算类（Rational）仿函数
 
 + 内建的“关系运算类仿函数”
+  + `equal_to<T>`
 + P421，7functor-rational.cpp
 
 #### 7.5、逻辑运算类（Logical）仿函数
@@ -247,6 +401,7 @@ cout<<greater<int>()(6,4);//true  【greater<int>()产生了一个无名（临�
 #### 7.6、证同（identity）、选择（select）、投射（project）
 
 + *这一节没太懂啥意思，lionel*
++ C++20，提供了`std::identity`
 
 ### chap8、配接器（adapters）
 
