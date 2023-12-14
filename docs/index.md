@@ -75,6 +75,12 @@ https://lxr.missinglinkelectronics.com/linux+v2.6.24/include/linux/skbuff.h，li
 + [中科大的计算机课程](https://github.com/USTC-Resource/USTC-Course)，*想看一下，一些OS的实验课*
   + https://mbinary.xyz/ustc-cs/，从这个网站跳过去的
   + https://github.com/weaiken/Blog，这个里面也有
-
 + https://www.bilibili.com/video/BV1Zb411q7iY/?spm_id_from=333.337.search-card.all.click&vd_source=66d6345790c729dfa0a136a5183762c9   b站郭炜的算法
   + 可能不太适合我，*感觉就是讲代码*，没具体投时间，2023-08-12
++ [程序员练级攻略](https://github.com/leesper/ProgrammersLevelUp)，*耗子的*
+  + 编程语言（C++）
+  + 理论学科（408）
+  + 系统知识（Linux）
+  + [实践项目](https://github.com/leesper/ProgrammersLevelUp/blob/main/07_%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/README.md)
++ https://freegeektime.com/posts/， 不少课程的文字版
++ 
