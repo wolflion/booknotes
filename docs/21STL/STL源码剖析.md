@@ -15,19 +15,52 @@
 
 ### chap1、STL概论与版本简介
 
+#### 1.8、SGI STL实现版本
+
+##### 1.8.1、GNU C++
+
+##### 1.8.2、SGI STL文件分布与简介
+
+##### 1.8.3、SGI STL的编译器组态设置
+
 #### 1.9、可能令你困惑的C++语法
+
++ template参数推导（argument deduction）
++ 偏特化（partial specialization）
 
 ##### 1.9.1、stl_config.h中的各种组态
 
 ##### 1.9.2、临时对象的产生与运用
 
++ 临时对象，就是**无名对象**（unnamed objects），它的出现不在程序员预期内
++ **仿函数（functor）**
++ config-temporary-object.cpp
+  + 测试for_each()的情形
+
 ##### 1.9.3、静态常量整数成员在class内部直接初始化
 
++ config-inclass-init.cpp
+  + *之前是要在类外的*（是不是只局限于const啊，*自己可以代码试一下*）
+
 ##### 1.9.4、increment/decrement/dereference操作符
+
++ config-operator-overloading.cpp
 
 ##### 1.9.5、前闭后开区间表示法`[)`
 
 ##### 1.9.6、function call操作符`operator()`
+
++ 之前，把函数当作参数传递，只有通过**函数指针**的方式，但有个缺点（**它无法持有自己的状态【局部状态】**），也无法达到组件技术中的**可适配性（adaptability）**，也就是无法再将某些修饰条件加诸于其上而改变其状态
++ 之前没看，**42页注释写得比较清楚**（75/534）
+
+```cpp
+plus<int> plusobj;  //lionel，这个plus是作者自定义的，虽然STL里也有一个
+cout<<plusobj(3,5)<<endl;//这个地方是8，   **这里使用仿函数，跟使用一般函数一样**
+//另一种方式
+cout<<plus<int>()(43,50)<<endl; //输出93，前面的plus<int>()产生仿函数的临时对象，第二对小括号表示调用
+```
+
+
 
 ### chap2、空间配置器（allocator）
 
@@ -372,11 +405,17 @@ cout<<greater<int>()(6,4);//true  【greater<int>()产生了一个无名（临�
 
 #### 7.2、可配接（adaptable）的关键
 
++ 仿函数的相应型别主要用来表现**函数参数型别**和**传回值型别**。
+
 ##### 7.2.1、unary_function
+
++ 表现一元函数的**参数型别**和**返值型别**。
 
 + 一元必须继承它
 
 ##### 7.2.2、binary_function
+
++ 表现一元函数的**第一参数型别**、**第二参数型别**和**返值型别**。
 
 + 二元必须继承它
 
@@ -385,7 +424,8 @@ cout<<greater<int>()(6,4);//true  【greater<int>()产生了一个无名（临�
 + 内建的“算术类仿函数”
   + `plus<T>`
 + P419，7functor-arithmetic.cpp
-+ 证同元素（identity element）
+
+##### 证同元素（identity element）
 
 #### 7.4、关系运算类（Rational）仿函数
 
@@ -424,6 +464,8 @@ cout<<greater<int>()(6,4);//true  【greater<int>()产生了一个无名（临�
 
 #### 8.2、container adapters
 
++ 容器适配器，主要是stack，queue，**底层都是deque**
+
 ##### 8.2.1、stack
 
 + `class Sequence = deque<T>`
@@ -437,6 +479,8 @@ cout<<greater<int>()(6,4);//true  【greater<int>()产生了一个无名（临�
 ##### 8.3.1、insert iterators
 
 ##### 8.3.2、reverse iterators
+
++ 将迭代器的移动行为倒转
 
 ##### 8.3.3、stream iterators
 
