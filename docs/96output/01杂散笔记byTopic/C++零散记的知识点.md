@@ -108,7 +108,7 @@
   + gsl::not_null
   + sizeof，const，extern，const修饰指针、const修饰成员函数
   + thread C++11，join()，detach()
-  + C++锁、互斥锁（mutex），条件锁（条件变量，condition_variable）、自旋锁，递归锁，信号量
+  + C++锁、互斥锁（mutex），条件锁（条件变量，condition_variable）、自旋锁，递归锁，信号量、读写锁
   + 大小端
   + std::set_intersetcion
   + 函数对象functor
