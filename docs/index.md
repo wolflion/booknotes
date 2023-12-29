@@ -83,4 +83,5 @@ https://lxr.missinglinkelectronics.com/linux+v2.6.24/include/linux/skbuff.h，li
   + 系统知识（Linux）
   + [实践项目](https://github.com/leesper/ProgrammersLevelUp/blob/main/07_%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/README.md)
 + https://freegeektime.com/posts/， 不少课程的文字版
++ 动手学深度学习，https://zh.d2l.ai/
 + 
