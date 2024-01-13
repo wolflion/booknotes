@@ -122,7 +122,11 @@ static struct super_operations sockfs_ops = {
 
 #### 3.1、地址设置接口
 
++ *为什么server端要调用bind()*
+
 #### 3.2、地址结构定义
+
++ *struct sockaddr_in与struct sockaddr能相互转换不？*
 
 #### 3.3、地址类型
 
@@ -130,9 +134,11 @@ static struct super_operations sockfs_ops = {
 
 #### 3.5、网络空间总管init_net
 
++ `net_ns_init()`
+
 ### chap4、路由
 
-4.1、路由函数表结构及关系图
+#### 4.1、路由函数表结构及关系图
 
 4.2、路由函数表的初始化
 
