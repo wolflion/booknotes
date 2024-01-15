@@ -537,6 +537,20 @@
         </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#chap15">chap15、进程池和线程池</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#152">15.2、处理多客户</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#153">15.3、半同步/半异步进程池实现</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap16">chap16、</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap17">chap17、系统监测工具</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#171tcpdump">17.1、tcpdump</a>
+    </li>
+        </ul>
     </li>
     </ul>
                   </li>
@@ -589,7 +603,7 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《深入理解Linux网络技术内幕》</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/Linux%E5%86%85%E6%A0%B8%E6%BA%90%E4%BB%A3%E7%A0%81%E5%89%96%E6%9E%90-tcpip%E5%AE%9E%E7%8E%B0/">《Linux内核源代码剖析-TCP/IP实现》</a>
+                  <li class="toctree-l1"><a class="" href="../../13kernel/Linux内核源代码剖析-tcpip实现.md">《Linux内核源代码剖析-TCP/IP实现》</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E5%86%85%E6%A0%B8/">《深入理解Linux内核》</a>
                   </li>
@@ -611,9 +625,9 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/">《剑指offer专项突破》</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../96output/OD%E5%9F%BA%E7%A1%80%E9%A2%98/">OD基础题</a>
+                  <li class="toctree-l1"><a class="" href="../../96output/OD基础题.md">OD基础题</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../96output/OD%E8%BF%9B%E9%98%B6%E9%A2%98/">OD进阶题</a>
+                  <li class="toctree-l1"><a class="" href="../../96output/OD进阶题.md">OD进阶题</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">网课</span></p>
@@ -1166,6 +1180,13 @@ return true;
 </ul>
 <h4 id="83io">8.3、I/O模型<a class="headerlink" href="#83io" title="Permanent link">&para;</a></h4>
 <ul>
+<li>ref（解释了一些名词）<ul>
+<li><a href="http://www.ninesnow.cn/2020/08/%e9%ab%98%e6%80%a7%e8%83%bd%e6%9c%8d%e5%8a%a1%e5%99%a8%e7%a8%8b%e5%ba%8f%e6%a1%86%e6%9e%b6-%e6%80%bb%e7%bb%93/">高性能服务器程序框架 总结</a></li>
+<li>阻塞与非阻塞的重点在于状态（<strong>当前线程是否挂起</strong>），同步和异步的重点在于消息通讯机制（异步<strong>无结果也返回，真有结果时通过一些方式通知调用者</strong>）</li>
+</ul>
+</li>
+</ul>
+<ul>
 <li>阻塞与非阻塞</li>
 <li>阻塞I/O：</li>
 <li><strong>非阻塞I/O通常要和其他I/O通知机制一起使用，比如I/O复用和SIGIO信号</strong>。</li>
@@ -1233,6 +1254,18 @@ return true;
 </ul>
 <h5 id="873">8.7.3、上下文切换和锁<a class="headerlink" href="#873" title="Permanent link">&para;</a></h5>
 <h3 id="chap9io">chap9、I/O复用<a class="headerlink" href="#chap9io" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>I/O复用使得程序能同时监听多个文件描述符</strong></li>
+<li>网络程序需要使用I/O复用技术<ul>
+<li>客户端程序要同时处理多个socket，<strong>非阻塞connect技术</strong></li>
+<li>客户端程序要同时处理用户输入和网络连接</li>
+<li>TCP服务器要同时处理监听socket和连接socket</li>
+<li>服务器要同时处理TCP请求和UDP请求</li>
+<li>服务器要同时监听多个端口，或者处理多种服务</li>
+</ul>
+</li>
+<li><strong>I/O复用虽然能同时监听多个文件描述符，但它本身是阻塞的</strong>。当多个文件描述符同时就绪时，如果不采取额外的措施，程序就只能按照顺序依次处理其中的每一个文件描述符，<strong>使得服务器程序看起来像是串行工作的</strong>。如果要实现并发，只能使用多进程或多线程</li>
+</ul>
 <h4 id="91select">9.1、select系统调用<a class="headerlink" href="#91select" title="Permanent link">&para;</a></h4>
 <ul>
 <li>select系统调用的用途是：<strong>在一段时间内，监听用户感兴趣的文件描述符上的可读、可写和异常等事件</strong>。</li>
@@ -1241,16 +1274,52 @@ return true;
 <pre class="highlight"><code class="language-c">#include &lt;sys/select.h&gt;
 int select(int nfds, fd_set *readfs, fd_set *writefds, fd_set* exceptfds,
           struct timeval* timeout);</code></pre>
+<ul>
+<li>nfds，指定被监听的文件描述符的总数</li>
+<li>readfs，writefs，exceptfs，可读，可写，异常事件对应的文件描述符集合</li>
+<li><strong>fd_set结构体</strong>，容纳的文件描述符数量由FD_SETSIZE指定，这就限制了select能同时处理的文件描述符的总量</li>
+<li>timeout，是超时时间</li>
+</ul>
 <h5 id="912">9.1.2、文件描述符就绪文件<a class="headerlink" href="#912" title="Permanent link">&para;</a></h5>
 <ul>
-<li>下列socket可读</li>
-<li>下列socket可写</li>
+<li>下列socket可读<ul>
+<li>socket内核接收缓存区中的字节数大于或等于其低水位标记SO_RCVLOWAT</li>
+<li>socket通信的对方关闭连接</li>
+<li>监听socket上有新的连接请求</li>
+<li>socket上有未处理的错误</li>
+</ul>
+</li>
+<li>下列socket可写<ul>
+<li>socket内核发送缓存中的可用字节数大于或等于其低水位标记SO_SNDLOWAT</li>
+<li>socket的写操作被关闭</li>
+<li>socket使用非阻塞connect连接成功或失败（超时）之后</li>
+<li>socket上有未处理的错误</li>
+</ul>
+</li>
 <li><strong>网络程序中，select能处理的异常情况只有一种：socket上接收到带外数据</strong>。</li>
 </ul>
 <h5 id="913out-of-band-oob">9.1.3、处理带外数据（out-of band OOB)<a class="headerlink" href="#913out-of-band-oob" title="Permanent link">&para;</a></h5>
+<ul>
+<li><em>带外数据，会让socket的返回值异常状态？</em></li>
+</ul>
 <h4 id="92poll">9.2、poll系统调用<a class="headerlink" href="#92poll" title="Permanent link">&para;</a></h4>
+<ul>
+<li>与select类似，<strong>指定时间内轮询一定数量的文件描述符</strong>，以测试其中是否有就绪者</li>
+</ul>
 <pre class="highlight"><code class="language-c">#include &lt;poll.h&gt;
 int poll(struct pollfd* fds, nfds_t nfds, int timeout);</code></pre>
+<ul>
+<li>fds是<strong>pollfd结构类型的数组</strong>，指定所有我们感兴趣的文件描述符上发生的可读、可写和异常事件</li>
+</ul>
+<pre class="highlight"><code class="language-c">struct pollfd{
+    int fd;//文件描述符
+    short events;//注册的事件 【监听的事件】
+    short revents;//实际发生的事件，由内核填充
+};</code></pre>
+<ul>
+<li>nfds，指定被监听事件集合fds的大小</li>
+<li>timeout，poll的超时值</li>
+</ul>
 <h4 id="93epoll">9.3、epoll系列系统调用<a class="headerlink" href="#93epoll" title="Permanent link">&para;</a></h4>
 <h5 id="931">9.3.1、内核事件表<a class="headerlink" href="#931" title="Permanent link">&para;</a></h5>
 <ul>
@@ -1269,6 +1338,15 @@ int epoll_create(int size);</code></pre>
 </ul>
 <pre class="highlight"><code class="language-c">#include&lt;sys/epoll.h&gt;
 int epoll_ctl(int epfd, int op, int fd, struct epoll_event *event);</code></pre>
+<ul>
+<li>epfd，要操作的文件描述符</li>
+<li>op，指定操作类型<ul>
+<li>EPOLL_CTL_ADD，往事件表中注册fd上的事件</li>
+<li>EPOLL_CTL_MOD，修改fd上的注册事件</li>
+<li>EPOLL_CTL_DEL，删除fd上的注册事件</li>
+</ul>
+</li>
+</ul>
 <h5 id="932epoll_wait">9.3.2、epoll_wait函数<a class="headerlink" href="#932epoll_wait" title="Permanent link">&para;</a></h5>
 <ul>
 <li>作用是：<strong>在一段超时时间内等待一组文件描述符上的事件</strong>。</li>
@@ -1326,24 +1404,32 @@ int epoll_wait(int epfd, struct epoll_event *events, int maxevents,
 <p>13.5.1、信号量原语</p>
 <ul>
 <li>P（passeren，传递，进入临界区）和V（vrijgeven，释放，退出临界区）</li>
-<li>sys/sem.h
-  13.5.2、semget系统调用</li>
+</ul>
+<ul>
+<li>
+<p>sys/sem.h</p>
+<p>13.5.2、semget系统调用</p>
+</li>
+</ul>
+<ul>
 <li><strong>创建信号量集</strong>
   13.5.3、semop系统调用
   13.5.4、semctl系统调用</li>
+</ul>
+<ul>
 <li><strong>允许调用者对信号量进行直接控制</strong>
   13.5.5、特殊键值ipc_private</li>
 </ul>
 <h4 id="136">13.6、共享内存<a class="headerlink" href="#136" title="Permanent link">&para;</a></h4>
 <h5 id="0_6">0、<a class="headerlink" href="#0_6" title="Permanent link">&para;</a></h5>
 <ul>
-<li>sys/shm.h
-  13.6.1、shmget系统调用
-  13.6.2、shmat和shmdt系统调用
-  13.6.3、shmctl系统调用
-  13.6.4、共享内存的posix方法
-  13.6.5、共享内存实例</li>
+<li>sys/shm.h</li>
 </ul>
+<p>13.6.1、shmget系统调用</p>
+<p>13.6.2、shmat和shmdt系统调用</p>
+<p>13.6.3、shmctl系统调用</p>
+<p>13.6.4、共享内存的posix方法</p>
+<p>13.6.5、共享内存实例</p>
 <h4 id="137">13.7、消息队列<a class="headerlink" href="#137" title="Permanent link">&para;</a></h4>
 <p>13.7.1、msgget系统调用
 13.7.2、msgsnd系统调用
@@ -1444,6 +1530,38 @@ int sem_wait(sem_t *sem);</code></pre>
 <li><strong>每个线程都可以独立地设置信号掩码</strong>。<code>sigprocmask()</code></li>
 </ul>
 <h3 id="chap15">chap15、进程池和线程池<a class="headerlink" href="#chap15" title="Permanent link">&para;</a></h3>
+<p>15.1、进程池和线程池概述</p>
+<h4 id="152">15.2、处理多客户<a class="headerlink" href="#152" title="Permanent link">&para;</a></h4>
+<ul>
+<li>监听socket和连接socket是否都由主进程统一管理？</li>
+<li><strong>半同步/半反应堆模式</strong>是由主进程统一管理这两种socket的</li>
+<li><strong>半同步/半异步</strong>（领导者/追随者）模式，则由主进程管理所有监听socket，而各个子进程分别管理属于自己的连接socket。</li>
+</ul>
+<h4 id="153">15.3、半同步/半异步进程池实现<a class="headerlink" href="#153" title="Permanent link">&para;</a></h4>
+<ul>
+<li>代码清单15-1</li>
+</ul>
+<p>15.4、用进程池实现的简单cgi服务器</p>
+<p>15.5、半同步/半反应堆线程池实现</p>
+<p>15.6、用线程池实现的简单web服务器</p>
+<h3 id="chap16">chap16、<a class="headerlink" href="#chap16" title="Permanent link">&para;</a></h3>
+<h3 id="chap17">chap17、系统监测工具<a class="headerlink" href="#chap17" title="Permanent link">&para;</a></h3>
+<h4 id="171tcpdump">17.1、tcpdump<a class="headerlink" href="#171tcpdump" title="Permanent link">&para;</a></h4>
+<ul>
+<li>tcpdump<strong>支持表达式</strong>进一步过滤数据包<ul>
+<li>类型</li>
+<li>方向：<code>tcpdump dst port 13579</code></li>
+<li>协议：<code>tcpdump icmp</code></li>
+</ul>
+</li>
+</ul>
+<p>17.2、lsof</p>
+<p>17.3、nc</p>
+<p>17.4、strace</p>
+<p>17.5、netstat</p>
+<p>17.6、vmstat</p>
+<p>17.7、ifstat</p>
+<p>17.8、mpstat</p>
               
             </div>
           </div><footer>

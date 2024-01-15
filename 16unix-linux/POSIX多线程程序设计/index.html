@@ -149,7 +149,7 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《深入理解Linux网络技术内幕》</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/Linux%E5%86%85%E6%A0%B8%E6%BA%90%E4%BB%A3%E7%A0%81%E5%89%96%E6%9E%90-tcpip%E5%AE%9E%E7%8E%B0/">《Linux内核源代码剖析-TCP/IP实现》</a>
+                  <li class="toctree-l1"><a class="" href="../../13kernel/Linux内核源代码剖析-tcpip实现.md">《Linux内核源代码剖析-TCP/IP实现》</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E5%86%85%E6%A0%B8/">《深入理解Linux内核》</a>
                   </li>
@@ -171,9 +171,9 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/">《剑指offer专项突破》</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../96output/OD%E5%9F%BA%E7%A1%80%E9%A2%98/">OD基础题</a>
+                  <li class="toctree-l1"><a class="" href="../../96output/OD基础题.md">OD基础题</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../96output/OD%E8%BF%9B%E9%98%B6%E9%A2%98/">OD进阶题</a>
+                  <li class="toctree-l1"><a class="" href="../../96output/OD进阶题.md">OD进阶题</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">网课</span></p>
@@ -775,6 +775,14 @@ int main(int argc, char *argv[]){
 <h4 id="_2">履历<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
 <ul>
 <li>2021-9-19读了本书的一大部分，并手写了笔记，2023-03月左右又把这本书的笔记给电子化了一下【<em>之前最大的问题，还是在于只是抄写了书的笔记，而没有真正的理解代码和应用场景</em>】</li>
+<li>2024-01-10学习了《UNP》的线程后，再回来翻看这本书，提出的问题是这样的<ul>
+<li>1、在哪地方能找个manual？posix thread 有吗？【对于C++11，就是多了<strong>原子类型</strong>，为了省mutex，引入原子类型】</li>
+<li>2、real code是干啥的？AI说，<strong>应用程序实际可执行的代码，与其它部分（头文件、静态数据）区分开来</strong></li>
+<li>3、多线程或操作系统中barrier怎么理解？<strong>同步机制，阻塞所有线程的执行（一个线程到达这个同步点，必须等待其它线程到达也行），MapReduce应用了这个技术</strong></li>
+<li>4、理解了chap4的使用方式（流水线好理解，C/S理解有例子【UNP中就这么用的】，工作组（<em>理解就是线程池？</em>）</li>
+<li>5、pthread多线程的调试</li>
+</ul>
+</li>
 </ul>
               
             </div>

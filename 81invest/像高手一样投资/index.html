@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>像高手一样投资 - lionel的技术笔记</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "\u50cf\u9ad8\u624b\u4e00\u6837\u6295\u8d44";
+        var mkdocs_page_input_path = "81invest\\\u50cf\u9ad8\u624b\u4e00\u6837\u6295\u8d44.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> lionel的技术笔记
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">简介</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../01daily/">daily</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../02ds/">ds</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../03cpp/">cpp</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../21tool/">tool</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">C++</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../20C%2B%2B/effectiveC%2B%2B/">《Effective C++》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../20C%2B%2B/%E6%B7%B1%E5%BA%A6%E6%8E%A2%E7%B4%A2C%2B%2B%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B/">《深度探索C++对象模型》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/EffectiveSTL/">《Effective STL》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/C%2B%2B%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/">《C++泛型STL原理和应用》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/">《STL源码剖析》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../22C%2B%2Bmodern/%E6%B7%B1%E5%85%A5%E5%BA%94%E7%94%A8C%2B%2B11/">《深入应用C++11》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">基础知识</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA/">《操作系统导论》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E5%A4%A7%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">《大话设计模式》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90_C%2B%2B4th/">《数据结构与算法分析_C++4th》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E7%AE%97%E6%B3%95%284th%29/">《算法4th》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90-%E5%BC%A0%E5%86%9B/">《算法设计与分析-张军》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E5%A4%A9%E8%A1%8C-%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《天行-算法设计与实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%95%99%E7%A8%8B-%E6%9D%8E%E6%98%A5%E8%91%86/">《数据结构教程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%96%B0%E7%BC%96%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%A0%E9%A2%98%E4%B8%8E%E8%A7%A3%E6%9E%90/">《新编数据结构习题与解析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网络编程</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/TCPIP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">《TCP/IP网络编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/">《Linux高性能服务器编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/TCPIP%E8%AF%A6%E8%A7%A3%E5%8D%B71/">《TCPIP详解卷1》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/Linux%E5%86%85%E6%A0%B8%E7%BD%91%E7%BB%9C%E6%A0%88%E6%BA%90%E4%BB%A3%E7%A0%81%E6%83%85%E6%99%AF%E5%88%86%E6%9E%90/">《Linux内核网络栈源代码情景分析》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C/">《深入理解Linux网络》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">机器&深度学习</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../30machineLearning/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%9F%BA%E7%A1%80/">《机器学习线性代数基础》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../31deepLearning/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%85%A5%E9%97%A8%EF%BC%9A%E5%9F%BA%E4%BA%8EPython%E7%9A%84%E7%90%86%E8%AE%BA%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《深度学习入门：基于Python的理论与实现》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">文件系统</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/Linux%E5%86%85%E6%A0%B8%E6%8E%A2%E7%A7%98/">《Linux内核探秘》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《文件系统技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">《存储技术原理分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">存储</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../12storage/ceph%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《ceph设计原理与实现》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">视频</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/FFmpeg%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/">《FFmpeg入门到精通》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/WebRTC%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/">《WebRTC权威指南》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/WebRTC%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AE%9E%E6%97%B6%E4%BA%92%E5%8A%A8%E6%8A%80%E6%9C%AF/">《WebRTC音视频实时互动技术》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/%E6%96%B0%E4%B8%80%E4%BB%A3%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9%E7%A0%81%E6%A0%87%E5%87%86-H.264_AVC/">《新一代视频压缩码标准-H.264_AVC》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">内核</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/Linux%E5%86%85%E6%A0%B8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《Linux内核设计与实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5Linux%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%E5%86%85%E6%A0%B8%E6%9C%BA%E5%88%B6/">《深入Linux设备驱动程序内核机制》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">《深入理解Linux虚拟内存管理》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《深入理解Linux网络技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../13kernel/Linux内核源代码剖析-tcpip实现.md">《Linux内核源代码剖析-TCP/IP实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E5%86%85%E6%A0%B8/">《深入理解Linux内核》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">工具</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/Wireshark%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98/">《Wireshark网络分析实战》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/Linux%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8Eshell%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B%E5%A4%A7%E5%85%A8%283rd%29/">《Linux命令行与shell脚本编程大全(3rd)》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/python%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%883rd%EF%BC%89/">《python程序设计（3rd）》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/python/Python%E7%BC%96%E7%A8%8B%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E8%B7%B5/">《Python编程从入门到实践》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">刷题</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer2nd/">《剑指offer2nd》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/">《剑指offer专项突破》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../96output/OD基础题.md">OD基础题</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../96output/OD进阶题.md">OD进阶题</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网课</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/01Linux%E9%AB%98%E5%B9%B6%E5%8F%91%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/">《Linux高并发网络编程开发》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/%E4%BE%AF%E6%8D%B7/%E4%BE%AF%E6%8D%B7C%2B%2B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%8660%E8%AE%B2/">《侯捷C++内存管理60讲》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/11NJU%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">《NJU算法设计与分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">英语专</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../60English/00794%E7%BB%BC%E5%90%88%E8%8B%B1%E8%AF%AD%E4%B8%80%E4%B8%8A/">《综合英语(一)上》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../95selfStudy/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/">《概率率与数理统计》</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">lionel的技术笔记</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>像高手一样投资</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="_1">《像高手一样投资》<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h3 id="0">0<a class="headerlink" href="#0" title="Permanent link">&para;</a></h3>
+<h4 id="_2">整体计划<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
+<ul>
+<li>2023-12-31开始看第1个番茄钟198-207/304，全书计划30个，<em>差不多全书17章，篇幅较多的访谈估计要看2个番茄钟</em></li>
+</ul>
+<h4 id="_3">一些收获<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
+<ul>
+<li>chap11任俊杰搞<strong>价值投资</strong></li>
+</ul>
+<h3 id="chap11">chap11、“荒岛股票”任俊杰<a class="headerlink" href="#chap11" title="Permanent link">&para;</a></h3>
+<ul>
+<li>从金融监管者到专业投资者</li>
+<li>2019-2-16下午访谈</li>
+</ul>
+<h4 id="0_1">0、<a class="headerlink" href="#0_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li>1984年到深圳的北京人，在央行做研究，到深圳人行从事外汇管理，做过财务公司，券商，雪球大V</li>
+<li>《穿过迷雾》一书</li>
+<li>1978年，考入北京财贸学院，分到人行总行的金融研究所，做了2年，1984年，深圳到北京和上海招聘干部，自己就去应聘，应聘上了，人行不让走，几经周折，人行答应可以去深圳特区分行，<strong>主要从事外汇有关</strong>，从科员做到处长，做3块<ul>
+<li>外资银行管理</li>
+<li>管理外债</li>
+<li>专业银行的外汇业务怎么开展</li>
+</ul>
+</li>
+<li>1990，1991年，深圳金融机构同业协会首任秘书长，1992年窗口公司<strong>江南财务</strong>，筹办了现在的<strong>长城证券</strong></li>
+<li>全身心做投资，2003年以后，起因是1996年在香港书店看到一本书《胜券在握》，当时还不知道巴菲特全球那么有名呢</li>
+</ul>
+<h4 id="_4">巴菲特的理论，是我最喜欢的<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
+<ul>
+<li>国内的版本是《巴菲特之到》，<strong>杨天南</strong>，1996年开始进门，因为不可能马上掌握这东西，经过六七年学习研究，2003年就觉得胜算大多了</li>
+<li>2001年有点积累了，但当时是牛市，价格太高，<strong>就等着，2002年下跌，2003年比较低了</strong>，当时买了华侨城、双汇，2005年前后买了茅台、张裕，<strong>价投以来，买过的股票10只左右，平均持股超过7年</strong></li>
+<li>怎么学投资的？<ul>
+<li><strong>看书，反复的看巴菲特的书</strong>，也看一些<strong>价值投资反对者</strong>写的书</li>
+</ul>
+</li>
+<li>全球市场长期收益率是9-10%，自己再比它高2-3个点，<strong>个人收益率18%的话，72法则，四年就翻倍</strong></li>
+</ul>
+<h4 id="_5">选股框架：四个“走”<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>自下而上</strong>选股</li>
+<li>看企业研究的书<ul>
+<li>怎么判断一个企业是不是好企业</li>
+<li>怎么看一个企业的生意是不是个好生意</li>
+<li>怎么看一个企业的生意能否长久、良性地发展下去</li>
+<li>《公司的核心竞争力》</li>
+<li>《蓝海战略》</li>
+</ul>
+</li>
+<li>四个“走”，<strong>走出去，走进去、走下去、走上去</strong><ul>
+<li>走出去，你企业的产品市场需不需要，有没有空间</li>
+<li>走进去，你的竞争优势在哪里</li>
+<li>走下去，有没有核心能力</li>
+<li>走上去，就是蓝海，没人跟你竞争</li>
+<li><strong>2007-2008形成的</strong></li>
+</ul>
+</li>
+<li>还买自己用过的服务，<strong>彼得.林奇</strong>是推荐大家买熟悉的股票，他自己大概买了1000多只股票</li>
+<li>关注的财务指标是<strong>净资产收益率</strong>，巴菲特的ROE是15%</li>
+<li>卖出一只股票，价值投资的标准答案<ul>
+<li>股价过高估值了，<strong>如果是好公司的话，过高估值这种情况不会出现</strong>，现在觉得高了，过25年看，这个价格只是半山腰</li>
+<li>公司基本面发生变化</li>
+<li>发现了更好的股票</li>
+</ul>
+</li>
+<li>如何做到心如止水<ul>
+<li><strong>预期12%，过高的收益都是市场给的奖励</strong></li>
+</ul>
+</li>
+<li>目前的持仓<ul>
+<li>茅台、招行、天士力、格力</li>
+</ul>
+</li>
+</ul>
+<h4 id="_6">我的“荒岛股票”<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
+<ul>
+<li>迷茫，<strong>对企业基本面的迷茫</strong>，</li>
+<li>荒岛上10年，你赶紧挑一只股票</li>
+<li><strong>对价格出现过度反应的股票，市场迟早会做出惩罚或反馈</strong></li>
+<li>香港市盈率是全球最低的</li>
+<li>大家<ul>
+<li>彼得.林奇，<strong>你发现好的企业以后，拿着它不动</strong></li>
+<li>费雪，<strong>没有任何时间适宜将最优秀的股票脱手</strong></li>
+<li>格雷厄姆</li>
+<li>芒格</li>
+<li>霍华德.马克思</li>
+</ul>
+</li>
+</ul>
+<h4 id="_7">段永平的很多想法跟巴菲特不谋而合<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h4>
+<ul>
+<li>段永平，不是看了巴菲特的书才开始买股票的，而是一开始就这么想的</li>
+<li>他的序，就是对着电话说，然后整理成文字版</li>
+<li>写的书《奥马哈之雾》，算是读书笔记</li>
+<li>2007年发过私募，巴菲特的那套，不太适合做客户销售的</li>
+<li><strong>怎么过得快乐</strong>，结交一些喜欢的朋友，财务上的一些自由，工作上取得一些成绩</li>
+</ul>
+<h3 id="chap12">chap12、博时基金前副总裁 杨锐<a class="headerlink" href="#chap12" title="Permanent link">&para;</a></h3>
+<ul>
+<li>好的宏观投资就是扼住时代发展的喉咙</li>
+<li>2021-2-20，微信</li>
+</ul>
+<h4 id="0_2">0、<a class="headerlink" href="#0_2" title="Permanent link">&para;</a></h4>
+<ul>
+<li>被动投资，就是指数投资，叫<strong>贝塔</strong>，也就是大盘</li>
+<li>主动投资，就是<strong>阿尔法</strong><ul>
+<li>自下而上，Buttom up，<strong>价值投资、成长投资</strong>，看企业的</li>
+<li>Top Down，自上而下，看宏观的</li>
+</ul>
+</li>
+</ul>
+<h4 id="_8">投资大师们如何看宏观<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h4>
+<ul>
+<li>不看宏观<ul>
+<li>彼得.林奇说过，每年思考问题15分钟就够了</li>
+<li>1994年巴菲特变成世界首富，<strong>思考宏观是昂贵的娱乐</strong>，为什么他能成为首富，他明白道理明白得早啊</li>
+</ul>
+</li>
+<li>看宏观的<ul>
+<li>索罗斯，吃过宏观的亏</li>
+<li>桥水的达利欧，也有过公司只剩下自己一个人的时候</li>
+</ul>
+</li>
+<li>看宏观有2条线<ul>
+<li>1、货币、利率角度</li>
+<li>2、经济增长的动力</li>
+</ul>
+</li>
+<li><strong>凯恩斯</strong>也投资，从宏观变成了价值投资者，<strong>集中投资</strong><ul>
+<li>巴菲特说过，将相当大比例的资金投入到他个人认为自己非常了解而且管理也值得信任的企业上</li>
+<li>凯恩斯跟丘吉尔是朋友</li>
+</ul>
+</li>
+</ul>
+<h4 id="_9">笑侃国内“首席经济学家”<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h4>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

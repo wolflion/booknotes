@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>FFmpeg入门详解 音视频原理及应用 - lionel的技术笔记</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "FFmpeg\u5165\u95e8\u8be6\u89e3 \u97f3\u89c6\u9891\u539f\u7406\u53ca\u5e94\u7528";
+        var mkdocs_page_input_path = "14video\\FFmpeg\u5165\u95e8\u8be6\u89e3-\u97f3\u89c6\u9891\u539f\u7406\u53ca\u5e94\u7528.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> lionel的技术笔记
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">简介</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../01daily/">daily</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../02ds/">ds</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../03cpp/">cpp</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../21tool/">tool</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">C++</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../20C%2B%2B/effectiveC%2B%2B/">《Effective C++》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../20C%2B%2B/%E6%B7%B1%E5%BA%A6%E6%8E%A2%E7%B4%A2C%2B%2B%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B/">《深度探索C++对象模型》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/EffectiveSTL/">《Effective STL》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/C%2B%2B%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/">《C++泛型STL原理和应用》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/">《STL源码剖析》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../22C%2B%2Bmodern/%E6%B7%B1%E5%85%A5%E5%BA%94%E7%94%A8C%2B%2B11/">《深入应用C++11》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">基础知识</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA/">《操作系统导论》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E5%A4%A7%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">《大话设计模式》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90_C%2B%2B4th/">《数据结构与算法分析_C++4th》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E7%AE%97%E6%B3%95%284th%29/">《算法4th》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90-%E5%BC%A0%E5%86%9B/">《算法设计与分析-张军》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E5%A4%A9%E8%A1%8C-%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《天行-算法设计与实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%95%99%E7%A8%8B-%E6%9D%8E%E6%98%A5%E8%91%86/">《数据结构教程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%96%B0%E7%BC%96%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%A0%E9%A2%98%E4%B8%8E%E8%A7%A3%E6%9E%90/">《新编数据结构习题与解析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网络编程</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/TCPIP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">《TCP/IP网络编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/">《Linux高性能服务器编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/TCPIP%E8%AF%A6%E8%A7%A3%E5%8D%B71/">《TCPIP详解卷1》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/Linux%E5%86%85%E6%A0%B8%E7%BD%91%E7%BB%9C%E6%A0%88%E6%BA%90%E4%BB%A3%E7%A0%81%E6%83%85%E6%99%AF%E5%88%86%E6%9E%90/">《Linux内核网络栈源代码情景分析》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C/">《深入理解Linux网络》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">机器&深度学习</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../30machineLearning/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%9F%BA%E7%A1%80/">《机器学习线性代数基础》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../31deepLearning/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%85%A5%E9%97%A8%EF%BC%9A%E5%9F%BA%E4%BA%8EPython%E7%9A%84%E7%90%86%E8%AE%BA%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《深度学习入门：基于Python的理论与实现》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">文件系统</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/Linux%E5%86%85%E6%A0%B8%E6%8E%A2%E7%A7%98/">《Linux内核探秘》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《文件系统技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">《存储技术原理分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">存储</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../12storage/ceph%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《ceph设计原理与实现》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">视频</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../FFmpeg%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/">《FFmpeg入门到精通》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../WebRTC%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/">《WebRTC权威指南》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../WebRTC%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AE%9E%E6%97%B6%E4%BA%92%E5%8A%A8%E6%8A%80%E6%9C%AF/">《WebRTC音视频实时互动技术》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../%E6%96%B0%E4%B8%80%E4%BB%A3%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9%E7%A0%81%E6%A0%87%E5%87%86-H.264_AVC/">《新一代视频压缩码标准-H.264_AVC》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">内核</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/Linux%E5%86%85%E6%A0%B8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《Linux内核设计与实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5Linux%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%E5%86%85%E6%A0%B8%E6%9C%BA%E5%88%B6/">《深入Linux设备驱动程序内核机制》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">《深入理解Linux虚拟内存管理》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《深入理解Linux网络技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../13kernel/Linux内核源代码剖析-tcpip实现.md">《Linux内核源代码剖析-TCP/IP实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E5%86%85%E6%A0%B8/">《深入理解Linux内核》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">工具</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/Wireshark%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98/">《Wireshark网络分析实战》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/Linux%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8Eshell%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B%E5%A4%A7%E5%85%A8%283rd%29/">《Linux命令行与shell脚本编程大全(3rd)》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/python%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%883rd%EF%BC%89/">《python程序设计（3rd）》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/python/Python%E7%BC%96%E7%A8%8B%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E8%B7%B5/">《Python编程从入门到实践》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">刷题</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer2nd/">《剑指offer2nd》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/">《剑指offer专项突破》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../96output/OD基础题.md">OD基础题</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../96output/OD进阶题.md">OD进阶题</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网课</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/01Linux%E9%AB%98%E5%B9%B6%E5%8F%91%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/">《Linux高并发网络编程开发》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/%E4%BE%AF%E6%8D%B7/%E4%BE%AF%E6%8D%B7C%2B%2B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%8660%E8%AE%B2/">《侯捷C++内存管理60讲》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/11NJU%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">《NJU算法设计与分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">英语专</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../60English/00794%E7%BB%BC%E5%90%88%E8%8B%B1%E8%AF%AD%E4%B8%80%E4%B8%8A/">《综合英语(一)上》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../95selfStudy/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/">《概率率与数理统计》</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">lionel的技术笔记</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>FFmpeg入门详解 音视频原理及应用</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="ffmpeg-">《FFmpeg入门详解-音视频原理及应用》<a class="headerlink" href="#ffmpeg-" title="Permanent link">&para;</a></h2>
+<p>chap1、</p>
+<h3 id="chap2">chap2、音视频入门<a class="headerlink" href="#chap2" title="Permanent link">&para;</a></h3>
+<h4 id="21">2.1、音视频入门引言<a class="headerlink" href="#21" title="Permanent link">&para;</a></h4>
+<h5 id="214">2.1.4 自学音视频的困惑<a class="headerlink" href="#214" title="Permanent link">&para;</a></h5>
+<ul>
+<li>知识分散、过渡断层，<strong>如何构建相关知识树？</strong></li>
+</ul>
+<h4 id="22">2.2 音视频基础概念<a class="headerlink" href="#22" title="Permanent link">&para;</a></h4>
+<h5 id="221">2.2.1、视频<a class="headerlink" href="#221" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、动画书<ul>
+<li><strong>视频本质是由一系列图片构成的</strong></li>
+</ul>
+</li>
+<li>2、视频</li>
+<li>3、视频帧<ul>
+<li><strong>Frame，一幅画面</strong>，一段视频是由许多帧组成的</li>
+</ul>
+</li>
+<li>4、帧率<ul>
+<li>帧率<strong>单位时间内帧的数量</strong>，单位f/s</li>
+<li>24-25f/s，一秒24或2帧，电视/电影的帧率</li>
+<li>游戏中30可以接受，60会感到十分流畅，85f/s以上人眼看不出画面过渡了</li>
+</ul>
+</li>
+<li>5.色彩空间<ul>
+<li>RGB</li>
+<li>YUV<ul>
+<li>(1)Y：亮度，即灰度值。除了表示亮度信号外，还含有较多的绿
+  色通道量。</li>
+<li>(2)U：蓝色通道与亮度的差值。</li>
+<li>(3)V：红色通道与亮度的差值</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>6.YUV的优势</li>
+<li>7.RGB和YUV的换算</li>
+</ul>
+<h5 id="222">2.2.2 音频<a class="headerlink" href="#222" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、基本知识<ul>
+<li>音频数据的承载方式最常用的是脉冲编码调制，即PCM</li>
+<li>声音是一种波，有振幅和频率，所以要保存声音，就要保存声音
+  在各个时间点上的振幅，但数字信号并不能连续保存所有时间点的振
+  幅，事实上，并不需要保存连续的信号也可以还原出人耳可接受的声
+  音。</li>
+<li>PCM的采集分为以下步骤：<ul>
+<li>模拟信号→采样→量化→编码→数字信号</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>2.采样率和采样位数<ul>
+<li>采样率，即采样的频率。上面提到，采样率要大于原声波最高频
+  率的2倍，人耳能听到的最高频率约为20kHz，所以为了满足人耳的
+  听觉要求，采样率至少应为40kHz，通常为44.1kHz，更高的频率通
+  常为48kHz。
+  注意：人耳听觉频率范围为[20Hz，20kHz]。</li>
+</ul>
+</li>
+<li>3.音频编码<ul>
+<li>音频编码是指要在计算机内播放或者处理音频文件，也就是要对
+  声音文件进行数、模转换，这个过程同样由采样和量化构成</li>
+</ul>
+</li>
+<li>4.声道数<ul>
+<li>声道数是指所支持的能发不同声音的音响的个数，常见的声道数
+  如下。<ul>
+<li>(1)单声道：1个声道。</li>
+<li>(2)双声道：两个声道</li>
+<li>(3)立体声道：默认为两个声道。</li>
+<li>(4)立体声道（4声道）：4个声道</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>5.码率<ul>
+<li>码率指<strong>一个数据流中每秒能通过的信息量</strong>，单位为b/s，公式是<strong>采样率<code>*</code>采样位数<code>*</code>声道数</strong></li>
+</ul>
+</li>
+<li>6.音频格式</li>
+</ul>
+<h5 id="223">2.2.3 音视频编码<a class="headerlink" href="#223" title="Permanent link">&para;</a></h5>
+<ul>
+<li>指的是<strong>压缩编码</strong><ul>
+<li>未经压缩的大概有多大，<em>怎么计算，lionel</em></li>
+</ul>
+</li>
+<li>1.视频编码<ul>
+<li>通常为<strong>有损压缩</strong></li>
+<li>H.26x系列，ITU主导</li>
+<li>MPEG系列，ISO下属</li>
+<li>其它系列</li>
+</ul>
+</li>
+<li>2.音频编码<ul>
+<li>AAC压缩格式。AAC格式主要分为两种：音频数据交换格式(Audio Data Interchange Format，
+  ADIF)和音频数据传输流(Audio Data Transport Stream，ADTS)<ul>
+<li>ADIF</li>
+<li>ADTS</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>3.硬解码和软解码<ul>
+<li>软解码是指利用CPU的计算能力来解码，通常如果CPU的能力不是很强，解码速度则会比较慢，也可能出现发热现象</li>
+<li>硬解码指的是利用专门的解码芯片来加速解码，通常硬解码的解码速度会快很多，但是由于硬解码由各个厂家实现</li>
+</ul>
+</li>
+</ul>
+<h5 id="224">2.2.4 音视频容器<a class="headerlink" href="#224" title="Permanent link">&para;</a></h5>
+<ul>
+<li>MP4、RMVB、AVI、MKV、MOV等。这些常见的视频格式，其实是包裹了音视频编码数据的容器，用来把特定编码标准编码的视频流和音频流混在一起，成为一个文件。</li>
+</ul>
+<h4 id="23">2.3 多媒体基础概念<a class="headerlink" href="#23" title="Permanent link">&para;</a></h4>
+<h4 id="24">2.4 数字电视基础概念<a class="headerlink" href="#24" title="Permanent link">&para;</a></h4>
+<h4 id="25">2.5 短视频基础概念<a class="headerlink" href="#25" title="Permanent link">&para;</a></h4>
+<h3 id="chap3">chap3、音视频开发常用工具<a class="headerlink" href="#chap3" title="Permanent link">&para;</a></h3>
+<h4 id="31-vlc">3.1 VLC播放器简介<a class="headerlink" href="#31-vlc" title="Permanent link">&para;</a></h4>
+<h4 id="32-mediainfo">3.2 MediaInfo简介<a class="headerlink" href="#32-mediainfo" title="Permanent link">&para;</a></h4>
+<ul>
+<li>分析视频和音频文件的编码和内容信息</li>
+</ul>
+<h4 id="33-flvanalyser">3.3 FlvAnalyser简介<a class="headerlink" href="#33-flvanalyser" title="Permanent link">&para;</a></h4>
+<h4 id="34-elecard-stream-analyzer">3.4 Elecard Stream Analyzer码流分析工具<a class="headerlink" href="#34-elecard-stream-analyzer" title="Permanent link">&para;</a></h4>
+<h5 id="341">3.4.1 简介<a class="headerlink" href="#341" title="Permanent link">&para;</a></h5>
+<ul>
+<li>码流是指<strong>视频文件在单位时间内使用的数据流量</strong>，是视频编码中画面质量控制中最重要的部分。（码流越大，压缩比越小，画面质量越好）</li>
+</ul>
+<h4 id="35-ffmpeg">3.5 FFmpeg简介<a class="headerlink" href="#35-ffmpeg" title="Permanent link">&para;</a></h4>
+<h3 id="4">第4章 音频基础<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
+<h4 id="41">4.1 音频基础概念<a class="headerlink" href="#41" title="Permanent link">&para;</a></h4>
+<h5 id="411">4.1.1 声音和音频<a class="headerlink" href="#411" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1.声音的三要素<ul>
+<li>声音的三要素为<strong>频率、振幅和波形</strong>。</li>
+<li>频率是指声波的频率，即声
+  音的音调，人类听觉的频率（音调）范围为[20Hz，20kHz]。振幅是
+  指声波的响度，通俗地讲就是声音的高低，可以理解为音量，例如一
+  般男生的声音振幅（响度）大于女生。波形是指声音的音色，在同样
+  的频率和振幅下，钢琴和小提琴的声音听起来是完全不同的，因为它
+  们的音色不同。波形决定了其所代表声音的音色，音色不同是因为它
+  们的介质所产生的波形不同。综上所述，声音的本质就是音调、音量
+  和音色。音调是指频率，音量是指振幅，音色与材质有关。</li>
+</ul>
+</li>
+<li>2.音频的基础概念</li>
+</ul>
+<h5 id="412">4.1.2 数字音频<a class="headerlink" href="#412" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1.采样</li>
+<li>2、量化</li>
+<li>3、编码</li>
+</ul>
+<ul>
+<li>4.其他概念</li>
+</ul>
+<h5 id="413">4.1.3 音频采集<a class="headerlink" href="#413" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1.直接获取已有音频数据</li>
+</ul>
+<ul>
+<li>2.利用音频处理软件捕获截取</li>
+<li>3.利用话筒录制</li>
+</ul>
+<h5 id="414">4.1.4 音频处理<a class="headerlink" href="#414" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1.噪声抑制</li>
+<li>2.回声消除</li>
+<li>3.自动增益控制</li>
+<li>4.静音检测</li>
+<li>5.舒适噪声产生</li>
+</ul>
+<h5 id="415">4.1.5 音频使用场景及应用<a class="headerlink" href="#415" title="Permanent link">&para;</a></h5>
+<h5 id="416">4.1.6 音频格式<a class="headerlink" href="#416" title="Permanent link">&para;</a></h5>
+<ul>
+<li>11.FLAC</li>
+</ul>
+<h5 id="417">4.1.7 混音技术<a class="headerlink" href="#417" title="Permanent link">&para;</a></h5>
+<ul>
+<li>混音就是把两路或者多路音频流混合在一起，形成一路音频流。
+  混流则是指音视频流的混合，也就是视频画面和声音的对齐。</li>
+</ul>
+<h5 id="418">4.1.8 音频重采样<a class="headerlink" href="#418" title="Permanent link">&para;</a></h5>
+<h4 id="42">4.2 音频编码原理<a class="headerlink" href="#42" title="Permanent link">&para;</a></h4>
+<h5 id="422">4.2.2 音频编码<a class="headerlink" href="#422" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1.音频编码概述<ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<h5 id="423">4.2.3 音频编码基本手段<a class="headerlink" href="#423" title="Permanent link">&para;</a></h5>
+<ul>
+<li>音频编码的基本手段包括量化器和语音编码器。</li>
+<li>1.量化和量化器</li>
+<li>2.语音编码器（3种类型）<ul>
+<li>波形编码器</li>
+<li>声码器</li>
+<li>混合编码器</li>
+</ul>
+</li>
+</ul>
+<h5 id="424">4.2.4 音频编码算法<a class="headerlink" href="#424" title="Permanent link">&para;</a></h5>
+<ul>
+<li>常见的音频编码算法有OPUS、AAC、Vorbis、Speex、iLBC、AMR、G.711等。</li>
+</ul>
+<h4 id="43">4.3 音频深度学习<a class="headerlink" href="#43" title="Permanent link">&para;</a></h4>
+<h5 id="432">4.3.2 十大音频处理任务<a class="headerlink" href="#432" title="Permanent link">&para;</a></h5>
+<ul>
+<li>(10)音符起始点检测是分析音频／建立音乐序列的第一步，对于
+  以上提到的大多数任务而言，执行音符起始点检测是必要的</li>
+</ul>
+<h3 id="5">第5章 视频基础<a class="headerlink" href="#5" title="Permanent link">&para;</a></h3>
+<h4 id="51">5.1 视频基础概念<a class="headerlink" href="#51" title="Permanent link">&para;</a></h4>
+<h5 id="511">5.1.1 图像与像素<a class="headerlink" href="#511" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1</li>
+<li>2</li>
+<li>3</li>
+<li>4、像素位深度</li>
+</ul>
+<h5 id="512">5.1.2 色彩空间<a class="headerlink" href="#512" title="Permanent link">&para;</a></h5>
+<h4 id="52">5.2 音视频封装<a class="headerlink" href="#52" title="Permanent link">&para;</a></h4>
+<h4 id="53">5.3、视频压缩编码<a class="headerlink" href="#53" title="Permanent link">&para;</a></h4>
+<h5 id="531">5.3.1 视频编码基础知识<a class="headerlink" href="#531" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1.视频和图像的关系</li>
+</ul>
+<h5 id="532">5.3.2 视频压缩<a class="headerlink" href="#532" title="Permanent link">&para;</a></h5>
+<h5 id="533">5.3.3 视频编码原理<a class="headerlink" href="#533" title="Permanent link">&para;</a></h5>
+<h5 id="534">5.3.4 视频编码的关键技术<a class="headerlink" href="#534" title="Permanent link">&para;</a></h5>
+<ul>
+<li>编码器(Encoder)是指压缩信号
+  的设备或程序；解码器(Decoder)是指解压缩信号的设备或程序；编
+  解码器(Codec)是指编解码器对。编码的主要流程包括预测、变换、
+  量化、熵编码，解码的流程与之互逆</li>
+<li>第一，为什么要变换？</li>
+<li>第二，为什么要量化？</li>
+<li>第三，为什么要采用熵编码？</li>
+</ul>
+<h5 id="535">5.3.5 视频编解码流程<a class="headerlink" href="#535" title="Permanent link">&para;</a></h5>
+<ul>
+<li>编码过程包括运动估计、运动补偿、DCT、量化与熵编码等</li>
+<li>解码是编码的逆操作</li>
+</ul>
+<h4 id="54">5.4 视频播放原理<a class="headerlink" href="#54" title="Permanent link">&para;</a></h4>
+<h5 id="541">5.4.1 视频播放器简介<a class="headerlink" href="#541" title="Permanent link">&para;</a></h5>
+<h5 id="542-ffmpeg">5.4.2 FFmpeg播放架构与原理<a class="headerlink" href="#542-ffmpeg" title="Permanent link">&para;</a></h5>
+<h3 id="6">第6章 音视频压缩编码基础<a class="headerlink" href="#6" title="Permanent link">&para;</a></h3>
+<h3 id="7">第7章 音视频编解码原理与标准<a class="headerlink" href="#7" title="Permanent link">&para;</a></h3>
+<h3 id="chap08">chap08、音视频编解码技术与流程<a class="headerlink" href="#chap08" title="Permanent link">&para;</a></h3>
+<ul>
+<li>技术主要包括I帧、P帧和B帧技术、运动估计和运动补偿等</li>
+<li>视频压缩编码过程一般分为3个步骤，包括时间维压缩、空间维压缩及熵编码。</li>
+</ul>
+<h4 id="81">8.1 视频编码简介<a class="headerlink" href="#81" title="Permanent link">&para;</a></h4>
+<h4 id="82">8.2 视频编码流程<a class="headerlink" href="#82" title="Permanent link">&para;</a></h4>
+<ul>
+<li>视频编码最主要的工作就是压缩，分为帧内压缩和帧间压缩，然后又分为几个步骤，主要包括预测、变换、量化、熵编码、滤波处理等，但压缩是分步骤的，不是简单地把图像中重复的数据直接聚合在一起。依据方法论，可压缩的内容有两种：单幅图像的压缩和多幅图像的压缩。</li>
+<li><strong>帧内压缩</strong>，一张图像，分成若干小块，每块为8×8像素大小，如果这个小块的每像素的颜色都是白色，就可以用一个点的值来代替这所有64个点的值，在编码中该标准术语叫空间冗余，相应的方法叫帧内压缩</li>
+<li><strong>帧间压缩</strong>，视频中一个连续的动作，例如画面里的男主角在蓝墙背景下闭上了眼睛，这一动作的背后，是由一系列的多幅图片组成的，而每幅图片的内容基本上都是一样的，唯一变化的部分就是眼睛所在图像区域，眼睛缓慢由开到闭，这块区域的像素值发生了变化。对于绝大多数的背景区域，它是没有变化的，那么除了含有闭眼动作的这块区域，是否可以只用一张图像来代替这么多个连续的图像呢？这在编码中的术语叫时间冗余，强调的是<strong>在一定时间段内如何对连续多幅图像的冗余部分进行压缩</strong>，其专业术语叫帧间压缩</li>
+<li>图像的空间冗余和时间冗余都被压缩了，压缩成一串字符串，然后还可以对这段字符串进行进一步压缩，就是所谓的<strong>编码冗余</strong>。</li>
+</ul>
+<h4 id="83-ipb">8.3 I/P/B帧技术详细讲解<a class="headerlink" href="#83-ipb" title="Permanent link">&para;</a></h4>
+<h5 id="831-ipb">8.3.1 I/P/B帧编解码技术<a class="headerlink" href="#831-ipb" title="Permanent link">&para;</a></h5>
+<ul>
+<li>I帧是自带全部信息的独立帧，是最完整的画面，占用的空间最大，不需要参考其他图像便可独立进行解码。视频序列中的第1个帧，始终都是I帧。</li>
+<li>P帧即帧间预测编码帧，需要参考前面的I帧和（或）P帧的不同部分，这样才能进行编码。P帧对前面的P和I参考帧有依赖性，但P帧压缩率比较高，占用的空间较小。</li>
+<li>B帧即双向预测编码帧，以前帧和后帧作为参考帧。不仅参考前面，还参考后面的帧，所以它的压缩率最高，可以达到200:1。<strong>不适合实时传输，例如视频会议</strong></li>
+</ul>
+<h5 id="832-ipb">8.3.2 I/P/B帧的特点<a class="headerlink" href="#832-ipb" title="Permanent link">&para;</a></h5>
+<ul>
+<li>I帧的特点<ul>
+<li>(1)I帧是一个全帧压缩编码帧，它将全帧图像信息进行JPEG压缩
+  编码及传输。</li>
+<li>(9)训练视频分类任务的时候往往在处理I帧的时候要采用更加复
+  杂的网络。</li>
+</ul>
+</li>
+<li>2.P帧的特点<ul>
+<li>(7)由于采用的是差值传送，所以P帧的压缩比较高。</li>
+</ul>
+</li>
+<li>3.B帧的特点<ul>
+<li>(5)B帧不是参考帧，不会造成解码错误的扩散。</li>
+</ul>
+</li>
+</ul>
+<h5 id="833-ipb">8.3.3 I/P/B帧的基本流程<a class="headerlink" href="#833-ipb" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1.I帧编码的基本流程</li>
+<li>2.P帧和B帧编码的基本流程</li>
+</ul>
+<h5 id="834">8.3.4 帧内与帧间编码<a class="headerlink" href="#834" title="Permanent link">&para;</a></h5>
+<ul>
+<li>对I帧的处理是采用帧内编码的方式，只利用本帧图像内的空间相
+  关性。对P帧的处理，采用帧间编码，如前向运动估计，同时利用空
+  间和时间上的相关性。简单来讲，采用运动补偿算法来去掉冗余信
+  息。I帧和P帧的编码如图8-16所示。对B帧采取双向预测内插编码的
+  压缩算法。</li>
+</ul>
+<h5 id="835">8.3.5 帧内编码流程<a class="headerlink" href="#835" title="Permanent link">&para;</a></h5>
+<ul>
+<li>图8-17 帧内编码的流程图</li>
+<li>帧内编码需要经过DCT、量化、编码等多个过程，涉及的技术包
+  括RGB转YUV、图片宏块切割、DCT离散余弦变换、量化、Zig-Zag
+  扫描、DPCM差值脉冲编码调制、RLE游程编码、哈夫曼编码、算数
+  编码等。</li>
+</ul>
+<h5 id="836">8.3.6 块与宏块<a class="headerlink" href="#836" title="Permanent link">&para;</a></h5>
+<ul>
+<li>一般是把
+  图像切割为不同的块或宏块，然后对它们进行计算。一个宏块一般为
+  16×16像素。宏块是编码处理的基本单元，通常宏块大小为16×16像
+  素。一个编码图像首先要划分成多个块（4×4像素）才能进行处理，
+  所以宏块应该由整数个块组成。宏块分为I、P、B宏块，I宏块（帧内
+  预测宏块）只能利用当前片中已解码的像素作为参考进行帧内预测；
+  P宏块（帧间预测宏块）可以利用前面已解码的图像作为参考图像进
+  行帧内预测；B宏块（帧间双向预测宏块）则是利用前后向的参考图
+  像进行帧内预测。可以将一张图片切割为多个宏块</li>
+</ul>
+<h4 id="84">8.4 运动估计和运动补偿<a class="headerlink" href="#84" title="Permanent link">&para;</a></h4>
+<ul>
+<li>运动估计的基本思想是将图像序列的每帧分成许多互不重叠的宏
+  块，并认为宏块内所有像素的位移量都相同，然后对每个宏块到参考
+  帧某一给定搜索范围内根据一定的匹配准则找出与当前块最相似的
+  块，即匹配块，匹配块与当前块的相对位移即为运动矢量。视频压缩
+  的时候，只需保存运动矢量和残差数据就可以完全恢复出当前块。</li>
+<li>运
+  动补偿是一种描述相邻帧（相邻在这里表示在编码关系上相邻，在播
+  放顺序上两帧未必相邻）差别的方法，具体来讲是描述前面一帧的每
+  个小块怎样移动到当前帧中的某个位置去。这种方法经常被视频压缩
+  ／视频编解码器用来减少视频序列中的空域冗余。它也可以用于去交
+  织及运动插值的操作。</li>
+</ul>
+<h4 id="85">8.5 音频编码技术与流程<a class="headerlink" href="#85" title="Permanent link">&para;</a></h4>
+<h5 id="851-mpeg-1">8.5.1 MPEG-1音频编码<a class="headerlink" href="#851-mpeg-1" title="Permanent link">&para;</a></h5>
+<h5 id="852-mpeg-2">8.5.2 MPEG-2音频编码<a class="headerlink" href="#852-mpeg-2" title="Permanent link">&para;</a></h5>
+<h5 id="853-mpeg-4">8.5.3 MPEG-4音频编码<a class="headerlink" href="#853-mpeg-4" title="Permanent link">&para;</a></h5>
+<h5 id="854-ac-3">8.5.4 AC-3音频编码<a class="headerlink" href="#854-ac-3" title="Permanent link">&para;</a></h5>
+<h3 id="chap9h264">chap9、H.264编解码基础<a class="headerlink" href="#chap9h264" title="Permanent link">&para;</a></h3>
+<h3 id="chap10aac">chap10、AAC编解码基础<a class="headerlink" href="#chap10aac" title="Permanent link">&para;</a></h3>
+<h3 id="chap11h265">chap11、H.265编解码基础<a class="headerlink" href="#chap11h265" title="Permanent link">&para;</a></h3>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>01数据结构与算法刷题目过程 - lionel的技术笔记</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "01\u6570\u636e\u7ed3\u6784\u4e0e\u7b97\u6cd5\u5237\u9898\u76ee\u8fc7\u7a0b";
+        var mkdocs_page_input_path = "96output\\tmp\\01\u6570\u636e\u7ed3\u6784\u4e0e\u7b97\u6cd5\u5237\u9898\u76ee\u8fc7\u7a0b.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> lionel的技术笔记
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">简介</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../01daily/">daily</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../02ds/">ds</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../03cpp/">cpp</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../21tool/">tool</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">C++</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../20C%2B%2B/effectiveC%2B%2B/">《Effective C++》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../20C%2B%2B/%E6%B7%B1%E5%BA%A6%E6%8E%A2%E7%B4%A2C%2B%2B%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B/">《深度探索C++对象模型》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../21STL/EffectiveSTL/">《Effective STL》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../21STL/C%2B%2B%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/">《C++泛型STL原理和应用》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../21STL/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/">《STL源码剖析》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../22C%2B%2Bmodern/%E6%B7%B1%E5%85%A5%E5%BA%94%E7%94%A8C%2B%2B11/">《深入应用C++11》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">基础知识</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../408/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA/">《操作系统导论》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../408/%E5%A4%A7%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">《大话设计模式》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../408/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90_C%2B%2B4th/">《数据结构与算法分析_C++4th》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../408/%E7%AE%97%E6%B3%95%284th%29/">《算法4th》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../408/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90-%E5%BC%A0%E5%86%9B/">《算法设计与分析-张军》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../408/%E5%A4%A9%E8%A1%8C-%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《天行-算法设计与实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../408/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%95%99%E7%A8%8B-%E6%9D%8E%E6%98%A5%E8%91%86/">《数据结构教程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../408/%E6%96%B0%E7%BC%96%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%A0%E9%A2%98%E4%B8%8E%E8%A7%A3%E6%9E%90/">《新编数据结构习题与解析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网络编程</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../10network/TCPIP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">《TCP/IP网络编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../10network/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/">《Linux高性能服务器编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../10network/TCPIP%E8%AF%A6%E8%A7%A3%E5%8D%B71/">《TCPIP详解卷1》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../10network/Linux%E5%86%85%E6%A0%B8%E7%BD%91%E7%BB%9C%E6%A0%88%E6%BA%90%E4%BB%A3%E7%A0%81%E6%83%85%E6%99%AF%E5%88%86%E6%9E%90/">《Linux内核网络栈源代码情景分析》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../10network/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C/">《深入理解Linux网络》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">机器&深度学习</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../30machineLearning/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%9F%BA%E7%A1%80/">《机器学习线性代数基础》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../31deepLearning/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%85%A5%E9%97%A8%EF%BC%9A%E5%9F%BA%E4%BA%8EPython%E7%9A%84%E7%90%86%E8%AE%BA%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《深度学习入门：基于Python的理论与实现》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">文件系统</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../11filesystem/Linux%E5%86%85%E6%A0%B8%E6%8E%A2%E7%A7%98/">《Linux内核探秘》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../11filesystem/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《文件系统技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../11filesystem/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">《存储技术原理分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">存储</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../12storage/ceph%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《ceph设计原理与实现》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">视频</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../14video/FFmpeg%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/">《FFmpeg入门到精通》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../14video/WebRTC%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/">《WebRTC权威指南》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../14video/WebRTC%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AE%9E%E6%97%B6%E4%BA%92%E5%8A%A8%E6%8A%80%E6%9C%AF/">《WebRTC音视频实时互动技术》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../14video/%E6%96%B0%E4%B8%80%E4%BB%A3%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9%E7%A0%81%E6%A0%87%E5%87%86-H.264_AVC/">《新一代视频压缩码标准-H.264_AVC》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">内核</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../13kernel/Linux%E5%86%85%E6%A0%B8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《Linux内核设计与实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../13kernel/%E6%B7%B1%E5%85%A5Linux%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%E5%86%85%E6%A0%B8%E6%9C%BA%E5%88%B6/">《深入Linux设备驱动程序内核机制》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">《深入理解Linux虚拟内存管理》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《深入理解Linux网络技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../13kernel/Linux内核源代码剖析-tcpip实现.md">《Linux内核源代码剖析-TCP/IP实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E5%86%85%E6%A0%B8/">《深入理解Linux内核》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">工具</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../15tool/Wireshark%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98/">《Wireshark网络分析实战》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../15tool/Linux%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8Eshell%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B%E5%A4%A7%E5%85%A8%283rd%29/">《Linux命令行与shell脚本编程大全(3rd)》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../15tool/python%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%883rd%EF%BC%89/">《python程序设计（3rd）》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../15tool/python/Python%E7%BC%96%E7%A8%8B%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E8%B7%B5/">《Python编程从入门到实践》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">刷题</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../91leetcode/%E5%89%91%E6%8C%87offer2nd/">《剑指offer2nd》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../91leetcode/%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/">《剑指offer专项突破》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../OD基础题.md">OD基础题</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../OD进阶题.md">OD进阶题</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网课</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../90lecture/01Linux%E9%AB%98%E5%B9%B6%E5%8F%91%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/">《Linux高并发网络编程开发》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../90lecture/%E4%BE%AF%E6%8D%B7/%E4%BE%AF%E6%8D%B7C%2B%2B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%8660%E8%AE%B2/">《侯捷C++内存管理60讲》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../90lecture/11NJU%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">《NJU算法设计与分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">英语专</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../60English/00794%E7%BB%BC%E5%90%88%E8%8B%B1%E8%AF%AD%E4%B8%80%E4%B8%8A/">《综合英语(一)上》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../95selfStudy/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/">《概率率与数理统计》</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">lionel的技术笔记</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>01数据结构与算法刷题目过程</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="_1">数据结构与算法刷题目过程<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h3 id="0">0、<a class="headerlink" href="#0" title="Permanent link">&para;</a></h3>
+<h4 id="01">0.1、一些摘抄<a class="headerlink" href="#01" title="Permanent link">&para;</a></h4>
+<ul>
+<li>每道类型的题，刷一道，不求多，但求精</li>
+</ul>
+<h4 id="02">0.2、自己感悟<a class="headerlink" href="#02" title="Permanent link">&para;</a></h4>
+<ul>
+<li>1、知识是有衔接，A不会，就分解，把<strong>具体哪不会的搞懂</strong></li>
+<li>2、学新知识点时，找到<strong>最经典或简单的例子去消化那种思想</strong>，然后再去套复杂场景，不然完全hold不住</li>
+</ul>
+<h3 id="11">1、数据结构1：二维数组、线性表、栈、队列、哈希表<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
+<ul>
+<li><em>对应的是一些基础题，没有啥明显算法的</em></li>
+<li>具体数据结构就不在这展示了，<strong>主要是使用STL的库</strong></li>
+</ul>
+<h4 id="11_1">1.1、二维数组<a class="headerlink" href="#11_1" title="Permanent link">&para;</a></h4>
+<h4 id="12">1.2、线性表<a class="headerlink" href="#12" title="Permanent link">&para;</a></h4>
+<h4 id="13">1.3、栈<a class="headerlink" href="#13" title="Permanent link">&para;</a></h4>
+<h4 id="14">1.4、队列<a class="headerlink" href="#14" title="Permanent link">&para;</a></h4>
+<h4 id="15">1.5、哈希表<a class="headerlink" href="#15" title="Permanent link">&para;</a></h4>
+<ul>
+<li>常用的操作：<strong>插入、查找、遍历</strong></li>
+<li>自己的问题<ul>
+<li>1、set与map有啥区别？<em>泛型那本书有解释过，但没完全明白</em></li>
+<li>2、做题的时候，老是用map，较少用到set，<em>set的应用场景在哪？</em></li>
+</ul>
+</li>
+</ul>
+<h5 id="151mapunordered_map">1.5.1、map&amp;unordered_map<a class="headerlink" href="#151mapunordered_map" title="Permanent link">&para;</a></h5>
+<ul>
+<li>0、知识点</li>
+<li>题目<ul>
+<li>LC242、有效异位词<ul>
+<li>看了下，自己做的，是先排序，然后逐个比较，人家的思路是<em>定义一个map，一个++，一个--</em></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="152setunordered_set">1.5.2、set&amp;unordered_set<a class="headerlink" href="#152setunordered_set" title="Permanent link">&para;</a></h5>
+<ul>
+<li>0、知识点<ul>
+<li>set.insert()，<em>不记得了</em></li>
+<li><code>set.find(x)!=set.end()</code>，<code>set.count(x)!=0</code></li>
+<li>我一般用<code>for(auto c: set)</code>，还有一种用<strong>迭代器</strong>，<code>for(auto it = set.begin(); it!=set.end();it++)</code></li>
+</ul>
+</li>
+<li>题目<ul>
+<li>LC349、2个数组，计算它们的交集<ul>
+<li>https://blog.csdn.net/linping_/article/details/116031412  【作者这一系列，都蛮多的】</li>
+<li><em>它这个解法有点妙</em>，两个数组，一个存，一个找到后，再删，最后比较数量   【记错了，不是这个思路，lionel】</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="153">1.5.3、进阶<a class="headerlink" href="#153" title="Permanent link">&para;</a></h5>
+<ul>
+<li>LC3、无重复字符的最长子串<ul>
+<li><em>完全不太会，看了下之前的记录，也没刷出来，初看还以为考KMP呢</em></li>
+</ul>
+</li>
+</ul>
+<h3 id="22">2、数据结构2：树<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
+<h3 id="33">3、数据结构3：图<a class="headerlink" href="#33" title="Permanent link">&para;</a></h3>
+<h3 id="44">4、数据结构4：堆、优先级队列、并查集、单调栈<a class="headerlink" href="#44" title="Permanent link">&para;</a></h3>
+<ul>
+<li>堆、优先级队列</li>
+</ul>
+<h4 id="43">4.3、并查集<a class="headerlink" href="#43" title="Permanent link">&para;</a></h4>
+<h5 id="431">4.3.1、思想&amp;模板<a class="headerlink" href="#431" title="Permanent link">&para;</a></h5>
+<ul>
+<li>概念</li>
+<li>模板</li>
+</ul>
+<h5 id="432">4.3.2、题目<a class="headerlink" href="#432" title="Permanent link">&para;</a></h5>
+<ul>
+<li>OD</li>
+<li>LC</li>
+</ul>
+<h5 id="433intfather">4.3.3、进阶（元素不是int型，怎么初始化father数组）<a class="headerlink" href="#433intfather" title="Permanent link">&para;</a></h5>
+<h4 id="44_1">4.4、单调栈<a class="headerlink" href="#44_1" title="Permanent link">&para;</a></h4>
+<h5 id="441">4.4.1、思想&amp;模板<a class="headerlink" href="#441" title="Permanent link">&para;</a></h5>
+<ul>
+<li>概念</li>
+<li>模板</li>
+</ul>
+<pre class="highlight"><code class="language-cpp">stack&lt;int&gt; stk;  //创建一个栈
+for (int i=input.size()-1;i&gt;=0;i--){  //lionel，这个要从后往前比
+    //栈顶元素比当前小，则弹出   【这里栈里存的是下标】
+    while (!stk.empty() &amp;&amp; input[stk.top()] &lt; input[i]) {
+        stk.pop();
+    }
+
+    //通过while循环了，就表示能满足相关条件了
+    //如果栈为空，则说明右边没有比当前大的数
+    if (stk.empty()) {
+        res[i] = 0;   //在没有 vector&lt;int&gt; res(N);进行初始化时，下标操作，肯定会crash的
+    } else {
+        res[i] = stk.top();
+    }
+    stk.push(i);  //lionel，这是业务上的事，存的是下标而已
+}</code></pre>
+<ul>
+<li>ref<ul>
+<li><a href="https://blog.csdn.net/nirendao/article/details/119065757">单调栈(monotonic stack)揭秘</a></li>
+</ul>
+</li>
+</ul>
+<h5 id="442">4.4.2、题目<a class="headerlink" href="#442" title="Permanent link">&para;</a></h5>
+<ul>
+<li>OD<ul>
+<li>25、找朋友（先看这个，再看 进阶 的）</li>
+</ul>
+</li>
+</ul>
+<h3 id="51">5、六大算法1：贪心<a class="headerlink" href="#51" title="Permanent link">&para;</a></h3>
+<h4 id="51_1">5.1、思想<a class="headerlink" href="#51_1" title="Permanent link">&para;</a></h4>
+<h4 id="52">5.2、组合问题中贪心<a class="headerlink" href="#52" title="Permanent link">&para;</a></h4>
+<h5 id="521">5.2.1、题目<a class="headerlink" href="#521" title="Permanent link">&para;</a></h5>
+<ul>
+<li>OD<ul>
+<li>最少面试官数</li>
+</ul>
+</li>
+<li>LC</li>
+</ul>
+<h5 id="522">5.2.2、坑&amp;心得<a class="headerlink" href="#522" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、<strong>读懂题意</strong>（有时候题，出得不好，难get到）<strong>找到贪心策略</strong>，然后<strong>自定义排序</strong>即可</li>
+</ul>
+<h4 id="53">5.3、图问题中的贪心（不会）<a class="headerlink" href="#53" title="Permanent link">&para;</a></h4>
+<ul>
+<li>OD中出现过中dijkstra（我只是懂了dijkstra做选择或填空，写代码还不行）</li>
+</ul>
+<h3 id="62">6、六大算法2：动态规划<a class="headerlink" href="#62" title="Permanent link">&para;</a></h3>
+<ul>
+<li><em>还得再复习下</em></li>
+</ul>
+<h4 id="61">6.1、思想&amp;入门题<a class="headerlink" href="#61" title="Permanent link">&para;</a></h4>
+<h5 id="612fibonacci-sequence">6.1.2、入门题：Fibonacci sequence<a class="headerlink" href="#612fibonacci-sequence" title="Permanent link">&para;</a></h5>
+<h4 id="62dp">6.2、一维dp<a class="headerlink" href="#62dp" title="Permanent link">&para;</a></h4>
+<h5 id="621">6.2.1、题目<a class="headerlink" href="#621" title="Permanent link">&para;</a></h5>
+<ul>
+<li>OD<ul>
+<li>高效会议安排</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>LC<ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<h4 id="63dp">6.3、二维dp<a class="headerlink" href="#63dp" title="Permanent link">&para;</a></h4>
+<h5 id="631">6.3.1、题目<a class="headerlink" href="#631" title="Permanent link">&para;</a></h5>
+<ul>
+<li>OD<ul>
+<li>代表团坐车<ul>
+<li><em>我还没完全懂呢</em></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="73dfs">7、六大算法3：回溯（DFS）<a class="headerlink" href="#73dfs" title="Permanent link">&para;</a></h3>
+<ul>
+<li>回溯与DFS区别？</li>
+<li>除了背模板外，<strong>真正的点，还在于如何去理解业务</strong>，要在不同题目中去体会</li>
+</ul>
+<h4 id="71">7.1、思想&amp;入门题<a class="headerlink" href="#71" title="Permanent link">&para;</a></h4>
+<h5 id="712">7.1.2、全排列<a class="headerlink" href="#712" title="Permanent link">&para;</a></h5>
+<h4 id="72dfs">7.2、图问题中的回溯：DFS<a class="headerlink" href="#72dfs" title="Permanent link">&para;</a></h4>
+<h5 id="721">7.2.1、邻接矩阵存储时的回溯，用的是递归（题目）<a class="headerlink" href="#721" title="Permanent link">&para;</a></h5>
+<ul>
+<li>OD<ul>
+<li>寻找最大价值矿堆</li>
+</ul>
+</li>
+<li>LC<ul>
+<li>695</li>
+</ul>
+</li>
+<li>模板<ul>
+<li>1、初始化没有问题，<strong>啥情况调用dfs，参数怎么组织</strong> <ul>
+<li><strong>用(x,y)一些是矩阵里的坐标</strong>，层数就一个即可，<em>也是根据题目意思来</em></li>
+<li><em>问题在于，这个调用层里，有没有业务逻辑要处理</em></li>
+</ul>
+</li>
+<li>2、dfs实现<ul>
+<li>2.1、把矩阵的行、列大小取到，也可以是传值过来的</li>
+<li>2.2、用完后，用<code>vistited</code>标记一下</li>
+<li>2.3、在4个方向（根据题目意思）判断<strong>不越界&amp;&amp;业务条件</strong>，再调用dfs<ul>
+<li>因为是递归，肯定要有变化的地方，<strong>这时候，一般是x,y有变化</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre class="highlight"><code class="language-cpp">int dirs21[4][2] = { {1,0},{-1,0},{0,-1},{0,1} };
+
+void dfs(vector&lt;vector&lt;int&gt;&gt;&amp; input, int x, int y, int&amp; island) {
+    int row = input.size();
+    int col = input[0].size();
+    island += input[x][y];
+
+    input[x][y] = 0; //修改一下，相当于visited[][]
+
+    for (auto dir : dirs21) {
+        int mx = x + dir[0];
+        int my = y + dir[1];
+        if (mx &gt;= 0 &amp;&amp; mx &lt; row &amp;&amp; my &gt;= 0 &amp;&amp; my &lt; col &amp;&amp; input[mx][my]) {
+            dfs(input, mx, my, island);
+        }
+    }
+}
+
+
+void od_a21_impl(vector&lt;vector&lt;int&gt;&gt; &amp;input) {
+    int row = input.size();
+    int col = input[0].size();
+
+    int res = 0, island = 0;
+    for (int i = 0; i &lt; row; i++) {
+        for (int j = 0; j &lt; col; j++) {
+            if (input[i][j]) {
+                dfs(input, i, j, island);
+                res = max(res, island);   //这一步，才是点睛之笔
+                island = 0;
+            }
+        }
+    }
+    cout &lt;&lt; res &lt;&lt; endl;
+}</code></pre>
+<h3 id="84">8、六大算法4：分治<a class="headerlink" href="#84" title="Permanent link">&para;</a></h3>
+<h3 id="95bfs">9、六大算法5：分支限界（BFS）<a class="headerlink" href="#95bfs" title="Permanent link">&para;</a></h3>
+<h3 id="106">10、六大算法6：蛮力<a class="headerlink" href="#106" title="Permanent link">&para;</a></h3>
+<h3 id="11kmp">11、杂散：KMP<a class="headerlink" href="#11kmp" title="Permanent link">&para;</a></h3>
+<h4 id="111kmp">11.1、KMP<a class="headerlink" href="#111kmp" title="Permanent link">&para;</a></h4>
+<ul>
+<li>除了<strong><code>getNext()</code>求next数组</strong>是模板外，其它还是<strong>业务</strong>（看题目场景）</li>
+</ul>
+<h5 id="1111">11.1.1、思想<a class="headerlink" href="#1111" title="Permanent link">&para;</a></h5>
+<ul>
+<li>靠B站<a href="https://www.bilibili.com/video/BV1PD4y1o7nd/?spm_id_from=333.337.search-card.all.click">帮你把KMP算法学个通透！（理论篇）</a>，<strong>代码随想录</strong>入的门<ul>
+<li><strong>最长相等前后缀</strong>，以"aabaaf"为例，（前缀表的值）<ul>
+<li><strong>前缀</strong>：含有首字母，不含尾字母</li>
+<li><strong>后缀</strong>：不含首字母，含有尾字母</li>
+<li>a，0</li>
+<li>aa，1，前缀是a，后缀是a，相等</li>
+<li>aab，0，前缀是a,a,aa，后缀是a,b,ab，<em>感觉又记混了，lionel</em></li>
+<li>aaba，1</li>
+<li>aabaa，2</li>
+<li>aabaaf，0</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="1112">11.1.2、模板<a class="headerlink" href="#1112" title="Permanent link">&para;</a></h5>
+<ul>
+<li>第1步，初始化：<ul>
+<li>i表示啥，<strong>初始化为1</strong></li>
+<li>j表示啥，</li>
+<li><code>next[0]</code>，怎么初始化</li>
+</ul>
+</li>
+<li>第2步，不相等时，<strong>用<code>while()</code>，因为不是一次回退</strong></li>
+<li>第3步，相等时，j++</li>
+<li>第4步，更新<code>next[i]</code></li>
+</ul>
+<pre class="highlight"><code class="language-cpp">void getNext(int *next, string s) {
+    next[0] = 0;
+    int j = 0;
+    for (int i = 1; i &lt; s.size(); i++) {
+        while (j &gt; 0 &amp;&amp; s[i] != s[j]) {  //这一步，要用while
+            j = next[j - 1];
+        }
+        if (s[i] == s[j]) {  //lionel，next数组这个差不多了，这个地方写错了，把==写成了=
+            j++;
+        }
+        next[i] = j;
+    }
+}</code></pre>
+<h3 id="_2">附录<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<h4 id="1">1、字符串操作<a class="headerlink" href="#1" title="Permanent link">&para;</a></h4>
+<ul>
+<li>https://en.cppreference.com/w/c/string/byte<ul>
+<li><em>现在cppreference里这个有点多</em>，主要是针对这个</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>因为我在<code>strstr()</code>的参数上没写对，所以<strong>想把这个当作基础内容</strong></li>
+</ul>
+<h5 id="11_2">1.1、字符数组与字符串<a class="headerlink" href="#11_2" title="Permanent link">&para;</a></h5>
+<h5 id="12_1">1.2、常用字符串操作<a class="headerlink" href="#12_1" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、初始化</li>
+<li>2、获取长度，<em>两者区别</em><ul>
+<li>strlen()</li>
+<li>sizeof()</li>
+</ul>
+</li>
+<li>3、</li>
+<li>strstr()</li>
+</ul>
+<h5 id="13_1">1.3、字符串的进阶<a class="headerlink" href="#13_1" title="Permanent link">&para;</a></h5>
+<h6 id="131split">1.3.1、split功能实现<a class="headerlink" href="#131split" title="Permanent link">&para;</a></h6>
+<ul>
+<li>1、传统的方法</li>
+<li>2、用正则表达式</li>
+</ul>
+<h4 id="2acm">2、ACM输入<a class="headerlink" href="#2acm" title="Permanent link">&para;</a></h4>
+<h5 id="21cingetlinegetchar">2.1、知识点（cin、getline()、getchar()）<a class="headerlink" href="#21cingetlinegetchar" title="Permanent link">&para;</a></h5>
+<ul>
+<li>cin<ul>
+<li>单独输入、批量输入，<strong>是个缓冲区</strong>，头文件是<code>&lt;iostream&gt;</code>，当<strong>读入的字符串中间存在空格时，cin读不全整个字符串</strong></li>
+<li>1、可以连续从键盘输入</li>
+<li>2、以空格、tab、换行符为分隔符</li>
+<li>3、从第1个非空格字符开始读取，直到遇到分隔符结束读取</li>
+</ul>
+</li>
+<li>getline()<ul>
+<li>头文件是<code>&lt;string&gt;</code></li>
+<li><strong>解决cin中存在空格读不全的问题</strong>，getline()会读入一行，包含空格，<strong>遇到换行符结束</strong><ul>
+<li><code>string s;  getline(cin,s);//原来可以这么写</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>getchar()<ul>
+<li>从缓冲区读出一个字符，<strong>经常用于判断是否换行</strong></li>
+<li><code>while(cin &gt;&gt; num){push.(num);  if(getchar()=='\n') break;//读到换行符，终止循环}</code></li>
+</ul>
+</li>
+</ul>
+<h5 id="22_1">2.2、练习题<a class="headerlink" href="#22_1" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、用逗号隔开的场景</li>
+</ul>
+<h5 id="2ref">2.、ref<a class="headerlink" href="#2ref" title="Permanent link">&para;</a></h5>
+<ul>
+<li><a href="https://blog.csdn.net/qq_46046431/article/details/129266738">ACM模式输入输出攻略 | C++篇</a></li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '../../..';</script>
+    <script src="../../../js/theme_extra.js" defer></script>
+    <script src="../../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>离散数学 - lionel的技术笔记</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "\u79bb\u6563\u6570\u5b66";
+        var mkdocs_page_input_path = "95selfStudy\\\u79bb\u6563\u6570\u5b66.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> lionel的技术笔记
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">简介</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../01daily/">daily</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../02ds/">ds</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../03cpp/">cpp</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../21tool/">tool</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">C++</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../20C%2B%2B/effectiveC%2B%2B/">《Effective C++》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../20C%2B%2B/%E6%B7%B1%E5%BA%A6%E6%8E%A2%E7%B4%A2C%2B%2B%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B/">《深度探索C++对象模型》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/EffectiveSTL/">《Effective STL》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/C%2B%2B%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/">《C++泛型STL原理和应用》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/">《STL源码剖析》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../22C%2B%2Bmodern/%E6%B7%B1%E5%85%A5%E5%BA%94%E7%94%A8C%2B%2B11/">《深入应用C++11》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">基础知识</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA/">《操作系统导论》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E5%A4%A7%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">《大话设计模式》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90_C%2B%2B4th/">《数据结构与算法分析_C++4th》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E7%AE%97%E6%B3%95%284th%29/">《算法4th》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90-%E5%BC%A0%E5%86%9B/">《算法设计与分析-张军》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E5%A4%A9%E8%A1%8C-%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《天行-算法设计与实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%95%99%E7%A8%8B-%E6%9D%8E%E6%98%A5%E8%91%86/">《数据结构教程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%96%B0%E7%BC%96%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%A0%E9%A2%98%E4%B8%8E%E8%A7%A3%E6%9E%90/">《新编数据结构习题与解析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网络编程</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/TCPIP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">《TCP/IP网络编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/">《Linux高性能服务器编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/TCPIP%E8%AF%A6%E8%A7%A3%E5%8D%B71/">《TCPIP详解卷1》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/Linux%E5%86%85%E6%A0%B8%E7%BD%91%E7%BB%9C%E6%A0%88%E6%BA%90%E4%BB%A3%E7%A0%81%E6%83%85%E6%99%AF%E5%88%86%E6%9E%90/">《Linux内核网络栈源代码情景分析》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C/">《深入理解Linux网络》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">机器&深度学习</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../30machineLearning/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%9F%BA%E7%A1%80/">《机器学习线性代数基础》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../31deepLearning/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%85%A5%E9%97%A8%EF%BC%9A%E5%9F%BA%E4%BA%8EPython%E7%9A%84%E7%90%86%E8%AE%BA%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《深度学习入门：基于Python的理论与实现》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">文件系统</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/Linux%E5%86%85%E6%A0%B8%E6%8E%A2%E7%A7%98/">《Linux内核探秘》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《文件系统技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">《存储技术原理分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">存储</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../12storage/ceph%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《ceph设计原理与实现》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">视频</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/FFmpeg%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/">《FFmpeg入门到精通》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/WebRTC%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/">《WebRTC权威指南》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/WebRTC%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AE%9E%E6%97%B6%E4%BA%92%E5%8A%A8%E6%8A%80%E6%9C%AF/">《WebRTC音视频实时互动技术》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/%E6%96%B0%E4%B8%80%E4%BB%A3%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9%E7%A0%81%E6%A0%87%E5%87%86-H.264_AVC/">《新一代视频压缩码标准-H.264_AVC》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">内核</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/Linux%E5%86%85%E6%A0%B8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《Linux内核设计与实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5Linux%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%E5%86%85%E6%A0%B8%E6%9C%BA%E5%88%B6/">《深入Linux设备驱动程序内核机制》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">《深入理解Linux虚拟内存管理》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《深入理解Linux网络技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../13kernel/Linux内核源代码剖析-tcpip实现.md">《Linux内核源代码剖析-TCP/IP实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E5%86%85%E6%A0%B8/">《深入理解Linux内核》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">工具</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/Wireshark%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98/">《Wireshark网络分析实战》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/Linux%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8Eshell%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B%E5%A4%A7%E5%85%A8%283rd%29/">《Linux命令行与shell脚本编程大全(3rd)》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/python%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%883rd%EF%BC%89/">《python程序设计（3rd）》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/python/Python%E7%BC%96%E7%A8%8B%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E8%B7%B5/">《Python编程从入门到实践》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">刷题</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer2nd/">《剑指offer2nd》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/">《剑指offer专项突破》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../96output/OD基础题.md">OD基础题</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../96output/OD进阶题.md">OD进阶题</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网课</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/01Linux%E9%AB%98%E5%B9%B6%E5%8F%91%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/">《Linux高并发网络编程开发》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/%E4%BE%AF%E6%8D%B7/%E4%BE%AF%E6%8D%B7C%2B%2B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%8660%E8%AE%B2/">《侯捷C++内存管理60讲》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/11NJU%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">《NJU算法设计与分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">英语专</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../60English/00794%E7%BB%BC%E5%90%88%E8%8B%B1%E8%AF%AD%E4%B8%80%E4%B8%8A/">《综合英语(一)上》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/">《概率率与数理统计》</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">lionel的技术笔记</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>离散数学</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="_1">《离散数学》<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h3 id="0">0<a class="headerlink" href="#0" title="Permanent link">&para;</a></h3>
+<ul>
+<li>研究<strong>离散量</strong>，包括：<ul>
+<li>数理逻辑（chap1-3）</li>
+<li>集合与关系理论（chap4-5）<ul>
+<li>5.1.2、关系的性质<strong>怎么记忆和理解</strong>（）</li>
+</ul>
+</li>
+<li>代数系统与布尔代数（chap6-7）</li>
+<li>图与树（chap8-9）</li>
+</ul>
+</li>
+</ul>
+<h3 id="chap1">chap1、命题与命题公式<a class="headerlink" href="#chap1" title="Permanent link">&para;</a></h3>
+<h4 id="11">1.1、命题与命题联结词<a class="headerlink" href="#11" title="Permanent link">&para;</a></h4>
+<h4 id="12">1.2、命题公式的等值演算<a class="headerlink" href="#12" title="Permanent link">&para;</a></h4>
+<h4 id="13">1.3、联结词完备案<a class="headerlink" href="#13" title="Permanent link">&para;</a></h4>
+<h3 id="chap2">chap2、命题逻辑的推理理论<a class="headerlink" href="#chap2" title="Permanent link">&para;</a></h3>
+<h4 id="21">2.1、范式<a class="headerlink" href="#21" title="Permanent link">&para;</a></h4>
+<h4 id="22">2.2、主范式<a class="headerlink" href="#22" title="Permanent link">&para;</a></h4>
+<h4 id="23">2.3、自然推理系统<a class="headerlink" href="#23" title="Permanent link">&para;</a></h4>
+<h3 id="chap3">chap3、谓词逻辑<a class="headerlink" href="#chap3" title="Permanent link">&para;</a></h3>
+<h4 id="31">3.1、谓词的概念与表示<a class="headerlink" href="#31" title="Permanent link">&para;</a></h4>
+<h4 id="32">3.2、量词与合式公式<a class="headerlink" href="#32" title="Permanent link">&para;</a></h4>
+<h4 id="33">3.3、谓词演算的等价式与蘊涵式<a class="headerlink" href="#33" title="Permanent link">&para;</a></h4>
+<h4 id="34">3.4、前束范式<a class="headerlink" href="#34" title="Permanent link">&para;</a></h4>
+<h4 id="35">3.5、谓词演算的推理理论<a class="headerlink" href="#35" title="Permanent link">&para;</a></h4>
+<h3 id="chap4">chap4、集合<a class="headerlink" href="#chap4" title="Permanent link">&para;</a></h3>
+<h4 id="41">4.1、集合的基本概念<a class="headerlink" href="#41" title="Permanent link">&para;</a></h4>
+<h4 id="42">4.2、集合的运算<a class="headerlink" href="#42" title="Permanent link">&para;</a></h4>
+<h4 id="43">4.3、有序对与笛卡尔积<a class="headerlink" href="#43" title="Permanent link">&para;</a></h4>
+<h5 id="431">4.3.1、有序对<a class="headerlink" href="#431" title="Permanent link">&para;</a></h5>
+<ul>
+<li>定义：<ul>
+<li>4.13</li>
+<li>4.14</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>按一次顺序排列的二元组</strong></li>
+</ul>
+<h5 id="432">4.3.2、笛卡尔积<a class="headerlink" href="#432" title="Permanent link">&para;</a></h5>
+<ul>
+<li>定义：<ul>
+<li>4.15</li>
+</ul>
+</li>
+<li>定理：<ul>
+<li>4.6、</li>
+<li>4.7、</li>
+<li>4.8、</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>又叫<strong>直积</strong>，设A中元素x为第一元素，B中元素y为第二元素构成有序对。</li>
+<li>笛卡尔积性质：</li>
+</ul>
+<h3 id="chap5">chap5、关系与函数<a class="headerlink" href="#chap5" title="Permanent link">&para;</a></h3>
+<h4 id="51">5.1、关系及关系的性质<a class="headerlink" href="#51" title="Permanent link">&para;</a></h4>
+<h5 id="511">5.1.1、关系的定义及表示<a class="headerlink" href="#511" title="Permanent link">&para;</a></h5>
+<ul>
+<li>定义：<ul>
+<li>5.1、</li>
+<li>5.2、</li>
+<li>5.3、</li>
+</ul>
+</li>
+</ul>
+<h5 id="512">5.1.2、关系的性质<a class="headerlink" href="#512" title="Permanent link">&para;</a></h5>
+<ul>
+<li>定义：<ul>
+<li>5.4</li>
+</ul>
+</li>
+<li>5个性质：<ul>
+<li>自反性</li>
+<li>反自反性</li>
+<li>对称性</li>
+<li>反对称性</li>
+<li>传递性</li>
+</ul>
+</li>
+</ul>
+<h4 id="52">5.2、关系的运算<a class="headerlink" href="#52" title="Permanent link">&para;</a></h4>
+<h5 id="521">5.2.1、关系的常规运算<a class="headerlink" href="#521" title="Permanent link">&para;</a></h5>
+<h5 id="522">5.2.2、复合关系<a class="headerlink" href="#522" title="Permanent link">&para;</a></h5>
+<h5 id="523">5.2.3、关系矩阵的布尔运算<a class="headerlink" href="#523" title="Permanent link">&para;</a></h5>
+<h5 id="524">5.2.4、关系的闭包<a class="headerlink" href="#524" title="Permanent link">&para;</a></h5>
+<ul>
+<li>定义<ul>
+<li>5.8</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>定理<ul>
+<li>5.5</li>
+</ul>
+</li>
+</ul>
+<h4 id="53">5.3、等价关系与序关系<a class="headerlink" href="#53" title="Permanent link">&para;</a></h4>
+<h5 id="531">5.3.1、等价关系<a class="headerlink" href="#531" title="Permanent link">&para;</a></h5>
+<ul>
+<li>定义：<ul>
+<li>5.9</li>
+<li>5.10</li>
+<li>5.11</li>
+<li>5.12</li>
+</ul>
+</li>
+<li>定理：<ul>
+<li>5.6</li>
+<li>5.7</li>
+</ul>
+</li>
+</ul>
+<h5 id="532">5.3.2、序关系<a class="headerlink" href="#532" title="Permanent link">&para;</a></h5>
+<ul>
+<li>定义：<ul>
+<li>5.14</li>
+<li>5.15</li>
+<li>5.16</li>
+</ul>
+</li>
+<li>定理<ul>
+<li>5.8</li>
+</ul>
+</li>
+</ul>
+<h4 id="54">5.4、函数<a class="headerlink" href="#54" title="Permanent link">&para;</a></h4>
+<h5 id="541">5.4.1、函数的概念<a class="headerlink" href="#541" title="Permanent link">&para;</a></h5>
+<h5 id="542">5.4.2、复合函数<a class="headerlink" href="#542" title="Permanent link">&para;</a></h5>
+<ul>
+<li>定义：<ul>
+<li>5.29</li>
+</ul>
+</li>
+<li>定理：<ul>
+<li>5.10</li>
+<li>5.11</li>
+<li>5.12</li>
+</ul>
+</li>
+</ul>
+<h3 id="chap6">chap6、代数系统的一般概念<a class="headerlink" href="#chap6" title="Permanent link">&para;</a></h3>
+<h4 id="61">6.1、代数系统<a class="headerlink" href="#61" title="Permanent link">&para;</a></h4>
+<ul>
+<li>定义：<ul>
+<li>6.1、<strong>该n元运算封闭</strong></li>
+<li>6.2、<strong>代数系统</strong>：集合+集合上的运算</li>
+<li>6.3、<strong>性质</strong></li>
+<li>6.4、<strong>单位元（幺元）</strong></li>
+<li>6.5、<strong>零元</strong></li>
+<li>6.6、<strong>逆元</strong></li>
+<li>6.7、<strong>同类型的代数系统</strong></li>
+<li>6.8、<strong>子代数</strong></li>
+</ul>
+</li>
+</ul>
+<h4 id="62">6.2、群与半群<a class="headerlink" href="#62" title="Permanent link">&para;</a></h4>
+<h5 id="621">6.2.1、半群与独异点<a class="headerlink" href="#621" title="Permanent link">&para;</a></h5>
+<h5 id="622">6.2.2、群<a class="headerlink" href="#622" title="Permanent link">&para;</a></h5>
+<h4 id="63">6.3、环与域<a class="headerlink" href="#63" title="Permanent link">&para;</a></h4>
+<ul>
+<li>定义<ul>
+<li>6.19，<strong>环</strong>，满足三个条件<ul>
+<li><code>&lt;A,+&gt;</code>是Abel群</li>
+<li><code>&lt;A,*&gt;</code>是半群</li>
+<li>运算<code>*</code>对于运算<code>+</code>是可分配的</li>
+</ul>
+</li>
+<li>6.20，<strong>零因子</strong></li>
+<li>6.21，<code>&lt;A,+,*&gt;</code>是环</li>
+<li>6.22，<strong>域</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="chap7">chap7、格与布尔代数<a class="headerlink" href="#chap7" title="Permanent link">&para;</a></h3>
+<h4 id="71">7.1、格的基本概念<a class="headerlink" href="#71" title="Permanent link">&para;</a></h4>
+<h5 id="711">7.1.1、格的定义<a class="headerlink" href="#711" title="Permanent link">&para;</a></h5>
+<ul>
+<li>定义7.1、设<span class="arithmatex">\(&lt;A,\preccurlyeq&gt;\)</span>是一个偏序集，有最大上界和最小下界，则称<span class="arithmatex">\(&lt;A,\preccurlyeq&gt;\)</span>为<strong>格</strong><ul>
+<li>偏序集，<code>\preccurlyeq</code></li>
+<li><strong>偏序集</strong>，集合A，以及A上的偏序关系  【<strong>5.3.2序关系</strong>】，【<strong>5.1.2关系的性质</strong>】<ul>
+<li>自反性</li>
+<li>反对称性</li>
+<li>传递性</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>定义7.2、<strong>交和并运算</strong></li>
+<li>定义7.3、<strong>对偶</strong>，</li>
+</ul>
+<h5 id="712">7.1.2、格式的性质<a class="headerlink" href="#712" title="Permanent link">&para;</a></h5>
+<ul>
+<li>0<ul>
+<li>定理7.1、</li>
+<li>定理7.2、</li>
+<li>定理7.3、</li>
+<li>定理7.4、</li>
+<li>定理7.5、</li>
+</ul>
+</li>
+<li>定义7.4、设<span class="arithmatex">\(&lt;L,\vee,\wedge&gt;\)</span>是代数系统，其中<span class="arithmatex">\(\vee\)</span>和<span class="arithmatex">\(\wedge\)</span>是二元运算，若<span class="arithmatex">\(\vee\)</span>和<span class="arithmatex">\(\wedge\)</span>运算满足交换律、结合律和吸收律，则称<span class="arithmatex">\(&lt;L,\vee,\wedge&gt;\)</span>是一个<strong>格</strong>。<ul>
+<li>https://su-lemon.gitee.io/post/73a19565.html  latex的数学符号</li>
+<li>定理7.6、</li>
+</ul>
+</li>
+</ul>
+<h4 id="72">7.2、分配格与有补格<a class="headerlink" href="#72" title="Permanent link">&para;</a></h4>
+<h5 id="721">7.2.1、分配格<a class="headerlink" href="#721" title="Permanent link">&para;</a></h5>
+<ul>
+<li>定义7.6、<strong>分配格</strong><ul>
+<li>格中定义的两个运算满足分配律</li>
+<li>定理7.7、</li>
+<li>推论7.1、（1）小于五元的格都是分配格，（2）任意一条链都是分配格</li>
+</ul>
+</li>
+</ul>
+<h5 id="722">7.2.2、有补格<a class="headerlink" href="#722" title="Permanent link">&para;</a></h5>
+<h4 id="73">7.3、布尔代数<a class="headerlink" href="#73" title="Permanent link">&para;</a></h4>
+<ul>
+<li>定义7.12、如果一个格是有补分配格，则称它为<strong>布尔格</strong>或<strong>布尔代数</strong><ul>
+<li><strong>有补格</strong>（定义7.11）</li>
+<li><strong>分配格</strong>（定义7.6），格中定义的两个运算满足分配律</li>
+</ul>
+</li>
+</ul>
+<h3 id="chap8">chap8、图<a class="headerlink" href="#chap8" title="Permanent link">&para;</a></h3>
+<ul>
+<li>1736年，瑞士L.Euler发表了第一篇图论的论文，解决了<strong>哥尼斯堡七桥</strong>问题</li>
+<li>1936年，科尼格（Konig）发表了第本图论著作</li>
+</ul>
+<h4 id="81">8.1、图的基本概念<a class="headerlink" href="#81" title="Permanent link">&para;</a></h4>
+<ul>
+<li>定义8.1、</li>
+<li>定义8.2、</li>
+<li>定义8.3、</li>
+<li>定义8.4、</li>
+<li>定义8.5、</li>
+<li>定义8.6、<strong>补图</strong>，设G=<V,E>是n阶无向简单图，以V为顶点集、所有属于<span class="arithmatex">\(K_n\)</span>但不属于G的边为边集所构成的图，称为G相对于<span class="arithmatex">\(K_n\)</span>的补图，简称为<strong>G的补图</strong>，记作<span class="arithmatex">\(\widetilde{G}\)</span><ul>
+<li><code>\sim</code>是波浪线，</li>
+<li><code>\widetilde{G}</code>，在G的正上方有个波浪线</li>
+<li><code>\overline</code>加横线</li>
+</ul>
+</li>
+<li>定义8.7、<strong>图G的最大度</strong>，<strong>图G的最小度</strong></li>
+<li>定义8.8、在无向图G=<V,E>中，如果每个顶点的度都是k，则图G称为<strong>k-正则图</strong></li>
+<li>定义8.9、<strong>子图</strong>，如果G的子图包含G的所有顶点，即，则G<em>一pi</em>称为G的<strong>生成子图</strong></li>
+<li>定义8.10、<strong>同构</strong></li>
+<li>定义8.11、<strong>自补图</strong></li>
+</ul>
+<h4 id="82">8.2、图的连通性<a class="headerlink" href="#82" title="Permanent link">&para;</a></h4>
+<ul>
+<li>定义8.12、</li>
+<li>定义8.13、</li>
+<li>定义8.14、</li>
+<li>定义8.15、</li>
+<li>定义8.16、</li>
+<li>定义8.17、</li>
+<li>定义8.18、<strong>边割集</strong>，</li>
+</ul>
+<h4 id="83">8.3、图的表示<a class="headerlink" href="#83" title="Permanent link">&para;</a></h4>
+<ul>
+<li>定义8.19、<strong>邻接矩阵</strong>，设图<span class="arithmatex">\(G=&lt;V,E&gt;，V=\{v_1,v_2,...,v_n\},\)</span>则n阶方阵<span class="arithmatex">\(M=(a_{ij})\)</span>称为G的邻接矩阵。其中，<span class="arithmatex">\(a_{ij}\)</span>为图G中从<span class="arithmatex">\(v_i\)</span>到<span class="arithmatex">\(v_j\)</span>的边的数目</li>
+<li>定义8.20、<strong>路径矩阵</strong></li>
+</ul>
+<h3 id="chap9">chap9、图的应用<a class="headerlink" href="#chap9" title="Permanent link">&para;</a></h3>
+<h4 id="91">9.1、欧拉图与哈密顿图<a class="headerlink" href="#91" title="Permanent link">&para;</a></h4>
+<h5 id="911">9.1.1、欧拉图<a class="headerlink" href="#911" title="Permanent link">&para;</a></h5>
+<ul>
+<li>定义9.1、具有欧拉回路的图称为<strong>欧拉图</strong><ul>
+<li>欧拉通路为回路，称为<strong>欧拉回路</strong></li>
+<li>连通图G中，经过G的每条边一次且仅一次的通路，称为<strong>欧拉通路</strong></li>
+<li><strong>半欧拉图</strong>，含有欧拉通路，但没有欧拉回路</li>
+<li>定理9.1、无向连通图G是欧拉图的充分必要条件是<strong>G是连通的且是无奇点的</strong><ul>
+<li>根据图中各顶点度的奇偶性将图中全部顶点分为<strong>奇点</strong>和<strong>偶点</strong>的</li>
+</ul>
+</li>
+<li>定理9.2、</li>
+</ul>
+</li>
+<li>定义9.2、<strong>单向欧拉通路</strong><ul>
+<li>定理9.3、</li>
+</ul>
+</li>
+</ul>
+<h5 id="912">9.1.2、哈密顿图<a class="headerlink" href="#912" title="Permanent link">&para;</a></h5>
+<ul>
+<li>定义9.3、具有哈密顿回路的图称为<strong>哈密顿图（H-图）</strong><ul>
+<li><strong>哈密顿回路（H-回路）</strong>，存在一条回路C，经过图中的每个顶点一次且仅一次</li>
+<li>给定无向图G，若存在一条回路L，经过图中每个顶点一次且仅一次，则L称为<strong>哈密顿路</strong>，简称<strong>H-路</strong></li>
+<li>定理9.4、</li>
+<li>定理9.5、</li>
+<li>定理9.6、</li>
+</ul>
+</li>
+</ul>
+<h4 id="92">9.2、平面图<a class="headerlink" href="#92" title="Permanent link">&para;</a></h4>
+<ul>
+<li>定义9.4、若一个图G能画在平面S上，且使G的边仅在端点处相交，则称图G为可嵌入平面S，<strong>G称为可平面图</strong>（平面图）</li>
+<li>定义9.5、<strong>该面的边界</strong>，包围每个面的所有边组成的回路<ul>
+<li>定理9.7、设连通平面图G，面的次数之和等于其边数的两倍。</li>
+<li>定理9.8、设有一个连通平面图G，共有n个顶点和m条边，其平面表示中共有r个面，则n-m+r=2成立。此公式称为<strong>欧拉公式</strong></li>
+<li>定理9.9、设G是一个有v个顶点m条边的连通简单平面图，若<span class="arithmatex">\(v\geq3\)</span>，则<span class="arithmatex">\(m\leq3v-6\)</span></li>
+<li>定理9.10、设G是一个有v个顶点m条边的连通简单平面图，若<span class="arithmatex">\(v\geq3\)</span>且没有长度为3的回路，则<span class="arithmatex">\(m\leq2v-4\)</span></li>
+</ul>
+</li>
+<li>定义9.6、<strong>同胚</strong>，如果两个图G1和G2同构，或经过反复插入或消去2度顶点后同构，刚称G1与G2<ul>
+<li><em>什么是 同构？</em></li>
+<li>定理9.11、</li>
+</ul>
+</li>
+</ul>
+<h4 id="93">9.3、树及其遍历<a class="headerlink" href="#93" title="Permanent link">&para;</a></h4>
+<h5 id="931">9.3.1、树的基本概念<a class="headerlink" href="#931" title="Permanent link">&para;</a></h5>
+<ul>
+<li>定义9.7、一个连通且无回路的无向图称为<strong>树</strong>，也叫<strong>自由树</strong><ul>
+<li>定理9.12、</li>
+<li>定理9.13、</li>
+<li>推论9.1、</li>
+<li>定理9.14、树T的每一个分支结点都是T的<strong>割点</strong></li>
+<li>定理9.15、连通图至少有一棵生成树</li>
+</ul>
+</li>
+<li>定义9.8</li>
+<li>定义9.9</li>
+<li>定义9.10<ul>
+<li>定理9.16、使用Kruskal算法生成的生成树T是<strong>最小生成树</strong></li>
+</ul>
+</li>
+<li>定义9.11、如果有向图在不考虑边的方向时是一棵树，那么这个有向图称为<strong>有向树</strong></li>
+<li>定义9.12、若一棵有向树恰有一个结点的入度为0，其余所有结点的入度均为1，则称该有向树为<strong>有根树</strong></li>
+<li>定义9.13</li>
+<li>定义9.14</li>
+<li>定义9.15、在有向树T中，若每个结点的子结点之间指定某种次序，则T称为<strong>有序树</strong></li>
+<li>定义9.16、在有根树中，若每一个结点的出度小于等于m，则称这棵树为<strong>m叉树</strong></li>
+</ul>
+<h5 id="932">9.3.2、二叉树的基本概念<a class="headerlink" href="#932" title="Permanent link">&para;</a></h5>
+<ul>
+<li>0<ul>
+<li>定理9.17</li>
+</ul>
+</li>
+</ul>
+<h5 id="933">9.3.3、二叉树与树的遍历<a class="headerlink" href="#933" title="Permanent link">&para;</a></h5>
+<ul>
+<li>定义9.17、<strong>树的遍历</strong>是指依次访问树中的每个结点一次且仅访问一次。也称为<strong>树的周游</strong></li>
+</ul>
+<h3 id="_2">最后<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<h4 id="_3">履历<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
+<ul>
+<li>2019-12-15把chap5看了一下，也是手抄了一下，基本没记住啥</li>
+</ul>
+<ul>
+<li>2020-01-05左右把chap6-9看了一下，<em>基本记了一下，感觉完全没看懂</em>，2024-01-01开始尝试记一下</li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

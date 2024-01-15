@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>手把手教你读财报 - lionel的技术笔记</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "\u624b\u628a\u624b\u6559\u4f60\u8bfb\u8d22\u62a5";
+        var mkdocs_page_input_path = "81invest\\\u624b\u628a\u624b\u6559\u4f60\u8bfb\u8d22\u62a5.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> lionel的技术笔记
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">简介</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../01daily/">daily</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../02ds/">ds</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../03cpp/">cpp</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../21tool/">tool</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">C++</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../20C%2B%2B/effectiveC%2B%2B/">《Effective C++》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../20C%2B%2B/%E6%B7%B1%E5%BA%A6%E6%8E%A2%E7%B4%A2C%2B%2B%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B/">《深度探索C++对象模型》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/EffectiveSTL/">《Effective STL》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/C%2B%2B%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/">《C++泛型STL原理和应用》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/">《STL源码剖析》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../22C%2B%2Bmodern/%E6%B7%B1%E5%85%A5%E5%BA%94%E7%94%A8C%2B%2B11/">《深入应用C++11》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">基础知识</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA/">《操作系统导论》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E5%A4%A7%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">《大话设计模式》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90_C%2B%2B4th/">《数据结构与算法分析_C++4th》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E7%AE%97%E6%B3%95%284th%29/">《算法4th》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90-%E5%BC%A0%E5%86%9B/">《算法设计与分析-张军》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E5%A4%A9%E8%A1%8C-%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《天行-算法设计与实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%95%99%E7%A8%8B-%E6%9D%8E%E6%98%A5%E8%91%86/">《数据结构教程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%96%B0%E7%BC%96%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%A0%E9%A2%98%E4%B8%8E%E8%A7%A3%E6%9E%90/">《新编数据结构习题与解析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网络编程</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/TCPIP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">《TCP/IP网络编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/">《Linux高性能服务器编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/TCPIP%E8%AF%A6%E8%A7%A3%E5%8D%B71/">《TCPIP详解卷1》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/Linux%E5%86%85%E6%A0%B8%E7%BD%91%E7%BB%9C%E6%A0%88%E6%BA%90%E4%BB%A3%E7%A0%81%E6%83%85%E6%99%AF%E5%88%86%E6%9E%90/">《Linux内核网络栈源代码情景分析》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C/">《深入理解Linux网络》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">机器&深度学习</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../30machineLearning/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%9F%BA%E7%A1%80/">《机器学习线性代数基础》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../31deepLearning/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%85%A5%E9%97%A8%EF%BC%9A%E5%9F%BA%E4%BA%8EPython%E7%9A%84%E7%90%86%E8%AE%BA%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《深度学习入门：基于Python的理论与实现》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">文件系统</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/Linux%E5%86%85%E6%A0%B8%E6%8E%A2%E7%A7%98/">《Linux内核探秘》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《文件系统技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">《存储技术原理分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">存储</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../12storage/ceph%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《ceph设计原理与实现》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">视频</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/FFmpeg%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/">《FFmpeg入门到精通》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/WebRTC%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/">《WebRTC权威指南》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/WebRTC%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AE%9E%E6%97%B6%E4%BA%92%E5%8A%A8%E6%8A%80%E6%9C%AF/">《WebRTC音视频实时互动技术》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/%E6%96%B0%E4%B8%80%E4%BB%A3%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9%E7%A0%81%E6%A0%87%E5%87%86-H.264_AVC/">《新一代视频压缩码标准-H.264_AVC》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">内核</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/Linux%E5%86%85%E6%A0%B8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《Linux内核设计与实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5Linux%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%E5%86%85%E6%A0%B8%E6%9C%BA%E5%88%B6/">《深入Linux设备驱动程序内核机制》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">《深入理解Linux虚拟内存管理》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《深入理解Linux网络技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../13kernel/Linux内核源代码剖析-tcpip实现.md">《Linux内核源代码剖析-TCP/IP实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E5%86%85%E6%A0%B8/">《深入理解Linux内核》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">工具</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/Wireshark%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98/">《Wireshark网络分析实战》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/Linux%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8Eshell%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B%E5%A4%A7%E5%85%A8%283rd%29/">《Linux命令行与shell脚本编程大全(3rd)》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/python%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%883rd%EF%BC%89/">《python程序设计（3rd）》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/python/Python%E7%BC%96%E7%A8%8B%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E8%B7%B5/">《Python编程从入门到实践》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">刷题</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer2nd/">《剑指offer2nd》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/">《剑指offer专项突破》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../96output/OD基础题.md">OD基础题</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../96output/OD进阶题.md">OD进阶题</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网课</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/01Linux%E9%AB%98%E5%B9%B6%E5%8F%91%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/">《Linux高并发网络编程开发》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/%E4%BE%AF%E6%8D%B7/%E4%BE%AF%E6%8D%B7C%2B%2B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%8660%E8%AE%B2/">《侯捷C++内存管理60讲》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/11NJU%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">《NJU算法设计与分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">英语专</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../60English/00794%E7%BB%BC%E5%90%88%E8%8B%B1%E8%AF%AD%E4%B8%80%E4%B8%8A/">《综合英语(一)上》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../95selfStudy/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/">《概率率与数理统计》</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">lionel的技术笔记</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>手把手教你读财报</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="_1">《手把手教你读财报》<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h3 id="0">0、<a class="headerlink" href="#0" title="Permanent link">&para;</a></h3>
+<ul>
+<li>14-54/369，全书计划12个，第1个，把chap1读掉了</li>
+</ul>
+<h3 id="chap114369">chap1、你必须学会读财务（14/369）<a class="headerlink" href="#chap114369" title="Permanent link">&para;</a></h3>
+<h4 id="11">1.1、财报是用来排除企业的<a class="headerlink" href="#11" title="Permanent link">&para;</a></h4>
+<ul>
+<li>财务里的小故事<ul>
+<li>故事一<ul>
+<li><em>未读懂这个例子，lionel</em></li>
+<li><strong>了解利润的产生过程</strong></li>
+</ul>
+</li>
+<li>故事二<ul>
+<li><em>过程更复杂了，更不懂，lionel</em></li>
+<li><strong>了解公司在业内的地位和产品的市场份额，懂得运用财报中毛利率、净利率和税收数据与行业内竞争对手对比</strong></li>
+</ul>
+</li>
+<li>故事三<ul>
+<li><em>不懂</em></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>小故事，大智慧<ul>
+<li>1、只看公司利润数据，很容易被误导</li>
+<li>2、财报中有很多细节，可以帮助我们排除造假企业，降低踩雷概率</li>
+</ul>
+</li>
+</ul>
+<h4 id="12">1.2、财报阅读入门<a class="headerlink" href="#12" title="Permanent link">&para;</a></h4>
+<ul>
+<li>关于财报的两个基础知识<ul>
+<li>时间<ul>
+<li>美、港（4.1-来看的3.31）</li>
+<li>大陆（自然年），来看4个月内披露年报，<strong>季报不得早于年报</strong></li>
+</ul>
+</li>
+<li>范围<ul>
+<li>3大表（资产负债表、利润表、现金流量表）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>资产负债表<ul>
+<li>右边：钱的来源（<strong>借的，欠的，股东投入的</strong>）<ul>
+<li>借的，欠的，<strong>负债</strong></li>
+<li>股东投入的，<strong>股东权益</strong></li>
+</ul>
+</li>
+<li>左边：钱的去处<ul>
+<li>（厂房、存货、股票、理财、借给人家）...</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>利润表（<strong>损益表</strong>）</li>
+<li>现金流量表</li>
+<li>其它</li>
+</ul>
+<h4 id="13">1.3、读财报前的准备工作<a class="headerlink" href="#13" title="Permanent link">&para;</a></h4>
+<ul>
+<li>数据来源：cninfo（巨潮）、szse（深交）、sse（上交）</li>
+<li>本书采用的范本：贵州茅台</li>
+</ul>
+<h4 id="14">1.4、重要提示<a class="headerlink" href="#14" title="Permanent link">&para;</a></h4>
+<ul>
+<li>2014年底，全国7790家会计事务所，<strong>证券牌照</strong>的只有53家，而上市公司有2500家（<em>lionel，这是我之前不知道的</em>）</li>
+<li><strong>标准无保留意见</strong>的审计报告，才有阅读价值<ul>
+<li>造假迹象未被本人发现</li>
+</ul>
+</li>
+<li>附带说明的无保留意见审计报告<ul>
+<li>有人背锅，我拿钱</li>
+</ul>
+</li>
+<li>保留意见审计报告<ul>
+<li>假报表</li>
+</ul>
+</li>
+<li>无法出具意见审计报告<ul>
+<li>本人拒绝跟骗子合作</li>
+</ul>
+</li>
+<li>否定意见审计报告<ul>
+<li>本人举报骗子</li>
+</ul>
+</li>
+</ul>
+<h4 id="15">1.5、财报的结构<a class="headerlink" href="#15" title="Permanent link">&para;</a></h4>
+<ul>
+<li>重点的有3节<ul>
+<li>财务会计报告</li>
+<li>董事会报告</li>
+<li>重要事项</li>
+</ul>
+</li>
+<li>次要内容<ul>
+<li>股份变动及股东情况</li>
+<li>董事、监事、高级管理人员和员工情况</li>
+</ul>
+</li>
+<li>非重要论述</li>
+</ul>
+<h3 id="chap2-54369">chap2、投资高手关心的表-资产负债表（54/369）<a class="headerlink" href="#chap2-54369" title="Permanent link">&para;</a></h3>
+<ul>
+<li>知道这家企业怎么赚钱，商品怎么流动，金钱怎么流动，各个环节的优势如何，可持续性是否可以判断，劣势在哪里，能否有改善可能</li>
+<li>生产类<ul>
+<li>固定资产、在建工程、无形资产、商誉</li>
+</ul>
+</li>
+<li>经营类：<strong>为企业销售商品或提供劳务服务的资产</strong><ul>
+<li>货币资金、存货、因销售商品或提供劳务而产生的各种应收款、预付款</li>
+</ul>
+</li>
+<li>投资类<ul>
+<li>股权、债权、基金、信托</li>
+</ul>
+</li>
+</ul>
+<h4 id="21">2.1、生产类资产<a class="headerlink" href="#21" title="Permanent link">&para;</a></h4>
+<h5 id="211">2.1.1、固定资产<a class="headerlink" href="#211" title="Permanent link">&para;</a></h5>
+<ul>
+<li>定义：<strong>为了经营活动而持有（非转手），使用寿命超1年，价值比较大</strong></li>
+<li>1、固定资产必须计提折旧（按月计提）</li>
+<li>2、<strong>折旧政策</strong><ul>
+<li>对应关键字是<strong>固定资产的折旧方法</strong></li>
+<li>一般公司会一直用一种，<em>如果改变折旧政策了要当心</em></li>
+</ul>
+</li>
+<li>3、折旧政策的影响<ul>
+<li><strong>双倍余额递减法</strong>，<strong>年数总和法</strong>【<em>暂时都不懂，找个具体的公司看了，再问AI</em>】</li>
+</ul>
+</li>
+<li>4、折旧可能是隐藏价值<ul>
+<li><strong>账目价值没有了，但实际价值一直在</strong></li>
+</ul>
+</li>
+<li>5、固定资产减值测试<ul>
+<li><em>不太懂，lionel</em></li>
+</ul>
+</li>
+</ul>
+<h5 id="212">2.1.2、固定资产清理<a class="headerlink" href="#212" title="Permanent link">&para;</a></h5>
+<h5 id="212_1">2.1.2、在建工程和工程物资<a class="headerlink" href="#212_1" title="Permanent link">&para;</a></h5>
+<ul>
+<li>在建工程（好了后，就是固定资产），在建工程<strong>不需要计提折旧</strong></li>
+<li>工程物资：<strong>为了在建工程而准备的物资</strong></li>
+</ul>
+<h5 id="213">2.1.3、油气资产<a class="headerlink" href="#213" title="Permanent link">&para;</a></h5>
+<h5 id="214">2.1.4、无形资产和开发支出（或研发支出）<a class="headerlink" href="#214" title="Permanent link">&para;</a></h5>
+<ul>
+<li>专利、商标权、著作权</li>
+<li><strong>需要折旧</strong>（不叫名字叫<strong>摊销</strong>）</li>
+<li>无形资产的来源<ul>
+<li>买的，<em>多少钱买的？</em>，股东投入</li>
+<li><strong>研究阶段支出全部费用化</strong>，计入当期管理费用</li>
+<li><strong>开发阶段符合条件的计入无形资产</strong>，不符合条件的计入当期管理费用</li>
+</ul>
+</li>
+<li>记录无形资产的学问<ul>
+<li><em>暂不太懂这个，lionel</em></li>
+</ul>
+</li>
+</ul>
+<h5 id="215">2.1.5、生物资产：造假高发区<a class="headerlink" href="#215" title="Permanent link">&para;</a></h5>
+<ul>
+<li><em>lionel，没太看懂</em></li>
+</ul>
+<ul>
+<li>生物资产分类</li>
+<li>难以判断价值的生物资产</li>
+<li>造假的高危地带</li>
+</ul>
+<h5 id="216">2.1.6、商誉<a class="headerlink" href="#216" title="Permanent link">&para;</a></h5>
+<ul>
+<li>商誉是怎么产生的？<ul>
+<li><strong>企业并购活动中产生的资产科目</strong>，如果没有收购其它企业，这一项就没有数字</li>
+</ul>
+</li>
+<li>商誉不用摊销<ul>
+<li><strong>每年做减值测试</strong></li>
+</ul>
+</li>
+</ul>
+<h5 id="217">2.1.7、长期待摊费用<a class="headerlink" href="#217" title="Permanent link">&para;</a></h5>
+<ul>
+<li>已经支出的，预计在一年以上时间起效</li>
+</ul>
+<h5 id="218">2.1.8、固定资产清理和工程物资<a class="headerlink" href="#218" title="Permanent link">&para;</a></h5>
+<ul>
+<li><em>未怎么看，lionel</em></li>
+</ul>
+<h5 id="219">2.1.9、使用权资产和租赁负债<a class="headerlink" href="#219" title="Permanent link">&para;</a></h5>
+<ul>
+<li>上市公司作为承租方的会计处理</li>
+<li>上市公司作为出租方的会计处理</li>
+</ul>
+<h4 id="2281369">2.2、经营类资产（81/369）<a class="headerlink" href="#2281369" title="Permanent link">&para;</a></h4>
+<ul>
+<li>生产完成后，紧接着就是<strong>商品（劳务）的销售</strong></li>
+</ul>
+<h5 id="221">2.2.1、货币资金<a class="headerlink" href="#221" title="Permanent link">&para;</a></h5>
+<ul>
+<li>0<ul>
+<li>流动资产，下面的，货币资金</li>
+</ul>
+</li>
+<li>“货币资金”只须关注合并资产负债表数据<ul>
+<li>资产负债表是<strong>按照变现难易程度排列的</strong></li>
+</ul>
+</li>
+<li>“货币资金”的构成<ul>
+<li>包含<strong>存放于央行的准备金</strong>（工商企业没有，财务类公司有）<ul>
+<li>法定准备金，不能随时支取，<strong>不属于现金等价物</strong></li>
+<li>超额准备金，随时支取</li>
+</ul>
+</li>
+<li>不能随时支取的，都不算现金等价物</li>
+</ul>
+</li>
+<li>“货币资金”发出的信号<ul>
+<li>三种发生货币资金的途径<ul>
+<li>发售股票或举债</li>
+<li>出售资产或业务部门</li>
+<li>经营活动的现金流持续大于现金流出</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="232">2.3.2、应收票据和应收账款<a class="headerlink" href="#232" title="Permanent link">&para;</a></h5>
+<ul>
+<li>应收票据<ul>
+<li>银行承兑汇票（财务公司也可以开）</li>
+<li>商业承兑汇票</li>
+<li>承兑，<strong>承诺兑付</strong></li>
+<li><strong>贴现</strong>，持票人为了在承兑汇票到期前获得现金，支付一定的利息将收款权利转让给任意银行的行为。</li>
+</ul>
+</li>
+<li>应收账款<ul>
+<li><strong>增值税</strong>，是增值的部分（售价 减 进价）收税</li>
+<li><em>这里面有操作空间，lionel</em></li>
+</ul>
+</li>
+</ul>
+<h5 id="233">2.3.3、预付账款<a class="headerlink" href="#233" title="Permanent link">&para;</a></h5>
+<h5 id="234">2.3.4、应收利息和应收股利<a class="headerlink" href="#234" title="Permanent link">&para;</a></h5>
+<h5 id="235">2.3.5、其他应收款<a class="headerlink" href="#235" title="Permanent link">&para;</a></h5>
+<h5 id="236">2.3.6、长期应收款<a class="headerlink" href="#236" title="Permanent link">&para;</a></h5>
+<ul>
+<li>一般是2种<ul>
+<li>一是企业融资租赁产生的应收款项</li>
+<li>二是采用递延方式分期收款</li>
+</ul>
+</li>
+</ul>
+<h5 id="237">2.3.7、存货<a class="headerlink" href="#237" title="Permanent link">&para;</a></h5>
+<ul>
+<li>0</li>
+<li>利用存货造假的手法</li>
+<li>造假的根源：不同的存货计货方式</li>
+<li><em>这部分未看，lionel</em></li>
+</ul>
+<h5 id="238">2.3.8、新准则带来的变化<a class="headerlink" href="#238" title="Permanent link">&para;</a></h5>
+<ul>
+<li><em>未看，lionel</em></li>
+</ul>
+<h4 id="23114369">2.3、投资类资产（114/369）<a class="headerlink" href="#23114369" title="Permanent link">&para;</a></h4>
+<h5 id="231">2.3.1、投资类资产的分类直接影响利润表<a class="headerlink" href="#231" title="Permanent link">&para;</a></h5>
+<ul>
+<li>上市公司将<strong>股票分类</strong><ul>
+<li><strong>可供出售金融资产</strong>，没有卖出，就不会对利润有影响</li>
+<li><strong>交易性金融资产</strong>，涨跌金额要计入当期上市公司利润</li>
+</ul>
+</li>
+</ul>
+<h5 id="232_1">2.3.2、投资性房地产<a class="headerlink" href="#232_1" title="Permanent link">&para;</a></h5>
+<ul>
+<li>0<ul>
+<li>房地产，自用（固定资产），出售（存货），不自用也不出售，用来收租或获取房地产增值（投资性房地产）</li>
+</ul>
+</li>
+<li>投资性房地产的计量<ul>
+<li>开始以成本入账，后面有2种方式，一种是<strong>以成本模式</strong>计量，一种是<strong>以公允价值模式</strong>计量</li>
+</ul>
+</li>
+<li>投资性房地产的转换<ul>
+<li><em>没太懂</em></li>
+</ul>
+</li>
+</ul>
+<h5 id="233_1">2.3.3、债权类投资<a class="headerlink" href="#233_1" title="Permanent link">&para;</a></h5>
+<p>2.4、负债和所有者权益</p>
+<p>2.5、快速阅读资产负债表</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

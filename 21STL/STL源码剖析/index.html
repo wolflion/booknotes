@@ -72,8 +72,26 @@
                   </li>
                   <li class="toctree-l1 current"><a class="reference internal current" href="./">《STL源码剖析》</a>
     <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#0">0、</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#_1">搜集的</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#-">设计模式-知识点</a>
+    </li>
+        </ul>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="#chap1stl">chap1、STL概论与版本简介</a>
         <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#18sgi-stl">1.8、SGI STL实现版本</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#181gnu-c">1.8.1、GNU C++</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#182sgi-stl">1.8.2、SGI STL文件分布与简介</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#183sgi-stl">1.8.3、SGI STL的编译器组态设置</a>
+    </li>
+        </ul>
+    </li>
     <li class="toctree-l3"><a class="reference internal" href="#19c">1.9、可能令你困惑的C++语法</a>
         <ul>
     <li class="toctree-l4"><a class="reference internal" href="#191stl_configh">1.9.1、stl_config.h中的各种组态</a>
@@ -140,7 +158,7 @@
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#pointer_type">pointer_type</a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#iterator_type">iterator_type</a>
+    <li class="toctree-l4"><a class="reference internal" href="#345iterator_category">3.4.5、迭代器相应型别之五：iterator_category</a>
     </li>
         </ul>
     </li>
@@ -155,6 +173,26 @@
     <li class="toctree-l2"><a class="reference internal" href="#chap4sequence-containers">chap4、序列式容器（sequence containers）</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#41">4.1、容器的概观与分类</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#411sequential-containers">4.1.1、序列式容器（sequential containers）</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#42vector">4.2、vector</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#43list">4.3、list</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#44deque">4.4、deque</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#45stack">4.5、stack</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#46queue">4.6、queue</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#47heap">4.7、heap</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#48priority_queue">4.8、priority_queue</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#49slist">4.9、slist</a>
     </li>
         </ul>
     </li>
@@ -231,6 +269,10 @@
         </ul>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#73arithmetic">7.3、算术类（Arithmetic）仿函数</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#identity-element">证同元素（identity element）</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#74rational">7.4、关系运算类（Rational）仿函数</a>
     </li>
@@ -286,9 +328,9 @@
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#_1">最后</a>
+    <li class="toctree-l2"><a class="reference internal" href="#_3">最后</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#_2">参考</a>
+    <li class="toctree-l3"><a class="reference internal" href="#_4">参考</a>
     </li>
         </ul>
     </li>
@@ -371,7 +413,7 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《深入理解Linux网络技术内幕》</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/Linux%E5%86%85%E6%A0%B8%E6%BA%90%E4%BB%A3%E7%A0%81%E5%89%96%E6%9E%90-tcpip%E5%AE%9E%E7%8E%B0/">《Linux内核源代码剖析-TCP/IP实现》</a>
+                  <li class="toctree-l1"><a class="" href="../../13kernel/Linux内核源代码剖析-tcpip实现.md">《Linux内核源代码剖析-TCP/IP实现》</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E5%86%85%E6%A0%B8/">《深入理解Linux内核》</a>
                   </li>
@@ -393,9 +435,9 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/">《剑指offer专项突破》</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../96output/OD%E5%9F%BA%E7%A1%80%E9%A2%98/">OD基础题</a>
+                  <li class="toctree-l1"><a class="" href="../../96output/OD基础题.md">OD基础题</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../96output/OD%E8%BF%9B%E9%98%B6%E9%A2%98/">OD进阶题</a>
+                  <li class="toctree-l1"><a class="" href="../../96output/OD进阶题.md">OD进阶题</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">网课</span></p>
@@ -439,14 +481,61 @@
             <div class="section" itemprop="articleBody">
               
                 <h2 id="stl">《STL源码剖析》<a class="headerlink" href="#stl" title="Permanent link">&para;</a></h2>
+<h3 id="0">0、<a class="headerlink" href="#0" title="Permanent link">&para;</a></h3>
+<h4 id="_1">搜集的<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li><a href="http://www.ninesnow.cn/2021/11/stl%e6%ba%90%e7%a0%81%e9%98%85%e8%af%bb%e5%b0%8f%e8%ae%b0%e4%b8%80-allocator/">STL源码阅读小记(一)——Allocator</a>  STL源码阅读小记，<em>可能跟书关系不大</em>，【提供了<a href="https://github.com/llvm/llvm-project">LLVM</a>中的<a href="https://github.com/llvm/llvm-project/tree/main/libcxx">libc++</a>的地址】</li>
+<li><a href="https://wangpengcheng.github.io/2019/07/06/cplusplus_annotated_stl_sources_01/">STL 源码剖析 –侯捷</a>，分了4版，<em>也有不少我可以参考的笔记（linux，内核，并发，设计模式）</em><ul>
+<li><a href="https://wangpengcheng.github.io/2023/11/07/shell_practice/">shell练习题</a></li>
+</ul>
+</li>
+</ul>
+<h4 id="-">设计模式-知识点<a class="headerlink" href="#-" title="Permanent link">&para;</a></h4>
+<ul>
+<li>迭代器</li>
+<li>适配器</li>
+</ul>
 <h3 id="chap1stl">chap1、STL概论与版本简介<a class="headerlink" href="#chap1stl" title="Permanent link">&para;</a></h3>
+<h4 id="18sgi-stl">1.8、SGI STL实现版本<a class="headerlink" href="#18sgi-stl" title="Permanent link">&para;</a></h4>
+<h5 id="181gnu-c">1.8.1、GNU C++<a class="headerlink" href="#181gnu-c" title="Permanent link">&para;</a></h5>
+<h5 id="182sgi-stl">1.8.2、SGI STL文件分布与简介<a class="headerlink" href="#182sgi-stl" title="Permanent link">&para;</a></h5>
+<h5 id="183sgi-stl">1.8.3、SGI STL的编译器组态设置<a class="headerlink" href="#183sgi-stl" title="Permanent link">&para;</a></h5>
 <h4 id="19c">1.9、可能令你困惑的C++语法<a class="headerlink" href="#19c" title="Permanent link">&para;</a></h4>
+<ul>
+<li>template参数推导（argument deduction）</li>
+<li>偏特化（partial specialization）</li>
+</ul>
 <h5 id="191stl_configh">1.9.1、stl_config.h中的各种组态<a class="headerlink" href="#191stl_configh" title="Permanent link">&para;</a></h5>
 <h5 id="192">1.9.2、临时对象的产生与运用<a class="headerlink" href="#192" title="Permanent link">&para;</a></h5>
+<ul>
+<li>临时对象，就是<strong>无名对象</strong>（unnamed objects），它的出现不在程序员预期内</li>
+<li><strong>仿函数（functor）</strong></li>
+<li>config-temporary-object.cpp<ul>
+<li>测试for_each()的情形</li>
+</ul>
+</li>
+</ul>
 <h5 id="193class">1.9.3、静态常量整数成员在class内部直接初始化<a class="headerlink" href="#193class" title="Permanent link">&para;</a></h5>
+<ul>
+<li>config-inclass-init.cpp<ul>
+<li><em>之前是要在类外的</em>（是不是只局限于const啊，<em>自己可以代码试一下</em>）</li>
+</ul>
+</li>
+</ul>
 <h5 id="194incrementdecrementdereference">1.9.4、increment/decrement/dereference操作符<a class="headerlink" href="#194incrementdecrementdereference" title="Permanent link">&para;</a></h5>
+<ul>
+<li>config-operator-overloading.cpp</li>
+</ul>
 <h5 id="195">1.9.5、前闭后开区间表示法<code>[)</code><a class="headerlink" href="#195" title="Permanent link">&para;</a></h5>
 <h5 id="196function-calloperator">1.9.6、function call操作符<code>operator()</code><a class="headerlink" href="#196function-calloperator" title="Permanent link">&para;</a></h5>
+<ul>
+<li>之前，把函数当作参数传递，只有通过<strong>函数指针</strong>的方式，但有个缺点（<strong>它无法持有自己的状态【局部状态】</strong>），也无法达到组件技术中的<strong>可适配性（adaptability）</strong>，也就是无法再将某些修饰条件加诸于其上而改变其状态</li>
+<li>之前没看，<strong>42页注释写得比较清楚</strong>（75/534）</li>
+</ul>
+<pre class="highlight"><code class="language-cpp">plus&lt;int&gt; plusobj;  //lionel，这个plus是作者自定义的，虽然STL里也有一个
+cout&lt;&lt;plusobj(3,5)&lt;&lt;endl;//这个地方是8，   **这里使用仿函数，跟使用一般函数一样**
+//另一种方式
+cout&lt;&lt;plus&lt;int&gt;()(43,50)&lt;&lt;endl; //输出93，前面的plus&lt;int&gt;()产生仿函数的临时对象，第二对小括号表示调用</code></pre>
 <h3 id="chap2allocator">chap2、空间配置器（allocator）<a class="headerlink" href="#chap2allocator" title="Permanent link">&para;</a></h3>
 <ul>
 <li>隐藏在容器背后，<em>这个可以听一下，侯捷在b站的视频（关于内存的使用）</em></li>
@@ -471,7 +560,22 @@
 <h3 id="chap3iteratortraits">chap3、迭代器（iterator）概念与traits编程技法<a class="headerlink" href="#chap3iteratortraits" title="Permanent link">&para;</a></h3>
 <ul>
 <li>iterator模式，<strong>提供一种方法，使之能够依次巡访某个聚合物（容器）所含的各个元素，而又无需暴露该聚合物的内部表述方式</strong>。</li>
-<li><em>如何设计迭代器</em></li>
+<li><em>如何设计迭代器</em><ul>
+<li><strong>行为型</strong></li>
+<li>不暴露底层数据结构时，遍历所有元素</li>
+<li><strong>C++中，类对象，提供自增和解引用操作</strong>，用于遍历所有元素</li>
+<li><a href="https://zhuanlan.zhihu.com/p/629378889">解密C++迭代器模式，轻松提高代码效率！ - 知乎 (zhihu.com)</a></li>
+<li>结构图<ul>
+<li>迭代器抽象类Iterator【virtual，Firset()，Next()，IsDone()】</li>
+<li>聚集抽象类Aggregate（<em>为何要聚合</em>）【创建迭代器】</li>
+<li>具体迭代器ConcreteIterator，继承Iterator</li>
+<li>具体聚集类ConcreteAggreate【<em>不懂啥意思</em>】（实现具体的迭代器吗？）</li>
+<li>客户端代码（ConcreteAggreate去new一个对象，然后用ConcreteaIterator给Iterator）<em>这个没懂</em></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><em>具体的算法，如何跟本节关联上？</em></li>
 </ul>
 <h4 id="31-stl">3.1、迭代器设计思维-STL关键所在<a class="headerlink" href="#31-stl" title="Permanent link">&para;</a></h4>
 <ul>
@@ -491,7 +595,11 @@
 <li>解决方法，<strong>利用function template的参数推导（argument deducation）机制</strong></li>
 </ul>
 </li>
-<li>相应型别有5种</li>
+<li>相应型别有5种<ul>
+<li><em>型别，表示的是 类型 吗？</em></li>
+</ul>
+</li>
+<li><em>本节，用了impl机制</em>（这个机制，我大概是懂的，但用在这是啥意思）</li>
 </ul>
 <h4 id="34traits-stl">3.4、Traits编程技法-STL源代码门钥<a class="headerlink" href="#34traits-stl" title="Permanent link">&para;</a></h4>
 <ul>
@@ -501,12 +609,93 @@
 <h5 id="difference_type">difference_type<a class="headerlink" href="#difference_type" title="Permanent link">&para;</a></h5>
 <h5 id="reference_type">reference_type<a class="headerlink" href="#reference_type" title="Permanent link">&para;</a></h5>
 <h5 id="pointer_type">pointer_type<a class="headerlink" href="#pointer_type" title="Permanent link">&para;</a></h5>
-<h5 id="iterator_type">iterator_type<a class="headerlink" href="#iterator_type" title="Permanent link">&para;</a></h5>
+<h5 id="345iterator_category">3.4.5、迭代器相应型别之五：iterator_category<a class="headerlink" href="#345iterator_category" title="Permanent link">&para;</a></h5>
+<ul>
+<li>迭代器的分类（5种）<ul>
+<li>input Iterator</li>
+<li>Output iterator</li>
+<li>Forward Iterator</li>
+<li>Bidirectional Iterator</li>
+<li>Random Access Iterator</li>
+</ul>
+</li>
+</ul>
+<h6 id="advace">以advace()为例<a class="headerlink" href="#advace" title="Permanent link">&para;</a></h6>
+<h6 id="_2">消除“单纯传递调用的函数”<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h6>
+<h6 id="distance">以distance()为例<a class="headerlink" href="#distance" title="Permanent link">&para;</a></h6>
 <h4 id="35stditerator">3.5、std::iterator的保证<a class="headerlink" href="#35stditerator" title="Permanent link">&para;</a></h4>
+<ul>
+<li>STL提供了一个iterators class，<strong>每个新设计的迭代器，都继承自它</strong>，【后三个，都有默认值】<em>我要搜下，源码中，怎么用的呢</em>】</li>
+</ul>
+<pre class="highlight"><code class="language-cpp">template &lt;class Category, class T, class Distance=ptrdiff_t, class Pointer = T*, class Reference = T&amp;&gt;
+struct iterator{
+    typedef Category iterator_category;
+    typedef T     value_type;
+    typedef Distance  difference_type;
+    typedef Pointer pointer;
+    typedef Reference reference;
+};</code></pre>
 <h4 id="36iterator">3.6、iterator源代码完整重列<a class="headerlink" href="#36iterator" title="Permanent link">&para;</a></h4>
 <h4 id="37sgi-stl__type_traits">3.7、SGI STL的私房菜:<code>__type_traits</code><a class="headerlink" href="#37sgi-stl__type_traits" title="Permanent link">&para;</a></h4>
 <h3 id="chap4sequence-containers">chap4、序列式容器（sequence containers）<a class="headerlink" href="#chap4sequence-containers" title="Permanent link">&para;</a></h3>
+<ul>
+<li>stack、queue算<strong>容器适配器</strong>（他们是封装了其它容器）</li>
+<li>priority_queue，<strong>依赖于heap</strong></li>
+<li>slist至少目前还没有标准化</li>
+</ul>
 <h4 id="41">4.1、容器的概观与分类<a class="headerlink" href="#41" title="Permanent link">&para;</a></h4>
+<h5 id="411sequential-containers">4.1.1、序列式容器（sequential containers）<a class="headerlink" href="#411sequential-containers" title="Permanent link">&para;</a></h5>
+<ul>
+<li>序列式容器，<strong>元素都可序（ordered）但未必有序（sorted）</strong>，【<em>简单点说，就是还没有排序sort呢，lionel</em>】</li>
+<li>stack、queue是deque的封装，<strong>技术上归类为一种配接器adapter</strong></li>
+</ul>
+<h4 id="42vector">4.2、vector<a class="headerlink" href="#42vector" title="Permanent link">&para;</a></h4>
+<p>4.2.1、vector概述</p>
+<p>4.2.1、vector概述</p>
+<p>4.2.1、vector概述</p>
+<p>4.2.1、vector概述</p>
+<p>4.2.1、vector概述</p>
+<p>4.2.1、vector概述</p>
+<h4 id="43list">4.3、list<a class="headerlink" href="#43list" title="Permanent link">&para;</a></h4>
+<p>4.3.1、vector概述</p>
+<p>4.3.1、vector概述</p>
+<p>4.3.1、vector概述</p>
+<p>4.3.1、vector概述</p>
+<p>4.3.1、vector概述</p>
+<p>4.3.1、vector概述</p>
+<h4 id="44deque">4.4、deque<a class="headerlink" href="#44deque" title="Permanent link">&para;</a></h4>
+<p>4.3.1、vector概述</p>
+<p>4.3.1、vector概述</p>
+<p>4.3.1、vector概述</p>
+<p>4.3.1、vector概述</p>
+<p>4.3.1、vector概述</p>
+<p>4.3.1、vector概述</p>
+<h4 id="45stack">4.5、stack<a class="headerlink" href="#45stack" title="Permanent link">&para;</a></h4>
+<p>4.3.1、vector概述</p>
+<p>4.3.1、vector概述</p>
+<p>4.3.1、vector概述</p>
+<p>4.3.1、vector概述</p>
+<h4 id="46queue">4.6、queue<a class="headerlink" href="#46queue" title="Permanent link">&para;</a></h4>
+<p>4.3.1、vector概述</p>
+<p>4.3.1、vector概述</p>
+<p>4.3.1、vector概述</p>
+<p>4.3.1、vector概述</p>
+<h4 id="47heap">4.7、heap<a class="headerlink" href="#47heap" title="Permanent link">&para;</a></h4>
+<p>4.3.1、vector概述</p>
+<p>4.3.1、vector概述</p>
+<p>4.3.1、vector概述</p>
+<p>4.3.1、vector概述</p>
+<h4 id="48priority_queue">4.8、priority_queue<a class="headerlink" href="#48priority_queue" title="Permanent link">&para;</a></h4>
+<p>4.8.1、priority_queue概述</p>
+<p>4.3.1、vector概述</p>
+<p>4.3.1、vector概述</p>
+<p>4.3.1、vector概述</p>
+<h4 id="49slist">4.9、slist<a class="headerlink" href="#49slist" title="Permanent link">&para;</a></h4>
+<p>4.3.1、vector概述</p>
+<p>4.3.1、vector概述</p>
+<p>4.3.1、vector概述</p>
+<p>4.3.1、vector概述</p>
+<p>4.3.1、vector概述</p>
 <h3 id="chap5">chap5、关联式容器<a class="headerlink" href="#chap5" title="Permanent link">&para;</a></h3>
 <ul>
 <li>multiset和multimap，<strong>底层机制均以RB-tree（红黑树）</strong></li>
@@ -591,6 +780,12 @@
 <p>6.3、数值算法<stl_numeric.h></p>
 <p>6.7、其它算法</p>
 <h3 id="chap7functors-function-objects">chap7、仿函数（functors，另名  函数对象 function objects）<a class="headerlink" href="#chap7functors-function-objects" title="Permanent link">&para;</a></h3>
+<ul>
+<li>官方提供的都是类似于<code>greater&lt;T&gt;,plus&lt;T&gt;</code>这种，<em>但我没懂，怎么描述它</em><ul>
+<li>它们是个类，然后创建一个类对象，<strong>支持<code>()</code>运算符重载</strong></li>
+</ul>
+</li>
+</ul>
 <h4 id="71functor">7.1、仿函数（functor）概观<a class="headerlink" href="#71functor" title="Permanent link">&para;</a></h4>
 <ul>
 <li>开始叫仿函数，后来规范叫<strong>函数对象</strong>（一种具有函数特质的对象）</li>
@@ -614,23 +809,38 @@ cout&lt;&lt;greater&lt;int&gt;()(6,4);//true  【greater&lt;int&gt;()产生了�
 </li>
 </ul>
 <h4 id="72adaptable">7.2、可配接（adaptable）的关键<a class="headerlink" href="#72adaptable" title="Permanent link">&para;</a></h4>
+<ul>
+<li>仿函数的相应型别主要用来表现<strong>函数参数型别</strong>和<strong>传回值型别</strong>。</li>
+</ul>
 <h5 id="721unary_function">7.2.1、unary_function<a class="headerlink" href="#721unary_function" title="Permanent link">&para;</a></h5>
+<ul>
+<li>表现一元函数的<strong>参数型别</strong>和<strong>返值型别</strong>。</li>
+</ul>
 <ul>
 <li>一元必须继承它</li>
 </ul>
 <h5 id="722binary_function">7.2.2、binary_function<a class="headerlink" href="#722binary_function" title="Permanent link">&para;</a></h5>
 <ul>
+<li>表现一元函数的<strong>第一参数型别</strong>、<strong>第二参数型别</strong>和<strong>返值型别</strong>。</li>
+</ul>
+<ul>
 <li>二元必须继承它</li>
 </ul>
 <h4 id="73arithmetic">7.3、算术类（Arithmetic）仿函数<a class="headerlink" href="#73arithmetic" title="Permanent link">&para;</a></h4>
 <ul>
-<li>内建的“算术类仿函数”</li>
-<li>P419，7functor-arithmetic.cpp</li>
-<li>证同元素（identity element）</li>
+<li>内建的“算术类仿函数”<ul>
+<li><code>plus&lt;T&gt;</code></li>
 </ul>
+</li>
+<li>P419，7functor-arithmetic.cpp</li>
+</ul>
+<h5 id="identity-element">证同元素（identity element）<a class="headerlink" href="#identity-element" title="Permanent link">&para;</a></h5>
 <h4 id="74rational">7.4、关系运算类（Rational）仿函数<a class="headerlink" href="#74rational" title="Permanent link">&para;</a></h4>
 <ul>
-<li>内建的“关系运算类仿函数”</li>
+<li>内建的“关系运算类仿函数”<ul>
+<li><code>equal_to&lt;T&gt;</code></li>
+</ul>
+</li>
 <li>P421，7functor-rational.cpp</li>
 </ul>
 <h4 id="75logical">7.5、逻辑运算类（Logical）仿函数<a class="headerlink" href="#75logical" title="Permanent link">&para;</a></h4>
@@ -641,6 +851,7 @@ cout&lt;&lt;greater&lt;int&gt;()(6,4);//true  【greater&lt;int&gt;()产生了�
 <h4 id="76identityselectproject">7.6、证同（identity）、选择（select）、投射（project）<a class="headerlink" href="#76identityselectproject" title="Permanent link">&para;</a></h4>
 <ul>
 <li><em>这一节没太懂啥意思，lionel</em></li>
+<li>C++20，提供了<code>std::identity</code></li>
 </ul>
 <h3 id="chap8adapters">chap8、配接器（adapters）<a class="headerlink" href="#chap8adapters" title="Permanent link">&para;</a></h3>
 <ul>
@@ -661,6 +872,9 @@ cout&lt;&lt;greater&lt;int&gt;()(6,4);//true  【greater&lt;int&gt;()产生了�
 <li>P431，8functor-adapter.cpp</li>
 </ul>
 <h4 id="82container-adapters">8.2、container adapters<a class="headerlink" href="#82container-adapters" title="Permanent link">&para;</a></h4>
+<ul>
+<li>容器适配器，主要是stack，queue，<strong>底层都是deque</strong></li>
+</ul>
 <h5 id="821stack">8.2.1、stack<a class="headerlink" href="#821stack" title="Permanent link">&para;</a></h5>
 <ul>
 <li><code>class Sequence = deque&lt;T&gt;</code></li>
@@ -672,6 +886,9 @@ cout&lt;&lt;greater&lt;int&gt;()(6,4);//true  【greater&lt;int&gt;()产生了�
 <h4 id="83iterator-adapters">8.3、iterator adapters<a class="headerlink" href="#83iterator-adapters" title="Permanent link">&para;</a></h4>
 <h5 id="831insert-iterators">8.3.1、insert iterators<a class="headerlink" href="#831insert-iterators" title="Permanent link">&para;</a></h5>
 <h5 id="832reverse-iterators">8.3.2、reverse iterators<a class="headerlink" href="#832reverse-iterators" title="Permanent link">&para;</a></h5>
+<ul>
+<li>将迭代器的移动行为倒转</li>
+</ul>
 <h5 id="833stream-iterators">8.3.3、stream iterators<a class="headerlink" href="#833stream-iterators" title="Permanent link">&para;</a></h5>
 <h4 id="84functor-adapters">8.4、functor adapters<a class="headerlink" href="#84functor-adapters" title="Permanent link">&para;</a></h4>
 <h5 id="841not1not2">8.4.1、对返回值进行逻辑否定：not1，not2<a class="headerlink" href="#841not1not2" title="Permanent link">&para;</a></h5>
@@ -679,8 +896,8 @@ cout&lt;&lt;greater&lt;int&gt;()(6,4);//true  【greater&lt;int&gt;()产生了�
 <h5 id="843compose1compose2">8.4.3、用于函数合成：compose1，compose2<a class="headerlink" href="#843compose1compose2" title="Permanent link">&para;</a></h5>
 <h5 id="844ptr_fun">8.4.4、用于函数指针：ptr_fun<a class="headerlink" href="#844ptr_fun" title="Permanent link">&para;</a></h5>
 <h5 id="845mem_funmem_fun_ref">8.4.5、用于成员函数指针：mem_fun，mem_fun_ref<a class="headerlink" href="#845mem_funmem_fun_ref" title="Permanent link">&para;</a></h5>
-<h3 id="_1">最后<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
-<h4 id="_2">参考<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
+<h3 id="_3">最后<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<h4 id="_4">参考<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
 <ul>
 <li>https://github.com/SilverMaple/STLSourceCodeNote/tree/master</li>
 </ul>

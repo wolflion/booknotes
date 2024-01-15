@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Unix网络编程卷1 - lionel的技术笔记</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Unix\u7f51\u7edc\u7f16\u7a0b\u53771";
+        var mkdocs_page_input_path = "10network\\unix\u7f51\u7edc\u7f16\u7a0b\u53771.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> lionel的技术笔记
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">简介</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../01daily/">daily</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../02ds/">ds</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../03cpp/">cpp</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../21tool/">tool</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">C++</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../20C%2B%2B/effectiveC%2B%2B/">《Effective C++》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../20C%2B%2B/%E6%B7%B1%E5%BA%A6%E6%8E%A2%E7%B4%A2C%2B%2B%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B/">《深度探索C++对象模型》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/EffectiveSTL/">《Effective STL》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/C%2B%2B%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/">《C++泛型STL原理和应用》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/">《STL源码剖析》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../22C%2B%2Bmodern/%E6%B7%B1%E5%85%A5%E5%BA%94%E7%94%A8C%2B%2B11/">《深入应用C++11》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">基础知识</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA/">《操作系统导论》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E5%A4%A7%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">《大话设计模式》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90_C%2B%2B4th/">《数据结构与算法分析_C++4th》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E7%AE%97%E6%B3%95%284th%29/">《算法4th》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90-%E5%BC%A0%E5%86%9B/">《算法设计与分析-张军》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E5%A4%A9%E8%A1%8C-%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《天行-算法设计与实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%95%99%E7%A8%8B-%E6%9D%8E%E6%98%A5%E8%91%86/">《数据结构教程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%96%B0%E7%BC%96%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%A0%E9%A2%98%E4%B8%8E%E8%A7%A3%E6%9E%90/">《新编数据结构习题与解析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网络编程</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../TCPIP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">《TCP/IP网络编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/">《Linux高性能服务器编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../TCPIP%E8%AF%A6%E8%A7%A3%E5%8D%B71/">《TCPIP详解卷1》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Linux%E5%86%85%E6%A0%B8%E7%BD%91%E7%BB%9C%E6%A0%88%E6%BA%90%E4%BB%A3%E7%A0%81%E6%83%85%E6%99%AF%E5%88%86%E6%9E%90/">《Linux内核网络栈源代码情景分析》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C/">《深入理解Linux网络》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">机器&深度学习</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../30machineLearning/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%9F%BA%E7%A1%80/">《机器学习线性代数基础》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../31deepLearning/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%85%A5%E9%97%A8%EF%BC%9A%E5%9F%BA%E4%BA%8EPython%E7%9A%84%E7%90%86%E8%AE%BA%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《深度学习入门：基于Python的理论与实现》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">文件系统</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/Linux%E5%86%85%E6%A0%B8%E6%8E%A2%E7%A7%98/">《Linux内核探秘》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《文件系统技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">《存储技术原理分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">存储</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../12storage/ceph%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《ceph设计原理与实现》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">视频</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/FFmpeg%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/">《FFmpeg入门到精通》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/WebRTC%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/">《WebRTC权威指南》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/WebRTC%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AE%9E%E6%97%B6%E4%BA%92%E5%8A%A8%E6%8A%80%E6%9C%AF/">《WebRTC音视频实时互动技术》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/%E6%96%B0%E4%B8%80%E4%BB%A3%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9%E7%A0%81%E6%A0%87%E5%87%86-H.264_AVC/">《新一代视频压缩码标准-H.264_AVC》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">内核</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/Linux%E5%86%85%E6%A0%B8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《Linux内核设计与实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5Linux%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%E5%86%85%E6%A0%B8%E6%9C%BA%E5%88%B6/">《深入Linux设备驱动程序内核机制》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">《深入理解Linux虚拟内存管理》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《深入理解Linux网络技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../13kernel/Linux内核源代码剖析-tcpip实现.md">《Linux内核源代码剖析-TCP/IP实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E5%86%85%E6%A0%B8/">《深入理解Linux内核》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">工具</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/Wireshark%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98/">《Wireshark网络分析实战》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/Linux%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8Eshell%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B%E5%A4%A7%E5%85%A8%283rd%29/">《Linux命令行与shell脚本编程大全(3rd)》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/python%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%883rd%EF%BC%89/">《python程序设计（3rd）》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/python/Python%E7%BC%96%E7%A8%8B%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E8%B7%B5/">《Python编程从入门到实践》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">刷题</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer2nd/">《剑指offer2nd》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/">《剑指offer专项突破》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../96output/OD基础题.md">OD基础题</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../96output/OD进阶题.md">OD进阶题</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网课</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/01Linux%E9%AB%98%E5%B9%B6%E5%8F%91%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/">《Linux高并发网络编程开发》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/%E4%BE%AF%E6%8D%B7/%E4%BE%AF%E6%8D%B7C%2B%2B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%8660%E8%AE%B2/">《侯捷C++内存管理60讲》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/11NJU%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">《NJU算法设计与分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">英语专</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../60English/00794%E7%BB%BC%E5%90%88%E8%8B%B1%E8%AF%AD%E4%B8%80%E4%B8%8A/">《综合英语(一)上》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../95selfStudy/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/">《概率率与数理统计》</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">lionel的技术笔记</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>Unix网络编程卷1</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="unix">《Unix网络编程》<a class="headerlink" href="#unix" title="Permanent link">&para;</a></h2>
+<ul>
+<li>网络编程，在哪个层次分的tcp和udp，是什么函数分的？</li>
+</ul>
+<h3 id="0">0<a class="headerlink" href="#0" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://github.com/unpbook/unpv13e">代码链接</a>，官方的<ul>
+<li><em>为啥没有unp.h</em>，难道要执行后才有？</li>
+</ul>
+</li>
+<li>Part1（1-2）</li>
+<li>Part2：基本套接字编程（3-）</li>
+</ul>
+<h3 id="chap1">chap1、简介<a class="headerlink" href="#chap1" title="Permanent link">&para;</a></h3>
+<h4 id="11">1.1、概述<a class="headerlink" href="#11" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>程序相互通信所用的协议（protocol）</strong><ul>
+<li><em>有个疑问是，如果选了一个应用层协议，我为什么使用socket()时要手动指定传输层的协议呢?</em></li>
+</ul>
+</li>
+</ul>
+<h4 id="12">1.2、一个简单的时间获取客户程序<a class="headerlink" href="#12" title="Permanent link">&para;</a></h4>
+<ul>
+<li><em>这个是最简单的，没有server</em>，"unp.h"从哪下载？</li>
+</ul>
+<h4 id="13">1.3、协议无关性<a class="headerlink" href="#13" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>sockaddr_in</code>是IPv4，来了个IPv6就要改代码，有个新的<strong>套结字地址结构</strong>（<code>sockaddr_storage</code>）</li>
+</ul>
+<h4 id="14">1.4、错误处理：包裹函数<a class="headerlink" href="#14" title="Permanent link">&para;</a></h4>
+<h4 id="15">1.5、一个简单的时间获取服务器程序<a class="headerlink" href="#15" title="Permanent link">&para;</a></h4>
+<h4 id="16cs">1.6、本书中C/S程序示例索引表<a class="headerlink" href="#16cs" title="Permanent link">&para;</a></h4>
+<h4 id="17osi">1.7、OSI模型<a class="headerlink" href="#17osi" title="Permanent link">&para;</a></h4>
+<h4 id="18bsd">1.8、BSD网络支持历史<a class="headerlink" href="#18bsd" title="Permanent link">&para;</a></h4>
+<h4 id="19">1.9、测试用网络及主机<a class="headerlink" href="#19" title="Permanent link">&para;</a></h4>
+<h4 id="110unix">1.10、Unix标准<a class="headerlink" href="#110unix" title="Permanent link">&para;</a></h4>
+<h5 id="1101posix">1.10.1、POSIX的背景<a class="headerlink" href="#1101posix" title="Permanent link">&para;</a></h5>
+<p>1.10.2、开放团体的背景</p>
+<p>1.10.3、标准的统一</p>
+<h5 id="1104">1.10.4、因特网工程任务攻坚组<a class="headerlink" href="#1104" title="Permanent link">&para;</a></h5>
+<h4 id="11164">1.11、64位体系结构<a class="headerlink" href="#11164" title="Permanent link">&para;</a></h4>
+<h4 id="112">1.12、小结<a class="headerlink" href="#112" title="Permanent link">&para;</a></h4>
+<ul>
+<li>引入简单却完整的TCP客户和服务程序</li>
+</ul>
+<h4 id="_1">习题<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li>1.1、找出你自己的网络拓扑信息?</li>
+</ul>
+<h3 id="chap2tcpudpsctp">chap2、传输层：TCP、UDP和SCTP<a class="headerlink" href="#chap2tcpudpsctp" title="Permanent link">&para;</a></h3>
+<h4 id="21">2.1、概述<a class="headerlink" href="#21" title="Permanent link">&para;</a></h4>
+<h4 id="22">2.2、总图<a class="headerlink" href="#22" title="Permanent link">&para;</a></h4>
+<h4 id="26tcp">2.6、TCP连接的建立和终止<a class="headerlink" href="#26tcp" title="Permanent link">&para;</a></h4>
+<h5 id="261">2.6.1、三路握手<a class="headerlink" href="#261" title="Permanent link">&para;</a></h5>
+<h5 id="264tcp">2.6.4、TCP状态转换图<a class="headerlink" href="#264tcp" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>TCP一个连接定义了11种状态</strong></li>
+</ul>
+<h4 id="29">2.9、端口号<a class="headerlink" href="#29" title="Permanent link">&para;</a></h4>
+<h4 id="210tcpduankou">2.10、TCPduankou号与并发服务器<a class="headerlink" href="#210tcpduankou" title="Permanent link">&para;</a></h4>
+<h4 id="211">2.11、缓冲区大小<a class="headerlink" href="#211" title="Permanent link">&para;</a></h4>
+<h4 id="214">2.14、小结<a class="headerlink" href="#214" title="Permanent link">&para;</a></h4>
+<h3 id="chap3">chap3、套接字编程简介<a class="headerlink" href="#chap3" title="Permanent link">&para;</a></h3>
+<h4 id="31">3.1、概述<a class="headerlink" href="#31" title="Permanent link">&para;</a></h4>
+<ul>
+<li>先了解一下<strong>套接字结构</strong><ul>
+<li>从内核到进程方向传递的是<strong>值-结果参数</strong>（也就是指针，C里没有引用）</li>
+</ul>
+</li>
+<li><strong>地址转换函数</strong>，inet_addr()，inet_nota()，inet_pton()，inet_ntop()<ul>
+<li>存在一个问题是<strong>与所转换的地址类型协议相关</strong>（IPv4还是IPv6）</li>
+<li><code>sock_</code>开头的函数，<strong>以协议无关的方式使用套接字地址结构</strong></li>
+</ul>
+</li>
+</ul>
+<h4 id="32">3.2、套接字地址结构<a class="headerlink" href="#32" title="Permanent link">&para;</a></h4>
+<ul>
+<li>以<code>sockaddr_</code>开头</li>
+</ul>
+<h5 id="321ipv4">3.2.1、IPv4套接字地址结构<a class="headerlink" href="#321ipv4" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>sockaddr_in</code>，在<code>&lt;netinet/in.h&gt;</code>中</li>
+</ul>
+<pre class="highlight"><code class="language-c">struct in_addr{
+    in_addr_t s_addr;//32位IPv4地址
+};
+
+struct sockaddr_in{
+    uint8_t sin_len;  //结构体的长度
+    sa_family_t sin_family;  //AF_INET
+    in_port_t  sin_port;   //16-bit TCP or UDP port number  network byte ordered
+    struct in_addr sin_addr;  //32-bit IPv4 address network bytes ordered
+    char  sin_zero[8];  //unused
+};</code></pre>
+<h5 id="322">3.2.2、通用套接字地址结构<a class="headerlink" href="#322" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>&lt;sys/socket.h&gt;</code></li>
+</ul>
+<h5 id="323ipv6">3.2.3、IPv6套接字地址结构<a class="headerlink" href="#323ipv6" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>&lt;netinet/in.h&gt;</code></li>
+</ul>
+<pre class="highlight"><code class="language-c">struct in6_addr{
+    unit8_t s6_addr;
+};
+
+struct sockaddr_in6{
+    uint8_t sin6_len;  //结构体的长度
+    sa_family_t sin6_family;  //AF_INET6
+    in_port_t  sin6_port;   //16-bit TCP or UDP port number  network byte ordered
+    uint32_t   sin6_flowinfo;
+    struct in6_addr sin6_addr;  //32-bit IPv4 address network bytes ordered
+    char  sin6_scope_id;  //unused
+};</code></pre>
+<h5 id="324">3.2.4、新的通用套接字地址结构<a class="headerlink" href="#324" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>sockaddr_storage</code>结构，在<code>&lt;netinet/in.h&gt;</code></li>
+</ul>
+<pre class="highlight"><code class="language-c">struct sockaddr_storage{
+    uint8_t ss_len;
+    sa_family_t  ss_family;
+};</code></pre>
+<h5 id="325">3.2.5、套接字地址结构的比较<a class="headerlink" href="#325" title="Permanent link">&para;</a></h5>
+<h4 id="33-">3.3、值-结果参数<a class="headerlink" href="#33-" title="Permanent link">&para;</a></h4>
+<ul>
+<li>1、从进程到内核传递套接字地址结构的函数有3个：bind，connect和sendto</li>
+<li>2、从内核到进程传递套接字地址结构的函数有4个：accept，recvfrom，getsockname，getsockname</li>
+</ul>
+<h4 id="34">3.4、字节排序函数<a class="headerlink" href="#34" title="Permanent link">&para;</a></h4>
+<ul>
+<li>大端</li>
+<li>小端</li>
+</ul>
+<h4 id="35">3.5、字节操纵函数<a class="headerlink" href="#35" title="Permanent link">&para;</a></h4>
+<ul>
+<li>b开头表示字节（bcopy，bzero）</li>
+<li>mem开头表示内存（memset）</li>
+<li>str开头表示字符串</li>
+</ul>
+<h4 id="36inet_atoninet_addrinet_ntoa">3.6、inet_aton、inet_addr和inet_ntoa函数<a class="headerlink" href="#36inet_atoninet_addrinet_ntoa" title="Permanent link">&para;</a></h4>
+<h4 id="37inet_ptoninet_ntop">3.7、inet_pton和inet_ntop函数<a class="headerlink" href="#37inet_ptoninet_ntop" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>p（presentation）表达，n（numeric）数值</strong></li>
+</ul>
+<h4 id="38sock_ntop">3.8、sock_ntop和相关函数<a class="headerlink" href="#38sock_ntop" title="Permanent link">&para;</a></h4>
+<h4 id="39readnwritenreadline">3.9、readn、writen和readline函数<a class="headerlink" href="#39readnwritenreadline" title="Permanent link">&para;</a></h4>
+<h4 id="310">3.10、小结<a class="headerlink" href="#310" title="Permanent link">&para;</a></h4>
+<ul>
+<li>套接字地址结构</li>
+</ul>
+<h4 id="_2">习题<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
+<h3 id="chap4tcptao">chap4、基本TCPtao接字编程<a class="headerlink" href="#chap4tcptao" title="Permanent link">&para;</a></h3>
+<h4 id="41">4.1、概述<a class="headerlink" href="#41" title="Permanent link">&para;</a></h4>
+<ul>
+<li>完整的TCP C/S 程序所xu要的基本tao接字函数。</li>
+<li>以此例子，加以改进，<strong>并发服务器</strong>，（多客户连接时，要fork新的进程），再改进到多线程</li>
+<li>TCP C/S 的<strong>典型时间表</strong>，图4-1</li>
+</ul>
+<h4 id="42socket">4.2、socket函数<a class="headerlink" href="#42socket" title="Permanent link">&para;</a></h4>
+<ul>
+<li>原型是<code>int socket()</code><ul>
+<li>问题是，怎么去记呢？</li>
+<li>family，AF（<strong>地址</strong>）<ul>
+<li>AF_INET，AF_INET6这种</li>
+</ul>
+</li>
+<li>type（类型，怎么分的）</li>
+<li>protocol（0是什么意思）<ul>
+<li>指定了tcp，udp</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>AF_X</code>与<code>PF_X</code>关系与区别？</li>
+</ul>
+<h4 id="43connect-client">4.3、connect函数  [client]<a class="headerlink" href="#43connect-client" title="Permanent link">&para;</a></h4>
+<ul>
+<li>TCP协议的话，在此阶段，<strong>触发三次握手</strong></li>
+</ul>
+<h4 id="44bind">4.4、bind函数<a class="headerlink" href="#44bind" title="Permanent link">&para;</a></h4>
+<p>＋ 本地协议地址 ，怎么理解？</p>
+<h4 id="45listenserver">4.5、listen函数（server）<a class="headerlink" href="#45listenserver" title="Permanent link">&para;</a></h4>
+<ul>
+<li>主动socket和被动socket？</li>
+<li>tcp状态转换图</li>
+<li>有使用顺序的，「一般在哪中间」</li>
+</ul>
+<h4 id="46acceptserver">4.6、accept函数（server）<a class="headerlink" href="#46acceptserver" title="Permanent link">&para;</a></h4>
+<h4 id="47forkexec">4.7、fork和exec函数<a class="headerlink" href="#47forkexec" title="Permanent link">&para;</a></h4>
+<ul>
+<li>APUE里的</li>
+</ul>
+<h4 id="48">4.8、并发服务器<a class="headerlink" href="#48" title="Permanent link">&para;</a></h4>
+<ul>
+<li>什么叫 迭代服务器（iterative server），服务器分几种？</li>
+</ul>
+<h4 id="49close">4.9、close函数<a class="headerlink" href="#49close" title="Permanent link">&para;</a></h4>
+<h4 id="410getsocknamegetpeername">4.10、getsockname和getpeername函数<a class="headerlink" href="#410getsocknamegetpeername" title="Permanent link">&para;</a></h4>
+<ul>
+<li>本地和外地 怎么 理解</li>
+</ul>
+<h4 id="411">4.11、小结<a class="headerlink" href="#411" title="Permanent link">&para;</a></h4>
+<ul>
+<li>服务器开发的话，「服务器模型」是不是要了解一下呢</li>
+<li>sock_addr结构体</li>
+</ul>
+<h4 id="_3">习题<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
+<ul>
+<li>4.1、4.4节中，头 中定义的<code>INADDR_</code>常值是主机字节序的。我们该如何bian别？</li>
+</ul>
+<h3 id="chap5tcp">chap5、TCP客户/服务器程序示例<a class="headerlink" href="#chap5tcp" title="Permanent link">&para;</a></h3>
+<h4 id="56">5.6、正常启动<a class="headerlink" href="#56" title="Permanent link">&para;</a></h4>
+<h4 id="519">5.19、小结<a class="headerlink" href="#519" title="Permanent link">&para;</a></h4>
+<ul>
+<li><em>对比简单例子</em>，这个有点fuza了，增加了进程开发、传输的数据格式</li>
+</ul>
+<h3 id="chap6ioselectpoll">chap6、I/O利用：select和poll函数<a class="headerlink" href="#chap6ioselectpoll" title="Permanent link">&para;</a></h3>
+<h4 id="61">6.1、概述<a class="headerlink" href="#61" title="Permanent link">&para;</a></h4>
+<ul>
+<li><em>为何要引入I/O利用</em>，这是解决什么问题？c还是s端？<ul>
+<li>客户处理2个输入？标准输入和tcp socket？</li>
+</ul>
+</li>
+</ul>
+<h4 id="62">6.2、模型<a class="headerlink" href="#62" title="Permanent link">&para;</a></h4>
+<h4 id="612">6.12、小结<a class="headerlink" href="#612" title="Permanent link">&para;</a></h4>
+<ul>
+<li>5种I/O模型，moren是阻塞型</li>
+</ul>
+<h4 id="_4">习题<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
+<ul>
+<li>6.2、</li>
+</ul>
+<h3 id="chap7">chap7、接字选项<a class="headerlink" href="#chap7" title="Permanent link">&para;</a></h3>
+<h4 id="71">7.1、概述<a class="headerlink" href="#71" title="Permanent link">&para;</a></h4>
+<ul>
+<li><em>为何要有这个选项</em></li>
+</ul>
+<h4 id="711fcntl">7.11、fcntl函数<a class="headerlink" href="#711fcntl" title="Permanent link">&para;</a></h4>
+<h4 id="72">7.2、小结<a class="headerlink" href="#72" title="Permanent link">&para;</a></h4>
+<ul>
+<li>rfc设计的时候，为何有这个值？</li>
+</ul>
+<h3 id="chap8udptao">chap8、基本UDPtao接字编程<a class="headerlink" href="#chap8udptao" title="Permanent link">&para;</a></h3>
+<h4 id="81">8.1、概述<a class="headerlink" href="#81" title="Permanent link">&para;</a></h4>
+<ul>
+<li>socket()函数里指定了协议，那么  用户态 怎么 知道不同流程呢？</li>
+</ul>
+<h4 id="815selecttcpudp">8.15、使用select函数的TCP和UDP回射服务器程序<a class="headerlink" href="#815selecttcpudp" title="Permanent link">&para;</a></h4>
+<h4 id="816">8.16、小结<a class="headerlink" href="#816" title="Permanent link">&para;</a></h4>
+<ul>
+<li>如何给UDP应用程序增加可靠性</li>
+</ul>
+<h3 id="chap11">chap11、名字与地址转换<a class="headerlink" href="#chap11" title="Permanent link">&para;</a></h3>
+<h4 id="1122">11.22、小结<a class="headerlink" href="#1122" title="Permanent link">&para;</a></h4>
+<ul>
+<li>fei除了一些函数<code>getservbyname()</code>，现在在用吗？</li>
+</ul>
+<h3 id="chap26">chap26、线程<a class="headerlink" href="#chap26" title="Permanent link">&para;</a></h3>
+<h3 id="chap28tao">chap28、原始tao接字<a class="headerlink" href="#chap28tao" title="Permanent link">&para;</a></h3>
+<h3 id="chap29">chap29、数据链路访问<a class="headerlink" href="#chap29" title="Permanent link">&para;</a></h3>
+<h3 id="chap30cs-646660824">chap30、C/S程序设计范式 646(660/824)<a class="headerlink" href="#chap30cs-646660824" title="Permanent link">&para;</a></h3>
+<ul>
+<li>普通服务器，并发服务器（里面有个fork），用select优化并发，线程服务器，<em>这一套优化流程？</em></li>
+</ul>
+<h4 id="301">30.1、概述<a class="headerlink" href="#301" title="Permanent link">&para;</a></h4>
+<p>30.2、</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

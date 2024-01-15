@@ -184,6 +184,8 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#chap4">chap4、内核是如何发送网络包的</a>
         <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#42">4.2、网络包发送过程总览</a>
+    </li>
     <li class="toctree-l3"><a class="reference internal" href="#43">4.3、网卡启动准备</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#44">4.4、数据从用户进程到网卡的详细过程</a>
@@ -203,6 +205,10 @@
     <li class="toctree-l4"><a class="reference internal" href="#447igb">4.4.7、igb网卡驱动发送</a>
     </li>
         </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#45ringbuffer">4.5、RingBuffer内存回收</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#46">4.6、本章总结</a>
     </li>
         </ul>
     </li>
@@ -383,7 +389,7 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《深入理解Linux网络技术内幕》</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/Linux%E5%86%85%E6%A0%B8%E6%BA%90%E4%BB%A3%E7%A0%81%E5%89%96%E6%9E%90-tcpip%E5%AE%9E%E7%8E%B0/">《Linux内核源代码剖析-TCP/IP实现》</a>
+                  <li class="toctree-l1"><a class="" href="../../13kernel/Linux内核源代码剖析-tcpip实现.md">《Linux内核源代码剖析-TCP/IP实现》</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E5%86%85%E6%A0%B8/">《深入理解Linux内核》</a>
                   </li>
@@ -405,9 +411,9 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/">《剑指offer专项突破》</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../96output/OD%E5%9F%BA%E7%A1%80%E9%A2%98/">OD基础题</a>
+                  <li class="toctree-l1"><a class="" href="../../96output/OD基础题.md">OD基础题</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../96output/OD%E8%BF%9B%E9%98%B6%E9%A2%98/">OD进阶题</a>
+                  <li class="toctree-l1"><a class="" href="../../96output/OD进阶题.md">OD进阶题</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">网课</span></p>
@@ -511,20 +517,44 @@
 <h6 id="_1">网络子系统初始化<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h6>
 <ul>
 <li><code>subsys_initcall()</code>来初始化各个子系统</li>
+<li>为每个CPU都申请一个softnet_data数据结构，这个数据结构里的poll_list用于等待驱动程序将其poll函数注册进来</li>
+<li><strong>open_softirq为每一种软中断都注册一个处理函数</strong>。<ul>
+<li>kernel/softirq.c</li>
+</ul>
+</li>
 </ul>
 <h6 id="_2">协议栈注册<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h6>
+<ul>
+<li>对应的实现函数分别是ip_rcv()，tcp_v4_rcv()和udp_rcv()。</li>
+<li><strong>内核是通过注册的方式来实现的</strong>。</li>
+<li>fs_initcall调用inet_init后开始网络协议栈注册，通过inet_init，将这些函数注册到inet_protos和ptype_base数据结构中。</li>
+<li><strong>inet_protos记录着UDP、TCP的处理函数地址，ptype_base存储着ip_rcv()函数的处理地址</strong></li>
+</ul>
 <h6 id="_3">网卡驱动初始化<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h6>
 <ul>
-<li><code>module_init()</code></li>
+<li>每一个驱动程序，会使用<code>module_init()</code>向内核注册一个初始化函数，<strong>当驱动程序被加载时，内核会调用这个函数</strong>。<ul>
+<li>igb网卡的驱动程序代码位于drivers/net/ethernet/intel/igb/igb_main.c中</li>
+</ul>
+</li>
+<li>驱动的pci_register_driver调用完成后，Linux内核就知道了该驱动的相关信息，<strong>比如igb网卡驱动的igb_driver_name和igb_rpobe函数地址，等等</strong></li>
+<li>驱动的probe方法执行的目的<strong>就是让设备处于ready状态</strong></li>
 </ul>
 <h6 id="_4">启动网卡<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h6>
 <ul>
 <li><code>struct net_device_ops</code>变量</li>
+<li>当启用一个网卡时（ifconfig eth0 up），<strong>net_device_ops变量中定义的ndo_open方法会被调用</strong>。</li>
+<li>创建队列</li>
 </ul>
 <h5 id="223">2.2.3、迎接数据的到来<a class="headerlink" href="#223" title="Permanent link">&para;</a></h5>
+<h6 id="_5">硬中断处理<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h6>
+<h6 id="ksoftirqd_1">ksoftirqd内核线程处理中断<a class="headerlink" href="#ksoftirqd_1" title="Permanent link">&para;</a></h6>
+<h6 id="_6">网络协议栈处理<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h6>
+<h6 id="ip">IP层处理<a class="headerlink" href="#ip" title="Permanent link">&para;</a></h6>
 <ul>
-<li>硬中断处理</li>
-<li>ksoftirqd内核线程处理中断</li>
+<li>主入口是<strong>ip_rcv</strong>，net/ipv4/ip_input.c，里面的<strong>NF_HOOK()</strong>，其<strong>最后一个参数是ip_rcv_finish()</strong><ul>
+<li><em>想深入研究netfilter可以从搜索NF_HOOK的这些引用处入手，lionel，作者的建议</em></li>
+</ul>
+</li>
 </ul>
 <h5 id="224">2.2.4、收包小结<a class="headerlink" href="#224" title="Permanent link">&para;</a></h5>
 <ul>
@@ -552,11 +582,23 @@
 </ul>
 <h4 id="32socket">3.2、socket的直接创建<a class="headerlink" href="#32socket" title="Permanent link">&para;</a></h4>
 <ul>
-<li>socket是如何在内核中表示的。<ul>
-<li>socket.c中的<code>sock_create()</code>，又调用af_inet.c中的<code>inet_create()</code></li>
-<li>net/core/sock.c，<em>lionel，这个干啥的？一般都是sock结构体啥的啊，</em>，这里调用了<code>sock_init_data()</code></li>
+<li>
+<p>socket是如何在内核中表示的。</p>
+<ul>
+<li><strong>内核在内部创建了一系列socket相关的内核对象</strong></li>
+<li>net/socket.c中的<code>sock_create()</code>，又调用af_inet.c中的<code>inet_create()</code><ul>
+<li>中间先是调用<code>__sock_create()</code>，然后先分配<code>sock_alloc()</code>，调用创建<code>create()</code>，<strong>对于AF_INET协议族来说，调用的是<code>inet_create</code></strong>，其它协议族来说，不一定就这个了</li>
 </ul>
 </li>
+<li>inet_create中，<strong>根据类型SOCK_STREAM</strong>查找到对于TCP定义的操作方法实现集合inet_stream_ops和tcp_prot，并把它们分别<strong>设置到socket-&gt;ops和sock-&gt;sk_prot上</strong></li>
+</ul>
+<ul>
+<li>net/core/sock.c，<code>sock_init_data()</code>，<strong>将sock中的sk_data_ready函数指针进行了初始化，设置为默认sock_def_readable</strong></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>当软中断上收到数据包时会通过调用sk_data_ready函数指针（实际被设置成了sock_def_readable()）来唤醒在sock上等待的进程</strong>。</li>
 </ul>
 <h4 id="33">3.3、内核和用户进程协作之阻塞方式<a class="headerlink" href="#33" title="Permanent link">&para;</a></h4>
 <ul>
@@ -566,20 +608,72 @@
 <li>3、数据包抵达网卡</li>
 <li>4、网卡把帧DMA到内存</li>
 <li>5、硬中断通知CPU</li>
+<li>6、处理完发出软中断</li>
+<li>7、从RingBuffer上摘下数据包</li>
+<li>8、收到socket的接收队列中</li>
 <li>9、唤醒等待队列上的进程（ksoftirqd内核线程）</li>
 </ul>
 </li>
 </ul>
 <h5 id="331">3.3.1、等待接收消息<a class="headerlink" href="#331" title="Permanent link">&para;</a></h5>
 <ul>
-<li>recv依赖的底层实现，<strong>strace命令跟踪</strong>，clib库函数recv会执行recvfrom系统调用</li>
-<li><strong>图3-5，recvfrom系统调用</strong></li>
+<li>recv依赖的底层实现</li>
+</ul>
+<ul>
+<li><strong>strace命令跟踪</strong>，clib库函数recv会执行recvfrom系统调用</li>
+<li><strong>图3-5，recvfrom系统调用</strong><ul>
+<li>1、系统调用recvfrom</li>
+<li>2、inet_stream_ops</li>
+<li>3、tcp_prot</li>
+<li>4、接收队列里数据为空</li>
+<li>5、修改当前进程状态</li>
+<li>6、主动让出CPU（Linux将调度下一个进程）</li>
+</ul>
+</li>
+<li><strong>recvfrom最后是怎么把自己的进程阻塞掉的</strong><ul>
+<li>net/socket.c中的<code>sock_recvmsg()-&gt;__sock_recvmsg()-&gt;__sock_recvmsg_nosec()</code></li>
+<li>net/ipv4/af_inet.c</li>
+<li>net/ipv4/tcp.c</li>
+<li>net/core/sock.c</li>
+</ul>
+</li>
+<li><strong>sk_wait_data是怎样把当前进程给阻塞掉的</strong><ul>
+<li>1、定义等待队列并关联current，include/linux/wait.h</li>
+<li>2、获取socket等待队列头</li>
+<li>3、插入</li>
+<li>4、修改当前进程状态</li>
+<li>首先在宏</li>
+<li>紧接着，</li>
+<li>接着调用prepare_to_wait来把新定义的等待队列wait插入sock对象的等待队列，kernel/wait.c</li>
+<li>后面当内核收完数据产生就绪事件的时候，就可以查找socket等待队列上的等待项，进而可以找到回调函数和在等待该socket就绪事件的进程了</li>
+<li>最后调用sk_wait_event让出CPU，进程将进入睡眠状态，<strong>这会导致一次进程上下文的开销</strong>，而这个开销是昂贵的，大约需要消耗几个微秒的CPU时间</li>
+</ul>
+</li>
 </ul>
 <h5 id="332">3.3.2、软中断模块<a class="headerlink" href="#332" title="Permanent link">&para;</a></h5>
 <ul>
-<li><strong>图3.9</strong></li>
-<li>net/ipv4/tcp_ipv4.c中的<code>tcp_v4_rcv()</code></li>
+<li><strong>负责接收和处理数据包</strong>的软中断<ul>
+<li>网络包到网卡后怎么被网卡接收，最后再交由<strong>软中断处理的</strong></li>
+<li><strong>tcp协议的接收函数<code>tcp_v4_rcv()</code></strong></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>图3.9</strong>软中断接收数据过程<ul>
+<li>1、</li>
+<li>2、</li>
+<li>3、唤醒等待队列上的进程</li>
+</ul>
+</li>
 <li>kernel/sched/core.c</li>
+<li>软中断（<strong>也就是linux中的ksoftirqd线程</strong>）里收到数据包以后，发现是TCP包就会执行tcp_v4_rcv函数。接着往下，如果是ESTABLISH状态下的数据包，则最终会把数据拆出来放到对应socket的接收队列中，然后调用sk_data_ready来唤醒用户进程。<ul>
+<li>net/ipv4/tcp_ipv4.c中的<code>tcp_v4_rcv()</code>，根据收到的网络包的header里的source和dest信息在本机上查询对应的socket。找到了后，直接进入接收的主体函数<code>tcp_v4_do_rcv()</code>，<strong>假设是处理ESTABLISH状态下的包</strong>，就又进入<code>tcp_rcv_established()</code>，再通过调用<code>tcp_queue_rcv()</code>，完成了将接收到的数据放到socket的接收队列上</li>
+<li>net/ipv4/tcp_input.c，里的了<code>tcp_queue_rcv()</code></li>
+<li><strong>调用tcp_queue_rcv接收完成之后，接着调用sk_data_ready来唤醒在socket上等待的用户进程</strong>。</li>
+<li>lionel，没写呢</li>
+<li><strong>在socket上等待而被阻塞的进程就被推入可运行队列里了，这又将产生一次进程上下文切换的开销</strong></li>
+</ul>
+</li>
 </ul>
 <h5 id="333">3.3.3、同步阻塞总结<a class="headerlink" href="#333" title="Permanent link">&para;</a></h5>
 <ul>
@@ -588,6 +682,7 @@
 <li>2、硬中断、软中断上下文（系统线程ksoftirqd）</li>
 </ul>
 </li>
+<li><strong>进程3.12</strong>，同步阻塞流程汇总</li>
 </ul>
 <h4 id="34epoll">3.4、内核和用户进程协作之epoll<a class="headerlink" href="#34epoll" title="Permanent link">&para;</a></h4>
 <h5 id="341epoll">3.4.1、epoll内核对象的创建<a class="headerlink" href="#341epoll" title="Permanent link">&para;</a></h5>
@@ -615,18 +710,46 @@
 <h4 id="35">3.5、本章总结<a class="headerlink" href="#35" title="Permanent link">&para;</a></h4>
 <h3 id="chap4">chap4、内核是如何发送网络包的<a class="headerlink" href="#chap4" title="Permanent link">&para;</a></h3>
 <p>4.1、相关实际问题</p>
-<p>4.2、网络包发送过程总览</p>
+<h4 id="42">4.2、网络包发送过程总览<a class="headerlink" href="#42" title="Permanent link">&para;</a></h4>
+<ul>
+<li>server端口的（read,  send）调用，<strong>调用send之后内核是怎样把数据包发送出去的</strong></li>
+<li>Linux源码最重要是要有整体上的把握，<strong>而不是一开始就陷入各种细节</strong></li>
+</ul>
+<ul>
+<li>图4-1，<strong>网络发送过程概览</strong><ul>
+<li>1、调用系统调用发送，send</li>
+<li>2、内存拷贝</li>
+<li>3、协议处理</li>
+<li>4、进入驱动RingBuffer</li>
+<li>5、实际发送</li>
+<li>6、中断通知发送完成</li>
+<li>7、清理RingBuffer</li>
+</ul>
+</li>
+<li>图4-2，<strong>网络发送过程</strong></li>
+<li>图4-3，<strong>发送完毕清理</strong></li>
+<li><strong>硬中断最终触发的软中断却是NET_RX_SOFTIRQ，而不是NET_TX_SOFTIRQ</strong></li>
+</ul>
 <h4 id="43">4.3、网卡启动准备<a class="headerlink" href="#43" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>网卡支持多队列，第一个队列都是由一个RingBuffer表示的</strong></li>
+<li>网卡在启动时最重要的任务之一就是<strong>分配和初始化RingBuffer</strong></li>
+</ul>
 <ul>
 <li>drivers/net/ethernet/intel/igb/igb_main.c中的<code>__igb_open()</code><ul>
 <li><strong>真正的RingBuffer构造过程是在<code>igb_setup_tx_resources()</code>中完成的</strong></li>
+</ul>
+</li>
+<li>一个传输RingBuffer的内部也不仅仅是一个环形队列数组：<ul>
+<li>igb_tx_buffer数组，这个数组是内核使用的，通过vzalloc申请</li>
+<li>e1000_adv_tx_desc数组，这个数组是网卡硬件使用的，通过dma_alloc_coherent分配</li>
 </ul>
 </li>
 </ul>
 <h4 id="44">4.4、数据从用户进程到网卡的详细过程<a class="headerlink" href="#44" title="Permanent link">&para;</a></h4>
 <h5 id="441send">4.4.1、send系统调用实现<a class="headerlink" href="#441send" title="Permanent link">&para;</a></h5>
 <ul>
-<li>sendto系统调用</li>
+<li>sendto系统调用，net/socket.c中，<strong>内部真正使用的是sendto系统调用</strong></li>
 <li>主要干了2件事情<ul>
 <li>1、在内核中把真正的socket找出来，这个里面记录了各种协议栈的函数地址</li>
 <li>2、构造一个struct msghdr对象，把用户传入的数据，都装进去</li>
@@ -634,20 +757,74 @@
 </li>
 </ul>
 <h5 id="442">4.4.2、传输层处理<a class="headerlink" href="#442" title="Permanent link">&para;</a></h5>
+<h6 id="_7">传输层拷贝<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h6>
 <ul>
-<li>传输层拷贝</li>
-<li>传输层发送</li>
+<li>对于tcp协议来说，那就是net/ipv4/af_inet.c中的<code>tcp_sendmsg()</code></li>
+<li><strong>只有满足forced_push(tp)或者skb==tcp_send_head(sk)成立时</strong>，内核才会真正启动发送数据包<ul>
+<li><strong>如果条件不满足，这次用户要发送的数据只是拷贝到内核就算完事了</strong></li>
+</ul>
+</li>
+</ul>
+<h6 id="_8">传输层发送<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h6>
+<ul>
+<li>net/ipv4/tcp_output.c中的<code>tcp_write_xmit()</code></li>
+<li>图4-10，<strong>传输层发送流程</strong><ul>
+<li>1、循环获取待发送skb</li>
+<li>2、滑动窗口管理</li>
+<li>3、克隆skb</li>
+<li>4、设置TCP头</li>
+</ul>
+</li>
 </ul>
 <h5 id="443">4.4.3、网络层发送处理<a class="headerlink" href="#443" title="Permanent link">&para;</a></h5>
 <ul>
+<li><strong>内核层的发送的实现们于net/ipv4/ip_output.c</strong></li>
+</ul>
+<ul>
 <li>net/ipv4/ip_output.c中的<code>ip_queue_xmit()</code></li>
+<li><strong>在网络层主要处理路由项查找、IP头设置、netfilter过滤、skb切分（大于MTU的话）</strong></li>
 </ul>
 <h5 id="444">4.4.4、邻居子系统<a class="headerlink" href="#444" title="Permanent link">&para;</a></h5>
+<ul>
+<li>位于<strong>网络层和数据链路层中间</strong>，作用是<strong>为网络层提供一个下层的封装，让网络层不必关心下层的地址信息，让下层来决定发送到哪个MAC地址</strong>。</li>
+<li>代码位于<strong>net/core/neighbour.c</strong></li>
+<li>主要是<strong>查找或者创建邻居项</strong><ul>
+<li><strong>创建邻居项</strong>的时候，有可能会发出实际的arp请求</li>
+</ul>
+</li>
+<li>图4-16，<strong>邻居子系统</strong></li>
+</ul>
 <h5 id="445">4.4.5、网络设备子系统<a class="headerlink" href="#445" title="Permanent link">&para;</a></h5>
+<ul>
+<li>图4.17，<strong>网络设备子系统</strong><ul>
+<li>1、选择发送队列（根据XPS或自动选择）</li>
+<li>2、获取排队规则</li>
+</ul>
+</li>
+</ul>
 <h5 id="446">4.4.6、软中断调度<a class="headerlink" href="#446" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>软中断</strong>是由内核进程来运行的，该进程会进入net_tx_action函数，在该函数中能获取发送队列，并也最终调用到驱动程序里的入口函数<code>dev_hard_start_xmit()</code></li>
+<li>net/core/dev.c</li>
+</ul>
 <h5 id="447igb">4.4.7、igb网卡驱动发送<a class="headerlink" href="#447igb" title="Permanent link">&para;</a></h5>
-<p>4.5、RingBuffer内存回收</p>
-<p>4.6、本章总结</p>
+<ul>
+<li><strong>网络设备子系统中的dev_hard_start_xmit()</strong>，会调用到驱动里的发送函数<code>igb_xmit_frame()</code></li>
+</ul>
+<h4 id="45ringbuffer">4.5、RingBuffer内存回收<a class="headerlink" href="#45ringbuffer" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>igb_poll()</code>，调用<code>igb_clean_tx_irq()</code><ul>
+<li>主要干了啥呢，<strong>清理了skb，解除DMA映射</strong>，只有等对方收到ACK后<strong>才会删除skb</strong></li>
+</ul>
+</li>
+</ul>
+<h4 id="46">4.6、本章总结<a class="headerlink" href="#46" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Q5、为什么Kafka的网络性能很突出？<ul>
+<li><strong>采用的是sendfile系统调用来发送网络数据包</strong>（所谓的零拷贝），减少了内核态和用户态之间的频繁数据拷贝</li>
+</ul>
+</li>
+</ul>
 <h3 id="chap5io">chap5、深度理解本机网络IO<a class="headerlink" href="#chap5io" title="Permanent link">&para;</a></h3>
 <h4 id="52">5.2、跨机网络通信过程<a class="headerlink" href="#52" title="Permanent link">&para;</a></h4>
 <h5 id="521">5.2.1、跨机数据发送<a class="headerlink" href="#521" title="Permanent link">&para;</a></h5>
@@ -710,18 +887,25 @@
 <h5 id="621listen">6.2.1、listen系统调用<a class="headerlink" href="#621listen" title="Permanent link">&para;</a></h5>
 <ul>
 <li>net/sock.c中的<code>listen</code></li>
+<li><strong>用户态socket_fd只是一个整数而已，内核没有办法直接用</strong>，要先查找socket内核对象<code>sock = sockfd_lookup_light(fd,&amp;err,&amp;fput_needed);</code></li>
+<li><em>入参的backlog是啥意思？</em></li>
 <li><code>err = sock-&gt;ops-&gt;listen(sock, backlog);</code></li>
 </ul>
 <h5 id="622listen">6.2.2、协议栈listen<a class="headerlink" href="#622listen" title="Permanent link">&para;</a></h5>
 <ul>
 <li>net/ipv4/af_inet.c中的<code>inet_listen()</code></li>
-<li><strong>服务端的全连接队列长度</strong></li>
+<li><strong>服务端的全连接队列长度</strong>，执行listen函数时传入的backlog和net.core.somaxconn之间较小的那个值。<ul>
+<li>啥叫<em>全连接？相对于谁的全？</em></li>
+</ul>
+</li>
 <li>net/ipv4/inet_connection_sock.c中的<code>inet_csk_listen_start()</code></li>
 </ul>
 <h5 id="623">6.2.3、接收队列定义<a class="headerlink" href="#623" title="Permanent link">&para;</a></h5>
 <ul>
 <li>include/net/inet_connection_sock.h</li>
 <li>include/net/request_sock.h中的<code>struct request_sock_queue{};</code></li>
+<li><strong>全连接队列</strong>，不需要进行复杂的查找工作，accept处理时只要先进先出即可，<strong>以链表的方式管理</strong></li>
+<li><strong>半连接队列</strong>，<code>listen_opt</code>，<strong>需要在第三次握手时快速地查找出第一次握手时留存的request_sock对象</strong>，所以需要用<strong>哈希表管理</strong></li>
 </ul>
 <h5 id="624">6.2.4、接收队列申请和初始化<a class="headerlink" href="#624" title="Permanent link">&para;</a></h5>
 <ul>

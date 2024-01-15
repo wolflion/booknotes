@@ -234,7 +234,7 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#56set">5.6、set容器</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#57hashhast">5.7、hash表基础及hast容器</a>
+    <li class="toctree-l3"><a class="reference internal" href="#57hashhash">5.7、hash表基础及hash容器</a>
         <ul>
     <li class="toctree-l4"><a class="reference internal" href="#571hash">5.7.1、hash表基础</a>
     </li>
@@ -425,7 +425,7 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《深入理解Linux网络技术内幕》</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/Linux%E5%86%85%E6%A0%B8%E6%BA%90%E4%BB%A3%E7%A0%81%E5%89%96%E6%9E%90-tcpip%E5%AE%9E%E7%8E%B0/">《Linux内核源代码剖析-TCP/IP实现》</a>
+                  <li class="toctree-l1"><a class="" href="../../13kernel/Linux内核源代码剖析-tcpip实现.md">《Linux内核源代码剖析-TCP/IP实现》</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E5%86%85%E6%A0%B8/">《深入理解Linux内核》</a>
                   </li>
@@ -447,9 +447,9 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/">《剑指offer专项突破》</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../96output/OD%E5%9F%BA%E7%A1%80%E9%A2%98/">OD基础题</a>
+                  <li class="toctree-l1"><a class="" href="../../96output/OD基础题.md">OD基础题</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../96output/OD%E8%BF%9B%E9%98%B6%E9%A2%98/">OD进阶题</a>
+                  <li class="toctree-l1"><a class="" href="../../96output/OD进阶题.md">OD进阶题</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">网课</span></p>
@@ -1424,8 +1424,12 @@ PAIR_IF pair1 = make_pair(18,3.14f);</code></pre>
 <ul>
 <li><em>还能带分配器，是啥意思，是不是之前的纸质笔记，写得有问题，lionel</em></li>
 <li>空间分配器，这个后面看到了再来看</li>
-<li>例5-7.cpp，使用map的默认构造函数创建一个map对象，然后使用insert()函数向其中插入11个pair数据</li>
-<li>例5-8.cpp</li>
+<li><strong>提供了5大构造函数</strong></li>
+<li>例5-7.cpp，使用map的默认构造函数创建一个map对象，然后使用insert()函数向其中插入11个pair数据<ul>
+<li><strong>map里的数据结构是红黑树</strong>，至少是树的形式</li>
+</ul>
+</li>
+<li>例5-8.cpp，创建一个以greator为排序策略的map容器</li>
 <li>例5-9.cpp，使用不同的构造函数常见map容器</li>
 </ul>
 <h5 id="552map">5.5.2、map的数据插入<a class="headerlink" href="#552map" title="Permanent link">&para;</a></h5>
@@ -1435,7 +1439,10 @@ PAIR_IF pair1 = make_pair(18,3.14f);</code></pre>
 </ul>
 </li>
 <li>2、insert()方法中指定数据类型的数据如下插入法<ul>
-<li>例5-11.cpp</li>
+<li>例5-11.cpp<ul>
+<li><code>mapStudent.insert(pair&lt;int, string&gt;::value_type(1, "student_one"));</code>，多了一个<code>::value_type</code>，我没太明白是啥意思</li>
+</ul>
+</li>
 <li><strong>当以重复键使用insert()方法插入数据时，只有第一次插入为有效操作，其后的所有都为无效操作，但编译器不报错</strong></li>
 <li>例5-12.cpp，使用insert()的方法返回值判断插入操作的有效性</li>
 </ul>
@@ -1452,9 +1459,22 @@ mapStudent[1]="student_one";</code></pre>
 <ul>
 <li>1、size()方法</li>
 <li>2、count()和find()方法<ul>
-<li>例5-14.cpp</li>
+<li>例5-14.cpp<ul>
+<li><em>这是个重点，我之前没太care它</em></li>
+<li>count()返回要么是1或0，<strong>不能重复</strong></li>
+<li>要看一下find()的返回值和谁比，找到的话就返回找到的迭代器，<strong>找不到，返回end()方法返回的迭代器</strong></li>
 </ul>
 </li>
+</ul>
+</li>
+</ul>
+<pre class="highlight"><code class="language-cpp">iter = mapStudent.find(1);
+    if (iter != mapStudent.end()) {
+        cout &lt;&lt; "Find, the value is " &lt;&lt; iter-&gt;second &lt;&lt; endl;
+    } else {
+        cout &lt;&lt; "Do not Find" &lt;&lt; endl;
+    }</code></pre>
+<ul>
 <li>3、lower_bound()和upper_bound()方法<ul>
 <li>返回键值空间的上界和下界，<em>有啥用？lionel</em></li>
 <li>例5-15.cpp</li>
@@ -1477,17 +1497,25 @@ mapStudent[1]="student_one";</code></pre>
 <ul>
 <li><strong>set用来保存只有键值而没有实值这类数据的容器</strong>，也是红黑树，只不过各节点的数据是单一值而不是pair。</li>
 <li>元素插入时会默认排序，<strong>默认为<code>less&lt;&gt;</code>排序规则</strong></li>
-<li>例5-18.cpp，set容器应用示例程序</li>
+<li>例5-18.cpp，set容器应用示例程序<ul>
+<li><em>lionel，其实这个例子里，也没有提到find()和count()</em> 【是本身没有，还是例子没有讲到】</li>
 </ul>
-<h4 id="57hashhast">5.7、hash表基础及hast容器<a class="headerlink" href="#57hashhast" title="Permanent link">&para;</a></h4>
+</li>
+</ul>
+<h4 id="57hashhash">5.7、hash表基础及hash容器<a class="headerlink" href="#57hashhash" title="Permanent link">&para;</a></h4>
 <h5 id="571hash">5.7.1、hash表基础<a class="headerlink" href="#571hash" title="Permanent link">&para;</a></h5>
+<ul>
+<li>以数组为例的话，<strong>数据与下标之间有对应关系</strong>，<em>把这个映射技巧，搬到了hash上</em></li>
+</ul>
 <ul>
 <li>提出的背景：<ul>
 <li>有{1,7,9,10,23}5个元素，如果<strong>以存储数据单元的地址查找数据</strong>就需要23个空间，但现在用了一个<strong>函数关系</strong>代替之前的<strong>1比1</strong>的关系</li>
 </ul>
 </li>
+<li>多个数据对应于同一个下标。<strong>数据的下标出现了冲突，术语叫碰撞</strong><ul>
+<li>处理方法，<strong>将数组单元进行扩充，将每个数据单元中都存放一个链表指针，然后把对应单元的数据存储在链表之中</strong>。</li>
 </ul>
-<ul>
+</li>
 <li>散列表的链表法中有如下几个常用术语<ul>
 <li>节点：链表中的节点，主要内容就是<strong>用户数据</strong></li>
 <li>桶子（bucket）：数组元素，</li>

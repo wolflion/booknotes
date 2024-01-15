@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>C++并发编程实战 - lionel的技术笔记</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "C++\u5e76\u53d1\u7f16\u7a0b\u5b9e\u6218";
+        var mkdocs_page_input_path = "22C++modern\\C++\u5e76\u53d1\u7f16\u7a0b\u5b9e\u6218.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> lionel的技术笔记
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">简介</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../01daily/">daily</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../02ds/">ds</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../03cpp/">cpp</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../21tool/">tool</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">C++</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../20C%2B%2B/effectiveC%2B%2B/">《Effective C++》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../20C%2B%2B/%E6%B7%B1%E5%BA%A6%E6%8E%A2%E7%B4%A2C%2B%2B%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B/">《深度探索C++对象模型》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/EffectiveSTL/">《Effective STL》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/C%2B%2B%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/">《C++泛型STL原理和应用》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/">《STL源码剖析》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../%E6%B7%B1%E5%85%A5%E5%BA%94%E7%94%A8C%2B%2B11/">《深入应用C++11》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">基础知识</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA/">《操作系统导论》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E5%A4%A7%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">《大话设计模式》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90_C%2B%2B4th/">《数据结构与算法分析_C++4th》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E7%AE%97%E6%B3%95%284th%29/">《算法4th》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90-%E5%BC%A0%E5%86%9B/">《算法设计与分析-张军》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E5%A4%A9%E8%A1%8C-%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《天行-算法设计与实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%95%99%E7%A8%8B-%E6%9D%8E%E6%98%A5%E8%91%86/">《数据结构教程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%96%B0%E7%BC%96%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%A0%E9%A2%98%E4%B8%8E%E8%A7%A3%E6%9E%90/">《新编数据结构习题与解析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网络编程</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/TCPIP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">《TCP/IP网络编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/">《Linux高性能服务器编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/TCPIP%E8%AF%A6%E8%A7%A3%E5%8D%B71/">《TCPIP详解卷1》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/Linux%E5%86%85%E6%A0%B8%E7%BD%91%E7%BB%9C%E6%A0%88%E6%BA%90%E4%BB%A3%E7%A0%81%E6%83%85%E6%99%AF%E5%88%86%E6%9E%90/">《Linux内核网络栈源代码情景分析》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C/">《深入理解Linux网络》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">机器&深度学习</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../30machineLearning/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%9F%BA%E7%A1%80/">《机器学习线性代数基础》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../31deepLearning/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%85%A5%E9%97%A8%EF%BC%9A%E5%9F%BA%E4%BA%8EPython%E7%9A%84%E7%90%86%E8%AE%BA%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《深度学习入门：基于Python的理论与实现》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">文件系统</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/Linux%E5%86%85%E6%A0%B8%E6%8E%A2%E7%A7%98/">《Linux内核探秘》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《文件系统技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">《存储技术原理分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">存储</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../12storage/ceph%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《ceph设计原理与实现》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">视频</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/FFmpeg%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/">《FFmpeg入门到精通》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/WebRTC%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/">《WebRTC权威指南》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/WebRTC%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AE%9E%E6%97%B6%E4%BA%92%E5%8A%A8%E6%8A%80%E6%9C%AF/">《WebRTC音视频实时互动技术》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/%E6%96%B0%E4%B8%80%E4%BB%A3%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9%E7%A0%81%E6%A0%87%E5%87%86-H.264_AVC/">《新一代视频压缩码标准-H.264_AVC》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">内核</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/Linux%E5%86%85%E6%A0%B8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《Linux内核设计与实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5Linux%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%E5%86%85%E6%A0%B8%E6%9C%BA%E5%88%B6/">《深入Linux设备驱动程序内核机制》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">《深入理解Linux虚拟内存管理》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《深入理解Linux网络技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../13kernel/Linux内核源代码剖析-tcpip实现.md">《Linux内核源代码剖析-TCP/IP实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E5%86%85%E6%A0%B8/">《深入理解Linux内核》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">工具</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/Wireshark%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98/">《Wireshark网络分析实战》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/Linux%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8Eshell%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B%E5%A4%A7%E5%85%A8%283rd%29/">《Linux命令行与shell脚本编程大全(3rd)》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/python%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%883rd%EF%BC%89/">《python程序设计（3rd）》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/python/Python%E7%BC%96%E7%A8%8B%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E8%B7%B5/">《Python编程从入门到实践》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">刷题</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer2nd/">《剑指offer2nd》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/">《剑指offer专项突破》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../96output/OD基础题.md">OD基础题</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../96output/OD进阶题.md">OD进阶题</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网课</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/01Linux%E9%AB%98%E5%B9%B6%E5%8F%91%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/">《Linux高并发网络编程开发》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/%E4%BE%AF%E6%8D%B7/%E4%BE%AF%E6%8D%B7C%2B%2B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%8660%E8%AE%B2/">《侯捷C++内存管理60讲》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/11NJU%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">《NJU算法设计与分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">英语专</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../60English/00794%E7%BB%BC%E5%90%88%E8%8B%B1%E8%AF%AD%E4%B8%80%E4%B8%8A/">《综合英语(一)上》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../95selfStudy/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/">《概率率与数理统计》</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">lionel的技术笔记</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>C++并发编程实战</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h3 id="c">《C++并发编程实战》<a class="headerlink" href="#c" title="Permanent link">&para;</a></h3>
+<h3 id="chap1c">chap1、你好，C++并发世界<a class="headerlink" href="#chap1c" title="Permanent link">&para;</a></h3>
+<h4 id="11">1.1、什么是并发<a class="headerlink" href="#11" title="Permanent link">&para;</a></h4>
+<h4 id="12">1.2、为什么使用并发<a class="headerlink" href="#12" title="Permanent link">&para;</a></h4>
+<h4 id="13c">1.3、在C++中使用并发和多线程<a class="headerlink" href="#13c" title="Permanent link">&para;</a></h4>
+<h4 id="14">1.4、开始入门<a class="headerlink" href="#14" title="Permanent link">&para;</a></h4>
+<pre class="highlight"><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;thread&gt;
+using namespace std;
+void hello() {
+    cout&lt;&lt;"Hello Concurrent World\n";
+}
+
+int main() {
+    thread t(hello);
+    t.join();
+}</code></pre>
+<h3 id="chap2">chap2、管理线程<a class="headerlink" href="#chap2" title="Permanent link">&para;</a></h3>
+<h4 id="21">2.1、基本线程管理<a class="headerlink" href="#21" title="Permanent link">&para;</a></h4>
+<pre class="highlight"><code class="language-cpp">// 2.1 当线程仍然访问局部变量时返回的函数
+struct func {
+    int &amp;i;
+    func(int &amp;i_) : i(i_){}
+
+    void operator() {
+        for(unsigned j = 0; j &lt; 1000000; ++j) {
+            do_something(i); //1.对悬空引用可能的访问
+        }
+    }
+};
+
+void oops() {
+    int some_local_state = 0;
+    func my_func(some_local_state);
+    std::thread my_thread(my_func);
+    my_thread.detach(); //2.不等待线程完成
+} //3.新的线程可能仍在运行</code></pre>
+<h4 id="22">2.2、传递参数给线程函数<a class="headerlink" href="#22" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>std::thread t(f,3,std::string(buffer));//不要太依赖于thread构造函数的隐式转换，**直接用</code>std::string()<code>**转好</code></li>
+<li><code>std::thread t(update_data_for_widget, w, std::ref(data)); //update_data_for_widget被传入引用</code></li>
+<li><code>std::bind</code></li>
+<li><code>std::ref</code></li>
+<li><code>std::unique_ptr</code></li>
+<li><strong>std::thread的实例是可移动的（movable），即使他们不是可复制的（copyable）。</strong>，所以第三个参数可以用<code>std::move()</code></li>
+</ul>
+<h4 id="23">2.3、转移线程的所有权<a class="headerlink" href="#23" title="Permanent link">&para;</a></h4>
+<pre class="highlight"><code class="language-c++">// 2.5 从函数中返回std::thread
+std::thread f()
+{
+    void some_function();
+    return std::thread(some_function);
+}
+
+std::thread g()
+{
+    void some_other_function(int);
+    std::thread t(some_other_function, 42);
+    return t;
+}
+
+
+
+// 2.6 scoped_thread和示例用法
+
+// 2.7 生成一批线程并等待它们完成
+void do_work(unsigned id);
+void f()
+{
+    std::vector&lt;std::thread&gt; threads;
+    for(unsigned i=0;i&lt;20;i++){
+        threads.push_back(std::thread(do_work,i)); //生成线程
+    }
+    std::for_each(threads.begin(), threads.end(),std::mem_fn(&amp;std::thread::join)); //轮流在每个线程上调用join()
+}</code></pre>
+<h4 id="24">2.4、在运行时选择线程数量<a class="headerlink" href="#24" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>std::thread::headware_currency()</code></li>
+</ul>
+<h4 id="25">2.5、标识线程<a class="headerlink" href="#25" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>std::this_thread::get_id();</code></li>
+<li><code>std::thread::id master_thread;//thread::id是成员类型</code></li>
+</ul>
+<h4 id="26">2.6、小结<a class="headerlink" href="#26" title="Permanent link">&para;</a></h4>
+<h3 id="chap3">chap3、在线程间共享数据<a class="headerlink" href="#chap3" title="Permanent link">&para;</a></h3>
+<h4 id="31">3.1、线程之间共享数据的问题<a class="headerlink" href="#31" title="Permanent link">&para;</a></h4>
+<ul>
+<li>3.1.1、竞争条件</li>
+<li>3.1.2、避免有问题的竞争条件</li>
+</ul>
+<h4 id="32">3.2、用互斥元保护共享数据<a class="headerlink" href="#32" title="Permanent link">&para;</a></h4>
+<ul>
+<li>3.2.1、使用C++中的互斥元</li>
+<li>3.2.2、为保护共享数据精心组织代码</li>
+<li>3.2.3、</li>
+<li>3.2.4、死锁：问题和解决方案</li>
+<li>3.2.5、避免死锁</li>
+<li>3.2.6、用std::unique_lock灵活锁定</li>
+<li>3.2.7、</li>
+<li>3.2.8、</li>
+</ul>
+<h4 id="33">3.3、用于共享数据保护的替代工具<a class="headerlink" href="#33" title="Permanent link">&para;</a></h4>
+<ul>
+<li>3.3.1、在初始化时保护共享数据</li>
+<li>3.3.2、</li>
+<li>3.3.3、递归锁</li>
+</ul>
+<h4 id="34">3.4、小结<a class="headerlink" href="#34" title="Permanent link">&para;</a></h4>
+<h3 id="chap4">chap4、同步并发操作<a class="headerlink" href="#chap4" title="Permanent link">&para;</a></h3>
+<h4 id="41">4.1、等待事件或其它条件<a class="headerlink" href="#41" title="Permanent link">&para;</a></h4>
+<ul>
+<li>4.1.1、用条件变量等待条件</li>
+<li>4.1.2、使用条件变量建立一个线程安全队列</li>
+</ul>
+<h4 id="42future">4.2、使用future等待一次性事件<a class="headerlink" href="#42future" title="Permanent link">&para;</a></h4>
+<ul>
+<li>4.2.1、从后台任务中返回值</li>
+</ul>
+<pre class="highlight"><code class="language-c++">#include &lt;future&gt;
+#include &lt;iostream&gt;
+
+int find_the_answer_to_ltuase();
+void do_other_stuff();
+int main()
+{
+    std::future&lt;int&gt; the_answer = std::async(find_the_answer_to_ltuase);
+    do_other_stuff();
+    std::cout&lt;&lt;"The answer is "&lt;&lt;the_answe.get()&lt;&lt;std::endl;
+}</code></pre>
+<ul>
+<li>4.2.2、</li>
+<li>4.2.3、</li>
+<li>4.2.4、</li>
+<li>4.2.5、</li>
+</ul>
+<h4 id="43">4.3、<a class="headerlink" href="#43" title="Permanent link">&para;</a></h4>
+<h4 id="44">4.4、使用操作同步来简化代码<a class="headerlink" href="#44" title="Permanent link">&para;</a></h4>
+<h4 id="45">4.5、小结<a class="headerlink" href="#45" title="Permanent link">&para;</a></h4>
+<h3 id="chap5c">chap5、C++内存模型和原子类型上操作<a class="headerlink" href="#chap5c" title="Permanent link">&para;</a></h3>
+<h4 id="51">5.1、内存模型基础<a class="headerlink" href="#51" title="Permanent link">&para;</a></h4>
+<h5 id="511">5.1.1、<a class="headerlink" href="#511" title="Permanent link">&para;</a></h5>
+<ul>
+<li>四个原则：
+    + 1、每个变量都是一个对象，包括作为其成员变量的对象
+    + 2、每个对象至少占有一个内存位置
+    + 3、基本类型都有确定的内存位置（无论类型大小如何，即使它们是相邻的，或是数组的一部分）
+    + 4、相邻位域是相同内存中的一部分</li>
+</ul>
+<h5 id="512">5.1.2、<a class="headerlink" href="#512" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>当有线程对内存位置上的数据进行修改，那就有可能会产生条件竞争</strong>。</li>
+<li>为了避免条件竞争，两个线程就需要一定的执行顺序。
+    + 第一种，使用<strong>互斥量来确定访问的顺序</strong>
+    + 第二种，使用<strong>原子操作</strong>，决定两个线程的访问顺序。</li>
+<li><strong>如果不规定两个不同线程对同一内存地址访问的顺序，那么访问就不是原子的</strong>。</li>
+</ul>
+<h5 id="513">5.1.3、<a class="headerlink" href="#513" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>每个C++程序中的对象，都有（由程序中的所有线程对象）确定好的修改顺序，且在初始化开始阶段确定</strong>。</li>
+</ul>
+<h4 id="52c">5.2、C++中的原子操作及类型<a class="headerlink" href="#52c" title="Permanent link">&para;</a></h4>
+<ul>
+<li>标准原子类型</li>
+<li>std::atomic_flag上的操作</li>
+</ul>
+<pre class="highlight"><code class="language-c++">// 使用std::atomic_flag的自旋锁互斥实现
+class spinlock_mutex{
+    std::atomic_flag flag;
+public:
+    spinlock_mutex():flag(ATOMIC_FLAG_INIT){}
+    void lock() {
+        while(falg.test_and_set(std::memory_order_acquire));
+    }
+    void unlock() {
+        flag.clear(std::memory_order_release);
+    }
+};</code></pre>
+<ul>
+<li>std::atomic<bool>的操作</li>
+<li>std::atomic<T*>上的操作：指针算术运算</li>
+<li>标准原子整型的操作</li>
+<li>std::atomic&lt;&gt;初级类模板</li>
+<li>原子操作的自由函数</li>
+</ul>
+<h4 id="53">5.3、同步操作和强制顺序<a class="headerlink" href="#53" title="Permanent link">&para;</a></h4>
+<ul>
+<li>0</li>
+</ul>
+<pre class="highlight"><code class="language-c++">// 5.2、从不同的线程中读取和写入变量
+#include &lt;vector&gt;
+#include &lt;atomic&gt;
+#include &lt;iostream&gt;
+
+std::vector&lt;int&gt; data;
+std::atomic&lt;bool&gt; data_ready(false);
+
+void reader_thread() {
+    while(!data_ready.load()) {//1
+        std::this_thread::sleep(std::milliseconds(1));
+    }
+    std::cout &lt;&lt; "The answer=" &lt;&lt; data[0] &lt;&lt; "\n";//2
+}
+
+void writer_thread() {
+    data.push_back(42);//3
+    data_ready = true;//4
+}</code></pre>
+<ul>
+<li>5.3.1、synchronizes-with关系</li>
+<li>5.3.2、happens-before关系</li>
+</ul>
+<pre class="highlight"><code class="language-c++">// 5.3、一个函数调用的参数的估计顺序是未指定的
+#include &lt;iostream&gt;
+void foo(int a, int b) {
+    std::cout&lt;&lt;a&lt;&lt;","&lt;&lt;b&lt;&lt;std::endl;
+}
+
+int get_num() {
+    static int i = 0;
+    return ++i;
+}
+
+int main() {
+    foo(get_num(),get_num());
+}</code></pre>
+<ul>
+<li>5.3.3、原子操作的内存顺序<ul>
+<li>顺序一致顺序</li>
+<li>7、使用获取-释放顺序和MEMORY_ORDER_CONSUME的数据依赖</li>
+</ul>
+</li>
+<li>5.3.4、释放序列和synchronizes-with</li>
+<li>5.3.5、屏障</li>
+<li>5.3.6、用原子操作排序非原子操作</li>
+</ul>
+<h4 id="54">5.4、小结<a class="headerlink" href="#54" title="Permanent link">&para;</a></h4>
+<h3 id="chap6">chap6、基于锁<a class="headerlink" href="#chap6" title="Permanent link">&para;</a></h3>
+<h4 id="61">6.1、<a class="headerlink" href="#61" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p><strong>序列化（serialzation）</strong>：线程轮流访问被保护的数据。<strong>这是对数据进行串行的访问，而非并发</strong>。</p>
+<h5 id="611">6.1.1、<a class="headerlink" href="#611" title="Permanent link">&para;</a></h5>
+</li>
+</ul>
+<ul>
+<li><strong>设计并发数据结构时</strong>，需要考量两方面：
+    + 一是确保访问安全
+    + 二是真正并发访问<pre class="highlight"><code>#### 6.2、基于锁</code></pre>
+</li>
+</ul>
+<ul>
+<li><em>用了栈和队列？</em></li>
+</ul>
+<h5 id="712">7.1.2、无锁数据结构<a class="headerlink" href="#712" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>无锁结构就意味着线程可以并发的访问数据结构</strong></li>
+</ul>
+<h5 id="714">7.1.4、无锁数据结构的利与弊<a class="headerlink" href="#714" title="Permanent link">&para;</a></h5>
+<ul>
+<li>使用无锁结构的主要原因：
+    + 1、将并发最大化。<strong>使用基于锁的容器，会让线程阻塞或等待；互斥锁削弱了结构的并发性</strong>。
+    + 2、鲁棒性。<strong>当一个线程在获取锁时被终止，那么数据结构将会被永久性的破坏</strong>。</li>
+</ul>
+<h4 id="72">7.2、<a class="headerlink" href="#72" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>无锁结构依赖于原子操作和内存序，以确保多线程以正确的顺序访问数据结构</strong>。所有原子操作默认使用的是<code>memory_seq_cst</code>内存序。</li>
+</ul>
+<h4 id="73">7.3、<a class="headerlink" href="#73" title="Permanent link">&para;</a></h4>
+<h5 id="733aba">7.3.3、指导建议：小心ABA问题<a class="headerlink" href="#733aba" title="Permanent link">&para;</a></h5>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

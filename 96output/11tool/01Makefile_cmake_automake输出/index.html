@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>01Makefile cmake automake输出 - lionel的技术笔记</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "01Makefile cmake automake\u8f93\u51fa";
+        var mkdocs_page_input_path = "96output\\11tool\\01Makefile_cmake_automake\u8f93\u51fa.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> lionel的技术笔记
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">简介</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../01daily/">daily</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../02ds/">ds</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../03cpp/">cpp</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../21tool/">tool</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">C++</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../20C%2B%2B/effectiveC%2B%2B/">《Effective C++》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../20C%2B%2B/%E6%B7%B1%E5%BA%A6%E6%8E%A2%E7%B4%A2C%2B%2B%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B/">《深度探索C++对象模型》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../21STL/EffectiveSTL/">《Effective STL》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../21STL/C%2B%2B%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/">《C++泛型STL原理和应用》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../21STL/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/">《STL源码剖析》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../22C%2B%2Bmodern/%E6%B7%B1%E5%85%A5%E5%BA%94%E7%94%A8C%2B%2B11/">《深入应用C++11》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">基础知识</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../408/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA/">《操作系统导论》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../408/%E5%A4%A7%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">《大话设计模式》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../408/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90_C%2B%2B4th/">《数据结构与算法分析_C++4th》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../408/%E7%AE%97%E6%B3%95%284th%29/">《算法4th》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../408/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90-%E5%BC%A0%E5%86%9B/">《算法设计与分析-张军》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../408/%E5%A4%A9%E8%A1%8C-%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《天行-算法设计与实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../408/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%95%99%E7%A8%8B-%E6%9D%8E%E6%98%A5%E8%91%86/">《数据结构教程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../408/%E6%96%B0%E7%BC%96%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%A0%E9%A2%98%E4%B8%8E%E8%A7%A3%E6%9E%90/">《新编数据结构习题与解析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网络编程</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../10network/TCPIP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">《TCP/IP网络编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../10network/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/">《Linux高性能服务器编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../10network/TCPIP%E8%AF%A6%E8%A7%A3%E5%8D%B71/">《TCPIP详解卷1》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../10network/Linux%E5%86%85%E6%A0%B8%E7%BD%91%E7%BB%9C%E6%A0%88%E6%BA%90%E4%BB%A3%E7%A0%81%E6%83%85%E6%99%AF%E5%88%86%E6%9E%90/">《Linux内核网络栈源代码情景分析》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../10network/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C/">《深入理解Linux网络》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">机器&深度学习</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../30machineLearning/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%9F%BA%E7%A1%80/">《机器学习线性代数基础》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../31deepLearning/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%85%A5%E9%97%A8%EF%BC%9A%E5%9F%BA%E4%BA%8EPython%E7%9A%84%E7%90%86%E8%AE%BA%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《深度学习入门：基于Python的理论与实现》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">文件系统</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../11filesystem/Linux%E5%86%85%E6%A0%B8%E6%8E%A2%E7%A7%98/">《Linux内核探秘》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../11filesystem/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《文件系统技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../11filesystem/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">《存储技术原理分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">存储</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../12storage/ceph%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《ceph设计原理与实现》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">视频</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../14video/FFmpeg%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/">《FFmpeg入门到精通》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../14video/WebRTC%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/">《WebRTC权威指南》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../14video/WebRTC%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AE%9E%E6%97%B6%E4%BA%92%E5%8A%A8%E6%8A%80%E6%9C%AF/">《WebRTC音视频实时互动技术》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../14video/%E6%96%B0%E4%B8%80%E4%BB%A3%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9%E7%A0%81%E6%A0%87%E5%87%86-H.264_AVC/">《新一代视频压缩码标准-H.264_AVC》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">内核</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../13kernel/Linux%E5%86%85%E6%A0%B8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《Linux内核设计与实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../13kernel/%E6%B7%B1%E5%85%A5Linux%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%E5%86%85%E6%A0%B8%E6%9C%BA%E5%88%B6/">《深入Linux设备驱动程序内核机制》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">《深入理解Linux虚拟内存管理》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《深入理解Linux网络技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../13kernel/Linux内核源代码剖析-tcpip实现.md">《Linux内核源代码剖析-TCP/IP实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E5%86%85%E6%A0%B8/">《深入理解Linux内核》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">工具</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../15tool/Wireshark%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98/">《Wireshark网络分析实战》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../15tool/Linux%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8Eshell%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B%E5%A4%A7%E5%85%A8%283rd%29/">《Linux命令行与shell脚本编程大全(3rd)》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../15tool/python%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%883rd%EF%BC%89/">《python程序设计（3rd）》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../15tool/python/Python%E7%BC%96%E7%A8%8B%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E8%B7%B5/">《Python编程从入门到实践》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">刷题</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../91leetcode/%E5%89%91%E6%8C%87offer2nd/">《剑指offer2nd》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../91leetcode/%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/">《剑指offer专项突破》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../OD基础题.md">OD基础题</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../OD进阶题.md">OD进阶题</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网课</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../90lecture/01Linux%E9%AB%98%E5%B9%B6%E5%8F%91%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/">《Linux高并发网络编程开发》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../90lecture/%E4%BE%AF%E6%8D%B7/%E4%BE%AF%E6%8D%B7C%2B%2B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%8660%E8%AE%B2/">《侯捷C++内存管理60讲》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../90lecture/11NJU%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">《NJU算法设计与分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">英语专</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../60English/00794%E7%BB%BC%E5%90%88%E8%8B%B1%E8%AF%AD%E4%B8%80%E4%B8%8A/">《综合英语(一)上》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../95selfStudy/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/">《概率率与数理统计》</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">lionel的技术笔记</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>01Makefile cmake automake输出</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="makefile_cmake_automake">Makefile_cmake_automake输出<a class="headerlink" href="#makefile_cmake_automake" title="Permanent link">&para;</a></h2>
+<ul>
+<li>在项目构建中，小型的话，可能就自己手写Makefile，但如果大型的话，可以用以下2种方式生成，<strong>但他们背后都是有依赖项的</strong><ul>
+<li><code>cmake .</code> 依赖CMakeLists.txt，<strong>需要手写CMakeLists.txt</strong></li>
+<li><code>./configure</code>  依赖 Makefile.in，<strong>需要手写Makefile.am</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="makefile">一、Makefile<a class="headerlink" href="#makefile" title="Permanent link">&para;</a></h3>
+<ul>
+<li>ref<ul>
+<li><a href="https://www.ruanyifeng.com/blog/2015/02/make.html">makefile教程</a>，<em>阮一峰</em></li>
+<li><a href="https://www.gnu.org/software/make/manual/make.html">GNU make</a>，官网，<em>空闲了，要拜读一下</em></li>
+</ul>
+</li>
+</ul>
+<h4 id="1makefile">1、简单Makefile例子<a class="headerlink" href="#1makefile" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>变量是不区分大小写的</strong></li>
+<li>给变量赋值还可以用<strong>make命令</strong>，<code>make NAME=my_custom_value</code></li>
+</ul>
+<pre class="highlight"><code class="language-makefile">TARGET = hello
+SOURCES = hello.c
+DEPS =
+
+CC = gcc
+CFLAGS = -Wall -Werror
+all:$(TARGET)
+$(TARGET): $(SOURCES) $(DEPS)   #虽然写得有点抽象，主要是把变量用起来了，但能看懂
+    $(CC) $(CFLAGS) -o $(TARGET) $(SOURCES)   #gcc -o hello hello.c，hello.c可以放最后吗？
+
+clean:
+    rm -f $(TARGET)</code></pre>
+<h4 id="2makefile">2、makefile语法<a class="headerlink" href="#2makefile" title="Permanent link">&para;</a></h4>
+<ul>
+<li>0<ul>
+<li><em>依赖项dependency：目标所依赖的文件，简单例子中，目标不依赖啥文件，直接空，lionel，这是翻译的错误</em></li>
+</ul>
+</li>
+</ul>
+<h5 id="21makefilerulerule">2.1、makefile是由每条<strong>规则（rule）</strong>组成，rule由以下目录组成<a class="headerlink" href="#21makefilerulerule" title="Permanent link">&para;</a></h5>
+<ul>
+<li>目标target：要生成的文件（<em>可以是执行文件，也可以是.o</em>），<strong>也可以是伪目标</strong>(<em>某个操作的名字</em>)，可以用<code>.phony</code>内置目标名<ul>
+<li>简单例子中，目标就是<code>hello</code>，是个可执行文件</li>
+<li>简单例子中，<code>clean</code>，就是伪目标</li>
+<li><strong>目标是必须的</strong>，不可缺少</li>
+</ul>
+</li>
+<li><strong>前置条件</strong>（prerequisites）：根据文件时间戳，判断是否要构建目标<ul>
+<li>冒号前面的叫<strong>目标</strong>，后面的叫<strong>前置条件</strong>（<strong>通过判断 前置条件 是否修改【删除一个或者更改一个】，目标就要重新构建</strong></li>
+<li>前置条件 或 命令，至少要有一个存在，不能同时不存在</li>
+</ul>
+</li>
+<li>命令command：生成目标所执行的操作<ul>
+<li>简单例子中，<code>gcc -o hello hello.c</code>，<em>这是为了生成目标hello</em></li>
+</ul>
+</li>
+</ul>
+<h5 id="22makefile">2.2、为了让makefile更灵活性，可以使用<strong>变量</strong>和<strong>函数</strong>，还可以包含<strong>判断和循环</strong><a class="headerlink" href="#22makefile" title="Permanent link">&para;</a></h5>
+<ul>
+<li>变量（Variables）<ul>
+<li>自定义变量：比如<code>SOURCES</code>，<em>自己定义了，才能用</em></li>
+<li>内置变量（Variables Used by Implicit Rules）：比如<code>$(CC)</code>，<em>没有定义，就直接用了</em></li>
+<li>自动变量（Automatic Variables）：<code>$@</code><ul>
+<li><em>暂时没用到，lionel，先不看</em>，也是从阮一峰blog看到的</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>函数（Functions for Transforming Text）<ul>
+<li>调用语法：<code>$(function arguments)</code>或<code>${function arguments}</code></li>
+<li><em>可以学一下内置的</em></li>
+<li><em>lionel，因为是没办法用自定义的</em></li>
+</ul>
+</li>
+<li>判断和循环，<strong>使用的是Bash语法</strong>  (<em>bash语法，我不太熟，lionel</em>)<ul>
+<li>判断，<code>ifeq else endif</code></li>
+<li>循环，<code>for i in $XX : do</code></li>
+</ul>
+</li>
+</ul>
+<h5 id="23">2.3、追加一些场景<a class="headerlink" href="#23" title="Permanent link">&para;</a></h5>
+<pre class="highlight"><code class="language-makefile">NAME ?= /home/test  #条件赋值操作符。它的作用是只在变量未定义或为空时，才对其进行赋值。
+
+CRT =$(shell dirname$(realpath $firstword $(MAKEFILE_LIST))) #获取当前Makefile所在的目录的绝对路径。
+#$(MAKEFILE_LIST) 是Makefile中的一个内置变量，它包含了当前正在被处理的Makefile的文件名列表。
+#firstword函数用于获取这个列表中的第一个文件名，即当前正在处理的Makefile的文件名。
+#realpath函数用于获取文件的绝对路径。它接受一个文件名作为参数，并返回该文件的绝对路径。
+#dirname函数用于获取给定路径的父目录。它接受一个路径作为参数，并返回该路径的父目录路径。
+
+#可以通过export USE_DEUG=0
+ifeq($(USE_DEUG),1) #如果$USE_DEBUG的值为1，就追加个-g，*但问题是，在哪看赋值，或者没赋值的时候是多少？可以通过export*
+    CFLAGS += -g
+end
+
+#规则中的 命令 部分是空的场景
+all: hello
+
+hello: hello.c
+    gcc -o hello hello.c #lionel，文件的顺序其实是无所谓的  hello.c可以放在-o前面或后面</code></pre>
+<h5 id="24">2.4、一些疑问&amp;答案<a class="headerlink" href="#24" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、Makefile中规则，是按顺序执行的嘛？<ul>
+<li><em>我觉得应该不是</em> 【只不过写的时候，对人看而言，尽量写得有逻辑性点，对机器，是根据不同去找的】</li>
+</ul>
+</li>
+</ul>
+<h4 id="3make">3、make命令<a class="headerlink" href="#3make" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>type make</code>看了一下，没写bultin-in，就不是内置的</li>
+<li><code>man make</code>也不行，<code>make -h</code>可以，一般man不行的时候，可以试一下<code>info make</code>，或者<code>make --help</code><ul>
+<li><strong>man、info、help</strong>3大命令</li>
+</ul>
+</li>
+<li><strong>make执行的时候，会去找Makefile</strong>，找不到，会报错</li>
+<li>给变量赋值还可以用<strong>make命令</strong>，<code>make NAME=my_custom_value</code></li>
+</ul>
+<h4 id="4linux-kernel">4、看一些例子（从linux kernel看吧）<a class="headerlink" href="#4linux-kernel" title="Permanent link">&para;</a></h4>
+<h4 id="5">5、自己生活中场景<a class="headerlink" href="#5" title="Permanent link">&para;</a></h4>
+<ul>
+<li>1、我之前在敲入《深入理解C++11》的时候，每个文件都是单个执行的，现在有个想法是<strong>写个makefile，每个文件生成对应的可执行文件</strong>，然后自己运行了看一下</li>
+</ul>
+<h3 id="cmakecmakeliststxt">二、Cmake&amp;CMakeLists.txt<a class="headerlink" href="#cmakecmakeliststxt" title="Permanent link">&para;</a></h3>
+<ul>
+<li>ref<ul>
+<li><a href="https://durant35.github.io/2016/04/21/tool_CMake_%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/">cmake快速入门</a>  ，<em>找了一个例子</em></li>
+<li><a href="https://durant35.github.io/uploads/CMake%20Practice.pdf">cmake实践</a>，<em>也是个例子，未看</em></li>
+<li><a href="https://cmake.org/cmake/help/latest/">cmake</a>，官网</li>
+</ul>
+</li>
+</ul>
+<h4 id="1cmakemake">1、cmake和make命令<a class="headerlink" href="#1cmakemake" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>cmake</code>会生成Makefile，然后再执行<code>make</code>命令，这是步骤<ul>
+<li><code>cmake .</code>生成Makefile时，<strong>会去找CMakeLists.txt</strong></li>
+</ul>
+</li>
+</ul>
+<h4 id="2cmakeliststxt">2、简单CMakeLists.txt例子<a class="headerlink" href="#2cmakeliststxt" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>第一行，第二行的内容是固定的</strong></li>
+</ul>
+<pre class="highlight"><code class="language-cmake">cmake_minimum_required(VERSION 3.0)  #最小版本，必须在第一行
+
+project(hello)  #project是关键字，表示生成hello的项目，必须在第二行
+
+add_executable(hello hello.c) #add_executable也是关键字，这里的hello是可执行文件，通过hello.c生成的</code></pre>
+<h4 id="3cmakeliststxt">3、CMakeLists.txt的实践<a class="headerlink" href="#3cmakeliststxt" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>add_library()</code>里指定<strong>STATIC</strong>和<strong>SHARED</strong>，其它都一样</li>
+<li>需要在<code>build</code>文件夹下面执行<code>cmake</code></li>
+<li><code>add_library()</code>，<strong>基本语法简单点</strong>，<code>add_library(target [SHARED | STATIC | MODULE] sources)</code><ul>
+<li><strong>默认的话，是生成静态库</strong></li>
+</ul>
+</li>
+<li><code>set_target_properties()</code>解释，<strong>设置目标的属性</strong><ul>
+<li>target，可以是多个（例子中只有1个，是mylibrary）</li>
+<li><strong>PROPERTIES</strong>是属性</li>
+<li>后面2个是<strong>成对的</strong>，（例子中，属性是OUTPUT_NAME，值是"myrenamedlibrary"），<strong>常用的属性</strong>有（具体看manual吧）<ul>
+<li><code>OUTPUT_NAME</code>：指定生成的目标文件的名称（不包括扩展名）。</li>
+<li><code>OUTPUT_NAME_DEBUG</code>：指定在 Debug 模式下生成的目标文件的名称。</li>
+<li><code>OUTPUT_NAME_RELEASE</code>：指定在 Release 模式下生成的目标文件的名称。</li>
+<li><code>RUNTIME_OUTPUT_DIRECTORY</code>：指定生成的可执行文件的输出目录。</li>
+<li><code>LIBRARY_OUTPUT_DIRECTORY</code>：指定生成的库文件（静态库或动态库）的输出目录。</li>
+<li><code>ARCHIVE_OUTPUT_DIRECTORY</code>：指定生成的静态库文件的输出目录。</li>
+<li><code>VERSION</code>：指定动态库的版本号。</li>
+<li><code>SOVERSION</code>：指定动态库的主版本号。</li>
+<li><code>COMPILE_DEFINITIONS</code>：指定在编译目标时定义的预处理宏。</li>
+<li><code>INCLUDE_DIRECTORIES</code>：指定包含的头文件目录。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="31">3.1、生成静态库，并为其改名<a class="headerlink" href="#31" title="Permanent link">&para;</a></h5>
+<pre class="highlight"><code class="language-cmake">cmake_minimum_required(VERSION 3.12)
+project(MyLibrary)
+
+# 添加源代码文件
+set(SOURCES file1.cpp file2.cpp)
+
+# 生成静态库并指定名称
+add_library(mylibrary STATIC ${SOURCES})  
+
+# 修改静态库的输出名称
+set_target_properties(mylibrary PROPERTIES OUTPUT_NAME "myrenamedlibrary")</code></pre>
+<h5 id="32">3.2、生成动态库，并为其改名<a class="headerlink" href="#32" title="Permanent link">&para;</a></h5>
+<pre class="highlight"><code class="language-cmake">cmake_minimum_required(VERSION 3.12)
+project(MyLibrary)
+
+# 添加源代码文件
+set(SOURCES file1.cpp file2.cpp)
+
+# 生成动态库并指定名称
+add_library(mylibrary SHARED ${SOURCES})
+
+# 修改动态库的输出名称
+set_target_properties(mylibrary PROPERTIES OUTPUT_NAME "myrenamedlibrary")</code></pre>
+<h4 id="4cmakeliststxt">4、CMakeLists.txt常用参数&amp;函数<a class="headerlink" href="#4cmakeliststxt" title="Permanent link">&para;</a></h4>
+<ul>
+<li><em>这部分要对应官网看下，以及上面ref里的2个例子</em>【目前来自AI回答，暂无实际应用】</li>
+</ul>
+<h5 id="41">4.1、参数<a class="headerlink" href="#41" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>CMAKE_MINIMUM_REQUIRED(VERSION)</code>：指定所需的最低 CMake 版本。</li>
+<li><code>PROJECT</code>：设置项目的名称。</li>
+<li><code>SET</code>：设置变量的值。</li>
+<li><code>IF</code>、<code>ELSE</code>、<code>ENDIF</code>：条件语句，用于根据条件执行不同的操作。【unused】</li>
+<li><code>OPTION</code>：定义一个可选项，允许用户在构建时选择是否启用某些功能。【unused】</li>
+<li><code>FIND_PACKAGE</code>：查找特定的外部依赖项。【unused】</li>
+<li><code>INCLUDE_DIRECTORIES</code>：添加包含的头文件目录。</li>
+<li><code>LINK_DIRECTORIES</code>：添加链接的库文件目录。</li>
+<li><code>ADD_EXECUTABLE</code>：定义一个可执行文件目标。</li>
+<li><code>ADD_LIBRARY</code>：定义一个库目标（静态库或动态库）。</li>
+<li><code>TARGET_LINK_LIBRARIES</code>：将目标与特定的库文件进行链接。</li>
+<li><code>INSTALL</code>：定义安装规则，指定在构建时安装文件的位置。【unused】</li>
+</ul>
+<h5 id="42all-unused">4.2、函数【all unused】<a class="headerlink" href="#42all-unused" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>MESSAGE</code>：输出消息到 CMake 构建过程中的日志。</li>
+<li><code>FILE</code>：用于文件和目录操作，例如复制、移动、删除文件等。</li>
+<li><code>CONFIGURE_FILE</code>：将源文件复制到构建目录，并进行变量替换。</li>
+<li><code>STRING</code>：字符串操作函数，例如字符串比较、替换等。</li>
+<li><code>LIST</code>：列表操作函数，例如追加、插入、获取列表元素等。</li>
+<li><code>FOREACH</code>、<code>WHILE</code>：用于循环遍历列表或执行特定的命令。</li>
+<li><code>RETURN</code>：从 CMakeLists.txt 文件中返回。</li>
+</ul>
+<h4 id="5cmakeliststxt">5、CMakelists.txt在多文件夹的工程中应用<a class="headerlink" href="#5cmakeliststxt" title="Permanent link">&para;</a></h4>
+<h3 id="automake">三、automake<a class="headerlink" href="#automake" title="Permanent link">&para;</a></h3>
+<ul>
+<li><em>还是要找实际的例子跑一下，现在用的例子，都是AI生成的</em></li>
+</ul>
+<ul>
+<li>区别与联系<ul>
+<li>cmake是跨平台的</li>
+<li>automake是unix上的</li>
+</ul>
+</li>
+<li>ref<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/487937400">利用autotool生成Makefile</a> ，zhihu上的</li>
+<li><a href="https://www.gnu.org/software/automake/manual/automake.pdf">automake</a> ，官网</li>
+</ul>
+</li>
+</ul>
+<h4 id="1configure">1、<code>./configure</code>命令<a class="headerlink" href="#1configure" title="Permanent link">&para;</a></h4>
+<ul>
+<li>下载一些开源软件，一般是让<code>./configure</code>一下，这是为了<strong>生成Makefile</strong>，然后再用<code>make</code></li>
+<li><strong>使用<code>./configure</code>时要确保安装了Autoconf</strong>，<em>如何check是否安装了呢？lionel</em></li>
+<li><code>./configure</code> 会<strong>根据系统的配置信息来修改 <code>Makefile.in</code></strong>，再生成一个完整的 Makefile</li>
+</ul>
+<h4 id="2configure">2、configure脚本是如何生成的<a class="headerlink" href="#2configure" title="Permanent link">&para;</a></h4>
+<ul>
+<li>2.1、用<code>autoscan</code> 生成 configure.scan，并把它修改为configure.ac</li>
+<li>2.2、 <code>aclocal</code> 命令。这将扫描 <code>configure.ac</code> 文件，并根据其中的宏定义生成 <code>aclocal.m4</code> 文件，<strong>宏定义和宏展开</strong></li>
+<li>2.3、运行 <code>autoconf</code> 命令，会解析 <code>configure.ac</code> 文件，执行其中的宏和脚本，然后生成一个名为 <code>configure</code> 的脚本文件，<strong>这里需要configure.ac和aclocal.m4两个文件</strong>才行</li>
+<li>2.4、运行 <code>autoreconf</code> 命令（可选）</li>
+</ul>
+<h4 id="3automakemakefilein">3、Automake是如何生成Makefile.in的<a class="headerlink" href="#3automakemakefilein" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Automake 使用这些宏来生成 Makefile.in。</li>
+<li><em>跟我看到的不一样嘛，lionel，自己要实践下</em>（2个AI回答得不一样嘛）</li>
+</ul>
+<h4 id="4makefileinmakefileam">4、Makefile.in和Makefile.am的区别<a class="headerlink" href="#4makefileinmakefileam" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Makefile.am 是 Automake 生成的文件，它包含了构建项目的规则，但它并不是一个完整的 Makefile。</li>
+<li>Makefile.in 是根据 Makefile.am 生成的文件，它是一个完整的 Makefile。<strong>多一个配置信息</strong></li>
+</ul>
+<h4 id="5makefilein">5、Makefile.in示例<a class="headerlink" href="#5makefilein" title="Permanent link">&para;</a></h4>
+<ul>
+<li>这是一个 Makefile.in 文件，通常用作模板文件，需要通过 <code>configure</code> 脚本生成最终的 Makefile 文件。在生成 Makefile 文件时，<code>@VARIABLE@</code> 类似的占位符会被实际的配置值替换。例如，<code>@CC@</code> 可能会被替换为实际的编译器名称。</li>
+</ul>
+<pre class="highlight"><code class="language-txt"># 编译器设置
+CC = gcc
+CFLAGS = -Wall -Wextra
+
+# 目标文件
+TARGET = myprogram
+
+# 源代码文件
+SRCS = main.c utils.c
+
+# 生成目标文件
+OBJS = $(SRCS:.c=.o)
+
+# 默认目标
+all: $(TARGET)
+
+# 目标文件生成规则
+$(TARGET): $(OBJS)
+    $(CC) $(CFLAGS) $(OBJS) -o $(TARGET)
+
+# 依赖关系
+main.o: main.c utils.h
+utils.o: utils.c utils.h
+
+# 清理目标文件和可执行文件
+clean:
+    rm -f $(OBJS) $(TARGET)</code></pre>
+<h4 id="5makefileam">5、Makefile.am示例<a class="headerlink" href="#5makefileam" title="Permanent link">&para;</a></h4>
+<ul>
+<li><em>我的疑问在于，makefile.am需要人工编写吗？</em> 【<strong>需要手动编写</strong>】</li>
+</ul>
+<pre class="highlight"><code class="language-txt"># 设置要生成的可执行文件名称
+bin_PROGRAMS = myprogram
+
+# 定义要编译的源代码文件
+myprogram_SOURCES = main.c utils.c
+
+# 定义要链接的库文件
+myprogram_LDADD = -lm
+
+# 清理规则
+clean:
+    rm -f $(bin_PROGRAMS)</code></pre>
+<h3 id="_1">四、其它构建工具<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<h4 id="meson"><a href="https://mesonbuild.com/">meson</a><a class="headerlink" href="#meson" title="Permanent link">&para;</a></h4>
+<h3 id="_2">最后<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>除了自动生成Makefile文件外，自己手写Makefile的语法结构介绍了，里面有个<strong>命令</strong>是个盲目，下一篇准备说一下这个<code>gcc</code>命令以及它的参数</li>
+</ul>
+<h4 id="_3">感悟<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
+<ul>
+<li>1、AI生成的吧，有点不对，但内容还是比我强太多了，<em>我只是整理其逻辑性，发现不对的地方</em></li>
+<li>2、有些人会用，<strong>也许，不是说特意去学它，而是项目中见多了，然后搜一下，多重反复</strong>，（这是不是跟搞古董的<strong>马未都</strong>一样，他们也许没说真正去学过瓷器或其它啥的，就是见多了）</li>
+</ul>
+<h4 id="_4">履历<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
+<ul>
+<li>0.1版，init<ul>
+<li>2024-01-04花了2个cubi整理了一下，中间跟AI碰撞了好几回，ubuntu环境不在，准备找个环境练个手后再更新</li>
+</ul>
+</li>
+<li>0.2版，update01（2024-01-05）<ul>
+<li>1、rule里的，<strong>前置条件</strong>（prerequisites）和<strong>依赖</strong> 搞混了，重新修正下，官网语法规则写的是prerequisites</li>
+<li>2、添加了“Makefile”节的中的“3、看内核的例子、4、自己生活场景中的问题”，调整了“makefile”下目录结构，并追加了2.3和2.4的内容</li>
+<li>3、添加了“CMakeLists.txt”中“4、CMakelists.txt实践”，主要是用来构建静态库、动态库，以及“5、在多文件夹中的应用”</li>
+</ul>
+</li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '../../..';</script>
+    <script src="../../../js/theme_extra.js" defer></script>
+    <script src="../../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

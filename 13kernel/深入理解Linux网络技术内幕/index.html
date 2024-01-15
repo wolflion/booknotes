@@ -235,9 +235,107 @@
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#41">4.1、使用通知链的原因</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#42">4.2、概论</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#43">4.3、定义链</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#44">4.4、链注册</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#45">4.5、链上的通知事件</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#46">4.6、网络子系统的通知链</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#_1">包裹函数</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#_2">范例</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#47proc">4.7、通过/proc文件系统的调整</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#48">4.8、本章涉及的函数和变量</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#49">4.9、本章涉及的文件和目录</a>
+    </li>
         </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#chap5">chap5、网络设备初始化</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#51">5.1、系统初始化概论</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#52">5.2、设备注册和初始化</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#53nic">5.3、NIC初始化的基本目标</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#54">5.4、设备与内核之间的交互</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#55">5.5、初始化选项</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#56">5.6、模块选项</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#57net_dev_init">5.7、设备处理层初始化：net_dev_init</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#58">5.8、用户空间辅助程序</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#59">5.9、虚拟设备</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#510proc">5.10、通过/proc文件系统调整</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#511">5.11、本章涉及的函数的变量</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#512">5.12、本章涉及的文件和目录</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap6pci">chap6、PCI层和网络接口卡</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#61">6.1、本章涉及的数据结构</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#62pci-nic">6.2、PCI NIC设备驱动程序的注册</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#63">6.3、电源管理和网络唤醒</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#64pci-nic">6.4、PCI NIC驱动程序注册范例</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#65">6.5、大蓝图</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#66proc">6.6、通过/proc文件系统调整</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#67">6.7、本章涉及的函数的变量</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#68">6.8、本章涉及的文件和目录</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap7">chap7、组件初始化的内核基础架构</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#71">7.1、引导期间的内核选项</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#72">7.2、模块初始化代码</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#73">7.3、优化宏卷标</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#74">7.4、内存最优化</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#75proc">7.5、通过/proc文件系统调整</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#76">7.6、本章涉及的函数和变量</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#77">7.7、本章涉及的文件和目录</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap8">chap8、设备注册和初始化</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#81">8.1、设备注册之时</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#82">8.2、设备除名之时</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#83net_device">8.3、分配net_device结构</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#84nic">8.4、NIC注册和除名的架构</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#chap9">chap9、中断和网络驱动程序</a>
         <ul>
@@ -509,9 +607,129 @@
     </li>
         </ul>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap26">chap26、邻居子系统：概念</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#261">26.1、邻居是什么？</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#262">26.2、需要邻居协议的原因</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#2621l3l2">26.2.1、L3地址何时需要被转换为L2地址</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#2622">26.2.2、共享介质</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#2623">26.2.3、为何没有足够的静态地址</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#2624">26.2.4、特殊情况</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#2625solicitation">26.2.5、Solicitation请求和应答</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#263linux">26.3、Linux实现</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#2631">26.3.1、邻居协议</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#264">26.4、邻居协议代理</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#2641">26.4.1、使用代理的条件</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#265solicitation">26.5、何时发送和处理Solicitation请求</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#266nud">26.6、邻居状态和网络不可到达性探测（NUD）</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#2661">26.6.1、可到达性</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#2662nud">26.6.2、NUD状态之间的转换</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#2663">26.6.3、可到达性确认</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap27">chap27、邻居子系统：基础结构</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap28arp">chap28、邻居子系统：地址解析协议（ARP）</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#281arp">28.1、ARP封包格式</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#2811arp">28.1.1、ARP封包中的目的地址类型</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#282arp">28.2、ARP事务范例</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#283arp">28.3、无端ARP</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#2831l2">28.3.1、L2地址发生变化</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#2832">28.3.2、重复地址检测</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#2833ip">28.3.3、虚拟IP</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#284">28.4、多个网络接口的应答</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#285arp">28.5、调整ARP选项</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#286arp">28.6、初始化ARP协议</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#2861arp_tbl">28.6.1、arp_tbl表</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#287neighbour">28.7、初始化neighbour结构</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#2871">28.7.1、基本的初始化顺序</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#2881arparp_send">28.8.1、发送ARP包：arp_send的介绍</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#289arp">28.9、处理入口ARP封包</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#2891">28.9.1、普通处理的初始化</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#2892arpop_request">28.9.2、处理ARPOP_REQUEST封包</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#2893arpop_reply">28.9.3、处理ARPOP_REPLY封包</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#2894">28.9.4、普通处理的结尾</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2810arp">28.10、ARP代理</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#28102arp">28.10.2、ARP代理服务器作为路由器</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2811">28.11、实例</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2812">28.12、外部事件</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2813arpd">28.13、ARPD</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2814rarp">28.14、逆向地址解析协议（RARP）</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2815ndipv6arpipv4">28.15、ND（IPv6）对ARP（IPv4）的改进</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap29">chap29、邻居子系统：其他问题</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#291">29.1、邻居的系统管理</a>
+    </li>
+        </ul>
+    </li>
     </ul>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../Linux%E5%86%85%E6%A0%B8%E6%BA%90%E4%BB%A3%E7%A0%81%E5%89%96%E6%9E%90-tcpip%E5%AE%9E%E7%8E%B0/">《Linux内核源代码剖析-TCP/IP实现》</a>
+                  <li class="toctree-l1"><a class="" href="../Linux内核源代码剖析-tcpip实现.md">《Linux内核源代码剖析-TCP/IP实现》</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E5%86%85%E6%A0%B8/">《深入理解Linux内核》</a>
                   </li>
@@ -533,9 +751,9 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/">《剑指offer专项突破》</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../96output/OD%E5%9F%BA%E7%A1%80%E9%A2%98/">OD基础题</a>
+                  <li class="toctree-l1"><a class="" href="../../96output/OD基础题.md">OD基础题</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../96output/OD%E8%BF%9B%E9%98%B6%E9%A2%98/">OD进阶题</a>
+                  <li class="toctree-l1"><a class="" href="../../96output/OD进阶题.md">OD进阶题</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">网课</span></p>
@@ -768,15 +986,121 @@
 <h4 id="35">3.5、配置改变串行化<a class="headerlink" href="#35" title="Permanent link">&para;</a></h4>
 <h3 id="chap4">chap4、通知链<a class="headerlink" href="#chap4" title="Permanent link">&para;</a></h3>
 <h4 id="41">4.1、使用通知链的原因<a class="headerlink" href="#41" title="Permanent link">&para;</a></h4>
-<p>4.2、概论</p>
-<p>4.3、定义链</p>
-<p>4.4、链注册</p>
-<p>4.5、链上的通知事件</p>
-<p>4.6、网络子系统的通知链</p>
-<p>4.7、通过/proc文件系统的调整</p>
-<p>4.8、本章涉及的函数和变量</p>
-<p>4.9、本章涉及的文件和目录</p>
+<h4 id="42">4.2、概论<a class="headerlink" href="#42" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>通知链就是一份简单的函数列表</strong></li>
+</ul>
+<ul>
+<li>就每条通知链而言，都有被动端（被通知者）和主动端（通知者），也就是<strong>发布-订阅</strong>（publish-and-subscriber）模型<ul>
+<li>被通知者（notified）就是要求接收某事件的子系统，而且会提供回调函数予以调用</li>
+<li>通知者（notifier）就是感受到一个事件并调用回呼函数的子系统</li>
+</ul>
+</li>
+</ul>
+<h4 id="43">4.3、定义链<a class="headerlink" href="#43" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>struct notifer_block{};</code></li>
+</ul>
+<h4 id="44">4.4、链注册<a class="headerlink" href="#44" title="Permanent link">&para;</a></h4>
+<ul>
+<li>notifier_chain_register + 包裹函数</li>
+<li>notifer_chain_unregister + 包裹函数</li>
+<li>notifer_call_chain</li>
+<li><strong>对通知链的访问受到notifier_lock锁的保护</strong>。</li>
+</ul>
+<h4 id="45">4.5、链上的通知事件<a class="headerlink" href="#45" title="Permanent link">&para;</a></h4>
+<h4 id="46">4.6、网络子系统的通知链<a class="headerlink" href="#46" title="Permanent link">&para;</a></h4>
+<ul>
+<li>定义了至少10种，主要有<ul>
+<li>inetaddr_chain，<strong>本地接口上的IPv4地址的插入、删除以及变更</strong>的通知信息</li>
+<li>netdev_chain，<strong>网络设备注册状态</strong>的通知信息</li>
+</ul>
+</li>
+</ul>
+<h5 id="_1">包裹函数<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h5>
+<ul>
+<li>大多数通知链都有一组包裹函数，可以用于注册和删除</li>
+</ul>
+<h5 id="_2">范例<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h5>
+<h4 id="47proc">4.7、通过/proc文件系统的调整<a class="headerlink" href="#47proc" title="Permanent link">&para;</a></h4>
+<h4 id="48">4.8、本章涉及的函数和变量<a class="headerlink" href="#48" title="Permanent link">&para;</a></h4>
+<ul>
+<li>函数和宏<ul>
+<li>前2个是 注册和删除回调处理程序， 第3个是  送出特定种类事件的所有通知信息</li>
+<li>notifier_chain_register + 包裹函数</li>
+<li>notifer_chain_unregister + 包裹函数</li>
+<li>notifer_call_chain</li>
+</ul>
+</li>
+<li>数据结构<ul>
+<li>struct notifier_block</li>
+</ul>
+</li>
+</ul>
+<h4 id="49">4.9、本章涉及的文件和目录<a class="headerlink" href="#49" title="Permanent link">&para;</a></h4>
+<ul>
+<li>usr/src/linux<ul>
+<li>net<ul>
+<li>/core/dev.c</li>
+<li>/ipv4/devinet.c</li>
+</ul>
+</li>
+<li>kernel/sys.c</li>
+<li>include/linux/netfilter.h</li>
+</ul>
+</li>
+</ul>
 <h3 id="chap5">chap5、网络设备初始化<a class="headerlink" href="#chap5" title="Permanent link">&para;</a></h3>
+<h4 id="51">5.1、系统初始化概论<a class="headerlink" href="#51" title="Permanent link">&para;</a></h4>
+<ul>
+<li>各种初始化中，感兴趣的有3个<ul>
+<li>引导期间选项</li>
+<li>中断和定时器</li>
+<li>初始化函数</li>
+</ul>
+</li>
+</ul>
+<h4 id="52">5.2、设备注册和初始化<a class="headerlink" href="#52" title="Permanent link">&para;</a></h4>
+<ul>
+<li>初始化的阶段<ul>
+<li>硬件初始化</li>
+<li>软件初始化</li>
+<li>功能初始化</li>
+</ul>
+</li>
+</ul>
+<h4 id="53nic">5.3、NIC初始化的基本目标<a class="headerlink" href="#53nic" title="Permanent link">&para;</a></h4>
+<h4 id="54">5.4、设备与内核之间的交互<a class="headerlink" href="#54" title="Permanent link">&para;</a></h4>
+<h4 id="55">5.5、初始化选项<a class="headerlink" href="#55" title="Permanent link">&para;</a></h4>
+<h4 id="56">5.6、模块选项<a class="headerlink" href="#56" title="Permanent link">&para;</a></h4>
+<h4 id="57net_dev_init">5.7、设备处理层初始化：net_dev_init<a class="headerlink" href="#57net_dev_init" title="Permanent link">&para;</a></h4>
+<h4 id="58">5.8、用户空间辅助程序<a class="headerlink" href="#58" title="Permanent link">&para;</a></h4>
+<h4 id="59">5.9、虚拟设备<a class="headerlink" href="#59" title="Permanent link">&para;</a></h4>
+<h4 id="510proc">5.10、通过/proc文件系统调整<a class="headerlink" href="#510proc" title="Permanent link">&para;</a></h4>
+<h4 id="511">5.11、本章涉及的函数的变量<a class="headerlink" href="#511" title="Permanent link">&para;</a></h4>
+<h4 id="512">5.12、本章涉及的文件和目录<a class="headerlink" href="#512" title="Permanent link">&para;</a></h4>
+<h3 id="chap6pci">chap6、PCI层和网络接口卡<a class="headerlink" href="#chap6pci" title="Permanent link">&para;</a></h3>
+<h4 id="61">6.1、本章涉及的数据结构<a class="headerlink" href="#61" title="Permanent link">&para;</a></h4>
+<h4 id="62pci-nic">6.2、PCI NIC设备驱动程序的注册<a class="headerlink" href="#62pci-nic" title="Permanent link">&para;</a></h4>
+<h4 id="63">6.3、电源管理和网络唤醒<a class="headerlink" href="#63" title="Permanent link">&para;</a></h4>
+<h4 id="64pci-nic">6.4、PCI NIC驱动程序注册范例<a class="headerlink" href="#64pci-nic" title="Permanent link">&para;</a></h4>
+<h4 id="65">6.5、大蓝图<a class="headerlink" href="#65" title="Permanent link">&para;</a></h4>
+<h4 id="66proc">6.6、通过/proc文件系统调整<a class="headerlink" href="#66proc" title="Permanent link">&para;</a></h4>
+<h4 id="67">6.7、本章涉及的函数的变量<a class="headerlink" href="#67" title="Permanent link">&para;</a></h4>
+<h4 id="68">6.8、本章涉及的文件和目录<a class="headerlink" href="#68" title="Permanent link">&para;</a></h4>
+<h3 id="chap7">chap7、组件初始化的内核基础架构<a class="headerlink" href="#chap7" title="Permanent link">&para;</a></h3>
+<h4 id="71">7.1、引导期间的内核选项<a class="headerlink" href="#71" title="Permanent link">&para;</a></h4>
+<h4 id="72">7.2、模块初始化代码<a class="headerlink" href="#72" title="Permanent link">&para;</a></h4>
+<h4 id="73">7.3、优化宏卷标<a class="headerlink" href="#73" title="Permanent link">&para;</a></h4>
+<h4 id="74">7.4、内存最优化<a class="headerlink" href="#74" title="Permanent link">&para;</a></h4>
+<h4 id="75proc">7.5、通过/proc文件系统调整<a class="headerlink" href="#75proc" title="Permanent link">&para;</a></h4>
+<h4 id="76">7.6、本章涉及的函数和变量<a class="headerlink" href="#76" title="Permanent link">&para;</a></h4>
+<h4 id="77">7.7、本章涉及的文件和目录<a class="headerlink" href="#77" title="Permanent link">&para;</a></h4>
+<h3 id="chap8">chap8、设备注册和初始化<a class="headerlink" href="#chap8" title="Permanent link">&para;</a></h3>
+<h4 id="81">8.1、设备注册之时<a class="headerlink" href="#81" title="Permanent link">&para;</a></h4>
+<h4 id="82">8.2、设备除名之时<a class="headerlink" href="#82" title="Permanent link">&para;</a></h4>
+<h4 id="83net_device">8.3、分配net_device结构<a class="headerlink" href="#83net_device" title="Permanent link">&para;</a></h4>
+<h4 id="84nic">8.4、NIC注册和除名的架构<a class="headerlink" href="#84nic" title="Permanent link">&para;</a></h4>
 <h3 id="chap9">chap9、中断和网络驱动程序<a class="headerlink" href="#chap9" title="Permanent link">&para;</a></h3>
 <ul>
 <li><em>lionel，本章讲的是，处理L2层的帧的函数，是由中断事件驱动的</em></li>
@@ -1066,12 +1390,162 @@
 <h4 id="241l4">24.1、可用的L4协议<a class="headerlink" href="#241l4" title="Permanent link">&para;</a></h4>
 <h3 id="chap25icmpv4">chap25、因特网控制消息协议（ICMPv4）<a class="headerlink" href="#chap25icmpv4" title="Permanent link">&para;</a></h3>
 <h4 id="251icmp">25.1、ICMP报头<a class="headerlink" href="#251icmp" title="Permanent link">&para;</a></h4>
+<h3 id="chap26">chap26、邻居子系统：概念<a class="headerlink" href="#chap26" title="Permanent link">&para;</a></h3>
+<ul>
+<li>RFC2461</li>
+</ul>
+<h4 id="261">26.1、邻居是什么？<a class="headerlink" href="#261" title="Permanent link">&para;</a></h4>
+<ul>
+<li>如果一台主机和你的计算机连接在同一个LAN上，那么<strong>它就是你的邻居（neighbor）</strong>，而且它有相同的L3网络配置。<ul>
+<li>另一个定义是，<strong>一台主机到其邻居必须有且仅一个L3跃点，并且它的L3路由表必须提供可以直接和其邻居通信的一条路径</strong>。【<em>简单的说，没有借助网关和路由器</em>】</li>
+</ul>
+</li>
+</ul>
+<h4 id="262">26.2、需要邻居协议的原因<a class="headerlink" href="#262" title="Permanent link">&para;</a></h4>
+<h5 id="2621l3l2">26.2.1、L3地址何时需要被转换为L2地址<a class="headerlink" href="#2621l3l2" title="Permanent link">&para;</a></h5>
+<ul>
+<li>2层（Ethernet、802.11无线、点对点连接），3层（IP），<strong>3层协议传输数据时，不必关心使用哪种物理介质</strong></li>
+</ul>
+<h5 id="2622">26.2.2、共享介质<a class="headerlink" href="#2622" title="Permanent link">&para;</a></h5>
+<ul>
+<li>在共享介质中，任一主机发出的任何帧都会被直接连接到该介质上的所有主机收到。</li>
+<li>在共享介质中使用的链路层协议<strong>需要定义一种寻址机制</strong>，以便发送方可以指定每个帧的接收方，接受方也可以识别发送方。</li>
+<li>CSMA/CD</li>
+</ul>
+<h5 id="2623">26.2.3、为何没有足够的静态地址<a class="headerlink" href="#2623" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>L2地址是绑定到NIC上的</strong>，L3地址可以分配给任一物理接口</li>
+</ul>
+<h5 id="2624">26.2.4、特殊情况<a class="headerlink" href="#2624" title="Permanent link">&para;</a></h5>
+<ul>
+<li>有些时候L3地址到L2地址的映射不需要任何协议就能完成<ul>
+<li>仅有一台主机就能把数据发送到点对点介质上</li>
+</ul>
+</li>
+</ul>
+<h5 id="2625solicitation">26.2.5、Solicitation请求和应答<a class="headerlink" href="#2625solicitation" title="Permanent link">&para;</a></h5>
+<ul>
+<li>Solicitation请求</li>
+<li>Solicitation应答</li>
+</ul>
+<h4 id="263linux">26.3、Linux实现<a class="headerlink" href="#263linux" title="Permanent link">&para;</a></h4>
+<ul>
+<li><em>大蓝图，lionel，自己要理解一下</em></li>
+</ul>
+<h5 id="2631">26.3.1、邻居协议<a class="headerlink" href="#2631" title="Permanent link">&para;</a></h5>
+<ul>
+<li>2个邻居协议<ul>
+<li>IPv4中的ARP协议</li>
+<li>IPv6中的（Neighbor Discovery）ND</li>
+</ul>
+</li>
+<li>为了减少系统开销和所有邻居协议使用的相似服务间的代码重复，Linux提供了<strong>通用基础结构</strong>，服务有：<ul>
+<li>1、为每个协议提供一个缓存来存放L3到L2转换的结果</li>
+<li>2、</li>
+<li>3、</li>
+<li>4、</li>
+<li>5、</li>
+</ul>
+</li>
+</ul>
+<h4 id="264">26.4、邻居协议代理<a class="headerlink" href="#264" title="Permanent link">&para;</a></h4>
+<ul>
+<li>若一台主机将发往另一台的主机流量拦截下来，并且代替后者处理这些流量，那么<strong>这台主机就是一个代理</strong>。</li>
+<li>如果主机和应用程序不需要精确配置成从代理提供的服务获益，这种代理称为<strong>透明代理</strong></li>
+</ul>
+<h5 id="2641">26.4.1、使用代理的条件<a class="headerlink" href="#2641" title="Permanent link">&para;</a></h5>
+<h4 id="265solicitation">26.5、何时发送和处理Solicitation请求<a class="headerlink" href="#265solicitation" title="Permanent link">&para;</a></h4>
+<h4 id="266nud">26.6、邻居状态和网络不可到达性探测（NUD）<a class="headerlink" href="#266nud" title="Permanent link">&para;</a></h4>
+<h5 id="2661">26.6.1、可到达性<a class="headerlink" href="#2661" title="Permanent link">&para;</a></h5>
+<h5 id="2662nud">26.6.2、NUD状态之间的转换<a class="headerlink" href="#2662nud" title="Permanent link">&para;</a></h5>
+<ul>
+<li>基础状态</li>
+<li>派生状态</li>
+<li>初态</li>
+</ul>
+<h5 id="2663">26.6.3、可到达性确认<a class="headerlink" href="#2663" title="Permanent link">&para;</a></h5>
+<h3 id="chap27">chap27、邻居子系统：基础结构<a class="headerlink" href="#chap27" title="Permanent link">&para;</a></h3>
+<p>27.1、主要的数据结构</p>
+<p>27.2、L3协议和邻居协议间的通用接口</p>
+<p>27.3、邻居基础结构的一般任务</p>
+<p>27.4、邻居结构的引用计数</p>
+<p>27.5、创建一个邻居项</p>
+<p>27.6、删除邻居</p>
+<p>27.7、担任代理</p>
+<p>27.8、L2帧头缓存</p>
+<p>27.9、协议初始化和清理</p>
+<p>27.10、与其他子系统的交互</p>
+<p>27.11、邻居协议和L3传输函数的交互</p>
+<p>27.12、排队</p>
+<p>27.13、入口排列</p>
+<h3 id="chap28arp">chap28、邻居子系统：地址解析协议（ARP）<a class="headerlink" href="#chap28arp" title="Permanent link">&para;</a></h3>
+<h4 id="281arp">28.1、ARP封包格式<a class="headerlink" href="#281arp" title="Permanent link">&para;</a></h4>
+<h5 id="2811arp">28.1.1、ARP封包中的目的地址类型<a class="headerlink" href="#2811arp" title="Permanent link">&para;</a></h5>
+<ul>
+<li>ARP对每个类型的处理<ul>
+<li>单播（Unicast）</li>
+<li>广播（Broadcast）</li>
+<li>多播（Multicast）</li>
+</ul>
+</li>
+</ul>
+<h4 id="282arp">28.2、ARP事务范例<a class="headerlink" href="#282arp" title="Permanent link">&para;</a></h4>
+<h4 id="283arp">28.3、无端ARP<a class="headerlink" href="#283arp" title="Permanent link">&para;</a></h4>
+<h5 id="2831l2">28.3.1、L2地址发生变化<a class="headerlink" href="#2831l2" title="Permanent link">&para;</a></h5>
+<h5 id="2832">28.3.2、重复地址检测<a class="headerlink" href="#2832" title="Permanent link">&para;</a></h5>
+<h5 id="2833ip">28.3.3、虚拟IP<a class="headerlink" href="#2833ip" title="Permanent link">&para;</a></h5>
+<h4 id="284">28.4、多个网络接口的应答<a class="headerlink" href="#284" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Linux有个不同寻常的设计，<strong>它认为一个IP地址属于一个主机，而不是属于一个接口</strong>，尽管IP地址是绑定在特定接口上的</li>
+</ul>
+<h4 id="285arp">28.5、调整ARP选项<a class="headerlink" href="#285arp" title="Permanent link">&para;</a></h4>
+<p>28.5.1、编译选项</p>
+<p>28.5.2、/proc选项</p>
+<h4 id="286arp">28.6、初始化ARP协议<a class="headerlink" href="#286arp" title="Permanent link">&para;</a></h4>
+<h5 id="2861arp_tbl">28.6.1、arp_tbl表<a class="headerlink" href="#2861arp_tbl" title="Permanent link">&para;</a></h5>
+<h4 id="287neighbour">28.7、初始化neighbour结构<a class="headerlink" href="#287neighbour" title="Permanent link">&para;</a></h4>
+<h5 id="2871">28.7.1、基本的初始化顺序<a class="headerlink" href="#2871" title="Permanent link">&para;</a></h5>
+<p>28.8、传输和接收ARP封包</p>
+<ul>
+<li>arp_send</li>
+<li>arp_rcv</li>
+</ul>
+<h5 id="2881arparp_send">28.8.1、发送ARP包：arp_send的介绍<a class="headerlink" href="#2881arparp_send" title="Permanent link">&para;</a></h5>
+<h4 id="289arp">28.9、处理入口ARP封包<a class="headerlink" href="#289arp" title="Permanent link">&para;</a></h4>
+<h5 id="2891">28.9.1、普通处理的初始化<a class="headerlink" href="#2891" title="Permanent link">&para;</a></h5>
+<h5 id="2892arpop_request">28.9.2、处理ARPOP_REQUEST封包<a class="headerlink" href="#2892arpop_request" title="Permanent link">&para;</a></h5>
+<h5 id="2893arpop_reply">28.9.3、处理ARPOP_REPLY封包<a class="headerlink" href="#2893arpop_reply" title="Permanent link">&para;</a></h5>
+<h5 id="2894">28.9.4、普通处理的结尾<a class="headerlink" href="#2894" title="Permanent link">&para;</a></h5>
+<h4 id="2810arp">28.10、ARP代理<a class="headerlink" href="#2810arp" title="Permanent link">&para;</a></h4>
+<p>28.10.1、目的NAT（DNAT）</p>
+<h5 id="28102arp">28.10.2、ARP代理服务器作为路由器<a class="headerlink" href="#28102arp" title="Permanent link">&para;</a></h5>
+<h4 id="2811">28.11、实例<a class="headerlink" href="#2811" title="Permanent link">&para;</a></h4>
+<h4 id="2812">28.12、外部事件<a class="headerlink" href="#2812" title="Permanent link">&para;</a></h4>
+<p>28.12.1、收到的事件</p>
+<p>28.12.2、产生的事件</p>
+<p>28.12.3、网络唤醒（Wake-on-LAN）事件</p>
+<h4 id="2813arpd">28.13、ARPD<a class="headerlink" href="#2813arpd" title="Permanent link">&para;</a></h4>
+<p>28.13.1、内核方面</p>
+<p>28.13.2、用户空间方面</p>
+<h4 id="2814rarp">28.14、逆向地址解析协议（RARP）<a class="headerlink" href="#2814rarp" title="Permanent link">&para;</a></h4>
+<h4 id="2815ndipv6arpipv4">28.15、ND（IPv6）对ARP（IPv4）的改进<a class="headerlink" href="#2815ndipv6arpipv4" title="Permanent link">&para;</a></h4>
+<ul>
+<li>ND的一些改进<ul>
+<li>1、ND是ICMPv6提供的函数。ICMPv6是一个强大的覆盖了ICMPv4、ARP和其他功能的协议</li>
+</ul>
+</li>
+</ul>
+<h3 id="chap29">chap29、邻居子系统：其他问题<a class="headerlink" href="#chap29" title="Permanent link">&para;</a></h3>
+<h4 id="291">29.1、邻居的系统管理<a class="headerlink" href="#291" title="Permanent link">&para;</a></h4>
+<p>29.2、使用/proc文件系统调整邻居性能</p>
+<p>29.3、本部分涉及的数据结构</p>
+<p>29.4、本部分涉及的文件和目录</p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
         <a href="../%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" class="btn btn-neutral float-left" title="《深入理解Linux虚拟内存管理》"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../Linux%E5%86%85%E6%A0%B8%E6%BA%90%E4%BB%A3%E7%A0%81%E5%89%96%E6%9E%90-tcpip%E5%AE%9E%E7%8E%B0/" class="btn btn-neutral float-right" title="《Linux内核源代码剖析-TCP/IP实现》">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E5%86%85%E6%A0%B8/" class="btn btn-neutral float-right" title="《深入理解Linux内核》">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -1097,7 +1571,7 @@
       <span><a href="../%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../Linux%E5%86%85%E6%A0%B8%E6%BA%90%E4%BB%A3%E7%A0%81%E5%89%96%E6%9E%90-tcpip%E5%AE%9E%E7%8E%B0/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E5%86%85%E6%A0%B8/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

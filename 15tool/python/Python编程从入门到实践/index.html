@@ -149,7 +149,7 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《深入理解Linux网络技术内幕》</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../../13kernel/Linux%E5%86%85%E6%A0%B8%E6%BA%90%E4%BB%A3%E7%A0%81%E5%89%96%E6%9E%90-tcpip%E5%AE%9E%E7%8E%B0/">《Linux内核源代码剖析-TCP/IP实现》</a>
+                  <li class="toctree-l1"><a class="" href="../../../13kernel/Linux内核源代码剖析-tcpip实现.md">《Linux内核源代码剖析-TCP/IP实现》</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E5%86%85%E6%A0%B8/">《深入理解Linux内核》</a>
                   </li>
@@ -418,6 +418,10 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#92">9.2、使用类和实例</a>
         <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#921car">9.2.1、Car类</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#922">9.2.2、给属性指定默认值</a>
+    </li>
     <li class="toctree-l4"><a class="reference internal" href="#923">9.2.3、修改属性的值</a>
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#_12">练习</a>
@@ -428,7 +432,45 @@
         <ul>
     <li class="toctree-l4"><a class="reference internal" href="#931__init__">9.3.1、子类的方法__init__()</a>
     </li>
+    <li class="toctree-l4"><a class="reference internal" href="#932python-27">9.3.2、Python 2.7中的继承</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#933">9.3.3、给子类定义属性和方法</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#934">9.3.4、重写父类的方法</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#935">9.3.5、将实例用作属性</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#936">9.3.6、模拟实物</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#_13">练习</a>
+    </li>
         </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#94">9.4、导入类</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#941">9.4.1、导入单类</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#942">9.4.2、在一个模块中存储多个类</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#943">9.4.3、从一个模块中导入多个类</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#944">9.4.4、导入整个模块</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#945">9.4.5、导入模块中的所有类</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#946">9.4.6、在一个模块中导入另一个模块</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#947">9.4.7、自定义工作流程</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#95python">9.5、Python标准库</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#_14">练习</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#96">9.6、类编码风格</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#97">9.7、小结</a>
     </li>
@@ -443,10 +485,48 @@
         </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#chap11">chap11、测试代码</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#111">11.1、测试函数</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1111">11.1.1、单元测试和单元用例</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1112">11.1.2、可通过的测试</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1113">11.1.3、不能通过的测试</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1114">11.1.4、测试未通过时怎么办</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1115">11.1.5、添加新测试</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#_15">练习</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#112">11.2、测试类</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1121">11.2.1、各种断言方法</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1122">11.2.2、一个要测试的类</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1123anonymoussurvey">11.2.3、测试AnonymousSurvey类</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1124setup">11.2.4、方法setUp()</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#113">11.3、小结</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#chap15">chap15、生成数据</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#152">15.2、绘制简单的折线图</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_16">最后</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#_17">履历</a>
     </li>
         </ul>
     </li>
@@ -459,9 +539,9 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../../91leetcode/%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/">《剑指offer专项突破》</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../../96output/OD%E5%9F%BA%E7%A1%80%E9%A2%98/">OD基础题</a>
+                  <li class="toctree-l1"><a class="" href="../../../96output/OD基础题.md">OD基础题</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../../96output/OD%E8%BF%9B%E9%98%B6%E9%A2%98/">OD进阶题</a>
+                  <li class="toctree-l1"><a class="" href="../../../96output/OD进阶题.md">OD进阶题</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">网课</span></p>
@@ -522,6 +602,8 @@
 </ul>
 </li>
 <li>2、可以使用<code>[-1]</code>作为下标，<em>自己要多记一下</em></li>
+<li>3、<code>class ElectricCar(Car):</code>，表示<strong>继承</strong>，电动汽车，继承，汽车类</li>
+<li>4、导入Car类，<code>from car import Car</code>，<strong>前面的小写car是car.py文件，后面的Car类表示是文件中的Car类</strong></li>
 </ul>
 <h3 id="1">1、其它地方看到的补序<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
 <ul>
@@ -879,6 +961,13 @@ greet_user()</code></pre>
 <h5 id="911dog">9.1.1、创建Dog类<a class="headerlink" href="#911dog" title="Permanent link">&para;</a></h5>
 <ul>
 <li><em>类里定义成员函数时，也是要加<code>def</code>的，lionel</em></li>
+<li>方法<code>__init__</code><ul>
+<li>是个<strong>特殊的方法</strong>，每当你根据Dog类创建新实例时，Python都会自动运行它</li>
+<li>本例中有3个<strong>形参</strong>，<strong>self形参必不可少，还必然在最前面</strong>（因为创建实例时，会自动传入实参self）</li>
+<li><strong>每个与类相关联的方法调用都自动传递实参self，它是一个指向实例本身的引用，让实例能够访问类中的属性和方法</strong></li>
+<li><code>self.name</code>表示，<strong>以self为前缀的变量都可供类中的所有方法使用</strong></li>
+</ul>
+</li>
 </ul>
 <pre class="highlight"><code class="language-python">class Dog():
     def __init__(self, name, age):
@@ -888,6 +977,12 @@ greet_user()</code></pre>
         print()
     def roll_ower(self):
         print()</code></pre>
+<ul>
+<li>在Python2.7中创建类<ul>
+<li><em>暂时不学吧</em></li>
+</ul>
+</li>
+</ul>
 <h5 id="912">9.1.2、根据类创建实例<a class="headerlink" href="#912" title="Permanent link">&para;</a></h5>
 <ul>
 <li><code>my_dog = Dog('Willie', 6)</code></li>
@@ -902,7 +997,11 @@ greet_user()</code></pre>
 <li>9-3</li>
 </ul>
 <h4 id="92">9.2、使用类和实例<a class="headerlink" href="#92" title="Permanent link">&para;</a></h4>
-<p>9.2.2、给属性指定默认值</p>
+<h5 id="921car">9.2.1、Car类<a class="headerlink" href="#921car" title="Permanent link">&para;</a></h5>
+<ul>
+<li>car.py</li>
+</ul>
+<h5 id="922">9.2.2、给属性指定默认值<a class="headerlink" href="#922" title="Permanent link">&para;</a></h5>
 <h5 id="923">9.2.3、修改属性的值<a class="headerlink" href="#923" title="Permanent link">&para;</a></h5>
 <ul>
 <li>1、直接修改属性的值</li>
@@ -917,13 +1016,80 @@ greet_user()</code></pre>
 <h4 id="93">9.3、继承<a class="headerlink" href="#93" title="Permanent link">&para;</a></h4>
 <h5 id="931__init__">9.3.1、子类的方法<code>__init__()</code><a class="headerlink" href="#931__init__" title="Permanent link">&para;</a></h5>
 <ul>
+<li>electric_car.py<ul>
+<li><strong>定义子类时，必须在括号内指定父类名称</strong></li>
+<li><code>class ElectricCar(Car):</code>，表示<strong>继承</strong>，电动汽车，继承，汽车类</li>
+<li>子类的<code>__init__</code>中的<code>super().__init__()</code>，<strong>super()是个特殊函数，帮助Python将父类和子类关联起来</strong></li>
+</ul>
+</li>
+</ul>
+<ul>
 <li><em>这个要具体看下代码</em></li>
 </ul>
-<p>9.3.2、Python 2.7中的继承</p>
-<p>9.3.6、模拟实物</p>
-<p>9.4、导入类</p>
-<p>9.5、Python标准库</p>
-<p>9.6、类编码风格</p>
+<h5 id="932python-27">9.3.2、Python 2.7中的继承<a class="headerlink" href="#932python-27" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>super()</code>中<strong>有2个实参</strong></li>
+</ul>
+<h5 id="933">9.3.3、给子类定义属性和方法<a class="headerlink" href="#933" title="Permanent link">&para;</a></h5>
+<h5 id="934">9.3.4、重写父类的方法<a class="headerlink" href="#934" title="Permanent link">&para;</a></h5>
+<ul>
+<li>要与重写的父类方法同名</li>
+</ul>
+<h5 id="935">9.3.5、将实例用作属性<a class="headerlink" href="#935" title="Permanent link">&para;</a></h5>
+<ul>
+<li>抽象出一个<strong>电池类</strong></li>
+</ul>
+<h5 id="936">9.3.6、模拟实物<a class="headerlink" href="#936" title="Permanent link">&para;</a></h5>
+<h5 id="_13">练习<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h5>
+<ul>
+<li>9-6冰淇淋小店</li>
+<li>9-7管理员</li>
+<li>9-8权限</li>
+<li>9-9 电瓶升级</li>
+</ul>
+<h4 id="94">9.4、导入类<a class="headerlink" href="#94" title="Permanent link">&para;</a></h4>
+<h5 id="941">9.4.1、导入单类<a class="headerlink" href="#941" title="Permanent link">&para;</a></h5>
+<ul>
+<li>my_car.py<ul>
+<li>导入Car类，<code>from car import Car</code>，<strong>前面的小写car是car.py文件，后面的Car类表示是文件中的Car类</strong></li>
+</ul>
+</li>
+</ul>
+<h5 id="942">9.4.2、在一个模块中存储多个类<a class="headerlink" href="#942" title="Permanent link">&para;</a></h5>
+<h5 id="943">9.4.3、从一个模块中导入多个类<a class="headerlink" href="#943" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>from car import Car,ElectricCar</code></li>
+</ul>
+<h5 id="944">9.4.4、导入整个模块<a class="headerlink" href="#944" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>import car</code></li>
+</ul>
+<h5 id="945">9.4.5、导入模块中的所有类<a class="headerlink" href="#945" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>from module_name import *</code><ul>
+<li><em>是不是9.4.4的作用一样？lionel</em></li>
+</ul>
+</li>
+<li><strong>不推荐这种导入方式</strong><ul>
+<li>1、这种方法没法明确导入了哪些类</li>
+<li>2、需要导入多个类时，最好导入整个模块</li>
+</ul>
+</li>
+</ul>
+<h5 id="946">9.4.6、在一个模块中导入另一个模块<a class="headerlink" href="#946" title="Permanent link">&para;</a></h5>
+<h5 id="947">9.4.7、自定义工作流程<a class="headerlink" href="#947" title="Permanent link">&para;</a></h5>
+<h4 id="95python">9.5、Python标准库<a class="headerlink" href="#95python" title="Permanent link">&para;</a></h4>
+<h5 id="_14">练习<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h5>
+<ul>
+<li>9-13 </li>
+<li>9-15</li>
+</ul>
+<h4 id="96">9.6、类编码风格<a class="headerlink" href="#96" title="Permanent link">&para;</a></h4>
+<ul>
+<li>驼峰命令</li>
+<li>每个类，紧跟在类定义后面包含一个文档字符串</li>
+<li>先导入标准库模块的import语句，再导入自己编写的</li>
+</ul>
 <h4 id="97">9.7、小结<a class="headerlink" href="#97" title="Permanent link">&para;</a></h4>
 <h3 id="chap10">chap10、文件和异常<a class="headerlink" href="#chap10" title="Permanent link">&para;</a></h3>
 <h4 id="101">10.1、从文件中读取数据<a class="headerlink" href="#101" title="Permanent link">&para;</a></h4>
@@ -932,14 +1098,58 @@ greet_user()</code></pre>
 <p>10.4、存储数据</p>
 <p>10.5、小结</p>
 <h3 id="chap11">chap11、测试代码<a class="headerlink" href="#chap11" title="Permanent link">&para;</a></h3>
-<p>11.1、测试函数</p>
-<p>11.2、测试类</p>
-<p>11.3、小结</p>
+<h4 id="111">11.1、测试函数<a class="headerlink" href="#111" title="Permanent link">&para;</a></h4>
+<ul>
+<li>name_function.py</li>
+<li>names.py</li>
+</ul>
+<h5 id="1111">11.1.1、单元测试和单元用例<a class="headerlink" href="#1111" title="Permanent link">&para;</a></h5>
+<ul>
+<li>unittest模块</li>
+</ul>
+<h5 id="1112">11.1.2、可通过的测试<a class="headerlink" href="#1112" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>import unittest</code></li>
+<li><code>self.assertEqual()</code></li>
+</ul>
+<h5 id="1113">11.1.3、不能通过的测试<a class="headerlink" href="#1113" title="Permanent link">&para;</a></h5>
+<h5 id="1114">11.1.4、测试未通过时怎么办<a class="headerlink" href="#1114" title="Permanent link">&para;</a></h5>
+<h5 id="1115">11.1.5、添加新测试<a class="headerlink" href="#1115" title="Permanent link">&para;</a></h5>
+<h5 id="_15">练习<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h5>
+<ul>
+<li>11-1</li>
+<li>11-2</li>
+</ul>
+<h4 id="112">11.2、测试类<a class="headerlink" href="#112" title="Permanent link">&para;</a></h4>
+<h5 id="1121">11.2.1、各种断言方法<a class="headerlink" href="#1121" title="Permanent link">&para;</a></h5>
+<ul>
+<li>assertEqual(a,b)</li>
+<li>assertNotEqual(a,b)</li>
+<li>assertTrue(x)</li>
+<li>assertFalse(x)</li>
+<li>assertIn(item, list)</li>
+<li>assertNotIn(item, list)</li>
+</ul>
+<h5 id="1122">11.2.2、一个要测试的类<a class="headerlink" href="#1122" title="Permanent link">&para;</a></h5>
+<ul>
+<li>survey.py</li>
+</ul>
+<h5 id="1123anonymoussurvey">11.2.3、测试AnonymousSurvey类<a class="headerlink" href="#1123anonymoussurvey" title="Permanent link">&para;</a></h5>
+<ul>
+<li>test_survey.py</li>
+</ul>
+<h5 id="1124setup">11.2.4、方法setUp()<a class="headerlink" href="#1124setup" title="Permanent link">&para;</a></h5>
+<h4 id="113">11.3、小结<a class="headerlink" href="#113" title="Permanent link">&para;</a></h4>
 <h3 id="chap15">chap15、生成数据<a class="headerlink" href="#chap15" title="Permanent link">&para;</a></h3>
 <p>15.1、安装matplotlib</p>
 <h4 id="152">15.2、绘制简单的折线图<a class="headerlink" href="#152" title="Permanent link">&para;</a></h4>
 <p>chap16、下载数据</p>
 <p>chap17、使用API</p>
+<h3 id="_16">最后<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
+<h4 id="_17">履历<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h4>
+<ul>
+<li>12.22把chap09类复习了一下（<em>代码中用到了类</em>）</li>
+</ul>
               
             </div>
           </div><footer>

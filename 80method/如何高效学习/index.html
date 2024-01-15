@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>如何高效学习 - lionel的技术笔记</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "\u5982\u4f55\u9ad8\u6548\u5b66\u4e60";
+        var mkdocs_page_input_path = "80method\\\u5982\u4f55\u9ad8\u6548\u5b66\u4e60.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> lionel的技术笔记
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">简介</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../01daily/">daily</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../02ds/">ds</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../03cpp/">cpp</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../21tool/">tool</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">C++</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../20C%2B%2B/effectiveC%2B%2B/">《Effective C++》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../20C%2B%2B/%E6%B7%B1%E5%BA%A6%E6%8E%A2%E7%B4%A2C%2B%2B%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B/">《深度探索C++对象模型》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/EffectiveSTL/">《Effective STL》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/C%2B%2B%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/">《C++泛型STL原理和应用》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/">《STL源码剖析》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../22C%2B%2Bmodern/%E6%B7%B1%E5%85%A5%E5%BA%94%E7%94%A8C%2B%2B11/">《深入应用C++11》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">基础知识</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA/">《操作系统导论》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E5%A4%A7%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">《大话设计模式》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90_C%2B%2B4th/">《数据结构与算法分析_C++4th》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E7%AE%97%E6%B3%95%284th%29/">《算法4th》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90-%E5%BC%A0%E5%86%9B/">《算法设计与分析-张军》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E5%A4%A9%E8%A1%8C-%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《天行-算法设计与实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%95%99%E7%A8%8B-%E6%9D%8E%E6%98%A5%E8%91%86/">《数据结构教程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%96%B0%E7%BC%96%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%A0%E9%A2%98%E4%B8%8E%E8%A7%A3%E6%9E%90/">《新编数据结构习题与解析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网络编程</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/TCPIP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">《TCP/IP网络编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/">《Linux高性能服务器编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/TCPIP%E8%AF%A6%E8%A7%A3%E5%8D%B71/">《TCPIP详解卷1》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/Linux%E5%86%85%E6%A0%B8%E7%BD%91%E7%BB%9C%E6%A0%88%E6%BA%90%E4%BB%A3%E7%A0%81%E6%83%85%E6%99%AF%E5%88%86%E6%9E%90/">《Linux内核网络栈源代码情景分析》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C/">《深入理解Linux网络》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">机器&深度学习</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../30machineLearning/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%9F%BA%E7%A1%80/">《机器学习线性代数基础》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../31deepLearning/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%85%A5%E9%97%A8%EF%BC%9A%E5%9F%BA%E4%BA%8EPython%E7%9A%84%E7%90%86%E8%AE%BA%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《深度学习入门：基于Python的理论与实现》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">文件系统</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/Linux%E5%86%85%E6%A0%B8%E6%8E%A2%E7%A7%98/">《Linux内核探秘》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《文件系统技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">《存储技术原理分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">存储</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../12storage/ceph%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《ceph设计原理与实现》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">视频</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/FFmpeg%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/">《FFmpeg入门到精通》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/WebRTC%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/">《WebRTC权威指南》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/WebRTC%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AE%9E%E6%97%B6%E4%BA%92%E5%8A%A8%E6%8A%80%E6%9C%AF/">《WebRTC音视频实时互动技术》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/%E6%96%B0%E4%B8%80%E4%BB%A3%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9%E7%A0%81%E6%A0%87%E5%87%86-H.264_AVC/">《新一代视频压缩码标准-H.264_AVC》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">内核</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/Linux%E5%86%85%E6%A0%B8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《Linux内核设计与实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5Linux%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%E5%86%85%E6%A0%B8%E6%9C%BA%E5%88%B6/">《深入Linux设备驱动程序内核机制》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">《深入理解Linux虚拟内存管理》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《深入理解Linux网络技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../13kernel/Linux内核源代码剖析-tcpip实现.md">《Linux内核源代码剖析-TCP/IP实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E5%86%85%E6%A0%B8/">《深入理解Linux内核》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">工具</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/Wireshark%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98/">《Wireshark网络分析实战》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/Linux%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8Eshell%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B%E5%A4%A7%E5%85%A8%283rd%29/">《Linux命令行与shell脚本编程大全(3rd)》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/python%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%883rd%EF%BC%89/">《python程序设计（3rd）》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/python/Python%E7%BC%96%E7%A8%8B%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E8%B7%B5/">《Python编程从入门到实践》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">刷题</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer2nd/">《剑指offer2nd》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/">《剑指offer专项突破》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../96output/OD基础题.md">OD基础题</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../96output/OD进阶题.md">OD进阶题</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网课</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/01Linux%E9%AB%98%E5%B9%B6%E5%8F%91%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/">《Linux高并发网络编程开发》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/%E4%BE%AF%E6%8D%B7/%E4%BE%AF%E6%8D%B7C%2B%2B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%8660%E8%AE%B2/">《侯捷C++内存管理60讲》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/11NJU%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">《NJU算法设计与分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">英语专</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../60English/00794%E7%BB%BC%E5%90%88%E8%8B%B1%E8%AF%AD%E4%B8%80%E4%B8%8A/">《综合英语(一)上》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../95selfStudy/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/">《概率率与数理统计》</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">lionel的技术笔记</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>如何高效学习</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="_1">《如何高效学习》<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<ul>
+<li>2023-12-23开始看，19-34/128，全书计划8个</li>
+</ul>
+<h3 id="part119128">Part1、整体性学习策略（19/128）<a class="headerlink" href="#part119128" title="Permanent link">&para;</a></h3>
+<h4 id="11">1.1、什么是整体性学习<a class="headerlink" href="#11" title="Permanent link">&para;</a></h4>
+<ul>
+<li>与机械记忆相反</li>
+<li>运用你大脑里<strong>已有的丰富的神经元网络吸收、整合信息</strong>，创造信息的网络，一个知识与另一个知识相互关联，那些相互关联的知识网络<strong>使你真正做到对知识的完全理解</strong></li>
+<li>学习任何知识都需要联系（<em>我感觉最开始需要的是理解？lionel，不理解它，怎么去建立联系呢？</em>）</li>
+<li>整体性学习基于三种主要观点<ul>
+<li>结构</li>
+<li>模型</li>
+<li>高速公路</li>
+</ul>
+</li>
+</ul>
+<h4 id="12">1.2、结构<a class="headerlink" href="#12" title="Permanent link">&para;</a></h4>
+<ul>
+<li><em>相当于有了整理知识的脉络？lionel，这个其实也很难</em></li>
+<li><strong>理解</strong>是结构高度发达完善的结果。</li>
+</ul>
+<h4 id="13">1.3、模型<a class="headerlink" href="#13" title="Permanent link">&para;</a></h4>
+<ul>
+<li>以本书举例，<strong>本书的模型</strong>就是目录</li>
+<li>模型并不一定是一张图，但一定是一种压缩形式，它把多个关键思想压至一处。</li>
+</ul>
+<h4 id="14">1.4、熟悉的结构（成熟结构）<a class="headerlink" href="#14" title="Permanent link">&para;</a></h4>
+<ul>
+<li>感知结构<ul>
+<li>图像、声音和情感</li>
+</ul>
+</li>
+<li>关系结构<ul>
+<li>通过故事、人物以及人物之间的相互作用</li>
+</ul>
+</li>
+<li>基础数学结构</li>
+<li>比喻法--结构、模型和高速公路<ul>
+<li><strong>生活经验</strong>是最熟悉的结构，是模型的主要来源</li>
+</ul>
+</li>
+</ul>
+<h4 id="15">1.5、高速公路<a class="headerlink" href="#15" title="Permanent link">&para;</a></h4>
+<ul>
+<li><em>没能理解，lionel</em></li>
+</ul>
+<h4 id="16">1.6、整体性学习的顺序<a class="headerlink" href="#16" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>信息是怎么得来的？</strong></li>
+<li>整体性学习的顺序<ul>
+<li>获取：<strong>进入你的眼睛、耳朵</strong></li>
+<li>理解：<strong>放到上下文中联系</strong></li>
+<li>拓展：<strong>形成联系</strong></li>
+<li>纠错</li>
+<li>应用</li>
+<li>测试</li>
+</ul>
+</li>
+</ul>
+<h4 id="17">1.7、获取阶段<a class="headerlink" href="#17" title="Permanent link">&para;</a></h4>
+<ul>
+<li>获取信息时3个主要目标<ul>
+<li>简化：<strong>无效信息删除</strong></li>
+<li>容量：看得多理解得越快</li>
+<li>速度</li>
+</ul>
+</li>
+</ul>
+<h4 id="18">1.8、理解阶段<a class="headerlink" href="#18" title="Permanent link">&para;</a></h4>
+<ul>
+<li>第一步：<strong>只是记住了公式</strong></li>
+<li>第二步：<strong>知道了公式里每个符号代表的是什么</strong></li>
+<li>第三步：应用，应用得多了也就有可能记住它</li>
+<li><strong>如果不能理解怎么办？</strong>【作者的建议是，<strong>尝试分解为更小的问题，缩小范围，搞清楚真正不理解的地方</strong>】</li>
+</ul>
+<h4 id="19">1.9、拓展阶段<a class="headerlink" href="#19" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>拓展才是整体性学习的真正开始</strong><ul>
+<li>信息的由来？</li>
+<li>与其他信息是怎么联系在一起的</li>
+</ul>
+</li>
+<li><strong>如何去拓展</strong>（以公式为例）<ul>
+<li>1、先去获取，然后理解公式本来的意思</li>
+<li>2、<strong>拓展</strong>，公式是怎么来的？公式中的每个成分代表的真实含义是什么？公式中的什么成分可以做哪些改变？这种改变会导致结果发生什么样的变化？其它公式与这个公式有什么相同之处，又有什么不同之处？</li>
+</ul>
+</li>
+<li>拓展的3种方式<ul>
+<li>深度拓展（知识的背景探究）<ul>
+<li>35/128</li>
+</ul>
+</li>
+<li>横向拓展</li>
+<li>纵向拓展</li>
+</ul>
+</li>
+</ul>
+<h4 id="110">1.10、纠错阶段<a class="headerlink" href="#110" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>纠错的最终途径就是实践</strong></li>
+</ul>
+<h4 id="111">1.11、应用阶段<a class="headerlink" href="#111" title="Permanent link">&para;</a></h4>
+<h4 id="112">1.12、测试阶段<a class="headerlink" href="#112" title="Permanent link">&para;</a></h4>
+<ul>
+<li>获取，我以前看过或听过这个知识吗？</li>
+<li>理解，理解了吗？（至少是字面上的意思）</li>
+<li>拓展，我知道知识从何而来，与哪些知识有关系吗？</li>
+<li>纠错，我删除了那些不恰当的联系吗？我删除了那些错误结论吗？</li>
+<li>应用，我将知识用到实际生活中了吗？</li>
+<li><strong>多线性的，而不是单线性的（不要迷信这五个步骤）</strong>，可以根据自己的习惯来实践</li>
+</ul>
+<h4 id="113">1.13、找出薄弱环节<a class="headerlink" href="#113" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>明确弱点何在</strong>是一项经常性的工作</li>
+<li>42/128</li>
+<li>理解阶段<ul>
+<li>理解不好的表现<ul>
+<li>1、虽然在读书，但不知道作者到底在说什么</li>
+<li>2、笔记写得不错，但你却不明白是啥什么意思</li>
+</ul>
+</li>
+<li><strong>找写得更好、解释得更清楚的材料阅读</strong></li>
+<li><strong>放慢阅读速度，寻找不同的说法</strong></li>
+</ul>
+</li>
+<li>拓展阶段<ul>
+<li><strong>缺少灵活性</strong></li>
+</ul>
+</li>
+<li>纠错阶段<ul>
+<li><strong>错误联系太多</strong></li>
+</ul>
+</li>
+</ul>
+<h4 id="114">1.14、信息结构<a class="headerlink" href="#114" title="Permanent link">&para;</a></h4>
+<ul>
+<li>分为5种信息<ul>
+<li>随意信息</li>
+<li>观点信息</li>
+<li>过程信息</li>
+<li>具体信息</li>
+<li>抽象信息</li>
+</ul>
+</li>
+</ul>
+<h4 id="115">1.15、随意信息<a class="headerlink" href="#115" title="Permanent link">&para;</a></h4>
+<ul>
+<li>指<strong>一系列事实、日期、定义或规则</strong>，缺少逻辑分类</li>
+<li>处理随意信息的方法<ul>
+<li>联想法</li>
+<li>挂钩法</li>
+<li>压缩法</li>
+</ul>
+</li>
+<li>随意信息的难点<ul>
+<li><strong>随意信息如果不进行反复机械记忆，非常容易遗忘</strong></li>
+</ul>
+</li>
+</ul>
+<h4 id="116">1.16、观点信息<a class="headerlink" href="#116" title="Permanent link">&para;</a></h4>
+<ul>
+<li>指<strong>存在争论的信息</strong></li>
+<li>观点信息的难点<ul>
+<li>在于获取阶段，可以采用<strong>速读技巧</strong></li>
+<li><strong>图表法</strong></li>
+</ul>
+</li>
+</ul>
+<h4 id="117">1.17、过程信息<a class="headerlink" href="#117" title="Permanent link">&para;</a></h4>
+<ul>
+<li>是<strong>指导你怎么行动的信息，是讲述一系列动作、操作的信息</strong></li>
+<li>应用过程信息的方法<ul>
+<li>内在化</li>
+<li>比喻法</li>
+<li>图表法</li>
+<li>模型纠错</li>
+</ul>
+</li>
+<li>过程信息的难点<ul>
+<li><strong>需要实际投入大量的时间用于练习</strong></li>
+</ul>
+</li>
+</ul>
+<h4 id="118">1.18、具体信息<a class="headerlink" href="#118" title="Permanent link">&para;</a></h4>
+<ul>
+<li>指<strong>可以观察到、听到、触到的信息</strong></li>
+<li>应用具体信息的方法</li>
+</ul>
+<h4 id="119">1.19、抽象信息<a class="headerlink" href="#119" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>缺少与感官的直接联系</strong>，数学、物理、心理学、计算机和化学，<strong>抽象信息非常难以理解，但是逻辑性很强</strong></li>
+<li>应用抽象信息的方法<ul>
+<li><strong>移到具体的层次</strong></li>
+<li>内在化和比喻法</li>
+</ul>
+</li>
+<li>抽象信息的难点</li>
+</ul>
+<h4 id="120">1.20、如何使用五种信息类型<a class="headerlink" href="#120" title="Permanent link">&para;</a></h4>
+<ul>
+<li>知识点的<strong>弱结构和强结构</strong></li>
+</ul>
+<h4 id="121">1.21、为什么你的课程枯燥乏味<a class="headerlink" href="#121" title="Permanent link">&para;</a></h4>
+<ul>
+<li>电影《春风化雨》</li>
+<li>52/128</li>
+</ul>
+<h4 id="122">1.22、学习的目标<a class="headerlink" href="#122" title="Permanent link">&para;</a></h4>
+<ul>
+<li>整体性学习中最关键的步骤是<strong>将所学知识运用到实际中去</strong>，知识只有获得了在实际生活中的价值才是真正的知识。</li>
+</ul>
+<h3 id="part255128">Part2、整体性学习技术（55/128）<a class="headerlink" href="#part255128" title="Permanent link">&para;</a></h3>
+<ul>
+<li>整体性学习技术<ul>
+<li>以<strong>下棋</strong>为例<ul>
+<li>1、你要了解下棋的基本规则和基本目标</li>
+<li>2、开始进一步学习具体的策略和如何赢得比赛</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>技术一览<ul>
+<li>获取知识<ul>
+<li>快速阅读、笔记流</li>
+</ul>
+</li>
+<li>联系观点<ul>
+<li>比喻、内在化、图表法</li>
+</ul>
+</li>
+<li>随意信息的处理<ul>
+<li>联想法、挂钩法、信息压缩技术</li>
+</ul>
+</li>
+<li>知识扩展<ul>
+<li>实际应用、模型纠错、以项目为基础的学习</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="21-71">2.1、获取知识　71<a class="headerlink" href="#21-71" title="Permanent link">&para;</a></h4>
+<ul>
+<li>学习知识的第一步就是要获取它，<strong>通过双眼、视神经和大脑，实实在在地将书本上的知识印到脑海里</strong>。</li>
+</ul>
+<h5 id="211">2.1.1、快速阅读<a class="headerlink" href="#211" title="Permanent link">&para;</a></h5>
+<ul>
+<li>指读法</li>
+<li>练习阅读法<ul>
+<li>唯一目的是<strong>训练自己以尽可能快的速度理解所读内容</strong></li>
+</ul>
+</li>
+<li>积极阅读法<ul>
+<li>1、这一节中主要观点是什么？</li>
+<li>2、我怎样才能记住主要观点？</li>
+<li>3、我要怎样将主要观点拓展开以及应用它</li>
+</ul>
+</li>
+<li>掌握快速阅读</li>
+<li>智力挑战<ul>
+<li>1、买适合的书</li>
+<li>2、3周内每天15min投入</li>
+<li>3、练习指读法两周</li>
+<li>4、每周练习1次积极阅读</li>
+</ul>
+</li>
+</ul>
+<h5 id="212">2.1.2、笔记流<a class="headerlink" href="#212" title="Permanent link">&para;</a></h5>
+<ul>
+<li>0<ul>
+<li><strong>一次学会</strong>，表示你在学习时要全神贯注地听老师讲课（<strong>而不是上课忙着记笔记，而下课再学</strong>）</li>
+</ul>
+</li>
+<li>混合型笔记流<ul>
+<li>涉及2个方面：<strong>记录和拓展</strong></li>
+</ul>
+</li>
+<li>课下笔记流</li>
+<li>评注流<ul>
+<li>写下最关键的信息，然后在信息之间加入联系。</li>
+</ul>
+</li>
+<li>关键信息的识别<ul>
+<li><strong>知道哪些知识是重点，哪些是老师教的核心内容</strong></li>
+</ul>
+</li>
+<li>智力挑战<ul>
+<li>1、</li>
+<li>2、每2周练习1次</li>
+</ul>
+</li>
+</ul>
+<h4 id="22">2.2、联系观点<a class="headerlink" href="#22" title="Permanent link">&para;</a></h4>
+<ul>
+<li>知识分为2类<ul>
+<li>（1）困难信息，<strong>应用联想法</strong>（没有什么逻辑性、抽象信息或随意信息）</li>
+<li>（2）关键信息（<strong>其它知识的基础</strong>）</li>
+</ul>
+</li>
+<li>使用联想法形成模型</li>
+<li>练习、练习、练习！<ul>
+<li>在纸上练习</li>
+<li>练习3次</li>
+</ul>
+</li>
+</ul>
+<h5 id="221">2.2.1、比喻<a class="headerlink" href="#221" title="Permanent link">&para;</a></h5>
+<ul>
+<li>0<ul>
+<li>1、确定你要深入理解和记忆的信息</li>
+<li>2、在你的个人经验中寻找与信息部分相似的东西</li>
+<li>3、重复上述过程，检查比喻不恰当的地方</li>
+<li><em>作者举了如何去理解导数</em> 68/128</li>
+</ul>
+</li>
+<li>运用比较法的技巧<ul>
+<li>1、要有寻找比喻的欲望</li>
+<li>2、注意第一个出现在脑海中的念头</li>
+<li>3、优化和测试你的比喻</li>
+</ul>
+</li>
+<li>智力挑战<ul>
+<li>1、坚持至少2周内每天一次好好阅读学习内容，阅读完教材或笔记后，写下至少5个主要观点</li>
+<li>2、针对每个观点，写一个可以解释观点的比喻</li>
+<li>3</li>
+<li>4、</li>
+<li>5、</li>
+</ul>
+</li>
+</ul>
+<h5 id="222">2.2.2、内在化<a class="headerlink" href="#222" title="Permanent link">&para;</a></h5>
+<ul>
+<li>0<ul>
+<li><strong>内在化</strong>，不仅仅在脑海中出现图像，而且有声音、触觉和情感</li>
+<li>要内在化一个知识：<strong>最好的方法就是先简单地在脑海中想象一幅图像</strong></li>
+</ul>
+</li>
+<li>怎样进行内在化<ul>
+<li>1、</li>
+<li>2、</li>
+<li>3、</li>
+<li>4、</li>
+<li>5、</li>
+<li>6、不断重复和优化图像，直到你一想到它就能很快地回忆起知识</li>
+</ul>
+</li>
+<li>比喻内在化</li>
+<li>智力挑战</li>
+</ul>
+<h5 id="223">2.2.3、图表法<a class="headerlink" href="#223" title="Permanent link">&para;</a></h5>
+<ul>
+<li>0<ul>
+<li><strong>图表是内在化的简化</strong></li>
+</ul>
+</li>
+<li>流程图</li>
+</ul>
+<ul>
+<li>概念图</li>
+<li>图像</li>
+<li>将图表与比喻和内在化结合在一起</li>
+<li>智力挑战</li>
+<li></li>
+<li>98
+  随意信息的处理　104
+  联想法　106
+  挂钩法　113
+  信息压缩技术　118
+  知识的延伸　123
+  实际应用　123
+  模型纠错　126
+  以项目为基础的学习　128
+  整体性学习技术的实际运用——?费曼技巧　132
+  整体性学习技术的回顾　138</li>
+</ul>
+<p>第三部分
+超越整体性学习
+高效率的学生　142
+高效率秘籍1　能量管理　144
+高效率秘籍2　不要“学习”（Don’t study）　147
+高效率秘籍3　绝不拖延　149
+高效率秘籍4　批处理　151
+高效率秘籍5　有组织　153
+自我教育　155
+建立良好的学习习惯　156
+克服挫折障碍　159
+设置学习目标　160
+自我教育小结　163</p>
+<p>第四部分
+整体性学习的小结
+主要概念的小结　172
+技术一览　174
+特别感谢　179</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
