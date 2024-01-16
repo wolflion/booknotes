@@ -782,15 +782,62 @@ chap17、桥接：其它主题
 
 ### chap27、邻居子系统：基础结构
 
-27.1、主要的数据结构
+#### 27.1、主要的数据结构
 
-27.2、L3协议和邻居协议间的通用接口
++ `include/net/neighbour.h`
++ negighbour
++ neigh_table
++ neigh_parms
++ neigh_ops
++ hh_cache
++ rtable
++ dst_entry
 
-27.3、邻居基础结构的一般任务
+#### 27.2、L3协议和邻居协议间的通用接口
 
-27.4、邻居结构的引用计数
+##### 0
 
-27.5、创建一个邻居项
++ **Linux内核有个通用邻居层，通过一个虚拟函数表**（Virtual Function Table），将L3协议和主要的L2传输函数连接起来
++ **邻居子系统的VFT是由neigh_ops结构实现的**
+
+##### 27.2.1、neigh->ops的初始化
+
+##### 27.2.2、neigh->output和neigh->nud_state的初始化
+
++ 普通状态改变函数
++ neigh->output使用的函数
+
+##### 27.2.3、邻居信息的更新：neigh_update
+
++ 0
+  + `net/core/neighbour.c`
++ neigh_update优化
++ neigh_update初始化
++ 链路层地址的改变
++ 通知arpd
+
+#### 27.3、邻居基础结构的一般任务
+
+##### 27.3.1、缓存
+
++ 邻居层实现了两种形式的缓存
+  + 邻居映射
+  + L2帧头
+
+##### 27.3.2、定时器
+
++ 状态转移时的定时器
++ 失败的solicitation请求的定时器
++ 垃圾回收定时器
++ Proxy定时器
+
+#### 27.4、邻居结构的引用计数
+
+#### 27.5、创建一个邻居项
+
+##### 0
+
+##### 27.5.1、函数neigh_create的参数
 
 27.6、删除邻居
 
