@@ -147,9 +147,171 @@
 
 #### 8.4、多线程与fork()
 
+### chap12、网络通信：连接的建立
+
+#### 12.1、socket文件描述符
+
++ *如何从fd找到文件*
++ `socket->sock_map_fd->sock_alloc_file()`
+
+#### 12.2、绑定IP地址
+
++ *为何要bind()地址，是每一个都要绑定吗？【TCP,UDP这种】*
+
+##### 12.2.1、bind的使用
+
+##### 12.2.2、bind的源码分析
+
++ net/socket.c中
+
+#### 12.3、客户端连接过程
+
+##### 12.3.1、connect的使用
+
++ *重复连接，会有什么问题？*
++ TCP的话，会有**三次握手** 【为什么是阻塞操作？】
+
+##### 12.3.2、connect的源码分析
+
+#### 12.4、服务器端连接过程
+
+##### 12.4.1、listen的使用
+
+##### 12.4.2、listen的源码分析
+
+##### 12.4.3、accept的使用
+
++ **从指定套接字的连接队列中取出第一个连接，并返回一个新的套接字用于与客户端进行通信**
++ `accept4()`是啥意思？
+
+##### 12.4.4、accept的源码分析
+
+#### 12.5、TCP三次握手的实现分析
+
+##### 12.5.1、SYN包的发送
+
++ SYN包是指**客户端主动建立一个TCP连接的第一个包**，TCP标志为SYN，**表示同步TCP的序列号**
++ `tcp_connect()`
+
+##### 12.5.2、接收SYN包，发送SYN+ACK包
+
++ `ip_local_deliver_finish()`
+
+##### 12.5.3、接收SYN+ACK数据包
+
++ `tcp_v4_do_rcv()`
+
+##### 12.5.4、接收ACK数据包，完成三次握手
+
++ `tcp_v4_hnd_req()`
+
+### chap13、网络通信：数据报文的发送
+
+#### 13.1、发送相关接口
+
++ `send()`
++ `sendto()`
++ `sendmsg()`
+
+#### 13.2、数据包从用户空间到内核空间的流程
+
++ send的内核实现
++ `send()->sendto()->sendmsg()`，这样连贯调用的
+
+#### 13.3、UDP数据包的发送流程
+
++ `udp_sendmsg()->udp_send_skb()`
+
+#### 13.4、TCP数据包的发送流程
+
++ `tcp_sendmsg()->__tcp_push_pending_frames()->tcp_write_xmit()`
+
+#### 13.5、IP数据包的发送流程
+
+##### 13.5.1、ip_send_skb源码分析
+
++ udp调用，`ip_send_skb()->ip_local_out()->__ip_local_out()->ip_output()->ip_finish_output()`
+
+##### 13.5.2、ip_queue_xmit源码分析
+
++ **TCP调用的是**，`ip_queue_xmit()->ip_local_out()`
+
+#### 13.6、底层模块数据包的发送流程
+
++ **二层网卡只接受自己地址的数据包**，所以需要**将三层网络地址“映射”为正确的二层硬件地址**
+  + ipv4的话，是ARP协议实现的
+  + ipv6的话，是**邻居发现协议**（ICMPv6）
+
++ **二层数据包的发送接口为`neigh_output()`**
+
+### chap14、网络通信：数据报文的接收
+
+#### 14.1、系统调用接口
+
++ `recv()`
++ `recvfrom()`
++ `recvmsg()`
+
+#### 14.2、数据包从用户空间到内核空间的流程
+
++ `recv()->recvfrom()->recvmsg()`
+
+#### 14.3、UDP数据包的接收流程
+
++ `udp_recvmsg()->__skb_recv_datagram()`
+
+#### 14.4、TCP数据包的接收流程
+
++ `tcp_recvmsg()`
+
+#### 14.5、TCP套接字的三个接收队列
+
++ struct sock中的sk_receive_queue
++ struct sock中的sk_backlog
++ struct tcp_sock中的prequeue
+
+#### 14.6、从网卡到套接字
+
++ **数据包是如何进入对应套接字的接收缓冲区的呢？**
+
+##### 14.6.1、从硬中断到软中断
+
++ 
+
+##### 14.6.2、软中断处理
+
++ 以下几种条件，内核会检查是否需要处理软中断：
+  + 退出硬中断上下文时
+  + 重新enable软中断时
+  + 每个CPU都有一个ksoftirqd内核线程。当内核的软中断数量过多时，就会唤醒该线程循环处理软中断
+
+##### 14.6.3、传递给协议栈流程
+
++ `netif_receive_skb()`
+
+##### 14.6.4、IP协议处理流程
+
++ 在inet_init中，调用了`dev_add_pack(&ip_packet_type)`进行了IPv4协议的注册。
+
+##### 14.6.5、大师的错误？原始套接字的接收
+
++ **普通的raw socket是无法收到TCP和UDP的数据包的，除非该套接字是从数据链路层就开始读取数据包的**。
++ `raw_local_deliver()->raw_v4_input()`
+
+##### 14.6.6、注册传输层协议
+
+##### 14.6.7、确定UDP套接字
+
++ `udp_protocol`结构体中`.handler`指定`udp_rcv()`再调用`__udp4_lib_rcv()`
+
+##### 14.6.8、确定TCP套接字
+
++ `tcp_protocol`结构体中`.handler`指定`tcp_v4_rcv()`
+
 ### 最后
 
 #### 履历
 
 + 2018年在github上写过笔记，不过当时写的是chap2-4基础的
 + 2024-01-15是把7-8两章（关于线程的章节）给过了一下
++ 2024-01-21把12-14三章（网络）给过了下
