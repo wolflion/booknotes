@@ -95,11 +95,13 @@
   + 处理**变长缓存**，接收和发送的数据报长度不是固定的
   + 容器在头尾部添加和移除数据，因为需要在不同网络层次间进行数据传递
   + 在添加和移除数据时能够尽量避免数据的复制
-+ 套接口缓存（socket buffer）
++ 套接口缓存（socket buffer），结构体是`sk_buffer`
 + **SKB的主要用途**：保存在进程和网络接口之间互相传递的用户数据，以及其他一些信息
-
-+ include/linux/[skbuff.h](https://lxr.missinglinkelectronics.com/linux+v2.6.24/include/linux/skbuff.h)，SKB结构定义和宏
-+ net/core/[skbuff.c](https://lxr.missinglinkelectronics.com/linux+v2.6.24/net/core/skbuff.c)，操作SKB的函数
++ 操作SKB的函数
++ *写代码的时候，怎么操作skb*
++ 源码路径
+  + include/linux/[skbuff.h](https://lxr.missinglinkelectronics.com/linux+v2.6.24/include/linux/skbuff.h)，SKB结构定义和宏
+  + net/core/[skbuff.c](https://lxr.missinglinkelectronics.com/linux+v2.6.24/net/core/skbuff.c)，操作SKB的函数
 
 #### 3.2、sk_buff结构
 
@@ -110,62 +112,138 @@
   + 通用成员变量
   + 标志性变量
   + 与特性相关的成员变量
-+ **添加首部，比拷贝数据效率高**，`skb_reserve()`先预留
++ **SKB在不同网络协议层之间传递**，可被用于不同的网络协议，**添加首部，比在不同层之间复制数据效率更高**，由于在数据缓冲区的头部添加数据意味着要修改指向数据缓存区的指针，这是个复杂的操作，所以提供了`skb_reserve()`先预留出空间
+  + 向上层协议传递SKB，下层协议层的首部信息就没有用了。二层首部在三层没有用，**但内核没有删除，只是把有效载荷指针指向三层首部**
+  + 向下层传递SKB，需要预留head空间
 
 ##### 3.2.1、网络参数和内核数据结构
 
++ *如何启用编译选项，以及编译选项的宏对应哪个？*
++ **SKB有两个部分**，
+  + 一部分为SKB描述符（sk_buffer结构本身）
+  + 另一部分为数据缓存区（参见sk_buff结构的head成员）
+
 ##### 3.2.2、SKB组织相关的变量
 
-+ 用来构成SKB双向链表
++ 用来构成SKB双向链表，`struct sk_buff *next; struct sk_buff *prev;`
+  + **每个SKB必须能被整个链表的头部快速找到**，在第一个SKB结点前面会插入另一个辅助的sk_buff_head结构的头结点，**可以认为该sk_buff_head结构就是SKB链表的头结点**。
+  + 相当于就是`sk_buff_head->skb1->skb2`【*还是书上的图画得更准确*】
 
-3.2.3、数据存储相关的变量
+```c
+struct sk_buff_head {
+	/* These two members must be first. */
+    struct sk_buff  *next;
+    struct sk_buff  *prev;
 
-3.2.4、通用的成员变量
+    __u32           qlen;  //SKB链表中结点数，即队列长度
+    spinlock_t      lock;  //控制对SKB链表并发操作的自旋锁
+};
+```
 
-3.2.5、标志性变量
 
-3.2.6、特性相关的成员变量
+
+##### 3.2.3、数据存储相关的变量
+
++ *不确定，书上的解读对不对了*-想找个例子看一下
+
+```c
+ 326        /* These elements must be at the end, see alloc_skb() for details.  */
+ 327        sk_buff_data_t          tail;
+ 328        sk_buff_data_t          end;
+ 329        unsigned char           *head,
+ 330                                *data;
+ 331        unsigned int            truesize;
+ 332        atomic_t                users;
+```
+
+
+
+##### 3.2.4、通用的成员变量
+
++ **与内核功能无关，主要跟网络协议、网络设备**等有关
+
+##### 3.2.5、标志性变量
+
++ **标识payload是否被单独引用，是否允许分片，当前克隆的状态**
+
+##### 3.2.6、特性相关的成员变量
 
 #### 3.3、skb_shared_info结构
+
++ **end指针所指向地址起紧跟着一个skb_shared_info结构**，作用是**保存了数据块的附加信息**。
+
++ *确实看到了，不知道啥意思*
++ *本节，看纸质书，好好学下*
 
 ##### 0、
 
 ##### 3.3.1、“零拷贝”技术
 
-3.3.2、对聚合分散I/O数据的支持
+##### 3.3.2、对聚合分散I/O数据的支持
 
-3.3.3、对GSO的支持
+##### 3.3.3、对GSO的支持
 
-3.3.4、访问skb_shared_info结构
+##### 3.3.4、访问skb_shared_info结构
 
 #### 3.4、管理函数
 
++ *这一部分，是不是也可以通过man skb_init()来看到操作，要确认一下*
+
 ##### 0、
 
-+ **不要直接调用`__do_something()`这种，而是用`do_something()`**，*有`__`开头的函数，lionel*
++ **不要直接调用`__do_something()`这种，而是用`do_something()`**，*有`__`开头的函数，lionel*，加过了合法性校验或者获取锁操作
 
-3.4.1、SKB的缓存池
+##### 3.4.1、SKB的缓存池
+
++ `skb_init()`，调用了`kmem_cache_create()`
++ *skbuff_head_cache和skbuff_fclone_cache，有什么区别？*
 
 ##### 3.4.2、分配SKB
 
-+ 1、
++ 1、alloc_skb()
 + 2、dev_alloc_skb()
+  + **alloc_skb()的封装函数**
 
-3.4.3、释放SKB
+##### 3.4.3、释放SKB
 
-3.4.4、数据预留和对齐
++ dev_kfree_skb()
++ kfree_skb()
 
-3.4.5、克隆和复制SKB
+##### 3.4.4、数据预留和对齐
 
-3.4.6、链表管理函数
++ 1、skb_reserve()
++ 2、skb_put()
++ 3、skb_push()
++ 4、skb_pull()
 
-3.4.7、添加或删除尾部数据
+##### 3.4.5、克隆和复制SKB
 
-3.4.8、拆分数据：skb_split()
++ 1、skb_clone()
++ 2、pskb_copy()
++ 3、skb_copy()
 
-3.4.9、重新分配SKB的线性数据区：pskb_expand_head()
+##### 3.4.6、链表管理函数
 
-3.4.10、其他函数
+##### 3.4.7、添加或删除尾部数据
+
++ 1、skb_add_data()
+
+##### 3.4.8、拆分数据：skb_split()
+
+##### 3.4.9、重新分配SKB的线性数据区：pskb_expand_head()
+
+##### 3.4.10、其他函数
+
++ pskb_may_pull()
++ skb_queue_empty()
++ skb_realloc_headroom()
++ skb_get()
++ skb_shared()
++ skb_share_check()
++ skb_unshare()
++ skb_orphan()
++ skb_cow()
++ skb_pagelen()
 
 ### chap4、网络模块初始化
 
