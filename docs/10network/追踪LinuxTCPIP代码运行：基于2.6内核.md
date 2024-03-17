@@ -250,6 +250,94 @@ struct notifier_block{
 + 发送，`qdisc_restart()`，**循环调用**
   + `struct Qdisc *q = dev->qdisc;//取得设备的排队规则`
 
+### chap12、建立连接的过程
+
++ 第9章
++ 本章分析，服务器如何为数据块建立数据包并从底层（链路层）向上层（应用层）传递到服务器程序的过程
+
+#### 12.1、驱动程序接收并建立数据包
+
++ 了解驱动程序是如何将中断程序登记到内核中的。CS8900驱动程序中的`cs89x0_probel()`
++ 当使用ifconfig eth0 up启动网卡时会执行系统调用`sys_ioctl()`，最终内核会执行`dev_open()`，整体过程是，`ioctl()->sock_ioctl()->dev_ioctl()->SIOCSIFFILAGS->dev_ifsioc()->dev_change_flags()->IFF_UP->dev_open()`
++ Linux内核中有一个网络软中断数据结构`softnet_data`
+
+#### 12.2、查找数据包类型且调用其处理函数
+
++ 最终目标是，`do_softirq()->net_rx_action()->process_backlog()->netif_receive_skb()`
+
+#### 12.3、接收或转发IP数据包
+
++ `ip_rcv()`最后通过NF_HOOK宏转入`ip_rcv_finish()`，这个函数有两方面的使用：
+  + 一是明确数据包是本地接收还是转发，如果是转发就需要进一步明确转发网络设备和跳转出口
+  + 二是分析和处理关于IP选项的内容
+  + 在`/net/ipv4/ip_input.c`
+  + 整个过程，`do_softirq()->net_rx_action()->process_backlog()->netif_receive_skb()->deliver_skb()->ip_rcv()->ip_rcv_finish()`
+
+#### 12.4、TCP数据包的处理
+
++ 无论是重组后的数据包还是直接接收的数据包都要进入`ip_local_deliver_finish()`交给传输层处理，在/net/ipv4/ip_input.c
++ 整个过程，`do_softirq()->net_rx_action()->process_backlog()->`
+
+#### 12.5、3次握手过程
+
++ 3次握手过程
+  + 一、client发送一个SYN=1、ACK=0标志的数据包给服务器请求进行连接
+  + 二、server收到请求并且允许连接就会发送一个SYN=1、ACK=1标志的数据包给客户端，告诉client可以发送数据了，并让客户端发送一个确认数据包
+  + 三、client发送一个SYN=0、ACK=1的数据包给服务器，告诉它连接已被确认
+
+### chap13、Internet控制信息的传输
+
++ 主要关于**错误和请求**的内容
+
+#### 13.1、发送ICMP信息
+
++ `icmp_send()`的过程为例来看Linux是如何使用ICMP协议发送控制信息，在`/net/ipv4/icmp.c`
+
+#### 13.2、接收ICMP信息
+
++ 再来看下`icmp_rcv()`，也在`/net/ipv4/icmp.c`
+
+### chap14、数据包的分段与重组
+
+#### 14.1、数据包的分段发送
+
+#### 14.2、数据包的分段接收和重组
+
++ `ip_defrag()`来看接收重组过程，在`/net/ipv4/ip_fragment.c`中，**`ip_defrag()`重组完数据后将其传递给TCP层**
+
+#### 14.3、分段数据包的接收队列
+
+#### 14.4、查找与创建分段队列
+
++ `ip_find()`，先将数据包头部和来源标志记录到该结构中，然后调用`inet_frag_find()`在`ipv4_frags`结构队列中查找INET分段队列头；如果找到了就返回分段队列头指针，反之创建分段队列
+
+#### 14.5、释放和销毁分段队列
+
++ `ip_evictor()`
+
+### chap15、发送和接收数据包
+
+#### 15.1、内核的发送、接收函数
+
+#### 15.2、客户端发送数据包
+
++ `__sock_sendmsg()`来分析
+
+#### 15.3、服务器接收数据包
+
++ `tcp_v4_rcv()`如何接收数据包
+  + 首先找到服务器创建的客户端sock结构
+
+### chap16、socket的关闭
+
+#### 16.1、内核的关闭函数
+
++ 关闭服务器的socket过程要比关闭客户端socket复杂
+
+#### 16.2、服务器与客户端的共同关闭
+
++ `tcp_v4_do_rcv()`
+
 ### 最后
 
 #### 履历
