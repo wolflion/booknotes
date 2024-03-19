@@ -140,15 +140,30 @@ static struct super_operations sockfs_ops = {
 
 #### 4.1、路由函数表结构及关系图
 
-4.2、路由函数表的初始化
++ 路由函数表fib_table是路由的总根，可以从它出发找到各个路由区结构fn_zone，也可以找到路由节点结构fib_node或者路由信息结构fib_info。
 
-4.3、通过路由函数表查找路由信息
+#### 4.2、路由函数表的初始化
 
-4.4、路由的设置及相关结构的初始化
++ `inet_init`调用了`ip_init()`，进一步调用了`ip_rt_init()`
++ *不少重点，没看*
 
-4.5、基于输出方向的路由表查找与创建
+#### 4.3、通过路由函数表查找路由信息
 
-4.6、基于输入方向的路由表查找与创建
++ 通过`_inet_dev_addr_type()`的过程中来看调用函数表`tb_lookup()`
+
+#### 4.4、路由的设置及相关结构的初始化
+
++ A、net_tools通过ioctl系统调用进入`ip_rt_ioctl()`，它通过**路由函数表的钩子函数**实现增加或者删除路由
++ B、iproute2设置路线，它设置路由的方式主要是通过netlink来实现，调用`inet_rtm_newroute()`或者`inet_rtm_delroute()`
++ C、通知链的方式，在`ip_fib_init()`
+
+#### 4.5、基于输出方向的路由表查找与创建
+
++ `sys_socketcall()->sys_connect()->inet_stream_connect()->tcp_v4_connect()->ip_route_connect()`
+
+#### 4.6、基于输入方向的路由表查找与创建
+
++ `do_softirq()->net_rx_action()->process_backlog()->netif_receive_skb()->deliver_skb()->ip_rcv()->ip_rcv_finish()->ip_route_input()`
 
 ### chap5、通知链
 
