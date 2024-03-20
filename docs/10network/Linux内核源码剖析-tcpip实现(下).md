@@ -85,249 +85,174 @@
 
 #### 21.6、路由策略的查找
 
-### chap22、套接口层
+### chap22、套接口层  56（65/529）
 
-#### 3.1、引言
++ 套接口是啥
+  + 1983年，4.2BSD引入
+  + **通用的网络应用程序编程接口**
++ 套接口包含啥？
+  + *本书好像没讲？*
 
-+ 网络协议中的操作对系统的存储和设计有要求
-  + 处理**变长缓存**，接收和发送的数据报长度不是固定的
-  + 容器在头尾部添加和移除数据，因为需要在不同网络层次间进行数据传递
-  + 在添加和移除数据时能够尽量避免数据的复制
-+ 套接口缓存（socket buffer），结构体是`sk_buffer`
-+ **SKB的主要用途**：保存在进程和网络接口之间互相传递的用户数据，以及其他一些信息
-+ 操作SKB的函数
-+ *写代码的时候，怎么操作skb*
-+ 源码路径
-  + include/linux/[skbuff.h](https://lxr.missinglinkelectronics.com/linux+v2.6.24/include/linux/skbuff.h)，SKB结构定义和宏
-  + net/core/[skbuff.c](https://lxr.missinglinkelectronics.com/linux+v2.6.24/net/core/skbuff.c)，操作SKB的函数
++ 套接口层的作用
+  + **为应用程序提供了一个访问网络和进程间通信的**通用接口
+  + 位于**应用程序和协议栈**之间
+  + 对应用程序屏蔽了与协议相关实现的具体细节，将应用程序发送的与协议无关的请求映射到与协议相关的实现
++ 套接口层怎么与其上下层衔接
+  + 应用程序中调用库函数，而库函数通过系统调用进入套接口层
+  + Linux套接口层实现提供了一组**专门的套接口系统调用**
+  + **图22-1**（套接口层将一般的请求转换为指定的协议操作）
++ 套接口的I/O操作以及套接口选项（23，24两章介绍的）
++ 涉及文件
+  + include/linux/net.h，定义套接口层相关的结构、宏和函数原型
+  + include/net/sock.h，定义基本的传输控制块结构、宏和函数原型
+  + net/socket.c，实现套接口层的调用
+  + net/ipv4/af_inet.c，网络层和传输层接口
 
-#### 3.2、sk_buff结构
+#### 22.1、socket结构
 
-##### 0、
++ `struct socket{};`
 
-+ **已接收或待发送的数据报文消息**，分为以下几类
-  + 与SKB组织相关的成员变量
-  + 通用成员变量
-  + 标志性变量
-  + 与特性相关的成员变量
-+ **SKB在不同网络协议层之间传递**，可被用于不同的网络协议，**添加首部，比在不同层之间复制数据效率更高**，由于在数据缓冲区的头部添加数据意味着要修改指向数据缓存区的指针，这是个复杂的操作，所以提供了`skb_reserve()`先预留出空间
-  + 向上层协议传递SKB，下层协议层的首部信息就没有用了。二层首部在三层没有用，**但内核没有删除，只是把有效载荷指针指向三层首部**
-  + 向下层传递SKB，需要预留head空间
+#### 22.2、proto_ops结构
 
-##### 3.2.1、网络参数和内核数据结构
++ 是一组与套接口系统调用相对应的传输层函数指针，可以看作是**一张套接口系统调用到传输层函数的跳转表**
++ 完成的是**从与协议无关的套接口层到协议相关的传输层**的转接，proto结构又将**传输层映射到网络层**，那么可想而知**每个传输层的协议都需要定义一个特定的proto_ops结构实例和proto结构实例**。
 
-+ *如何启用编译选项，以及编译选项的宏对应哪个？*
-+ **SKB有两个部分**，
-  + 一部分为SKB描述符（sk_buffer结构本身）
-  + 另一部分为数据缓存区（参见sk_buff结构的head成员）
+#### 22.3、套接口文件系统
 
-##### 3.2.2、SKB组织相关的变量
+##### 22.3.1、套接口文件系统类型
 
-+ 用来构成SKB双向链表，`struct sk_buff *next; struct sk_buff *prev;`
-  + **每个SKB必须能被整个链表的头部快速找到**，在第一个SKB结点前面会插入另一个辅助的sk_buff_head结构的头结点，**可以认为该sk_buff_head结构就是SKB链表的头结点**。
-  + 相当于就是`sk_buff_head->skb1->skb2`【*还是书上的图画得更准确*】
++ sockfs文件系统类型`sock_fs_type`，通过`get_sb()`和`alloc_inode()`和`destroy_inode()`分配和释放与套接口文件相关的i结点
++ 通过`/proc/filesystem`文件查看操作系统支持的文件系统
 
-```c
-struct sk_buff_head {
-	/* These two members must be first. */
-    struct sk_buff  *next;
-    struct sk_buff  *prev;
+##### 22.3.2、套接口文件系统超级块操作接口
 
-    __u32           qlen;  //SKB链表中结点数，即队列长度
-    spinlock_t      lock;  //控制对SKB链表并发操作的自旋锁
-};
-```
+##### 22.3.3、套接口文件的inode
 
++ `struct socket_alloc{};`由socket结构和inode结构两部分组成
 
+##### 22.3.4、sock_alloc_inode()
 
-##### 3.2.3、数据存储相关的变量
+##### 3.2.5、sock_destroy_inode()
 
-+ *不确定，书上的解读对不对了*-想找个例子看一下
+#### 22.4、套接口文件
 
-```c
- 326        /* These elements must be at the end, see alloc_skb() for details.  */
- 327        sk_buff_data_t          tail;
- 328        sk_buff_data_t          end;
- 329        unsigned char           *head,
- 330                                *data;
- 331        unsigned int            truesize;
- 332        atomic_t                users;
-```
++ 创建套接口文件时，使file结构中的f_op指向了`socket_file_ops`，**通过socket_file_ops可以看到套接口文件支持哪些系统调用**
 
+##### 22.4.1、套接口文件与套接口的绑定
 
++ 1、sock_map_fd()
++ 2、sock_attach_fd()
 
-##### 3.2.4、通用的成员变量
+##### 22.4.2、根据文件描述符获取套接口
 
-+ **与内核功能无关，主要跟网络协议、网络设备**等有关
++ 1、sockfd_lookup_light()
++ 2、sock_from_file()
 
-##### 3.2.5、标志性变量
+#### 22.5、进程、文件描述符和套接口
 
-+ **标识payload是否被单独引用，是否允许分片，当前克隆的状态**
++ 在task_struct结构中，files指向file_struct结构，该结构的主要功能是管理fd_array指针数组指向的描述符，每个file结构描述一个打开的文件
 
-##### 3.2.6、特性相关的成员变量
+#### 22.6、套接口层的系统初始化
 
-#### 3.3、skb_shared_info结构
-
-+ **end指针所指向地址起紧跟着一个skb_shared_info结构**，作用是**保存了数据块的附加信息**。
-
-+ *确实看到了，不知道啥意思*
-+ *本节，看纸质书，好好学下*
-
-##### 0、
-
-##### 3.3.1、“零拷贝”技术
-
-##### 3.3.2、对聚合分散I/O数据的支持
-
-##### 3.3.3、对GSO的支持
-
-##### 3.3.4、访问skb_shared_info结构
-
-#### 3.4、管理函数
-
-+ *这一部分，是不是也可以通过man skb_init()来看到操作，要确认一下*
-
-##### 0、
-
-+ **不要直接调用`__do_something()`这种，而是用`do_something()`**，*有`__`开头的函数，lionel*，加过了合法性校验或者获取锁操作
-
-##### 3.4.1、SKB的缓存池
-
-+ `skb_init()`，调用了`kmem_cache_create()`
-+ *skbuff_head_cache和skbuff_fclone_cache，有什么区别？*
-
-##### 3.4.2、分配SKB
-
-+ 1、alloc_skb()
-+ 2、dev_alloc_skb()
-  + **alloc_skb()的封装函数**
-
-##### 3.4.3、释放SKB
-
-+ dev_kfree_skb()
-+ kfree_skb()
-
-##### 3.4.4、数据预留和对齐
-
-+ 1、skb_reserve()
-+ 2、skb_put()
-+ 3、skb_push()
-+ 4、skb_pull()
-
-##### 3.4.5、克隆和复制SKB
-
-+ 1、skb_clone()
-+ 2、pskb_copy()
-+ 3、skb_copy()
-
-##### 3.4.6、链表管理函数
-
-##### 3.4.7、添加或删除尾部数据
-
-+ 1、skb_add_data()
-
-##### 3.4.8、拆分数据：skb_split()
-
-##### 3.4.9、重新分配SKB的线性数据区：pskb_expand_head()
-
-##### 3.4.10、其他函数
-
-+ pskb_may_pull()
-+ skb_queue_empty()
-+ skb_realloc_headroom()
-+ skb_get()
-+ skb_shared()
-+ skb_share_check()
-+ skb_unshare()
-+ skb_orphan()
-+ skb_cow()
-+ skb_pagelen()
++ `sock_init()`
 
 #### 22.7、套接口系统调用
 
++ 理解proto_ops结构和proto结构的差异和调用层次
+
+##### 22.7.1、套接口系统调用入口
+
++ **表22-5**，套接口系统调用
+
+##### 22.7.2、socket系统调用
+
++ 1、sys_socket()
++ 2、
+
+##### 22.7.3、bind系统调用
+
++ 1、sys_bind()
+
+##### 22.7.4、listen系统调用
+
+##### 22.7.5、accept系统调用
+
+##### 22.7.6、connect系统调用
+
+##### 22.7.7、shutdown系统调用
+
++ 1、sys_shutdown
++ 2、套接口层的实现
+
+##### 22.7.8、close系统调用
+
++ 1、关闭套接口
++ 2、套接口层的实现
+
+##### 22.7.9、select系统调用的实现
+
 ### chap23、套接口I/O
 
-#### 4.1、引言
++ 套接口I/O涉及的文件
+  + include/linux/socket.h，定义套接口的结构、宏和函数原型
+  + net/core/iovec.c，实现对I/O向量块的复制操作
+  + net/socket.c，实现套接口层的调用
 
-+ 网络设备驱动程序是如何初始化的
-+ 各个协议是如何初始化的
-+ include/linux/init.h
-+ include/asm-generic/vmlinux.lds.h，**编译链接相关的宏定义**
-+ init/main.c，启动时的高级初始化
-+ net/core/dev.c，网络设备注册、输入和输出等接口
-+ drivers/net/e100.c，e100驱动程序
+#### 23.1、输出/输入数据的组织
 
-#### 4.2、网络模块初始化顺序
+##### 23.1.1、msghdr结构
 
-+ **图4-1**
-+ 分**静态**和**动态**加载
-  + 判断标准是**函数地址是否为NULL**
++ `struct msghdr{};`
 
-#### 4.3、优化基于宏的标记
+##### 23.1.2、verify_iovec()
 
-+ 模块的初始化，通过`module_init`宏（*可以自动根据条件选不同初始化方法*）
++ 发送和接收的数据的msghdr结构需要在用户态组织，**而在内核中是不信任用户态的数据的**，因此需要对用户态提供的msghdr结构进行校难。
 
-#### 4.4、网络设备处理层初始化
+##### 23.1.3、
 
-+ 表4-3
-  + net/socket.c，`core_initcall(sock_init)`，套接口层的初始化函数
-  + net/core/sock.c，`subsys_initcall(proto_init)`，传输层的初始化函数
-  + net/ipv4/af_inet.c，`fs_initall(inet_init)`，Internet协议族的初始化函数
-  + net/core/dev.c，`subsys_initcall(net_dev_init)`，设备处理层的初始化函数
-  + drivers/net/e100.c，`module_init(e100_init_module)`，e100型号的网络设备驱动的初始化函数
-+ 本地暂时讲的是net_dev_init和e100_init_module
+23.1.4、
 
-### chap5、网络设备
+23.1.5、
 
-#### 5.1、PCI设备
+##### 23.1.6、csum_partial_copy_fromiovecend()
 
-+ 自己写的
-  + 除了PCI能插网卡，还有哪些接口可以插网卡
-    + PCIe
-    + USB
-    + Express Card
-    + thunderbolt 
-    + pcncia
-+ 之前用ISA（Industry Standard Architecutre）接口，现在都是PCI接口了
-  + ISA是慢速设备
+#### 23.2、输出系统调用
 
-##### 5.1.1、PCI驱动程序相关结构
+##### 23.2.1、sock_sendmsg()
 
-+ 1、pci_device_id结构
-+ 2、pci_driver结构
+##### 23.2.2、sendto系统调用
 
-##### 5.1.2、注册PCI驱动程序
+##### 23.2.3、send系统调用
 
-+ *这一套，其实是有实现模板的*
+##### 23.2.4、sendmsg系统调用
 
-+ **以e100为例**
-  + 首先是`module_init(e100_init_module)`，表示e100_init_module()是e100驱动的初始化接口，**在模块装载到内核时被调用**
-  + `e100_init_module()`再调用`pci_register_driver()`，**为e100网络设备进行PCI驱动的注册**
+#### 23.3、输入系统调用
 
-#### 5.2、与网络设备有关的数据结构
++ 图23-3，recvmsg系统调用过程
 
-##### 5.2.1、net_device结构
+#### 23.4、网络设备处理层初始化
 
-##### 5.2.2、网络设备有关的结构的组织
+### chap24、套接口选项  99（108/529）
 
-##### 5.2.3、相关函数
++ 套接口选项的实现涉及的文件
+  + net/socket.c，实现套接口层的调用
+  + net/ipv4/af_inet.c，网络层和传输层接口
 
-#### 5.3、网络设备的注册
+#### 24.1、setsockopt系统调用
 
-##### 5.3.1、设备注册的时机
+#### 24.2、ioctl系统调用
 
-##### 5.3.2、分配net_device结构空间
+##### 24.2.1、ioctl在文件系统内的调用过程
 
-##### 5.3.3、网络设备注册过程
+##### 24.2.2、套接口文件ioctl调用接口的实现
 
-##### 5.3.4、注册设备的状态迁移
+##### 24.2.3、套接口层的实现
 
-##### 5.3.5、设备注册状态通知
+#### 24.3、getsockname系统调用
 
-+ 1、netdev_chain通知链
-+ 2、netlink链接通知
+#### 24.4、getpeername系统调用
 
-##### 5.3.6、引用计数
+### chap25、传输控制块  111（120/529）
 
 #### 5.4、网络设备的注销
 
@@ -356,46 +281,7 @@ struct sk_buff_head {
 
 + `e100_suspend()`
 
-##### 5.7.2、唤醒设备
-
-#### 5.8、侦测连接状态改变
-
-+ 设备驱动侦测到设备传递信号时调用`netif_carrier_on()`
-+ 设备驱动侦测到设备丢失信号时调用`netif_carrier_off()`
-  + `__LINK_STATE_NOCARRIER`标志位
-
-##### 5.8.1、调度处理连接状态改变事件
-
-##### 5.8.2、linkwatch标志
-
-#### 5.9、从用户空间配置设备相关信息
-
-##### 5.9.1、ethtool
-
-##### 5.9.2、媒体独立接口
-
-#### 5.10、虚拟网络设备
-
-+ 虚拟设备与物理设备的关系
-  + 1对1
-  + 多对1
-  + 1对多
-
-+ 表5-8，虚拟网络设备类型
-  + Bonding
-  + 802.1Q
-  + Bridging
-  + Aliasing interfaces
-  + Tunnel interfaces
-+ 表5-9，虚拟设备与物理设备在与内核交互的方式上的区别
-  + 初始化
-  + 配置
-  + 外部接口
-  + 发送
-  + 接收
-  + 外部通知
-  + 注册
-  + 注销
+##### 5.7.2、唤醒设
 
 ### chap6、IP编址
 
