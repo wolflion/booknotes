@@ -254,79 +254,134 @@
 
 ### chap25、传输控制块  111（120/529）
 
-#### 5.4、网络设备的注销
++ 根据协议族和传输层协议的特点，分层次地定义了多个结构用来组成传输控制块
+  + sock_common、**传输控制块信息的最小集合**，由sock和inet_timewait_sock结构前面相同部分单独构成
+  + sock、比较通用的网络层描述块，构成传输控制块的基础，与具体的协议族无关
+  + inet_sock、
+  + inet_connection_sock、支持面向连接特性的描述块，
+  + tcp_sock、request_sock、
 
-##### 5.4.1、设备注销的时机
++ 涉及的文件
+  + include/net/sock.h，定义基本的传输控制块结构、宏和函数原型
+  + include/net/inet_sock.h，定义IPv4专用的传输控制块
+  + net/core/sock.c，实现传输层通用的函数
+  + net/socket.c，实现套接口层的调用
 
-+ 两种情形
-  + 1、卸载网络设备驱动程序
-  + 2、移除热插拔网络设备
+#### 25.1、系统参数
 
-##### 5.4.2、网络设备注销过程
++ optmem_max，每个传输控制块辅助缓冲区的上限，`sock_kmalloc()`
+  + **辅助数据**包括进行设置选项、设置过滤时分配的内存和组播设置
++ rmem_default，传输控制块接收缓冲区大小的上限的默认值
++ rmem_max，传输控制块接收缓冲区大小的上限的最大值
++ vmem_default，传输控制块发送缓冲区大小的上限的默认值
++ vmem_max，传输控制块发送缓冲区大小的上限的最大值
 
-+ 1、unregister_netdevice()
-+ 2、衔接操作：netdev_run_todo()
+#### 25.2、传输描述块结构
 
-#### 5.5、网络设备的启用
+##### 25.2.1、sock_common结构
 
-+ `dev_open()`，发送一个**NETDEV_UP消息**到网络设备状态改变通知链上
+##### 25.2.2、sock结构
 
-#### 5.6、网络设备的禁用
+##### 25.2.3、inet_sock结构
 
-+ `dev_close()`
++ **是IPv4协议专用的传输控制块，是对sock结构的扩展**，在传输控制块的基本属性已具备的基础上，进一步提供了IPv4协议专有的一些属性
 
-#### 5.7、与电池管理交互
+#### 25.3、proto结构
 
-##### 5.7.1、挂起设备
++ proto结构为**网络接口层**，结构中的操作实现传输层的操作和从传输层到网络层调用的跳转，**在proto结构中某些成员跟proto_ops结构中的成员对应**
 
-+ `e100_suspend()`
+##### 25.3.1、ptoto实例组织结构
 
-##### 5.7.2、唤醒设
+##### 25.3.2、proto_register()
 
-### chap6、IP编址
++ **注册proto实例到proto_list链表中**
 
-+ [rfc790](https://datatracker.ietf.org/doc/html/rfc790)，提到了a,b,c类地址
+##### 25.3.3、proto_unregister()
 
-#### 6.1、接口和IP地址
+#### 25.4、传输控制块的内存管理
 
-##### 6.1.1、主IP地址，从属IP地址和IP别名
+##### 25.4.1、传输控制块的分配和释放
 
-##### 6.1.2、IP地址的组织
++ 1、sk_alloc()
+  + 在创建套接口时，TCP、UDP和原始IP会分配一个传输控制块
++ 2、sk_clone()
++ 3、sk_free()
++ 4、sock_put()
 
-##### 6.1.3、in_device结构
+##### 25.4.2、普通的发送缓存区的分配
 
-+ **IP配置块**（网络适配层和IPv4相关的配置），通过ifconfig修改
++ 1、sock_alloc_send_skb()
++ 2、sock_alloc_send_pskb()
++ 3、sock_wait_for_wmem()
 
-##### 6.1.4、in_ifaddr结构
+##### 25.4.3、发送缓存的分配与释放
 
-+ **IP地址块**（存储主机的IP地址，子网掩码，广播地址），**这些配置属于主机，但又是配置到网络设备上**
++ 1、sock_wmalloc()，**分配发送缓存**
++ 2、skb_set_owner_w()
++ 3、sock_wfree()
 
-#### 6.2、函数
+##### 25.4.4、接收缓存的分配与释放
 
-##### 6.2.1、
-
-##### 6.2.7、inet_ifa_byprefix()
-
-##### 6.2.8、inet_abc_len()
-
-#### 6.3、IP地址的设置
-
-+ *我的疑问是，netlink和ioctl的区别是啥？*
-
-##### 6.3.1、netlink接口
-
-+ 0、
-  + iproute2包，需要单独装，*至少有些版本上是*
-+ 1、netlink消息结构
-  + 对应[rfc3549](https://datatracker.ietf.org/doc/html/rfc3549)
++ 1、sk_stream_set_owner_r()和sk_stream_rfree()
 + 2、
-+ 3、
 
-##### 6.3.3、
+##### 25.4.5、辅助缓存的分配与释放
 
-#### 6.4、ioctl
++ 1、sock_kmalloc()，**分配有关选项的缓存**
++ 2、sock_kfree_s()，**释放由sock_kmalloc()分配的缓存**
 
-#### 6.5、inetaddr_chain通知链
+#### 25.5、异步IO机制
+
+##### 25.5.1、sk_wake_async()
+
+##### 25.5.8、sock_fasync()
+
++ **实现了对套接口的异步通知队列增加和删除的更新操作**
+
+#### 25.6、网络设备的禁用
+
+##### 25.6.1、socket_lock_t结构
+
++ 实现控制用户进程和下半部间同步锁和控制下半部间同步锁都是由`socket_lock_t`结构描述的。
+
+##### 25.6.2、控制用户进程和下半部间同步锁
+
++ 传输控制块通常在两种执行体中执行，**进程上下文**和**软中断上下文**，对传输控制块的访问完全是异步的，因此**为了防止在访问传输控制块时产生冲突，加入了锁机制**。
++ 1、lock_sock()
++ 2、release_sock()
++ 3、sock_owned_by_user宏
+
+##### 25.6.3、控制下半部间同步锁
+
+### chap26、TCP：传输控制协议
+
+#### 26.1、系统参数
+
+#### 26.2、TCP的inet_protosw实例
+
+#### 26.3、TCP的net_protosw实例
+
+#### 26.4、TCP传输控制块
+
+##### 26.4.1、inet_connection_sock结构
+
+##### 26.4.2、inet_connection_sock_af_ops结构
+
+##### 26.4.3、tcp_sock结构
+
+##### 26.4.4、tcp_options_received结构
+
++ **保存接收到的TCP选项信息**
+
+##### 26.4.5、tcp_skb_cb结构
+
+#### 26.5、TCP的proto结构和proto_ops结构的实例
+
+#### 26.6、TCP状态迁移图
+
+#### 26.7、TCP首部
+
+#### 26.8、TCP校验和
 
 ### chap7、接口层的输入
 
