@@ -277,24 +277,26 @@ struct sk_buff_head {
   + drivers/net/e100.c，`module_init(e100_init_module)`，e100型号的网络设备驱动的初始化函数
 + 本地暂时讲的是net_dev_init和e100_init_module
 
-### chap5、网络设备
+### chap5、网络设备  （65/560）
 
 #### 5.1、PCI设备
 
-+ 自己写的
-  + 除了PCI能插网卡，还有哪些接口可以插网卡
-    + PCIe
-    + USB
-    + Express Card
-    + thunderbolt 
-    + pcncia
++ 除了PCI能插网卡，还有哪些接口可以插网卡
+  + PCIe
+  + USB
+  + Express Card
+  + thunderbolt 
+  + pcncia
+
 + 之前用ISA（Industry Standard Architecutre）接口，现在都是PCI接口了
   + ISA是慢速设备
++ 涉及到的文件
+  + include/linux/mod_devicetable.h
 
 ##### 5.1.1、PCI驱动程序相关结构
 
-+ 1、pci_device_id结构
-+ 2、pci_driver结构
++ 1、pci_device_id结构，**配置寄存器**
++ 2、pci_driver结构，**描述一个PCI设备，因此所有的PCI驱动都必须创建一个pci_driver结构的实例**
 
 ##### 5.1.2、注册PCI驱动程序
 
@@ -308,7 +310,16 @@ struct sk_buff_head {
 
 ##### 5.2.1、net_device结构
 
++ **网络驱动及接口层**中最重要的结构，不但描述了**接口方面的信息**，还包括**硬件信息**，*容易被诟病*，大概分为以下几类：
+  + 硬件信息
+  + 接口信息
+  + 设备操作接口变量
+  + 辅助成员变量
++ *这部分内容有点多，但主要还是要搞懂，这个结构体被谁用，具体字段是啥意思，这属于细节*
+
 ##### 5.2.2、网络设备有关的结构的组织
+
++ *net_device与in_device*的的关系
 
 ##### 5.2.3、相关函数
 
@@ -316,11 +327,21 @@ struct sk_buff_head {
 
 ##### 5.3.1、设备注册的时机
 
++ （1）加载网络设备驱动程序
++ （2）插入可热插拔网络设备
+
 ##### 5.3.2、分配net_device结构空间
+
++ 1、alloc_netdev()
++ 2、ether_setup()
 
 ##### 5.3.3、网络设备注册过程
 
++ *没细看呢*
+
 ##### 5.3.4、注册设备的状态迁移
+
++ 图5-5
 
 ##### 5.3.5、设备注册状态通知
 
@@ -333,9 +354,8 @@ struct sk_buff_head {
 
 ##### 5.4.1、设备注销的时机
 
-+ 两种情形
-  + 1、卸载网络设备驱动程序
-  + 2、移除热插拔网络设备
++ 1、卸载网络设备驱动程序
++ 2、移除热插拔网络设备
 
 ##### 5.4.2、网络设备注销过程
 
@@ -366,11 +386,22 @@ struct sk_buff_head {
 
 ##### 5.8.1、调度处理连接状态改变事件
 
++ 1、linkwatch_fire_event()
+  + *图5-9*的流程
++ 2、linkwatch_event()
++ 3、linkwatch_run_queue()
+
 ##### 5.8.2、linkwatch标志
+
++ net/core/linkwatch.c中的定义的
+  + LW_RUNNING
+  + LW_SE_USED
 
 #### 5.9、从用户空间配置设备相关信息
 
 ##### 5.9.1、ethtool
+
++ 图5-10，设备配置ioctl接口
 
 ##### 5.9.2、媒体独立接口
 
@@ -397,7 +428,7 @@ struct sk_buff_head {
   + 注册
   + 注销
 
-### chap6、IP编址
+### chap6、IP编址   （109/560）
 
 + [rfc790](https://datatracker.ietf.org/doc/html/rfc790)，提到了a,b,c类地址
 
@@ -445,8 +476,16 @@ struct sk_buff_head {
 ### chap7、接口层的输入
 
 + *我的问题是，怎么理解 接口层*（我大概想了一下，可能是那种5层结构的那种接口层，用于承上启下的）
++ 本章讨论网络设备通用接口、netpoll接口和netconsole驱动，涉及文件
+  + include/linux/if.h，定义IPv4专用的接口层使用的结构、宏
+  + include/linux/netdevice.h，定义网络设备结构、宏
 
 #### 7.1、系统参数
+
++ dev_weight
++ netdev_budget
++ netdev_max_backlog
++ message_burst与message_cost
 
 #### 7.2、接口层的ioctl
 
@@ -692,9 +731,98 @@ struct sk_buff_head {
 
 chap16、
 
-chap17、
+### chap17、邻居子系统（447/560）
 
-chap18、
+#### 17.1、什么是邻居子系统
+
++ 涉及的文件
+  + include/linux/inetdevice.h，定义IPv4专用的网络设备相关的结构、宏等
+  + include/net/neighbour.h，定义邻居项等结构、宏和函数原型
+  + net/core/neighour.c，邻居子系统的实现
+
+#### 17.2
+
+#### 17.3、邻居子系统的结构
+
+##### 17.3.1、neigh_table结构
+
++ 存储**与邻居协议相关的参数、功能函数，以及邻居散列表**，一个实例对一个邻居协议，**所有的实例都链接在全局链表neigh_tables中**
+  + *怎么链接呢？*
+  + 对于ARP而言，neigh_table的实例就是`arp_tbl`
+
+##### 17.3.2、neighbour结构
+
++ 存储**邻居的相关信息**，包括（状态、二层和三层协议地址、提供给三层协议的函数指针）**一个邻居，并不代表一个主机，而是一个三层协议地址**，对于多接口的主机，就有多三层协议地址
+  + *难道真正的关联的是在这里面？*
+
+##### 17.3.3、neigh_ops结构
+
++ 实现了L3与`dev_queue_xmit()`之间的调用桥梁
+  + *理解不深*
+
+##### 17.3.4、neigh_parms结构
+
++ 邻居协议参数配置块，**存储可调节的邻居协议参数**，**一个邻居协议对应一个参数配置块**，而每一个网络设备的IPv4的配置块中也存在一个存放默认值的邻居配置块
+
+##### 17.3.5、pneigh_entry结构
+
++ **保存允许代理的条件**，只有和结构中的接收设备以及目标地址相匹配才能代理
+
+##### 17.3.6、neigh_statistics结构
+
++ **存储统计信息**，一个该结构实例对应一个网络设备上的一种邻居协议
+
+##### 17.3.7、hh_cache结构
+
++ **缓存二层首部**，`hardware_header`
+
+#### 17.4、邻居表的初始化
+
+#### 17.5、邻居项的状态机
+
+#### 17.6、邻居项的添加与删除
+
+#### 17.7、邻居项的创建与初始化
+
+##### 17.7.1、neigh_alloc()
+
+##### 17.7.2、neigh_create()
+
+#### 17.8、邻居项散列表的扩容
+
++ `neigh_hash_grow`
+
+#### 17.9、邻居项的查找
+
+##### 17.9.1、neigh_lookup()
+
+##### 17.9.2、neigh_lookup_nodev()
+
+##### 17.9.3、__neigh_lookup()和neigh_lookup_errno()
+
+#### 17.10、邻居项的更新
+
+#### 17.11、垃圾回收
+
+##### 17.11.1、同步回收
+
+##### 17.11.2、异步回收
+
+#### 17.12、外部事件
+
+#### 17.13、邻居项状态处理定时器
+
+#### 17.14、代理项
+
+#### 17.15、输出函数（484/560）
+
+##### 17.15.1、丢弃
+
+##### 17.15.2、慢速发送
+
++ 1、neigh_resolve_output()
+
+### chap18、ARP：地址解析协议（490/560）
 
 ### chap19、路由表  （513/560）
 
