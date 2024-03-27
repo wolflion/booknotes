@@ -579,54 +579,194 @@
 
 13.3.7、
 
-### chap14、ICMP：Internet控制报文协议
+### chap32、TCP连接的终止 442（451/529）
 
-#### 14.1、ICMP报文结构
+#### 32.1、连接终止过程
 
-14.2、注册ICMP报文类型
+##### 32.1.1、正常关闭
 
-14.3、系统参数
+##### 32.1.2、同时关闭
 
-14.4、ICMP的初始化
+#### 33.2、shutdown传输接口层的实现
 
-14.5、输入处理
+##### 33.2.1、tcp_shutdown()
 
-14.5.1、
++ 是TCP的shutdown系统调用的传输接口层实现，由套接口层的实现`inet_shutdown()`调用
 
-14.5.2、
+##### 33.2.2、tcp_send_fin()
 
-14.5.3、
++ 过程：
+  + 由于发送FIN无需占用额外的负载
 
-14.5.4、
+#### 32.3、close传输接口层的实现：tcp_close()
 
-14.5.5、
+#### 32.4、被动关闭：FIN段的接收处理
 
-14.6、输出处理
+#### 32.5、主动关闭
 
-14.6.1、发送ICMP报文
+##### 32.5.1、timewait控制块的数据结构
 
-14.6.2、发送回显应答和时间戳应答报文
++ 1、inet_timewait_death_row结构
++ 2、inet_timewait_sock结构
++ 3、tcp_timewait_sock结构
 
-### chap15、IP组播
+##### 32.5.2、timewait控制块取代TCP传输控制块
 
-15.1、初始化
+##### 32.5.3、
 
-15.2、虚拟接口
+##### 32.5.4、
 
-15.3、组播转发缓存
+##### 32.5.5、FIN_WAIT2和TIME_WAIT状态处理
 
-15.4、临时组播转发缓存
++ 1、TCP输入入口
++ 2、FIN_WAIT2和TIME_WAIT状态的输入处理
 
-15.5、外部事件
+##### 32.5.6、timewait控制块的2MSL超时处理
 
-15.6、组播套接口选项
++ 1、2MSL等待超时时间较短的超时处理
++ 2、2MSL等待超时时间较长的超时处理
+  + (1)、tw_timer定时器的例程
+  + (2)、twkill_work工作队列例程
 
-15.7、组播选路套接口选项
+### chap33、UDP：用户数据报  473（482/529）
 
-15.8、组播的ioctl
+#### 33.1、引言
 
-15.9、组播报文的输入
++ UDP不提供可靠性
++ 涉及的文件
+  + include/net/udplite.h，定义轻量级UDP专用的函数
+  + include/linux/udp.h，定义UDP传输控制块
+  + net/ipv4/udp.c
+  + net/ipv4/udplite.c
+  + net/core/sock.c，实现传输层通用的函数
+  + net/ipv4/datagram.c，实现UDP的connect调用
+  + net/ipv4/af_inet.c，网络层和传输层接口
 
-15.10、组播报文的转发
+##### 33.1.1、UDP首部
 
-15.11、组播报文的输出
++ 端口号用来标识发送和接收进程
+
+##### 33.1.2、UDP的输入与输出
+
++ 发送，UDP层  udp_sendmsg->udp_push_pending_frame()
+  + 另一个调用是 IP层的 `ip_append_data()`
++ 接收，IP层是，`ip_local_deliver()`
+  + UDP层，udp_rcv()->`_udp4_lib_rcv()`->udp_queue_rcv_skb()->sock_queue_rcv_skb()->skb_queue_tail()->`sk->sk_data_ready()`
++ `struct sock`中的**sk_receive_queue**是接收队列
+
+#### 33.2、UDP的inet_protosw结构
+
++ `struct inet_protosw inetsw_array[] = `
+  + 传输层操作接口为`udp_prot`
+  + 套接口层操作接口为`inet_dgram_ops`
+
+#### 33.3、UDP的传输控制块
+
++ `struct udp_sock{}`是对`inet_sock`结构的扩展
+
+#### 33.4、UDP的proto结构和proto_ops结构的实例
+
++ 传输层操作接口为`udp_prot`
++ 套接口层操作接口为`inet_dgram_ops`
++ *没有扩展*
+
+#### 33.5、UDP的状态
+
++ UDP的传输是没有状态的
+
+#### 33.6、UDP传输控制块的管理
+
++ UDP并不是在hash接口中将其传输控制块添加到**udp_hash散列表**中的，而是**在绑定端口后，才将其添加到散列表**，关键字为端口号与散列表大小取模后的值。
++ `udp_sock`，`socket结构`，`struct file结构`
+
+#### 33.7、bind系统调用的实现
+
++ **UDP的绑定实际上完成两个功能**：
+  + 根据选取的合适端口号将传输控制块添加到udp_hash散列表中
+  + 并将端口号设置到传输控制块中
++ `inet_bind()`
+  + 原始IP，调用bind接口进行绑定
+  + 其他的包括TCP和UDP则调用`get_port()`进行绑定
++ 在UDP中实现传输接口层`get_port()`接口的函数是`udp_v4_get_port()`，**真正绑定的是`__udp_lib_get_port()`**
+
+#### 33.8、UDP套接口的关闭
+
++ UDP的传输接口层的close接口为`udp_lib_close()`，通过对传输接口层的unhash接口的调用，把传输控制块从散列表中删除
+  + `sk_common_release()`
+
+#### 33.9、connect系统调用的实现
+
++ `inet_dgram_connect()`为connect在UDP套接口层的实现
+
+##### 33.9.1、udp_disconnect()
+
++ 传输接口层UDP的disconnect接口的实现
+
+##### 33.9.2、ipv4_datagram_connect()
+
++ 传输接口层UDP的connect接口的实现
+
+#### 33.10、select系统调用的实现
+
++ `udp_poll()`
+
+#### 33.11、UDP的ioctl
+
++ SIOCOUTQ，返回标识该传输控制块为发送而分配的所有数据区的总大小
++ SIOCINQ，获取在接收队列缓存中第一个未读数据报的长度
+
+#### 33.12、UDP的套接口选项
+
++ UDP套接口选项入口为`udp_setsockopt()`
+  + 如果是`SOL_UDP`和`SOL_UDPLITE`级别，调用`udp_lib_setsockopt()`
+  + 否则通过IP接口调用`ip_setsockopt()`
+
+#### 33.13、UDP校验和
+
+##### 33.13.1、输入UDP数据报校验和的计算
+
++ 1、udp4_csum_init()
+  + 用于UDP数据报接收校验的初始化
++ 2、udp_lib_checksum_complete()
+  + 基于伪首部累加和，完成全包校验和的检测
+
+##### 33.13.2、输出UDP数据报校验和的计算
+
++ 1、udp4_hwcsum_outgoing()
++ 2、csum_tcpudp_magic()和udp_csum_outgoing()
+  + udp_csum_outgoing()用在硬件不支持完成校验和的情况下
+
+#### 33.14、UDP的输出：sendmsg系统调用
+
+##### 33.14.1、udp_sendmsg()
+
++ 实现了UDP数据报的组织和发送
+
+##### 33.14.2、udp_push_pending_frames()
+
++ 将待发送数据打包成一个UDP数据报输出
+
+#### 33.15、UDP的输入
+
+##### 33.15.1、UDP接收的入口：udp_rcv()
+
++ UDP层的数据接收，对于套接口而言，就是**接收队列的入队操作**，在IP层，如果是发送到本地数据，则会交由`ip_local_deliver_finish()`处理
+
+##### 33.15.2、UDP组播数据报输入：__udp4_lib_mcast_deliver()
+
+##### 33.15.3、udp_queue_rcv_skb()
+
++ 将UDP数据报添加到所属传输控制块的接收队列中的功能由udp_queue_rcv_skb()来实现
+
+#### 33.16、recvmsg系统调用的实现
+
++ 实现UDP的传输接口层的recvmsg接口函数为`udp_recvmsg()`
+
++ udp_recvmsg()实现了主动从传输控制块的接收队列中读取数据到用户空间的缓冲区中。
+
+#### 33.17、UDP的差错处理：udp_err()
+
+#### 33.18、轻量级UDP
+
++ 在UDP-Lite协议中，一个数据包到底需不需要对其负载进行校验，或者是校验多少位都是由用户控制的
++ `s = socket(PF_INET, SOCK_DGRAM, IPPROTO_UDPLITE);`
