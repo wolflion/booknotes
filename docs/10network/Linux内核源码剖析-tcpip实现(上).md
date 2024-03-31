@@ -507,49 +507,111 @@ struct sk_buff_head {
 
 8.2.2、net_tx_action()
 
-### chap9、流量控制
+### chap9、流量控制（184/560）
+
++ *iptables与流量控制 有啥关系？*
 
 #### 9.1、通过流量控制后输出
 
-9.1.1、dev_queue_xmit()
++ 在链路层，每个数据包通过邻居子系统之后，都由dev_queue_xmit()来进行输出，然后根据输出网络设备的排队规程来确定是否通过QoS之后发送，还是直接调用网卡驱动注册的发送函数把数据包发送出去。
++ 流量控制在接口层输出的位置
+  + 邻居子系统，调用dev_queue_xmit()
+  + 接口层dev_queue_xmit()，入QoS队列激活数据包发送软中断
+  + 数据包发送软中断，数据包发送软中断被激活 出QoS队列调用dev_hard_start_xmit()
+  + 网络设备，`dev->hard_start_xmit()`
++ 涉及的文件
+  + include/net/pkt_sched.h，定义了操作排队规则的宏等
+  + include/net/sch_generic.h，定义排队规则、类和过滤器的结构、宏等
+  + net/sched/sch_api.c，操作排队规则的接口函数
+  + net/sched/sch_generic.c，基本的数据包调度函数
+  + net/core/dev.c，网络设备注册、输入和输出等接口
 
-9.1.2、qdisc_restart()
+##### 9.1.1、dev_queue_xmit()
 
-9.2、构成流量控制的三种元素
+##### 9.1.2、qdisc_restart()
 
-9.2.1、排队规则
++ 从排队规则中获取一个可以输出的报文，然后将其输出到网络设备
 
-9.2.2、类
+#### 9.2、构成流量控制的三种元素
 
-9.2.3、过滤器
++ 在启用了流量控制的情况下，每个网络设备至少会配置一个排队规则。
 
-9.3、默认的FIFO排队规则
+##### 9.2.1、排队规则
 
-9.3.1、pfifo_fast_init()
++ 1、Qdisc结构
++ 2、Qdisc_ops结构
+  + 描述队列操作的接口，每个排队规则都必须要实现该接口
++ 3、排队规则相关函数
+  + dev_init_scheduler()，初始化排队规则的相关数据，在注册网络设备的register_netdevice()中被调用
+  + pktsched_int()，
+  + register_qdisc()，
 
-9.3.2、pfifo_fast_reset()
+##### 9.2.2、类
 
-9.3.1、pfifo_fast_enqueue()
++ 1、xxx_class结构
++ 2、Qdisc_class_ops结构，用于类操作的接口，排队规则实现了分类就必须实现该接口
++ 3、类相关函数
+  + qdisc_graft()
+  + dev_graft_qdisc()
 
-9.3.1、pfifo_fast_dequeue()
+##### 9.2.3、过滤器
 
-9.3.1、pfifo_fast_requeue()
++ **当报文被送到一个具有多个类的排队规则中时，排队规则将调用tc_classify()**
+  + 检查过滤器是否接受`skb->protocol`所指定的协议
+  + 然后，调用过滤器的`classify()`做出决定是否接受或分到哪个类中
 
-9.4、netlink的tc接口
++ 1、tcf_proto结构
++ 2、tcp_proto_ops结构
+  + **描述过滤器的结构**，如果排队规则实现了分类，则必须实现过滤器用来分类
++ 3、过滤器相关函数
+  + tc_filter_init()
+  + register_tcf_proto_ops()
+  + unregister_tcf_proto_ops()
+  + tcf_proto_lookup_ops()
 
-9.5、排队规则的创建接口
+#### 9.3、默认的FIFO排队规则
 
-9.5.1、类的创建接口
+##### 9.3.1、pfifo_fast_init()
 
-9.5.2、过滤器的创建接口
++ FIFO排队规则的初始化函数，用来初始化三个优先级队列
 
-### chap10、Internet协议族
+##### 9.3.2、pfifo_fast_reset()
 
-+ 支持32种协议族，`net_families[NPROTO];`
-+ include/linux/net.h，套接口层的结构、宏和函数原型
-+ include/linux/protocol.h，注册传输层协议的结构、宏和函数原型
-+ net/ipv4/af_inet.c，网络层和传输层接口
-+ net/ipv4/ip_input.c，IP数据报的输入
+##### 9.3.3、pfifo_fast_enqueue()
+
+##### 9.3.4、pfifo_fast_dequeue()
+
+##### 9.3.5、pfifo_fast_requeue()
+
+#### 9.4、netlink的tc接口
+
++ **tc就是通过netlink对流量控制进行配置的命令**
+
+#### 9.5、排队规则的创建接口
+
++ 当用tc工具创建排队规则时，通过netlink后最终由`tc_modify_qdisc()`来处理
+
+##### 9.5.1、类的创建接口
+
++ 使用tc工具配置排队规则类，通过netlink后最终由`tc_ctl_tclass()`来处理
+
+##### 9.5.2、过滤器的创建接口
+
++ 使用tc工具配置类的过滤器，通过netlink后最终由`tc_ctl_tfilter()`来处理
+
+#### 其它
+
++ *我之前以为过滤器是独立的，其实也属于IP层*
+
+### chap10、Internet协议族  （219/560）
+
++ 支持32种协议族，`net_families[NPROTO];`，**每个协议族用一个net_proto_family结构实例来表示**，调用**sock_register()将结构注册到全局数组net_families中**
+  + *有哪些具体的协议没有啊*，PF_INET，PF_LOCAL，PF_UNIX应该都算
++ 涉及的文件
+  + include/linux/net.h，套接口层的结构、宏和函数原型
+  + include/linux/protocol.h，注册传输层协议的结构、宏和函数原型
+  + net/ipv4/af_inet.c，网络层和传输层接口
+  + net/ipv4/ip_input.c，IP数据报的输入
 
 #### 10.1、net_proto_family结构
 
@@ -559,18 +621,31 @@ struct sk_buff_head {
 
 + **只在套接口层起作用**
 + inetsw_array数组包含了三个inet_protosw结构的实例：**TCP，UDP和原始套接口**
++ inet_register_protosw()将inetsw_array数组中的inet_protosw结构实例，以其type值为key组织到散列表inetsw中，**各协议族中的type值相同而protocol值不同的inet_protosw结构实例，在inetsw散列表中以type为关键字连接成链表**，通过inetsw散列表可以找到所有协议族的inet_protosw结构实例
 
 #### 10.3、net_protocol结构
 
 + 定义了协议族中支持的传输层协议以及传输层的报文接收例程。是**网络层和传输层之间的桥梁**。
+  + 这里“传输层”，包含了ICMP和IGMP
+  + **当网络数据报从网络层流向传输层时，会调用此结构中的传输层协议数据报接收处理函数**
 
 #### 10.4、Internet协议族的初始化
 
 + 初始化函数是`inet_init()`，通过fs_initcall(inet_init)，将inet_init加到内核的初始化列表中，保证了此函数会在系统启动时被调用
 
-### chap11、IP：网际协议
+### chap11、IP：网际协议 （227/560）
 
 #### 11.1、引言
+
++ 涉及的文件
+  + include/net/ip.h，定义IP层相关的结构、宏和函数原型
+  + include/linux/inetdevice.h，定义IPv4专用的网络设备相关的结构、宏等
+  + net/ipv4/ip_output.c，IP数据报的输出
+  + net/ipv4/ip_sockglue.c，IP层套接口选项
+  + net/ipv4/ip_input.c，IP数据报的输入
+  + net/ipv4/ip_forward.c，IP数据报的转发
+  + net/ipv4/inetpeer.c，对端信息块的管理
+  + net/ipv4/af_inet.c，网络层和传输层接口
 
 ##### 11.1.1、IP首部
 
@@ -584,29 +659,130 @@ struct sk_buff_head {
 
 #### 11.2、IP的私有信息控制块
 
-11.3、系统参数
++ IP层在SKB中有个信息控制块`inet_skb_parm`结构，存储在skb_buff结构的cb成员中。
 
-11.4、初始化
+#### 11.3、系统参数
 
-11.5、IP层套接口选项
++ ip_default_ttl，
++ ip_dynaddr，
++ ip_local_port_range，
++ ip_no_pmtu_disc
 
-11.6、ipv4_devconf结构
+#### 11.4、初始化
 
-11.7、套接口的错误队列
+#### 11.5、IP层套接口选项
 
-11.8、报文控制信息
++ IP层套接口选项
+  + IP_OPTIONS
+  + IP_PKTINFO
 
-11.9、对端信息块
+#### 11.6、ipv4_devconf结构
 
-11.10、IP数据报的输入处理
++ 是**网络设备接口的IPv4系统配置**，是**系统全局变量**，该配置对所有接口有效。
 
-11.11、IP数据报的输出处理
+#### 11.7、套接口的错误队列
 
-11.12、IP层对GSO的支持
++ 在传输控制块中有一个用于保存错误信息的队列`sk_error_queue`
 
-### chap12、IP选项处理
+##### 11.7.1、添加ICMP差错信息
 
-+ 0、
+##### 11.7.2、添加由本地产生的差错信息
+
+##### 11.7.3、读取错误信息
+
++ recvmsg()用来接收远端发送到所在套接口的数据的，但也可通过设置flags为`MSG_ERRQUEUE`来读取传输控制块错误队列上的错误信息。
+
+#### 11.8、报文控制信息
+
+##### 11.8.1、IP控制信息块
+
++ 由`ipcm_cookie{}`结构描述，存储有关输出的控制信息
+
+##### 11.8.2、报文控制信息的输出
+
+##### 11.8.3、报文控制信息的输入
+
++ `ip_cmsg_recv()`用于获取报文控制信息
+
+#### 11.9、对端信息块
+
++ 由`inet_peer`结构描述，用来保存对端的一些信息
++ 对端信息块以`v4addr`为关键字
+
+##### 11.9.1、系统参数
+
++ inet_peer_gc_maxtime
+
+##### 11.9.2、对端信息块的创建和查找
+
++ 通过`inet_getpeer()`来实现的，**由参数create来区分是创建还是查找**
+
+##### 11.9.3、对端信息块的删除
+
+##### 11.9.4、垃圾回收
+
++ 1、对端信息块的释放
++ 2、同步清理
++ 3、异步清理
+
+#### 11.10、IP数据报的输入处理  (254/560)
+
++ IP数据报定义，`struct packet_type ip_packet_type{}`
++ 1、`ip_rcv()`
+  + ip_rcv()处理完成并经`PRE-ROUTING`点netfilter处理后，再由`ip_rcv_finish()`处理
+  + ip_rcv_finish()中，根据数据报的路由信息，决定**数据报是转发还是输入到本机**
+    + 输入到本机由`ip_local_deliver()`处理
+    + 转发由`ip_forward()`处理
++ 2、`ip_rcv_finish()`
+
+##### 11.10.1、IP数据报输入到本地
+
++ 1、ip_local_deliver()
+  + **先判断接收到的数据报是不是分片**，若是分片，则需将分片重组
++ 2、ip_local_deliver_finish()
+
+##### 11.10.2、IP数据报的转发
+
++ 转发由`ip_forward()`
+
+#### 11.11、IP数据报的输出处理
+
+##### 11.11.1、IP数据报输出到设备
+
++ 经过路由之后都要输出到网络设备，**输出到网络设备的接口就是`ip_output()`**
++ dst_output0()
++ ip_output()
++ ip_finish_output()
++ ip_finish_output2()
+
+##### 11.11.2、TCP输出的接口
+
++ **ip_build_and_send_pkt()和ip_send_reply()只有在发送特定段时才会被调用**
+
++ 1、ip_queue_xmit()
++ 2、ip_build_and_send_pkt()
++ 3、ip_send_reply()
+  + **用于构成并输出RST和ACK段，在tcp_v4_send_reset()和tcp_v4_send_ack()中被调用**
+
+##### 11.11.3、UDP输出的接口
+
++ 1、ip_append_data()
++ 2、ip_ufo_append_data()
++ 3、ip_push_pending_frames()
+
+#### 11.12、IP层对GSO的支持
+
+##### 11.12.1、inet_gso_segment()
+
++ IP层gso_segment接口的实现函数
+
+##### 11.12.2、inet_gso_send_check()
+
++ IP层gso_send_check接口的实现函数，**在分段之前对伪首部进行校验和计算**
+
+### chap12、IP选项处理（288/560）
+
++ 思考、
   + 自己看了RFC791，里面的**IP选项**的介绍能对得上12.1，但是**实现**不确定从哪来的
   + [rfc1122](https://datatracker.ietf.org/doc/html/rfc1122#page-35)，跟rfc791差不多，只不过人家实现了多种场景，（link layer，ip层、传输层）
 + 提到了2个rfc，rfc791，rfc1122
@@ -615,11 +791,19 @@ struct sk_buff_head {
 
 ##### 12.1.1、选项列表的结束符，End of Option List
 
+##### 12.1.2、空操作
+
+##### 12.1.3、安全选项
+
+##### 12.1.4、严格源路由选项（SSRR）
+
 ##### 12.1.9、
 
 + 我没在rfc791上看到，**作者让看rfc2113**
 
 #### 12.2、ip_options结构
+
++ IP选项信息块
 
 #### 12.3、在IP数据报中构建IP选项
 
@@ -645,7 +829,7 @@ struct sk_buff_head {
 
 #### 12.12、由控制信息生成IP选项信息块
 
-### chap13、IP的分片与组装
+### chap13、IP的分片与组装（313/560）
 
 + **UDP很容易导致分片**
 
@@ -653,65 +837,170 @@ struct sk_buff_head {
 
 #### 13.1、系统参数
 
++ ipfrag_high_thresh
++ ipfrag_low_thresh
++ ipfrag_max_dist，允许接收来自同一个源IP地址的IP分片数量的上限值，**用于防御Dos攻击**，默认值64
++ ipfrag_secret_interval
++ ipfrag_time
+
 #### 13.2、分片
 
++ **ip_finish_output()**将数据报发送出去之前，会检测数据报长度，超出MTU，调用**ip_fragment()对数据报分片**，否则直接调用ip_finish_output2()输出到数据链路层。
+
 + *两种分片在rfc791里没有提到，只是给了个分片过程，具体的实现，还是内核侧提供的，函数的话，还是看他们*
++ *快速分片，慢速分片，两者区别*
 
 ##### 13.2.1、快速分片
 
++ 当传输层已将数据分块，并将这些块链接在`skb_shinfo(skb)->frag_list`，此时则可以通过快速分片进行处理
++ **有4种情况不能快速分片：**
+  + 有分片长度大于MTU
+  + 除最后一个分片外还有分片长度未8字节对齐
+  + IP首部中的MF或片偏移不为0，说明SKB不是一个完整的IP数据报
+  + 此SKB被克隆
+
 ##### 13.2.2、慢速分片
 
-13.3、组装
+#### 13.3、组装
 
-13.3.1、ipq结构
++ **每一个将被重新组合的IP数据报都用一个ipq结构实例来表示**
 
-13.3.2、ipq散列表和链表的维护
+##### 13.3.1、ipq结构
 
-13.3.3、ipq散列表的重组
++ 用于保存分片的数据结构必须做到以下几点：
+  + 1、快速定位属于某一数据报的一组分片
+  + 2、在属于某一数据报的一组分片中快速插入新的分片
+  + 3、有效地判断一个数据报的所有分片是否已经全部接收
+  + 4、具有组装超时机制，如果在重组完成之前定时器溢出，则删除该数据报的所有内容
 
-13.3.4、
+##### 13.3.2、ipq散列表和链表的维护
 
-13.3.5、
++ ipq_kill()，
++ ipq_put()，释放irq及分片
 
-13.3.6、
+##### 13.3.3、ipq散列表的重组
 
-13.3.7、
++ **所有的分片重组都是通过ipq散列表进行的**
++ ipfrag_init()
++ ipfrag_secret_rebuild()
 
-### chap14、ICMP：Internet控制报文协议
+##### 13.3.4、超时IP分片的清除
+
++ ip_frag_create()
++ ip_expire()
+
+##### 13.3.5、垃圾收集
+
++ ip_evictor()主要对ipq中分片进行条件性的清理
+
+##### 13.3.6、相关分片组装函数
+
++ ip_find()
++ ip_frag_create()
++ ip_frag_intern()
++ ip_frag_queue()
++ ip_frag_reasm()
+
+##### 13.3.7、分片组装
+
++ **图13-5**
++ IP分片组装过程三步：
+  + 1、首先判断接收到的IP数据报是否是一个分片
+  + 2、以(addr，saddr，protocol，id，ipfrag_hash_rnd)计算键值，在ipq散列表中找到分片所属的ipq，并按序插入到该ipq的分片链表中
+  + 3、如果此时该ipq的所有分片已经全部到达，则将这些分片组装成一个完整的IP数据报
+
+### chap14、ICMP：Internet控制报文协议（340/560）
+
++ ICMP是网络层的，**可以看作IP协议的附属协议**，因为它主要被IP用来与其他主机或路由器交换错误报文及其他需注意的信息。
++ 涉及文件
+  + net/ipv4/icmp.c，ICMP协议的处理
+  + net/ipv4/af_inet.c，网络层和传输层接口
 
 #### 14.1、ICMP报文结构
 
-14.2、注册ICMP报文类型
+#### 14.2、注册ICMP报文类型
 
-14.3、系统参数
++ `struct net_protocol icmp_protocol={.handler = icmp_rcv,};`
++ 接收ICMP报文例程是`icmp_rcv()`
 
-14.4、ICMP的初始化
+#### 14.3、系统参数
 
-14.5、输入处理
++ icmp_echo_ignore_all
++ icmp_echo_ignore_broadcasts
 
-14.5.1、
+#### 14.4、ICMP的初始化
 
-14.5.2、
++ icmp_init，在`inet_init()`中调用，主要功能是**为每个CPU创建一个基于原始流、IPPROTO_ICMP协议类型的套接口供内核使用**
 
-14.5.3、
+#### 14.5、输入处理icmp_rcv
 
-14.5.4、
++ ICMP报文到达时，IP层通过inet_protos[IPPROTO_ICMP]找到该函数进行输入处理
 
-14.5.5、
+##### 14.5.1、差错控制
 
-14.6、输出处理
++ icmp_unreach()，处理**目的不可达、源端被关闭、超时、参数错误**这四种类型的差错ICMP报文
 
-14.6.1、发送ICMP报文
+##### 14.5.2、重定向处理
 
-14.6.2、发送回显应答和时间戳应答报文
++ icmp_redirect()
 
-### chap15、IP组播
+##### 14.5.3、请求回显
 
-15.1、初始化
++ `struct icmp_bxm{};`
 
-15.2、虚拟接口
+##### 14.5.4、时间戳请求
 
-15.3、组播转发缓存
++ icmp_timestamp()
+
+##### 14.5.5、地址掩码请求和应答
+
+#### 14.6、输出处理icmp_send
+
+##### 14.6.1、发送ICMP报文
+
++ 输出各种指定类型和编码的ICMP报文，**不能应答目的地址为组播或广播类型的硬件地址或IP地址的报文**
+
+##### 14.6.2、发送回显应答和时间戳应答报文
+
++ icmp_reply()，**回显应答和时间戳应答**
++ icmp_push_reply()
+  + **用来创建待发送ICMP报文，然后将其添加到传输控制块的发送缓冲队列中**，完成后，如果套接口的输出队列上还有未输出的报文，则计算ICMP报文的校验和并将其输出
+
+### chap15、IP组播（363/560）
+
++ **只有通过组播路由协议守护进程（mrouted），依靠路由协议（静态路由、ospf、rip）来生成转发缓存**，才能真正实现组播功能。
++ 涉及文件
+  + include/linux/mroute.h，定义IP组播相关的虚拟接口结构、组播转发缓存结构等
+  + net/ipv4/ipmr.c，IP组播的输入和转发
+  + net/ipv4/ip_output.c，IP数据报的输出，包括IP组播的输出
+
+#### 15.1、初始化
+
++ 为IP组播建立环境，包括**创建组播转发缓存池，为临时路由转发缓存建立定时器**
++ `ip_mr_init()`在`inet_init()`中被调用来初始化IP组播
+
+#### 15.2、虚拟接口
+
++ 组播报文可以通过两条途径来收发：
+  + 一是**直接通过LAN网络设备收发**
+  + 二是**打包成二级单播IP数据报，然后通过隧道传输**
++ 由**vif_device结构来描述**，**标志flags**来区分虚拟接口当前描述的是**物理网络设备还是IP-IP隧道**
+
+##### 15.2.1、虚拟接口的添加
+
++ `struct vifctl{};`
+
+##### 15.2.2、虚拟接口的删除：vif_delete()
+
++ 以MRT_DEL_VIF为optname参数值调用ip_mroute_setsockopt()时被激活。**参数vifi是待删除虚拟接口的索引**
+
+##### 15.2.3、查找虚拟接口：ipmr_find_vif()
+
++ 根据参数给出的网络设备**遍历vif_table数组**查找对应的虚拟接口，该函数通常在输入或输发组播报文时被调用。
+
+#### 15.3、组播转发缓存（Multicast Forwarding Cache，MFC）
+
++ 用来存储组播转发所需的全部信息
 
 15.4、临时组播转发缓存
 
