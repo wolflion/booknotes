@@ -1,5 +1,7 @@
 ## 《深入理解Linux网络》
 
++ 核心4.4，**从用户进程到网卡的详细过程**
+
 ### chap1、绪论
 
 #### 1.1、我在工作中的困惑
@@ -232,6 +234,9 @@
 
 ### chap4、内核是如何发送网络包的
 
++ *自己想复习的是*
+  + 用户进程到网卡的过程，*差不多在chap5，又复习了一下了*
+
 4.1、相关实际问题
 
 #### 4.2、网络包发送过程总览
@@ -270,6 +275,7 @@
 + 主要干了2件事情
   + 1、在内核中把真正的socket找出来，这个里面记录了各种协议栈的函数地址
   + 2、构造一个struct msghdr对象，把用户传入的数据，都装进去
++ 到了，协议栈的`inet_sendmsg()`
 
 ##### 4.4.2、传输层处理
 
@@ -330,11 +336,76 @@
 
 ### chap5、深度理解本机网络IO
 
++ *换成更通俗的问法*：【本机网络IO，**无非就是的收发都在本机的情况**】
+  + 1、复习一下跨机网络通信
+  + 2、本机发送
+  + 3、本机接收
++ *RingBuffer不是很熟*
+
+#### 5.1、相关实际问题
+
++ LNMP中的nginx和php-fpm进程，就是通过本机来通信的
++ 微服务中的sidecar模式，也是本机网络IO
++ 问题
+  + 1、127.0.0.1本机网络IO需要经过网卡吗？ **不需要网卡**【但为啥呢？走的是**虚拟的环回设备lo**】
+  + 2、数据包在内核中是什么走向，和外网发送相比流程上有什么差别？  **节约了驱动上的一些开销**
+  + 3、访问本机服务时，使用127.0.0.1能比使用本机IP（如192.168.1.1）更快吗？**一样的**【但为啥呢？走的是**虚拟的环回设备lo**】
+
 #### 5.2、跨机网络通信过程
 
-##### 5.2.1、跨机数据发送
+##### 5.2.1、跨机数据发送（chap4介绍了）
+
++ 数据发送流程
+  + 一、用户态（send，1、调用系统调用发送）
+  + 二、内核态（send系统调用，2、内存拷贝）
+    + skb，3、协议处理  4、进入驱动RingBuffer
+    + **传输队列**
+    + 7、收到中断后，清理RingBuffer
+  + 三、PCI总线，5、实际发送，**6、中断通知CPU，发送完成** 
++ **5-2数据发送源码**
+  + 一、应用层，main中的send()
+  + 二、系统调用，net/socket.c中的`SYSCALL_DEFINE6(sendto)`，`__sock_sendmsg_nosec(){}`中的`sock_sendmsg{sock->ops->sendmsg()}`
+  + 三、协议栈，net/ipv4/af_inet.c中的`inet_sendmsg(){sk->sk_port->sendmsg()}`
+    + 协议栈，传输层，net/ipv4/tcp.c中的`tcp_sendmsg()`
+    + 协议栈，传输层，net/ipv4/tcp_output.c中的`tcp_transmit_skb()`中的`icsk->icsk_af_ops->queue_xmit()`
+    + 协议栈，网络层，net/ipv4/ip_output.c中的`ip_queue_xmit()`
+    + 协议栈，网络层，net/ipv4/ip_output.c中的`ip_finish_output2()`
+  + 三、邻居子系统，include/net/dst.h中的`dst_neigh_outpu()`
+    + 邻居子系统，include/net/neighbour.h中的`neigh_hh_output()`
+  + 四、网络设备子系统，net/core/dev.c中的`dev_queue_xmit()`
+    + 网络设备子系统，net/core/dev.c中的`dev_hard_start_xmit()`
+  + 五、驱动程序，drivers/net/ethernet/intel/igb/igb_main.c中的`igb_xmit_frame()`，以及`igb_xmit_frame_ring()`
+  + 六、硬件
++ **图5.3，RingBuffer清理**
+  + 一、硬件
+  + 二、硬中断，drivers/net/ethernet/intel/igb/igb_main.c中的`igb_msix_ring()`
+    + `__napi_schedule()`再调用
+  + 三、软中断，net/core/dev.c中的`net_rx_action(){work = n->poll()}`
+  + 四、驱动，drivers/net/ethernet/intel/igb/igb_main.c中的`igb_poll()`
+    + 驱动，`igb_clean_tx_irq()`
 
 ##### 5.2.2、跨机数据接收
+
++ 接收过程
+  + 一、网卡，1、数据帧从外部网络到达网卡
+    + 3、**给CPU一个中断**，硬中断通知给CPU
+    + 4、CPU响应中断，简单处理后，发出软中断
+    + 5、**ksoftirqd线程处理软中断**，调用网卡驱动注册的poll函数开始收包，**进入内核态**
+  + 二、PCIe总线，2、网卡把帧DMA到内存
+  + 三、内核态，6、帧被从RingBuffer上摘下来保存为一个skb
+  + 四、用户态，7、协议层开始处理网络帧，处理后的数据放到socket的接收队列中
+  + 8、**内核唤醒用户进程**（*这个流程上，在图上没看懂啊*，跟CPU有啥关系？）
++ 数据接收源码
+  + 一、硬件
+  + 二、软中断，drivers/net/ethernet/intel/igb/igb_main.c中的
+    + net/core/dev.c中的`__napi_schedule()`
+  + 三、软中断，net/core/dev.c中的`net_rx_action()`
+    + 软中断，驱动，drivers/net/ethernet/intel/igb/igb_main.c中的`igb_poll()`
+    + 软中断，驱动，net/core/dev.c中的`deliver_skb()`
+  + 四、协议栈，IP层，ipv4/ip_input.c中的`ip_rcv`
+    + 协议栈，传输层，net/ipv4/tcp_ipv4.c中的`tcp_v4_rcv()`
+    + 协议栈，传输层，net/ipv4/tcp_ipv4.c中的`tcp_rcv_established(){tcp_queue_rcv(); sk->sk_data_ready()}`
+  + 五、用户进程，main中的`recvfrom(fd,buff,BUFFSIZE)`
 
 ##### 5.2.3、跨机网络通信汇总
 
@@ -359,6 +430,16 @@
 ##### 5.3.1、网络层路由
 
 + 网络层入口函数是`ip_queue_xmit()`，net/ipv4/ip_output.c
++ **对于本机网络IO来说，在local路由表中就能找到路由项，对应的设备都将使用loopback网卡，也就是lo设备**
++ 一、网络层工作流程
+  + 1、ip_queue_xmit
+    + ip_route_output_ports，查找并设置路由项
+    + 设置IP头
+  + 2、ip_local_out
+    + netfilter过滤统计工作
+  + 3、ip_finish_output
+    + 大于MTU的话要分片
++ 二、邻居子系统，`dst_neigh_output()`
 
 ##### 5.3.2、本机IP路由
 
@@ -368,20 +449,39 @@
 ##### 5.3.3、网络设备子系统
 
 + 网络设备子系统的入口函数是`dev_queue_xmit()`，net/core/dev.c
++ 一、邻居子系统
++ 二、网络设备子系统
+  + dev_queue_xmit()，**选择队列skb入队出队并发送**
+  + dev_hard_start_xmit()
++ 三、驱动程序
+  + igb_xmit_frame
+    + 1、获取可用缓存区，并关联skb
+    + 2、dma_map_single构造内存映射
 
 ##### 5.3.4、“驱动”程序
 
 + 对于真实的igb网卡来说，它的驱动代码都在drivers/net/ethernet/intel/igb/igb_main.c文件中
 + drivers/net/loopback.c
   + `loopback_xmit()`
+    + 1、剥离skb
+    + 2、加入input_pkt_queue
+    + 3、触发软中断
 + net/core/dev.c
   + `__napi_schedule()`
 
 #### 5.4、本机接收过程
 
 + 软中断处理函数`net_rx_action()`
++ 一、软中断，net_rx_action，**调用驱动提供的poll函数**
++ 二、驱动程序，process_backlog，**使用新链表**
+  + process_queue，`skb`的队列
 
 #### 5.5、本章总结
+
++ *自己想的*
+  + 细节是**中断**，这个怎么理解呢？
+    + 网卡收到数据了，**给CPU一个硬中断**，然后**CPU简单处理后，发出软中断**
+    + *这里的，软中断、硬中断*，怎么理解？
 
 ### chap6、深度理解TCP连接建立过程
 
