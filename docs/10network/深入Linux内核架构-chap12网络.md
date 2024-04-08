@@ -109,6 +109,9 @@
 
 ##### 12.9.1、UDP
 
++ ip_local_deliver负责分发IP分组传输的数据内容，net/ipv4/udp.c中的udp_rcv用于进一步处理UDP数据报
++ 在`__udp4_lib_rcv()`中调用`__udp4_lib_lookup()`，**查找目标套接字**
+
 ##### 12.9.2、TCP
 
 #### 12.10、应用层
