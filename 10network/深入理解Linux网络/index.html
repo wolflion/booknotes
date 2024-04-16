@@ -214,9 +214,11 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#chap5io">chap5、深度理解本机网络IO</a>
         <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#51">5.1、相关实际问题</a>
+    </li>
     <li class="toctree-l3"><a class="reference internal" href="#52">5.2、跨机网络通信过程</a>
         <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#521">5.2.1、跨机数据发送</a>
+    <li class="toctree-l4"><a class="reference internal" href="#521chap4">5.2.1、跨机数据发送（chap4介绍了）</a>
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#522">5.2.2、跨机数据接收</a>
     </li>
@@ -387,7 +389,7 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">《深入理解Linux虚拟内存管理》</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《深入理解Linux网络技术内幕》</a>
+                  <li class="toctree-l1"><a class="" href="../../13kernel/深入理解Linux网络技术内幕.md">《深入理解Linux网络技术内幕》</a>
                   </li>
                   <li class="toctree-l1"><a class="" href="../../13kernel/Linux内核源代码剖析-tcpip实现.md">《Linux内核源代码剖析-TCP/IP实现》</a>
                   </li>
@@ -457,6 +459,9 @@
             <div class="section" itemprop="articleBody">
               
                 <h2 id="linux">《深入理解Linux网络》<a class="headerlink" href="#linux" title="Permanent link">&para;</a></h2>
+<ul>
+<li>核心4.4，<strong>从用户进程到网卡的详细过程</strong></li>
+</ul>
 <h3 id="chap1">chap1、绪论<a class="headerlink" href="#chap1" title="Permanent link">&para;</a></h3>
 <h4 id="11">1.1、我在工作中的困惑<a class="headerlink" href="#11" title="Permanent link">&para;</a></h4>
 <h5 id="115127001">1.1.5、访问127.0.0.1过网卡吗？<a class="headerlink" href="#115127001" title="Permanent link">&para;</a></h5>
@@ -709,6 +714,12 @@
 </ul>
 <h4 id="35">3.5、本章总结<a class="headerlink" href="#35" title="Permanent link">&para;</a></h4>
 <h3 id="chap4">chap4、内核是如何发送网络包的<a class="headerlink" href="#chap4" title="Permanent link">&para;</a></h3>
+<ul>
+<li><em>自己想复习的是</em><ul>
+<li>用户进程到网卡的过程，<em>差不多在chap5，又复习了一下了</em></li>
+</ul>
+</li>
+</ul>
 <p>4.1、相关实际问题</p>
 <h4 id="42">4.2、网络包发送过程总览<a class="headerlink" href="#42" title="Permanent link">&para;</a></h4>
 <ul>
@@ -755,6 +766,7 @@
 <li>2、构造一个struct msghdr对象，把用户传入的数据，都装进去</li>
 </ul>
 </li>
+<li>到了，协议栈的<code>inet_sendmsg()</code></li>
 </ul>
 <h5 id="442">4.4.2、传输层处理<a class="headerlink" href="#442" title="Permanent link">&para;</a></h5>
 <h6 id="_7">传输层拷贝<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h6>
@@ -826,9 +838,111 @@
 </li>
 </ul>
 <h3 id="chap5io">chap5、深度理解本机网络IO<a class="headerlink" href="#chap5io" title="Permanent link">&para;</a></h3>
+<ul>
+<li><em>换成更通俗的问法</em>：【本机网络IO，<strong>无非就是的收发都在本机的情况</strong>】<ul>
+<li>1、复习一下跨机网络通信</li>
+<li>2、本机发送</li>
+<li>3、本机接收</li>
+</ul>
+</li>
+<li><em>RingBuffer不是很熟</em></li>
+</ul>
+<h4 id="51">5.1、相关实际问题<a class="headerlink" href="#51" title="Permanent link">&para;</a></h4>
+<ul>
+<li>LNMP中的nginx和php-fpm进程，就是通过本机来通信的</li>
+<li>微服务中的sidecar模式，也是本机网络IO</li>
+<li>问题<ul>
+<li>1、127.0.0.1本机网络IO需要经过网卡吗？ <strong>不需要网卡</strong>【但为啥呢？走的是<strong>虚拟的环回设备lo</strong>】</li>
+<li>2、数据包在内核中是什么走向，和外网发送相比流程上有什么差别？  <strong>节约了驱动上的一些开销</strong></li>
+<li>3、访问本机服务时，使用127.0.0.1能比使用本机IP（如192.168.1.1）更快吗？<strong>一样的</strong>【但为啥呢？走的是<strong>虚拟的环回设备lo</strong>】</li>
+</ul>
+</li>
+</ul>
 <h4 id="52">5.2、跨机网络通信过程<a class="headerlink" href="#52" title="Permanent link">&para;</a></h4>
-<h5 id="521">5.2.1、跨机数据发送<a class="headerlink" href="#521" title="Permanent link">&para;</a></h5>
+<h5 id="521chap4">5.2.1、跨机数据发送（chap4介绍了）<a class="headerlink" href="#521chap4" title="Permanent link">&para;</a></h5>
+<ul>
+<li>数据发送流程<ul>
+<li>一、用户态（send，1、调用系统调用发送）</li>
+<li>二、内核态（send系统调用，2、内存拷贝）<ul>
+<li>skb，3、协议处理  4、进入驱动RingBuffer</li>
+<li><strong>传输队列</strong></li>
+<li>7、收到中断后，清理RingBuffer</li>
+</ul>
+</li>
+<li>三、PCI总线，5、实际发送，<strong>6、中断通知CPU，发送完成</strong> </li>
+</ul>
+</li>
+<li><strong>5-2数据发送源码</strong><ul>
+<li>一、应用层，main中的send()</li>
+<li>二、系统调用，net/socket.c中的<code>SYSCALL_DEFINE6(sendto)</code>，<code>__sock_sendmsg_nosec(){}</code>中的<code>sock_sendmsg{sock-&gt;ops-&gt;sendmsg()}</code></li>
+<li>三、协议栈，net/ipv4/af_inet.c中的<code>inet_sendmsg(){sk-&gt;sk_port-&gt;sendmsg()}</code><ul>
+<li>协议栈，传输层，net/ipv4/tcp.c中的<code>tcp_sendmsg()</code></li>
+<li>协议栈，传输层，net/ipv4/tcp_output.c中的<code>tcp_transmit_skb()</code>中的<code>icsk-&gt;icsk_af_ops-&gt;queue_xmit()</code></li>
+<li>协议栈，网络层，net/ipv4/ip_output.c中的<code>ip_queue_xmit()</code></li>
+<li>协议栈，网络层，net/ipv4/ip_output.c中的<code>ip_finish_output2()</code></li>
+</ul>
+</li>
+<li>三、邻居子系统，include/net/dst.h中的<code>dst_neigh_outpu()</code><ul>
+<li>邻居子系统，include/net/neighbour.h中的<code>neigh_hh_output()</code></li>
+</ul>
+</li>
+<li>四、网络设备子系统，net/core/dev.c中的<code>dev_queue_xmit()</code><ul>
+<li>网络设备子系统，net/core/dev.c中的<code>dev_hard_start_xmit()</code></li>
+</ul>
+</li>
+<li>五、驱动程序，drivers/net/ethernet/intel/igb/igb_main.c中的<code>igb_xmit_frame()</code>，以及<code>igb_xmit_frame_ring()</code></li>
+<li>六、硬件</li>
+</ul>
+</li>
+<li><strong>图5.3，RingBuffer清理</strong><ul>
+<li>一、硬件</li>
+<li>二、硬中断，drivers/net/ethernet/intel/igb/igb_main.c中的<code>igb_msix_ring()</code><ul>
+<li><code>__napi_schedule()</code>再调用</li>
+</ul>
+</li>
+<li>三、软中断，net/core/dev.c中的<code>net_rx_action(){work = n-&gt;poll()}</code></li>
+<li>四、驱动，drivers/net/ethernet/intel/igb/igb_main.c中的<code>igb_poll()</code><ul>
+<li>驱动，<code>igb_clean_tx_irq()</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h5 id="522">5.2.2、跨机数据接收<a class="headerlink" href="#522" title="Permanent link">&para;</a></h5>
+<ul>
+<li>接收过程<ul>
+<li>一、网卡，1、数据帧从外部网络到达网卡<ul>
+<li>3、<strong>给CPU一个中断</strong>，硬中断通知给CPU</li>
+<li>4、CPU响应中断，简单处理后，发出软中断</li>
+<li>5、<strong>ksoftirqd线程处理软中断</strong>，调用网卡驱动注册的poll函数开始收包，<strong>进入内核态</strong></li>
+</ul>
+</li>
+<li>二、PCIe总线，2、网卡把帧DMA到内存</li>
+<li>三、内核态，6、帧被从RingBuffer上摘下来保存为一个skb</li>
+<li>四、用户态，7、协议层开始处理网络帧，处理后的数据放到socket的接收队列中</li>
+<li>8、<strong>内核唤醒用户进程</strong>（<em>这个流程上，在图上没看懂啊</em>，跟CPU有啥关系？）</li>
+</ul>
+</li>
+<li>数据接收源码<ul>
+<li>一、硬件</li>
+<li>二、软中断，drivers/net/ethernet/intel/igb/igb_main.c中的<ul>
+<li>net/core/dev.c中的<code>__napi_schedule()</code></li>
+</ul>
+</li>
+<li>三、软中断，net/core/dev.c中的<code>net_rx_action()</code><ul>
+<li>软中断，驱动，drivers/net/ethernet/intel/igb/igb_main.c中的<code>igb_poll()</code></li>
+<li>软中断，驱动，net/core/dev.c中的<code>deliver_skb()</code></li>
+</ul>
+</li>
+<li>四、协议栈，IP层，ipv4/ip_input.c中的<code>ip_rcv</code><ul>
+<li>协议栈，传输层，net/ipv4/tcp_ipv4.c中的<code>tcp_v4_rcv()</code></li>
+<li>协议栈，传输层，net/ipv4/tcp_ipv4.c中的<code>tcp_rcv_established(){tcp_queue_rcv(); sk-&gt;sk_data_ready()}</code></li>
+</ul>
+</li>
+<li>五、用户进程，main中的<code>recvfrom(fd,buff,BUFFSIZE)</code></li>
+</ul>
+</li>
+</ul>
 <h5 id="523">5.2.3、跨机网络通信汇总<a class="headerlink" href="#523" title="Permanent link">&para;</a></h5>
 <ul>
 <li>send<ul>
@@ -855,6 +969,24 @@
 <h5 id="531">5.3.1、网络层路由<a class="headerlink" href="#531" title="Permanent link">&para;</a></h5>
 <ul>
 <li>网络层入口函数是<code>ip_queue_xmit()</code>，net/ipv4/ip_output.c</li>
+<li><strong>对于本机网络IO来说，在local路由表中就能找到路由项，对应的设备都将使用loopback网卡，也就是lo设备</strong></li>
+<li>一、网络层工作流程<ul>
+<li>1、ip_queue_xmit<ul>
+<li>ip_route_output_ports，查找并设置路由项</li>
+<li>设置IP头</li>
+</ul>
+</li>
+<li>2、ip_local_out<ul>
+<li>netfilter过滤统计工作</li>
+</ul>
+</li>
+<li>3、ip_finish_output<ul>
+<li>大于MTU的话要分片</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>二、邻居子系统，<code>dst_neigh_output()</code></li>
 </ul>
 <h5 id="532ip">5.3.2、本机IP路由<a class="headerlink" href="#532ip" title="Permanent link">&para;</a></h5>
 <ul>
@@ -864,12 +996,31 @@
 <h5 id="533">5.3.3、网络设备子系统<a class="headerlink" href="#533" title="Permanent link">&para;</a></h5>
 <ul>
 <li>网络设备子系统的入口函数是<code>dev_queue_xmit()</code>，net/core/dev.c</li>
+<li>一、邻居子系统</li>
+<li>二、网络设备子系统<ul>
+<li>dev_queue_xmit()，<strong>选择队列skb入队出队并发送</strong></li>
+<li>dev_hard_start_xmit()</li>
+</ul>
+</li>
+<li>三、驱动程序<ul>
+<li>igb_xmit_frame<ul>
+<li>1、获取可用缓存区，并关联skb</li>
+<li>2、dma_map_single构造内存映射</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <h5 id="534">5.3.4、“驱动”程序<a class="headerlink" href="#534" title="Permanent link">&para;</a></h5>
 <ul>
 <li>对于真实的igb网卡来说，它的驱动代码都在drivers/net/ethernet/intel/igb/igb_main.c文件中</li>
 <li>drivers/net/loopback.c<ul>
-<li><code>loopback_xmit()</code></li>
+<li><code>loopback_xmit()</code><ul>
+<li>1、剥离skb</li>
+<li>2、加入input_pkt_queue</li>
+<li>3、触发软中断</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>net/core/dev.c<ul>
@@ -880,8 +1031,23 @@
 <h4 id="54">5.4、本机接收过程<a class="headerlink" href="#54" title="Permanent link">&para;</a></h4>
 <ul>
 <li>软中断处理函数<code>net_rx_action()</code></li>
+<li>一、软中断，net_rx_action，<strong>调用驱动提供的poll函数</strong></li>
+<li>二、驱动程序，process_backlog，<strong>使用新链表</strong><ul>
+<li>process_queue，<code>skb</code>的队列</li>
+</ul>
+</li>
 </ul>
 <h4 id="55">5.5、本章总结<a class="headerlink" href="#55" title="Permanent link">&para;</a></h4>
+<ul>
+<li><em>自己想的</em><ul>
+<li>细节是<strong>中断</strong>，这个怎么理解呢？<ul>
+<li>网卡收到数据了，<strong>给CPU一个硬中断</strong>，然后<strong>CPU简单处理后，发出软中断</strong></li>
+<li><em>这里的，软中断、硬中断</em>，怎么理解？</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h3 id="chap6tcp">chap6、深度理解TCP连接建立过程<a class="headerlink" href="#chap6tcp" title="Permanent link">&para;</a></h3>
 <h4 id="62listen">6.2、深入理解listen<a class="headerlink" href="#62listen" title="Permanent link">&para;</a></h4>
 <h5 id="621listen">6.2.1、listen系统调用<a class="headerlink" href="#621listen" title="Permanent link">&para;</a></h5>

@@ -147,7 +147,7 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">《深入理解Linux虚拟内存管理》</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《深入理解Linux网络技术内幕》</a>
+                  <li class="toctree-l1"><a class="" href="../../13kernel/深入理解Linux网络技术内幕.md">《深入理解Linux网络技术内幕》</a>
                   </li>
                   <li class="toctree-l1"><a class="" href="../../13kernel/Linux内核源代码剖析-tcpip实现.md">《Linux内核源代码剖析-TCP/IP实现》</a>
                   </li>
@@ -365,11 +365,32 @@ sock_mnt = kern_mount(&amp;sock_fs_type);//安装网络文件系统</code></pre>
 </ul>
 <h3 id="chap4">chap4、路由<a class="headerlink" href="#chap4" title="Permanent link">&para;</a></h3>
 <h4 id="41">4.1、路由函数表结构及关系图<a class="headerlink" href="#41" title="Permanent link">&para;</a></h4>
-<p>4.2、路由函数表的初始化</p>
-<p>4.3、通过路由函数表查找路由信息</p>
-<p>4.4、路由的设置及相关结构的初始化</p>
-<p>4.5、基于输出方向的路由表查找与创建</p>
-<p>4.6、基于输入方向的路由表查找与创建</p>
+<ul>
+<li>路由函数表fib_table是路由的总根，可以从它出发找到各个路由区结构fn_zone，也可以找到路由节点结构fib_node或者路由信息结构fib_info。</li>
+</ul>
+<h4 id="42">4.2、路由函数表的初始化<a class="headerlink" href="#42" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>inet_init</code>调用了<code>ip_init()</code>，进一步调用了<code>ip_rt_init()</code></li>
+<li><em>不少重点，没看</em></li>
+</ul>
+<h4 id="43">4.3、通过路由函数表查找路由信息<a class="headerlink" href="#43" title="Permanent link">&para;</a></h4>
+<ul>
+<li>通过<code>_inet_dev_addr_type()</code>的过程中来看调用函数表<code>tb_lookup()</code></li>
+</ul>
+<h4 id="44">4.4、路由的设置及相关结构的初始化<a class="headerlink" href="#44" title="Permanent link">&para;</a></h4>
+<ul>
+<li>A、net_tools通过ioctl系统调用进入<code>ip_rt_ioctl()</code>，它通过<strong>路由函数表的钩子函数</strong>实现增加或者删除路由</li>
+<li>B、iproute2设置路线，它设置路由的方式主要是通过netlink来实现，调用<code>inet_rtm_newroute()</code>或者<code>inet_rtm_delroute()</code></li>
+<li>C、通知链的方式，在<code>ip_fib_init()</code></li>
+</ul>
+<h4 id="45">4.5、基于输出方向的路由表查找与创建<a class="headerlink" href="#45" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>sys_socketcall()-&gt;sys_connect()-&gt;inet_stream_connect()-&gt;tcp_v4_connect()-&gt;ip_route_connect()</code></li>
+</ul>
+<h4 id="46">4.6、基于输入方向的路由表查找与创建<a class="headerlink" href="#46" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>do_softirq()-&gt;net_rx_action()-&gt;process_backlog()-&gt;netif_receive_skb()-&gt;deliver_skb()-&gt;ip_rcv()-&gt;ip_rcv_finish()-&gt;ip_route_input()</code></li>
+</ul>
 <h3 id="chap5">chap5、通知链<a class="headerlink" href="#chap5" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>内核为了及时响应某些到来的事件，采取了通知链的方式来执行指定函数</strong></li>
@@ -463,6 +484,94 @@ sock_mnt = kern_mount(&amp;sock_fs_type);//安装网络文件系统</code></pre>
 <li><code>struct Qdisc *q = dev-&gt;qdisc;//取得设备的排队规则</code></li>
 </ul>
 </li>
+</ul>
+<h3 id="chap12">chap12、建立连接的过程<a class="headerlink" href="#chap12" title="Permanent link">&para;</a></h3>
+<ul>
+<li>第9章</li>
+<li>本章分析，服务器如何为数据块建立数据包并从底层（链路层）向上层（应用层）传递到服务器程序的过程</li>
+</ul>
+<h4 id="121">12.1、驱动程序接收并建立数据包<a class="headerlink" href="#121" title="Permanent link">&para;</a></h4>
+<ul>
+<li>了解驱动程序是如何将中断程序登记到内核中的。CS8900驱动程序中的<code>cs89x0_probel()</code></li>
+<li>当使用ifconfig eth0 up启动网卡时会执行系统调用<code>sys_ioctl()</code>，最终内核会执行<code>dev_open()</code>，整体过程是，<code>ioctl()-&gt;sock_ioctl()-&gt;dev_ioctl()-&gt;SIOCSIFFILAGS-&gt;dev_ifsioc()-&gt;dev_change_flags()-&gt;IFF_UP-&gt;dev_open()</code></li>
+<li>Linux内核中有一个网络软中断数据结构<code>softnet_data</code></li>
+</ul>
+<h4 id="122">12.2、查找数据包类型且调用其处理函数<a class="headerlink" href="#122" title="Permanent link">&para;</a></h4>
+<ul>
+<li>最终目标是，<code>do_softirq()-&gt;net_rx_action()-&gt;process_backlog()-&gt;netif_receive_skb()</code></li>
+</ul>
+<h4 id="123ip">12.3、接收或转发IP数据包<a class="headerlink" href="#123ip" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>ip_rcv()</code>最后通过NF_HOOK宏转入<code>ip_rcv_finish()</code>，这个函数有两方面的使用：<ul>
+<li>一是明确数据包是本地接收还是转发，如果是转发就需要进一步明确转发网络设备和跳转出口</li>
+<li>二是分析和处理关于IP选项的内容</li>
+<li>在<code>/net/ipv4/ip_input.c</code></li>
+<li>整个过程，<code>do_softirq()-&gt;net_rx_action()-&gt;process_backlog()-&gt;netif_receive_skb()-&gt;deliver_skb()-&gt;ip_rcv()-&gt;ip_rcv_finish()</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="124tcp">12.4、TCP数据包的处理<a class="headerlink" href="#124tcp" title="Permanent link">&para;</a></h4>
+<ul>
+<li>无论是重组后的数据包还是直接接收的数据包都要进入<code>ip_local_deliver_finish()</code>交给传输层处理，在/net/ipv4/ip_input.c</li>
+<li>整个过程，<code>do_softirq()-&gt;net_rx_action()-&gt;process_backlog()-&gt;</code></li>
+</ul>
+<h4 id="1253">12.5、3次握手过程<a class="headerlink" href="#1253" title="Permanent link">&para;</a></h4>
+<ul>
+<li>3次握手过程<ul>
+<li>一、client发送一个SYN=1、ACK=0标志的数据包给服务器请求进行连接</li>
+<li>二、server收到请求并且允许连接就会发送一个SYN=1、ACK=1标志的数据包给客户端，告诉client可以发送数据了，并让客户端发送一个确认数据包</li>
+<li>三、client发送一个SYN=0、ACK=1的数据包给服务器，告诉它连接已被确认</li>
+</ul>
+</li>
+</ul>
+<h3 id="chap13internet">chap13、Internet控制信息的传输<a class="headerlink" href="#chap13internet" title="Permanent link">&para;</a></h3>
+<ul>
+<li>主要关于<strong>错误和请求</strong>的内容</li>
+</ul>
+<h4 id="131icmp">13.1、发送ICMP信息<a class="headerlink" href="#131icmp" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>icmp_send()</code>的过程为例来看Linux是如何使用ICMP协议发送控制信息，在<code>/net/ipv4/icmp.c</code></li>
+</ul>
+<h4 id="132icmp">13.2、接收ICMP信息<a class="headerlink" href="#132icmp" title="Permanent link">&para;</a></h4>
+<ul>
+<li>再来看下<code>icmp_rcv()</code>，也在<code>/net/ipv4/icmp.c</code></li>
+</ul>
+<h3 id="chap14">chap14、数据包的分段与重组<a class="headerlink" href="#chap14" title="Permanent link">&para;</a></h3>
+<h4 id="141">14.1、数据包的分段发送<a class="headerlink" href="#141" title="Permanent link">&para;</a></h4>
+<h4 id="142">14.2、数据包的分段接收和重组<a class="headerlink" href="#142" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>ip_defrag()</code>来看接收重组过程，在<code>/net/ipv4/ip_fragment.c</code>中，<strong><code>ip_defrag()</code>重组完数据后将其传递给TCP层</strong></li>
+</ul>
+<h4 id="143">14.3、分段数据包的接收队列<a class="headerlink" href="#143" title="Permanent link">&para;</a></h4>
+<h4 id="144">14.4、查找与创建分段队列<a class="headerlink" href="#144" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>ip_find()</code>，先将数据包头部和来源标志记录到该结构中，然后调用<code>inet_frag_find()</code>在<code>ipv4_frags</code>结构队列中查找INET分段队列头；如果找到了就返回分段队列头指针，反之创建分段队列</li>
+</ul>
+<h4 id="145">14.5、释放和销毁分段队列<a class="headerlink" href="#145" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>ip_evictor()</code></li>
+</ul>
+<h3 id="chap15">chap15、发送和接收数据包<a class="headerlink" href="#chap15" title="Permanent link">&para;</a></h3>
+<h4 id="151">15.1、内核的发送、接收函数<a class="headerlink" href="#151" title="Permanent link">&para;</a></h4>
+<h4 id="152">15.2、客户端发送数据包<a class="headerlink" href="#152" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>__sock_sendmsg()</code>来分析</li>
+</ul>
+<h4 id="153">15.3、服务器接收数据包<a class="headerlink" href="#153" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>tcp_v4_rcv()</code>如何接收数据包<ul>
+<li>首先找到服务器创建的客户端sock结构</li>
+</ul>
+</li>
+</ul>
+<h3 id="chap16socket">chap16、socket的关闭<a class="headerlink" href="#chap16socket" title="Permanent link">&para;</a></h3>
+<h4 id="161">16.1、内核的关闭函数<a class="headerlink" href="#161" title="Permanent link">&para;</a></h4>
+<ul>
+<li>关闭服务器的socket过程要比关闭客户端socket复杂</li>
+</ul>
+<h4 id="162">16.2、服务器与客户端的共同关闭<a class="headerlink" href="#162" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>tcp_v4_do_rcv()</code></li>
 </ul>
 <h3 id="_1">最后<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
 <h4 id="_2">履历<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>

@@ -418,6 +418,8 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#chap9io">chap9、I/O复用</a>
         <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#0ai">0、我自己想和解答的【问AI】</a>
+    </li>
     <li class="toctree-l3"><a class="reference internal" href="#91select">9.1、select系统调用</a>
         <ul>
     <li class="toctree-l4"><a class="reference internal" href="#911select-api">9.1.1、select api</a>
@@ -466,6 +468,80 @@
     </li>
         </ul>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap10">chap10、信号</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#101linux">10.1、Linux信号概述</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1011">10.1.1、发送信号</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1012">10.1.2、信号处理方式</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1013linux">10.1.3、Linux信号</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1014">10.1.4、中断系统调用</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#102">10.2、信号函数</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1021signal">10.2.1、signal系统调用</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1022sigaction">10.2.2、sigaction系统调用</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#103">10.3、信号集</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1031">10.3.1、信号集函数</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1032">10.3.2、进程信号掩码</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1033">10.3.3、被挂起的信号</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#104">10.4、统一事件源</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#105">10.5、网络编程相关信号</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1051sighup">10.5.1、SIGHUP</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1052sigpipe">10.5.2、SIGPIPE</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1053sigur">10.5.3、SIGUR</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap11">chap11、定时器</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#111socketso_rcvtimeoso_sndtimeo">11.1、socket选项SO_RCVTIMEO和SO_SNDTIMEO</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#112sigalrm">11.2、SIGALRM信号</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1121">11.2.1、基于升序链表的定时器</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1122">11.2.2、处理非活动连接</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#113io">11.3、I/O复用系统调用的超时参数</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chap12iolibevent">chap12、高性能I/O框架库Libevent</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#121io">12.1、I/O框架库概述</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#122libevent">12.2、libevent源码分析</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1221">12.2.1、一个实例</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="#chap13">chap13、多进程编程</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#0_5">0</a>
@@ -479,14 +555,46 @@
     <li class="toctree-l3"><a class="reference internal" href="#134">13.4、管道</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#135">13.5、信号量</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1351">13.5.1、信号量原语</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1352semget">13.5.2、semget系统调用</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1353semop">13.5.3、semop系统调用</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1354semctl">13.5.4、semctl系统调用</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1355ipc_private">13.5.5、特殊键值ipc_private</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#136">13.6、共享内存</a>
         <ul>
     <li class="toctree-l4"><a class="reference internal" href="#0_6">0、</a>
     </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1361shmget">13.6.1、shmget系统调用</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1362shmatshmdt">13.6.2、shmat和shmdt系统调用</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1363shmctl">13.6.3、shmctl系统调用</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1364posix">13.6.4、共享内存的posix方法</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1365">13.6.5、共享内存实例</a>
+    </li>
         </ul>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#137">13.7、消息队列</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1371msgget">13.7.1、msgget系统调用</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1372msgsnd">13.7.2、msgsnd系统调用</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1373msgrcv">13.7.3、msgrcv系统调用</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1374msgctl">13.7.4、msgctl系统调用</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#138ipc">13.8、ipc命令</a>
     </li>
@@ -512,7 +620,7 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#145">14.5、互斥锁</a>
         <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#1451api">14.5.1、互斥锁基础api</a>
+    <li class="toctree-l4"><a class="reference internal" href="#1451api5">14.5.1、互斥锁基础api（5个）</a>
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#1452">14.5.2、互斥锁属性</a>
     </li>
@@ -521,6 +629,10 @@
         </ul>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#146">14.6、条件变量</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#_1">自己提问及搜的</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#147">14.7、线程同步机制包装类</a>
     </li>
@@ -538,13 +650,43 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#chap15">chap15、进程池和线程池</a>
         <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#151">15.1、进程池和线程池概述</a>
+    </li>
     <li class="toctree-l3"><a class="reference internal" href="#152">15.2、处理多客户</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#153">15.3、半同步/半异步进程池实现</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#154cgi">15.4、用进程池实现的简单cgi服务器</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#155">15.5、半同步/半反应堆线程池实现</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#156web">15.6、用线程池实现的简单web服务器</a>
+    </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#chap16">chap16、</a>
+    <li class="toctree-l2"><a class="reference internal" href="#chap16">chap16、服务器调制、调试和测试</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#161">16.1、最大文件描述符数</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#162">16.2、调整内核参数</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1621procsysfs">16.2.1、/proc/sys/fs目录下的部分文件</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1622procsysnet">16.2.2、/proc/sys/net目录下的部分文件</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#163gdb">16.3、gdb调试</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1631gdb">16.3.1、用gdb调试多进程程序</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#1632gdb">16.3.2、用gdb调试多线程程序</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#164">16.4、压力测试</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#chap17">chap17、系统监测工具</a>
         <ul>
@@ -601,7 +743,7 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">《深入理解Linux虚拟内存管理》</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《深入理解Linux网络技术内幕》</a>
+                  <li class="toctree-l1"><a class="" href="../../13kernel/深入理解Linux网络技术内幕.md">《深入理解Linux网络技术内幕》</a>
                   </li>
                   <li class="toctree-l1"><a class="" href="../../13kernel/Linux内核源代码剖析-tcpip实现.md">《Linux内核源代码剖析-TCP/IP实现》</a>
                   </li>
@@ -679,7 +821,10 @@
 </ul>
 </li>
 <li>高性能程序的一般框架（8）</li>
-<li>服务器程序的IO单元（9-12）：IO事件、信号、定时、libevent</li>
+<li>服务器程序的IO单元（9-12）：IO事件、信号、定时、libevent<ul>
+<li><strong>Linux服务器程序必须处理的三类事件：IO事件、信号、定时事件</strong></li>
+</ul>
+</li>
 <li>服务器程序的逻辑单元（13-15）：多进程、多线程</li>
 </ul>
 </li>
@@ -1266,6 +1411,16 @@ return true;
 </li>
 <li><strong>I/O复用虽然能同时监听多个文件描述符，但它本身是阻塞的</strong>。当多个文件描述符同时就绪时，如果不采取额外的措施，程序就只能按照顺序依次处理其中的每一个文件描述符，<strong>使得服务器程序看起来像是串行工作的</strong>。如果要实现并发，只能使用多进程或多线程</li>
 </ul>
+<h4 id="0ai">0、我自己想和解答的【问AI】<a class="headerlink" href="#0ai" title="Permanent link">&para;</a></h4>
+<ul>
+<li>1、什么是I/O复用（问的AI）<ul>
+<li>复用：多个相似的操作，合并为一个</li>
+<li>I/O复用：多个I/O合并到一个I/O上，<em>这些都是正确的废话，还是不好理解</em></li>
+<li>可以理解的解释的是，<strong>一个进程同时监听了多个I/O事件，不用为每个I/O事件创建进程</strong></li>
+<li>举例：web服务器中，传统的情况，需要为每个客户端创建一个进程或线程</li>
+</ul>
+</li>
+</ul>
 <h4 id="91select">9.1、select系统调用<a class="headerlink" href="#91select" title="Permanent link">&para;</a></h4>
 <ul>
 <li>select系统调用的用途是：<strong>在一段时间内，监听用户感兴趣的文件描述符上的可读、可写和异常等事件</strong>。</li>
@@ -1380,9 +1535,103 @@ int epoll_wait(int epfd, struct epoll_event *events, int maxevents,
 <li><code>cat /var/run/xinetd.pid</code></li>
 <li>图9-1（195/363）</li>
 </ul>
-<p>chap10、信号</p>
-<p>chap11、定时器</p>
-<p>chap12、高性能I/O框架库Libevent</p>
+<h3 id="chap10">chap10、信号<a class="headerlink" href="#chap10" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>信号</strong>，是由用户、系统或者进程发送给目标进程的信息，以通知目标进程某个状态的改变或系统异常。</li>
+<li>Linux信号可由如下条件产生：<ul>
+<li>对于前台进程，用户可以通过输入特殊的终端字符来给它发送信号</li>
+<li>系统异常</li>
+<li>系统状态变化</li>
+<li>运行kill命令或者调用kill函数</li>
+</ul>
+</li>
+</ul>
+<h4 id="101linux">10.1、Linux信号概述<a class="headerlink" href="#101linux" title="Permanent link">&para;</a></h4>
+<h5 id="1011">10.1.1、发送信号<a class="headerlink" href="#1011" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>kill()</code></li>
+</ul>
+<h5 id="1012">10.1.2、信号处理方式<a class="headerlink" href="#1012" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>bits/signum.h</code>，</li>
+<li><code>signal.h</code>，<code>sighandler_t</code></li>
+</ul>
+<h5 id="1013linux">10.1.3、Linux信号<a class="headerlink" href="#1013linux" title="Permanent link">&para;</a></h5>
+<h5 id="1014">10.1.4、中断系统调用<a class="headerlink" href="#1014" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>sigaction()</code>为信号标置<code>SA_RESTART</code></li>
+</ul>
+<h4 id="102">10.2、信号函数<a class="headerlink" href="#102" title="Permanent link">&para;</a></h4>
+<h5 id="1021signal">10.2.1、signal系统调用<a class="headerlink" href="#1021signal" title="Permanent link">&para;</a></h5>
+<h5 id="1022sigaction">10.2.2、sigaction系统调用<a class="headerlink" href="#1022sigaction" title="Permanent link">&para;</a></h5>
+<h4 id="103">10.3、信号集<a class="headerlink" href="#103" title="Permanent link">&para;</a></h4>
+<h5 id="1031">10.3.1、信号集函数<a class="headerlink" href="#1031" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>sigset_t</code>，长整型数组，数组的每个元素的每个位表示一个信号</li>
+</ul>
+<h5 id="1032">10.3.2、进程信号掩码<a class="headerlink" href="#1032" title="Permanent link">&para;</a></h5>
+<ul>
+<li>利用<code>sigaction</code>结构体的<code>sa_mask</code>成员来设置进程的信号掩码</li>
+</ul>
+<ul>
+<li><code>sigprocmask()</code></li>
+</ul>
+<h5 id="1033">10.3.3、被挂起的信号<a class="headerlink" href="#1033" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>sigpending()</code></li>
+</ul>
+<h4 id="104">10.4、统一事件源<a class="headerlink" href="#104" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>信号是一种异步事件</strong></li>
+<li>解决方案是：<ul>
+<li><strong>把信号的主要处理逻辑放到程序的主循环中，当信号处理函数被触发时，它只是简单地通知主循环程序接收到信号，并把信号值传递给主循环</strong></li>
+</ul>
+</li>
+<li>代码清单10-1，统一事件源</li>
+</ul>
+<h4 id="105">10.5、网络编程相关信号<a class="headerlink" href="#105" title="Permanent link">&para;</a></h4>
+<h5 id="1051sighup">10.5.1、SIGHUP<a class="headerlink" href="#1051sighup" title="Permanent link">&para;</a></h5>
+<ul>
+<li>强制服务器重读配置文件</li>
+</ul>
+<h5 id="1052sigpipe">10.5.2、SIGPIPE<a class="headerlink" href="#1052sigpipe" title="Permanent link">&para;</a></h5>
+<h5 id="1053sigur">10.5.3、SIGUR<a class="headerlink" href="#1053sigur" title="Permanent link">&para;</a></h5>
+<h3 id="chap11">chap11、定时器<a class="headerlink" href="#chap11" title="Permanent link">&para;</a></h3>
+<ul>
+<li>网络程序需要处理的第三类事件是<strong>定时事件</strong></li>
+<li>Linux提供了三种定时方法<ul>
+<li>1、socket选项SO_RCVTIMEO和SO_SNDTIMEO</li>
+<li>2、SIGALRM信号</li>
+<li>3、I/O复用系统调用的超时参数</li>
+</ul>
+</li>
+</ul>
+<h4 id="111socketso_rcvtimeoso_sndtimeo">11.1、socket选项SO_RCVTIMEO和SO_SNDTIMEO<a class="headerlink" href="#111socketso_rcvtimeoso_sndtimeo" title="Permanent link">&para;</a></h4>
+<h4 id="112sigalrm">11.2、SIGALRM信号<a class="headerlink" href="#112sigalrm" title="Permanent link">&para;</a></h4>
+<h5 id="1121">11.2.1、基于升序链表的定时器<a class="headerlink" href="#1121" title="Permanent link">&para;</a></h5>
+<h5 id="1122">11.2.2、处理非活动连接<a class="headerlink" href="#1122" title="Permanent link">&para;</a></h5>
+<h4 id="113io">11.3、I/O复用系统调用的超时参数<a class="headerlink" href="#113io" title="Permanent link">&para;</a></h4>
+<h3 id="chap12iolibevent">chap12、高性能I/O框架库Libevent<a class="headerlink" href="#chap12iolibevent" title="Permanent link">&para;</a></h3>
+<ul>
+<li>处理三类事件（chap9,10,11）需要考虑如下三个问题<ul>
+<li>1、统一事件源</li>
+<li>2、可移植性</li>
+<li>3、对并发编程的支持</li>
+</ul>
+</li>
+</ul>
+<h4 id="121io">12.1、I/O框架库概述<a class="headerlink" href="#121io" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Reactor模式</strong>的I/O框架库包含如下几个组件：<ul>
+<li>1、句柄</li>
+<li>2、事件多路分发器</li>
+<li>3、事件处理器和具体的事件处理器</li>
+<li>4、Reactor</li>
+</ul>
+</li>
+</ul>
+<h4 id="122libevent">12.2、libevent源码分析<a class="headerlink" href="#122libevent" title="Permanent link">&para;</a></h4>
+<h5 id="1221">12.2.1、一个实例<a class="headerlink" href="#1221" title="Permanent link">&para;</a></h5>
 <h3 id="chap13">chap13、多进程编程<a class="headerlink" href="#chap13" title="Permanent link">&para;</a></h3>
 <h4 id="0_5">0<a class="headerlink" href="#0_5" title="Permanent link">&para;</a></h4>
 <ul>
@@ -1401,40 +1650,49 @@ int epoll_wait(int epfd, struct epoll_event *events, int maxevents,
 <li>管道能在父、子进程间传递数据，利用的是fork调用之后两个管道文件描述符（fd[0]和fd[1]）都保持打开。</li>
 </ul>
 <h4 id="135">13.5、信号量<a class="headerlink" href="#135" title="Permanent link">&para;</a></h4>
-<p>13.5.1、信号量原语</p>
+<h5 id="1351">13.5.1、信号量原语<a class="headerlink" href="#1351" title="Permanent link">&para;</a></h5>
 <ul>
 <li>P（passeren，传递，进入临界区）和V（vrijgeven，释放，退出临界区）</li>
 </ul>
 <ul>
-<li>
-<p>sys/sem.h</p>
-<p>13.5.2、semget系统调用</p>
-</li>
+<li>sys/sem.h</li>
 </ul>
+<h5 id="1352semget">13.5.2、semget系统调用<a class="headerlink" href="#1352semget" title="Permanent link">&para;</a></h5>
 <ul>
-<li><strong>创建信号量集</strong>
-  13.5.3、semop系统调用
-  13.5.4、semctl系统调用</li>
+<li><strong>创建信号量集</strong></li>
 </ul>
+<h5 id="1353semop">13.5.3、semop系统调用<a class="headerlink" href="#1353semop" title="Permanent link">&para;</a></h5>
+<h5 id="1354semctl">13.5.4、semctl系统调用<a class="headerlink" href="#1354semctl" title="Permanent link">&para;</a></h5>
 <ul>
-<li><strong>允许调用者对信号量进行直接控制</strong>
-  13.5.5、特殊键值ipc_private</li>
+<li><strong>允许调用者对信号量进行直接控制</strong></li>
 </ul>
+<h5 id="1355ipc_private">13.5.5、特殊键值ipc_private<a class="headerlink" href="#1355ipc_private" title="Permanent link">&para;</a></h5>
 <h4 id="136">13.6、共享内存<a class="headerlink" href="#136" title="Permanent link">&para;</a></h4>
 <h5 id="0_6">0、<a class="headerlink" href="#0_6" title="Permanent link">&para;</a></h5>
 <ul>
 <li>sys/shm.h</li>
 </ul>
-<p>13.6.1、shmget系统调用</p>
-<p>13.6.2、shmat和shmdt系统调用</p>
-<p>13.6.3、shmctl系统调用</p>
-<p>13.6.4、共享内存的posix方法</p>
-<p>13.6.5、共享内存实例</p>
+<h5 id="1361shmget">13.6.1、shmget系统调用<a class="headerlink" href="#1361shmget" title="Permanent link">&para;</a></h5>
+<h5 id="1362shmatshmdt">13.6.2、shmat和shmdt系统调用<a class="headerlink" href="#1362shmatshmdt" title="Permanent link">&para;</a></h5>
+<h5 id="1363shmctl">13.6.3、shmctl系统调用<a class="headerlink" href="#1363shmctl" title="Permanent link">&para;</a></h5>
+<h5 id="1364posix">13.6.4、共享内存的posix方法<a class="headerlink" href="#1364posix" title="Permanent link">&para;</a></h5>
+<h5 id="1365">13.6.5、共享内存实例<a class="headerlink" href="#1365" title="Permanent link">&para;</a></h5>
 <h4 id="137">13.7、消息队列<a class="headerlink" href="#137" title="Permanent link">&para;</a></h4>
-<p>13.7.1、msgget系统调用
-13.7.2、msgsnd系统调用
-13.7.3、msgrcv系统调用
-13.7.4、msgctl系统调用</p>
+<ul>
+<li><em>这个例子，我没太写过，要尝试写下，再用man看下，怎么使用，lionel</em></li>
+</ul>
+<ul>
+<li>两个进程之间传递二进制块数据</li>
+<li>sys/msg.h中，以下4个系统调用</li>
+</ul>
+<h5 id="1371msgget">13.7.1、msgget系统调用<a class="headerlink" href="#1371msgget" title="Permanent link">&para;</a></h5>
+<ul>
+<li>创建或获取一个消息队列，<code>int msgget(key_t key, int msgflg)</code>，key是一个键值，<strong>标识一个全局唯一的消息队列</strong></li>
+<li><code>struct msqid_ds{}</code></li>
+</ul>
+<h5 id="1372msgsnd">13.7.2、msgsnd系统调用<a class="headerlink" href="#1372msgsnd" title="Permanent link">&para;</a></h5>
+<h5 id="1373msgrcv">13.7.3、msgrcv系统调用<a class="headerlink" href="#1373msgrcv" title="Permanent link">&para;</a></h5>
+<h5 id="1374msgctl">13.7.4、msgctl系统调用<a class="headerlink" href="#1374msgctl" title="Permanent link">&para;</a></h5>
 <h4 id="138ipc">13.8、ipc命令<a class="headerlink" href="#138ipc" title="Permanent link">&para;</a></h4>
 <ul>
 <li><code>ipcs</code></li>
@@ -1487,16 +1745,83 @@ int epoll_wait(int epfd, struct epoll_event *events, int maxevents,
 </li>
 </ul>
 <h5 id="1412linux">14.1.2、linux线程库<a class="headerlink" href="#1412linux" title="Permanent link">&para;</a></h5>
+<ul>
+<li>LinuxThreads</li>
+<li>NPTL</li>
+</ul>
 <h4 id="142">14.2、创建线程和结束线程<a class="headerlink" href="#142" title="Permanent link">&para;</a></h4>
 <ul>
 <li>pthread_create</li>
+</ul>
+<ul>
 <li>pthread_exit</li>
-<li>pthread_join</li>
+</ul>
+<ul>
+<li>
+<p>pthread_join，<strong>回收线程</strong>【<strong>等待其他线程结束</strong>】</p>
+<ul>
+<li>类似于wait和waitpid</li>
+<li><strong><code>pthread_join()</code>函数只能等待一个指定的线程</strong></li>
+<li>使用场景：<ul>
+<li>等待指定线程结束，阻塞当前线程，直到指定线程退出</li>
+<li>线程同步，当主线程需要等待其他线程完成任务后再继续执行，可以使用<code>pthread_join()</code>等待其他线程的结束</li>
+<li>获取线程的返回值</li>
+<li>资源回收</li>
+</ul>
+</li>
+</ul>
+<pre class="highlight"><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;pthread.h&gt;
+
+void* thread_function(void* arg) {
+    int thread_id = *(int*)arg;
+    printf("Thread %d is running.\n", thread_id);
+    // 模拟线程执行一些任务
+    for (int i = 0; i &lt; 5; i++) {
+        printf("Thread %d: %d\n", thread_id, i);
+    }
+    int* result = malloc(sizeof(int));
+    *result = thread_id * 100;
+    pthread_exit(result);
+}
+
+int main() {
+    pthread_t thread;
+    int thread_id = 1;
+    int* result;
+
+    // 创建线程，使用thread_function函数，并把 thread_id 当作参数传递过去
+    if (pthread_create(&amp;thread, NULL, thread_function, &amp;thread_id) != 0) {
+        fprintf(stderr, "Failed to create thread.\n");
+        return 1;
+    }
+
+    printf("Main thread is waiting for the thread to finish.\n");
+
+    // 等待线程结束并获取返回值result
+    if (pthread_join(thread, (void**)&amp;result) != 0) {
+        fprintf(stderr, "Failed to join thread.\n");
+        return 1;
+    }
+
+    printf("Thread returned: %d\n", *result);
+
+    free(result);
+
+    return 0;
+}</code></pre>
+</li>
+</ul>
+<ul>
 <li>pthread_cancel</li>
 </ul>
-<pre class="highlight"><code class="language-c">#include &lt;pthread.h&gt;
+<pre class="highlight"><code class="language-c">#include &lt;pthread.h&gt;  //记的这个头文件
 int pthread_cancel(pthread_t thread);</code></pre>
 <h4 id="143">14.3、线程属性<a class="headerlink" href="#143" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>pthread_attr_t</code>结构体</li>
+</ul>
 <h4 id="144posix">14.4、posix信号量<a class="headerlink" href="#144posix" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong><code>pthread_join</code>可以看作一种简单的线程同步方式</strong>，它无法高效地实现复杂的同步需求，比如控制对共享资源的独占式访问，又抑或是在某个条件满足之后唤醒一个线程。</li>
@@ -1506,14 +1831,33 @@ int pthread_cancel(pthread_t thread);</code></pre>
 int sem_init(sem_t *sem, int pshard, unsigned int value);
 int sem_wait(sem_t *sem);</code></pre>
 <h4 id="145">14.5、互斥锁<a class="headerlink" href="#145" title="Permanent link">&para;</a></h4>
-<h5 id="1451api">14.5.1、互斥锁基础api<a class="headerlink" href="#1451api" title="Permanent link">&para;</a></h5>
+<ul>
+<li><em>这些自己用得都比较少</em></li>
+</ul>
+<h5 id="1451api5">14.5.1、互斥锁基础api（5个）<a class="headerlink" href="#1451api5" title="Permanent link">&para;</a></h5>
+<pre class="highlight"><code class="language-c">int pthread_mutex_init();
+int pthread_mutex_destroy();
+int pthread_mutex_lock();</code></pre>
 <h5 id="1452">14.5.2、互斥锁属性<a class="headerlink" href="#1452" title="Permanent link">&para;</a></h5>
+<pre class="highlight"><code class="language-c">int pthread_mutexattr_init();
+int pthread_mutexattr_destroy();</code></pre>
 <h5 id="1453">14.5.3、死锁举例<a class="headerlink" href="#1453" title="Permanent link">&para;</a></h5>
 <h4 id="146">14.6、条件变量<a class="headerlink" href="#146" title="Permanent link">&para;</a></h4>
 <ul>
 <li>如果说互斥锁是用于同步线程对共享数据的访问的话，那么条件变量则是<strong>用于在线程之间同步共享数据的值</strong>。</li>
 <li>条件变量提供了一种<strong>线程间的通知机制</strong>：当某个共享数据达到某个值的时候，唤醒等待这个共享数据的线程。</li>
 <li>5个函数</li>
+</ul>
+<pre class="highlight"><code class="language-c">int pthread_cond_init();
+int pthread_cond_destroy();</code></pre>
+<h5 id="_1">自己提问及搜的<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h5>
+<ul>
+<li>条件变量（Condition Variable）是线程同步的一种机制，用于解决多线程间的协调和通信问题。它的引入主要是为了解决以下问题：<ul>
+<li>1、避免忙等待：当线程需要等待某个条件满足时，常见的做法是通过轮询或忙等待来检查条件是否满足。这种方式会消耗CPU资源，并降低系统的性能。条件变量提供了一种更高效的等待机制，使得线程可以进入睡眠状态，等待条件满足时被唤醒，从而避免了忙等待。</li>
+<li>2、线程间的通信：多个线程之间可能需要进行通信，例如一个线程产生了某个结果，其他线程需要等待该结果可用后才能继续执行。条件变量提供了一种线程间的通信机制，使得一个线程可以通知其他线程某个条件的变化，从而实现线程间的协调和同步。</li>
+<li>3、避免竞争条件：多线程环境下，可能会存在共享资源的竞争条件（Race Condition），即多个线程同时访问和修改共享资源，而没有合适的同步机制。条件变量结合互斥锁（Mutex）可以解决竞争条件问题。线程可以在条件变量上等待某个条件的满足，而在修改共享资源之前使用互斥锁进行保护，从而确保线程之间的安全访问。</li>
+</ul>
+</li>
 </ul>
 <h4 id="147">14.7、线程同步机制包装类<a class="headerlink" href="#147" title="Permanent link">&para;</a></h4>
 <h4 id="148">14.8、多线程环境<a class="headerlink" href="#148" title="Permanent link">&para;</a></h4>
@@ -1530,7 +1874,7 @@ int sem_wait(sem_t *sem);</code></pre>
 <li><strong>每个线程都可以独立地设置信号掩码</strong>。<code>sigprocmask()</code></li>
 </ul>
 <h3 id="chap15">chap15、进程池和线程池<a class="headerlink" href="#chap15" title="Permanent link">&para;</a></h3>
-<p>15.1、进程池和线程池概述</p>
+<h4 id="151">15.1、进程池和线程池概述<a class="headerlink" href="#151" title="Permanent link">&para;</a></h4>
 <h4 id="152">15.2、处理多客户<a class="headerlink" href="#152" title="Permanent link">&para;</a></h4>
 <ul>
 <li>监听socket和连接socket是否都由主进程统一管理？</li>
@@ -1541,10 +1885,50 @@ int sem_wait(sem_t *sem);</code></pre>
 <ul>
 <li>代码清单15-1</li>
 </ul>
-<p>15.4、用进程池实现的简单cgi服务器</p>
-<p>15.5、半同步/半反应堆线程池实现</p>
-<p>15.6、用线程池实现的简单web服务器</p>
-<h3 id="chap16">chap16、<a class="headerlink" href="#chap16" title="Permanent link">&para;</a></h3>
+<h4 id="154cgi">15.4、用进程池实现的简单cgi服务器<a class="headerlink" href="#154cgi" title="Permanent link">&para;</a></h4>
+<h4 id="155">15.5、半同步/半反应堆线程池实现<a class="headerlink" href="#155" title="Permanent link">&para;</a></h4>
+<h4 id="156web">15.6、用线程池实现的简单web服务器<a class="headerlink" href="#156web" title="Permanent link">&para;</a></h4>
+<h3 id="chap16">chap16、服务器调制、调试和测试<a class="headerlink" href="#chap16" title="Permanent link">&para;</a></h3>
+<h4 id="161">16.1、最大文件描述符数<a class="headerlink" href="#161" title="Permanent link">&para;</a></h4>
+<h4 id="162">16.2、调整内核参数<a class="headerlink" href="#162" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>sysctl -a</code>查看这些内核参数</li>
+</ul>
+<h5 id="1621procsysfs">16.2.1、/proc/sys/fs目录下的部分文件<a class="headerlink" href="#1621procsysfs" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>文件系统</strong></li>
+<li>file-max</li>
+<li>epoll/max_user_watches</li>
+</ul>
+<h5 id="1622procsysnet">16.2.2、/proc/sys/net目录下的部分文件<a class="headerlink" href="#1622procsysnet" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>网络模块</strong></li>
+<li>core/somaxconn</li>
+<li>ipv4/tcp_max_syn_backlog</li>
+<li>ipv4/tcp_wmem</li>
+<li>ipv4/tcp_syncookies</li>
+</ul>
+<h4 id="163gdb">16.3、gdb调试<a class="headerlink" href="#163gdb" title="Permanent link">&para;</a></h4>
+<h5 id="1631gdb">16.3.1、用gdb调试多进程程序<a class="headerlink" href="#1631gdb" title="Permanent link">&para;</a></h5>
+<h6 id="1">1、单独调试子进程<a class="headerlink" href="#1" title="Permanent link">&para;</a></h6>
+<ul>
+<li><code>gdb</code>进去后，<strong>直接<code>attach 子进程号</code></strong>，设置子进程中的断点</li>
+</ul>
+<h6 id="2follow-fork-mode">2、使用调试器选项follow-fork-mode<a class="headerlink" href="#2follow-fork-mode" title="Permanent link">&para;</a></h6>
+<ul>
+<li><code>set follow-fork-mode parent</code>或<code>set follow-fork-mode child</code>，设置为父或子进程</li>
+</ul>
+<h5 id="1632gdb">16.3.2、用gdb调试多线程程序<a class="headerlink" href="#1632gdb" title="Permanent link">&para;</a></h5>
+<ul>
+<li>info threads，<strong>ID前面有"<code>*</code>"号的线程是当前被调试的线程</strong></li>
+<li>thread ID，调试目标ID指定的线程</li>
+<li>set scheduler-locking [off|on|setp]，<strong>off不锁任何线程，这是默认值</strong><ul>
+<li>on表示只有当前被调试的线程会继续执行</li>
+<li>step表示在单步执行的时候，只有当前线程会执行</li>
+</ul>
+</li>
+</ul>
+<h4 id="164">16.4、压力测试<a class="headerlink" href="#164" title="Permanent link">&para;</a></h4>
 <h3 id="chap17">chap17、系统监测工具<a class="headerlink" href="#chap17" title="Permanent link">&para;</a></h3>
 <h4 id="171tcpdump">17.1、tcpdump<a class="headerlink" href="#171tcpdump" title="Permanent link">&para;</a></h4>
 <ul>

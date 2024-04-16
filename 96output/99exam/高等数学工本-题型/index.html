@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>高等数学工本 题型 - lionel的技术笔记</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "\u9ad8\u7b49\u6570\u5b66\u5de5\u672c \u9898\u578b";
+        var mkdocs_page_input_path = "96output\\99exam\\\u9ad8\u7b49\u6570\u5b66\u5de5\u672c-\u9898\u578b.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> lionel的技术笔记
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">简介</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../01daily/">daily</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../02ds/">ds</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../03cpp/">cpp</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../21tool/">tool</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">C++</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../20C%2B%2B/effectiveC%2B%2B/">《Effective C++》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../20C%2B%2B/%E6%B7%B1%E5%BA%A6%E6%8E%A2%E7%B4%A2C%2B%2B%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B/">《深度探索C++对象模型》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../21STL/EffectiveSTL/">《Effective STL》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../21STL/C%2B%2B%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/">《C++泛型STL原理和应用》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../21STL/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/">《STL源码剖析》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../22C%2B%2Bmodern/%E6%B7%B1%E5%85%A5%E5%BA%94%E7%94%A8C%2B%2B11/">《深入应用C++11》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">基础知识</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../408/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA/">《操作系统导论》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../408/%E5%A4%A7%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">《大话设计模式》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../408/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90_C%2B%2B4th/">《数据结构与算法分析_C++4th》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../408/%E7%AE%97%E6%B3%95%284th%29/">《算法4th》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../408/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90-%E5%BC%A0%E5%86%9B/">《算法设计与分析-张军》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../408/%E5%A4%A9%E8%A1%8C-%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《天行-算法设计与实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../408/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%95%99%E7%A8%8B-%E6%9D%8E%E6%98%A5%E8%91%86/">《数据结构教程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../408/%E6%96%B0%E7%BC%96%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%A0%E9%A2%98%E4%B8%8E%E8%A7%A3%E6%9E%90/">《新编数据结构习题与解析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网络编程</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../10network/TCPIP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">《TCP/IP网络编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../10network/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/">《Linux高性能服务器编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../10network/TCPIP%E8%AF%A6%E8%A7%A3%E5%8D%B71/">《TCPIP详解卷1》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../10network/Linux%E5%86%85%E6%A0%B8%E7%BD%91%E7%BB%9C%E6%A0%88%E6%BA%90%E4%BB%A3%E7%A0%81%E6%83%85%E6%99%AF%E5%88%86%E6%9E%90/">《Linux内核网络栈源代码情景分析》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../10network/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C/">《深入理解Linux网络》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">机器&深度学习</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../30machineLearning/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%9F%BA%E7%A1%80/">《机器学习线性代数基础》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../31deepLearning/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%85%A5%E9%97%A8%EF%BC%9A%E5%9F%BA%E4%BA%8EPython%E7%9A%84%E7%90%86%E8%AE%BA%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《深度学习入门：基于Python的理论与实现》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">文件系统</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../11filesystem/Linux%E5%86%85%E6%A0%B8%E6%8E%A2%E7%A7%98/">《Linux内核探秘》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../11filesystem/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《文件系统技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../11filesystem/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">《存储技术原理分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">存储</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../12storage/ceph%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《ceph设计原理与实现》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">视频</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../14video/FFmpeg%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/">《FFmpeg入门到精通》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../14video/WebRTC%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/">《WebRTC权威指南》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../14video/WebRTC%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AE%9E%E6%97%B6%E4%BA%92%E5%8A%A8%E6%8A%80%E6%9C%AF/">《WebRTC音视频实时互动技术》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../14video/%E6%96%B0%E4%B8%80%E4%BB%A3%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9%E7%A0%81%E6%A0%87%E5%87%86-H.264_AVC/">《新一代视频压缩码标准-H.264_AVC》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">内核</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../13kernel/Linux%E5%86%85%E6%A0%B8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《Linux内核设计与实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../13kernel/%E6%B7%B1%E5%85%A5Linux%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%E5%86%85%E6%A0%B8%E6%9C%BA%E5%88%B6/">《深入Linux设备驱动程序内核机制》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">《深入理解Linux虚拟内存管理》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../13kernel/深入理解Linux网络技术内幕.md">《深入理解Linux网络技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../13kernel/Linux内核源代码剖析-tcpip实现.md">《Linux内核源代码剖析-TCP/IP实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E5%86%85%E6%A0%B8/">《深入理解Linux内核》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">工具</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../15tool/Wireshark%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98/">《Wireshark网络分析实战》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../15tool/Linux%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8Eshell%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B%E5%A4%A7%E5%85%A8%283rd%29/">《Linux命令行与shell脚本编程大全(3rd)》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../15tool/python%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%883rd%EF%BC%89/">《python程序设计（3rd）》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../15tool/python/Python%E7%BC%96%E7%A8%8B%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E8%B7%B5/">《Python编程从入门到实践》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">刷题</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../91leetcode/%E5%89%91%E6%8C%87offer2nd/">《剑指offer2nd》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../91leetcode/%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/">《剑指offer专项突破》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../OD基础题.md">OD基础题</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../OD进阶题.md">OD进阶题</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网课</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../90lecture/01Linux%E9%AB%98%E5%B9%B6%E5%8F%91%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/">《Linux高并发网络编程开发》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../90lecture/%E4%BE%AF%E6%8D%B7/%E4%BE%AF%E6%8D%B7C%2B%2B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%8660%E8%AE%B2/">《侯捷C++内存管理60讲》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../90lecture/11NJU%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">《NJU算法设计与分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">英语专</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../60English/00794%E7%BB%BC%E5%90%88%E8%8B%B1%E8%AF%AD%E4%B8%80%E4%B8%8A/">《综合英语(一)上》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../95selfStudy/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/">《概率率与数理统计》</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">lionel的技术笔记</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>高等数学工本 题型</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h3 id="1-515">一、选择（1-5），15分<a class="headerlink" href="#1-515" title="Permanent link">&para;</a></h3>
+<h4 id="1">1、空间直角坐标系中点的位置<a class="headerlink" href="#1" title="Permanent link">&para;</a></h4>
+<ul>
+<li>题型<ul>
+<li>点在哪个平面</li>
+<li>点在卦象</li>
+<li>点关于<strong>哪个面？</strong>的对称点</li>
+</ul>
+</li>
+<li>自问<ul>
+<li>要复习一下</li>
+</ul>
+</li>
+</ul>
+<h4 id="21">2.1、求二元极限<a class="headerlink" href="#21" title="Permanent link">&para;</a></h4>
+<ul>
+<li>知识点<ul>
+<li><strong>一元极限</strong>不太会求了</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>题型</li>
+<li>自问<ul>
+<li><em>不太记得了</em></li>
+</ul>
+</li>
+</ul>
+<h4 id="22">2.2、连续、间断、偏导数<a class="headerlink" href="#22" title="Permanent link">&para;</a></h4>
+<ul>
+<li>知识点<ul>
+<li><em>不太记得了</em></li>
+</ul>
+</li>
+<li>题型</li>
+<li>自问<ul>
+<li><em>好像改题型了</em></li>
+</ul>
+</li>
+</ul>
+<h4 id="31">3.1、全微分<a class="headerlink" href="#31" title="Permanent link">&para;</a></h4>
+<h4 id="32">3.2、二重积分化为极坐标下的二次积分<a class="headerlink" href="#32" title="Permanent link">&para;</a></h4>
+<h4 id="4">4、微分方程<a class="headerlink" href="#4" title="Permanent link">&para;</a></h4>
+<h4 id="51">5.1、幂级数收敛<a class="headerlink" href="#51" title="Permanent link">&para;</a></h4>
+<h4 id="52">5.2、无穷级数收敛<a class="headerlink" href="#52" title="Permanent link">&para;</a></h4>
+<h3 id="6-1010">二、填空（6-10），10分<a class="headerlink" href="#6-1010" title="Permanent link">&para;</a></h3>
+<h4 id="6">6、向量的计算<a class="headerlink" href="#6" title="Permanent link">&para;</a></h4>
+<ul>
+<li>题型<ul>
+<li>乘积</li>
+<li>同方向的单位向量</li>
+<li>向量的之和+数乘（2020年8月）</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><em>乘积</em>自己不会</li>
+</ul>
+<h4 id="71">7.1、偏导数<a class="headerlink" href="#71" title="Permanent link">&para;</a></h4>
+<h4 id="72">7.2、求原函数<a class="headerlink" href="#72" title="Permanent link">&para;</a></h4>
+<h4 id="81">8.1、二次积分<a class="headerlink" href="#81" title="Permanent link">&para;</a></h4>
+<ul>
+<li>题型<ul>
+<li>简单的二次积分</li>
+<li>要转换为<strong>极坐标</strong>的积分</li>
+</ul>
+</li>
+</ul>
+<h4 id="82">8.2、对弧长的曲线积分<a class="headerlink" href="#82" title="Permanent link">&para;</a></h4>
+<ul>
+<li>见17、弧长的曲线积分</li>
+</ul>
+<h4 id="9">9、微分方程<a class="headerlink" href="#9" title="Permanent link">&para;</a></h4>
+<ul>
+<li>题型<ul>
+<li>一阶线性非齐次</li>
+<li>不可降阶的二阶</li>
+</ul>
+</li>
+</ul>
+<h4 id="101">10.1、无穷级数的和<a class="headerlink" href="#101" title="Permanent link">&para;</a></h4>
+<h4 id="102">10.2、傅里叶系数<a class="headerlink" href="#102" title="Permanent link">&para;</a></h4>
+<h3 id="11-2260">三、计算（11-22），60分<a class="headerlink" href="#11-2260" title="Permanent link">&para;</a></h3>
+<h4 id="111l">11.1、直线L的方程<a class="headerlink" href="#111l" title="Permanent link">&para;</a></h4>
+<ul>
+<li>题型<ul>
+<li>过点，与平面垂直，求直线L的方程（2020年8月）</li>
+</ul>
+</li>
+</ul>
+<h4 id="112">11.2、平面的夹角<a class="headerlink" href="#112" title="Permanent link">&para;</a></h4>
+<ul>
+<li>题型</li>
+<li>自问<ul>
+<li><em>公式不太会啊</em></li>
+</ul>
+</li>
+</ul>
+<h4 id="12">12、偏导数<a class="headerlink" href="#12" title="Permanent link">&para;</a></h4>
+<h4 id="131">13.1、法平面方程<a class="headerlink" href="#131" title="Permanent link">&para;</a></h4>
+<h4 id="132">13.2、全微分<a class="headerlink" href="#132" title="Permanent link">&para;</a></h4>
+<h4 id="141x">14.1、梯度垂直于x轴<a class="headerlink" href="#141x" title="Permanent link">&para;</a></h4>
+<h4 id="142">14.2、隐函数的偏导数<a class="headerlink" href="#142" title="Permanent link">&para;</a></h4>
+<h4 id="151">15.1、二重积分<a class="headerlink" href="#151" title="Permanent link">&para;</a></h4>
+<ul>
+<li>题型<ul>
+<li>转为<strong>极坐标</strong></li>
+</ul>
+</li>
+<li>自问<ul>
+<li><span class="arithmatex">\(\int_0^{2\pi}\int_{r_1{\theta}}^{r_2{\theta}}f(rcos\theta,rsin\theta)rdrd\theta\)</span></li>
+<li><span class="arithmatex">\(\int_{r_1{\theta}}^{r_2{\theta}}\)</span></li>
+</ul>
+</li>
+</ul>
+<h4 id="152">15.2、求梯度<a class="headerlink" href="#152" title="Permanent link">&para;</a></h4>
+<h4 id="161">16.1、三重积分<a class="headerlink" href="#161" title="Permanent link">&para;</a></h4>
+<ul>
+<li>题型<ul>
+<li>x,y,z的积分区域，（2020年8月）<ul>
+<li>2018年10月，<em>但里面为何能提取出了个8，没太懂</em></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>自问<ul>
+<li><em>不太会</em></li>
+<li><strong>先对z求的时候，把x和y看成常数即可</strong></li>
+</ul>
+</li>
+</ul>
+<h4 id="162">16.2、二重积分<a class="headerlink" href="#162" title="Permanent link">&para;</a></h4>
+<ul>
+<li>见15.1</li>
+</ul>
+<h4 id="17">17、弧长的曲线积分<a class="headerlink" href="#17" title="Permanent link">&para;</a></h4>
+<ul>
+<li>自问<ul>
+<li><strong>真正的核心在于<code>ds</code></strong>怎么计算，要换成<code>dx</code>，<strong>公式就是<span class="arithmatex">\(\sqrt{(1+{y'}^2)}\)</span></strong>，然后再把y代入算出即可</li>
+<li><em>对于比较复杂的，可能不能这样算</em>（2018年10月）</li>
+</ul>
+</li>
+</ul>
+<h4 id="181">18.1、面积的曲面积分<a class="headerlink" href="#181" title="Permanent link">&para;</a></h4>
+<h4 id="182">18.2、对坐标的曲线积分<a class="headerlink" href="#182" title="Permanent link">&para;</a></h4>
+<ul>
+<li>题型<ul>
+<li>对坐标的曲线积分（2020年8月）</li>
+</ul>
+</li>
+<li>自问<ul>
+<li><strong>通过2个点，找到x的区间，作为x的上、下限进行积分，同时有<code>x+y=2</code>类似这样的公式，把原式里的y算成x</strong>，这样就变成了对x的积分</li>
+</ul>
+</li>
+</ul>
+<h4 id="19-20">19-20、微分方程的通解<a class="headerlink" href="#19-20" title="Permanent link">&para;</a></h4>
+<h4 id="21_1">21、无穷级数收敛判断<a class="headerlink" href="#21_1" title="Permanent link">&para;</a></h4>
+<h4 id="221">22.1、傅里叶级数求和<a class="headerlink" href="#221" title="Permanent link">&para;</a></h4>
+<h4 id="222">22.2、幂级数的和函数<a class="headerlink" href="#222" title="Permanent link">&para;</a></h4>
+<h3 id="23-2515">四、综合题（23-25），15分<a class="headerlink" href="#23-2515" title="Permanent link">&para;</a></h3>
+<h4 id="231">23.1、证明<a class="headerlink" href="#231" title="Permanent link">&para;</a></h4>
+<ul>
+<li>题型<ul>
+<li>法线过球心</li>
+</ul>
+</li>
+</ul>
+<h4 id="232">23.2、函数的极值<a class="headerlink" href="#232" title="Permanent link">&para;</a></h4>
+<h4 id="241">24.1、验证<a class="headerlink" href="#241" title="Permanent link">&para;</a></h4>
+<ul>
+<li>题型<ul>
+<li>在平面内的是某个二元函数<code>u(x,y)</code>的全微分，求这个函数</li>
+</ul>
+</li>
+</ul>
+<h4 id="242">24.2、曲面在点处的法线方程<a class="headerlink" href="#242" title="Permanent link">&para;</a></h4>
+<h4 id="251">25.1、展开为幂级数<a class="headerlink" href="#251" title="Permanent link">&para;</a></h4>
+<ul>
+<li>题型</li>
+</ul>
+<h4 id="252">25.2、无穷级数的发散<a class="headerlink" href="#252" title="Permanent link">&para;</a></h4>
+<h3 id="_1">最后<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<h4 id="_2">履历<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
+<ul>
+<li>2024-01-21开始整理了一下</li>
+</ul>
+<h4 id="_3">参考<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
+<ul>
+<li><a href="https://blog.lisp4fun.com/2017/11/01/formula">公式</a></li>
+<li><a href="https://blog.nowcoder.net/n/7d5d9ff47af74c288d19ba29e88c5643">MarkDown编辑器中数学公式与符号-LaTeX 各种数学命令，符号</a></li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '../../..';</script>
+    <script src="../../../js/theme_extra.js" defer></script>
+    <script src="../../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

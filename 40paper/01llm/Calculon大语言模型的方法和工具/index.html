@@ -147,7 +147,7 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">《深入理解Linux虚拟内存管理》</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《深入理解Linux网络技术内幕》</a>
+                  <li class="toctree-l1"><a class="" href="../../../13kernel/深入理解Linux网络技术内幕.md">《深入理解Linux网络技术内幕》</a>
                   </li>
                   <li class="toctree-l1"><a class="" href="../../../13kernel/Linux内核源代码剖析-tcpip实现.md">《Linux内核源代码剖析-TCP/IP实现》</a>
                   </li>
@@ -221,7 +221,132 @@
 <li>https://dl.acm.org/doi/pdf/10.1145/3581784.3607102</li>
 </ul>
 <h4 id="abstract">ABSTRACT<a class="headerlink" href="#abstract" title="Permanent link">&para;</a></h4>
+<p>This paper presents a parameterized analytical performance model of transformer-based Large Language Models (LLMs) for guiding high-level algorithm-architecture codesign studies.</p>
+<ul>
+<li>这篇论文展示了 基于transformer的LLMs 参数分析性能模型，为指导高级别算法架构codesign研究</li>
+</ul>
+<p>This model de-rives from an extensive survey of performance optimizations that have been proposed for the training and inference of LLMs; the model’s parameters capture application characteristics, the hard-ware system, and the space of implementation strategies.</p>
+<ul>
+<li>这个模型性能优化的可执行调查，展示了LLMs的训练和推理目的；模型的参数捕捉应用字符，硬件系统，实现策略的空间。</li>
+</ul>
+<p>With such a model, we can systematically explore a joint space of hardware and software configurations to identify optimal system designs un-der given constraints, like the total amount of system memory.</p>
+<ul>
+<li>在这个模型中，我们系统和探索了硬件和软件的联合空间，去标识优化的系统设计在给定的限制中，像大量的系统内存。</li>
+</ul>
+<p>We implemented this model and methodology in a Python-based open-source tool called Calculon.</p>
+<ul>
+<li>我们实现了这个模型基于开源的python，叫Calculon</li>
+</ul>
+<p>Using it, we identified novel system designs that look significantly different from current inference and training systems, showing quantitatively the estimated potential to achieve higher efficiency, lower cost, and better scalability.</p>
+<ul>
+<li>使用它，我们标识文本系统设计 与众不同的当前的推理和训练系统，展现质量，估计潜在达到高效，低成本和更好的规模</li>
+</ul>
 <h4 id="1introduction">1、INTRODUCTION<a class="headerlink" href="#1introduction" title="Permanent link">&para;</a></h4>
+<p>We consider the task of conducting high-level analyses for algorithm-architecture codesign of distributed clusters and transformer-based Large Language Models (LLMs) [3, 4, 36, 39, 40].</p>
+<ul>
+<li>我们认为</li>
+</ul>
+<p>By “high level,” we mean focusing on developing and using fast and coarse-grained analytical or semi-empirical models of the software and hardware, a stage of design that precedes detailed simulation or implemen-tation on actual hardware. </p>
+<p>The goal is to estimate the best-case
+relative improvements that might come from significant changes
+to the system or software, as well as combinations of system and</p>
+<p>software configurations that might be unusual or otherwise costly
+and difficult to implement. Since high level models are expected to
+be much cheaper than detailed simulation, they should facilitate
+rapid exploration of a potentially large parameter space during the
+early phases of codesign.
+In this work, our starting point is Megatron, a large family of
+open-source LLM instances developed by NVIDIA [44]. The cost
+of training such models is high: a version of Megatron having
+one trillion (1T) parameters was recently trained over 84 days on
+450 billion tokens using 3,072 NVIDIA A100 Graphics Processing
+Unit (GPU) and executing more than 1,000 zettaFLOP (1 × 1021
+floating-point operations) [29, 30]. This cost roughly equals seven
+hundred years on a single GPU and over six million dollars (US)
+assuming a single GPU at $1 per hour cloud-GPU rates. Incurring
+such costs is commonplace; the PaLM-540B model recently trained
+by Google used 2,572 zettaFLOP with similar numbers of Tensor
+Processing Units (TPUs) and more than 8 million TPU hours [6].
+Such high costs strongly motivate any combination of algorithmic,
+software, or hardware redesign that can reduce them.
+Consequently, there are proposed enhancements in algorithms
+and software [29, 37, 38] and options for hardware acceleration [18,
+31]. However, selecting a good configuration in practice has relied
+primarily on heuristic reasoning [29]. While these proposals have
+yielded impressive results, it has also been observed that distributed
+training runs at a FLOP/s rate well below 50% of peak despite the
+prevalence of matrix multiply (GEMM) operations [34].
+The challenge is that the codesign landscape is quite large, mak-
+ing it hard to reason about the impact of major changes to arbi-
+trary combinations of hardware and software. For example, con-
+sider that limited GPU memory capacity requires dividing a large
+model among processors. Doing so can be achieved via model paral-
+lelism, which combines two strategies known as tensor parallelism
+and pipeline parallelism [29]. However, when using NVIDIA A100
+GPUs, the size of the NVLink domain is 8, which can limit tensor
+parallelism performance [32]. To compensate, one can increase the
+degree of pipeline parallelism—but that may in turn produce other
+inefficiencies such as reduced utilization due to pipeline bubbles
+and needing to recompute intermediate features in light of memory
+constraints [13, 29]. Alternatively, one might improve the computer
+network to support larger tensor parallelism domains; companies
+and researchers have indeed considered doing so [17, 32]. However,
+if memory capacity is the root issue, then a more cost-effective</p>
+<p>strategy is to increase capacity. Overall, this example shows that
+codesign should carefully consider and delicately balance memory
+capacity, memory bandwidth, processing throughput (i.e., FLOP/s),
+network bandwidth, and network scalability, all of which interact
+with choices made in software. Therefore, to reason about these
+trade-offs we seek a principled analysis framework that can be
+extended or adapted in a hardware and software landscape under-
+going rapid and continual evolution.
+We propose one such model-driven approach for high-level code-
+sign of LLM training and inference systems. We first identify a
+parameterized space of possible configurations that span major
+system features and common algorithmic and software implemen-
+tation strategies (Section 2). We then develop a unified analytical
+model to estimate the end-to-end performance of LLM training as
+a function of the configuration parameters. This model allows us to
+pose, mathematically, a constrained optimization problem: find the
+configuration that yields the best performance given fixed system
+constraints such as memory capacity and system or network size.
+We encode this performance model and model-optimizer in a
+tool called Calculon. The parameter space includes the structure
+and number of weights in the LLM model, the implementation
+strategy, and a schematic description of the hardware system (Ta-
+ble 1). Since Calculon’s model is analytical, it can calculate and
+return a complete breakdown of projected training or inference
+time quickly, typically in much less than a 1 ms per configuration.
+It thus becomes possible to search an entire configuration space
+having many millions of combinations in only a few minutes on a
+standard desktop computer.
+This paper includes several analyses we have conducted using
+Calculon. The modeling formulae themselves are complex to write
+out in full; therefore, to save space, we focus on the analyses as
+“proof-of-concept,” with detailed formulas appearing in Calculon’s
+open-source repository, where our formulas and assumptions ap-
+pear in full, allowing replication of our results or modification of our
+assumptions.1 The analyses showcase Calculon’s potential to facili-
+tate high-level codesign, revealing several system and optimization
+insights that may contradict conventional wisdom:
+(1) None of the existing software-parallelism strategies is uniformly
+the “best.” However, there is an optimal split-parallelism strat-
+egy that balances system resources well, with the exact optimum
+depending on system parameters, as we show.
+(2) The speed of LLM training can be a sensitive function of system
+size, with performance variability (ratio of highest to lowest
+performer) exceeding 6×. These “efficiency cliffs” come from</p>
+<p>difficulties mapping LLM structures to a given number of pro-
+cessors when sizes do not “divide evenly.”
+(3) Adding a second high-capacity tier of memory for tensor of-
+floading reduces performance variability across various LLM
+configurations and sizes, enabling efficient training of larger
+models. Moreover, the bandwidth requirement for efficient of-
+floading is within current technological capabilities.
+While these findings are estimates, they suggest quantitatively what
+performance improvements are possible, a critical first step for LLM
+codesign. Our methodology is systematic and rigorous, enabling
+future exploration via more detailed experiments and simulation.</p>
 <h4 id="2analytical-model">2、ANALYTICAL MODEL<a class="headerlink" href="#2analytical-model" title="Permanent link">&para;</a></h4>
 <h5 id="21llm-configuration">2.1、LLM Configuration<a class="headerlink" href="#21llm-configuration" title="Permanent link">&para;</a></h5>
 <ul>

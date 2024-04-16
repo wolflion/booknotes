@@ -147,7 +147,7 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">《深入理解Linux虚拟内存管理》</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《深入理解Linux网络技术内幕》</a>
+                  <li class="toctree-l1"><a class="" href="../../13kernel/深入理解Linux网络技术内幕.md">《深入理解Linux网络技术内幕》</a>
                   </li>
                   <li class="toctree-l1"><a class="" href="../../13kernel/Linux内核源代码剖析-tcpip实现.md">《Linux内核源代码剖析-TCP/IP实现》</a>
                   </li>
@@ -216,7 +216,28 @@
             <div class="section" itemprop="articleBody">
               
                 <h2 id="ffmpeg-">《FFmpeg入门详解-音视频原理及应用》<a class="headerlink" href="#ffmpeg-" title="Permanent link">&para;</a></h2>
-<p>chap1、</p>
+<h3 id="_1">自己想到的一些问题<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<h4 id="q1h264">Q1、H.264编译应该怎么学？<a class="headerlink" href="#q1h264" title="Permanent link">&para;</a></h4>
+<ul>
+<li>了解H.264编码的基本原理（将视频序列分解为一系列图像帧，然后对每一帧图像进行编码。）帧内编码和帧间编码<ul>
+<li>帧内：对每一帧图像进行单独编码</li>
+<li>帧间：对相邻帧图像之间的差异进行编码</li>
+</ul>
+</li>
+<li>掌握H.264编码的各种技术（运动补偿、帧内预测、帧间预测、熵编码）</li>
+<li>熟悉H.264编码的各种参数。</li>
+<li>实践操作H.264编码器。<strong>下载一些开源的H.264编码器</strong></li>
+<li><strong>H.264编码标准</strong>：https://www.itu.int/rec/T-REC-H.264/en</li>
+<li><strong>H.264编码器</strong>：https://www.ffmpeg.org/</li>
+<li><strong>H.264编码教程</strong>：https://www.youtube.com/watch?v=H264-Encoding-Tutorial</li>
+</ul>
+<h4 id="q2ipb">Q2、I，P，B帧分别是啥意思<a class="headerlink" href="#q2ipb" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>I帧（Intra frame）</strong>，是关键帧，包含了完整的图像信息，可以独立解码。I帧的压缩率最低，但它也是最重的帧。I帧通常用在视频的开头和关键时刻。</li>
+<li><strong>P帧（Predicted frame）</strong>，是预测帧，它通过对前一帧（I帧或P帧）进行预测来生成。P帧的压缩率比I帧高，但它也比I帧更轻。P帧通常用在视频的中间部分。</li>
+<li><strong>B帧（Bidirectional predicted frame）</strong>，是双向预测帧，它通过对前一帧（I帧或P帧）和后一帧（P帧或B帧）进行预测来生成。B帧的压缩率最高，但它也是最轻的帧。B帧通常用在视频的末尾部分。</li>
+</ul>
+<h3 id="chap1">chap1、<a class="headerlink" href="#chap1" title="Permanent link">&para;</a></h3>
 <h3 id="chap2">chap2、音视频入门<a class="headerlink" href="#chap2" title="Permanent link">&para;</a></h3>
 <h4 id="21">2.1、音视频入门引言<a class="headerlink" href="#21" title="Permanent link">&para;</a></h4>
 <h5 id="214">2.1.4 自学音视频的困惑<a class="headerlink" href="#214" title="Permanent link">&para;</a></h5>
@@ -466,14 +487,135 @@
 <h4 id="54">5.4 视频播放原理<a class="headerlink" href="#54" title="Permanent link">&para;</a></h4>
 <h5 id="541">5.4.1 视频播放器简介<a class="headerlink" href="#541" title="Permanent link">&para;</a></h5>
 <h5 id="542-ffmpeg">5.4.2 FFmpeg播放架构与原理<a class="headerlink" href="#542-ffmpeg" title="Permanent link">&para;</a></h5>
-<h3 id="6">第6章 音视频压缩编码基础<a class="headerlink" href="#6" title="Permanent link">&para;</a></h3>
-<h3 id="7">第7章 音视频编解码原理与标准<a class="headerlink" href="#7" title="Permanent link">&para;</a></h3>
+<h3 id="chap6">chap6、音视频压缩编码基础<a class="headerlink" href="#chap6" title="Permanent link">&para;</a></h3>
+<h4 id="61">6.1、音视频压缩编码<a class="headerlink" href="#61" title="Permanent link">&para;</a></h4>
+<ul>
+<li>空间冗余</li>
+<li>时间冗余</li>
+<li>视觉冗余</li>
+<li>信息熵</li>
+<li>结构冗余</li>
+<li>知识冗余</li>
+</ul>
+<h4 id="62">6.2、压缩编码技术分类<a class="headerlink" href="#62" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>数据=信息+数据冗余</strong></li>
+<li><strong>无损压缩</strong>也称为可逆编码，重构后的数据与原数据完全相同，适用于磁盘文件的压缩等。</li>
+<li><strong>有损压缩</strong>也称为不可逆编码，指使用压缩后的数据进行重构（解压缩）时，重构后的数据与原来的数据有差异，但不会使人们对原始资料所表达的信息造成误解。</li>
+</ul>
+<h5 id="621">6.2.1、无损压缩<a class="headerlink" href="#621" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、哈夫曼编码</li>
+<li>2、香农编码</li>
+<li>3、算术编码</li>
+</ul>
+<h5 id="622">6.2.2、有损压缩<a class="headerlink" href="#622" title="Permanent link">&para;</a></h5>
+<ul>
+<li>典型的有损压缩编码技术包括以下几项<ul>
+<li>1、预测编码主要是减少数据在空间和时间上的相关性，以达到对数据压缩的目的</li>
+<li>2、变换编码将图像时域信号变换到频域上进行处理</li>
+<li>3、量化编码包括标量量化、矢量量化，当对模拟信号进行数字化时，需要经历一个量化的过程。</li>
+<li>4、子带编码包括子带编码、块切割法，子带编码主要有两种方式。</li>
+<li>5、模型编码包括结构模型、知识基模型。结构模型编码也称为二代编码</li>
+<li>6、混合编码包括JPEG、H.261、MPEG等，同时使用两种或两种以上的编码方法进行编码。</li>
+</ul>
+</li>
+</ul>
+<h4 id="63">6.3 压缩编码关键技术<a class="headerlink" href="#63" title="Permanent link">&para;</a></h4>
+<ul>
+<li>预测是指通过帧内预测和帧间预测降低视频图像的空间冗余和时间冗余。</li>
+<li>变换是指通过从时域到频域的变换，去除相邻数据之间的相关性，即去除空间冗余。</li>
+<li>量化是指通过用更粗糙的数据表示精细的数据来降低编码的数据量，或者通过去除人眼不敏感的信息来降低编码数据量。</li>
+<li>熵编码是根据待编码数据的概率特性减少编码冗余。从信号处理层面入手，以像素、块为表示基础的视频图像包含大量冗余信息，如时间冗余、空间冗余和感知冗余等。</li>
+</ul>
+<h5 id="631">6.3.1、预测编码<a class="headerlink" href="#631" title="Permanent link">&para;</a></h5>
+<ul>
+<li>预测编码主要包括空间预测编码和时间预测编码。<ul>
+<li>空间预测是利用图像空间相邻像素的相关性来预测的方法。</li>
+<li>时间预测是利用时间上相邻图像的相关性来预测的方法。</li>
+</ul>
+</li>
+<li>预测编码的基本原理是计算出信号的预测值，然后与实际值求差。</li>
+</ul>
+<h5 id="632">6.3.2、变换<a class="headerlink" href="#632" title="Permanent link">&para;</a></h5>
+<ul>
+<li>变换编码是从频域的角度减小图像信号的空间相关性，它在降低数码率等方面取得了和预测编码相近的效果。</li>
+</ul>
+<h5 id="633">6.3.3、量化<a class="headerlink" href="#633" title="Permanent link">&para;</a></h5>
+<ul>
+<li>量化就是把经过抽样得到的瞬时值将其幅度离散，即用一组规定的电平，把瞬时抽样值用最接近的电平值来表示，或指把输入信号幅度连续变化的范围分为有限个不重叠的子区间（量化级），每个子区间用该区间内一个确定数值表示，落入其内的输入信号将以该值输出，从而将连续输入信号变为具有有限个离散值电平的近似信号。</li>
+</ul>
+<h5 id="634">6.3.4、熵编码<a class="headerlink" href="#634" title="Permanent link">&para;</a></h5>
+<ul>
+<li>熵编码即编码过程中按熵原理不丢失任何信息的编码。信息熵为信源的平均信息量（不确定性的度量）。</li>
+</ul>
+<h4 id="64">6.4 帧内编码与帧间编码<a class="headerlink" href="#64" title="Permanent link">&para;</a></h4>
+<h5 id="641">6.4.1、帧内编码<a class="headerlink" href="#641" title="Permanent link">&para;</a></h5>
+<ul>
+<li>帧内预测技术，即利用当前编码块周围已经重构出来的像素预测当前块。帧内编码是空间域编码，利用图像空间性冗余度进行图像压缩，处理的是一幅独立的图像，不会跨越多幅图像。</li>
+</ul>
+<p>6.4.2 帧间编码</p>
+<p>6.4.3 运动矢量</p>
+<p>6.4.4 运动补偿</p>
+<h5 id="645">6.4.5、双向预测<a class="headerlink" href="#645" title="Permanent link">&para;</a></h5>
+<h4 id="65gopdtspts">6.5、GOP与DTS/PTS<a class="headerlink" href="#65gopdtspts" title="Permanent link">&para;</a></h4>
+<h5 id="651ipbidr">6.5.1、I/P/B/IDR帧<a class="headerlink" href="#651ipbidr" title="Permanent link">&para;</a></h5>
+<h5 id="652gop">6.5.2、GOP详细讲解<a class="headerlink" href="#652gop" title="Permanent link">&para;</a></h5>
+<h5 id="653dtspts">6.5.3、DTS和PTS详细讲解<a class="headerlink" href="#653dtspts" title="Permanent link">&para;</a></h5>
+<h3 id="chap07">chap07、音视频编解码原理与标准<a class="headerlink" href="#chap07" title="Permanent link">&para;</a></h3>
+<h4 id="71">7.1 视频编码原理<a class="headerlink" href="#71" title="Permanent link">&para;</a></h4>
+<ul>
+<li>帧率是以帧为单位的位图图像连续出现在显示器上的频率。</li>
+<li>视频数据往往在时域和空域层面有极强的相关性，这也表示有大量的时域冗余信息和空域冗余信息，压缩技术就是去掉数据中的冗余信息。<ul>
+<li><strong>视频编码</strong>就是通过特定的<strong>压缩技术</strong>，将某个视频格式的文件转换成另一种视频格式。</li>
+</ul>
+</li>
+<li>为什么巨大的原始视频可以编码成很小的视频呢？核心思想就是去除冗余信息，主要包括空间冗余、时间冗余、编码冗余、视觉冗余
+  和知识冗余。</li>
+<li>传统的压缩编码是建立在香农信息论的基础上的，它以经典的集合论为基础，用统计概率模型来描述信源，但它未考虑信息接收者的
+  主观特性及事件本身的具体含义、重要程度和引起的后果</li>
+<li>图像编码方法可分为两代：<ul>
+<li>第一代是基于数据统计的，去掉数据冗余，称为低层压缩编码方法</li>
+<li>第二代是基于内容的，去掉内容冗余，其中基于对象(Object-Based)的方法称为中层压缩编码方法</li>
+</ul>
+</li>
+<li>使用帧间编码技术可去除时域冗余信息，包括以下3部分：<ul>
+<li>（1）、运动补偿是通过先前的局部图像来预测、补偿当前的局部图像，它是减少帧序列冗余信息的有效方法。</li>
+<li>（2）、运动是指不同区域的图像需要使用不同的运动矢量来描述运动信息，运动矢量通过熵编码进行压缩。</li>
+<li>（3）、运动估计是从视频序列中抽取运动信息的一整套技术。</li>
+</ul>
+</li>
+<li>使用帧间编码技术和熵编码技术可以去除空域冗余信息，主要包括以下3种方法：<ul>
+<li>（1）、变换编码是指帧内图像和预测差分信号都有很高的空域冗余信息，变换编码将空域信号变换到另一个正交矢量空间，使其相关性下降，数据冗余度减小。</li>
+<li>（2）、量化编码是指经过变换编码后，产生一批变换系数，对这些系数进行量化，使编码器的输出达到一定的位率，这一过程可导致精度的降低。</li>
+<li>（3）、熵编码是无损编码，对变换、量化后所得到的系数和运动信息进行进一步的压缩。</li>
+</ul>
+</li>
+</ul>
+<h4 id="72">7.2、视频采集原理<a class="headerlink" href="#72" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>视频</strong>是多幅静止图像（图像帧）与连续的音频信息在时间轴上同步运动的混合媒体，多帧图像随时间变化而产生运动感，因此视频也
+  被称为运动图像。</li>
+</ul>
+<h4 id="73">7.3、音频编码原理<a class="headerlink" href="#73" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>阈值特性</strong>是指人耳对不同频率的声音具有不同的听觉灵敏度，对低频段（100Hz以下）和超高频段（16kHz以上）的听觉灵敏度较
+  低，而在[1kHz，5kHz]的中音频段时，听觉灵敏度明显提高。</li>
+<li><strong>子带编码技术</strong>是将原始信号由时间域转变为频率域，然后将其分割为若干个子频带，并对其分别进行数字编码的技术。</li>
+</ul>
+<h4 id="74">7.4、视频编码标准<a class="headerlink" href="#74" title="Permanent link">&para;</a></h4>
+<h5 id="741-ituisojvt">7.4.1 ITU/ISO/JVT<a class="headerlink" href="#741-ituisojvt" title="Permanent link">&para;</a></h5>
+<h5 id="742-mpeg-x">7.4.2 MPEG-x系列<a class="headerlink" href="#742-mpeg-x" title="Permanent link">&para;</a></h5>
+<h5 id="743-h26x">7.4.3 H.26x系列<a class="headerlink" href="#743-h26x" title="Permanent link">&para;</a></h5>
 <h3 id="chap08">chap08、音视频编解码技术与流程<a class="headerlink" href="#chap08" title="Permanent link">&para;</a></h3>
 <ul>
 <li>技术主要包括I帧、P帧和B帧技术、运动估计和运动补偿等</li>
 <li>视频压缩编码过程一般分为3个步骤，包括时间维压缩、空间维压缩及熵编码。</li>
 </ul>
 <h4 id="81">8.1 视频编码简介<a class="headerlink" href="#81" title="Permanent link">&para;</a></h4>
+<ul>
+<li>编码就是为了压缩。要实现压缩，就要设计各种算法，<strong>将视频数据中的冗余信息去除</strong>。</li>
+</ul>
 <h4 id="82">8.2 视频编码流程<a class="headerlink" href="#82" title="Permanent link">&para;</a></h4>
 <ul>
 <li>视频编码最主要的工作就是压缩，分为帧内压缩和帧间压缩，然后又分为几个步骤，主要包括预测、变换、量化、熵编码、滤波处理等，但压缩是分步骤的，不是简单地把图像中重复的数据直接聚合在一起。依据方法论，可压缩的内容有两种：单幅图像的压缩和多幅图像的压缩。</li>
@@ -559,8 +701,201 @@
 <h5 id="853-mpeg-4">8.5.3 MPEG-4音频编码<a class="headerlink" href="#853-mpeg-4" title="Permanent link">&para;</a></h5>
 <h5 id="854-ac-3">8.5.4 AC-3音频编码<a class="headerlink" href="#854-ac-3" title="Permanent link">&para;</a></h5>
 <h3 id="chap9h264">chap9、H.264编解码基础<a class="headerlink" href="#chap9h264" title="Permanent link">&para;</a></h3>
+<ul>
+<li>ITU-T以H.26x系列为名称命名的视频编解码技术标准之一</li>
+<li>H.264是在MPEG-4技术的基础之上建立起来的，其编解码流程主要包括<strong>5部分</strong>：<ul>
+<li>帧间和帧内预测、</li>
+<li>变换和反变换、</li>
+<li>量化和反量化、</li>
+<li>环路滤波、</li>
+<li>熵编码。</li>
+</ul>
+</li>
+<li>H.264标准的主要目标是与其他现有的视频编码标准相比，在相同的带宽下提供更加优秀的图像质量。</li>
+</ul>
+<h4 id="91h264">9.1、H.264快速入门<a class="headerlink" href="#91h264" title="Permanent link">&para;</a></h4>
+<ul>
+<li>在系统层面上，H.264提出了一个新的概念，在视频编码层(Video Coding Layer，VCL)和网络提取层(Network Abstraction Layer，NAL)之间进行概念性分割，<ul>
+<li>前者是视频内容的核心压缩内容之表述，</li>
+<li>后者则是通过特定类型网络进行递送的表述</li>
+</ul>
+</li>
+</ul>
+<h5 id="911">9.1.1、视频压缩编码的基本技术<a class="headerlink" href="#911" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、预测编码<ul>
+<li>用于处理视频中的时间和空间域的冗余。</li>
+<li><strong>帧内预测编码</strong>是指预测值与实际值位于同一帧内，用于消除图像的空间冗余；帧内预测编码的特点是压缩率相对较低，然而可以独立解码，不依赖于其他帧的数据；</li>
+<li><strong>帧间预测编码</strong>利用连续帧中的时间冗余进行运动估计和补偿。</li>
+</ul>
+</li>
+<li>2、变换编码</li>
+<li>3、量化<ul>
+<li><strong>量化</strong>就是把经过抽样得到的瞬时值将其幅度离散，即用一组规定的电平，把瞬时抽样值用最接近的电平值来表示，或指把输入信号幅度连续变化的范围分为有限个不重叠的子区间（量化级），每个子区间用该区间内一个确定数值表示，落入其内的输入信号将以该值输出，从而将连续输入信号变为具有有限个离散值电平的近似信号。</li>
+</ul>
+</li>
+<li>4、熵编码<ul>
+<li>视频编码中的熵编码方法主要用于消除视频信息中的统计冗余。</li>
+</ul>
+</li>
+</ul>
+<h5 id="912h264">9.1.2、H.264的句法元素<a class="headerlink" href="#912h264" title="Permanent link">&para;</a></h5>
+<ul>
+<li>在H.264中，句法元素被<strong>组织成5个层次</strong></li>
+<li>1、序列<ul>
+<li>H.264编码标准中视频序列(Sequence)是指连续几个相关的帧所组成的一个独立的单位，序列中的帧、像素、亮度与色温的差别很小，所以面对一段时间内的几个连续图像时，没必要去对每张图像进行完整一帧的编码，而是选取这段时间的第一帧图像作为完整编码，而下一张图像可以记录与第一帧完整编码图像像素、亮度与色温等的差别即可，以此类推循环下去。</li>
+</ul>
+</li>
+<li>2、图像、帧、场、宏块</li>
+</ul>
+<ul>
+<li>3.片</li>
+<li>4.帧类型</li>
+<li>5.帧内编码帧/I帧／关键帧</li>
+<li>6.P帧／预测帧／前向预测编码帧</li>
+<li>7.B帧／双向预测编码帧</li>
+<li>8.GOP</li>
+<li>9、IDR帧<ul>
+<li>I帧和IDR帧都是使用帧内预测的，它们本质上都是I帧，但在编码和解码中为了方便，GOP中首个I帧要和其他I帧区别开，把第1个I帧叫作IDR，这样方便控制编码和解码流程，所以IDR帧一定是I帧，但I帧不一定是IDR帧。</li>
+</ul>
+</li>
+</ul>
+<h5 id="913-vclnal">9.1.3 VCL与NAL<a class="headerlink" href="#913-vclnal" title="Permanent link">&para;</a></h5>
+<h5 id="914">9.1.4、档次与级别<a class="headerlink" href="#914" title="Permanent link">&para;</a></h5>
+<ul>
+<li>为了适应不同的应用场景，H.264定义了4种不同的Profile：<ul>
+<li>(1)基本档次(Baseline Profile，BP)主要用于视频会议、可视电话等低延时实时通信领域</li>
+<li>(2)主档次(Main Profile，MP)主要用于数字电视广播、数字视频数据存储等</li>
+</ul>
+</li>
+</ul>
+<h5 id="915x264jm">9.1.5、X264与JM<a class="headerlink" href="#915x264jm" title="Permanent link">&para;</a></h5>
+<h4 id="92h264">9.2、H.264编解码原理与实现<a class="headerlink" href="#92h264" title="Permanent link">&para;</a></h4>
+<ul>
+<li>视频编码是为了<strong>将数据进行压缩</strong>，这样在传输的过程中就不会使资源浪费。</li>
+<li>帧内预测压缩以解决空域数据冗余问题、帧间预测压缩（运动估计与
+  运动补偿）以解决时域数据冗余问题、整数离散余弦变换可以将空间
+  上的相关性变为频域上无关的数据然后进行量化、熵编码。经过压缩
+  后的帧分为I帧、P帧和B帧。I帧是关键帧，采用帧内压缩技术；P帧是
+  向前参考帧，在压缩时，只参考前面已经处理的帧，采用帧间压缩技
+  术；B帧是双向参考帧，在压缩时，既参考前面的帧，又参考它后面
+  的帧，采用帧间压缩技术。除了I帧、P帧和B帧外，还有图像序列
+  GOP，两个I帧之间是一张图像序列，在一张图像序列中只有一个I
+  帧。</li>
+</ul>
+<h5 id="921h264">9.2.1、H.264编解码简介<a class="headerlink" href="#921h264" title="Permanent link">&para;</a></h5>
+<h5 id="922h264">9.2.2、H.264编解码流程<a class="headerlink" href="#922h264" title="Permanent link">&para;</a></h5>
+<h5 id="923h264">9.2.3、H.264的帧内预测编码<a class="headerlink" href="#923h264" title="Permanent link">&para;</a></h5>
+<ul>
+<li>压缩编码大概<strong>分成4个步骤</strong>：<ul>
+<li>第一步是<strong>分组</strong>，将一系列变换不大的图像归为一个组，也就是一个序列，也可以叫作GOP</li>
+<li>第二步是<strong>定义帧</strong>，将每组的图像帧归分为I帧、P帧和B帧3种类型</li>
+<li>第三步是<strong>预测帧</strong>，以I帧作为基础帧，以I帧预测P帧，再由I帧和P帧预测B帧</li>
+<li>第四步是<strong>数据传输</strong>，最后将I帧数据与预测的差值信息进行存储和传输。</li>
+</ul>
+</li>
+<li>H.264采用的核心算法是帧内压缩编码和帧间压缩编码，帧内压缩是生成I帧的算法，帧间压缩是生成B帧和P帧的算法。<ul>
+<li><strong>I帧（Intra frame）</strong>，是关键帧，包含了完整的图像信息，可以独立解码。I帧的压缩率最低，但它也是最重的帧。I帧通常用在视频的开头和关键时刻。</li>
+<li><strong>P帧（Predicted frame）</strong>，是预测帧，它通过对前一帧（I帧或P帧）进行预测来生成。P帧的压缩率比I帧高，但它也比I帧更轻。P帧通常用在视频的中间部分。</li>
+<li><strong>B帧（Bidirectional predicted frame）</strong>，是双向预测帧，它通过对前一帧（I帧或P帧）和后一帧（P帧或B帧）进行预测来生成。B帧的压缩率最高，但它也是最轻的帧。B帧通常用在视频的末尾部分。</li>
+</ul>
+</li>
+<li>H.264的帧内预测算法通常可以分为3种情况：<ul>
+<li>1、4×4亮度分量预测</li>
+<li>2、16×16亮度分量预测</li>
+<li>3、H.264的I_PCM编码模式</li>
+</ul>
+</li>
+</ul>
+<h4 id="924h264">9.2.4、H.264的帧间预测编码<a class="headerlink" href="#924h264" title="Permanent link">&para;</a></h4>
+<ul>
+<li>1、树状结构分块</li>
+<li>2、运动估计准则</li>
+<li>3、运动搜索方法</li>
+<li>4、树状分级搜索和亚像素估计</li>
+</ul>
+<h4 id="93h264">9.3、H.264码流结构<a class="headerlink" href="#93h264" title="Permanent link">&para;</a></h4>
+<ul>
+<li>H.264的功能分为两层，包括VCL和NAL。<ul>
+<li>每个NAL单元包含一个RBSP。</li>
+</ul>
+</li>
+</ul>
+<h5 id="931h264">9.3.1、H.264分层结构<a class="headerlink" href="#931h264" title="Permanent link">&para;</a></h5>
+<h5 id="932h264">9.3.2、H.264码流结构<a class="headerlink" href="#932h264" title="Permanent link">&para;</a></h5>
+<ul>
+<li>H.264的码流结构分为两层，其中视频编码层是对核心算法引擎、块、宏块及片的语法级别定义，VCL数据是由编码器直接输出的SODB，它表示图像被压缩后的编码比特流。网络提取层定义了片级以上的语法级别，同时支持以下功能：独立片解码，保证起始码唯一，SEI及流格式编码数据传送。</li>
+</ul>
+<h5 id="933h264nal-unit">9.3.3、H.264的NAL Unit<a class="headerlink" href="#933h264nal-unit" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、H.264的NAL结构</li>
+<li>2、NAL头<ul>
+<li>NALU由1个NAL头和1个RBSP或EBSP组成。</li>
+</ul>
+</li>
+<li>3、NAL Unit数据类型<ul>
+<li>在具体介绍NAL数据类型前，有必要知道NAL分为VCL和非VCL的NAL Unit。</li>
+</ul>
+</li>
+<li>4、NALU与片、宏块的关系<ul>
+<li>(1)、1帧=1～N个片，也可以说1到多个片为一个片组。</li>
+<li>(2)、1个片=1～N个宏块。</li>
+<li>(3)、1个宏块=16×16的YUV数据。</li>
+</ul>
+</li>
+</ul>
 <h3 id="chap10aac">chap10、AAC编解码基础<a class="headerlink" href="#chap10aac" title="Permanent link">&para;</a></h3>
+<h4 id="101aac">10.1、AAC编码概述<a class="headerlink" href="#101aac" title="Permanent link">&para;</a></h4>
+<ul>
+<li>AAC是新一代的音频有损压缩技术，它通过一些附加的编码技术，衍生出了LC-AAC、HE-AAC、HE-
+  AACv2共3种主要的编码。</li>
+<li>AAC共有9种规格，以适应对不同场合的需要。<ul>
+<li>（1）、MPEG-2 AAC LC：</li>
+</ul>
+</li>
+</ul>
+<h4 id="102aac">10.2、AAC音频文件格式<a class="headerlink" href="#102aac" title="Permanent link">&para;</a></h4>
+<ul>
+<li>AAC的音频文件格式有两种，包括ADIF和ADTS。<ul>
+<li>ADIF特征可以准确地找到这个音频数据的开始，不可以在音频数据流的中间位置进行解码，即它的解码必须在明确定义的开始处进行，故这种格式常用在磁盘文件中。</li>
+<li>ADTS是一个有同步字的比特流，解码可以在这个流中的任何位置开始，它的特征类似于MP3数据流格式。</li>
+</ul>
+</li>
+<li>在AAC中，原始数据块的组成有以下几种不同的元素：<ul>
+<li>（1）、SCE（Single Channel Element，单通道元素），基本上只由一个ICS组成。</li>
+</ul>
+</li>
+</ul>
 <h3 id="chap11h265">chap11、H.265编解码基础<a class="headerlink" href="#chap11h265" title="Permanent link">&para;</a></h3>
+<h4 id="111h265">11.1、H.265编解码概述<a class="headerlink" href="#111h265" title="Permanent link">&para;</a></h4>
+<ul>
+<li>2012年8月，爱立信公司推出了首款H.265编解码器，而在仅仅6个月之后，ITU就正式批准并通过了HEVC/H.265标准，相较于之前的
+  H.264标准有了相当大的改善。</li>
+</ul>
+<h4 id="112h265">11.2、H.265码流简介<a class="headerlink" href="#112h265" title="Permanent link">&para;</a></h4>
+<ul>
+<li>H.265相比较于H.264，除了包含SPS、PPS外，还多包含了一个VPS 。</li>
+</ul>
+<h5 id="1121hevc-profileslevelstier">11.2.1、HEVC Profiles/Levels/Tier<a class="headerlink" href="#1121hevc-profileslevelstier" title="Permanent link">&para;</a></h5>
+<ul>
+<li>HEVC Profile规定了编码器可采用哪些编码工具或算法，共分3个档次：<ul>
+<li>（1）、Main Profile：每像素8b的位深，是最常见的档次。</li>
+<li>（2）、Main Still Picture Profile：支持单个静态图像，按照Main档次的规定进行编码，码流仅包含单一的帧内编码图像。</li>
+<li>（3）、Main 10 Profile：除了8b位深，也可扩展支持10b位深，支持Main 10的解码器必须同时可解码Main档次的码流。</li>
+</ul>
+</li>
+</ul>
+<h5 id="1122hevc">11.2.2、HEVC的分层结构<a class="headerlink" href="#1122hevc" title="Permanent link">&para;</a></h5>
+<ul>
+<li>与H.264/AVC类似，H.265/HEVC采用了VCL和NAL<ul>
+<li>VCL包含了视频数据的内容</li>
+<li>NAL主要负责对视频压缩后的数据进行划分和封装，保证数据能在不同的网络环境中传输。</li>
+</ul>
+</li>
+<li>在HEVC编码架构中，整体被分为了3个基本单位，分别是编码单位(Coding Unit，CU)、预测单位(Predict Unit，PU)和转换单位
+  (Transform Unit，TU)。</li>
+</ul>
+<h4 id="113h265h264">11.3、H.265与H.264的区别与优势<a class="headerlink" href="#113h265h264" title="Permanent link">&para;</a></h4>
               
             </div>
           </div><footer>

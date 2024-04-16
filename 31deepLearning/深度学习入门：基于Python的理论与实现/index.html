@@ -323,21 +323,73 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#chap6">chap6、与学习相关的技巧</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#641">6.4.1、过拟合</a>
+    <li class="toctree-l3"><a class="reference internal" href="#61">6.1、参数的更新</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#611">6.1.1、探险家的故事</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#642">6.4.2、权值衰减</a>
+    <li class="toctree-l4"><a class="reference internal" href="#612sgd">6.1.2、SGD</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#643dropout">6.4.3、Dropout</a>
+    <li class="toctree-l4"><a class="reference internal" href="#613sgd">6.1.3、SGD的缺点</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#614momentum">6.1.4、Momentum</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#615adagrad">6.1.5、AdaGrad</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#616adm">6.1.6、Adm</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#617">6.1.7、使用哪种更新方法呢</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#618mnist">6.1.8、基于MNIST数据集的更新方法的比较</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#62">6.2、权重的初始值</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#6210">6.2.1、可以将权重初始值设为0吗</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#622">6.2.2、隐藏层的激活值的分布</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#623relu">6.2.3、ReLU的权重初始值</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#624mnist">6.2.4、基于MNIST数据集的权重初始化</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#63batch-normalization">6.3、Batch Normalization</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#631batch-normalization">6.3.1、Batch Normalization的算法</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#632batch-normalization">6.3.2、Batch Normalization的评估</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#64">6.4、正则化</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#641">6.4.1、过拟合</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#642weight-decay">6.4.2、权值衰减（weight decay）</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#643dropout">6.4.3、Dropout</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#65">6.5、超参数的验证</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#66">6.6、小结</a>
     </li>
         </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#chap7">chap7、卷积神经网络</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#71">7.1、整体结构</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#72">7.2、卷积层</a>
         <ul>
     <li class="toctree-l4"><a class="reference internal" href="#721">7.2.1、全连接层存在的问题</a>
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#722">7.2.2、卷积运算</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#723">7.2.3、填充</a>
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#724">7.2.4、步幅</a>
     </li>
@@ -397,7 +449,7 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">《深入理解Linux虚拟内存管理》</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《深入理解Linux网络技术内幕》</a>
+                  <li class="toctree-l1"><a class="" href="../../13kernel/深入理解Linux网络技术内幕.md">《深入理解Linux网络技术内幕》</a>
                   </li>
                   <li class="toctree-l1"><a class="" href="../../13kernel/Linux内核源代码剖析-tcpip实现.md">《Linux内核源代码剖析-TCP/IP实现》</a>
                   </li>
@@ -797,12 +849,78 @@
 <h5 id="574">5.7.4、使用误差反向传播法的学习<a class="headerlink" href="#574" title="Permanent link">&para;</a></h5>
 <p>5.8、小结</p>
 <h3 id="chap6">chap6、与学习相关的技巧<a class="headerlink" href="#chap6" title="Permanent link">&para;</a></h3>
-<p>6.1、参数的更新</p>
-<p>6.2、权重的初始值</p>
-<p>6.3、Batch Normalization</p>
-<p>6.4、正则化</p>
+<ul>
+<li>神经网络的学习中的一些重要观点，主题涉及<strong>寻找最优权重参数的最优化方法，权重参数的初始值，超参数的设定方法</strong></li>
+<li>为了应对<strong>过拟合</strong>，还将介绍<strong>权值衰减，Dropout等正则化方法</strong></li>
+<li>最后介绍了一下<strong>Batch Normalization</strong></li>
+</ul>
+<h4 id="61">6.1、参数的更新<a class="headerlink" href="#61" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>神经网络的学习的目的</strong>是找到<strong>使损失函数的值尽可能小的参数</strong>，这种寻找最优参数的问题，解决这个问题的过程称为<strong>最优化（optimization）</strong></li>
+<li>前几章，为了找到最优参数，将<strong>参数的梯度（导数）</strong>作为了线索，沿梯度方向更新参数，这个过程称为<strong>随机梯度下降法（stochastic gradient descent）SGD</strong></li>
+</ul>
+<h5 id="611">6.1.1、探险家的故事<a class="headerlink" href="#611" title="Permanent link">&para;</a></h5>
+<ul>
+<li>至深之地，<strong>地面的坡度</strong>，朝着当前所在位置的坡度最大的方向前进，这就是<strong>SGD的策略</strong></li>
+</ul>
+<h5 id="612sgd">6.1.2、SGD<a class="headerlink" href="#612sgd" title="Permanent link">&para;</a></h5>
+<ul>
+<li><em>没懂这个</em></li>
+</ul>
+<h5 id="613sgd">6.1.3、SGD的缺点<a class="headerlink" href="#613sgd" title="Permanent link">&para;</a></h5>
+<ul>
+<li>SGD低效的根本原因是，<strong>梯度的方向并没有指向最小值的方向</strong>。</li>
+</ul>
+<h5 id="614momentum">6.1.4、Momentum<a class="headerlink" href="#614momentum" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>动量</strong>的意思，让人感觉<strong>小球在斜面上滚动</strong></li>
+</ul>
+<h5 id="615adagrad">6.1.5、AdaGrad<a class="headerlink" href="#615adagrad" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>学习率衰减（learning rate decay）</strong></li>
+</ul>
+<h5 id="616adm">6.1.6、Adm<a class="headerlink" href="#616adm" title="Permanent link">&para;</a></h5>
+<h5 id="617">6.1.7、使用哪种更新方法呢<a class="headerlink" href="#617" title="Permanent link">&para;</a></h5>
+<ul>
+<li>代码在ch06/optimizer_compare_naive.py中</li>
+</ul>
+<h5 id="618mnist">6.1.8、基于MNIST数据集的更新方法的比较<a class="headerlink" href="#618mnist" title="Permanent link">&para;</a></h5>
+<h4 id="62">6.2、权重的初始值<a class="headerlink" href="#62" title="Permanent link">&para;</a></h4>
+<h5 id="6210">6.2.1、可以将权重初始值设为0吗<a class="headerlink" href="#6210" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>权值衰减</strong>就是一种<strong>以减小权重参数的值为目的进行学习的方法</strong></li>
+<li>如果想减小权重的值，一开始就将初始值设为较小的值才是正途。</li>
+<li>不能设置为0，不能将权重初始值设成一样，<strong>因为在误差反向传播法中，所有的权重值都会进行相同的更新</strong>。</li>
+</ul>
+<h5 id="622">6.2.2、隐藏层的激活值的分布<a class="headerlink" href="#622" title="Permanent link">&para;</a></h5>
+<ul>
+<li>这里的<strong>激活值</strong>是指<strong>激活函数的输出数据</strong>。</li>
+<li><strong>梯度消失</strong>（gradient vanishing）</li>
+</ul>
+<h5 id="623relu">6.2.3、ReLU的权重初始值<a class="headerlink" href="#623relu" title="Permanent link">&para;</a></h5>
+<h5 id="624mnist">6.2.4、基于MNIST数据集的权重初始化<a class="headerlink" href="#624mnist" title="Permanent link">&para;</a></h5>
+<h4 id="63batch-normalization">6.3、Batch Normalization<a class="headerlink" href="#63batch-normalization" title="Permanent link">&para;</a></h4>
+<h5 id="631batch-normalization">6.3.1、Batch Normalization的算法<a class="headerlink" href="#631batch-normalization" title="Permanent link">&para;</a></h5>
+<ul>
+<li>优点<ul>
+<li>使学习快速进行（增大学习率）</li>
+<li>不那么依赖初始值（对于初始值不用那么神经质）</li>
+<li>抑制过拟合（降低Dropout等的必要性）</li>
+</ul>
+</li>
+<li>Batch Norm，<strong>以进行学习时的mini-batch为单位，按mini-batch进行正规化</strong>，具体而言，<strong>就是进行使数据分布的均值为0，方差为1的正规化</strong>。</li>
+</ul>
+<h5 id="632batch-normalization">6.3.2、Batch Normalization的评估<a class="headerlink" href="#632batch-normalization" title="Permanent link">&para;</a></h5>
+<h4 id="64">6.4、正则化<a class="headerlink" href="#64" title="Permanent link">&para;</a></h4>
 <h5 id="641">6.4.1、过拟合<a class="headerlink" href="#641" title="Permanent link">&para;</a></h5>
-<h5 id="642">6.4.2、权值衰减<a class="headerlink" href="#642" title="Permanent link">&para;</a></h5>
+<ul>
+<li>发生过拟合的原因，主要有以下2个：<ul>
+<li>模型拥有大量参数，表现力强</li>
+<li>训练数据少</li>
+</ul>
+</li>
+</ul>
+<h5 id="642weight-decay">6.4.2、权值衰减（weight decay）<a class="headerlink" href="#642weight-decay" title="Permanent link">&para;</a></h5>
 <ul>
 <li><strong>通过在学习的过程中对大的权重进行惩罚</strong></li>
 </ul>
@@ -810,8 +928,11 @@
 <ul>
 <li><strong>在学习过程中随机删除神经元的方法</strong></li>
 </ul>
-<p>6.5、超参数的验证</p>
-<p>6.6、小结</p>
+<h4 id="65">6.5、超参数的验证<a class="headerlink" href="#65" title="Permanent link">&para;</a></h4>
+<p>6.5.1、验证数据</p>
+<p>6.5.2、超参数的最优化</p>
+<p>6.5.3、超参数最优化的实现</p>
+<h4 id="66">6.6、小结<a class="headerlink" href="#66" title="Permanent link">&para;</a></h4>
 <h3 id="chap7">chap7、卷积神经网络<a class="headerlink" href="#chap7" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Convolutional Neural Network，用于图像识别、语音识别</li>
@@ -820,8 +941,16 @@
 <ul>
 <li>如何组装层以构建CNN</li>
 <li>神经网络中，相邻层的所有神经元之间都有连接，称为<strong>全连接</strong>（fully-connected）</li>
+<li>我们用Affine层实现了全连接层<ul>
+<li>5层的话（前4层是Affine+ReLu，最后1层是Affine+Softmax）</li>
+<li>CNN的话，就会增加池化层</li>
 </ul>
-<p>7.2、卷积层</p>
+</li>
+</ul>
+<h4 id="72">7.2、卷积层<a class="headerlink" href="#72" title="Permanent link">&para;</a></h4>
+<ul>
+<li>一些术语<strong>填充，步幅</strong></li>
+</ul>
 <h5 id="721">7.2.1、全连接层存在的问题<a class="headerlink" href="#721" title="Permanent link">&para;</a></h5>
 <ul>
 <li><strong>数据的形状被“忽视”了</strong>，输入时图像通常是<strong>高、长、通道方向上3维形态</strong>，向全连接层输入时，需要将3维数据拉平为1维数据。</li>
@@ -831,7 +960,10 @@
 <ul>
 <li>相当于图像处理中的<strong>滤波器运算</strong>，有时也用<strong>核</strong></li>
 </ul>
-<p>7.2.3、</p>
+<h5 id="723">7.2.3、填充<a class="headerlink" href="#723" title="Permanent link">&para;</a></h5>
+<ul>
+<li>在进行卷积层处理之前，有时要<strong>向输入数据的周围填入固定的数据（比如0等）</strong>，这称为<strong>填充（padding）</strong>。</li>
+</ul>
 <h5 id="724">7.2.4、步幅<a class="headerlink" href="#724" title="Permanent link">&para;</a></h5>
 <ul>
 <li>应用滤波器的位置间隔称为<strong>步幅</strong>（stride）</li>

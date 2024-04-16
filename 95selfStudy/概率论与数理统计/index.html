@@ -147,7 +147,7 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">《深入理解Linux虚拟内存管理》</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《深入理解Linux网络技术内幕》</a>
+                  <li class="toctree-l1"><a class="" href="../../13kernel/深入理解Linux网络技术内幕.md">《深入理解Linux网络技术内幕》</a>
                   </li>
                   <li class="toctree-l1"><a class="" href="../../13kernel/Linux内核源代码剖析-tcpip实现.md">《Linux内核源代码剖析-TCP/IP实现》</a>
                   </li>
@@ -391,6 +391,24 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#chap7">chap7、参数估计</a>
         <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#71">7.1、点估计的几种方法</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#711">7.1.1、替换原理和矩法估计</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#712">7.1.2、极大似然估计</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#72">7.2、点估计的评价标准</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#721">7.2.1、相合性</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#722">7.2.2、无偏性</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#723">7.2.3、有效性</a>
+    </li>
+        </ul>
+    </li>
     <li class="toctree-l3"><a class="reference internal" href="#73">7.3、参数的区间估计</a>
         <ul>
     <li class="toctree-l4"><a class="reference internal" href="#731">7.3.1、置信区间的概念</a>
@@ -404,6 +422,10 @@
     <li class="toctree-l2"><a class="reference internal" href="#chap8">chap8、假设检验</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#81">8.1、假设检验的基本思想和概念</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#811">8.1.1、基本思想</a>
+    </li>
+        </ul>
     </li>
         </ul>
     </li>
@@ -928,15 +950,99 @@
 <h5 id="636">6.3.6、极大顺序统计量和极小顺序统计量<a class="headerlink" href="#636" title="Permanent link">&para;</a></h5>
 <h5 id="637">6.3.7、正态总体的抽样分布<a class="headerlink" href="#637" title="Permanent link">&para;</a></h5>
 <h3 id="chap7">chap7、参数估计<a class="headerlink" href="#chap7" title="Permanent link">&para;</a></h3>
-<p>7.1、占估计的几种方法</p>
-<p>7.2、占估计的评价标准</p>
+<ul>
+<li><strong>统计推断</strong>：由样本来推断总体，有2种方法<ul>
+<li>参数估计</li>
+<li>假设检验</li>
+</ul>
+</li>
+<li>参数估计里的<strong>参数</strong>是指如下<strong>三类未知参数</strong>：<ul>
+<li>1、分布中所含的未知参数<span class="arithmatex">\(\theta\)</span></li>
+<li>2、分布中所含的未知参数<span class="arithmatex">\(\theta\)</span>的函数</li>
+<li>3、分布的各种特征数也都是未知参数</li>
+</ul>
+</li>
+<li>参数估计的形式<ul>
+<li>1、点估计</li>
+<li>2、区间估计</li>
+</ul>
+</li>
+<li><strong>如何构造统计量</strong>，涉及2个问题<ul>
+<li>1、如何给出估计，<strong>估计的方法问题</strong></li>
+<li>2、如何对不同的估计进行评价，<strong>估计的好坏判断标准</strong></li>
+</ul>
+</li>
+</ul>
+<h4 id="71">7.1、点估计的几种方法<a class="headerlink" href="#71" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>点估计量（简称为 点估计）</strong></li>
+<li>两种常用的点估计方法，<strong>矩法和极大似然法</strong></li>
+</ul>
+<h5 id="711">7.1.1、替换原理和矩法估计<a class="headerlink" href="#711" title="Permanent link">&para;</a></h5>
+<ul>
+<li>用样本矩替换总体矩，<strong>也包括函数</strong></li>
+<li>用样本均值，估计总体均值</li>
+</ul>
+<h5 id="712">7.1.2、极大似然估计<a class="headerlink" href="#712" title="Permanent link">&para;</a></h5>
+<ul>
+<li>连续型</li>
+<li>离散型</li>
+<li>定义1：<ul>
+<li><strong>求导</strong>是极大似然估计最常用的方法</li>
+</ul>
+</li>
+</ul>
+<h4 id="72">7.2、点估计的评价标准<a class="headerlink" href="#72" title="Permanent link">&para;</a></h4>
+<h5 id="721">7.2.1、相合性<a class="headerlink" href="#721" title="Permanent link">&para;</a></h5>
+<ul>
+<li>定义1</li>
+<li>定理1</li>
+</ul>
+<h5 id="722">7.2.2、无偏性<a class="headerlink" href="#722" title="Permanent link">&para;</a></h5>
+<ul>
+<li>定义2</li>
+</ul>
+<h5 id="723">7.2.3、有效性<a class="headerlink" href="#723" title="Permanent link">&para;</a></h5>
+<ul>
+<li>定义3</li>
+</ul>
 <h4 id="73">7.3、参数的区间估计<a class="headerlink" href="#73" title="Permanent link">&para;</a></h4>
 <h5 id="731">7.3.1、置信区间的概念<a class="headerlink" href="#731" title="Permanent link">&para;</a></h5>
+<ul>
+<li>定义1</li>
+</ul>
 <h5 id="732">7.3.2、单个正态总体参数的置信区间<a class="headerlink" href="#732" title="Permanent link">&para;</a></h5>
 <h3 id="chap8">chap8、假设检验<a class="headerlink" href="#chap8" title="Permanent link">&para;</a></h3>
 <h4 id="81">8.1、假设检验的基本思想和概念<a class="headerlink" href="#81" title="Permanent link">&para;</a></h4>
-<p>8.2、</p>
-<p>8.3、</p>
+<h5 id="811">8.1.1、基本思想<a class="headerlink" href="#811" title="Permanent link">&para;</a></h5>
+<p>8.1.2、统计假设的概念</p>
+<ul>
+<li><span class="arithmatex">\(H_o\)</span>称为<strong>统计假设</strong>（简称为 假设）<ul>
+<li><strong>参数假设</strong>，仅仅涉及到总体分布的未知参数</li>
+<li><strong>非参数假设</strong>，涉及到<strong>分布函数</strong>的形式</li>
+</ul>
+</li>
+</ul>
+<p>8.1.3、两类错误</p>
+<ul>
+<li>第一类错误（拒真错误），<span class="arithmatex">\(H_o\)</span>成立，样本值落入W因而<span class="arithmatex">\(H_o\)</span>被拒绝</li>
+<li>第二类错误（取伪错误），<span class="arithmatex">\(H_o\)</span>不成立，样本值未落入W，因而<span class="arithmatex">\(H_o\)</span>被接受</li>
+</ul>
+<p>8.1.4、假设检验的基本步骤</p>
+<ul>
+<li>1、</li>
+<li>2、</li>
+<li>3、</li>
+<li>4、</li>
+</ul>
+<p>8.2、总体均值的假设检验</p>
+<p>8.2.1、u检验</p>
+<p>8.2.2、t检验</p>
+<p>8.3、正态总体方差的假设检验</p>
+<ul>
+<li><strong>方差检验</strong></li>
+</ul>
+<p>8.3.1、x方检验</p>
 <h3 id="_2">最后<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <h4 id="_3">履历<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
 <ul>

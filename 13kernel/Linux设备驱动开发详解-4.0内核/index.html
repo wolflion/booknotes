@@ -147,7 +147,7 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">《深入理解Linux虚拟内存管理》</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《深入理解Linux网络技术内幕》</a>
+                  <li class="toctree-l1"><a class="" href="../深入理解Linux网络技术内幕.md">《深入理解Linux网络技术内幕》</a>
                   </li>
                   <li class="toctree-l1"><a class="" href="../Linux内核源代码剖析-tcpip实现.md">《Linux内核源代码剖析-TCP/IP实现》</a>
                   </li>
@@ -318,6 +318,32 @@
 <p>5.4.3、udev的组成</p>
 <p>5.4.4、udev规则文件</p>
 <h4 id="55">5.5、总结<a class="headerlink" href="#55" title="Permanent link">&para;</a></h4>
+<h3 id="chap12linux">chap12、Linux设备驱动的软件架构思想<a class="headerlink" href="#chap12linux" title="Permanent link">&para;</a></h3>
+<h4 id="121linux">12.1、Linux驱动的软件架构<a class="headerlink" href="#121linux" title="Permanent link">&para;</a></h4>
+<ul>
+<li>对于网卡驱动，Linux的想法是，<strong>这个网卡驱动应该最好一行都不要改就可以在任何一个平台上跑起来</strong></li>
+<li>Linux字符设备驱动需要<strong>编写<code>file_operations</code>成员函数，负责处理阻塞、非组塞、多路复用、SIGIO等复杂事物</strong></li>
+<li><strong>提炼出一个input核心层</strong></li>
+</ul>
+<h4 id="122platform">12.2、platform设备驱动<a class="headerlink" href="#122platform" title="Permanent link">&para;</a></h4>
+<h5 id="1221platform">12.2.1、platform总线、设备与驱动<a class="headerlink" href="#1221platform" title="Permanent link">&para;</a></h5>
+<h4 id="123">12.3、设备驱动的分层思想<a class="headerlink" href="#123" title="Permanent link">&para;</a></h4>
+<h4 id="124">12.4、主机驱动与外设驱动分离的设计思想<a class="headerlink" href="#124" title="Permanent link">&para;</a></h4>
+<h4 id="125">12.5、总结<a class="headerlink" href="#125" title="Permanent link">&para;</a></h4>
+<h3 id="chap14linux">chap14、Linux网络设备驱动<a class="headerlink" href="#chap14linux" title="Permanent link">&para;</a></h3>
+<h4 id="141linux">14.1、Linux网络设备驱动的结构<a class="headerlink" href="#141linux" title="Permanent link">&para;</a></h4>
+<ul>
+<li>4层<ul>
+<li>网络协议接口层，<strong>数据包，接收，发送</strong>，dev_queue_xmit()、netif_rx()</li>
+<li>网络设备接口层，<strong>数据结构net_device</strong></li>
+<li>设备驱动功能层，<strong>数据包发送、中断处理（接收）</strong>，hard_start_xmit()、</li>
+<li>网络设备与媒介层，<strong>网络物理设备</strong></li>
+</ul>
+</li>
+</ul>
+<h5 id="1411">14.1.1、网络协议接口层<a class="headerlink" href="#1411" title="Permanent link">&para;</a></h5>
+<h5 id="1412">14.1.2、网络设备接口层<a class="headerlink" href="#1412" title="Permanent link">&para;</a></h5>
+<h5 id="1413">14.1.3、设备驱动功能层<a class="headerlink" href="#1413" title="Permanent link">&para;</a></h5>
               
             </div>
           </div><footer>

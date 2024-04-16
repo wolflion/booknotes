@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>写给大家看的面向对象编程书 - lionel的技术笔记</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "\u5199\u7ed9\u5927\u5bb6\u770b\u7684\u9762\u5411\u5bf9\u8c61\u7f16\u7a0b\u4e66";
+        var mkdocs_page_input_path = "17arch-desgin\\OO\\\u5199\u7ed9\u5927\u5bb6\u770b\u7684\u9762\u5411\u5bf9\u8c61\u7f16\u7a0b\u4e66.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> lionel的技术笔记
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">简介</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../01daily/">daily</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../02ds/">ds</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../03cpp/">cpp</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../21tool/">tool</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">C++</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../20C%2B%2B/effectiveC%2B%2B/">《Effective C++》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../20C%2B%2B/%E6%B7%B1%E5%BA%A6%E6%8E%A2%E7%B4%A2C%2B%2B%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B/">《深度探索C++对象模型》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../21STL/EffectiveSTL/">《Effective STL》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../21STL/C%2B%2B%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/">《C++泛型STL原理和应用》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../21STL/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/">《STL源码剖析》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../22C%2B%2Bmodern/%E6%B7%B1%E5%85%A5%E5%BA%94%E7%94%A8C%2B%2B11/">《深入应用C++11》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">基础知识</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../408/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA/">《操作系统导论》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../408/%E5%A4%A7%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">《大话设计模式》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../408/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90_C%2B%2B4th/">《数据结构与算法分析_C++4th》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../408/%E7%AE%97%E6%B3%95%284th%29/">《算法4th》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../408/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90-%E5%BC%A0%E5%86%9B/">《算法设计与分析-张军》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../408/%E5%A4%A9%E8%A1%8C-%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《天行-算法设计与实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../408/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%95%99%E7%A8%8B-%E6%9D%8E%E6%98%A5%E8%91%86/">《数据结构教程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../408/%E6%96%B0%E7%BC%96%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%A0%E9%A2%98%E4%B8%8E%E8%A7%A3%E6%9E%90/">《新编数据结构习题与解析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网络编程</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../10network/TCPIP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">《TCP/IP网络编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../10network/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/">《Linux高性能服务器编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../10network/TCPIP%E8%AF%A6%E8%A7%A3%E5%8D%B71/">《TCPIP详解卷1》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../10network/Linux%E5%86%85%E6%A0%B8%E7%BD%91%E7%BB%9C%E6%A0%88%E6%BA%90%E4%BB%A3%E7%A0%81%E6%83%85%E6%99%AF%E5%88%86%E6%9E%90/">《Linux内核网络栈源代码情景分析》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../10network/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C/">《深入理解Linux网络》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">机器&深度学习</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../30machineLearning/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%9F%BA%E7%A1%80/">《机器学习线性代数基础》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../31deepLearning/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%85%A5%E9%97%A8%EF%BC%9A%E5%9F%BA%E4%BA%8EPython%E7%9A%84%E7%90%86%E8%AE%BA%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《深度学习入门：基于Python的理论与实现》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">文件系统</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../11filesystem/Linux%E5%86%85%E6%A0%B8%E6%8E%A2%E7%A7%98/">《Linux内核探秘》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../11filesystem/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《文件系统技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../11filesystem/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">《存储技术原理分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">存储</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../12storage/ceph%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《ceph设计原理与实现》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">视频</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../14video/FFmpeg%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/">《FFmpeg入门到精通》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../14video/WebRTC%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/">《WebRTC权威指南》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../14video/WebRTC%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AE%9E%E6%97%B6%E4%BA%92%E5%8A%A8%E6%8A%80%E6%9C%AF/">《WebRTC音视频实时互动技术》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../14video/%E6%96%B0%E4%B8%80%E4%BB%A3%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9%E7%A0%81%E6%A0%87%E5%87%86-H.264_AVC/">《新一代视频压缩码标准-H.264_AVC》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">内核</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../13kernel/Linux%E5%86%85%E6%A0%B8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《Linux内核设计与实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../13kernel/%E6%B7%B1%E5%85%A5Linux%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%E5%86%85%E6%A0%B8%E6%9C%BA%E5%88%B6/">《深入Linux设备驱动程序内核机制》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">《深入理解Linux虚拟内存管理》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../13kernel/深入理解Linux网络技术内幕.md">《深入理解Linux网络技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../13kernel/Linux内核源代码剖析-tcpip实现.md">《Linux内核源代码剖析-TCP/IP实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E5%86%85%E6%A0%B8/">《深入理解Linux内核》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">工具</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../15tool/Wireshark%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98/">《Wireshark网络分析实战》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../15tool/Linux%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8Eshell%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B%E5%A4%A7%E5%85%A8%283rd%29/">《Linux命令行与shell脚本编程大全(3rd)》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../15tool/python%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%883rd%EF%BC%89/">《python程序设计（3rd）》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../15tool/python/Python%E7%BC%96%E7%A8%8B%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E8%B7%B5/">《Python编程从入门到实践》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">刷题</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../91leetcode/%E5%89%91%E6%8C%87offer2nd/">《剑指offer2nd》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../91leetcode/%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/">《剑指offer专项突破》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../96output/OD基础题.md">OD基础题</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../96output/OD进阶题.md">OD进阶题</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网课</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../90lecture/01Linux%E9%AB%98%E5%B9%B6%E5%8F%91%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/">《Linux高并发网络编程开发》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../90lecture/%E4%BE%AF%E6%8D%B7/%E4%BE%AF%E6%8D%B7C%2B%2B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%8660%E8%AE%B2/">《侯捷C++内存管理60讲》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../90lecture/11NJU%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">《NJU算法设计与分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">英语专</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../60English/00794%E7%BB%BC%E5%90%88%E8%8B%B1%E8%AF%AD%E4%B8%80%E4%B8%8A/">《综合英语(一)上》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../95selfStudy/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/">《概率率与数理统计》</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">lionel的技术笔记</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>写给大家看的面向对象编程书</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="_1">《写给大家看的面向对象编程书》<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h3 id="chap1">chap1、面向对象概念介绍<a class="headerlink" href="#chap1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>遗留系统（legacy system）</li>
+</ul>
+<ul>
+<li><strong>对象包装器</strong>，把一个结构化模块，把它包装在一个对象中。</li>
+</ul>
+<h4 id="11oo">1.1、过程式程序设计与OO程序设计<a class="headerlink" href="#11oo" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>对象到底是什么？</strong> object，可以定义为<strong>同时包含</strong>数据和行为的一个实体。<ul>
+<li><strong>属性</strong>和<strong>行为</strong></li>
+<li>过程式中，<strong>属性和行为</strong>是分开的</li>
+<li>过程式中，<strong>数据通常与过程分离</strong>，有时数据是全局的</li>
+</ul>
+</li>
+</ul>
+<h4 id="12">1.2、从过程式开发转向面向对象开发<a class="headerlink" href="#12" title="Permanent link">&para;</a></h4>
+<h5 id="121">1.2.1、过程式程序设计<a class="headerlink" href="#121" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>将系统的数据与处理这些数据的操作相分离</strong></li>
+</ul>
+<h5 id="122oo">1.2.2、OO程序设计<a class="headerlink" href="#122oo" title="Permanent link">&para;</a></h5>
+<ul>
+<li>数据和处理这些数据的操作（代码）都封装在对象中</li>
+</ul>
+<h4 id="13">1.3、对象到底是什么<a class="headerlink" href="#13" title="Permanent link">&para;</a></h4>
+<ul>
+<li>对象是OO程序的构建模块</li>
+</ul>
+<h5 id="131">1.3.1、对象数据<a class="headerlink" href="#131" title="Permanent link">&para;</a></h5>
+<ul>
+<li>存储在一个对象中的数据表示<strong>对象的状态</strong>，也叫<strong>属性</strong></li>
+</ul>
+<h5 id="132">1.3.2、对象行为<a class="headerlink" href="#132" title="Permanent link">&para;</a></h5>
+<ul>
+<li>对象的行为就是<strong>对象能够做什么</strong></li>
+<li><em>xml怎么影响的，这部分没看</em>    8（21/280）</li>
+</ul>
+<h4 id="14">1.4　类到底是什么<a class="headerlink" href="#14" title="Permanent link">&para;</a></h4>
+<ul>
+<li>类是对象的蓝图。</li>
+</ul>
+<h5 id="141">1.4.1　类是对象模板<a class="headerlink" href="#141" title="Permanent link">&para;</a></h5>
+<h5 id="142">1.4.2　属性<a class="headerlink" href="#142" title="Permanent link">&para;</a></h5>
+<h5 id="143">1.4.3　方法<a class="headerlink" href="#143" title="Permanent link">&para;</a></h5>
+<h5 id="144">1.4.4　消息<a class="headerlink" href="#144" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>对象之间的通信机制</strong>，当对象A调用对象B的一个方法时，<strong>对象A就是在向对象B发送一个消息</strong>。</li>
+</ul>
+<h4 id="15-uml">1.5　使用UML完成类图建模<a class="headerlink" href="#15-uml" title="Permanent link">&para;</a></h4>
+<h4 id="16">1.6　封装和数据隐藏<a class="headerlink" href="#16" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>只应公开其他对象与之交互所必需的接口</strong></li>
+<li><strong>数据隐藏</strong>是<strong>封装</strong>的一个主要部分</li>
+</ul>
+<h5 id="161">1.6.1　接口<a class="headerlink" href="#161" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>定义了对象间通信的基本途径</strong></li>
+<li>计算一个数据的平方，接口包括两部分：<ul>
+<li>如何实例化一个Square对象</li>
+<li>如何向对象发送一个值，并得到该值的平方</li>
+</ul>
+</li>
+<li><strong>类的接口</strong>【是公共方法】和<strong>方法的接口</strong>【如何调用这个方法】</li>
+</ul>
+<h5 id="162">1.6.2　实现<a class="headerlink" href="#162" title="Permanent link">&para;</a></h5>
+<ul>
+<li>只有公共属性和方法被认为是接口。</li>
+<li><strong>与一个对象的交互只能通过类接口</strong></li>
+</ul>
+<h5 id="163">1.6.3　接口/实现范型的一个实际例子<a class="headerlink" href="#163" title="Permanent link">&para;</a></h5>
+<ul>
+<li>15（28/280）<em>未看</em></li>
+</ul>
+<h5 id="164">1.6.4　接口/实现范型的模型<a class="headerlink" href="#164" title="Permanent link">&para;</a></h5>
+<ul>
+<li>16（29/280）<em>未看</em></li>
+</ul>
+<h4 id="17">1.7　继承<a class="headerlink" href="#17" title="Permanent link">&para;</a></h4>
+<h5 id="171">1.7.1　超类和子类<a class="headerlink" href="#171" title="Permanent link">&para;</a></h5>
+<ul>
+<li>超类（父类）包含继承自该类的所有子类共同的属性和行为。</li>
+</ul>
+<h5 id="172-16">1.7.2　抽象　16<a class="headerlink" href="#172-16" title="Permanent link">&para;</a></h5>
+<ul>
+<li><em>没讲清楚，重点</em>，17（30/280）</li>
+</ul>
+<h5 id="173-is-a-17">1.7.3　is-a关系　17<a class="headerlink" href="#173-is-a-17" title="Permanent link">&para;</a></h5>
+<ul>
+<li><em>没讲清楚，重点</em>， 18（31/280）</li>
+</ul>
+<h4 id="18">1.8　多态<a class="headerlink" href="#18" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>覆盖</strong>（overriding），将父类的一个实现替换为其子类的一个实现</li>
+<li>19（32/280）</li>
+<li><strong>抽象类</strong></li>
+</ul>
+<h4 id="19">1.9　组合<a class="headerlink" href="#19" title="Permanent link">&para;</a></h4>
+<ul>
+<li>对象是由其他对象构建或组合（composition）而成的。</li>
+</ul>
+<h5 id="191">1.9.1　抽象<a class="headerlink" href="#191" title="Permanent link">&para;</a></h5>
+<ul>
+<li>继承（被认为是is-a的关系，猫是一只动物）</li>
+<li>组合（汽车与发动机，不是is-a的关系，是has-a的关系）</li>
+</ul>
+<h5 id="192-has-a">1.9.2　has-a关系<a class="headerlink" href="#192-has-a" title="Permanent link">&para;</a></h5>
+<h4 id="110">1.10　小结<a class="headerlink" href="#110" title="Permanent link">&para;</a></h4>
+<ul>
+<li>封装</li>
+<li>继承</li>
+<li>多态</li>
+<li>组合</li>
+</ul>
+<h4 id="111">1.11　本章使用的示例代码<a class="headerlink" href="#111" title="Permanent link">&para;</a></h4>
+<ul>
+<li>23（36/280）</li>
+</ul>
+<p>1.11.1　TestPerson示例　21
+1.11.2　TestPerson示例　22
+1.11.3　TestShape示例　23
+1.11.4　TestShape示例　25</p>
+<h3 id="chap2-27">chap2、如何以对象方式思考　27<a class="headerlink" href="#chap2-27" title="Permanent link">&para;</a></h3>
+<ul>
+<li>28（41/280）</li>
+<li><strong>同一个问题往往可能有多种不同的处理方法</strong></li>
+<li>3个方面<ul>
+<li>接口与实现的区别</li>
+<li>以更抽象的方式思考</li>
+<li>尽可能为用户提供最小接口</li>
+</ul>
+</li>
+</ul>
+<h4 id="21">2.1　了解接口与实现之间的区别<a class="headerlink" href="#21" title="Permanent link">&para;</a></h4>
+<ul>
+<li>发动机是实现的一部分，方向盘是接口的一部分</li>
+<li><strong>类分2个部分设计--接口和实现</strong></li>
+</ul>
+<h5 id="211">2.1.1　接口<a class="headerlink" href="#211" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>设计一个类时，最重要的是明确类的受众或用户</strong></li>
+</ul>
+<h5 id="212">2.1.2　实现<a class="headerlink" href="#212" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>改变实现不需要同时改变用户的代码</strong></li>
+</ul>
+<h5 id="213">2.1.3　接口/实现示例<a class="headerlink" href="#213" title="Permanent link">&para;</a></h5>
+<ul>
+<li>30（43/280），<em>未细看</em></li>
+</ul>
+<h4 id="22">2.2　设计接口时使用抽象思维<a class="headerlink" href="#22" title="Permanent link">&para;</a></h4>
+<ul>
+<li>35（48/280）</li>
+</ul>
+<ul>
+<li><strong>可重用类的接口</strong>往往更抽象而不是更具体。</li>
+<li>抽象接口与具体接口</li>
+<li>抽象与重用</li>
+</ul>
+<h4 id="23-35">2.3　尽可能为用户提供最小接口　35<a class="headerlink" href="#23-35" title="Permanent link">&para;</a></h4>
+<ul>
+<li>36（49/280），<em>未看，设计准则？</em></li>
+<li>简单规则<ul>
+<li>只为用户提供他们确实需要的东西</li>
+<li>最好是当用户确实需要时才增加接口，而不要为用户提供他们不需要的接口</li>
+<li>公共接口定义用户能访问的信息</li>
+<li>从用户角度设计类，而不要从信息系统的角度进行设计</li>
+<li>确保设计类时与将真正使用这个类的人（不只是开发人员）反复考虑过需求和设计</li>
+</ul>
+</li>
+</ul>
+<h5 id="231-35">2.3.1　确定用户　35<a class="headerlink" href="#231-35" title="Permanent link">&para;</a></h5>
+<h5 id="232-36">2.3.2　对象行为　36<a class="headerlink" href="#232-36" title="Permanent link">&para;</a></h5>
+<h5 id="233-36">2.3.3　环境约束　36<a class="headerlink" href="#233-36" title="Permanent link">&para;</a></h5>
+<h5 id="234-36">2.3.4　明确公共接口　36<a class="headerlink" href="#234-36" title="Permanent link">&para;</a></h5>
+<h5 id="235-37">2.3.5　明确实现　37<a class="headerlink" href="#235-37" title="Permanent link">&para;</a></h5>
+<h4 id="24-37">2.4　小结　37<a class="headerlink" href="#24-37" title="Permanent link">&para;</a></h4>
+<p>2.5　参考书目　38</p>
+<h3 id="chap3">chap3、高级面向对象概念<a class="headerlink" href="#chap3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>40（53/280）</li>
+</ul>
+<h4 id="31">3.1　构造函数<a class="headerlink" href="#31" title="Permanent link">&para;</a></h4>
+<p>3.1.1　何时调用构造函数　39
+3.1.2　构造函数中有什么　40
+3.1.3　默认构造函数　40
+3.1.4　使用多个构造函数　41
+3.1.5　构造函数的设计　44
+3.2　错误处理　44
+3.2.1　忽略问题　45
+3.2.2　检查问题并中止应用　45
+3.2.3　检查问题并尝试恢复　45
+3.2.4　抛出异常　45
+3.3　作用域概念　47
+3.3.1　局部属性　48
+3.3.2　对象属性　49
+3.3.3　类属性　50
+3.4　操作符重载　51
+3.5　多重继承　52
+3.6　对象操作　53
+3.7　小结　54
+3.8　参考书目　54
+3.9　本章使用的示例代码　54
+3.9.1　TestNumber示例：C#.NET　54
+3.9.2　TestNumber示例　55
+第4章　类剖析　57
+4.1　类名　57
+4.2　注释　58
+4.3　属性　59
+4.4　构造函数　60
+4.5　访问方法　62
+4.6　公共接口方法　63
+4.7　私有实现方法　64
+4.8　小结　64
+4.9　参考书目　64
+4.10　本章使用的示例代码　65
+4.10.1　TestCab示例：C#.NET　65
+4.10.2　TestCab示例　66
+第5章　类设计指导原则　68
+5.1　真实世界系统建模　68
+5.2　明确公共接口　69
+5.2.1　最小公共接口　69
+5.2.2　隐藏实现　69
+5.3　设计健壮的构造函数(和析构函数)　70
+5.4　在类中设计错误处理　70
+5.4.1　对类建立文档以及使用注释　71
+5.4.2　构建类要以合作为出发点　71
+5.5　设计时充分考虑重用　72
+5.6　设计时充分考虑到可扩展性　72
+5.6.1　名字要有描述性　72
+5.6.2　抽出不可移植的代码　72
+5.6.3　提供一种复制和比较对象的方法　73
+5.6.4　让作用域尽可能小　73
+5.6.5　类应当对自己负责　74
+5.7　设计时充分考虑可维护性　75
+5.7.1　使用迭代　76
+5.7.2　测试接口　76
+5.8　使用对象持久性　78
+5.9　小结　79
+5.10　参考书目　79
+5.11　本章使用的示例代码　79
+5.11.1　TestMath示例：C#.NET　79
+5.11.2　TestMath示例　80
+第6章　利用对象实现设计　81
+6.1　设计指导原则　81
+6.1.1　完成适当的分析　84
+6.1.2　建立工作陈述　84
+6.1.3　收集需求　84
+6.1.4　开发用户界面的原型　85
+6.1.5　明确类　85
+6.1.6　确定各个类的职责　85
+6.1.7　确定类如何相互合作　85
+6.1.8　创建类模型来描述系统　85
+6.2　案例研究：blackjack示例　86
+6.2.1　使用CRC卡　87
+6.2.2　明确blackjack类　88
+6.2.3　明确类的职责　90
+6.2.4　UML用例：明确协作关系　95
+6.2.5　第一轮CRC卡　98
+6.2.6　UML类图：对象模型　99
+6.2.7　建立用户界面原型　100
+6.3　小结　101
+6.4　参考书目　101
+第7章　掌握继承和组合　102
+7.1　重用对象　102
+7.2　继承　103
+7.2.1　一般化和特殊化　105
+7.2.2　设计决策　105
+7.3　组合　107
+7.4　为什么封装在OO中如此重要　109
+7.4.1　继承如何削弱封装　109
+7.4.2　多态的一个详细例子　111
+7.4.3　对象职责　111
+7.5　小结　115
+7.6　参考书目　115
+7.7　本章使用的示例代码　115
+7.7.1　TestShape示例：C#.NET　115
+7.7.2　TestShape示例　117
+第8章　框架与重用：使用接口和抽象类实现设计　119
+8.1　代码：重用还是不重用　119
+8.2　什么是框架　119
+8.3　什么是契约　121
+8.3.1　抽象类　122
+8.3.2　接口　124
+8.3.3　集成　125
+8.3.4　编译器的证明　127
+8.3.5　建立契约　128
+8.3.6　系统插入点　130
+8.4　一个电子商务例子　130
+8.4.1　电子商务问题　130
+8.4.2　非重用的方法　131
+8.4.3　一个电子商务解决方案　133
+8.4.4　UML对象模型　133
+8.5　小结　137
+8.6　参考书目　137
+8.7　本章使用的示例代码　138
+8.7.1　TestShape示例：C#.NET　138
+8.7.2　TestShape示例　140
+第9章　构建对象　143
+9.1　组合关系　143
+9.2　分阶段构建　144
+9.3　不同类型的组合　146
+9.3.1　聚集　146
+9.3.2　关联　146
+9.3.3　结合使用关联和聚集　148
+9.4　避免依赖性　148
+9.5　基数　149
+9.5.1　多个对象关联　151
+9.5.2　可选关联　151
+9.6　集成示例　152
+9.7　小结　152
+9.8　参考书目　153
+第10章　用UML创建对象模型　154
+10.1　什么是UML　154
+10.2　类图的结构　155
+10.3　属性和方法　156
+10.3.1　属性　156
+10.3.2　方法　157
+10.4　访问指示　157
+10.5　继承　158
+10.6　接口　159
+10.7　组合　160
+10.7.1　聚集　160
+10.7.2　关联　161
+10.8　基数　161
+10.9　小结　162
+10.10　参考书目　163
+第11章　对象和可移植数据：XML　164
+11.1　可移植数据　164
+11.2　XML　165
+11.3　XML与HTML　166
+11.4　XML和面向对象语言　166
+11.5　两个公司间共享数据　167
+11.6　用DTD验证文档　168
+11.7　将DTD集成到XML文档　170
+11.8　使用层叠样式表　175
+11.9　小结　177
+11.10　参考书目　177
+第12章　持久对象：串行化和关系数据库　178
+12.1　持久对象基础　178
+12.2　将对象保存到平面文件　179
+12.2.1　串行化文件　180
+12.2.2　再谈实现和接口　182
+12.2.3　方法如何保存　183
+12.3　串行化过程中使用XML　183
+12.4　写至关系数据库　186
+12.5　加载驱动程序　189
+12.5.1　建立连接　189
+12.5.2　SQL语句　190
+12.6　小结　192
+12.7　参考书目　192
+12.8　本章使用的示例代码　192
+12.8.1　Person类示例：C#.NET　193
+12.8.2　Person类示例　195
+第13章　对象与因特网　197
+13.1　分布式计算的演进　197
+13.2　基于对象的脚本语言　197
+13.3　JavaScript验证示例　200
+13.4　Web页面中的对象　202
+13.4.1　JavaScript对象　202
+13.4.2　Web页面控件　204
+13.4.3　声音播放器　205
+13.4.4　电影播放器　205
+13.4.5　Flash　206
+13.5　分布式对象和企业　206
+13.5.1　公共对象请求代理体系结构(CORBA)　207
+13.5.2　Web服务定义　210
+13.5.3　Web服务代码　213
+13.5.4　Invoice.cs　214
+13.5.5　Invoice.vb　215
+13.6　小结　216
+13.7　参考书目　216
+第14章　对象和客户/服务器应用　217
+14.1　客户/服务器方法　217
+14.2　专有方法　217
+14.2.1　串行化对象代码　218
+14.2.2　客户代码　218
+14.2.3　服务器代码　220
+14.2.4　运行专有的客户/服务器示例　222
+14.3　非专有方法　223
+14.3.1　对象定义代码　223
+14.3.2　客户代码　224
+14.3.3　服务器代码　225
+14.3.4　运行非专有的客户/服务器示例　227
+14.4　小结　228
+14.5　参考书目　228
+14.6　本章使用的示例代码　228
+14.6.1　客户/服务器示例：对象定义代码　228
+14.6.2　客户/服务器示例：客户代码　229
+14.6.3　客户/服务器示例：服务器代码　230
+第15章　设计模式　232
+15.1　为什么研究设计模式　232
+15.2　Smalltalk的模型/视图/控制器　233
+15.3　设计模式的不同类型　234
+15.3.1　创建型模式　235
+15.3.2　结构型模式　239
+15.3.3　行为型模式　241
+15.4　反模式　242
+15.5　小结　243
+15.6　参考书目　243
+15.7　本章使用的示例代码　243
+15.7.1　C#.NET　244
+索引　250</p>
+<h3 id="_2">最后<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<h4 id="_3">履历<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
+<ul>
+<li>2024-01-26，花了1个cubi把前2章过了一遍。</li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '../../..';</script>
+    <script src="../../../js/theme_extra.js" defer></script>
+    <script src="../../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

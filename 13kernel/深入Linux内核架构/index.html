@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>深入Linux内核架构 - lionel的技术笔记</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "\u6df1\u5165Linux\u5185\u6838\u67b6\u6784";
+        var mkdocs_page_input_path = "13kernel\\\u6df1\u5165Linux\u5185\u6838\u67b6\u6784.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> lionel的技术笔记
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">简介</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../01daily/">daily</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../02ds/">ds</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../03cpp/">cpp</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../21tool/">tool</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">C++</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../20C%2B%2B/effectiveC%2B%2B/">《Effective C++》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../20C%2B%2B/%E6%B7%B1%E5%BA%A6%E6%8E%A2%E7%B4%A2C%2B%2B%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B/">《深度探索C++对象模型》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/EffectiveSTL/">《Effective STL》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/C%2B%2B%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/">《C++泛型STL原理和应用》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/">《STL源码剖析》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../22C%2B%2Bmodern/%E6%B7%B1%E5%85%A5%E5%BA%94%E7%94%A8C%2B%2B11/">《深入应用C++11》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">基础知识</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA/">《操作系统导论》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E5%A4%A7%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">《大话设计模式》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90_C%2B%2B4th/">《数据结构与算法分析_C++4th》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E7%AE%97%E6%B3%95%284th%29/">《算法4th》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90-%E5%BC%A0%E5%86%9B/">《算法设计与分析-张军》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E5%A4%A9%E8%A1%8C-%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《天行-算法设计与实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%95%99%E7%A8%8B-%E6%9D%8E%E6%98%A5%E8%91%86/">《数据结构教程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%96%B0%E7%BC%96%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%A0%E9%A2%98%E4%B8%8E%E8%A7%A3%E6%9E%90/">《新编数据结构习题与解析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网络编程</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/TCPIP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">《TCP/IP网络编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/">《Linux高性能服务器编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/TCPIP%E8%AF%A6%E8%A7%A3%E5%8D%B71/">《TCPIP详解卷1》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/Linux%E5%86%85%E6%A0%B8%E7%BD%91%E7%BB%9C%E6%A0%88%E6%BA%90%E4%BB%A3%E7%A0%81%E6%83%85%E6%99%AF%E5%88%86%E6%9E%90/">《Linux内核网络栈源代码情景分析》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C/">《深入理解Linux网络》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">机器&深度学习</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../30machineLearning/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%9F%BA%E7%A1%80/">《机器学习线性代数基础》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../31deepLearning/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%85%A5%E9%97%A8%EF%BC%9A%E5%9F%BA%E4%BA%8EPython%E7%9A%84%E7%90%86%E8%AE%BA%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《深度学习入门：基于Python的理论与实现》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">文件系统</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/Linux%E5%86%85%E6%A0%B8%E6%8E%A2%E7%A7%98/">《Linux内核探秘》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《文件系统技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">《存储技术原理分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">存储</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../12storage/ceph%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《ceph设计原理与实现》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">视频</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/FFmpeg%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/">《FFmpeg入门到精通》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/WebRTC%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/">《WebRTC权威指南》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/WebRTC%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AE%9E%E6%97%B6%E4%BA%92%E5%8A%A8%E6%8A%80%E6%9C%AF/">《WebRTC音视频实时互动技术》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/%E6%96%B0%E4%B8%80%E4%BB%A3%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9%E7%A0%81%E6%A0%87%E5%87%86-H.264_AVC/">《新一代视频压缩码标准-H.264_AVC》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">内核</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../Linux%E5%86%85%E6%A0%B8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《Linux内核设计与实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../%E6%B7%B1%E5%85%A5Linux%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%E5%86%85%E6%A0%B8%E6%9C%BA%E5%88%B6/">《深入Linux设备驱动程序内核机制》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">《深入理解Linux虚拟内存管理》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../深入理解Linux网络技术内幕.md">《深入理解Linux网络技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../Linux内核源代码剖析-tcpip实现.md">《Linux内核源代码剖析-TCP/IP实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E5%86%85%E6%A0%B8/">《深入理解Linux内核》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">工具</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/Wireshark%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98/">《Wireshark网络分析实战》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/Linux%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8Eshell%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B%E5%A4%A7%E5%85%A8%283rd%29/">《Linux命令行与shell脚本编程大全(3rd)》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/python%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%883rd%EF%BC%89/">《python程序设计（3rd）》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/python/Python%E7%BC%96%E7%A8%8B%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E8%B7%B5/">《Python编程从入门到实践》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">刷题</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer2nd/">《剑指offer2nd》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/">《剑指offer专项突破》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../96output/OD基础题.md">OD基础题</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../96output/OD进阶题.md">OD进阶题</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网课</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/01Linux%E9%AB%98%E5%B9%B6%E5%8F%91%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/">《Linux高并发网络编程开发》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/%E4%BE%AF%E6%8D%B7/%E4%BE%AF%E6%8D%B7C%2B%2B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%8660%E8%AE%B2/">《侯捷C++内存管理60讲》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/11NJU%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">《NJU算法设计与分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">英语专</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../60English/00794%E7%BB%BC%E5%90%88%E8%8B%B1%E8%AF%AD%E4%B8%80%E4%B8%8A/">《综合英语(一)上》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../95selfStudy/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/">《概率率与数理统计》</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">lionel的技术笔记</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>深入Linux内核架构</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="linux">《深入Linux内核架构》<a class="headerlink" href="#linux" title="Permanent link">&para;</a></h2>
+<h3 id="chap8">chap8、虚拟文件系统<a class="headerlink" href="#chap8" title="Permanent link">&para;</a></h3>
+<h4 id="84vfs">8.4、处理VFS对象<a class="headerlink" href="#84vfs" title="Permanent link">&para;</a></h4>
+<h5 id="841">8.4.1、文件系统操作<a class="headerlink" href="#841" title="Permanent link">&para;</a></h5>
+<h6 id="8411">8.4.1.1、注册文件系统<a class="headerlink" href="#8411" title="Permanent link">&para;</a></h6>
+<ul>
+<li>fs.h中用于描述文件系统的结构<code>struct file_system_type {};</code></li>
+</ul>
+<h6 id="8412">8.4.1.2、装载与卸载<a class="headerlink" href="#8412" title="Permanent link">&para;</a></h6>
+<ul>
+<li>共享子树</li>
+<li>伪文件系统</li>
+</ul>
+<h5 id="842">8.4.2、文件操作<a class="headerlink" href="#842" title="Permanent link">&para;</a></h5>
+<h6 id="8421inode">8.4.2.1、查找inode<a class="headerlink" href="#8421inode" title="Permanent link">&para;</a></h6>
+<ul>
+<li>do_lookup的实现</li>
+<li>do_follow_link的实现</li>
+</ul>
+<h6 id="8422">8.4.2.2、打开文件<a class="headerlink" href="#8422" title="Permanent link">&para;</a></h6>
+<h6 id="8423">8.4.2.3、读取和写入<a class="headerlink" href="#8423" title="Permanent link">&para;</a></h6>
+<ul>
+<li>0<ul>
+<li>fs/read_write.c</li>
+</ul>
+</li>
+<li>read</li>
+<li>write</li>
+</ul>
+<h4 id="85">8.5、标准函数<a class="headerlink" href="#85" title="Permanent link">&para;</a></h4>
+<p>8.5.1、</p>
+<p>8.5.2、失效机制</p>
+<p>8.5.3、权限检查</p>
+<h4 id="86">8.6、小结<a class="headerlink" href="#86" title="Permanent link">&para;</a></h4>
+<h3 id="chap9ext">chap9、Ext文件系统族<a class="headerlink" href="#chap9ext" title="Permanent link">&para;</a></h3>
+<h4 id="92ext">9.2、Ext文件系统<a class="headerlink" href="#92ext" title="Permanent link">&para;</a></h4>
+<h5 id="921">9.2.1、物理结构<a class="headerlink" href="#921" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、结构概观<ul>
+<li>一些语义<ul>
+<li>超级块是用于存储文件系统自身元数据的核心结构。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>2、间接<ul>
+<li>数据块的长度是4KiB</li>
+<li>使用间接，在inode中仅需要耗费少量字节存储块号，刚好够用来表示平均意义上长度较小的文件。</li>
+<li>文件系统在硬盘上分配一个数据块，不存储文件数据，专门用于存储块号。<strong>该块称为一次间接块（single indirect block）</strong>，可以容纳数百个块号。</li>
+</ul>
+</li>
+<li>3、碎片</li>
+</ul>
+<h5 id="922">9.2.2、数据结构<a class="headerlink" href="#922" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、超级块<ul>
+<li><strong>超级块的数据使用ext2_read_super例程读取（fs/ext2/super.c），内核通常借助file_system_type结构中的read_super函数指针来调用该函数</strong>。</li>
+<li>ext2_fs.h中的<code>struct ext2_super_block{};</code></li>
+<li>感兴趣的成员<ul>
+<li>s_log_block_size：</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>2、组描述符<ul>
+<li>ext2_fs.h中<code>struct ext2_group_desc{};</code></li>
+</ul>
+</li>
+<li>3、inode<ul>
+<li>ext2_fs.h中的<code>struct ext2_inode{};</code></li>
+</ul>
+</li>
+<li>4、目录和文件</li>
+<li>5、内存中的数据结构<ul>
+<li>ext2_fs.h中的<code>struct ext2_sb_info{};</code></li>
+</ul>
+</li>
+</ul>
+<h5 id="923">9.2.3、创建文件系统<a class="headerlink" href="#923" title="Permanent link">&para;</a></h5>
+<ul>
+<li>文件系统并非由内核自身创建，是由<code>mke2fs</code>用户空间工具创建的。</li>
+</ul>
+<h5 id="924">9.2.4、文件系统操作<a class="headerlink" href="#924" title="Permanent link">&para;</a></h5>
+<ul>
+<li>0<ul>
+<li>用于操作文件内容的操作保存在file_operations中</li>
+<li>用于此类文件对象自身的操作保存在inode_operations中</li>
+<li>用于一般地址空间的操作保存在address_space_operations中</li>
+<li>fs/ext2/file.c中的<code>ext2_file_operations</code>定义，<strong>大多数项指向了VFS的标准函数</strong></li>
+<li>目录文件，fs/ext2/dir.c中的<code>ext2_dir_operations</code>定义</li>
+<li>普通文件，fs/ext2/file.c中的 <code>ext2_file_inode_operations</code>定义</li>
+<li>目录有更多可用的inode操作，fs/ext2/namei.c中的<code>ext2_dir_inode_operations</code></li>
+<li><strong>文件系统和块层通过<code>address_space_operations</code>关联</strong>，fs/ext2/inode.c中的<code>ext2_aops</code>定义</li>
+<li><strong><code>super_operations</code>与超级块交互</strong>，fs/ext2/super.c中的<code>ext2_sops</code>定义</li>
+<li><strong>后面只是讨论了几个重要的函数</strong>，没有全部说，<em>lionel，我可以通过这种思路，扩展一下，其它函数的学习</em></li>
+</ul>
+</li>
+<li>1、装载和卸载<ul>
+<li>结构的定义，fs/ext2/super.c中的<code>struct file_sytem_type ext2_fs_type</code>定义</li>
+<li>mount系统调用通过get_sb来读取文件系统超级块的内容，<code>get_sb_bdev()</code>，fs/ext2/super.c中的<code>ext2_get_sb()</code></li>
+<li><code>ext2_fill_super()</code>的一个函数指针作为参数传递给<code>get_sb_bdev</code>，该函数用数据填充一个超级块对象。</li>
+<li><strong>文件系统的元信息应该一直驻留在内存中，并由ext2_sb_info数据结构保存</strong></li>
+<li>逐块读取组描述符，并使用<code>ext2_check_descriptors</code>检查一致性</li>
+<li>填充超级块信息的最后一步是<code>ext2_count_free_blocks、ext2_count_free_inodes、ext2_count_dirs</code>分别计算空闲块数目、空闲inode数目和目录数目。</li>
+<li>控制权转移到ext2_setup_super，进行几项最后的检查并输出适当的警告信息</li>
+<li>最后一步是ext2_write_super，它将超级块的内容写回到底层的存储介质</li>
+</ul>
+</li>
+<li>2、读取并产生数据块和间接块<ul>
+<li><code>ext2_get_blocks()</code>流程 【<em>lionel，这里有个勘误</em>】</li>
+</ul>
+</li>
+<li>3、创建和删除inode<ul>
+<li>fs/ext2/namei.c中的<code>ext2_mkdir()</code></li>
+</ul>
+</li>
+<li>4、注册inode</li>
+<li>5、删除inode</li>
+<li>6、删除数据块</li>
+<li>7、地址空间操作</li>
+</ul>
+<h4 id="93ext3">9.3、Ext3文件系统<a class="headerlink" href="#93ext3" title="Permanent link">&para;</a></h4>
+<h5 id="931">9.3.1、概念<a class="headerlink" href="#931" title="Permanent link">&para;</a></h5>
+<h5 id="932">9.3.2、数据结构<a class="headerlink" href="#932" title="Permanent link">&para;</a></h5>
+<ul>
+<li>ext3_fs_sb.h中<code>struct ext3_sb_info{};</code>新增了几个日志<ul>
+<li><code>struct inode *s_journal_inode; struct journal_s *s_journal;</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="chap12">chap12、网络<a class="headerlink" href="#chap12" title="Permanent link">&para;</a></h3>
+<h3 id="chap13">chap13、系统调用<a class="headerlink" href="#chap13" title="Permanent link">&para;</a></h3>
+<h4 id="131">13.1、系统程序设计基础<a class="headerlink" href="#131" title="Permanent link">&para;</a></h4>
+<h5 id="1311">13.1.1、追踪系统调用<a class="headerlink" href="#1311" title="Permanent link">&para;</a></h5>
+<h5 id="1312">13.1.2、支持的标准<a class="headerlink" href="#1312" title="Permanent link">&para;</a></h5>
+<h5 id="1313">13.1.3、重启系统调用<a class="headerlink" href="#1313" title="Permanent link">&para;</a></h5>
+<h4 id="132">13.2、可用的系统调用<a class="headerlink" href="#132" title="Permanent link">&para;</a></h4>
+<h4 id="133">13.3、系统调用的实现<a class="headerlink" href="#133" title="Permanent link">&para;</a></h4>
+<h5 id="1331">13.3.1、系统调用的结构<a class="headerlink" href="#1331" title="Permanent link">&para;</a></h5>
+<h5 id="1332">13.3.2、访问用户空间<a class="headerlink" href="#1332" title="Permanent link">&para;</a></h5>
+<h5 id="1333">13.3.3、追踪系统调用<a class="headerlink" href="#1333" title="Permanent link">&para;</a></h5>
+<h4 id="134">13.4、小结<a class="headerlink" href="#134" title="Permanent link">&para;</a></h4>
+<h3 id="_1">附录<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<h4 id="a">附录A、体系结构相关知识<a class="headerlink" href="#a" title="Permanent link">&para;</a></h4>
+<h4 id="b">附录B、使用源代码<a class="headerlink" href="#b" title="Permanent link">&para;</a></h4>
+<h5 id="b1">B.1、内核源代码的组织<a class="headerlink" href="#b1" title="Permanent link">&para;</a></h5>
+<h4 id="eelf">附录E、ELF二进制格式<a class="headerlink" href="#eelf" title="Permanent link">&para;</a></h4>
+<h5 id="e1">E.1、布局和结构<a class="headerlink" href="#e1" title="Permanent link">&para;</a></h5>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

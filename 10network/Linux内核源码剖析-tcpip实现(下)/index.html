@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Linux内核源码剖析 tcpip实现(下) - lionel的技术笔记</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Linux\u5185\u6838\u6e90\u7801\u5256\u6790 tcpip\u5b9e\u73b0(\u4e0b)";
+        var mkdocs_page_input_path = "10network\\Linux\u5185\u6838\u6e90\u7801\u5256\u6790-tcpip\u5b9e\u73b0(\u4e0b).md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> lionel的技术笔记
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">简介</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../01daily/">daily</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../02ds/">ds</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../03cpp/">cpp</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../21tool/">tool</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">C++</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../20C%2B%2B/effectiveC%2B%2B/">《Effective C++》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../20C%2B%2B/%E6%B7%B1%E5%BA%A6%E6%8E%A2%E7%B4%A2C%2B%2B%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B/">《深度探索C++对象模型》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/EffectiveSTL/">《Effective STL》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/C%2B%2B%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/">《C++泛型STL原理和应用》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/">《STL源码剖析》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../22C%2B%2Bmodern/%E6%B7%B1%E5%85%A5%E5%BA%94%E7%94%A8C%2B%2B11/">《深入应用C++11》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">基础知识</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA/">《操作系统导论》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E5%A4%A7%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">《大话设计模式》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90_C%2B%2B4th/">《数据结构与算法分析_C++4th》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E7%AE%97%E6%B3%95%284th%29/">《算法4th》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90-%E5%BC%A0%E5%86%9B/">《算法设计与分析-张军》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E5%A4%A9%E8%A1%8C-%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《天行-算法设计与实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%95%99%E7%A8%8B-%E6%9D%8E%E6%98%A5%E8%91%86/">《数据结构教程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%96%B0%E7%BC%96%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%A0%E9%A2%98%E4%B8%8E%E8%A7%A3%E6%9E%90/">《新编数据结构习题与解析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网络编程</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../TCPIP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">《TCP/IP网络编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/">《Linux高性能服务器编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../TCPIP%E8%AF%A6%E8%A7%A3%E5%8D%B71/">《TCPIP详解卷1》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Linux%E5%86%85%E6%A0%B8%E7%BD%91%E7%BB%9C%E6%A0%88%E6%BA%90%E4%BB%A3%E7%A0%81%E6%83%85%E6%99%AF%E5%88%86%E6%9E%90/">《Linux内核网络栈源代码情景分析》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C/">《深入理解Linux网络》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">机器&深度学习</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../30machineLearning/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%9F%BA%E7%A1%80/">《机器学习线性代数基础》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../31deepLearning/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%85%A5%E9%97%A8%EF%BC%9A%E5%9F%BA%E4%BA%8EPython%E7%9A%84%E7%90%86%E8%AE%BA%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《深度学习入门：基于Python的理论与实现》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">文件系统</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/Linux%E5%86%85%E6%A0%B8%E6%8E%A2%E7%A7%98/">《Linux内核探秘》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《文件系统技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">《存储技术原理分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">存储</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../12storage/ceph%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《ceph设计原理与实现》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">视频</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/FFmpeg%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/">《FFmpeg入门到精通》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/WebRTC%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/">《WebRTC权威指南》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/WebRTC%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AE%9E%E6%97%B6%E4%BA%92%E5%8A%A8%E6%8A%80%E6%9C%AF/">《WebRTC音视频实时互动技术》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/%E6%96%B0%E4%B8%80%E4%BB%A3%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9%E7%A0%81%E6%A0%87%E5%87%86-H.264_AVC/">《新一代视频压缩码标准-H.264_AVC》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">内核</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/Linux%E5%86%85%E6%A0%B8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《Linux内核设计与实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5Linux%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%E5%86%85%E6%A0%B8%E6%9C%BA%E5%88%B6/">《深入Linux设备驱动程序内核机制》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">《深入理解Linux虚拟内存管理》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../13kernel/深入理解Linux网络技术内幕.md">《深入理解Linux网络技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../13kernel/Linux内核源代码剖析-tcpip实现.md">《Linux内核源代码剖析-TCP/IP实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E5%86%85%E6%A0%B8/">《深入理解Linux内核》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">工具</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/Wireshark%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98/">《Wireshark网络分析实战》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/Linux%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8Eshell%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B%E5%A4%A7%E5%85%A8%283rd%29/">《Linux命令行与shell脚本编程大全(3rd)》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/python%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%883rd%EF%BC%89/">《python程序设计（3rd）》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/python/Python%E7%BC%96%E7%A8%8B%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E8%B7%B5/">《Python编程从入门到实践》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">刷题</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer2nd/">《剑指offer2nd》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/">《剑指offer专项突破》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../96output/OD基础题.md">OD基础题</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../96output/OD进阶题.md">OD进阶题</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网课</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/01Linux%E9%AB%98%E5%B9%B6%E5%8F%91%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/">《Linux高并发网络编程开发》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/%E4%BE%AF%E6%8D%B7/%E4%BE%AF%E6%8D%B7C%2B%2B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%8660%E8%AE%B2/">《侯捷C++内存管理60讲》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/11NJU%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">《NJU算法设计与分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">英语专</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../60English/00794%E7%BB%BC%E5%90%88%E8%8B%B1%E8%AF%AD%E4%B8%80%E4%B8%8A/">《综合英语(一)上》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../95selfStudy/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/">《概率率与数理统计》</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">lionel的技术笔记</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>Linux内核源码剖析 tcpip实现(下)</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="linux-tcpip">《Linux内核源码剖析-TCP/IP实现》（下）<a class="headerlink" href="#linux-tcpip" title="Permanent link">&para;</a></h2>
+<ul>
+<li>2.6.20代码</li>
+<li>https://lxr.missinglinkelectronics.com/</li>
+<li>下册（20-33章）</li>
+</ul>
+<h3 id="chap20-110529">chap20、路由缓存  1（10/529）<a class="headerlink" href="#chap20-110529" title="Permanent link">&para;</a></h3>
+<ul>
+<li>缓存的主要工作是存储使路由子系统能够找到报文目的地的信息，并通过一组函数向更高层提供该信息。</li>
+</ul>
+<ul>
+<li>路由缓存涉及到的文件<ul>
+<li>include/net/route.h，定义目的路由缓存项</li>
+<li>include/net/flow.h，定义查询路由缓存的条件组合结构、宏和函数原型等</li>
+<li>include/net/dst.h，定义目的路由缓存项的部分结构、宏、函数等</li>
+<li>net/ipv4/route.c，实现路由缓存项的操作函数</li>
+</ul>
+</li>
+</ul>
+<h4 id="201">20.1、系统参数<a class="headerlink" href="#201" title="Permanent link">&para;</a></h4>
+<ul>
+<li>系统参数（有11个）<ul>
+<li>flush，控制路由缓存的刷新</li>
+</ul>
+</li>
+</ul>
+<h4 id="202">20.2、路由缓存的组织结构<a class="headerlink" href="#202" title="Permanent link">&para;</a></h4>
+<ul>
+<li>路由缓存是用一张<strong>散列表</strong>来实现的，路由缓存散列表的类型是<strong>rt_hash_bucket结构</strong>，该结构只包含<strong>指向缓存元素链表的一个指针</strong>。缓存项的类型为rtable结构</li>
+</ul>
+<h5 id="2021rtable">20.2.1、rtable结构<a class="headerlink" href="#2021rtable" title="Permanent link">&para;</a></h5>
+<ul>
+<li>查看<code>/proc/net/rt_cache</code>文件，或者通过<code>ip route list cache</code>和<code>route -C</code>来列出路由缓存的内容</li>
+</ul>
+<h5 id="2022flowi">20.2.2、flowi结构<a class="headerlink" href="#2022flowi" title="Permanent link">&para;</a></h5>
+<ul>
+<li>根据诸如输入网络设备和输出网络设备、三层和四层协议报头中的参数等字段的组合对流量进行分类。</li>
+</ul>
+<h5 id="2023dst_entry">20.2.3、dst_entry结构<a class="headerlink" href="#2023dst_entry" title="Permanent link">&para;</a></h5>
+<ul>
+<li>dst_entry结构被用于存储缓存路由项中独立于协议的信息。</li>
+</ul>
+<h5 id="2024dst_ops">20.2.4、dst_ops结构<a class="headerlink" href="#2024dst_ops" title="Permanent link">&para;</a></h5>
+<ul>
+<li>dst_ops结构是使用路由缓存的三层协议与独立于协议的缓存之间的接口</li>
+</ul>
+<h4 id="203">20.3、初始化<a class="headerlink" href="#203" title="Permanent link">&para;</a></h4>
+<ul>
+<li>由<code>ip_rt_init()</code>进行初始化的   11（20/529）</li>
+</ul>
+<h4 id="204">20.4、创建路由缓存项<a class="headerlink" href="#204" title="Permanent link">&para;</a></h4>
+<p>20.5、添加路由表项到缓存中</p>
+<p>20.6、输入路由缓存查询</p>
+<p>20.7、输出路由缓存查询</p>
+<p>20.7.1、ip_route_output_key()</p>
+<h4 id="208">20.8、垃圾回收<a class="headerlink" href="#208" title="Permanent link">&para;</a></h4>
+<h4 id="209">20.9、刷新缓存<a class="headerlink" href="#209" title="Permanent link">&para;</a></h4>
+<h5 id="131tsogso">1.3.1、TSO/GSO<a class="headerlink" href="#131tsogso" title="Permanent link">&para;</a></h5>
+<h5 id="132io-at">1.3.2、I/O AT<a class="headerlink" href="#132io-at" title="Permanent link">&para;</a></h5>
+<h5 id="141slab">1.4.1、slab分配器<a class="headerlink" href="#141slab" title="Permanent link">&para;</a></h5>
+<h5 id="2097procflush">20.9.7、通过写/proc的flush文件<a class="headerlink" href="#2097procflush" title="Permanent link">&para;</a></h5>
+<h4 id="2010icmp">20.10、ICMP重定向消息的处理<a class="headerlink" href="#2010icmp" title="Permanent link">&para;</a></h4>
+<h4 id="2011icmp">20.11、ICMP目的不可达，需要分片<a class="headerlink" href="#2011icmp" title="Permanent link">&para;</a></h4>
+<h3 id="chap21">chap21、路由策略<a class="headerlink" href="#chap21" title="Permanent link">&para;</a></h3>
+<ul>
+<li><em>感觉目录，是从上层往下层的，lionel</em></li>
+</ul>
+<p>2.1、引言</p>
+<p>2.2、协议简介</p>
+<p>2.3、网络架构</p>
+<p>2.4、系统调用接口</p>
+<p>2.5、协议无关接口</p>
+<h4 id="216">21.6、路由策略的查找<a class="headerlink" href="#216" title="Permanent link">&para;</a></h4>
+<h3 id="chap22-5665529">chap22、套接口层  56（65/529）<a class="headerlink" href="#chap22-5665529" title="Permanent link">&para;</a></h3>
+<ul>
+<li>套接口是啥<ul>
+<li>1983年，4.2BSD引入</li>
+<li><strong>通用的网络应用程序编程接口</strong></li>
+</ul>
+</li>
+<li>套接口包含啥？<ul>
+<li><em>本书好像没讲？</em></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>套接口层的作用<ul>
+<li><strong>为应用程序提供了一个访问网络和进程间通信的</strong>通用接口</li>
+<li>位于<strong>应用程序和协议栈</strong>之间</li>
+<li>对应用程序屏蔽了与协议相关实现的具体细节，将应用程序发送的与协议无关的请求映射到与协议相关的实现</li>
+</ul>
+</li>
+<li>套接口层怎么与其上下层衔接<ul>
+<li>应用程序中调用库函数，而库函数通过系统调用进入套接口层</li>
+<li>Linux套接口层实现提供了一组<strong>专门的套接口系统调用</strong></li>
+<li><strong>图22-1</strong>（套接口层将一般的请求转换为指定的协议操作）</li>
+</ul>
+</li>
+<li>套接口的I/O操作以及套接口选项（23，24两章介绍的）</li>
+<li>涉及文件<ul>
+<li>include/linux/net.h，定义套接口层相关的结构、宏和函数原型</li>
+<li>include/net/sock.h，定义基本的传输控制块结构、宏和函数原型</li>
+<li>net/socket.c，实现套接口层的调用</li>
+<li>net/ipv4/af_inet.c，网络层和传输层接口</li>
+</ul>
+</li>
+</ul>
+<h4 id="221socket">22.1、socket结构<a class="headerlink" href="#221socket" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>struct socket{};</code></li>
+</ul>
+<h4 id="222proto_ops">22.2、proto_ops结构<a class="headerlink" href="#222proto_ops" title="Permanent link">&para;</a></h4>
+<ul>
+<li>是一组与套接口系统调用相对应的传输层函数指针，可以看作是<strong>一张套接口系统调用到传输层函数的跳转表</strong></li>
+<li>完成的是<strong>从与协议无关的套接口层到协议相关的传输层</strong>的转接，proto结构又将<strong>传输层映射到网络层</strong>，那么可想而知<strong>每个传输层的协议都需要定义一个特定的proto_ops结构实例和proto结构实例</strong>。</li>
+</ul>
+<h4 id="223">22.3、套接口文件系统<a class="headerlink" href="#223" title="Permanent link">&para;</a></h4>
+<h5 id="2231">22.3.1、套接口文件系统类型<a class="headerlink" href="#2231" title="Permanent link">&para;</a></h5>
+<ul>
+<li>sockfs文件系统类型<code>sock_fs_type</code>，通过<code>get_sb()</code>和<code>alloc_inode()</code>和<code>destroy_inode()</code>分配和释放与套接口文件相关的i结点</li>
+<li>通过<code>/proc/filesystem</code>文件查看操作系统支持的文件系统</li>
+</ul>
+<h5 id="2232">22.3.2、套接口文件系统超级块操作接口<a class="headerlink" href="#2232" title="Permanent link">&para;</a></h5>
+<h5 id="2233inode">22.3.3、套接口文件的inode<a class="headerlink" href="#2233inode" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>struct socket_alloc{};</code>由socket结构和inode结构两部分组成</li>
+</ul>
+<h5 id="2234sock_alloc_inode">22.3.4、sock_alloc_inode()<a class="headerlink" href="#2234sock_alloc_inode" title="Permanent link">&para;</a></h5>
+<h5 id="325sock_destroy_inode">3.2.5、sock_destroy_inode()<a class="headerlink" href="#325sock_destroy_inode" title="Permanent link">&para;</a></h5>
+<h4 id="224">22.4、套接口文件<a class="headerlink" href="#224" title="Permanent link">&para;</a></h4>
+<ul>
+<li>创建套接口文件时，使file结构中的f_op指向了<code>socket_file_ops</code>，<strong>通过socket_file_ops可以看到套接口文件支持哪些系统调用</strong></li>
+</ul>
+<h5 id="2241">22.4.1、套接口文件与套接口的绑定<a class="headerlink" href="#2241" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、sock_map_fd()</li>
+<li>2、sock_attach_fd()</li>
+</ul>
+<h5 id="2242">22.4.2、根据文件描述符获取套接口<a class="headerlink" href="#2242" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、sockfd_lookup_light()</li>
+<li>2、sock_from_file()</li>
+</ul>
+<h4 id="225">22.5、进程、文件描述符和套接口<a class="headerlink" href="#225" title="Permanent link">&para;</a></h4>
+<ul>
+<li>在task_struct结构中，files指向file_struct结构，该结构的主要功能是管理fd_array指针数组指向的描述符，每个file结构描述一个打开的文件</li>
+</ul>
+<h4 id="226">22.6、套接口层的系统初始化<a class="headerlink" href="#226" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>sock_init()</code></li>
+</ul>
+<h4 id="227">22.7、套接口系统调用<a class="headerlink" href="#227" title="Permanent link">&para;</a></h4>
+<ul>
+<li>理解proto_ops结构和proto结构的差异和调用层次</li>
+</ul>
+<h5 id="2271">22.7.1、套接口系统调用入口<a class="headerlink" href="#2271" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>表22-5</strong>，套接口系统调用</li>
+</ul>
+<h5 id="2272socket">22.7.2、socket系统调用<a class="headerlink" href="#2272socket" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、sys_socket()</li>
+<li>2、</li>
+</ul>
+<h5 id="2273bind">22.7.3、bind系统调用<a class="headerlink" href="#2273bind" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、sys_bind()</li>
+</ul>
+<h5 id="2274listen">22.7.4、listen系统调用<a class="headerlink" href="#2274listen" title="Permanent link">&para;</a></h5>
+<h5 id="2275accept">22.7.5、accept系统调用<a class="headerlink" href="#2275accept" title="Permanent link">&para;</a></h5>
+<h5 id="2276connect">22.7.6、connect系统调用<a class="headerlink" href="#2276connect" title="Permanent link">&para;</a></h5>
+<h5 id="2277shutdown">22.7.7、shutdown系统调用<a class="headerlink" href="#2277shutdown" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、sys_shutdown</li>
+<li>2、套接口层的实现</li>
+</ul>
+<h5 id="2278close">22.7.8、close系统调用<a class="headerlink" href="#2278close" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、关闭套接口</li>
+<li>2、套接口层的实现</li>
+</ul>
+<h5 id="2279select">22.7.9、select系统调用的实现<a class="headerlink" href="#2279select" title="Permanent link">&para;</a></h5>
+<h3 id="chap23io">chap23、套接口I/O<a class="headerlink" href="#chap23io" title="Permanent link">&para;</a></h3>
+<ul>
+<li>套接口I/O涉及的文件<ul>
+<li>include/linux/socket.h，定义套接口的结构、宏和函数原型</li>
+<li>net/core/iovec.c，实现对I/O向量块的复制操作</li>
+<li>net/socket.c，实现套接口层的调用</li>
+</ul>
+</li>
+</ul>
+<h4 id="231">23.1、输出/输入数据的组织<a class="headerlink" href="#231" title="Permanent link">&para;</a></h4>
+<h5 id="2311msghdr">23.1.1、msghdr结构<a class="headerlink" href="#2311msghdr" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>struct msghdr{};</code></li>
+</ul>
+<h5 id="2312verify_iovec">23.1.2、verify_iovec()<a class="headerlink" href="#2312verify_iovec" title="Permanent link">&para;</a></h5>
+<ul>
+<li>发送和接收的数据的msghdr结构需要在用户态组织，<strong>而在内核中是不信任用户态的数据的</strong>，因此需要对用户态提供的msghdr结构进行校难。</li>
+</ul>
+<h5 id="2313">23.1.3、<a class="headerlink" href="#2313" title="Permanent link">&para;</a></h5>
+<p>23.1.4、</p>
+<p>23.1.5、</p>
+<h5 id="2316csum_partial_copy_fromiovecend">23.1.6、csum_partial_copy_fromiovecend()<a class="headerlink" href="#2316csum_partial_copy_fromiovecend" title="Permanent link">&para;</a></h5>
+<h4 id="232">23.2、输出系统调用<a class="headerlink" href="#232" title="Permanent link">&para;</a></h4>
+<h5 id="2321sock_sendmsg">23.2.1、sock_sendmsg()<a class="headerlink" href="#2321sock_sendmsg" title="Permanent link">&para;</a></h5>
+<h5 id="2322sendto">23.2.2、sendto系统调用<a class="headerlink" href="#2322sendto" title="Permanent link">&para;</a></h5>
+<h5 id="2323send">23.2.3、send系统调用<a class="headerlink" href="#2323send" title="Permanent link">&para;</a></h5>
+<h5 id="2324sendmsg">23.2.4、sendmsg系统调用<a class="headerlink" href="#2324sendmsg" title="Permanent link">&para;</a></h5>
+<h4 id="233">23.3、输入系统调用<a class="headerlink" href="#233" title="Permanent link">&para;</a></h4>
+<ul>
+<li>图23-3，recvmsg系统调用过程</li>
+</ul>
+<h4 id="234">23.4、网络设备处理层初始化<a class="headerlink" href="#234" title="Permanent link">&para;</a></h4>
+<h3 id="chap24-99108529">chap24、套接口选项  99（108/529）<a class="headerlink" href="#chap24-99108529" title="Permanent link">&para;</a></h3>
+<ul>
+<li>套接口选项的实现涉及的文件<ul>
+<li>net/socket.c，实现套接口层的调用</li>
+<li>net/ipv4/af_inet.c，网络层和传输层接口</li>
+</ul>
+</li>
+</ul>
+<h4 id="241setsockopt">24.1、setsockopt系统调用<a class="headerlink" href="#241setsockopt" title="Permanent link">&para;</a></h4>
+<h4 id="242ioctl">24.2、ioctl系统调用<a class="headerlink" href="#242ioctl" title="Permanent link">&para;</a></h4>
+<h5 id="2421ioctl">24.2.1、ioctl在文件系统内的调用过程<a class="headerlink" href="#2421ioctl" title="Permanent link">&para;</a></h5>
+<h5 id="2422ioctl">24.2.2、套接口文件ioctl调用接口的实现<a class="headerlink" href="#2422ioctl" title="Permanent link">&para;</a></h5>
+<h5 id="2423">24.2.3、套接口层的实现<a class="headerlink" href="#2423" title="Permanent link">&para;</a></h5>
+<h4 id="243getsockname">24.3、getsockname系统调用<a class="headerlink" href="#243getsockname" title="Permanent link">&para;</a></h4>
+<h4 id="244getpeername">24.4、getpeername系统调用<a class="headerlink" href="#244getpeername" title="Permanent link">&para;</a></h4>
+<h3 id="chap25-111120529">chap25、传输控制块  111（120/529）<a class="headerlink" href="#chap25-111120529" title="Permanent link">&para;</a></h3>
+<ul>
+<li>根据协议族和传输层协议的特点，分层次地定义了多个结构用来组成传输控制块<ul>
+<li>sock_common、<strong>传输控制块信息的最小集合</strong>，由sock和inet_timewait_sock结构前面相同部分单独构成</li>
+<li>sock、比较通用的网络层描述块，构成传输控制块的基础，与具体的协议族无关</li>
+<li>inet_sock、</li>
+<li>inet_connection_sock、支持面向连接特性的描述块，</li>
+<li>tcp_sock、request_sock、</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>涉及的文件<ul>
+<li>include/net/sock.h，定义基本的传输控制块结构、宏和函数原型</li>
+<li>include/net/inet_sock.h，定义IPv4专用的传输控制块</li>
+<li>net/core/sock.c，实现传输层通用的函数</li>
+<li>net/socket.c，实现套接口层的调用</li>
+</ul>
+</li>
+</ul>
+<h4 id="251">25.1、系统参数<a class="headerlink" href="#251" title="Permanent link">&para;</a></h4>
+<ul>
+<li>optmem_max，每个传输控制块辅助缓冲区的上限，<code>sock_kmalloc()</code><ul>
+<li><strong>辅助数据</strong>包括进行设置选项、设置过滤时分配的内存和组播设置</li>
+</ul>
+</li>
+<li>rmem_default，传输控制块接收缓冲区大小的上限的默认值</li>
+<li>rmem_max，传输控制块接收缓冲区大小的上限的最大值</li>
+<li>vmem_default，传输控制块发送缓冲区大小的上限的默认值</li>
+<li>vmem_max，传输控制块发送缓冲区大小的上限的最大值</li>
+</ul>
+<h4 id="252">25.2、传输描述块结构<a class="headerlink" href="#252" title="Permanent link">&para;</a></h4>
+<h5 id="2521sock_common">25.2.1、sock_common结构<a class="headerlink" href="#2521sock_common" title="Permanent link">&para;</a></h5>
+<h5 id="2522sock">25.2.2、sock结构<a class="headerlink" href="#2522sock" title="Permanent link">&para;</a></h5>
+<h5 id="2523inet_sock">25.2.3、inet_sock结构<a class="headerlink" href="#2523inet_sock" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>是IPv4协议专用的传输控制块，是对sock结构的扩展</strong>，在传输控制块的基本属性已具备的基础上，进一步提供了IPv4协议专有的一些属性</li>
+</ul>
+<h4 id="253proto">25.3、proto结构<a class="headerlink" href="#253proto" title="Permanent link">&para;</a></h4>
+<ul>
+<li>proto结构为<strong>网络接口层</strong>，结构中的操作实现传输层的操作和从传输层到网络层调用的跳转，<strong>在proto结构中某些成员跟proto_ops结构中的成员对应</strong></li>
+</ul>
+<h5 id="2531ptoto">25.3.1、ptoto实例组织结构<a class="headerlink" href="#2531ptoto" title="Permanent link">&para;</a></h5>
+<h5 id="2532proto_register">25.3.2、proto_register()<a class="headerlink" href="#2532proto_register" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>注册proto实例到proto_list链表中</strong></li>
+</ul>
+<h5 id="2533proto_unregister">25.3.3、proto_unregister()<a class="headerlink" href="#2533proto_unregister" title="Permanent link">&para;</a></h5>
+<h4 id="254">25.4、传输控制块的内存管理<a class="headerlink" href="#254" title="Permanent link">&para;</a></h4>
+<h5 id="2541">25.4.1、传输控制块的分配和释放<a class="headerlink" href="#2541" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、sk_alloc()<ul>
+<li>在创建套接口时，TCP、UDP和原始IP会分配一个传输控制块</li>
+</ul>
+</li>
+<li>2、sk_clone()</li>
+<li>3、sk_free()</li>
+<li>4、sock_put()</li>
+</ul>
+<h5 id="2542">25.4.2、普通的发送缓存区的分配<a class="headerlink" href="#2542" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、sock_alloc_send_skb()</li>
+<li>2、sock_alloc_send_pskb()</li>
+<li>3、sock_wait_for_wmem()</li>
+</ul>
+<h5 id="2543">25.4.3、发送缓存的分配与释放<a class="headerlink" href="#2543" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、sock_wmalloc()，<strong>分配发送缓存</strong></li>
+<li>2、skb_set_owner_w()</li>
+<li>3、sock_wfree()</li>
+</ul>
+<h5 id="2544">25.4.4、接收缓存的分配与释放<a class="headerlink" href="#2544" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、sk_stream_set_owner_r()和sk_stream_rfree()</li>
+<li>2、</li>
+</ul>
+<h5 id="2545">25.4.5、辅助缓存的分配与释放<a class="headerlink" href="#2545" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、sock_kmalloc()，<strong>分配有关选项的缓存</strong></li>
+<li>2、sock_kfree_s()，<strong>释放由sock_kmalloc()分配的缓存</strong></li>
+</ul>
+<h4 id="255io">25.5、异步IO机制<a class="headerlink" href="#255io" title="Permanent link">&para;</a></h4>
+<h5 id="2551sk_wake_async">25.5.1、sk_wake_async()<a class="headerlink" href="#2551sk_wake_async" title="Permanent link">&para;</a></h5>
+<h5 id="2558sock_fasync">25.5.8、sock_fasync()<a class="headerlink" href="#2558sock_fasync" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>实现了对套接口的异步通知队列增加和删除的更新操作</strong></li>
+</ul>
+<h4 id="256">25.6、网络设备的禁用<a class="headerlink" href="#256" title="Permanent link">&para;</a></h4>
+<h5 id="2561socket_lock_t">25.6.1、socket_lock_t结构<a class="headerlink" href="#2561socket_lock_t" title="Permanent link">&para;</a></h5>
+<ul>
+<li>实现控制用户进程和下半部间同步锁和控制下半部间同步锁都是由<code>socket_lock_t</code>结构描述的。</li>
+</ul>
+<h5 id="2562">25.6.2、控制用户进程和下半部间同步锁<a class="headerlink" href="#2562" title="Permanent link">&para;</a></h5>
+<ul>
+<li>传输控制块通常在两种执行体中执行，<strong>进程上下文</strong>和<strong>软中断上下文</strong>，对传输控制块的访问完全是异步的，因此<strong>为了防止在访问传输控制块时产生冲突，加入了锁机制</strong>。</li>
+<li>1、lock_sock()</li>
+<li>2、release_sock()</li>
+<li>3、sock_owned_by_user宏</li>
+</ul>
+<h5 id="2563">25.6.3、控制下半部间同步锁<a class="headerlink" href="#2563" title="Permanent link">&para;</a></h5>
+<h3 id="chap26tcp">chap26、TCP：传输控制协议<a class="headerlink" href="#chap26tcp" title="Permanent link">&para;</a></h3>
+<h4 id="261">26.1、系统参数<a class="headerlink" href="#261" title="Permanent link">&para;</a></h4>
+<h4 id="262tcpinet_protosw">26.2、TCP的inet_protosw实例<a class="headerlink" href="#262tcpinet_protosw" title="Permanent link">&para;</a></h4>
+<h4 id="263tcpnet_protosw">26.3、TCP的net_protosw实例<a class="headerlink" href="#263tcpnet_protosw" title="Permanent link">&para;</a></h4>
+<h4 id="264tcp">26.4、TCP传输控制块<a class="headerlink" href="#264tcp" title="Permanent link">&para;</a></h4>
+<h5 id="2641inet_connection_sock">26.4.1、inet_connection_sock结构<a class="headerlink" href="#2641inet_connection_sock" title="Permanent link">&para;</a></h5>
+<h5 id="2642inet_connection_sock_af_ops">26.4.2、inet_connection_sock_af_ops结构<a class="headerlink" href="#2642inet_connection_sock_af_ops" title="Permanent link">&para;</a></h5>
+<h5 id="2643tcp_sock">26.4.3、tcp_sock结构<a class="headerlink" href="#2643tcp_sock" title="Permanent link">&para;</a></h5>
+<h5 id="2644tcp_options_received">26.4.4、tcp_options_received结构<a class="headerlink" href="#2644tcp_options_received" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>保存接收到的TCP选项信息</strong></li>
+</ul>
+<h5 id="2645tcp_skb_cb">26.4.5、tcp_skb_cb结构<a class="headerlink" href="#2645tcp_skb_cb" title="Permanent link">&para;</a></h5>
+<h4 id="265tcpprotoproto_ops">26.5、TCP的proto结构和proto_ops结构的实例<a class="headerlink" href="#265tcpprotoproto_ops" title="Permanent link">&para;</a></h4>
+<h4 id="266tcp">26.6、TCP状态迁移图<a class="headerlink" href="#266tcp" title="Permanent link">&para;</a></h4>
+<h4 id="267tcp">26.7、TCP首部<a class="headerlink" href="#267tcp" title="Permanent link">&para;</a></h4>
+<h4 id="268tcp">26.8、TCP校验和<a class="headerlink" href="#268tcp" title="Permanent link">&para;</a></h4>
+<h3 id="chap7">chap7、接口层的输入<a class="headerlink" href="#chap7" title="Permanent link">&para;</a></h3>
+<ul>
+<li><em>我的问题是，怎么理解 接口层</em>（我大概想了一下，可能是那种5层结构的那种接口层，用于承上启下的）</li>
+</ul>
+<h4 id="71">7.1、系统参数<a class="headerlink" href="#71" title="Permanent link">&para;</a></h4>
+<h4 id="72ioctl">7.2、接口层的ioctl<a class="headerlink" href="#72ioctl" title="Permanent link">&para;</a></h4>
+<p>7.2.1、SIOCxIFxxx类命令</p>
+<h3 id="chap8">chap8、接口层的输出<a class="headerlink" href="#chap8" title="Permanent link">&para;</a></h3>
+<h4 id="81">8.1、输出接口<a class="headerlink" href="#81" title="Permanent link">&para;</a></h4>
+<p>8.1.1、dev_queue_xmit()</p>
+<p>8.1.2、dev_hard_start_xmit()</p>
+<h5 id="813e100e100_xmit_frame">8.1.3、e100的输出接口：e100_xmit_frame()<a class="headerlink" href="#813e100e100_xmit_frame" title="Permanent link">&para;</a></h5>
+<p>8.2、网络输出软中断</p>
+<p>8.2.1、netif_schedule()</p>
+<p>8.2.2、net_tx_action()</p>
+<h3 id="chap9">chap9、流量控制<a class="headerlink" href="#chap9" title="Permanent link">&para;</a></h3>
+<h4 id="91">9.1、通过流量控制后输出<a class="headerlink" href="#91" title="Permanent link">&para;</a></h4>
+<p>9.1.1、dev_queue_xmit()</p>
+<p>9.1.2、qdisc_restart()</p>
+<p>9.2、构成流量控制的三种元素</p>
+<p>9.2.1、排队规则</p>
+<p>9.2.2、类</p>
+<p>9.2.3、过滤器</p>
+<p>9.3、默认的FIFO排队规则</p>
+<p>9.3.1、pfifo_fast_init()</p>
+<p>9.3.2、pfifo_fast_reset()</p>
+<p>9.3.1、pfifo_fast_enqueue()</p>
+<p>9.3.1、pfifo_fast_dequeue()</p>
+<p>9.3.1、pfifo_fast_requeue()</p>
+<p>9.4、netlink的tc接口</p>
+<p>9.5、排队规则的创建接口</p>
+<p>9.5.1、类的创建接口</p>
+<p>9.5.2、过滤器的创建接口</p>
+<h3 id="chap10internet">chap10、Internet协议族<a class="headerlink" href="#chap10internet" title="Permanent link">&para;</a></h3>
+<ul>
+<li>支持32种协议族，<code>net_families[NPROTO];</code></li>
+<li>include/linux/net.h，套接口层的结构、宏和函数原型</li>
+<li>include/linux/protocol.h，注册传输层协议的结构、宏和函数原型</li>
+<li>net/ipv4/af_inet.c，网络层和传输层接口</li>
+<li>net/ipv4/ip_input.c，IP数据报的输入</li>
+</ul>
+<h4 id="101net_proto_family">10.1、net_proto_family结构<a class="headerlink" href="#101net_proto_family" title="Permanent link">&para;</a></h4>
+<ul>
+<li>net_proto_family屏蔽了（不同的协议族，传输层结构和实现的差异，各自套接口创建函数也有差异）差异，统一用<code>sock_register()</code>注册到net_families数组中，<strong>提供了协议族到套接口创建</strong>之前的接口</li>
+</ul>
+<h4 id="102inet_protosw">10.2、inet_protosw结构<a class="headerlink" href="#102inet_protosw" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>只在套接口层起作用</strong></li>
+<li>inetsw_array数组包含了三个inet_protosw结构的实例：<strong>TCP，UDP和原始套接口</strong></li>
+</ul>
+<h4 id="103net_protocol">10.3、net_protocol结构<a class="headerlink" href="#103net_protocol" title="Permanent link">&para;</a></h4>
+<ul>
+<li>定义了协议族中支持的传输层协议以及传输层的报文接收例程。是<strong>网络层和传输层之间的桥梁</strong>。</li>
+</ul>
+<h4 id="104internet">10.4、Internet协议族的初始化<a class="headerlink" href="#104internet" title="Permanent link">&para;</a></h4>
+<ul>
+<li>初始化函数是<code>inet_init()</code>，通过fs_initcall(inet_init)，将inet_init加到内核的初始化列表中，保证了此函数会在系统启动时被调用</li>
+</ul>
+<h3 id="chap11ip">chap11、IP：网际协议<a class="headerlink" href="#chap11ip" title="Permanent link">&para;</a></h3>
+<h4 id="111">11.1、引言<a class="headerlink" href="#111" title="Permanent link">&para;</a></h4>
+<h5 id="1111ip">11.1.1、IP首部<a class="headerlink" href="#1111ip" title="Permanent link">&para;</a></h5>
+<ul>
+<li>计算一份数据报IP检验和的方法<ul>
+<li>首先把检验和字段置为0</li>
+<li>然后将整个首部看成由一串16位字组成，对其中的每个16位进行二进制反码求和，结果存在检验和字段中</li>
+</ul>
+</li>
+</ul>
+<h5 id="1112ip">11.1.2、IP数据报的输入与输出<a class="headerlink" href="#1112ip" title="Permanent link">&para;</a></h5>
+<ul>
+<li>图11-3，<strong>IP层主要函数调用关系</strong></li>
+</ul>
+<h4 id="112ip">11.2、IP的私有信息控制块<a class="headerlink" href="#112ip" title="Permanent link">&para;</a></h4>
+<p>11.3、系统参数</p>
+<p>11.4、初始化</p>
+<p>11.5、IP层套接口选项</p>
+<p>11.6、ipv4_devconf结构</p>
+<p>11.7、套接口的错误队列</p>
+<p>11.8、报文控制信息</p>
+<p>11.9、对端信息块</p>
+<p>11.10、IP数据报的输入处理</p>
+<p>11.11、IP数据报的输出处理</p>
+<p>11.12、IP层对GSO的支持</p>
+<h3 id="chap12ip">chap12、IP选项处理<a class="headerlink" href="#chap12ip" title="Permanent link">&para;</a></h3>
+<ul>
+<li>0、<ul>
+<li>自己看了RFC791，里面的<strong>IP选项</strong>的介绍能对得上12.1，但是<strong>实现</strong>不确定从哪来的</li>
+<li><a href="https://datatracker.ietf.org/doc/html/rfc1122#page-35">rfc1122</a>，跟rfc791差不多，只不过人家实现了多种场景，（link layer，ip层、传输层）</li>
+</ul>
+</li>
+<li>提到了2个rfc，rfc791，rfc1122</li>
+</ul>
+<h4 id="121ip">12.1、IP选项<a class="headerlink" href="#121ip" title="Permanent link">&para;</a></h4>
+<h5 id="1211end-of-option-list">12.1.1、选项列表的结束符，End of Option List<a class="headerlink" href="#1211end-of-option-list" title="Permanent link">&para;</a></h5>
+<h5 id="1219">12.1.9、<a class="headerlink" href="#1219" title="Permanent link">&para;</a></h5>
+<ul>
+<li>我没在rfc791上看到，<strong>作者让看rfc2113</strong></li>
+</ul>
+<h4 id="122ip_options">12.2、ip_options结构<a class="headerlink" href="#122ip_options" title="Permanent link">&para;</a></h4>
+<h4 id="123ipip">12.3、在IP数据报中构建IP选项<a class="headerlink" href="#123ipip" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>ip_options_build()</code></li>
+</ul>
+<h4 id="124ipip_options">12.4、复制IP数据报中选项到指定的ip_options结构<a class="headerlink" href="#124ipip_options" title="Permanent link">&para;</a></h4>
+<h4 id="125ip">12.5、处理待发送IP分片中的选项<a class="headerlink" href="#125ip" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>复制标志</strong>为0的给清理掉，<em>但我没找到相关字段？</em></li>
+</ul>
+<h4 id="126ip">12.6、解析IP选项<a class="headerlink" href="#126ip" title="Permanent link">&para;</a></h4>
+<h4 id="127ipip">12.7、还原在检验IP选项时修改的IP选项<a class="headerlink" href="#127ipip" title="Permanent link">&para;</a></h4>
+<h4 id="128ipip">12.8、处理转发IP数据报中的IP选项<a class="headerlink" href="#128ipip" title="Permanent link">&para;</a></h4>
+<h4 id="129ip">12.9、处理IP数据报的源路由选项<a class="headerlink" href="#129ip" title="Permanent link">&para;</a></h4>
+<h4 id="1210ipip">12.10、解析并处理IP首部中的IP选项<a class="headerlink" href="#1210ipip" title="Permanent link">&para;</a></h4>
+<h4 id="1211">12.11、路由警告选项的处理<a class="headerlink" href="#1211" title="Permanent link">&para;</a></h4>
+<h4 id="1212ip">12.12、由控制信息生成IP选项信息块<a class="headerlink" href="#1212ip" title="Permanent link">&para;</a></h4>
+<h3 id="chap13ip">chap13、IP的分片与组装<a class="headerlink" href="#chap13ip" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>UDP很容易导致分片</strong></li>
+</ul>
+<ul>
+<li><strong>分片</strong>是<strong>IP层和二层之间</strong>的传输单元，分片对传输层是透明的</li>
+</ul>
+<h4 id="131">13.1、系统参数<a class="headerlink" href="#131" title="Permanent link">&para;</a></h4>
+<h4 id="132">13.2、分片<a class="headerlink" href="#132" title="Permanent link">&para;</a></h4>
+<ul>
+<li><em>两种分片在rfc791里没有提到，只是给了个分片过程，具体的实现，还是内核侧提供的，函数的话，还是看他们</em></li>
+</ul>
+<h5 id="1321">13.2.1、快速分片<a class="headerlink" href="#1321" title="Permanent link">&para;</a></h5>
+<h5 id="1322">13.2.2、慢速分片<a class="headerlink" href="#1322" title="Permanent link">&para;</a></h5>
+<p>13.3、组装</p>
+<p>13.3.1、ipq结构</p>
+<p>13.3.2、ipq散列表和链表的维护</p>
+<p>13.3.3、ipq散列表的重组</p>
+<p>13.3.4、</p>
+<p>13.3.5、</p>
+<p>13.3.6、</p>
+<p>13.3.7、</p>
+<h3 id="chap32tcp-442451529">chap32、TCP连接的终止 442（451/529）<a class="headerlink" href="#chap32tcp-442451529" title="Permanent link">&para;</a></h3>
+<h4 id="321">32.1、连接终止过程<a class="headerlink" href="#321" title="Permanent link">&para;</a></h4>
+<h5 id="3211">32.1.1、正常关闭<a class="headerlink" href="#3211" title="Permanent link">&para;</a></h5>
+<h5 id="3212">32.1.2、同时关闭<a class="headerlink" href="#3212" title="Permanent link">&para;</a></h5>
+<h4 id="332shutdown">33.2、shutdown传输接口层的实现<a class="headerlink" href="#332shutdown" title="Permanent link">&para;</a></h4>
+<h5 id="3321tcp_shutdown">33.2.1、tcp_shutdown()<a class="headerlink" href="#3321tcp_shutdown" title="Permanent link">&para;</a></h5>
+<ul>
+<li>是TCP的shutdown系统调用的传输接口层实现，由套接口层的实现<code>inet_shutdown()</code>调用</li>
+</ul>
+<h5 id="3322tcp_send_fin">33.2.2、tcp_send_fin()<a class="headerlink" href="#3322tcp_send_fin" title="Permanent link">&para;</a></h5>
+<ul>
+<li>过程：<ul>
+<li>由于发送FIN无需占用额外的负载</li>
+</ul>
+</li>
+</ul>
+<h4 id="323closetcp_close">32.3、close传输接口层的实现：tcp_close()<a class="headerlink" href="#323closetcp_close" title="Permanent link">&para;</a></h4>
+<h4 id="324fin">32.4、被动关闭：FIN段的接收处理<a class="headerlink" href="#324fin" title="Permanent link">&para;</a></h4>
+<h4 id="325">32.5、主动关闭<a class="headerlink" href="#325" title="Permanent link">&para;</a></h4>
+<h5 id="3251timewait">32.5.1、timewait控制块的数据结构<a class="headerlink" href="#3251timewait" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、inet_timewait_death_row结构</li>
+<li>2、inet_timewait_sock结构</li>
+<li>3、tcp_timewait_sock结构</li>
+</ul>
+<h5 id="3252timewaittcp">32.5.2、timewait控制块取代TCP传输控制块<a class="headerlink" href="#3252timewaittcp" title="Permanent link">&para;</a></h5>
+<h5 id="3253">32.5.3、<a class="headerlink" href="#3253" title="Permanent link">&para;</a></h5>
+<h5 id="3254">32.5.4、<a class="headerlink" href="#3254" title="Permanent link">&para;</a></h5>
+<h5 id="3255fin_wait2time_wait">32.5.5、FIN_WAIT2和TIME_WAIT状态处理<a class="headerlink" href="#3255fin_wait2time_wait" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、TCP输入入口</li>
+<li>2、FIN_WAIT2和TIME_WAIT状态的输入处理</li>
+</ul>
+<h5 id="3256timewait2msl">32.5.6、timewait控制块的2MSL超时处理<a class="headerlink" href="#3256timewait2msl" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、2MSL等待超时时间较短的超时处理</li>
+<li>2、2MSL等待超时时间较长的超时处理<ul>
+<li>(1)、tw_timer定时器的例程</li>
+<li>(2)、twkill_work工作队列例程</li>
+</ul>
+</li>
+</ul>
+<h3 id="chap33udp-473482529">chap33、UDP：用户数据报  473（482/529）<a class="headerlink" href="#chap33udp-473482529" title="Permanent link">&para;</a></h3>
+<h4 id="331">33.1、引言<a class="headerlink" href="#331" title="Permanent link">&para;</a></h4>
+<ul>
+<li>UDP不提供可靠性</li>
+<li>涉及的文件<ul>
+<li>include/net/udplite.h，定义轻量级UDP专用的函数</li>
+<li>include/linux/udp.h，定义UDP传输控制块</li>
+<li>net/ipv4/udp.c</li>
+<li>net/ipv4/udplite.c</li>
+<li>net/core/sock.c，实现传输层通用的函数</li>
+<li>net/ipv4/datagram.c，实现UDP的connect调用</li>
+<li>net/ipv4/af_inet.c，网络层和传输层接口</li>
+</ul>
+</li>
+</ul>
+<h5 id="3311udp">33.1.1、UDP首部<a class="headerlink" href="#3311udp" title="Permanent link">&para;</a></h5>
+<ul>
+<li>端口号用来标识发送和接收进程</li>
+</ul>
+<h5 id="3312udp">33.1.2、UDP的输入与输出<a class="headerlink" href="#3312udp" title="Permanent link">&para;</a></h5>
+<ul>
+<li>发送，UDP层  udp_sendmsg-&gt;udp_push_pending_frame()<ul>
+<li>另一个调用是 IP层的 <code>ip_append_data()</code></li>
+</ul>
+</li>
+<li>接收，IP层是，<code>ip_local_deliver()</code><ul>
+<li>UDP层，udp_rcv()-&gt;<code>_udp4_lib_rcv()</code>-&gt;udp_queue_rcv_skb()-&gt;sock_queue_rcv_skb()-&gt;skb_queue_tail()-&gt;<code>sk-&gt;sk_data_ready()</code></li>
+</ul>
+</li>
+<li><code>struct sock</code>中的<strong>sk_receive_queue</strong>是接收队列</li>
+</ul>
+<h4 id="332udpinet_protosw">33.2、UDP的inet_protosw结构<a class="headerlink" href="#332udpinet_protosw" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>struct inet_protosw inetsw_array[] =</code><ul>
+<li>传输层操作接口为<code>udp_prot</code></li>
+<li>套接口层操作接口为<code>inet_dgram_ops</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="333udp">33.3、UDP的传输控制块<a class="headerlink" href="#333udp" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>struct udp_sock{}</code>是对<code>inet_sock</code>结构的扩展</li>
+</ul>
+<h4 id="334udpprotoproto_ops">33.4、UDP的proto结构和proto_ops结构的实例<a class="headerlink" href="#334udpprotoproto_ops" title="Permanent link">&para;</a></h4>
+<ul>
+<li>传输层操作接口为<code>udp_prot</code></li>
+<li>套接口层操作接口为<code>inet_dgram_ops</code></li>
+<li><em>没有扩展</em></li>
+</ul>
+<h4 id="335udp">33.5、UDP的状态<a class="headerlink" href="#335udp" title="Permanent link">&para;</a></h4>
+<ul>
+<li>UDP的传输是没有状态的</li>
+</ul>
+<h4 id="336udp">33.6、UDP传输控制块的管理<a class="headerlink" href="#336udp" title="Permanent link">&para;</a></h4>
+<ul>
+<li>UDP并不是在hash接口中将其传输控制块添加到<strong>udp_hash散列表</strong>中的，而是<strong>在绑定端口后，才将其添加到散列表</strong>，关键字为端口号与散列表大小取模后的值。</li>
+<li><code>udp_sock</code>，<code>socket结构</code>，<code>struct file结构</code></li>
+</ul>
+<h4 id="337bind">33.7、bind系统调用的实现<a class="headerlink" href="#337bind" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>UDP的绑定实际上完成两个功能</strong>：<ul>
+<li>根据选取的合适端口号将传输控制块添加到udp_hash散列表中</li>
+<li>并将端口号设置到传输控制块中</li>
+</ul>
+</li>
+<li><code>inet_bind()</code><ul>
+<li>原始IP，调用bind接口进行绑定</li>
+<li>其他的包括TCP和UDP则调用<code>get_port()</code>进行绑定</li>
+</ul>
+</li>
+<li>在UDP中实现传输接口层<code>get_port()</code>接口的函数是<code>udp_v4_get_port()</code>，<strong>真正绑定的是<code>__udp_lib_get_port()</code></strong></li>
+</ul>
+<h4 id="338udp">33.8、UDP套接口的关闭<a class="headerlink" href="#338udp" title="Permanent link">&para;</a></h4>
+<ul>
+<li>UDP的传输接口层的close接口为<code>udp_lib_close()</code>，通过对传输接口层的unhash接口的调用，把传输控制块从散列表中删除<ul>
+<li><code>sk_common_release()</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="339connect">33.9、connect系统调用的实现<a class="headerlink" href="#339connect" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>inet_dgram_connect()</code>为connect在UDP套接口层的实现</li>
+</ul>
+<h5 id="3391udp_disconnect">33.9.1、udp_disconnect()<a class="headerlink" href="#3391udp_disconnect" title="Permanent link">&para;</a></h5>
+<ul>
+<li>传输接口层UDP的disconnect接口的实现</li>
+</ul>
+<h5 id="3392ipv4_datagram_connect">33.9.2、ipv4_datagram_connect()<a class="headerlink" href="#3392ipv4_datagram_connect" title="Permanent link">&para;</a></h5>
+<ul>
+<li>传输接口层UDP的connect接口的实现</li>
+</ul>
+<h4 id="3310select">33.10、select系统调用的实现<a class="headerlink" href="#3310select" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>udp_poll()</code></li>
+</ul>
+<h4 id="3311udpioctl">33.11、UDP的ioctl<a class="headerlink" href="#3311udpioctl" title="Permanent link">&para;</a></h4>
+<ul>
+<li>SIOCOUTQ，返回标识该传输控制块为发送而分配的所有数据区的总大小</li>
+<li>SIOCINQ，获取在接收队列缓存中第一个未读数据报的长度</li>
+</ul>
+<h4 id="3312udp_1">33.12、UDP的套接口选项<a class="headerlink" href="#3312udp_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li>UDP套接口选项入口为<code>udp_setsockopt()</code><ul>
+<li>如果是<code>SOL_UDP</code>和<code>SOL_UDPLITE</code>级别，调用<code>udp_lib_setsockopt()</code></li>
+<li>否则通过IP接口调用<code>ip_setsockopt()</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="3313udp">33.13、UDP校验和<a class="headerlink" href="#3313udp" title="Permanent link">&para;</a></h4>
+<h5 id="33131udp">33.13.1、输入UDP数据报校验和的计算<a class="headerlink" href="#33131udp" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、udp4_csum_init()<ul>
+<li>用于UDP数据报接收校验的初始化</li>
+</ul>
+</li>
+<li>2、udp_lib_checksum_complete()<ul>
+<li>基于伪首部累加和，完成全包校验和的检测</li>
+</ul>
+</li>
+</ul>
+<h5 id="33132udp">33.13.2、输出UDP数据报校验和的计算<a class="headerlink" href="#33132udp" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、udp4_hwcsum_outgoing()</li>
+<li>2、csum_tcpudp_magic()和udp_csum_outgoing()<ul>
+<li>udp_csum_outgoing()用在硬件不支持完成校验和的情况下</li>
+</ul>
+</li>
+</ul>
+<h4 id="3314udpsendmsg">33.14、UDP的输出：sendmsg系统调用<a class="headerlink" href="#3314udpsendmsg" title="Permanent link">&para;</a></h4>
+<h5 id="33141udp_sendmsg">33.14.1、udp_sendmsg()<a class="headerlink" href="#33141udp_sendmsg" title="Permanent link">&para;</a></h5>
+<ul>
+<li>实现了UDP数据报的组织和发送</li>
+</ul>
+<h5 id="33142udp_push_pending_frames">33.14.2、udp_push_pending_frames()<a class="headerlink" href="#33142udp_push_pending_frames" title="Permanent link">&para;</a></h5>
+<ul>
+<li>将待发送数据打包成一个UDP数据报输出</li>
+</ul>
+<h4 id="3315udp">33.15、UDP的输入<a class="headerlink" href="#3315udp" title="Permanent link">&para;</a></h4>
+<h5 id="33151udpudp_rcv">33.15.1、UDP接收的入口：udp_rcv()<a class="headerlink" href="#33151udpudp_rcv" title="Permanent link">&para;</a></h5>
+<ul>
+<li>UDP层的数据接收，对于套接口而言，就是<strong>接收队列的入队操作</strong>，在IP层，如果是发送到本地数据，则会交由<code>ip_local_deliver_finish()</code>处理</li>
+</ul>
+<h5 id="33152udp__udp4_lib_mcast_deliver">33.15.2、UDP组播数据报输入：__udp4_lib_mcast_deliver()<a class="headerlink" href="#33152udp__udp4_lib_mcast_deliver" title="Permanent link">&para;</a></h5>
+<h5 id="33153udp_queue_rcv_skb">33.15.3、udp_queue_rcv_skb()<a class="headerlink" href="#33153udp_queue_rcv_skb" title="Permanent link">&para;</a></h5>
+<ul>
+<li>将UDP数据报添加到所属传输控制块的接收队列中的功能由udp_queue_rcv_skb()来实现</li>
+</ul>
+<h4 id="3316recvmsg">33.16、recvmsg系统调用的实现<a class="headerlink" href="#3316recvmsg" title="Permanent link">&para;</a></h4>
+<ul>
+<li>实现UDP的传输接口层的recvmsg接口函数为<code>udp_recvmsg()</code></li>
+</ul>
+<ul>
+<li>udp_recvmsg()实现了主动从传输控制块的接收队列中读取数据到用户空间的缓冲区中。</li>
+</ul>
+<h4 id="3317udpudp_err">33.17、UDP的差错处理：udp_err()<a class="headerlink" href="#3317udpudp_err" title="Permanent link">&para;</a></h4>
+<h4 id="3318udp">33.18、轻量级UDP<a class="headerlink" href="#3318udp" title="Permanent link">&para;</a></h4>
+<ul>
+<li>在UDP-Lite协议中，一个数据包到底需不需要对其负载进行校验，或者是校验多少位都是由用户控制的</li>
+<li><code>s = socket(PF_INET, SOCK_DGRAM, IPPROTO_UDPLITE);</code></li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
