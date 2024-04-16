@@ -549,6 +549,14 @@ return true;
   + 服务器要同时监听多个端口，或者处理多种服务
 + **I/O复用虽然能同时监听多个文件描述符，但它本身是阻塞的**。当多个文件描述符同时就绪时，如果不采取额外的措施，程序就只能按照顺序依次处理其中的每一个文件描述符，**使得服务器程序看起来像是串行工作的**。如果要实现并发，只能使用多进程或多线程
 
+#### 0、我自己想和解答的【问AI】
+
++ 1、什么是I/O复用（问的AI）
+  + 复用：多个相似的操作，合并为一个
+  + I/O复用：多个I/O合并到一个I/O上，*这些都是正确的废话，还是不好理解*
+  + 可以理解的解释的是，**一个进程同时监听了多个I/O事件，不用为每个I/O事件创建进程**
+  + 举例：web服务器中，传统的情况，需要为每个客户端创建一个进程或线程
+
 #### 9.1、select系统调用
 
 + select系统调用的用途是：**在一段时间内，监听用户感兴趣的文件描述符上的可读、可写和异常等事件**。
@@ -800,20 +808,22 @@ int epoll_wait(int epfd, struct epoll_event *events, int maxevents,
 
 #### 13.5、信号量
 
-13.5.1、信号量原语
+##### 13.5.1、信号量原语
 
 + P（passeren，传递，进入临界区）和V（vrijgeven，释放，退出临界区）
 
 + sys/sem.h
 
-  13.5.2、semget系统调用
+##### 13.5.2、semget系统调用
 
 + **创建信号量集**
-  13.5.3、semop系统调用
-  13.5.4、semctl系统调用
-  
+##### 13.5.3、semop系统调用
+
+##### 13.5.4、semctl系统调用
+
 + **允许调用者对信号量进行直接控制**
-  13.5.5、特殊键值ipc_private
+  
+##### 13.5.5、特殊键值ipc_private
 
 #### 13.6、共享内存
 
@@ -821,22 +831,33 @@ int epoll_wait(int epfd, struct epoll_event *events, int maxevents,
 
 + sys/shm.h
 
-13.6.1、shmget系统调用
+##### 13.6.1、shmget系统调用
 
-13.6.2、shmat和shmdt系统调用
+##### 13.6.2、shmat和shmdt系统调用
 
-13.6.3、shmctl系统调用
+##### 13.6.3、shmctl系统调用
 
-13.6.4、共享内存的posix方法
+##### 13.6.4、共享内存的posix方法
 
-13.6.5、共享内存实例
+##### 13.6.5、共享内存实例
 
 #### 13.7、消息队列
 
-13.7.1、msgget系统调用
-13.7.2、msgsnd系统调用
-13.7.3、msgrcv系统调用
-13.7.4、msgctl系统调用
++ *这个例子，我没太写过，要尝试写下，再用man看下，怎么使用，lionel*
+
++ 两个进程之间传递二进制块数据
++ sys/msg.h中，以下4个系统调用
+
+##### 13.7.1、msgget系统调用
+
++ 创建或获取一个消息队列，`int msgget(key_t key, int msgflg)`，key是一个键值，**标识一个全局唯一的消息队列**
++ `struct msqid_ds{}`
+
+##### 13.7.2、msgsnd系统调用
+
+##### 13.7.3、msgrcv系统调用
+
+##### 13.7.4、msgctl系统调用
 
 #### 13.8、ipc命令
 
@@ -893,19 +914,81 @@ int main()
 
 ##### 14.1.2、linux线程库
 
++ LinuxThreads
++ NPTL
+
 #### 14.2、创建线程和结束线程
 
 + pthread_create
+
 + pthread_exit
-+ pthread_join
+
++ pthread_join，**回收线程**【**等待其他线程结束**】
+
+  + 类似于wait和waitpid
+  + **`pthread_join()`函数只能等待一个指定的线程**
+  + 使用场景：
+    + 等待指定线程结束，阻塞当前线程，直到指定线程退出
+    + 线程同步，当主线程需要等待其他线程完成任务后再继续执行，可以使用`pthread_join()`等待其他线程的结束
+    + 获取线程的返回值
+    + 资源回收
+
+  ```c
+  #include <stdio.h>
+  #include <stdlib.h>
+  #include <pthread.h>
+  
+  void* thread_function(void* arg) {
+      int thread_id = *(int*)arg;
+      printf("Thread %d is running.\n", thread_id);
+      // 模拟线程执行一些任务
+      for (int i = 0; i < 5; i++) {
+          printf("Thread %d: %d\n", thread_id, i);
+      }
+      int* result = malloc(sizeof(int));
+      *result = thread_id * 100;
+      pthread_exit(result);
+  }
+  
+  int main() {
+      pthread_t thread;
+      int thread_id = 1;
+      int* result;
+  
+      // 创建线程，使用thread_function函数，并把 thread_id 当作参数传递过去
+      if (pthread_create(&thread, NULL, thread_function, &thread_id) != 0) {
+          fprintf(stderr, "Failed to create thread.\n");
+          return 1;
+      }
+  
+      printf("Main thread is waiting for the thread to finish.\n");
+  
+      // 等待线程结束并获取返回值result
+      if (pthread_join(thread, (void**)&result) != 0) {
+          fprintf(stderr, "Failed to join thread.\n");
+          return 1;
+      }
+  
+      printf("Thread returned: %d\n", *result);
+  
+      free(result);
+  
+      return 0;
+  }
+  ```
+
+  
+
 + pthread_cancel
 
 ```c
-#include <pthread.h>
+#include <pthread.h>  //记的这个头文件
 int pthread_cancel(pthread_t thread);
 ```
 
 #### 14.3、线程属性
+
++ `pthread_attr_t`结构体
 
 #### 14.4、posix信号量
 
@@ -920,9 +1003,26 @@ int sem_wait(sem_t *sem);
 
 #### 14.5、互斥锁
 
-##### 14.5.1、互斥锁基础api
++ *这些自己用得都比较少*
+
+##### 14.5.1、互斥锁基础api（5个）
+
+```c
+int pthread_mutex_init();
+int pthread_mutex_destroy();
+int pthread_mutex_lock();
+```
+
+
 
 ##### 14.5.2、互斥锁属性
+
+```c
+int pthread_mutexattr_init();
+int pthread_mutexattr_destroy();
+```
+
+
 
 ##### 14.5.3、死锁举例
 
@@ -931,6 +1031,18 @@ int sem_wait(sem_t *sem);
 + 如果说互斥锁是用于同步线程对共享数据的访问的话，那么条件变量则是**用于在线程之间同步共享数据的值**。
 + 条件变量提供了一种**线程间的通知机制**：当某个共享数据达到某个值的时候，唤醒等待这个共享数据的线程。
 + 5个函数
+
+```c
+int pthread_cond_init();
+int pthread_cond_destroy();
+```
+
+##### 自己提问及搜的
+
++ 条件变量（Condition Variable）是线程同步的一种机制，用于解决多线程间的协调和通信问题。它的引入主要是为了解决以下问题：
+  + 1、避免忙等待：当线程需要等待某个条件满足时，常见的做法是通过轮询或忙等待来检查条件是否满足。这种方式会消耗CPU资源，并降低系统的性能。条件变量提供了一种更高效的等待机制，使得线程可以进入睡眠状态，等待条件满足时被唤醒，从而避免了忙等待。
+  + 2、线程间的通信：多个线程之间可能需要进行通信，例如一个线程产生了某个结果，其他线程需要等待该结果可用后才能继续执行。条件变量提供了一种线程间的通信机制，使得一个线程可以通知其他线程某个条件的变化，从而实现线程间的协调和同步。
+  + 3、避免竞争条件：多线程环境下，可能会存在共享资源的竞争条件（Race Condition），即多个线程同时访问和修改共享资源，而没有合适的同步机制。条件变量结合互斥锁（Mutex）可以解决竞争条件问题。线程可以在条件变量上等待某个条件的满足，而在修改共享资源之前使用互斥锁进行保护，从而确保线程之间的安全访问。
 
 #### 14.7、线程同步机制包装类
 
@@ -950,7 +1062,7 @@ int sem_wait(sem_t *sem);
 
 ### chap15、进程池和线程池
 
-15.1、进程池和线程池概述
+#### 15.1、进程池和线程池概述
 
 #### 15.2、处理多客户
 
@@ -962,13 +1074,55 @@ int sem_wait(sem_t *sem);
 
 + 代码清单15-1
 
-15.4、用进程池实现的简单cgi服务器
+#### 15.4、用进程池实现的简单cgi服务器
 
-15.5、半同步/半反应堆线程池实现
+#### 15.5、半同步/半反应堆线程池实现
 
-15.6、用线程池实现的简单web服务器
+#### 15.6、用线程池实现的简单web服务器
 
-### chap16、
+### chap16、服务器调制、调试和测试
+
+#### 16.1、最大文件描述符数
+
+#### 16.2、调整内核参数
+
++ `sysctl -a`查看这些内核参数
+
+##### 16.2.1、/proc/sys/fs目录下的部分文件
+
++ **文件系统**
++ file-max
++ epoll/max_user_watches
+
+##### 16.2.2、/proc/sys/net目录下的部分文件
+
++ **网络模块**
++ core/somaxconn
++ ipv4/tcp_max_syn_backlog
++ ipv4/tcp_wmem
++ ipv4/tcp_syncookies
+
+#### 16.3、gdb调试
+
+##### 16.3.1、用gdb调试多进程程序
+
+###### 1、单独调试子进程
+
++ `gdb`进去后，**直接`attach 子进程号`**，设置子进程中的断点
+
+###### 2、使用调试器选项follow-fork-mode
+
++ `set follow-fork-mode parent`或`set follow-fork-mode child`，设置为父或子进程
+
+##### 16.3.2、用gdb调试多线程程序
+
++ info threads，**ID前面有"`*`"号的线程是当前被调试的线程**
++ thread ID，调试目标ID指定的线程
++ set scheduler-locking [off|on|setp]，**off不锁任何线程，这是默认值**
+  + on表示只有当前被调试的线程会继续执行
+  + step表示在单步执行的时候，只有当前线程会执行
+
+#### 16.4、压力测试
 
 ### chap17、系统监测工具
 
