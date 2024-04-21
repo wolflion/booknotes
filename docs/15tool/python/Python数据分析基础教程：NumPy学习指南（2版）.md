@@ -50,6 +50,7 @@ import numpy as np
 a = np.arange(5)  # 这个简写的不成样子，直接用arange(5)是不能运行的
 a.dtype
 # dtype('int32')  #这是输出的
+print(a)#输出0，1，2，3，4
 ```
 
 
