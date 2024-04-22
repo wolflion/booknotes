@@ -353,37 +353,143 @@
 
 ##### 25.6.3、控制下半部间同步锁
 
-### chap26、TCP：传输控制协议
+### chap26、TCP：传输控制协议  149（158/529）
+
++ TCP的内容分为7章
++ 图26-1，TCP函数调用关系
++ TCP传输控制块的管理、套接口选项、ioctl、差错处理以及缓存管理的文件
+  + include/linux/tcp.h
+  + include/net/sock.h
+  + include/net/inet_connection_sock.h
+  + include/net/inet_hashtables.h，定义管理传输控制块的散列表
+  + net/ipv4/af_inet.c，网络层和传输层接口
+  + net/ipv4/tcp_ipv4.c，传输控制块与网络层之间的接口实现
+  + net/ipv4/tcp.c，传输控制块与应用层之间的接口实现
+  + net/core/strem.c，TCP中流内存管理的实现
 
 #### 26.1、系统参数
 
++ 40、tcp_timestamps
++ 46、tcp_workaround_signed_windows
+
 #### 26.2、TCP的inet_protosw实例
+
++ `struct inet_protosw inetsw_array[] ={.protocol = IPPROTO_TCP}`
 
 #### 26.3、TCP的net_protosw实例
 
++ `struct net_protocol tcp_protocol ={.handler = tcp_v4_rcv,}`
+
 #### 26.4、TCP传输控制块
+
++ 3种类型的TCP传输控制块
+  + tcp_request_sock
+  + tcp_sock，*本章讲这个*，**在连接建立之后终止之前使用，TCP状态为ESTABLISHED**
+  + tcp_timewait_sock，**在终止连接过程中使用**
 
 ##### 26.4.1、inet_connection_sock结构
 
++ **所有面向连接传输控制块**，在**inet_sock结构的基础上**，增加了**连接、确认和重传**
+
 ##### 26.4.2、inet_connection_sock_af_ops结构
+
++ 封装了一组**与传输层相关的操作集**，TCP中的实例是**ipv4_specific**
 
 ##### 26.4.3、tcp_sock结构
 
++ **TCP协议的控制块**，是在**inet_connection_sock**基础上，扩展了**滑动窗口协议、拥塞控制算法**
+
 ##### 26.4.4、tcp_options_received结构
 
-+ **保存接收到的TCP选项信息**
++ **保存接收到的TCP选项信息**，如时间戳、SACK等
 
 ##### 26.4.5、tcp_skb_cb结构
 
++ skb_buff结构的cb成员，**TCP利用这个字段存储了一个tcp_skb_cb结构**
+
 #### 26.5、TCP的proto结构和proto_ops结构的实例
 
++ TCP的传输层接口为tcp_prot，另一个是`inet_stream_ops`，*是不是作者字写错了*
+
 #### 26.6、TCP状态迁移图
+
++ *跟用户态是一样的*
 
 #### 26.7、TCP首部
 
 #### 26.8、TCP校验和
 
-### chap7、接口层的输入
++ TCP的校验和**覆盖TCP首部及TCP数据**，IP首部中的校验和**只覆盖IP的首部**，不覆盖IP数据报中的任何数据
++ 校验和规则，**每16位字取反后相加**，**TCP段都包含一个12B的伪首部**
+
+##### 26.8.1、输入TCP段的校验和检测
+
+###### 1、tcp_v4_checksum_init()
+
+###### 2、tcp_checksum_complete()和tcp_checksum_complete_user()
+
+##### 26.8.2、输出TCP段校验和的计算
+
++ tcp_v4_send_check()
+
+#### 26.9、TCP的初始化
+
++ tcp_init()由**IPv4协议族的初始化函数inet_init()调用**
+
+#### 26.10、TCP传输控制块的管理
+
++ **TCP存在多个状态**
+
+##### 26.10.1、inet_hashinfo结构
+
++ **tcp_hashinfo对所有的散列表进行集中管理**
+
+##### 26.10.2、管理除LISTEN状态之外的TCP传输控制块
+
++ tcp_v4_hash()
+
+##### 26.10.3、管理LISTEN状态的TCP传输控制块
+
+#### 26.11、TCP层的套接口选项
+
++ tcp_setsockopt()
+
+#### 26.12、TCP的ioctl
+
++ TCP中的几个ioctl命令
+  + SIOCINQ
+  + SIOCATMARK
+  + SIOCOUTQ
+
+#### 26.13、TCP传输控制块的初始化
+
++ tcp_prot中，将**init接口设置为tcp_v4_init_sock()**
+
+#### 26.14、TCP的差错处理
+
++ tcp_v4_err()
+
+#### 26.15、TCP传输控制块层的缓存管理
+
+##### 26.15.1、缓存管理的算法
+
+###### 3、
+
+###### 4、等待可用的缓存
+
+##### 26.15.2、发送缓存的管理
+
+###### 1、分配SKB
+
+###### 2、确认发送缓存是否可用
+
+##### 26.15.3、接收缓存的管理
+
+###### 1、确认接收缓存是否可用
+
+###### 2、释放SKB
+
+### chap27、TCP的定时器  196（205/529）
 
 + *我的问题是，怎么理解 接口层*（我大概想了一下，可能是那种5层结构的那种接口层，用于承上启下的）
 
