@@ -1,0 +1,11 @@
+
+
++ 内核中的**桥接**（多个网络连在一起）
+    + 网络层、链路层、物理层  *都是可以的*
+
+
+参考
++ openstack网络学习笔记，learning openstack networking(neutron)
+
+Linux 网络协议栈开发基础篇—— 网桥br0  https://www.cnblogs.com/gjmhome/p/13846398.html
+
