@@ -555,19 +555,102 @@
 
 ### chap28、TCP连接的建立   217（226/529）
 
++ 自己搜的
+  + 主动，被动、同时
+    + **主动**打开，client向server发送SYN
+    + 被动打开，server等待client的答复
+    + 同时打开，client和server同时发送SYN
+  + TCP连接建立过程中有哪些系统调用
+    + socket
+    + bind
+    + listen
+    + accept
+    + connect
+  + **不管主动，被动，三次握手，都是client发SYN，server回SYN+ACK**
+  + TCP接收队列、全连接、半连接
+    + 接收队列，kernel中接收到但未被应用程序处理的TCP数据包的缓存区
+    + **全连接**，已3次握手，双向传输
+    + **半连接**，一方只完成了三次握手的前2步，**单向传输**，或者是网络中断，或者是对方拒绝连接
+
++ TCP连接建立的过程（侦听套接口的IP地址和端口的绑定，套接口的侦听和accept，客户端接口的IP地址和端口的绑定，以及被动打开、主动打开和同时打开的实现过程）
++ 涉及的文件
+  + include/linux/tcp.h
+  + include/net/request_sock.h
+  + include/net/inet_sock.h
+  + include/net/inet_connection_sock.h
+  + net/ipv4/inet_connection_sock.c，基于连接的传输控制块实现
+  + net/ipv4/af_inet.c，网络层和传输层接口
+
 #### 28.1、服务端建立连接过程
 
-8.1.1、dev_queue_xmit()
++ TCP连接的过程
+  + client发送一个SYN段，标识希望连接的服务器端口以及初始序号
+  + server回复一个包含服务器初始序号以及对clientSYN段确认的SYN+ACK段作为应答
+  + client发送确认序号为服务器初始序号加1的ACK段，对服务器SYN段进行确认
 
-8.1.2、dev_hard_start_xmit()
+#### 28.2、网络输出软中断
 
-##### 8.1.3、e100的输出接口：e100_xmit_frame()
+##### 28.2.1、request_sock_queue结构
 
-8.2、网络输出软中断
++ **存放三次握手的信息**
 
-8.2.1、netif_schedule()
+##### 28.2.2、listen_sock结构
 
-8.2.2、net_tx_action()
++ 存储**连接请求块**，在**listen调用之后才会创建**，request_sock_queue结构中`listen_opt`成员
+
+##### 28.2.3、tcp_request_sock结构
+
++ **保存双方的初始序号、双方的端口及IP地址、TCP选项，如是否支持窗口扩大因子、是否支持SACK等，并控制连接的建立**
+
+###### 1、inet_request_sock结构
+
+###### 2、request_sock结构
+
+##### 28.2.4、request_sock_ops结构
+
++ TCP中指向的实例是`tcp_request_sock_ops`
+
+#### 28.3、bind系统调用的实现
+
+##### 28.3.1、bind端口散列表
+
+##### 28.3.2、传输接口层的实现
+
++ `inet_csk_get_port()`
+
+#### 28.4、listen系统调用的实现
+
+##### 28.4.1、inet_listen()
+
+##### 28.4.2、实现侦听：inet_csk_listen_start()
+
+#### 28.5、accept系统调用的实现
+
+##### 28.5.1、套接口层的实现：inet_accept()
+
+##### 28.5.2、传输接口层的实现：inet_csk_accept()
+
+#### 28.6、被动打开
+
+##### 28.6.1、第一次握手：发送SYN段
+
+##### 28.6.2、第二次握手：接收SYN+ACK段
+
+##### 28.6.3、第三次握手：发送ACK段
+
+#### 28.7、connect系统调用的实现
+
+##### 28.7.1、套接口层的实现：inet_stream_connect
+
+##### 28.7.2、传输套接口层的实现
+
+#### 28.8、主动打开
+
+##### 28.8.1、第一次握手：发送SYN段
+
+##### 28.8.2、第二次握手：接收SYN+ACK段
+
+##### 28.8.3、第三次握手：发送ACK段
 
 #### 28.9、同时打开
 
