@@ -4,6 +4,36 @@
 + https://lxr.missinglinkelectronics.com/
 + 下册（20-33章）
 
+### ReadMe
+
+#### 0.1、下册讲的内容
+
+##### 0.1.1、我自己想的
+
++ 从四层的角度来说，下册讲了**网络层（25-32TCP，33UDP）、socket层（22-24）**，还有就是**IP中的路由（20-21，还有上册的19）**
++ 从用户态的角度来说（*这个算自己的扩展*）也就几方面内容
+  + posix api
+  + 阻塞IO（socket都是阻塞的）
+  + 非阻塞IO（*如何做到非阻塞*）
+  + IO多路复习（select、poll、epoll各自表示啥，有啥差异）
++ ref1中的**Socket Layer**讲到的数据结构，**要把这个层次关系搞懂**，*有了这个图后，再去理解（传输控制块）和（套接口层），就相对更直观些*
+  + socket
+  + sock
+  + inet_sock、raw_sock、inet_connection_sock
+  + tcp_sock、udp_sock
++ ref1中的**路由系统**，*这部分，感觉没太对上*
+  + 更多是对chap21、路由策略
++ ref3中的路由**只是讲代码，没有理清逻辑来**
+
+##### ref
+
++ 1、[Linux Kernel TCP/IP Stack|Linux网络硬核系列](https://www.cnblogs.com/windyrainy/p/16663141.html) ，这个流程图画得特别好
++ 2、[挖掘潜力 拥抱挑战 第二届OpenHarmony技术大会OS内核及视窗分论坛召开](https://cn.chinadaily.com.cn/a/202311/06/WS654875afa310d5acd876d713.html)，*不太确定，魏勇军是不是搞网络相关了，看了eBPF*
+  + https://blog.csdn.net/digi2020/article/details/127663340 *eBPF*（extended Berkeley Packet Filter）
+  + [eBPF介绍](https://blog.csdn.net/ss810540895/article/details/129710256)，tcpdump就基于BPF实现的
++ 3、路由相关 [Linux 内核网络协议栈 ----- Linux 内核路由机制（一） (2.6.25)](https://blog.csdn.net/shanshanpt/article/details/19918171)  *这只是讲代码，没有理出逻辑来*
+  + 二，https://blog.csdn.net/shanshanpt/article/details/20699543d
+
 ### chap20、路由缓存  1（10/529）
 
 + 缓存的主要工作是存储使路由子系统能够找到报文目的地的信息，并通过一组函数向更高层提供该信息。
