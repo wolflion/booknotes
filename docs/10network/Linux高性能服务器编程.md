@@ -1,14 +1,38 @@
 ## 《Linux高性能服务器编程》
 
 + Part01、TCP/IP协议详解（1-4）
-+ Part02、深入解析高性能服务器编程（4-15）
++ Part02、深入解析高性能服务器编程（5-15）
   + 网络编程API（5-7）
     + 6高级IO函数（pipe、dup、dup2、readv、writev、sendfile、mmap、munmap、splice、tee、fcntl）
   + 高性能程序的一般框架（8）
+    + 服务器程序解构为**IO单元、逻辑单元、存储单元**
   + 服务器程序的IO单元（9-12）：IO事件、信号、定时、libevent
-    + **Linux服务器程序必须处理的三类事件：IO事件、信号、定时事件**
+    + chap9(IO复用)，chap10(信号)，chap11(定时器)，chap12(libevent)
+    + **Linux服务器程序必须处理的三类事件：IO事件、信号事件、定时事件**
+      + IO事件，*是啥呢*
+      + 信号事件，*就是触发的信号*
+      + 定时事件，*定期检测客户连接的状态*
+    + 优秀的开源IO框架库--libevent
   + 服务器程序的逻辑单元（13-15）：多进程、多线程
 + Part03、高性能服务器优化与监测（16-17）
+
+### 前言
+
+#### 为什么要写这本书
+
++ 国内书的问题**内容宽泛而空洞**
+  + 囊括了最新技术，**但一个最基本的技术细节，也无法解释清楚**
+  + 有些书呢，都是从网络上摘抄，不仅没有自己的观点，**连自己的总结，也没有**
++ 大师们的经典，**只专注于一个问题，对每个技术细节都精雕细琢**
+
+#### 读者对象
+
++ 有一定的Linux系统编程和C++编程基础
+
+#### 本书特色
+
++ 作者写过完整的负载均衡服务器程序springsnail
++ pjhq87@gmail.com
 
 ### chap1、TCP/IP协议族
 
@@ -313,6 +337,18 @@ printf("unknown...\n");
 
 ##### 5.1.4、IP地址转换函数
 
+#### 5.2、创建socket
+
+#### 5.3、命令socket
+
+#### 5.4、监听socket
+
+#### 5.5、接受连接
+
+#### 5.6、发起连接
+
+#### 5.7、关闭连接
+
 #### 5.8、数据读写
 
 ##### 5.8.1、tcp数据读写
@@ -358,9 +394,23 @@ int main(int argc, char *argv[]){
 
 #### 5.11、socket选项
 
+##### 5.11.1、so_reusedaddr选项
+
+##### 5.11.2、so_rcvbuf和so_sndbuf选项
+
+##### 5.11.3、so_rcvlowat和so_sndlowat选项
+
+##### 5.11.4、so_linger选项
+
 #### 5.12、网络信息api
 
+##### 5.12.1、gethostbyname和gethostbyaddr
+
+##### 5.12.2、getservbyname和getservbyport
+
 ##### 5.12.3、getaddrinfo
+
+##### 5.12.4、getnameinfo
 
 ### chap6、高级I/O函数
 
@@ -742,25 +792,39 @@ int epoll_wait(int epfd, struct epoll_event *events, int maxevents,
 
 + **信号**，是由用户、系统或者进程发送给目标进程的信息，以通知目标进程某个状态的改变或系统异常。
 + Linux信号可由如下条件产生：
-  + 对于前台进程，用户可以通过输入特殊的终端字符来给它发送信号
-  + 系统异常
-  + 系统状态变化
+  + 对于前台进程，用户可以通过输入特殊的终端字符来给它发送信号，`Ctrl+C`
+  + 系统异常，非法内存段
+  + 系统状态变化，alarm定时器到期引起SIGALRM信号
   + 运行kill命令或者调用kill函数
++ **服务器程序必须处理（或至少忽略）一些常见的信号**
 
 #### 10.1、Linux信号概述
 
 ##### 10.1.1、发送信号
 
-+ `kill()`
++ `kill(pid_t pid, int sig)`，**信号值都大于0，如果sig为0，则kill函数不发送任何信号**。
 
 ##### 10.1.2、信号处理方式
 
 + `bits/signum.h`，
-+ `signal.h`，`sighandler_t`
++ `typedef void (*_sighandler_t)(int)`
++ `signal.h`，`sighandler_t`，中的`SIG_IGN`表示忽略信号，和`SIG_DFL`信号的默认处理方式
++ 信号的默认处理方式
+  + 结束进程，Term
+  + 忽略信号，Ign
+  + 结束进程并生成核心转储文件，Core
+  + 暂停进程，Stop
+  + 继续进程，Cont
 
 ##### 10.1.3、Linux信号
 
++ bits/signum.h中定义了标准信号
++ **与网络编程关系紧密的几个信号：SIGHUP、SIGPIPE、SIGURG**，后面还有**SIGALRM、SIGCHLD**
+
 ##### 10.1.4、中断系统调用
+
++ **POSIX没有规定这种行为，是Linux独有的**。
++ 处于阻塞状态的系统调用时接收到信号，并且也为该信号设置了信号处理函数，**则默认情况下系统调用被中断**，并且errno被设置为EINTR。
 
 + `sigaction()`为信号标置`SA_RESTART`
 
@@ -768,15 +832,32 @@ int epoll_wait(int epfd, struct epoll_event *events, int maxevents,
 
 ##### 10.2.1、signal系统调用
 
++ `_sighandler_t signal(int sig, _sighandler_t _handler)`，返回一个函数指针
+
 ##### 10.2.2、sigaction系统调用
+
++ `int sigaction(int sig, const struct sigaction* act, struct sigaction* oact);`
+  + sig指出要捕获的信号类型
+  + act是新的信号处理方式
+  + oact是先前的处理方式
++ **struct sigaction结构体**中的**sa_hander成员指定信号处理函数**，sa_mask，sa_flags成员用于设置程序收到信号时的行为
 
 #### 10.3、信号集
 
 ##### 10.3.1、信号集函数
 
++ **一组信号**用`sigset_t`结构表示
+
 + `sigset_t`，长整型数组，数组的每个元素的每个位表示一个信号
++ 具体的操作
+  + sigemptyset()
+  + sigfillset()
+  + sigaddset()
+  + sigdelset()
 
 ##### 10.3.2、进程信号掩码
+
++ *设置掩码，有什么用，lionel*  【有些信号，不能被进程接收】
 
 + 利用`sigaction`结构体的`sa_mask`成员来设置进程的信号掩码
 
@@ -784,28 +865,43 @@ int epoll_wait(int epfd, struct epoll_event *events, int maxevents,
 
 ##### 10.3.3、被挂起的信号
 
++ **设置进程信号掩码后，被屏蔽的信号将不能被进程接收**
+
 + `sigpending()`
 
 #### 10.4、统一事件源
 
-+ **信号是一种异步事件**
++ **信号是一种异步事件**：信号处理函数和程序的主循环是两条不同的执行路线。
 + 解决方案是：
   + **把信号的主要处理逻辑放到程序的主循环中，当信号处理函数被触发时，它只是简单地通知主循环程序接收到信号，并把信号值传递给主循环**
++ IO框架库和后台服务器程序都统一处理信号和IO事件，比如LibeventIO框架库和xinetd超级服务
 + 代码清单10-1，统一事件源
 
 #### 10.5、网络编程相关信号
 
 ##### 10.5.1、SIGHUP
 
-+ 强制服务器重读配置文件
++ **当挂起进程的控制终端时，SIGHUP信号将被触发**，如果没有控制终端，那就**强制服务器重读配置文件**，典型的例子是，xinetd
++ 分析xinetd处理SIGHUP信号的流程，*这个暂时先不看，lionel*
+  + 先通过`ps`看下，xinetd创建的子进程
+  + `strace`跟踪一程序执行时调用的系统调用和接收到的信号
 
 ##### 10.5.2、SIGPIPE
 
-##### 10.5.3、SIGUR
++ **默认情况下，往一个读端关闭的管道或socket连接中写数据将引发SIGPIPE信号**
++ 可以用`send()`反馈的errno的值来判断管道或者socket连接的读端是否关闭
++ 也可以用IO复用系统调用
+
+##### 10.5.3、SIGURG
+
++ Linux环境下，内核通知应用程序带外数据到达主要有两种方法：
+  + 1种是chap9的，IO复用技术，**select在接收到带外数据时返回，并向应用程序报告socket上的异常事件**
+  + 另一种是使用SIGURG信号
++ 代码10-3，用SIGURG检测带外数据是否到达
 
 ### chap11、定时器
 
-+ 网络程序需要处理的第三类事件是**定时事件**
++ **网络程序需要处理的第三类事件是定时事件**
 + Linux提供了三种定时方法
   + 1、socket选项SO_RCVTIMEO和SO_SNDTIMEO
   + 2、SIGALRM信号
@@ -1200,3 +1296,9 @@ int pthread_cond_destroy();
 17.7、ifstat
 
 17.8、mpstat
+
+### 最后
+
+#### 履历
+
++ 2024-05-06，把chap10信号，复习了一下，*剩下，就是代码没读和运行了*
