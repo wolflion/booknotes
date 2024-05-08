@@ -4,6 +4,22 @@
 + https://lxr.missinglinkelectronics.com/
 + 上册（1-19章）
 
+### ReadMe
+
+#### 0.2、各章的内容
+
++ 问题1、include/linux下面的，与include/net下面的区别？
+
+##### 18、ARP（net/ipv4/arp.c）
+
++ 头文件嘛，include/linux/if_arp.h
++ [【计算机网络】详解网络层（二）ARP和RARP](https://blog.csdn.net/wenqian1991/article/details/44133039)
++ [【Linux 内核网络协议栈源码剖析】ARP地址解析协议](https://www.cnblogs.com/ztguang/p/12645483.html)
+
+##### 19、路由表（net/ipv4/fib_开头的.c，route.c）
+
++ 头文件的一些结构体定义，主要在`include/net/ip_fib.h`
+
 ### chap1、预备知识
 
 #### 1.1、应用层配置诊断工具
@@ -1249,6 +1265,72 @@ struct sk_buff_head {
 
 ### chap18、ARP：地址解析协议（490/560）
 
++ 涉及文件
+  + net/ipv4/arp.c
+  + include/linux/if_arp.h
+
+#### 18.1、ARP报文格式
+
+18.2、系统参数
+
+#### 18.3、注册ARP报文类型
+
+#### 18.4、ARP初始化`arp_init()`
+
++ `arp_init()`，[**net/ipv4/arp.c**](https://elixir.bootlin.com/linux/latest/source/net/ipv4/arp.c#L1463)
+
+#### 18.5、ARP的邻居项函数指针表，`struct neigh_ops arp_generic_ops`
+
++ 还是在`arp.c`中
+
+#### 18.6、ARP表，`struct neigh_table arp_tbl`
+
++ `struct neigh_table arp_tbl`
+
+#### 18.7、函数
+
+18.7.1、arp_error_report()
+
+18.7.2、arp_solicit()
+
+18.7.3、
+
+18.7.4、arp_filter()
+
+#### 18.8、IPv4中邻居项的初始化，`arp_constructor`
+
++ [arp_constructor](https://elixir.bootlin.com/linux/latest/source/net/ipv4/arp.c#L130)
+
+#### 18.9、ARP报文的创建，`arp_create()`
+
+#### 18.10、ARP的输出，`arp_send()`
+
+#### 18.11、ARP的输入，`arp_rcv()`
+
+18.11.1、arp_rcv()
+
+18.11.2、arp_process()
+
+#### 18.12、ARP代理
+
++ *没太懂，啥是ARP代理*
+
+##### 18.12.1、apr_process()
+
+18.12.2、arp_fwd_proxy()
+
+18.12.3、parp_redo()
+
+#### 18.13、ARP的ioctl
+
+#### 18.14、外部事件，`arp_netdev_event()`
+
++ `arp_netdev_event()`，[**net/ipv4/arp.c**](https://elixir.bootlin.com/linux/latest/source/net/ipv4/arp.c#L1272)
+
+#### 18.15、路由表项与邻居项的绑定，`arp_bind_neighbour()`
+
++ `arp_bind_neighbour()`，*没找到*
+
 ### chap19、路由表  （513/560）
 
 #### 19.1、什么是路由表
@@ -1291,3 +1373,65 @@ struct sk_buff_head {
 #### 19.2、系统参数
 
 #### 19.3、路由表组成结构
+
++ *本节的结构体定义，主要在`include/net/ip_fib.h`中*
+
++ 2.6.20版本支持两种查找路由表项的算法
+  + FIB_HASH，系统默认算法
+  + FIB_TRIE，**在超大路由表的情况下可以提高查找效率**
++ 路由表是由fib_table结构来描述的，所有的fib_table结构链接在全局散列表fib_table_hash中
+
+##### 19.3.5、fib_info结构
+
+##### 19.3.6、fib_nb结构
+
+#### 19.4、路由表的初始化`fib_hash_init`
+
++ `fib_hash_init()`，*这个竟然没找到*
+
+#### 19.5、netlink接口
+
+##### 19.5.1、netlink路由表项消息结构
+
+##### 19.5.2、inet_rtm_newroute()
+
++ [**net/ipv4/fib_frontend.c**,](https://elixir.bootlin.com/linux/latest/source/net/ipv4/fib_frontend.c#L885)
+
+##### 19.5.3、
+
+#### 19.6、获取指定的路由表`fib_new_table()`
+
++ `fib_new_table()`，[**include/net/ip_fib.h**](https://elixir.bootlin.com/linux/latest/source/include/net/ip_fib.h#L305)，跟这里面的static是对得上的
++ fib_frontend.c中的有点差异，*这个可能是另一种调用场景*
+
+#### 19.7、路由表项的添加`fib_hash_insert()`
+
++ *我感觉是不是hash的方式，V6的版本不用了*
+
+19.8、路由表的删除
+
+#### 19.9、外部事件
+
+##### 19.9.1、网络设备状态变化事件`fib_netdev_event()`
+
++ `fib_netdev_event()`，[**net/ipv4/fib_frontend.c**](https://elixir.bootlin.com/linux/latest/source/net/ipv4/fib_frontend.c#L1463)
+
+##### 19.9.6、fib_magic()
+
+#### 19.10、选路
+
++ *从代码命名的角度来猜测，选路，一般得是route.c了*
+
+##### 19.10.1、输入选路：ip_route_input_slow()
+
++ **路由时，一般用`ip_route_input()`选路，当缓存中没有时**，调用`ip_route_input_slow()`在路由表中查找，找到就**加入缓存中**，[**net/ipv4/route.c**](https://elixir.bootlin.com/linux/latest/source/net/ipv4/route.c#L2224)
+
+##### 19.10.4、fib_lookup()
+
+##### 19.10.5、fn_hash_lookup()
+
++ *这个没找到*
+
+#### 19.11、ICMP重定向消息的发送`ip_rt_send_redirect()`
+
++ `ip_rt_send_redirect()`，[**net/ipv4/route.c**](https://elixir.bootlin.com/linux/latest/source/net/ipv4/route.c#L874)
