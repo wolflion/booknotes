@@ -34,6 +34,10 @@
 + 3、路由相关 [Linux 内核网络协议栈 ----- Linux 内核路由机制（一） (2.6.25)](https://blog.csdn.net/shanshanpt/article/details/19918171)  *这只是讲代码，没有理出逻辑来*
   + 二，https://blog.csdn.net/shanshanpt/article/details/20699543d
 
+#### 0.2、各章的内容
+
+##### 29、拥塞控制，*更多的实现，还是在tcp_input.c和tcp_output.c中，多拥塞，对应的是tcp_cong.c*
+
 ### chap20、路由缓存  1（10/529）
 
 + 缓存的主要工作是存储使路由子系统能够找到报文目的地的信息，并通过一组函数向更高层提供该信息。
@@ -701,12 +705,6 @@
   + net/ipv4/tcp_output.c，TCP的输出
   + net/ipv4/tcp_timer.c，TCP定时器的实现
   + net/ipv4/tcp_cong.c，支持TCP多拥塞算法以及NewReno算法
-
-
-
-9.1.1、dev_queue_xmit()
-
-9.1.2、qdisc_restart()
 
 #### 29.2、拥塞控制状态机
 
