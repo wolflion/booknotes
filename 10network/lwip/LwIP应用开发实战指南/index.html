@@ -215,7 +215,77 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                
+                <h3 id="chap13tcp">chap13、TCP协议<a class="headerlink" href="#chap13tcp" title="Permanent link">&para;</a></h3>
+<h4 id="131tcp">13.1、TCP服务简介<a class="headerlink" href="#131tcp" title="Permanent link">&para;</a></h4>
+<ul>
+<li>TCP是2个主机建立连接的关系，应用数据<strong>以数据流的形式</strong>进行传输</li>
+<li><strong>UDP运载的是报文</strong>，各个报文在网络中互不相干传输，UDP每收到一个报文就递交给上层应用，<em>这个时候，是在应用层组装？</em></li>
+</ul>
+<h4 id="132tcp">13.2、TCP的特性<a class="headerlink" href="#132tcp" title="Permanent link">&para;</a></h4>
+<h5 id="1321">13.2.1、连接机制<a class="headerlink" href="#1321" title="Permanent link">&para;</a></h5>
+<h5 id="1322">13.2.2、确认与重传<a class="headerlink" href="#1322" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>一个完整的TCP传输必须有数据的交互</strong>，收到数据后必须要正面的确认，发送方必须等接收方的确认，<strong>同时启动一个定时器</strong>，如果超过指定时间，就认为发送失败，然后进行重发操作，这就是<strong>报文重传</strong></li>
+</ul>
+<h5 id="1323">13.2.3、缓冲机制<a class="headerlink" href="#1323" title="Permanent link">&para;</a></h5>
+<ul>
+<li>很多小数据，等一起了再发</li>
+<li>发出去的数据不一定能被接收方正确接收，需要等对方收到了再删除，所以也需要缓冲区</li>
+</ul>
+<h5 id="1324">13.2.4、全双工通信<a class="headerlink" href="#1324" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>TCP连接建立后，那么两个主机就是对等的</strong></li>
+<li>TCP协议的确认是<strong>通过捎带的方式</strong>来实现的</li>
+<li>任何一方都可以断开连接，但另一个方向上数据仍是连通的状态，这时是<strong>半双工</strong></li>
+</ul>
+<h5 id="1325">13.2.5、流量控制<a class="headerlink" href="#1325" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>TCP通过让发送方维护一个称为接收窗口（receive window）的变量</strong>来提供流量控制</li>
+<li>接收方为0时，发送方发送只有1个字节的报文段</li>
+<li><strong>接收方会告诉发送方，我只能处理这么多</strong></li>
+</ul>
+<h5 id="1326">13.2.6、差错控制<a class="headerlink" href="#1326" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>检验和</strong>来检验数据的有效性</li>
+</ul>
+<h5 id="1327">13.2.7、拥塞控制<a class="headerlink" href="#1327" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>拥塞</strong>，当数据从一个大的管道向一个较小的管道发送时便会发生拥塞。</li>
+<li>在<strong>网络中拥塞的情况下调整自身的发送速度</strong>，这种形式对发送方的控制被称为<strong>拥塞控制（congestion control）</strong></li>
+</ul>
+<h4 id="133">13.3、端口号的概念<a class="headerlink" href="#133" title="Permanent link">&para;</a></h4>
+<h4 id="134tcp">13.4、TCP报文段结构<a class="headerlink" href="#134tcp" title="Permanent link">&para;</a></h4>
+<h5 id="1342tcptcp_hdr">13.4.2、TCP报文段格式<code>tcp_hdr</code><a class="headerlink" href="#1342tcptcp_hdr" title="Permanent link">&para;</a></h5>
+<p>13.5、TCP连接</p>
+<h5 id="1351">13.5.1、三次握手<a class="headerlink" href="#1351" title="Permanent link">&para;</a></h5>
+<h5 id="1352">13.5.2、四次挥手<a class="headerlink" href="#1352" title="Permanent link">&para;</a></h5>
+<h4 id="136tcp">13.6、TCP状态<a class="headerlink" href="#136tcp" title="Permanent link">&para;</a></h4>
+<h5 id="1361lwiptcptcp_state_str">13.6.1、LwIP中定义的TCP状态<code>tcp_state_str[]</code><a class="headerlink" href="#1361lwiptcptcp_state_str" title="Permanent link">&para;</a></h5>
+<h5 id="1362tcp">13.6.2、TCP状态转移<a class="headerlink" href="#1362tcp" title="Permanent link">&para;</a></h5>
+<h6 id="13621">13.6.2.1、三次握手过程<a class="headerlink" href="#13621" title="Permanent link">&para;</a></h6>
+<h6 id="13622">13.6.2.2、四次挥手过程<a class="headerlink" href="#13622" title="Permanent link">&para;</a></h6>
+<h4 id="137tcptcp_pcb">13.7、TCP中的数据结构<code>tcp_pcb</code><a class="headerlink" href="#137tcptcp_pcb" title="Permanent link">&para;</a></h4>
+<h4 id="138">13.8、窗口的概念<a class="headerlink" href="#138" title="Permanent link">&para;</a></h4>
+<h5 id="1381">13.8.1、接收窗口<a class="headerlink" href="#1381" title="Permanent link">&para;</a></h5>
+<ul>
+<li>rcv_nxt，下次期望接收到的数据编号</li>
+<li>rcv_wnd，接收窗口的大小</li>
+<li>rcv_ann_wnd，告诉发送方窗口的大小</li>
+<li>rcv_ann_right_edge，记录了窗口的右边界</li>
+<li><strong>这4个成员变量都会在数据传输的过程中动态改变的</strong></li>
+</ul>
+<h5 id="1382">13.8.2、发送窗口<a class="headerlink" href="#1382" title="Permanent link">&para;</a></h5>
+<ul>
+<li>lastack，已经确认的最大序号</li>
+<li>snd_nxt，下次要发送的序号</li>
+<li>snd_lbb，下一个将被应用线程缓冲的序号</li>
+<li>snd_wnd，发送窗口的大小，由接收方提供</li>
+<li><strong>动态变化</strong></li>
+</ul>
+<h4 id="139tcp">13.9、TCP报文段处理<a class="headerlink" href="#139tcp" title="Permanent link">&para;</a></h4>
+<h5 id="1391tcp_seg">13.9.1、报文段缓冲队列<code>tcp_seg</code><a class="headerlink" href="#1391tcp_seg" title="Permanent link">&para;</a></h5>
+<h5 id="1392tcptcp_output">13.9.2、TCP报文段发送<code>tcp_output</code><a class="headerlink" href="#1392tcptcp_output" title="Permanent link">&para;</a></h5>
+<h5 id="1393tcptcp_input">13.9.3、TCP报文段接收<code>tcp_input</code><a class="headerlink" href="#1393tcptcp_input" title="Permanent link">&para;</a></h5>
               
             </div>
           </div><footer>

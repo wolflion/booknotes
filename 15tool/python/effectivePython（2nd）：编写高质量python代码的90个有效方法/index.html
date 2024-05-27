@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>effectivePython（2nd）：编写高质量python代码的90个有效方法 - lionel的技术笔记</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "effectivePython\uff082nd\uff09\uff1a\u7f16\u5199\u9ad8\u8d28\u91cfpython\u4ee3\u7801\u768490\u4e2a\u6709\u6548\u65b9\u6cd5";
+        var mkdocs_page_input_path = "15tool\\python\\effectivePython\uff082nd\uff09\uff1a\u7f16\u5199\u9ad8\u8d28\u91cfpython\u4ee3\u7801\u768490\u4e2a\u6709\u6548\u65b9\u6cd5.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> lionel的技术笔记
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">简介</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../01daily/">daily</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../02ds/">ds</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../03cpp/">cpp</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../21tool/">tool</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">C++</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../20C%2B%2B/effectiveC%2B%2B/">《Effective C++》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../20C%2B%2B/%E6%B7%B1%E5%BA%A6%E6%8E%A2%E7%B4%A2C%2B%2B%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B/">《深度探索C++对象模型》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../21STL/EffectiveSTL/">《Effective STL》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../21STL/C%2B%2B%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/">《C++泛型STL原理和应用》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../21STL/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/">《STL源码剖析》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../22C%2B%2Bmodern/%E6%B7%B1%E5%85%A5%E5%BA%94%E7%94%A8C%2B%2B11/">《深入应用C++11》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">基础知识</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../408/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA/">《操作系统导论》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../408/%E5%A4%A7%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">《大话设计模式》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../408/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90_C%2B%2B4th/">《数据结构与算法分析_C++4th》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../408/%E7%AE%97%E6%B3%95%284th%29/">《算法4th》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../408/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90-%E5%BC%A0%E5%86%9B/">《算法设计与分析-张军》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../408/%E5%A4%A9%E8%A1%8C-%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《天行-算法设计与实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../408/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%95%99%E7%A8%8B-%E6%9D%8E%E6%98%A5%E8%91%86/">《数据结构教程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../408/%E6%96%B0%E7%BC%96%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%A0%E9%A2%98%E4%B8%8E%E8%A7%A3%E6%9E%90/">《新编数据结构习题与解析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网络编程</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../10network/TCPIP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">《TCP/IP网络编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../10network/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/">《Linux高性能服务器编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../10network/TCPIP%E8%AF%A6%E8%A7%A3%E5%8D%B71/">《TCPIP详解卷1》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../10network/Linux%E5%86%85%E6%A0%B8%E7%BD%91%E7%BB%9C%E6%A0%88%E6%BA%90%E4%BB%A3%E7%A0%81%E6%83%85%E6%99%AF%E5%88%86%E6%9E%90/">《Linux内核网络栈源代码情景分析》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../10network/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C/">《深入理解Linux网络》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">机器&深度学习</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../30machineLearning/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%9F%BA%E7%A1%80/">《机器学习线性代数基础》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../31deepLearning/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%85%A5%E9%97%A8%EF%BC%9A%E5%9F%BA%E4%BA%8EPython%E7%9A%84%E7%90%86%E8%AE%BA%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《深度学习入门：基于Python的理论与实现》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">文件系统</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../11filesystem/Linux%E5%86%85%E6%A0%B8%E6%8E%A2%E7%A7%98/">《Linux内核探秘》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../11filesystem/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《文件系统技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../11filesystem/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">《存储技术原理分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">存储</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../12storage/ceph%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《ceph设计原理与实现》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">视频</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../14video/FFmpeg%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/">《FFmpeg入门到精通》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../14video/WebRTC%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/">《WebRTC权威指南》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../14video/WebRTC%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AE%9E%E6%97%B6%E4%BA%92%E5%8A%A8%E6%8A%80%E6%9C%AF/">《WebRTC音视频实时互动技术》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../14video/%E6%96%B0%E4%B8%80%E4%BB%A3%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9%E7%A0%81%E6%A0%87%E5%87%86-H.264_AVC/">《新一代视频压缩码标准-H.264_AVC》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">内核</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../13kernel/Linux%E5%86%85%E6%A0%B8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《Linux内核设计与实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../13kernel/%E6%B7%B1%E5%85%A5Linux%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%E5%86%85%E6%A0%B8%E6%9C%BA%E5%88%B6/">《深入Linux设备驱动程序内核机制》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">《深入理解Linux虚拟内存管理》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../13kernel/深入理解Linux网络技术内幕.md">《深入理解Linux网络技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../13kernel/Linux内核源代码剖析-tcpip实现.md">《Linux内核源代码剖析-TCP/IP实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E5%86%85%E6%A0%B8/">《深入理解Linux内核》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">工具</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Wireshark%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98/">《Wireshark网络分析实战》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Linux%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8Eshell%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B%E5%A4%A7%E5%85%A8%283rd%29/">《Linux命令行与shell脚本编程大全(3rd)》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../python%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%883rd%EF%BC%89/">《python程序设计（3rd）》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Python%E7%BC%96%E7%A8%8B%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E8%B7%B5/">《Python编程从入门到实践》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">刷题</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../91leetcode/%E5%89%91%E6%8C%87offer2nd/">《剑指offer2nd》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../91leetcode/%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/">《剑指offer专项突破》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../96output/OD基础题.md">OD基础题</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../96output/OD进阶题.md">OD进阶题</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网课</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../90lecture/01Linux%E9%AB%98%E5%B9%B6%E5%8F%91%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/">《Linux高并发网络编程开发》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../90lecture/%E4%BE%AF%E6%8D%B7/%E4%BE%AF%E6%8D%B7C%2B%2B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%8660%E8%AE%B2/">《侯捷C++内存管理60讲》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../90lecture/11NJU%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">《NJU算法设计与分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">英语专</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../60English/00794%E7%BB%BC%E5%90%88%E8%8B%B1%E8%AF%AD%E4%B8%80%E4%B8%8A/">《综合英语(一)上》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../95selfStudy/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/">《概率率与数理统计》</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">lionel的技术笔记</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>effectivePython（2nd）：编写高质量python代码的90个有效方法</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="effective-python">《Effective Python》<a class="headerlink" href="#effective-python" title="Permanent link">&para;</a></h2>
+<h3 id="chap1pythoninc1-10">chap1、用Pythoninc方式来思考（1-10）<a class="headerlink" href="#chap1pythoninc1-10" title="Permanent link">&para;</a></h3>
+<h4 id="1python">1、查询自己使用的Python版本<a class="headerlink" href="#1python" title="Permanent link">&para;</a></h4>
+<pre class="highlight"><code class="language-python">import sys
+sys.version</code></pre>
+<h4 id="2pep8">2、遵循PEP8风格指南<a class="headerlink" href="#2pep8" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Python Enhancement Proposal #8</li>
+</ul>
+<h4 id="4f-stringcstrformat">4、用支持插值的f-string取代C网格的格式字符串与str.format方法<a class="headerlink" href="#4f-stringcstrformat" title="Permanent link">&para;</a></h4>
+<h4 id="5">5、用辅助函数取代复杂的表达式<a class="headerlink" href="#5" title="Permanent link">&para;</a></h4>
+<ul>
+<li>要点<ul>
+<li>Python的语法很容易氢复杂的意思挤到同一行表达式里，这样写很能懂</li>
+</ul>
+</li>
+</ul>
+<h4 id="6">6、把数据结构直接拆分到多个变量里，不要专门通过下标访问<a class="headerlink" href="#6" title="Permanent link">&para;</a></h4>
+<h4 id="7enumeraterange">7、尽量用enumerate取代range<a class="headerlink" href="#7enumeraterange" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>range适合用来迭代一系列整数</strong></li>
+<li>enumerate能够<strong>把任何一种迭代器（iterator）封装成惰性生成器（lazy generator)</strong></li>
+</ul>
+<pre class="highlight"><code class="language-python">it = enumerate(flavor_list)
+print(next(it))
+print(next(it))  #必须要通过next()，才能找到下一个
+
+for i, flavor in enumerate(flavor_list):
+    print(f'(i+1):{flavor})</code></pre>
+<h4 id="8zip">8、用zip函数同时遍历两个迭代器<a class="headerlink" href="#8zip" title="Permanent link">&para;</a></h4>
+<pre class="highlight"><code class="language-python">names =['Cecilia','Lise','Marie']
+counts = [len(n) for n in names]  #这个输出就是每个names的长度吧，7,4,5
+longest_name = None
+max_count = 0
+for name count in zip(names, counts):
+    if count &gt; max_count:
+        longest_name = name
+        max_count = count</code></pre>
+<ul>
+<li>要点<ul>
+<li>zip会创建惰性生成器，让它每次只生成一个元组，所以无论输入的数据有多长，它都是一个个处理的</li>
+</ul>
+</li>
+</ul>
+<h4 id="9forwhileelse">9、不要在for与while循环后面写else块<a class="headerlink" href="#9forwhileelse" title="Permanent link">&para;</a></h4>
+<ul>
+<li>要点<ul>
+<li>只有在整个循环没有因为break提前跳出的情况下，else块才会执行</li>
+</ul>
+</li>
+</ul>
+<h4 id="10">10、用赋值表达式减少重复代码<a class="headerlink" href="#10" title="Permanent link">&para;</a></h4>
+<ul>
+<li>要点<ul>
+<li>赋值表达式通过<strong>海象操作符</strong>（<code>:=</code>）给变量赋值，并且让这个值成为这条表达式的结果，于是，我们可以利用这项特性来缩减代码。</li>
+<li>如果赋值表达式是大表达式里的一部分，就得用一对括号把它括起来</li>
+</ul>
+</li>
+</ul>
+<h3 id="chap211-18">chap2、列表与字典（11-18）<a class="headerlink" href="#chap211-18" title="Permanent link">&para;</a></h3>
+<ul>
+<li>列表list，把每项任务都当成列表中的一个元素，<em>相当于数组？</em></li>
+<li>与列表list互补的是<strong>字典dict</strong>（key-value），<strong>访问和赋值所花时间，是个常量</strong></li>
+</ul>
+<h4 id="11">11、学会对序列做切片<a class="headerlink" href="#11" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>[3:5]</code>，不含end，只有3，4两个元素</li>
+<li><em>越界怎么办？</em></li>
+<li><em>切片数在左侧，右侧，有啥区别？</em></li>
+</ul>
+<h4 id="12">12、不要在切片里同时指定起止下标与步进<a class="headerlink" href="#12" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>somelist[start:end:stride]</code>，stride翻译是条带，其实是步进</li>
+</ul>
+<h4 id="13unpacking">13、通过带星号的unpacking操作来捕获多个元素，不要用切片<a class="headerlink" href="#13unpacking" title="Permanent link">&para;</a></h4>
+<pre class="highlight"><code class="language-python">#不知道在哪抄的
+#带*号形成列表（可变长度参数、解包操作符、扩展操作符）
+#带*号表达式
+def my_func(a,bc):
+    print(a,b,c)
+my_list = [1,2,3]
+my_func(*my_list)</code></pre>
+<h4 id="14sortkey">14、用sort方法的key参数来表示复杂的排序逻辑<a class="headerlink" href="#14sortkey" title="Permanent link">&para;</a></h4>
+<pre class="highlight"><code class="language-python">#自己的例子
+topos = []
+keyfunc = functools.cmp_to_key(lambda x,y: operator.eq(x,y))
+topos.sort(key=keyfunc)</code></pre>
+<p>15、不要过分依赖给字典添加条目时所用的顺序</p>
+<ul>
+<li>会与创建时不一样</li>
+</ul>
+<h4 id="16getinkeyerror">16、用get处理键不在字典中的情况，不要使用in与KeyError<a class="headerlink" href="#16getinkeyerror" title="Permanent link">&para;</a></h4>
+<ul>
+<li>字典的三种基本交互操作：<strong>访问、赋值以及删除键值对</strong></li>
+</ul>
+<p>17、用defaultdic处理内部状态中缺失的元素，而不要用setdefault</p>
+<p>18、学会利用<code>__mising__</code>构造依赖键的默认值</p>
+<h3 id="chap319-26">chap3、函数（19-26）<a class="headerlink" href="#chap319-26" title="Permanent link">&para;</a></h3>
+<h4 id="19">19、不要把函数返回的多个数值拆分到三个以上的变量中<a class="headerlink" href="#19" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>unpacking机制</strong></li>
+<li>在返回多个值的时候，可以用带星号的表达式接收那些没有被普通变量捕获到的值。</li>
+</ul>
+<h4 id="20none">20、遇到意外状况时应该抛出异常，不要返回None<a class="headerlink" href="#20none" title="Permanent link">&para;</a></h4>
+<h4 id="21">21、了解如何在闭包里面使用外围作用域中的变量<a class="headerlink" href="#21" title="Permanent link">&para;</a></h4>
+<ul>
+<li>把辅助函数通过key参数传给列表的sort方法<ul>
+<li>1、Python支持闭包（closure），<em>什么是闭包</em></li>
+<li>2、函数在Python里是头等对象（first-class object）</li>
+<li>3、Python在判断两个序列（包括元组）的大小时，有自己的一套规则</li>
+</ul>
+</li>
+</ul>
+<pre class="highlight"><code class="language-python">def sort_priority(values, group):
+    def helper(x):
+        if x in group:
+            return (0,x)
+        return (1,x)
+    values.sort(key=helper)</code></pre>
+<h4 id="22">22、用数量可变的位置参数给函数设计清晰的参数列表<a class="headerlink" href="#22" title="Permanent link">&para;</a></h4>
+<ul>
+<li>要点<ul>
+<li>用def定义函数时，可以通过<code>*args</code>的写法让函数接受数量可变的位置参数</li>
+</ul>
+</li>
+</ul>
+<h4 id="23">23、用关键字参数来表示可选的行为<a class="headerlink" href="#23" title="Permanent link">&para;</a></h4>
+<pre class="highlight"><code class="language-python">def remainder(number, divisor):
+    return number % divisor
+assert remainder(20,7) == 6
+
+#调用函数时，在调用括号内可以把关键字的名称写在=左边，把参数值写在右边
+
+#如果混用
+remainder(number=20,7) #error，位置参数必须出现在关键字参数之前
+remainder(20,number=7) #error，每个参数只能指定一次，不能既通过位置形式指定，又通过关键字形式指定</code></pre>
+<ul>
+<li>关键字参数的灵活用法带来3个好处：<ul>
+<li>1、用关键字参数调用函数可以让初次阅读代码的人更容易看懂</li>
+<li>2、它可以带有默认值，该值是在定义函数时指定的</li>
+<li>3、可以很灵活地扩充函数的参数，而不用担心会影响原有的函数调用代码</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>要点<ul>
+<li>函数的参数可以按位置指定，也可以用关键字的形式指定</li>
+</ul>
+</li>
+</ul>
+<h4 id="24nonedocstring">24、用None和docstring来描述默认值会变的参数<a class="headerlink" href="#24nonedocstring" title="Permanent link">&para;</a></h4>
+<ul>
+<li>要点<ul>
+<li>如果关键字参数的默认值属于这种会发生变化的值，那就应该写成None，并且要在docstring里面描述函数此时的默认行为</li>
+<li>默认值为None的关键字参数，也可以添加类型注解</li>
+</ul>
+</li>
+</ul>
+<h4 id="25">25、用只能以关键字指定和只能按位置传入的参数来设计清晰的参数列表<a class="headerlink" href="#25" title="Permanent link">&para;</a></h4>
+<ul>
+<li>要点<ul>
+<li>Keyword-only argument是一种只能通过关键字指定而不能通过位置指定的函数。</li>
+<li>Positional-only argument是这样一种参数，它不允许调用者通过关键字来指定，而是要求必须按位置传递。</li>
+<li>在参数列表中，位于<code>/</code>和<code>*</code>之间的参数，可以按位置指定，也可以用关键字来指定。</li>
+</ul>
+</li>
+</ul>
+<h4 id="26functoolswraps">26、用functools.wraps定义函数修饰器<a class="headerlink" href="#26functoolswraps" title="Permanent link">&para;</a></h4>
+<ul>
+<li><em>什么叫装饰器？</em></li>
+</ul>
+<h3 id="chap322-28">chap3、类与继承（22-28）<a class="headerlink" href="#chap322-28" title="Permanent link">&para;</a></h3>
+<h3 id="chap642-48">chap6、内置模块（42-48）<a class="headerlink" href="#chap642-48" title="Permanent link">&para;</a></h3>
+<h3 id="chap975-81">chap9、测试与调试（75-81）<a class="headerlink" href="#chap975-81" title="Permanent link">&para;</a></h3>
+<h4 id="75repr">75、通过repr字符串输出调试信息<a class="headerlink" href="#75repr" title="Permanent link">&para;</a></h4>
+<ul>
+<li>print函数、logging模块输出日志</li>
+<li><strong>repr()</strong>，是显示出其可打印形式，再用<code>eval()</code>给转换回去</li>
+</ul>
+<pre class="highlight"><code class="language-python">a = '\x07'
+print(repr(a))</code></pre>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '../../..';</script>
+    <script src="../../../js/theme_extra.js" defer></script>
+    <script src="../../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

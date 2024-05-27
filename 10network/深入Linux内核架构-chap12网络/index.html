@@ -341,6 +341,48 @@
 <li>在<code>__udp4_lib_rcv()</code>中调用<code>__udp4_lib_lookup()</code>，<strong>查找目标套接字</strong></li>
 </ul>
 <h5 id="1292tcp">12.9.2、TCP<a class="headerlink" href="#1292tcp" title="Permanent link">&para;</a></h5>
+<ul>
+<li>讨论TCP协议的3个主要部分<ul>
+<li>连接建立</li>
+<li>连接终止</li>
+<li>数据流的按序传输</li>
+</ul>
+</li>
+<li><strong>TCP连接总处于某个明确定义的状态</strong></li>
+</ul>
+<ul>
+<li><strong>TCP状态转换图</strong>，<em>怎么去记住这个图，lionel</em></li>
+</ul>
+<h6 id="1tcp">1、TCP首部<a class="headerlink" href="#1tcp" title="Permanent link">&para;</a></h6>
+<h6 id="2tcp">2、接收TCP数据<a class="headerlink" href="#2tcp" title="Permanent link">&para;</a></h6>
+<ul>
+<li><strong>TCP数据是如何传递到传输层的</strong>，tcp_v4_rcv是TCP层的入口</li>
+<li>系统中的每个TCP套接字都归入3个散列表之一，分别接受下列状态的套接字<ul>
+<li>完全连接的套接字</li>
+<li>等待连接（监听状态）的套接字</li>
+<li>处于建立连接过程中（使用下文讨论的三次握手）的套接字</li>
+</ul>
+</li>
+</ul>
+<h6 id="3">3、三次握手<a class="headerlink" href="#3" title="Permanent link">&para;</a></h6>
+<h6 id="4tcp_v4_rcv">4、被动连接建立（tcp_v4_rcv）<a class="headerlink" href="#4tcp_v4_rcv" title="Permanent link">&para;</a></h6>
+<ul>
+<li><strong>在接收到一个连接请求的SYN分组后触发的</strong></li>
+</ul>
+<h6 id="5tcp_v4_connect">5、主动连接建立（tcp_v4_connect）<a class="headerlink" href="#5tcp_v4_connect" title="Permanent link">&para;</a></h6>
+<ul>
+<li>主动连接建立发起时，通过用户空间调用open，发出socksetcall系统调用到内核函数tcp_v4_connect</li>
+</ul>
+<h6 id="6">6、分组传输<a class="headerlink" href="#6" title="Permanent link">&para;</a></h6>
+<h6 id="7tcp_v4_rcv">7、接收分组（tcp_v4_rcv）<a class="headerlink" href="#7tcp_v4_rcv" title="Permanent link">&para;</a></h6>
+<ul>
+<li>tcp_v4_rcv()</li>
+</ul>
+<h6 id="8">8、发送分组<a class="headerlink" href="#8" title="Permanent link">&para;</a></h6>
+<ul>
+<li>tcp_sendmsg()</li>
+</ul>
+<h6 id="9">9、连接终止<a class="headerlink" href="#9" title="Permanent link">&para;</a></h6>
 <h4 id="1210">12.10、应用层<a class="headerlink" href="#1210" title="Permanent link">&para;</a></h4>
 <ul>
 <li>使用了socketcall系统调用，<em>是这样嘛，我没太用过啊</em></li>

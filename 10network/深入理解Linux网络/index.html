@@ -320,7 +320,43 @@
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#71">7.1、相关实际问题</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#72linux">7.2、Linux内核如何管理内存</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#721node">7.2.1、node划分</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#722zone">7.2.2、zone划分</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#723">7.2.3、基于伙伴系统管理空闲页面</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#724slab">7.2.4、slab分配器</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#725">7.2.5、小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#73tcp">7.3、TCP连接相关内核对象</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#731socket">7.3.1、socket函数直接创建</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#732socket">7.3.2、服务端socket创建</a>
+    </li>
+        </ul>
+    </li>
     <li class="toctree-l3"><a class="reference internal" href="#74tcp">7.4、实测TCP内核对象开销</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#741">7.4.1、实验准备</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#742">7.4.2、实验开始</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#743establish">7.4.3、观察ESTABLISH状态开销</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#744establish">7.4.4、观察非ESTABLISH状态开销</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#745">7.4.5、收发缓存区简单测试</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#746">7.4.6、实验结果小结</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#75">7.5、本章小结</a>
     </li>
@@ -328,21 +364,81 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#chap8tcp">chap8、一台机器最多能支持多少条TCP连接</a>
         <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#81">8.1、相关实际问题</a>
+    </li>
     <li class="toctree-l3"><a class="reference internal" href="#82linux">8.2、理解Linux最大文件描述符</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#823fsfile-max">8.2.3、寻找系统级限制fs.file-max</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#824">8.2.4、小结</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#83tcp">8.3、一台服务端机器最多可以支撑多少条TCP连接</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#8465535">8.4、一台客户端机器最多只能发起65535条连接吗</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#843">8.4.3、端口复用增加连接数</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#844">8.4.4、小结</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#85">8.5、单机百万并发连接的动手实验</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#852ip">8.5.2、方案二、单IP客户端机器发起百万连接</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#853">8.5.3、最后多谈一点</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#86">8.6、本章小结</a>
     </li>
         </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#chap9">chap9、网络性能优化建议</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#91">9.1、网络请求优化</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1io">建议1、尽量减少不必要的网络IO</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#2">建议2、尽量合并网络请求</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#92">9.2、接收过程优化</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#93">9.3、发送过程优化</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#2_1">建议2、减少内存拷贝</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#5ebpfio">建议5、使用eBPF绕开协议栈的本机网络IO</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#94">9.4、内核与进程协作优化</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1recvfrom">建议1、尽量少用recvfrom等进程阻塞的方式</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#2_2">建议2、使用成熟的网络库</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#3kernel-bypass">建议3、使用Kernel-ByPass新技术</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#95">9.5、握手挥手过程优化</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#8time_wait">建议8、TIME_WAIT的优化</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#chap10">chap10、容器网络虚拟化</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#102veth">10.2、veth设备对</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#105">10.5、外部网络通信</a>
     </li>
         </ul>
     </li>
@@ -1136,18 +1232,141 @@
 <h4 id="67">6.7、本章总结<a class="headerlink" href="#67" title="Permanent link">&para;</a></h4>
 <h3 id="chap7tcp">chap7、一条TCP连接消耗多大内存<a class="headerlink" href="#chap7tcp" title="Permanent link">&para;</a></h3>
 <h4 id="71">7.1、相关实际问题<a class="headerlink" href="#71" title="Permanent link">&para;</a></h4>
-<p>7.2、Linux内核如何管理内存</p>
-<p>7.3、TCP连接相关内核对象</p>
+<ul>
+<li>1）内核是如何管理内存的？</li>
+<li>2）如何查看内核使用的内存信息？</li>
+<li>3）服务器上一条ESTABLISH状态的空连接需要消耗多少内存？</li>
+<li>4）我的机器上出现了3万多个TIME_WAIT，内存开销会不会很大？</li>
+</ul>
+<h4 id="72linux">7.2、Linux内核如何管理内存<a class="headerlink" href="#72linux" title="Permanent link">&para;</a></h4>
+<ul>
+<li>内核使用<strong>SLAB/SLUB的内存管理机制</strong>，总共分4步<ul>
+<li>1、相邻的内存条和CPU被划分成node</li>
+<li>2、每个node被划分成多个zone，每个zone下包含很多个页面</li>
+<li>3、每个zone下的空闲页面都通过一个伙伴系统进行管理</li>
+<li>4、slab分配器向伙伴系统申请连续整页内存存储内核对象</li>
+</ul>
+</li>
+</ul>
+<h5 id="721node">7.2.1、node划分<a class="headerlink" href="#721node" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>现代的服务器上，内存和CPU都是所谓的NUMA架构</strong></li>
+</ul>
+<ul>
+<li>通过<code>dmidecode</code>命令查看主板上插着的CPU的详细信息</li>
+</ul>
+<h5 id="722zone">7.2.2、zone划分<a class="headerlink" href="#722zone" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>zoneinfo</code>命令</li>
+</ul>
+<h5 id="723">7.2.3、基于伙伴系统管理空闲页面<a class="headerlink" href="#723" title="Permanent link">&para;</a></h5>
+<ul>
+<li>include/linux/mmzone.h</li>
+<li>用<code>cat /proc/pagetypeinfo</code>查看当前系统中伙伴系统各个尺寸的可用连续内存块数量</li>
+</ul>
+<h5 id="724slab">7.2.4、slab分配器<a class="headerlink" href="#724slab" title="Permanent link">&para;</a></h5>
+<ul>
+<li>目前介绍的内存分配都是<strong>以页面（4KB）为单位的</strong></li>
+<li>include/linux/slab_def.h</li>
+<li><code>cat /proc/slabinfo</code></li>
+<li><code>slabtop</code>命令</li>
+</ul>
+<h5 id="725">7.2.5、小结<a class="headerlink" href="#725" title="Permanent link">&para;</a></h5>
+<ul>
+<li>TCP cache下每个slab占用8个页面，也就是8 乘 4096B = 32768B</li>
+</ul>
+<h4 id="73tcp">7.3、TCP连接相关内核对象<a class="headerlink" href="#73tcp" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>从内存申请的角度看socket的创建</strong></li>
+</ul>
+<h5 id="731socket">7.3.1、socket函数直接创建<a class="headerlink" href="#731socket" title="Permanent link">&para;</a></h5>
+<ul>
+<li>net/socket.c中</li>
+</ul>
+<h6 id="tcpstruct-tcp_sock">TCP对象申请（struct tcp_sock）<a class="headerlink" href="#tcpstruct-tcp_sock" title="Permanent link">&para;</a></h6>
+<ul>
+<li>net/ipv4/af_inet.c</li>
+<li>net/ipv4/tcp_ipv4.c</li>
+</ul>
+<h6 id="filestruct-file">file对象申请（struct file）<a class="headerlink" href="#filestruct-file" title="Permanent link">&para;</a></h6>
+<ul>
+<li>fs/file_table.c</li>
+</ul>
+<h6 id="_9">小结<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h6>
+<ul>
+<li>图7.14，socket内核对象</li>
+</ul>
+<h5 id="732socket">7.3.2、服务端socket创建<a class="headerlink" href="#732socket" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>通过accept函数在接收连接请求时完成相关内核对象的创建</strong></li>
+</ul>
 <h4 id="74tcp">7.4、实测TCP内核对象开销<a class="headerlink" href="#74tcp" title="Permanent link">&para;</a></h4>
+<h5 id="741">7.4.1、实验准备<a class="headerlink" href="#741" title="Permanent link">&para;</a></h5>
+<h5 id="742">7.4.2、实验开始<a class="headerlink" href="#742" title="Permanent link">&para;</a></h5>
+<h5 id="743establish">7.4.3、观察ESTABLISH状态开销<a class="headerlink" href="#743establish" title="Permanent link">&para;</a></h5>
+<h5 id="744establish">7.4.4、观察非ESTABLISH状态开销<a class="headerlink" href="#744establish" title="Permanent link">&para;</a></h5>
+<h6 id="fin_wait2">FIN_WAIT2<a class="headerlink" href="#fin_wait2" title="Permanent link">&para;</a></h6>
+<h6 id="time_wait">TIME_WAIT<a class="headerlink" href="#time_wait" title="Permanent link">&para;</a></h6>
+<h5 id="745">7.4.5、收发缓存区简单测试<a class="headerlink" href="#745" title="Permanent link">&para;</a></h5>
+<h6 id="_10">服务端不接收<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h6>
+<h6 id="_11">服务端接收<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h6>
+<h5 id="746">7.4.6、实验结果小结<a class="headerlink" href="#746" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>我们大概知道了一条ESTABLISH状态的空连接消耗的内存大约是3KB多一点点</strong></li>
+</ul>
 <h4 id="75">7.5、本章小结<a class="headerlink" href="#75" title="Permanent link">&para;</a></h4>
 <h3 id="chap8tcp">chap8、一台机器最多能支持多少条TCP连接<a class="headerlink" href="#chap8tcp" title="Permanent link">&para;</a></h3>
+<h4 id="81">8.1、相关实际问题<a class="headerlink" href="#81" title="Permanent link">&para;</a></h4>
+<ul>
+<li>1）、"Too many open files"报错是怎么回事，该如何解决？</li>
+<li>2）、一台服务端机器最大究竟能支持多少条连接？</li>
+<li>3）、一台客户端机器最大能发起多少条网络连接？</li>
+<li>4）、做一个长连接推送产品，支持1亿用户需要多少台机器？</li>
+</ul>
 <h4 id="82linux">8.2、理解Linux最大文件描述符<a class="headerlink" href="#82linux" title="Permanent link">&para;</a></h4>
+<h5 id="823fsfile-max">8.2.3、寻找系统级限制fs.file-max<a class="headerlink" href="#823fsfile-max" title="Permanent link">&para;</a></h5>
+<h5 id="824">8.2.4、小结<a class="headerlink" href="#824" title="Permanent link">&para;</a></h5>
 <h4 id="83tcp">8.3、一台服务端机器最多可以支撑多少条TCP连接<a class="headerlink" href="#83tcp" title="Permanent link">&para;</a></h4>
 <h4 id="8465535">8.4、一台客户端机器最多只能发起65535条连接吗<a class="headerlink" href="#8465535" title="Permanent link">&para;</a></h4>
+<h5 id="843">8.4.3、端口复用增加连接数<a class="headerlink" href="#843" title="Permanent link">&para;</a></h5>
+<h5 id="844">8.4.4、小结<a class="headerlink" href="#844" title="Permanent link">&para;</a></h5>
 <h4 id="85">8.5、单机百万并发连接的动手实验<a class="headerlink" href="#85" title="Permanent link">&para;</a></h4>
+<h5 id="852ip">8.5.2、方案二、单IP客户端机器发起百万连接<a class="headerlink" href="#852ip" title="Permanent link">&para;</a></h5>
+<h6 id="_12">客户端机器准备<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h6>
+<ul>
+<li>调整可用端口范围</li>
+</ul>
+<h5 id="853">8.5.3、最后多谈一点<a class="headerlink" href="#853" title="Permanent link">&para;</a></h5>
+<h4 id="86">8.6、本章小结<a class="headerlink" href="#86" title="Permanent link">&para;</a></h4>
 <h3 id="chap9">chap9、网络性能优化建议<a class="headerlink" href="#chap9" title="Permanent link">&para;</a></h3>
+<h4 id="91">9.1、网络请求优化<a class="headerlink" href="#91" title="Permanent link">&para;</a></h4>
+<h5 id="1io">建议1、尽量减少不必要的网络IO<a class="headerlink" href="#1io" title="Permanent link">&para;</a></h5>
+<h5 id="2">建议2、尽量合并网络请求<a class="headerlink" href="#2" title="Permanent link">&para;</a></h5>
+<p>建议3、</p>
+<p>建议4、</p>
+<h4 id="92">9.2、接收过程优化<a class="headerlink" href="#92" title="Permanent link">&para;</a></h4>
+<p>建议1、调整网卡RingBuffer大小</p>
+<p>建议2、多队列网卡RSS调优</p>
+<p>建议3、硬中断合并</p>
+<p>建议4、软中断budget调整</p>
+<h4 id="93">9.3、发送过程优化<a class="headerlink" href="#93" title="Permanent link">&para;</a></h4>
+<p>建议1、控制数据包大小</p>
+<h5 id="2_1">建议2、减少内存拷贝<a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h5>
+<h5 id="5ebpfio">建议5、使用eBPF绕开协议栈的本机网络IO<a class="headerlink" href="#5ebpfio" title="Permanent link">&para;</a></h5>
+<h4 id="94">9.4、内核与进程协作优化<a class="headerlink" href="#94" title="Permanent link">&para;</a></h4>
+<h5 id="1recvfrom">建议1、尽量少用recvfrom等进程阻塞的方式<a class="headerlink" href="#1recvfrom" title="Permanent link">&para;</a></h5>
+<h5 id="2_2">建议2、使用成熟的网络库<a class="headerlink" href="#2_2" title="Permanent link">&para;</a></h5>
+<h5 id="3kernel-bypass">建议3、使用Kernel-ByPass新技术<a class="headerlink" href="#3kernel-bypass" title="Permanent link">&para;</a></h5>
+<h4 id="95">9.5、握手挥手过程优化<a class="headerlink" href="#95" title="Permanent link">&para;</a></h4>
+<p>建议1、</p>
+<h5 id="8time_wait">建议8、TIME_WAIT的优化<a class="headerlink" href="#8time_wait" title="Permanent link">&para;</a></h5>
 <h3 id="chap10">chap10、容器网络虚拟化<a class="headerlink" href="#chap10" title="Permanent link">&para;</a></h3>
+<p>10.1、相关实际问题</p>
 <h4 id="102veth">10.2、veth设备对<a class="headerlink" href="#102veth" title="Permanent link">&para;</a></h4>
+<p>10.3、网络命名空间</p>
+<p>10.4、虚拟交换机Bridge</p>
+<h4 id="105">10.5、外部网络通信<a class="headerlink" href="#105" title="Permanent link">&para;</a></h4>
+<p>10.6、本章总结</p>
               
             </div>
           </div><footer>

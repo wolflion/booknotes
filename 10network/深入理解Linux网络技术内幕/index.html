@@ -1437,25 +1437,163 @@
 <h5 id="icmp_redirect_1">处理入口ICMP_REDIRECT消息<a class="headerlink" href="#icmp_redirect_1" title="Permanent link">&para;</a></h5>
 <h4 id="317">31.7、反向路径过滤<a class="headerlink" href="#317" title="Permanent link">&para;</a></h4>
 <h3 id="chap32linux-8338511016">chap32、路由：Linux的实现  833（851/1016）<a class="headerlink" href="#chap32linux-8338511016" title="Permanent link">&para;</a></h3>
+<ul>
+<li>本节内容（先提到<strong>主要数据结构</strong>）再描述<ul>
+<li>如何定义路由scope和IP地址scope</li>
+<li>如何初始化路由子系统</li>
+<li>哪些外部事件需要通知路由子系统，以便更新路由信息</li>
+</ul>
+</li>
+</ul>
 <h4 id="321">32.1、内核选项<a class="headerlink" href="#321" title="Permanent link">&para;</a></h4>
-<p>32.2、主要的数据结构</p>
-<p>32.3、路由scope与地址scope</p>
-<p>32.4、主IP地址与辅助IP地址</p>
-<p>32.5、常用的辅助程序与宏</p>
-<p>32.6、全局锁</p>
-<p>32.7、路由子系统初始化</p>
-<p>32.8、外部事件</p>
+<ul>
+<li>分为2类<ul>
+<li>一类是永远支持，比如通过<code>/proc</code>来配置或开启的选项</li>
+<li>另一类是<strong>重新编译内核时可以添加或删除的选项</strong><ul>
+<li>CONFIG_WAN_ROUTER选项</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="_25">基本选项<a class="headerlink" href="#_25" title="Permanent link">&para;</a></h5>
+<ul>
+<li>IP：多播路由（CONFIG_IP_MROUTE）</li>
+</ul>
+<h5 id="_26">高级选项<a class="headerlink" href="#_26" title="Permanent link">&para;</a></h5>
+<h5 id="_27">最近去掉的选项<a class="headerlink" href="#_27" title="Permanent link">&para;</a></h5>
+<ul>
+<li>2.4系统中内核支持，而在2.6系列中被去掉的<ul>
+<li>IP：快速网络转换（CONFIG_IP_ROUTE_NAT）</li>
+<li>快速交换（CONFIG_NET_FASTROUTE）</li>
+</ul>
+</li>
+</ul>
+<h4 id="322">32.2、主要的数据结构<a class="headerlink" href="#322" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>rt开头（route）路由，fib开头（Forwarding Information Base）转发信息库，fn开头（function）功能</strong></li>
+</ul>
+<h5 id="hash">链表与hash表<a class="headerlink" href="#hash" title="Permanent link">&para;</a></h5>
+<h4 id="323scopescope">32.3、路由scope与地址scope<a class="headerlink" href="#323scopescope" title="Permanent link">&para;</a></h4>
+<h5 id="scope_1">路由scope<a class="headerlink" href="#scope_1" title="Permanent link">&para;</a></h5>
+<ul>
+<li>保存在<strong>fib_alias数据结构内的fa_scope字段</strong></li>
+</ul>
+<h5 id="scope_2">地址scope<a class="headerlink" href="#scope_2" title="Permanent link">&para;</a></h5>
+<ul>
+<li>保存在<strong>in_ifaddr结构内的ifa_scope字段</strong></li>
+</ul>
+<h5 id="scopescope">路由scope与下一跳scope之间的关系<a class="headerlink" href="#scopescope" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>路由下一跳（fib_bh结构）的scope总是由内核来设定</strong></li>
+</ul>
+<h4 id="324ipip">32.4、主IP地址与辅助IP地址<a class="headerlink" href="#324ipip" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>IPv4的辅助地址在其in_ifaddr数据结构内带有IFA_F_SEDONDARY标识</strong>，没有这个标识的，就认为是主IP地址</li>
+</ul>
+<h4 id="325">32.5、常用的辅助程序与宏<a class="headerlink" href="#325" title="Permanent link">&para;</a></h4>
+<h4 id="326">32.6、全局锁<a class="headerlink" href="#326" title="Permanent link">&para;</a></h4>
+<ul>
+<li>fib_hash_lock（读写旋转锁rwlock）<strong>保护所有的路由表</strong></li>
+<li>fib_info_lock</li>
+<li>fib_rules_lock</li>
+<li>rt_flush_lock</li>
+</ul>
+<h4 id="327">32.7、路由子系统初始化<a class="headerlink" href="#327" title="Permanent link">&para;</a></h4>
+<ul>
+<li>net/ipv4/route.c中的<code>ip_rt_init()</code>，<strong>被net/ipv4/ip_output.c中的ip_init调用</strong></li>
+<li>ip_rt_init函数功能<ul>
+<li>初始化数据结构和全局变量</li>
+</ul>
+</li>
+</ul>
+<h4 id="328">32.8、外部事件<a class="headerlink" href="#328" title="Permanent link">&para;</a></h4>
+<ul>
+<li>路由子系统尤其对两类事件感兴趣<ul>
+<li>网络设备状态的变化</li>
+<li>网络设备上IP配置的变化</li>
+</ul>
+</li>
+</ul>
+<h5 id="_28">辅助程序<a class="headerlink" href="#_28" title="Permanent link">&para;</a></h5>
+<h5 id="ip_2">IP配置改变<a class="headerlink" href="#ip_2" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>只要设备的IP配置发生变化，路由子系统就收到一个通知，并运行fib_inetaddr_event来处理该通知</strong></li>
+</ul>
+<h6 id="ipfib_add_ifaddr">添加一个IP地址（fib_add_ifaddr）<a class="headerlink" href="#ipfib_add_ifaddr" title="Permanent link">&para;</a></h6>
+<h6 id="ipfib_del_ifaddr">删除一个IP地址（fib_del_ifaddr）<a class="headerlink" href="#ipfib_del_ifaddr" title="Permanent link">&para;</a></h6>
+<h5 id="_29">设备状态改变<a class="headerlink" href="#_29" title="Permanent link">&para;</a></h5>
+<ul>
+<li>路由子系统向netdev_chain通知链注册三个不同的处理函数来处理设备状态的变化：<ul>
+<li>fib_netdev_event更新路由表</li>
+</ul>
+</li>
+</ul>
+<h6 id="_30">对路由表的影响<a class="headerlink" href="#_30" title="Permanent link">&para;</a></h6>
+<h6 id="_31">对策略数据库的影响<a class="headerlink" href="#_31" title="Permanent link">&para;</a></h6>
+<h6 id="ip_3">对IP配置的影响<a class="headerlink" href="#ip_3" title="Permanent link">&para;</a></h6>
 <h4 id="329">32.9、与其他子系统的交互<a class="headerlink" href="#329" title="Permanent link">&para;</a></h4>
-<h3 id="chap33">chap33、路由：路由缓存<a class="headerlink" href="#chap33" title="Permanent link">&para;</a></h3>
-<p>33.1、路由缓存初始化</p>
-<p>33.2、Hash表的组织</p>
-<p>33.3、主要的缓存操作</p>
-<p>33.4、多路径缓存</p>
-<p>33.5、DST与调用协议间的接口</p>
-<p>33.6、刷新路由缓存</p>
-<p>33.7、垃圾回收</p>
+<h5 id="netlink">Netlink通知<a class="headerlink" href="#netlink" title="Permanent link">&para;</a></h5>
+<h5 id="_32">策略路由与基于防火墙的分类器<a class="headerlink" href="#_32" title="Permanent link">&para;</a></h5>
+<h5 id="_33">路由协议守护进程<a class="headerlink" href="#_33" title="Permanent link">&para;</a></h5>
+<h3 id="chap33-8648821016">chap33、路由：路由缓存  864（882/1016）<a class="headerlink" href="#chap33-8648821016" title="Permanent link">&para;</a></h3>
+<ul>
+<li>路由缓存<strong>减少路由表查找的时间</strong>。路由缓存的核心是<strong>与协议无关的目的缓存（Protocol Independent Destination Cache DST）</strong></li>
+<li><strong>缓存的主要工作</strong>：存储使路由子系统能够找到封包目的地的信息，并将这些信息通过一组函数提供给上层协议。</li>
+</ul>
+<h4 id="331">33.1、路由缓存初始化<a class="headerlink" href="#331" title="Permanent link">&para;</a></h4>
+<ul>
+<li>在ip_rt_init中初始化</li>
+<li><strong>缓存容量取决于主机中可用的物理内存的大小</strong></li>
+</ul>
+<h4 id="332hash">33.2、Hash表的组织<a class="headerlink" href="#332hash" title="Permanent link">&para;</a></h4>
+<ul>
+<li>在IPv4中，hash表bucket的类型是<code>rt_hash_bucket</code>，该结构<strong>只包含一个指向冲突元素链表的指针和一个锁</strong></li>
+<li><strong>缓存中的元素类型为rtable</strong></li>
+</ul>
+<h4 id="333">33.3、主要的缓存操作<a class="headerlink" href="#333" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>缓存中与协议无关的（DST）部分是一组dst_entry数据结构</strong></li>
+</ul>
+<h5 id="_34">缓存锁<a class="headerlink" href="#_34" title="Permanent link">&para;</a></h5>
+<h5 id="_35">缓存表项的内存分配和引用计数<a class="headerlink" href="#_35" title="Permanent link">&para;</a></h5>
+<h5 id="_36">添加元素到缓存中<a class="headerlink" href="#_36" title="Permanent link">&para;</a></h5>
+<h5 id="arp">将路由缓存绑定到ARP缓存<a class="headerlink" href="#arp" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>大多数路由缓存表项要被绑定到该路由下一跳地址对应的ARP缓存表项</strong></li>
+</ul>
+<h5 id="_37">缓存查找<a class="headerlink" href="#_37" title="Permanent link">&para;</a></h5>
+<ul>
+<li>路由子系统提供了<strong>两个不同路由查找函数</strong>，一个用于入口路由，一个用于出口路由<ul>
+<li>ip_route_input</li>
+<li>ip_route_output_key</li>
+</ul>
+</li>
+</ul>
+<h6 id="_38">入口查找<a class="headerlink" href="#_38" title="Permanent link">&para;</a></h6>
+<h6 id="_39">出口查找<a class="headerlink" href="#_39" title="Permanent link">&para;</a></h6>
+<h4 id="334">33.4、多路径缓存<a class="headerlink" href="#334" title="Permanent link">&para;</a></h4>
+<h5 id="_40">注册一个缓存算法<a class="headerlink" href="#_40" title="Permanent link">&para;</a></h5>
+<h5 id="_41">路由缓存与多路径之间的接口<a class="headerlink" href="#_41" title="Permanent link">&para;</a></h5>
+<h5 id="_42">辅助函数<a class="headerlink" href="#_42" title="Permanent link">&para;</a></h5>
+<h5 id="_43">几种路由算法之间的共性<a class="headerlink" href="#_43" title="Permanent link">&para;</a></h5>
+<h5 id="_44">随机算法<a class="headerlink" href="#_44" title="Permanent link">&para;</a></h5>
+<h5 id="_45">加权随机算法<a class="headerlink" href="#_45" title="Permanent link">&para;</a></h5>
+<h5 id="_46">循环算法<a class="headerlink" href="#_46" title="Permanent link">&para;</a></h5>
+<h5 id="_47">设备循环算法<a class="headerlink" href="#_47" title="Permanent link">&para;</a></h5>
+<h4 id="335dst">33.5、DST与调用协议间的接口<a class="headerlink" href="#335dst" title="Permanent link">&para;</a></h4>
+<h5 id="ipsecdst_entry">IPsec变换与dst_entry的使用<a class="headerlink" href="#ipsecdst_entry" title="Permanent link">&para;</a></h5>
+<h5 id="_48">外部事件<a class="headerlink" href="#_48" title="Permanent link">&para;</a></h5>
+<h4 id="336">33.6、刷新路由缓存<a class="headerlink" href="#336" title="Permanent link">&para;</a></h4>
+<h4 id="337">33.7、垃圾回收<a class="headerlink" href="#337" title="Permanent link">&para;</a></h4>
+<h5 id="_49">同步清理<a class="headerlink" href="#_49" title="Permanent link">&para;</a></h5>
+<h5 id="rt_garbage_collect">rt_garbage_collect函数<a class="headerlink" href="#rt_garbage_collect" title="Permanent link">&para;</a></h5>
+<h5 id="_50">异步清理<a class="headerlink" href="#_50" title="Permanent link">&para;</a></h5>
+<h5 id="_51">过期标准<a class="headerlink" href="#_51" title="Permanent link">&para;</a></h5>
+<h5 id="dst">删除DST表项<a class="headerlink" href="#dst" title="Permanent link">&para;</a></h5>
+<h5 id="_52">调整和控制垃圾回收的变量<a class="headerlink" href="#_52" title="Permanent link">&para;</a></h5>
 <h4 id="338icmp-redirect">33.8、出口ICMP REDIRECT限速<a class="headerlink" href="#338icmp-redirect" title="Permanent link">&para;</a></h4>
-<h3 id="chap34">chap34、路由：路由表<a class="headerlink" href="#chap34" title="Permanent link">&para;</a></h3>
+<h3 id="chap34-9019191016">chap34、路由：路由表  901（919/1016）<a class="headerlink" href="#chap34-9019191016" title="Permanent link">&para;</a></h3>
 <h4 id="341hash">34.1、路由Hash表的组织<a class="headerlink" href="#341hash" title="Permanent link">&para;</a></h4>
 <p>34.2、路由表初始化</p>
 <p>34.3、路由的添加与删除</p>

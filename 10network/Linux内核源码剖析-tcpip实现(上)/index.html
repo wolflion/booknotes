@@ -221,6 +221,21 @@
 <li>https://lxr.missinglinkelectronics.com/</li>
 <li>上册（1-19章）</li>
 </ul>
+<h3 id="readme">ReadMe<a class="headerlink" href="#readme" title="Permanent link">&para;</a></h3>
+<h4 id="02">0.2、各章的内容<a class="headerlink" href="#02" title="Permanent link">&para;</a></h4>
+<ul>
+<li>问题1、include/linux下面的，与include/net下面的区别？</li>
+</ul>
+<h5 id="18arpnetipv4arpc">18、ARP（net/ipv4/arp.c）<a class="headerlink" href="#18arpnetipv4arpc" title="Permanent link">&para;</a></h5>
+<ul>
+<li>头文件嘛，include/linux/if_arp.h</li>
+<li><a href="https://blog.csdn.net/wenqian1991/article/details/44133039">【计算机网络】详解网络层（二）ARP和RARP</a></li>
+<li><a href="https://www.cnblogs.com/ztguang/p/12645483.html">【Linux 内核网络协议栈源码剖析】ARP地址解析协议</a></li>
+</ul>
+<h5 id="19netipv4fib_croutec">19、路由表（net/ipv4/fib_开头的.c，route.c）<a class="headerlink" href="#19netipv4fib_croutec" title="Permanent link">&para;</a></h5>
+<ul>
+<li>头文件的一些结构体定义，主要在<code>include/net/ip_fib.h</code></li>
+</ul>
 <h3 id="chap1">chap1、预备知识<a class="headerlink" href="#chap1" title="Permanent link">&para;</a></h3>
 <h4 id="11">1.1、应用层配置诊断工具<a class="headerlink" href="#11" title="Permanent link">&para;</a></h4>
 <h5 id="111iputils">1.1.1、iputils<a class="headerlink" href="#111iputils" title="Permanent link">&para;</a></h5>
@@ -1435,6 +1450,58 @@
 <li>1、neigh_resolve_output()</li>
 </ul>
 <h3 id="chap18arp490560">chap18、ARP：地址解析协议（490/560）<a class="headerlink" href="#chap18arp490560" title="Permanent link">&para;</a></h3>
+<ul>
+<li>涉及文件<ul>
+<li>net/ipv4/arp.c</li>
+<li>include/linux/if_arp.h</li>
+</ul>
+</li>
+</ul>
+<h4 id="181arp">18.1、ARP报文格式<a class="headerlink" href="#181arp" title="Permanent link">&para;</a></h4>
+<p>18.2、系统参数</p>
+<h4 id="183arp">18.3、注册ARP报文类型<a class="headerlink" href="#183arp" title="Permanent link">&para;</a></h4>
+<h4 id="184arparp_init">18.4、ARP初始化<code>arp_init()</code><a class="headerlink" href="#184arparp_init" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>arp_init()</code>，<a href="https://elixir.bootlin.com/linux/latest/source/net/ipv4/arp.c#L1463"><strong>net/ipv4/arp.c</strong></a></li>
+</ul>
+<h4 id="185arpstruct-neigh_ops-arp_generic_ops">18.5、ARP的邻居项函数指针表，<code>struct neigh_ops arp_generic_ops</code><a class="headerlink" href="#185arpstruct-neigh_ops-arp_generic_ops" title="Permanent link">&para;</a></h4>
+<ul>
+<li>还是在<code>arp.c</code>中</li>
+</ul>
+<h4 id="186arpstruct-neigh_table-arp_tbl">18.6、ARP表，<code>struct neigh_table arp_tbl</code><a class="headerlink" href="#186arpstruct-neigh_table-arp_tbl" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>struct neigh_table arp_tbl</code></li>
+</ul>
+<h4 id="187">18.7、函数<a class="headerlink" href="#187" title="Permanent link">&para;</a></h4>
+<p>18.7.1、arp_error_report()</p>
+<p>18.7.2、arp_solicit()</p>
+<p>18.7.3、</p>
+<p>18.7.4、arp_filter()</p>
+<h4 id="188ipv4arp_constructor">18.8、IPv4中邻居项的初始化，<code>arp_constructor</code><a class="headerlink" href="#188ipv4arp_constructor" title="Permanent link">&para;</a></h4>
+<ul>
+<li><a href="https://elixir.bootlin.com/linux/latest/source/net/ipv4/arp.c#L130">arp_constructor</a></li>
+</ul>
+<h4 id="189arparp_create">18.9、ARP报文的创建，<code>arp_create()</code><a class="headerlink" href="#189arparp_create" title="Permanent link">&para;</a></h4>
+<h4 id="1810arparp_send">18.10、ARP的输出，<code>arp_send()</code><a class="headerlink" href="#1810arparp_send" title="Permanent link">&para;</a></h4>
+<h4 id="1811arparp_rcv">18.11、ARP的输入，<code>arp_rcv()</code><a class="headerlink" href="#1811arparp_rcv" title="Permanent link">&para;</a></h4>
+<p>18.11.1、arp_rcv()</p>
+<p>18.11.2、arp_process()</p>
+<h4 id="1812arp">18.12、ARP代理<a class="headerlink" href="#1812arp" title="Permanent link">&para;</a></h4>
+<ul>
+<li><em>没太懂，啥是ARP代理</em></li>
+</ul>
+<h5 id="18121apr_process">18.12.1、apr_process()<a class="headerlink" href="#18121apr_process" title="Permanent link">&para;</a></h5>
+<p>18.12.2、arp_fwd_proxy()</p>
+<p>18.12.3、parp_redo()</p>
+<h4 id="1813arpioctl">18.13、ARP的ioctl<a class="headerlink" href="#1813arpioctl" title="Permanent link">&para;</a></h4>
+<h4 id="1814arp_netdev_event">18.14、外部事件，<code>arp_netdev_event()</code><a class="headerlink" href="#1814arp_netdev_event" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>arp_netdev_event()</code>，<a href="https://elixir.bootlin.com/linux/latest/source/net/ipv4/arp.c#L1272"><strong>net/ipv4/arp.c</strong></a></li>
+</ul>
+<h4 id="1815arp_bind_neighbour">18.15、路由表项与邻居项的绑定，<code>arp_bind_neighbour()</code><a class="headerlink" href="#1815arp_bind_neighbour" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>arp_bind_neighbour()</code>，<em>没找到</em></li>
+</ul>
 <h3 id="chap19-513560">chap19、路由表  （513/560）<a class="headerlink" href="#chap19-513560" title="Permanent link">&para;</a></h3>
 <h4 id="191">19.1、什么是路由表<a class="headerlink" href="#191" title="Permanent link">&para;</a></h4>
 <ul>
@@ -1488,6 +1555,63 @@
 </ul>
 <h4 id="192">19.2、系统参数<a class="headerlink" href="#192" title="Permanent link">&para;</a></h4>
 <h4 id="193">19.3、路由表组成结构<a class="headerlink" href="#193" title="Permanent link">&para;</a></h4>
+<ul>
+<li><em>本节的结构体定义，主要在<code>include/net/ip_fib.h</code>中</em></li>
+</ul>
+<ul>
+<li>2.6.20版本支持两种查找路由表项的算法<ul>
+<li>FIB_HASH，系统默认算法</li>
+<li>FIB_TRIE，<strong>在超大路由表的情况下可以提高查找效率</strong></li>
+</ul>
+</li>
+<li>路由表是由fib_table结构来描述的，所有的fib_table结构链接在全局散列表fib_table_hash中</li>
+</ul>
+<h5 id="1935fib_info">19.3.5、fib_info结构<a class="headerlink" href="#1935fib_info" title="Permanent link">&para;</a></h5>
+<h5 id="1936fib_nb">19.3.6、fib_nb结构<a class="headerlink" href="#1936fib_nb" title="Permanent link">&para;</a></h5>
+<h4 id="194fib_hash_init">19.4、路由表的初始化<code>fib_hash_init</code><a class="headerlink" href="#194fib_hash_init" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>fib_hash_init()</code>，<em>这个竟然没找到</em></li>
+</ul>
+<h4 id="195netlink">19.5、netlink接口<a class="headerlink" href="#195netlink" title="Permanent link">&para;</a></h4>
+<h5 id="1951netlink">19.5.1、netlink路由表项消息结构<a class="headerlink" href="#1951netlink" title="Permanent link">&para;</a></h5>
+<h5 id="1952inet_rtm_newroute">19.5.2、inet_rtm_newroute()<a class="headerlink" href="#1952inet_rtm_newroute" title="Permanent link">&para;</a></h5>
+<ul>
+<li><a href="https://elixir.bootlin.com/linux/latest/source/net/ipv4/fib_frontend.c#L885"><strong>net/ipv4/fib_frontend.c</strong>,</a></li>
+</ul>
+<h5 id="1953">19.5.3、<a class="headerlink" href="#1953" title="Permanent link">&para;</a></h5>
+<h4 id="196fib_new_table">19.6、获取指定的路由表<code>fib_new_table()</code><a class="headerlink" href="#196fib_new_table" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>fib_new_table()</code>，<a href="https://elixir.bootlin.com/linux/latest/source/include/net/ip_fib.h#L305"><strong>include/net/ip_fib.h</strong></a>，跟这里面的static是对得上的</li>
+<li>fib_frontend.c中的有点差异，<em>这个可能是另一种调用场景</em></li>
+</ul>
+<h4 id="197fib_hash_insert">19.7、路由表项的添加<code>fib_hash_insert()</code><a class="headerlink" href="#197fib_hash_insert" title="Permanent link">&para;</a></h4>
+<ul>
+<li><em>我感觉是不是hash的方式，V6的版本不用了</em></li>
+</ul>
+<p>19.8、路由表的删除</p>
+<h4 id="199">19.9、外部事件<a class="headerlink" href="#199" title="Permanent link">&para;</a></h4>
+<h5 id="1991fib_netdev_event">19.9.1、网络设备状态变化事件<code>fib_netdev_event()</code><a class="headerlink" href="#1991fib_netdev_event" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>fib_netdev_event()</code>，<a href="https://elixir.bootlin.com/linux/latest/source/net/ipv4/fib_frontend.c#L1463"><strong>net/ipv4/fib_frontend.c</strong></a></li>
+</ul>
+<h5 id="1996fib_magic">19.9.6、fib_magic()<a class="headerlink" href="#1996fib_magic" title="Permanent link">&para;</a></h5>
+<h4 id="1910">19.10、选路<a class="headerlink" href="#1910" title="Permanent link">&para;</a></h4>
+<ul>
+<li><em>从代码命名的角度来猜测，选路，一般得是route.c了</em></li>
+</ul>
+<h5 id="19101ip_route_input_slow">19.10.1、输入选路：ip_route_input_slow()<a class="headerlink" href="#19101ip_route_input_slow" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>路由时，一般用<code>ip_route_input()</code>选路，当缓存中没有时</strong>，调用<code>ip_route_input_slow()</code>在路由表中查找，找到就<strong>加入缓存中</strong>，<a href="https://elixir.bootlin.com/linux/latest/source/net/ipv4/route.c#L2224"><strong>net/ipv4/route.c</strong></a></li>
+</ul>
+<h5 id="19104fib_lookup">19.10.4、fib_lookup()<a class="headerlink" href="#19104fib_lookup" title="Permanent link">&para;</a></h5>
+<h5 id="19105fn_hash_lookup">19.10.5、fn_hash_lookup()<a class="headerlink" href="#19105fn_hash_lookup" title="Permanent link">&para;</a></h5>
+<ul>
+<li><em>这个没找到</em></li>
+</ul>
+<h4 id="1911icmpip_rt_send_redirect">19.11、ICMP重定向消息的发送<code>ip_rt_send_redirect()</code><a class="headerlink" href="#1911icmpip_rt_send_redirect" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>ip_rt_send_redirect()</code>，<a href="https://elixir.bootlin.com/linux/latest/source/net/ipv4/route.c#L874"><strong>net/ipv4/route.c</strong></a></li>
+</ul>
               
             </div>
           </div><footer>

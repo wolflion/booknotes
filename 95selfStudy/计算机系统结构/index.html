@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>计算机系统结构 - lionel的技术笔记</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "\u8ba1\u7b97\u673a\u7cfb\u7edf\u7ed3\u6784";
+        var mkdocs_page_input_path = "95selfStudy\\\u8ba1\u7b97\u673a\u7cfb\u7edf\u7ed3\u6784.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> lionel的技术笔记
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">简介</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../01daily/">daily</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../02ds/">ds</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../03cpp/">cpp</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../21tool/">tool</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">C++</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../20C%2B%2B/effectiveC%2B%2B/">《Effective C++》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../20C%2B%2B/%E6%B7%B1%E5%BA%A6%E6%8E%A2%E7%B4%A2C%2B%2B%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B/">《深度探索C++对象模型》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/EffectiveSTL/">《Effective STL》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/C%2B%2B%E6%B3%9B%E5%9E%8BSTL%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/">《C++泛型STL原理和应用》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../21STL/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/">《STL源码剖析》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../22C%2B%2Bmodern/%E6%B7%B1%E5%85%A5%E5%BA%94%E7%94%A8C%2B%2B11/">《深入应用C++11》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">基础知识</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA/">《操作系统导论》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E5%A4%A7%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">《大话设计模式》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90_C%2B%2B4th/">《数据结构与算法分析_C++4th》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E7%AE%97%E6%B3%95%284th%29/">《算法4th》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90-%E5%BC%A0%E5%86%9B/">《算法设计与分析-张军》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E5%A4%A9%E8%A1%8C-%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《天行-算法设计与实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%95%99%E7%A8%8B-%E6%9D%8E%E6%98%A5%E8%91%86/">《数据结构教程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../408/%E6%96%B0%E7%BC%96%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%A0%E9%A2%98%E4%B8%8E%E8%A7%A3%E6%9E%90/">《新编数据结构习题与解析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网络编程</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/TCPIP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">《TCP/IP网络编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/">《Linux高性能服务器编程》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/TCPIP%E8%AF%A6%E8%A7%A3%E5%8D%B71/">《TCPIP详解卷1》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/Linux%E5%86%85%E6%A0%B8%E7%BD%91%E7%BB%9C%E6%A0%88%E6%BA%90%E4%BB%A3%E7%A0%81%E6%83%85%E6%99%AF%E5%88%86%E6%9E%90/">《Linux内核网络栈源代码情景分析》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10network/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C/">《深入理解Linux网络》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">机器&深度学习</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../30machineLearning/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%9F%BA%E7%A1%80/">《机器学习线性代数基础》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../31deepLearning/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%85%A5%E9%97%A8%EF%BC%9A%E5%9F%BA%E4%BA%8EPython%E7%9A%84%E7%90%86%E8%AE%BA%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《深度学习入门：基于Python的理论与实现》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">文件系统</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/Linux%E5%86%85%E6%A0%B8%E6%8E%A2%E7%A7%98/">《Linux内核探秘》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">《文件系统技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../11filesystem/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">《存储技术原理分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">存储</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../12storage/ceph%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《ceph设计原理与实现》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">视频</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/FFmpeg%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/">《FFmpeg入门到精通》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/WebRTC%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/">《WebRTC权威指南》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/WebRTC%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AE%9E%E6%97%B6%E4%BA%92%E5%8A%A8%E6%8A%80%E6%9C%AF/">《WebRTC音视频实时互动技术》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../14video/%E6%96%B0%E4%B8%80%E4%BB%A3%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9%E7%A0%81%E6%A0%87%E5%87%86-H.264_AVC/">《新一代视频压缩码标准-H.264_AVC》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">内核</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/Linux%E5%86%85%E6%A0%B8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">《Linux内核设计与实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5Linux%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%E5%86%85%E6%A0%B8%E6%9C%BA%E5%88%B6/">《深入Linux设备驱动程序内核机制》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">《深入理解Linux虚拟内存管理》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../13kernel/深入理解Linux网络技术内幕.md">《深入理解Linux网络技术内幕》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../13kernel/Linux内核源代码剖析-tcpip实现.md">《Linux内核源代码剖析-TCP/IP实现》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../13kernel/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E5%86%85%E6%A0%B8/">《深入理解Linux内核》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">工具</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/Wireshark%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98/">《Wireshark网络分析实战》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/Linux%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8Eshell%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B%E5%A4%A7%E5%85%A8%283rd%29/">《Linux命令行与shell脚本编程大全(3rd)》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/python%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%883rd%EF%BC%89/">《python程序设计（3rd）》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../15tool/python/Python%E7%BC%96%E7%A8%8B%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E8%B7%B5/">《Python编程从入门到实践》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">刷题</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer2nd/">《剑指offer2nd》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../91leetcode/%E5%89%91%E6%8C%87offer%E4%B8%93%E9%A1%B9%E7%AA%81%E7%A0%B4/">《剑指offer专项突破》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../96output/OD基础题.md">OD基础题</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../96output/OD进阶题.md">OD进阶题</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网课</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/01Linux%E9%AB%98%E5%B9%B6%E5%8F%91%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/">《Linux高并发网络编程开发》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/%E4%BE%AF%E6%8D%B7/%E4%BE%AF%E6%8D%B7C%2B%2B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%8660%E8%AE%B2/">《侯捷C++内存管理60讲》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../90lecture/11NJU%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">《NJU算法设计与分析》</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">英语专</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../60English/00794%E7%BB%BC%E5%90%88%E8%8B%B1%E8%AF%AD%E4%B8%80%E4%B8%8A/">《综合英语(一)上》</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/">《概率率与数理统计》</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">lionel的技术笔记</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>计算机系统结构</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="_1">内容<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h3 id="chap1">chap1、概论<a class="headerlink" href="#chap1" title="Permanent link">&para;</a></h3>
+<h4 id="11">1.1、计算机系统的层次结构<a class="headerlink" href="#11" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>固件（Firmware）</strong>：是一种具有软件功能的硬件。</li>
+<li>以软件为主实现的机器称为<strong>虚拟机器</strong>。</li>
+</ul>
+<h4 id="12">1.2、计算机系统结构、计算机组成和计算机实现<a class="headerlink" href="#12" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<h5 id="121">1.2.1、计算机系统结构的定义和内涵<a class="headerlink" href="#121" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>计算机系统结构</strong>：研究的是软、硬件之间的功能分配以及对传统机器级界面的确定。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>
+<h5 id="122">1.2.2、计算机组成与计算机实现的定义和内涵<a class="headerlink" href="#122" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>计算机组成</strong>：（Computer Organization）指的是计算机系统结构的逻辑实现，包括机器级内部的数据流和控制流的组成以及逻辑设计等。</li>
+<li><strong>计算机实现：</strong>（Computer Implementation）指的是计算机组成的物理实现，包括处理机、主存等部件的物理结构，器件的集成度和速度，器件、模块、插件、底板的划分与连接，专用器件的设计，微组装技术，信号传输，电源、冷却及整机装配技术等。<ul>
+<li>计算机实现的设计着眼于器件技术和微组装技术，其中，<strong>器件技术</strong>起着主导作用。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>
+<h5 id="123">1.2.3、计算机系统结构、组成和实现的相互关系和影响<a class="headerlink" href="#123" title="Permanent link">&para;</a></h5>
+<ul>
+<li>计算机系统结构设计的任务：是进行软、硬件的功能分配，确定传统机器组的软、硬件界面</li>
+<li>“计算机系统结构”这门学科来讲，实际上包括了<strong>系统结构和组成</strong>两个方面的内容。</li>
+</ul>
+</li>
+</ul>
+<h4 id="13">1.3、计算机系统的软、硬件取舍及定量设计原理<a class="headerlink" href="#13" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<h5 id="131">1.3.1、软、硬件取舍的基本原则<a class="headerlink" href="#131" title="Permanent link">&para;</a></h5>
+</li>
+</ul>
+<ul>
+<li>
+<h5 id="132">1.3.2、计算机系统的定量设计原理<a class="headerlink" href="#132" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、Huffman压缩原理</li>
+<li>2、Amdahl定律：确定对系统中性能瓶颈部件采取措施提高速度后系统性能改进的程度。<ul>
+<li>系统加速比</li>
+<li>性能可改进比</li>
+<li>部件加速比</li>
+</ul>
+</li>
+<li>3、程序访问的局部性定律<ul>
+<li>时间上的局部性：</li>
+<li>空间上的局部性：</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>
+<h5 id="133">1.3.3、计算机系统设计的主要任务和方法<a class="headerlink" href="#133" title="Permanent link">&para;</a></h5>
+<ul>
+<li>计算机系统设计的主要任务：包括<strong>系统结构、组成和实现的设计</strong>。</li>
+<li>计算机系统的设计方法<ul>
+<li>“由上往下”设计</li>
+<li>“由下往上”设计</li>
+<li>“从中间开始”向两边设计</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="14">1.4、软件、应用、器件的发展对系统结构的影响<a class="headerlink" href="#14" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<h5 id="141">1.4.1、软件发展对系统结构的影响<a class="headerlink" href="#141" title="Permanent link">&para;</a></h5>
+<ul>
+<li>实现软件移植的技术主要有如下几种：<ul>
+<li>1、统一高级语言</li>
+<li>2、采用系列机</li>
+<li>3、模拟和仿真<ul>
+<li><strong>模拟（Simulation）</strong>：用机器语言程序解释实现软件移植的方法。进行模拟的A机器称为<strong>宿主机</strong>，被模拟的B机器称为<strong>虚拟机</strong>。</li>
+<li><strong>仿真（Emulation）</strong>：用微程序直接解释另一种机器指令系统的方法。进行仿真的A机器称为<strong>宿主机</strong>，被仿真的B机器称为<strong>目标机</strong>。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>
+<h5 id="142">1.4.2、应用的发展对系统结构的影响<a class="headerlink" href="#142" title="Permanent link">&para;</a></h5>
+</li>
+</ul>
+<ul>
+<li>
+<h5 id="143">1.4.3、器件的发展对系统结构的影响<a class="headerlink" href="#143" title="Permanent link">&para;</a></h5>
+<ul>
+<li>计算机所用器件已从电子管、晶体管、小规模集成电路、大规模集成电路迅速发展到超大规模集成电路，并使用或开始使用砷化镓器件、高密度组装技术和光电子集成技术。</li>
+</ul>
+</li>
+</ul>
+<h4 id="15">1.5、系统结构中的并行性开发及计算机系统的分类<a class="headerlink" href="#15" title="Permanent link">&para;</a></h4>
+<h5 id="151">1.5.1、并行性的概念与开发<a class="headerlink" href="#151" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>并行性（Parallelism）</strong>：解题中具有可以同时进行运算或操作的特性。<ul>
+<li><strong>同时性（Simultaneity）</strong>：指两个或多个事件在同一时刻发生</li>
+<li><strong>并发性（Concurrency）</strong>：指两个或多个事件在同一时间间隔内发生</li>
+</ul>
+</li>
+<li>2、并行性开发的途径<ul>
+<li>（1）时间重叠</li>
+<li>（2）资源重复</li>
+<li>（3）资源共享</li>
+</ul>
+</li>
+<li>3、计算机系统的并行性发展</li>
+<li>4、多机系统的耦合度</li>
+</ul>
+<h5 id="152">1.5.2、计算机系统的分类<a class="headerlink" href="#152" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1966年，Michael J.Flynn提出按指令流和数据流的多倍性对计算机系统分类。<ul>
+<li>指令流：机器执行的指令序列。</li>
+<li>数据流：由指令流调用的数据序列，包括输入数据和中间结果。</li>
+<li>多倍性：指在系统性能瓶颈部件上处于同一执行阶段的指令或数据的最大可能个数</li>
+<li>SISD</li>
+<li>SIMD</li>
+<li>MISD</li>
+<li>MIMD</li>
+</ul>
+</li>
+<li>1978年，David J.Kuck<ul>
+<li>SISE</li>
+<li>SIME</li>
+<li>MISE</li>
+<li>MIME</li>
+</ul>
+</li>
+<li>1972年，Tse-yun Feng</li>
+<li>1977年，Wolfgang Handler</li>
+</ul>
+<h3 id="chap2">chap2、数据表示、寻址方式与指令系统<a class="headerlink" href="#chap2" title="Permanent link">&para;</a></h3>
+<h4 id="21">2.1、数据表示<a class="headerlink" href="#21" title="Permanent link">&para;</a></h4>
+<h5 id="211">2.1.1、数据表示与数据结构<a class="headerlink" href="#211" title="Permanent link">&para;</a></h5>
+<ul>
+<li>数据表示：指的是<strong>能由计算机硬件识别和引用</strong>的数据类型，表现在它有对这种类型的数据进行操作的指令和运算部件。</li>
+</ul>
+<h5 id="212">2.1.2、高级数据表示<a class="headerlink" href="#212" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、自定义（Self-defining）数据表示：<strong>标志符数据表示</strong>和<strong>数据描述符</strong><ul>
+<li>标志符数据表示<ul>
+<li>类型标志：数据值</li>
+</ul>
+</li>
+<li>数据描述符：<strong>与数据分开存放</strong>，用于描述所要访问的数据是整块还是单个的，访问该数据块或数据元素所要的地址以及其他信息等。<ul>
+<li>描述符：前3位是“101”</li>
+<li>数据：前3位是“000”</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>2、向量、数组数据表示<ul>
+<li>有向量数据表示的处理机就是<strong>向量处理机</strong></li>
+<li>在没有向量、数组数据表示的计算机上经编译后需<strong>借助于变址操作实现</strong>。</li>
+</ul>
+</li>
+<li>3、堆栈数据表示</li>
+</ul>
+<h5 id="213">2.1.3、引入数据表示的原则<a class="headerlink" href="#213" title="Permanent link">&para;</a></h5>
+<ul>
+<li>原则1：看系统的效率是否有显著提高，包括<strong>实现时间</strong>和<strong>存储时间</strong>是否有显著减少</li>
+<li>原则2：看引入这种数据表示后，其<strong>通用性</strong>和<strong>利用率</strong>是否提高。</li>
+</ul>
+<h5 id="214">2.1.4、浮点数尾数基值大小和下溢处理方法的选择<a class="headerlink" href="#214" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、浮点数尾数基值的选择<ul>
+<li><strong>阶码</strong>（小数点前面、m个机器位），<strong>尾数</strong>（小数点后面、p+1位）</li>
+<li>浮点数表示中p和m的位数主要是根据<strong>数的表示范围和精度</strong>来确定的</li>
+</ul>
+</li>
+<li>2、浮点数尾数下溢处理方法<ul>
+<li>截断法：超出计算机字长的部分截去</li>
+<li>舍入法：在计算机运算的规定字长之外增设一位附加位</li>
+<li>恒置“1”法：将计算机运算的规定字长的最低位恒置为“1”（用于中、高速计算机）</li>
+<li>查表舍入法</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>系统结构的研究方法往往是设法<strong>找出影响问题的各个因素</strong>，建立起相关的数学模型。</li>
+</ul>
+<h4 id="22">2.2、寻址方式<a class="headerlink" href="#22" title="Permanent link">&para;</a></h4>
+<ul>
+<li>寻址方式：指的是指令<strong>按什么方式寻找（或访问）</strong>到所需的操作数或信息的。</li>
+</ul>
+<h5 id="221">2.2.1、寻址方式的三种面向<a class="headerlink" href="#221" title="Permanent link">&para;</a></h5>
+<ul>
+<li>多数计算机都将主存、寄存器、堆栈分类编址，分别有<strong>面向主存、面向寄存器、面向堆栈</strong>的寻址方式。</li>
+</ul>
+<h5 id="222">2.2.2、寻址方式在指令中的指明<a class="headerlink" href="#222" title="Permanent link">&para;</a></h5>
+<ul>
+<li>一种方式：占用操作码的某些位来指明</li>
+<li>另一种方式：不占用操作码，而是在地址码部分专门设置寻址方式位字段指明</li>
+</ul>
+<h5 id="223">2.2.3、程序在主存中的定位技术<a class="headerlink" href="#223" title="Permanent link">&para;</a></h5>
+<ul>
+<li>当程序装入主存时，就需要进行逻辑地址空间到物理地址空间的变换，即<strong>进行程序的定位</strong></li>
+<li>（1）静态再定位：程序执行时，<strong>物理地址不再改变</strong></li>
+<li>（2）动态再定位：把<strong>在执行每条指令时才形成访存物理地址</strong>的方法<ul>
+<li>变址寻址：对诸如向量、数组等数据块运算的支持，以便于实现程序的循环</li>
+<li>基址寻址：对逻辑地址空间到物理地址空间变换的支持，以利于实现程序的动态再定位</li>
+</ul>
+</li>
+<li>（3）虚实地址映像表</li>
+</ul>
+<h5 id="224">2.2.4、物理主存中信息的存储分布<a class="headerlink" href="#224" title="Permanent link">&para;</a></h5>
+<ul>
+<li>按整数边界存储</li>
+</ul>
+<h4 id="23">2.3、指令系统的设计与优化<a class="headerlink" href="#23" title="Permanent link">&para;</a></h4>
+<h5 id="231">2.3.1、指令系统设计的基本原则<a class="headerlink" href="#231" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>指令系统</strong>：是程序设计者看计算机的主要属性，是软、硬件的主要界面，它在很大程度上决定了计算机具有的基本功能。</li>
+<li>指令系统的设计包括<strong>指令的功能</strong>（操作类型、寻址方式和具体操作内容）和<strong>指令格式</strong>的设计。</li>
+<li>非特权型指令</li>
+<li>特权型指令</li>
+</ul>
+<h5 id="232">2.3.2、指令操作码的优化<a class="headerlink" href="#232" title="Permanent link">&para;</a></h5>
+<ul>
+<li>指令是由<strong>操作码</strong>和<strong>地址码</strong>两部分组成的。</li>
+<li><strong>哈夫曼压缩的基本思想：</strong></li>
+<li>研究操作码的优化表示：主要是为了<strong>缩短指令字长，减少程序总位数、增加指令字</strong>能表示的操作信息和地址信息。</li>
+</ul>
+<h5 id="233">2.3.3、指令字格式的优化<a class="headerlink" href="#233" title="Permanent link">&para;</a></h5>
+<h4 id="24">2.4、指令系统的发展和改进<a class="headerlink" href="#24" title="Permanent link">&para;</a></h4>
+<h5 id="241ciscrisc">2.4.1、两种途径和方向（CISC和RISC）<a class="headerlink" href="#241ciscrisc" title="Permanent link">&para;</a></h5>
+<ul>
+<li>一种，<strong>软件功能的硬化</strong>，复杂指令系统计算机（Complex Instruction Set Computer）</li>
+<li>另一种，<strong>降低硬件设计的复杂度</strong>，精简指令系统计算机（Reduced Instruction Set Computer）</li>
+</ul>
+<h5 id="242cisc">2.4.2、按CISC方向发展和改进指令系统<a class="headerlink" href="#242cisc" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、面向<strong>目标程序</strong>的优化实现改进<ul>
+<li>途径1：通过对大量已有机器的机器语言程序及其执行情况，统计各种指令和指令串的使用频度来加以分析和改进</li>
+<li>途径2：由微程序解释实现</li>
+</ul>
+</li>
+<li>2、面向<strong>高级语言</strong>的优化实现改进<ul>
+<li>途径1：通过对源程序中各种高级语言语句的使用频度进行统计来分析改进</li>
+<li>途径2：如何面向编译，优化代码生成来改进</li>
+<li>途径3：改进指令系统，使它与各种语言间的语义差距都有同等的缩小</li>
+<li>途径4：让计算机具有分别面向各种高级语言的多种指令系统、多种系统结构的面向问题动态自寻优的计算机系统</li>
+<li>途径5：发展高级语言计算机</li>
+</ul>
+</li>
+<li>3、面向<strong>操作系统</strong>的优化实现改进<ul>
+<li>途径1：</li>
+<li>途径2：</li>
+<li>途径3：</li>
+<li>途径4：</li>
+</ul>
+</li>
+</ul>
+<h5 id="243risc">2.4.3、按RISC方向发展和改进指令系统<a class="headerlink" href="#243risc" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、CISC的问题</li>
+<li>2、设计RISC的基本原则</li>
+<li>3、设计RISC结构采用的基本技术</li>
+<li>4、RISC技术的发展</li>
+</ul>
+<h3 id="chap3io">chap3、存储、中断、总线与I/O系统<a class="headerlink" href="#chap3io" title="Permanent link">&para;</a></h3>
+<h4 id="31">3.1、存储系统的基本要求和并行主存系统<a class="headerlink" href="#31" title="Permanent link">&para;</a></h4>
+<h5 id="311">3.1.1、存储系统的基本要求<a class="headerlink" href="#311" title="Permanent link">&para;</a></h5>
+<ul>
+<li>要求：大容量、高速度、低价格</li>
+<li>存储容量：Sm = W（存储体的字长：<strong>单位是位或字节</strong>） * l（存储体的字数） * m（并行工作的存储体数）。</li>
+<li>速度：<ul>
+<li>Ta（访问时间）</li>
+<li>Tm（存储周期）</li>
+<li>Bm（频宽、带宽）</li>
+</ul>
+</li>
+<li>价格：<ul>
+<li>总价格C</li>
+<li>每位价格：c=C/Sm</li>
+</ul>
+</li>
+<li>弥补CPU与存储器在速度上的差异，一条途径是<strong>在组成上引入并行和重叠技术</strong></li>
+</ul>
+<h5 id="312lionel">3.1.2、并行主存系统（<em>lionel，难点</em>）<a class="headerlink" href="#312lionel" title="Permanent link">&para;</a></h5>
+<ul>
+<li>单体单字存储器</li>
+<li>单体多字存储器</li>
+<li><strong>并行主存系统</strong>：能并行读出多个CPU字的单体多字和单体单字、多体多字的交叉访问主存系统</li>
+<li>例3-1</li>
+</ul>
+<h4 id="32">3.2、中断系统<a class="headerlink" href="#32" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>中断</strong>：<ul>
+<li>内部中断：由CPU内的异常引起的</li>
+<li>外部中断：由中断信号引起<ul>
+<li>可屏蔽中断</li>
+<li>不可屏蔽中断</li>
+</ul>
+</li>
+<li>软件中断：由自陷指令引起，用于供操作系统服务</li>
+</ul>
+</li>
+<li><strong>中断系统</strong>：响应和处理各种中断的软、硬件总体</li>
+</ul>
+<h5 id="321">3.2.1、中断的分类和分级<a class="headerlink" href="#321" title="Permanent link">&para;</a></h5>
+<ul>
+<li>中断的分类<ul>
+<li>访管中断</li>
+<li>程序性中断（中断码16位）</li>
+<li>外部中断（中断码16位）</li>
+<li>输入/输出中断（中断码16位）</li>
+<li>重新启动中断</li>
+</ul>
+</li>
+<li>中断的分级<ul>
+<li>第1级：机器校验</li>
+<li>第2级：程序性和管理程序调用</li>
+<li>第3级：外部中断级别</li>
+<li>第4级：重新启动中断级别</li>
+</ul>
+</li>
+</ul>
+<h5 id="322">3.2.2、中断的响应次序与处理次序<a class="headerlink" href="#322" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>中断的响应次序</strong>：是在同时发生多个不同中断类的中断请求时，中断响应硬件中的排队器所决定的响应次序。</li>
+</ul>
+<h5 id="323">3.2.3、中断系统的软、硬件功能分配<a class="headerlink" href="#323" title="Permanent link">&para;</a></h5>
+<ul>
+<li>中断系统功能：包括中断请求的保存与清除、优先级的确定、中断断点及现场的保存、对中断请求的分析和处理以及中断返回等。</li>
+<li><strong>中断现场</strong>包括软件状态（）和硬件状态（）。</li>
+<li>中断响应时间主要<strong>取决于交换PSW的时间</strong></li>
+</ul>
+<h4 id="33">3.3、总线系统<a class="headerlink" href="#33" title="Permanent link">&para;</a></h4>
+<ul>
+<li>0<ul>
+<li><strong>总线</strong>：是用于互连计算机、CPU、存储器、I/O接口及外围设备、远程通信设备间信息传送通路的集合。</li>
+<li>总线与其相配合的附属控制电路统称为<strong>总线系统</strong>。</li>
+<li><strong>数据线根数</strong>决定同时传送的数据位数，即<strong>数据通路宽度</strong>。</li>
+<li><strong>地址线根数</strong>决定直接寻址的范围；</li>
+</ul>
+</li>
+</ul>
+<h5 id="331">3.3.1、总线的分类<a class="headerlink" href="#331" title="Permanent link">&para;</a></h5>
+<h5 id="332">3.3.2、总线的控制方式<a class="headerlink" href="#332" title="Permanent link">&para;</a></h5>
+<ul>
+<li>集中式总线控制</li>
+</ul>
+<h5 id="333">3.3.3、总线的通信技术<a class="headerlink" href="#333" title="Permanent link">&para;</a></h5>
+<ul>
+<li>同步通信</li>
+<li>异步通信</li>
+</ul>
+<h5 id="334">3.3.4、数据宽度与总线线数<a class="headerlink" href="#334" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>数据宽度</strong>：是I/O设备取得I/O总线后所传送数据的总量。<ul>
+<li>有单字（单字节）、定长块、可变长块、单定加定长块和单字加可变长块</li>
+</ul>
+</li>
+<li><strong>总线线数</strong>：<ul>
+<li>数据总线的宽度有位、字节、字或双字等4种</li>
+</ul>
+</li>
+</ul>
+<h4 id="34io">3.4、I/O系统<a class="headerlink" href="#34io" title="Permanent link">&para;</a></h4>
+<h5 id="341io">3.4.1、I/O系统概述<a class="headerlink" href="#341io" title="Permanent link">&para;</a></h5>
+<h5 id="342">3.4.2、通道处理机的工作原理和流量设计<a class="headerlink" href="#342" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、通道处理机的工作原理<ul>
+<li>根据通道数据传送期中信息传送方式的不同，可分为<strong>字节多路、数组多路和选择</strong>3类通道</li>
+</ul>
+</li>
+<li>2、通道流量的设计（<strong>重点</strong>，lionel）<em>P119，会考一道计算题</em><ul>
+<li><strong>通道流量</strong>：指通道在数据传送期内，单位时间内传送的字节数。</li>
+<li>极限流量：与其工作方式、数据传送期内选择一次设备的时间Ts，传送一个字节的时间Td的长度有关。<code>1/(Ts+Td)</code>，一台设备能传K个字节，传送N个字节，需要<code>N/K</code>次。每次一台设备<code>K/(Ts+KTd)</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="chap4">chap4、存储体系<a class="headerlink" href="#chap4" title="Permanent link">&para;</a></h3>
+<h4 id="41">4.1、基本概念<a class="headerlink" href="#41" title="Permanent link">&para;</a></h4>
+<h5 id="411">4.1.1、存储体系及其分支<a class="headerlink" href="#411" title="Permanent link">&para;</a></h5>
+<h5 id="412">4.1.2、存储体系的构成依据<a class="headerlink" href="#412" title="Permanent link">&para;</a></h5>
+<h5 id="413">4.1.3、存储体系的性能参数<a class="headerlink" href="#413" title="Permanent link">&para;</a></h5>
+<h4 id="42">4.2、虚拟存储器<a class="headerlink" href="#42" title="Permanent link">&para;</a></h4>
+<h5 id="421">4.2.1、虚拟存储器的管理方式<a class="headerlink" href="#421" title="Permanent link">&para;</a></h5>
+<h5 id="422">4.2.2、页式虚拟存储器的构成<a class="headerlink" href="#422" title="Permanent link">&para;</a></h5>
+<h5 id="423">4.2.3、页式虚拟存储器实现中的问题<a class="headerlink" href="#423" title="Permanent link">&para;</a></h5>
+<h4 id="43">4.3、高速缓冲存储器<a class="headerlink" href="#43" title="Permanent link">&para;</a></h4>
+<h5 id="431">4.3.1、工作原理和基本结构<a class="headerlink" href="#431" title="Permanent link">&para;</a></h5>
+<h5 id="432">4.3.2、地址的映像与变换<a class="headerlink" href="#432" title="Permanent link">&para;</a></h5>
+<h5 id="433cachelru">4.3.3、cache存储器的LRU替换算法的硬件实现<a class="headerlink" href="#433cachelru" title="Permanent link">&para;</a></h5>
+<h5 id="434cache">4.3.4、cache存储器的透明性及性能分析<a class="headerlink" href="#434cache" title="Permanent link">&para;</a></h5>
+<h4 id="44">4.4、三级存储体系<a class="headerlink" href="#44" title="Permanent link">&para;</a></h4>
+<h5 id="441cache">4.4.1、物理地址cache<a class="headerlink" href="#441cache" title="Permanent link">&para;</a></h5>
+<h5 id="442cache">4.4.2、虚地址cache<a class="headerlink" href="#442cache" title="Permanent link">&para;</a></h5>
+<h5 id="443cache">4.4.3、全cache<a class="headerlink" href="#443cache" title="Permanent link">&para;</a></h5>
+<h3 id="chap5">chap5、标量处理机<a class="headerlink" href="#chap5" title="Permanent link">&para;</a></h3>
+<h4 id="51">5.1、重叠方式<a class="headerlink" href="#51" title="Permanent link">&para;</a></h4>
+<h5 id="511">5.1.1、重叠原理与一次重叠<a class="headerlink" href="#511" title="Permanent link">&para;</a></h5>
+<ul>
+<li>解释一条指令大概有三步操作（<strong>取指、分析、执行</strong>）</li>
+</ul>
+<h5 id="512">5.1.2、相关处理<a class="headerlink" href="#512" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、转移指令的处理</li>
+<li>2、指令相关的处理</li>
+<li>3、主存空间数相关的处理</li>
+<li>4、通用寄存器组相关的处理</li>
+</ul>
+<h4 id="52">5.2、流水方式<a class="headerlink" href="#52" title="Permanent link">&para;</a></h4>
+<h5 id="521">5.2.1、基本概念<a class="headerlink" href="#521" title="Permanent link">&para;</a></h5>
+<ul>
+<li>工作原理</li>
+</ul>
+<h5 id="522">5.2.2、标量流水线的主要性能<a class="headerlink" href="#522" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、吞吐率Tp和加速比Sp</li>
+<li>2、效率</li>
+</ul>
+<h5 id="523">5.2.3、标题流水机的相关处理和控制机构<a class="headerlink" href="#523" title="Permanent link">&para;</a></h5>
+<ul>
+<li>1、局部性相关的处理</li>
+<li>2、全局性相关的处理</li>
+<li>3、流水机器的中断处理</li>
+<li>4、非线性流水线的调度</li>
+</ul>
+<h4 id="53">5.3、指令级高度并行的超级处理机<a class="headerlink" href="#53" title="Permanent link">&para;</a></h4>
+<h5 id="531">5.3.1、超标量处理机<a class="headerlink" href="#531" title="Permanent link">&para;</a></h5>
+<h5 id="532">5.3.2、超长指令字处理机<a class="headerlink" href="#532" title="Permanent link">&para;</a></h5>
+<h5 id="533">5.3.3、超流水线处理机<a class="headerlink" href="#533" title="Permanent link">&para;</a></h5>
+<h5 id="534">5.3.4、超标量超流水线处理机<a class="headerlink" href="#534" title="Permanent link">&para;</a></h5>
+<h2 id="_2">最后<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="_3">过程<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>2022-12-05初步整理了chap01、概论的内容，用于平时的复习，并计划本周内整理下chap02、数据表示。（开卷做完，每章后面的习题，不会的地方，标注一下）</li>
+<li>2022-12-08初步整理了一下chap02（仅仅是初步看了一下吧，一些例题都没太细看）</li>
+<li>2022-12-12初步整理了一下chap03（大概看了一下，<em>计算题有点感觉了</em>）</li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

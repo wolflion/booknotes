@@ -218,6 +218,42 @@
                 <ul>
 <li>https://shixiangwang.github.io/pybook/%E5%A4%A7%E7%BA%B2/</li>
 </ul>
+<h3 id="chap3">chap3、基本数据结构<a class="headerlink" href="#chap3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>集合（set），<strong>同样的元素，只出现一次</strong></li>
+<li>字典（dict）</li>
+</ul>
+<h4 id="31list">3.1、列表（list，[]）<a class="headerlink" href="#31list" title="Permanent link">&para;</a></h4>
+<h4 id="32tuple">3.2、元组（tuple，()）<a class="headerlink" href="#32tuple" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>元组的() 括号是可以省略的</strong></li>
+</ul>
+<h5 id="321">3.2.1、元组的创建<a class="headerlink" href="#321" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>单个元素时，元组后面要有逗号</strong></li>
+</ul>
+<pre class="highlight"><code class="language-python">a_tuple = (1, 2, 3)
+another_tuple = 1,2,3
+type(another_tuple)
+single_tuple = 1,</code></pre>
+<h5 id="322">3.2.2、元组操作<a class="headerlink" href="#322" title="Permanent link">&para;</a></h5>
+<ul>
+<li>操作符</li>
+<li>切片</li>
+<li>修改<ul>
+<li><strong>元组是不可修改的，不能使用append()、pop()方法增，删，改操作</strong></li>
+</ul>
+</li>
+<li>变量值交换</li>
+</ul>
+<h5 id="323">3.2.3、元组与列表的区别<a class="headerlink" href="#323" title="Permanent link">&para;</a></h5>
+<ul>
+<li>元组不能修改</li>
+<li>元组一个隐形的优点是它会比列表占用更少的内存</li>
+</ul>
+<h4 id="33dict">3.3、字典（dict，{}）<a class="headerlink" href="#33dict" title="Permanent link">&para;</a></h4>
+<h4 id="34set">3.4、集合（set，{}）<a class="headerlink" href="#34set" title="Permanent link">&para;</a></h4>
+<p>3.5、章末小结</p>
 <h3 id="chap6numpy">chap6、NumPy<a class="headerlink" href="#chap6numpy" title="Permanent link">&para;</a></h3>
 <h4 id="61numpyndarry">6.1、NumPy简介与ndarry<a class="headerlink" href="#61numpyndarry" title="Permanent link">&para;</a></h4>
 <h5 id="611numpy">6.1.1、NumPy简介<a class="headerlink" href="#611numpy" title="Permanent link">&para;</a></h5>
@@ -234,6 +270,9 @@ py_array = list(range(100))</code></pre>
 <h4 id="63ndarray">6.3、ndarray数组函数与方法<a class="headerlink" href="#63ndarray" title="Permanent link">&para;</a></h4>
 <h5 id="631">6.3.1、通用函数<a class="headerlink" href="#631" title="Permanent link">&para;</a></h5>
 <h5 id="632">6.3.2、基本统计<a class="headerlink" href="#632" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>arr = np.random.random(5,5)</code>，生成5行5列的数组</li>
+</ul>
 <h3 id="chap7matplotlib">chap7、Matplotlib<a class="headerlink" href="#chap7matplotlib" title="Permanent link">&para;</a></h3>
 <ul>
 <li>
@@ -306,14 +345,31 @@ ax2 = plt.axes([0.2, 0.65, 0.2, 0.2])# 子图距离左侧0.2，下方0.65，宽�
 <li><em>哪2种接口啊</em>，一种是Matlab样式接口，另一种是？</li>
 </ul>
 <h3 id="chap8pandas">chap8、Pandas简介<a class="headerlink" href="#chap8pandas" title="Permanent link">&para;</a></h3>
+<h4 id="81pandas">8.1、Pandas 简介<a class="headerlink" href="#81pandas" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Pandas 的名字来自<strong>面板数据（Panel data）</strong>和<strong>数据分析（Data analysis）</strong>的组合</li>
+</ul>
 <h4 id="82pandas">8.2、Pandas的数据结构<a class="headerlink" href="#82pandas" title="Permanent link">&para;</a></h4>
 <h5 id="821series">8.2.1、Series<a class="headerlink" href="#821series" title="Permanent link">&para;</a></h5>
+<ul>
+<li>Series 形似字典，包含索引（也称数据标签）和数据两部分。<ul>
+<li><code>scores = pd.Series([80, 90, 97])</code>只给了值，没给索引，<strong>会自动创建</strong>从0开始的索引</li>
+<li>通过<code>scores.index</code>来看到索引，<code>scores.value()</code>看到值</li>
+<li><code>scores = pd.Series([80, 90, 97], index=[u'语文',u'数学',u'外语'])</code>，<strong>指定索引</strong></li>
+</ul>
+</li>
+</ul>
 <ul>
 <li><strong>Pandas 库是基于 NumPy 库构建的，所以 Series 实际上是通过一维的 NumPy 数组实现的。</strong></li>
 </ul>
 <h5 id="822dataframe">8.2.2、DataFrame<a class="headerlink" href="#822dataframe" title="Permanent link">&para;</a></h5>
 <ul>
 <li><strong>Series 对象只能有效地表示一维的数据</strong></li>
+</ul>
+<pre class="highlight"><code class="language-python">df = {'姓名': ['小明','小王','小张'], '语文':[80,85,90], '数学':[99,88,86] }
+df = pd.DataFrame(df)</code></pre>
+<ul>
+<li>DataFrame 的 index、columns、values 属性</li>
 </ul>
 <h4 id="83pandas">8.3、Pandas对象基本操作<a class="headerlink" href="#83pandas" title="Permanent link">&para;</a></h4>
 <h5 id="831">8.3.1、查看数据<a class="headerlink" href="#831" title="Permanent link">&para;</a></h5>
@@ -323,7 +379,27 @@ s1.head()  #默认5行
 d1 = pd.DataFrame({'a':np.random.rand(1000), 'b':np.random.rand(1000)})
 d1.head()</code></pre>
 <h5 id="832">8.3.2、转置<a class="headerlink" href="#832" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>d1.T</code></li>
+</ul>
+<h5 id="833">8.3.3、重索引<a class="headerlink" href="#833" title="Permanent link">&para;</a></h5>
 <h4 id="84">8.4、基本统计分析<a class="headerlink" href="#84" title="Permanent link">&para;</a></h4>
+<h3 id="chap10">chap10、数据导入<a class="headerlink" href="#chap10" title="Permanent link">&para;</a></h3>
+<h4 id="101csv">10.1、csv文件<a class="headerlink" href="#101csv" title="Permanent link">&para;</a></h4>
+<h5 id="1013pandas">10.1.3、使用Pandas库<a class="headerlink" href="#1013pandas" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>records = pd.read_csv('records.csv')</code></li>
+<li><code>records.cloumns</code>和<code>records.index</code></li>
+</ul>
+<h4 id="102csv">10.2、csv变体<a class="headerlink" href="#102csv" title="Permanent link">&para;</a></h4>
+<h5 id="1022pandas">10.2.2、使用Pandas导入<a class="headerlink" href="#1022pandas" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>pd.read_csv('records.tsv', sep='\t')</code>，<strong>多了一个sep属性</strong></li>
+</ul>
+<h4 id="103excel">10.3、Excel文件<a class="headerlink" href="#103excel" title="Permanent link">&para;</a></h4>
+<h5 id="1031">10.3.1、检查数据<a class="headerlink" href="#1031" title="Permanent link">&para;</a></h5>
+<h5 id="1032">10.3.2、准备工作<a class="headerlink" href="#1032" title="Permanent link">&para;</a></h5>
+<h5 id="1033pandasexcel">10.3.3、使用Pandas读写Excel<a class="headerlink" href="#1033pandasexcel" title="Permanent link">&para;</a></h5>
               
             </div>
           </div><footer>
