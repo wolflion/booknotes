@@ -15,6 +15,7 @@
     + 优秀的开源IO框架库--libevent
   + 服务器程序的逻辑单元（13-15）：多进程、多线程
 + Part03、高性能服务器优化与监测（16-17）
++ *自己想写一个libevent的使用例子，2024-05-27*
 
 ### 前言
 
@@ -626,6 +627,10 @@ return true;
 
 #### 8.6、有限状态机
 
++ 代码8-1，状态独立的有限状态机
++ 代码8-2，带状态转移的有限状态机
++ 代码8-3，http请求的读取和分析
+
 #### 8.7、提高服务器性能的其它建议
 
 ##### 8.7.1、池
@@ -695,6 +700,7 @@ int select(int nfds, fd_set *readfs, fd_set *writefds, fd_set* exceptfds,
 ##### 9.1.3、处理带外数据（out-of band OOB)
 
 + *带外数据，会让socket的返回值异常状态？*
++ 代码9-1，同时接收普通数据和带外数据
 
 #### 9.2、poll系统调用
 
@@ -756,27 +762,59 @@ int epoll_wait(int epfd, struct epoll_event *events, int maxevents,
 			  int timeout)
 ```
 
++ 代码9-2，
+
 ##### 9.3.3、lt和et模式
 
 + epoll对文件描述符的操作有两种模式：
   + LT（Level Trigger 电平触发）：默认的工作方式，这种模式下相当于一个效率较高的poll。
   + ET（Edge Trigger 边沿触发）：当epoll_wait检测到其上有事件发生并将此事件通知应用程序后，应用程序必须立即处理该事件，因为后续的epoll_wait调用将不再向应用程序通知这一事件。
++ 代码9-3，
 
 ##### 9.3.4、epolloneshot事件
 
++ 代码9-4，
+
 #### 9.4、三组I/O复用函数的比较
+
++ **表9-2，select、poll和epoll的区别**
+  + 事件集合
+  + 应用程序索引就绪文件描述符的时间复杂度
+  + 最大支持文件描述符数
+  + 工作模式
+  + 内核实现和工作效率
 
 #### 9.5、I/O复用的高级应用一：非阻塞connect
 
++ 代码9-5，
++ *非阻塞的一些问题*
+
 #### 9.6、I/O复用的高级应用二：聊天室程序
+
++ 以poll为例实现一个简单的聊天室程序
+  + 客户端功能：
+    + 从标准输入终端读入用户数据，并发送至服务器
+    + 往标准输出终端打印服务器发送它的数据
+  + 服务器功能：
+    + 接收客户数据，并把客户数据发送给每一个登录到该服务器上的客户端
 
 ##### 9.6.1、客户端
 
++ 客户端，使用poll同时监听用户输入和网络连接，并利用spilice函数将用户输入内容直接定向到网络连接上以发送之，从而实现数据零拷贝，提高了程序执行效率
+
++ 代码9-6，
+
 ##### 9.6.2、服务端
+
++ 代码9-7，聊天室服务器
 
 #### 9.7、I/O复用的高级应用三：同时处理tcp和udp服务
 
++ 代码9-8，
+
 #### 9.8、超级服务xinetd
+
++ **同时管理着多个子服务，即监听多个端口**
 
 ##### 9.8.1、xinetd配置文件
 
@@ -885,6 +923,7 @@ int epoll_wait(int epfd, struct epoll_event *events, int maxevents,
 + 分析xinetd处理SIGHUP信号的流程，*这个暂时先不看，lionel*
   + 先通过`ps`看下，xinetd创建的子进程
   + `strace`跟踪一程序执行时调用的系统调用和接收到的信号
++ 代码10-2，用strace命令查看xinetd处理SIGHUP的流程
 
 ##### 10.5.2、SIGPIPE
 
@@ -963,12 +1002,29 @@ int epoll_wait(int epfd, struct epoll_event *events, int maxevents,
 
 ##### 12.2.1、一个实例
 
+##### 12.2.2、源代码组织结构
+
+##### 12.2.3、event结构体
+
+##### 12.2.4、往注册事件队列中添加事件处理器
+
+##### 12.2.5、往事件多路分发器中注册事件
+
+##### 12.2.6、eventop结构体
+
+##### 12.2.7、event_base结构体
+
+##### 12.2.8、事件循环
+
 ### chap13、多进程编程
 
-#### 0
-
-+ 复制进程映像的fork系统调用和替换进程映像的exec系列系统调用
-+ 僵尸进程以及如何避免僵尸进程
++ 包含的内容
+  + 复制进程映像的fork系统调用和替换进程映像的exec系列系统调用
+  + 僵尸进程以及如何避免僵尸进程
+  + 进程间通信最简单的方式：管道
+  + 3种System V进程间通信方式：**信号量、消息队列和共享内存**，因为是 AT&T System V2版本引入的，所以称为System V
+  + 进程间传递文件描述符的通用方法：**通过UNIX本地域socket传递特殊的辅助数据**
+    + 辅助数据见5.8.3小节，**msg_control和msg_controllen成员**
 
 #### 13.1、fork系统调用
 
@@ -978,6 +1034,8 @@ int epoll_wait(int epfd, struct epoll_event *events, int maxevents,
 #### 13.2、exec系列系统调用
 
 #### 13.3、处理僵尸进程
+
++ `wait()和waitpid()`
 
 #### 13.4、管道
 
@@ -1002,10 +1060,13 @@ int epoll_wait(int epfd, struct epoll_event *events, int maxevents,
   
 ##### 13.5.5、特殊键值ipc_private
 
++ 代码13-3，使用IPC_PRIVATE信号量
+
 #### 13.6、共享内存
 
-##### 0、
-
++ 最高效的IPC机制，**因为它不涉及进程之间的任何数据传输**，带来的问题是
+  + **必须用其它辅助手段来同步进程对共享内存的访问**，否则会产生竞态条件
+  + **共享内存通常和其他进程间通信房事一起使用**
 + sys/shm.h
 
 ##### 13.6.1、shmget系统调用
@@ -1018,11 +1079,14 @@ int epoll_wait(int epfd, struct epoll_event *events, int maxevents,
 
 ##### 13.6.5、共享内存实例
 
++ 代码13-4，使用共享内存的聊天室服务器程序
+
 #### 13.7、消息队列
+
++ 两个进程之间传递二进制块数据，**可以不一定像管道或命名管道一样，必须先进先出的方式接收数据**
 
 + *这个例子，我没太写过，要尝试写下，再用man看下，怎么使用，lionel*
 
-+ 两个进程之间传递二进制块数据
 + sys/msg.h中，以下4个系统调用
 
 ##### 13.7.1、msgget系统调用
@@ -1091,72 +1155,73 @@ int main()
 
 ##### 14.1.2、linux线程库
 
-+ LinuxThreads
-+ NPTL
++ LinuxThreads，**不能充分利用多处理器系统的优势**
++ NPTL的优势
+  + 内核线程不再是一个进程
 
 #### 14.2、创建线程和结束线程
 
-+ pthread_create
+##### 1、pthread_create
 
-+ pthread_exit
+##### 2、pthread_exit
 
-+ pthread_join，**回收线程**【**等待其他线程结束**】
+##### 3、pthread_join，**回收线程**【**等待其他线程结束**】
 
-  + 类似于wait和waitpid
-  + **`pthread_join()`函数只能等待一个指定的线程**
-  + 使用场景：
-    + 等待指定线程结束，阻塞当前线程，直到指定线程退出
-    + 线程同步，当主线程需要等待其他线程完成任务后再继续执行，可以使用`pthread_join()`等待其他线程的结束
-    + 获取线程的返回值
-    + 资源回收
++ 类似于wait和waitpid
++ **`pthread_join()`函数只能等待一个指定的线程**
++ 使用场景：
+  + 等待指定线程结束，阻塞当前线程，直到指定线程退出
+  + 线程同步，当主线程需要等待其他线程完成任务后再继续执行，可以使用`pthread_join()`等待其他线程的结束
+  + 获取线程的返回值
+  + 资源回收
 
-  ```c
-  #include <stdio.h>
-  #include <stdlib.h>
-  #include <pthread.h>
-  
-  void* thread_function(void* arg) {
-      int thread_id = *(int*)arg;
-      printf("Thread %d is running.\n", thread_id);
-      // 模拟线程执行一些任务
-      for (int i = 0; i < 5; i++) {
-          printf("Thread %d: %d\n", thread_id, i);
-      }
-      int* result = malloc(sizeof(int));
-      *result = thread_id * 100;
-      pthread_exit(result);
-  }
-  
-  int main() {
-      pthread_t thread;
-      int thread_id = 1;
-      int* result;
-  
-      // 创建线程，使用thread_function函数，并把 thread_id 当作参数传递过去
-      if (pthread_create(&thread, NULL, thread_function, &thread_id) != 0) {
-          fprintf(stderr, "Failed to create thread.\n");
-          return 1;
-      }
-  
-      printf("Main thread is waiting for the thread to finish.\n");
-  
-      // 等待线程结束并获取返回值result
-      if (pthread_join(thread, (void**)&result) != 0) {
-          fprintf(stderr, "Failed to join thread.\n");
-          return 1;
-      }
-  
-      printf("Thread returned: %d\n", *result);
-  
-      free(result);
-  
-      return 0;
-  }
-  ```
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <pthread.h>
 
-  
+void* thread_function(void* arg) {
+    int thread_id = *(int*)arg;
+    printf("Thread %d is running.\n", thread_id);
+    // 模拟线程执行一些任务
+    for (int i = 0; i < 5; i++) {
+        printf("Thread %d: %d\n", thread_id, i);
+    }
+    int* result = malloc(sizeof(int));
+    *result = thread_id * 100;
+    pthread_exit(result);
+}
 
-+ pthread_cancel
+int main() {
+    pthread_t thread;
+    int thread_id = 1;
+    int* result;
+
+    // 创建线程，使用thread_function函数，并把 thread_id 当作参数传递过去
+    if (pthread_create(&thread, NULL, thread_function, &thread_id) != 0) {
+        fprintf(stderr, "Failed to create thread.\n");
+        return 1;
+    }
+
+    printf("Main thread is waiting for the thread to finish.\n");
+
+    // 等待线程结束并获取返回值result
+    if (pthread_join(thread, (void**)&result) != 0) {
+        fprintf(stderr, "Failed to join thread.\n");
+        return 1;
+    }
+
+    printf("Thread returned: %d\n", *result);
+
+    free(result);
+
+    return 0;
+}
+```
+
+
+
+##### 4、pthread_cancel
 
 ```c
 #include <pthread.h>  //记的这个头文件
@@ -1170,6 +1235,9 @@ int pthread_cancel(pthread_t thread);
 #### 14.4、posix信号量
 
 + **`pthread_join`可以看作一种简单的线程同步方式**，它无法高效地实现复杂的同步需求，比如控制对共享资源的独占式访问，又抑或是在某个条件满足之后唤醒一个线程。
+  + POSIX信号量
+  + 互斥量
+  + 条件变量
 + POSIX信号量函数的名字是以`sem_`开头，常用的是下面5个
 
 ```c
@@ -1181,6 +1249,7 @@ int sem_wait(sem_t *sem);
 #### 14.5、互斥锁
 
 + *这些自己用得都比较少*
++ **确保其独占式的访问**，P，V操作
 
 ##### 14.5.1、互斥锁基础api（5个）
 
@@ -1203,6 +1272,10 @@ int pthread_mutexattr_destroy();
 
 ##### 14.5.3、死锁举例
 
++ **死锁**使得一个或多个线程被挂起而无法继续执行，而且这种情况还不容易被发现
+
++ 代码14-1，按不同顺序访问互斥锁导致死锁
+
 #### 14.6、条件变量
 
 + 如果说互斥锁是用于同步线程对共享数据的访问的话，那么条件变量则是**用于在线程之间同步共享数据的值**。
@@ -1223,45 +1296,105 @@ int pthread_cond_destroy();
 
 #### 14.7、线程同步机制包装类
 
++ 代码14-2，locker.h
+
 #### 14.8、多线程环境
 
 ##### 14.8.1、可重入函数
 
 + 如果一个函数能被多个线程同时调用且不发生竞态条件，则我们称它是**线程安全的（thread safe）**，或者说它是**可重入函数**。
++ 有小部分是不可重入的，对应的函数版本后面要加上`_r`
 
 ##### 14.8.2、线程和进程
 
++ 思考一个问题
+  + 如果一个多线程程序的某个线程调用了fork函数，那么新创建的子进程是否将自动创建和父进程相同数量的线程呢？
+  + **答案是“否“**
+
++ 代码14-3
+
 + **子进程只拥有一个执行线程**
++ 代码14-4
 
 ##### 14.8.3、线程和信号
 
 + **每个线程都可以独立地设置信号掩码**。`sigprocmask()`
++ 代码14-5
 
 ### chap15、进程池和线程池
 
++ 动态创建子进程（子线程）来实现并发服务器，有以下缺点
+  + 动态创建进程（线程）比较耗时，将导致较慢的客户响应
+  + 动态创建的子进程（子线程）只为一个客户服务，导致系统上产生大量的细微进程（或线程）。进程（或线程）间的切换将消耗大量CPU时间
+
 #### 15.1、进程池和线程池概述
+
++ **进程池中进程数量，一般跟CPU数量差不多**
+  + 进程池中的所有子进程都运行着相同的代码，并具有相同的属性，比如优先级、PGID等
++ 主进程选择哪个子进程来为新任务服务，有两种方式
+  + 主进程使用某种算法来主动选择子进程（随机算法、Round Robin轮流选取算法）
+  + 主进程和所有子进程通过一个共享的工作队列来同步，子进程都睡眠在该工作队列上
++ **选择好子进程后，主进程还需要使用某种通知机制来告诉目标子进程有新任务需要处理，并传递必要的数据**
+
++ **图15-1，进程池模型**
 
 #### 15.2、处理多客户
 
-+ 监听socket和连接socket是否都由主进程统一管理？
-+ **半同步/半反应堆模式**是由主进程统一管理这两种socket的
-+ **半同步/半异步**（领导者/追随者）模式，则由主进程管理所有监听socket，而各个子进程分别管理属于自己的连接socket。
++ **处理多客户任务时**，需要问，监听socket和连接socket是否都由主进程统一管理？
++ 第8章的并发模式
+  + **半同步/半反应堆模式**是由主进程统一管理这两种socket的
+    + 主进程接受新的连接以得到连接socket，再把它传递给子进程（线程池，进程池不同传递方法）
+  + **半同步/半异步**（领导者/追随者）模式，则由主进程管理所有监听socket，而各个子进程分别管理属于自己的连接socket。
+    + 子进程可以自己调用accept来接受新的连接，
+    + 父进程无须向子进程传递socket，只需要通知一声，“我检测到新的连接，你来接受它”
++ 图15-2
+  + 客户任务是无状态的，可以考虑使用不同的子进程来为该客户的不同请求服务
+  + **如果客户任务是存在上下文关系的，则最好一直用同一个子进程来为之服务**
 
 #### 15.3、半同步/半异步进程池实现
 
-+ 代码清单15-1
++ 代码清单15-1（**基于图8-11所示的半同步/半异步并发模式的进程池**）
++ 避免在父、子进程之间传递文件描述符，**接受新连接的操作放到子进程中**
++ 对这种模式而言，**一个客户连接上的所有任务始终是由一个子进程来处理的**
 
 #### 15.4、用进程池实现的简单cgi服务器
 
++ 代码15-2（重新写了一下6.2节的功能）
+
 #### 15.5、半同步/半反应堆线程池实现
 
++ **用一个工作队列完全解除了主线程和工作线程的耦合关系**
+  + 主线程往工作队列中插入任务
+  + 工作线程通过竞争来取得任务并执行它
+
++ 15-4代码
+
 #### 15.6、用线程池实现的简单web服务器
+
+##### 15.6.1、http_conn类
+
++ 线程池的模板参数类，用以封装对逻辑任务的处理
+
+##### 15.6.2、main函数
+
++ 15-6的代码
 
 ### chap16、服务器调制、调试和测试
 
 #### 16.1、最大文件描述符数
 
++ **用户级限制**，目标用户运行的所有进程总共能打开的文件描述符数
++ **系统级限制**，所有用户总共能打开的文件描述符数
+
++ `ulimit -n`，查看用户级
++ `ulimit -SHn max-file-number`，设定用户级
++ 以上都是Session级别的，**永久修改**的话，在`/etc/security/limits.conf`
++ 修改系统级`sysctl -w fs.file-max=max-file-number`，这是临时有效
+  + **永久的话**，需要在`/etc/sysctl.conf`中添加`fs.file-max=max-file-number`，执行`sysctl -p`使更改生效
+
 #### 16.2、调整内核参数
+
++ 几乎所有的内核模块，包括内核核心模块和驱动程序，**都在`/proc/sys`文件系统下提供了某些配置文件以供用户调整模块的属性和行为**。通常一个配置文件对应一个内核参数，文件名就是参数的名字，文件的内容是参数的值。
 
 + `sysctl -a`查看这些内核参数
 
@@ -1301,6 +1434,8 @@ int pthread_cond_destroy();
 
 #### 16.4、压力测试
 
++ 16-4的代码
+
 ### chap17、系统监测工具
 
 #### 17.1、tcpdump
@@ -1310,19 +1445,36 @@ int pthread_cond_destroy();
   + 方向：`tcpdump dst port 13579`
   + 协议：`tcpdump icmp`
 
-17.2、lsof
+#### 17.2、lsof（list open file）
 
-17.3、nc
++ *还是到时用man吧*
 
-17.4、strace
+#### 17.3、nc（netcat）
 
-17.5、netstat
++ 快速构建网络连接
 
-17.6、vmstat
+#### 17.4、strace
 
-17.7、ifstat
++ 测试服务器性能，**跟踪程序运行过程中执行的系统调用和接收到的信号**，并将系统调用名、参数、返回值及信号名输出到标准输出或者指定的文件
 
-17.8、mpstat
+#### 17.5、netstat
+
++ **网络信息统计工具**，打印本地网卡接口上的全部连接、路由表信息、网卡接口信息等
+
+#### 17.6、vmstat（virtual memory statistics）
+
++ **实时输出系统的各种资源的使用情况**，比如进程信息、内存使用、CPU使用率以及I/O使用情况
++ `iostat`获得磁盘使用情况的更多信息
++ `mpstat`获得CPU使用情况的更多信息
+
+#### 17.7、ifstat（interface statiscis）
+
++ **简单的网络流量监测工具**
+
+#### 17.8、mpstat（multi-processor statistics）
+
++ **实时监测多处理器系统上每个CPU的使用情况**
++ mpstat和iostat都**集成在包sysstat中**
 
 ### 最后
 
