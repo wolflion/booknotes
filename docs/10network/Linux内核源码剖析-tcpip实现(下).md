@@ -931,6 +931,17 @@
 
 ### chap32、TCP连接的终止 442（451/529）
 
++ *啥是主动或被动关闭*，谁先发起的关闭就是主动关闭，对应的另一方先发起的话，就是被动关闭。--*自己搜的*
++ **TIME_WAIT状态也称为2MSL等待状态**，rfc793指出MSL为2min，linux实现中的默认值为1min。
++ **大多数传输控制块主动关闭时都会经历TIME_WAIT状态**
++ 本章论述TCP连接的终止，包括shutdown、close系统调用，主动和被动关闭，涉及文件
+  + include/net/sock.h
+  + include/net/inet_timewait_sock.h，timewait传输控制块的结构、宏和函数原型等
+  + net/ipv4/tcp.c，传输控制块与应用层之间的接口实现
+  + net/ipv4/tcp_input.c，TCP的输入
+  + net/ipv4/tcp_minisocks.c，接收连接请求而创建传输控制块的实现，以及timewait传输控制块的状态处理
+  + net/ipv4/inet_timewait_sock.c，timewait传输控制块的实现
+
 #### 32.1、连接终止过程
 
 ##### 32.1.1、正常关闭
