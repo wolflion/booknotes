@@ -22,3 +22,8 @@
 ### 思考
 
 + proto_ops与proto结构体，感觉有点类似于 OO的设计啊， 类的虚函数设计，一个是对象，一个是方法（虚方法），把2者结合起来看，其它这样的也类似
+
+### 其它
+
++ [how-kernel-handles-send-system-call.md](https://gist.github.com/yegle/4560621)
+
